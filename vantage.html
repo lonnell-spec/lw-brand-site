@@ -1,26 +1,871 @@
-# Vantage — by Lonnell Williams
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VANTAGE — Executive Command Center | LDW</title>
+  <meta name="description" content="Vantage V4 — Executive Command Center. A leadership operating system built for leaders who build." />
+  <meta property="og:title" content="VANTAGE — Executive Command Center" />
+  <meta property="og:description" content="Not a dashboard. A vantage point. Built for leaders who build." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#08080A" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body, #root { min-height: 100vh; margin: 0; padding: 0; }
+    body { background: #08080A; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(238,236,234,0.08); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(238,236,234,0.14); }
+    .vantage-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 9999; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; height: 48px; background: rgba(8,8,10,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(238,236,234,0.04); }
+    .vantage-nav a { font-family: 'SF Pro Display', -apple-system, sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(238,236,234,0.4); text-decoration: none; transition: color 0.3s; }
+    .vantage-nav a:hover { color: #EEECEA; }
+    .vantage-nav-brand { display: flex; align-items: center; gap: 10px; }
+    .vantage-nav-brand svg { opacity: 0.5; transition: opacity 0.3s; }
+    .vantage-nav-brand:hover svg { opacity: 1; }
+    .vantage-footer { background: #08080A; border-top: 1px solid rgba(238,236,234,0.06); padding: 48px 40px 32px; font-family: 'SF Pro Display', -apple-system, sans-serif; }
+    .vantage-footer-inner { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap; }
+    .vantage-footer-col { display: flex; flex-direction: column; gap: 10px; }
+    .vantage-footer-label { font-size: 8px; letter-spacing: 4px; text-transform: uppercase; color: rgba(238,236,234,0.2); margin-bottom: 4px; }
+    .vantage-footer a { font-size: 12px; letter-spacing: 1px; color: rgba(238,236,234,0.35); text-decoration: none; transition: color 0.3s; }
+    .vantage-footer a:hover { color: #EEECEA; }
+    .vantage-footer-bottom { width: 100%; margin-top: 32px; padding-top: 20px; border-top: 1px solid rgba(238,236,234,0.04); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .vantage-footer-brand { font-size: 11px; letter-spacing: 6px; text-transform: uppercase; color: rgba(238,236,234,0.12); }
+    .vantage-footer-legal { font-size: 10px; color: rgba(238,236,234,0.15); letter-spacing: 1px; }
+    .vantage-footer-portal { font-size: 9px; letter-spacing: 2px; color: rgba(238,236,234,0.12); text-decoration: none; transition: color 0.3s; }
+    .vantage-footer-portal:hover { color: rgba(238,236,234,0.4); }
+    @media (max-width: 600px) { .vantage-footer-inner { flex-direction: column; gap: 28px; } .vantage-footer-bottom { flex-direction: column; align-items: flex-start; } }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+</head>
+<body>
+  <nav class="vantage-nav">
+    <a href="/" class="vantage-nav-brand">
+      <svg width="20" height="20" viewBox="0 0 240 240" fill="none">
+        <polygon points="40,180 120,130 120,55 40,105" fill="#EEECEA"/>
+        <polygon points="120,55 200,105 200,180 120,130" fill="#C9842E"/>
+        <polygon points="40,180 120,230 200,180 120,130" fill="rgba(238,236,234,0.06)"/>
+      </svg>
+      LDW
+    </a>
+    <div style="display:flex;gap:24px;">
+      <a href="/">Home</a>
+      <a href="/speaking.html">Speaking</a>
+      <a href="/media.html">Media</a>
+    </div>
+  </nav>
+  <div id="root"></div>
 
-**Leadership intelligence, reimagined.**
+  <!-- === FOOTER === -->
+  <footer class="vantage-footer">
+    <div class="vantage-footer-inner">
+      <div class="vantage-footer-col">
+        <div class="vantage-footer-label">Navigate</div>
+        <a href="/">Home</a>
+        <a href="/speaking.html">Speaking</a>
+        <a href="/media.html">Media</a>
+        <a href="/#books">Books</a>
+        <a href="/#consulting">Work With Me</a>
+      </div>
+      <div class="vantage-footer-col">
+        <div class="vantage-footer-label">Connect</div>
+        <a href="/#newsletter">Newsletter</a>
+        <a href="https://lonnellwilliams.substack.com" target="_blank">Substack</a>
+      </div>
+      <div class="vantage-footer-col">
+        <div class="vantage-footer-label">Foundation</div>
+        <p style="font-size:11px;color:rgba(238,236,234,0.2);max-width:260px;line-height:1.6;font-style:italic;">"The God of heaven will make us prosper, and we his servants will arise and build."</p>
+        <span style="font-size:9px;letter-spacing:2px;color:rgba(238,236,234,0.12);">NEHEMIAH 2:20 — ESV</span>
+      </div>
+      <div class="vantage-footer-bottom">
+        <span class="vantage-footer-brand">LONNELL DAWSON WILLIAMS</span>
+        <span class="vantage-footer-legal">&copy; 2026 LONNELL WILLIAMS. ALL RIGHTS RESERVED.</span>
+        <a href="/admin.html" class="vantage-footer-portal">Portal</a>
+      </div>
+    </div>
+  </footer>
+  <script type="text/babel">
+const { useState, useEffect, useCallback, useRef } = React;
 
-Vantage is a leadership intelligence product currently in development by Lonnell Williams. It represents the intersection of operational expertise, AI-powered systems thinking, and the practical frameworks developed through years of building and scaling organizations.
+// ═══════════════════════════════════════════════════════════
+// VANTAGE V4 — Executive Command Center
+// Full product experience. Not a dashboard. A vantage point.
+// ═══════════════════════════════════════════════════════════
 
-## What Is Vantage?
+const B = {
+  bg: "#08080A", surface: "#0E0E12", card: "#131318", cardHi: "#191920",
+  accent: "#C9842E", text: "#EEECEA", dim: "#8A8A96", muted: "#4A4A56",
+  green: "#34D399", red: "#F87171", amber: "#FBBF24", blue: "#60A5FA", purple: "#A78BFA",
+  border: "rgba(238,236,234,0.05)", borderHi: "rgba(238,236,234,0.1)",
+};
+const CC = {
+  ops: { m: "#60A5FA", d: "rgba(96,165,250,0.07)", g: "rgba(96,165,250,0.15)", b: "rgba(96,165,250,0.2)" },
+  finance: { m: "#34D399", d: "rgba(52,211,153,0.07)", g: "rgba(52,211,153,0.15)", b: "rgba(52,211,153,0.2)" },
+  people: { m: "#A78BFA", d: "rgba(167,139,250,0.07)", g: "rgba(167,139,250,0.15)", b: "rgba(167,139,250,0.2)" },
+  growth: { m: "#FBBF24", d: "rgba(251,191,36,0.07)", g: "rgba(251,191,36,0.15)", b: "rgba(251,191,36,0.2)" },
+};
+const FN = "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif";
 
-Vantage gives leaders the elevated perspective they need to make better decisions, faster. Built from real operational experience — not theoretical frameworks — Vantage is designed for leaders who carry weight and need tools that match their capacity.
+const INTEGRATIONS = [
+  { name: "Notion", connected: true },
+  { name: "Planning Center", connected: true },
+  { name: "Salesforce", connected: true },
+  { name: "Asana", connected: true },
+  { name: "Monday.com", connected: true },
+  { name: "Zapier", connected: true },
+  { name: "Make.com", connected: true },
+  { name: "Stripe", connected: true },
+  { name: "Google Calendar", connected: true },
+  { name: "Slack", connected: true },
+  { name: "Mailchimp", connected: false },
+  { name: "HubSpot", connected: false },
+];
 
-## Who Is It For?
+function greet() { const h = new Date().getHours(); return h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening"; }
+function timeStr() { return new Date().toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true }); }
+function dateStr() { return new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" }); }
 
-- Executive leaders managing complex organizations
-- Pastors and ministry leaders carrying operational and spiritual weight
-- Operators who need intelligence, not just information
-- Leaders scaling teams, systems, and infrastructure under pressure
+// ─── PULSE BAR DATA ───────────────────────────────────────
+const ORG_PULSE = [
+  { label: "WEEKLY ATTENDANCE", value: "3,214", delta: "+14.1%", up: true, color: CC.ops.m },
+  { label: "WEEKLY GIVING", value: "$214.6K", delta: "+9.7%", up: true, color: CC.finance.m },
+  { label: "STAFF", value: "64", delta: "+18 YTD", up: true, color: CC.people.m },
+  { label: "DAYS TO MOVE-IN", value: "487", delta: "On Track", up: true, color: CC.growth.m },
+];
+const BIZ_PULSE = [
+  { label: "MONTHLY REVENUE", value: "$42.6K", delta: "+26%", up: true, color: CC.ops.m },
+  { label: "SUBSCRIBERS", value: "2,340", delta: "+310", up: true, color: CC.finance.m },
+  { label: "YOUTUBE", value: "5,680", delta: "+480", up: true, color: CC.people.m },
+  { label: "PIPELINE", value: "22", delta: "+8 QTR", up: true, color: CC.growth.m },
+];
 
-## Status
+const ORG_ATTN = [
+  { text: "Two new staff onboarding today — orientation at 10 AM", type: "action" },
+  { text: "Monthly giving 8.4% below target — review with finance lead", type: "warning" },
+  { text: "Facility walkthrough pending — awaiting vendor confirmation", type: "pending" },
+];
+const BIZ_ATTN = [
+  { text: "Weekly newsletter draft due — publishing window closes tonight", type: "action" },
+  { text: "Discovery call with enterprise prospect — 2:00 PM today", type: "action" },
+  { text: "Partnership proposal due Friday — final review needed", type: "pending" },
+];
 
-Vantage is currently in development. Join the waitlist at [ldw.build](https://ldw.build) to be notified when it launches.
+// ─── ORG DATA ─────────────────────────────────────────────
+const ORG = [
+  {
+    id: "ops", label: "OPERATIONS", tagline: "Weekly Pulse + Service Health",
+    badges: 1, urgency: "normal", synced: "2m ago",
+    hero: { value: "3,214", label: "AVG WEEKLY ATTENDANCE", delta: "+14.1%", up: true },
+    stats: [
+      { label: "New Visitors", value: "156", delta: "+28%", up: true },
+      { label: "Volunteer Coverage", value: "91%", delta: "+3.2%", up: true, pct: 91 },
+      { label: "Retention Rate", value: "78%", delta: "+4.6%", up: true, pct: 78 },
+      { label: "Active Groups", value: "52", delta: "+8", up: true },
+    ],
+    table: { title: "UPCOMING SERVICES", headers: ["Date", "Series", "Speaker", "Notes"], rows: [
+      ["Mar 9", "Unshakable", "Senior Pastor", "Communion"], ["Mar 16", "Unshakable", "Senior Pastor", "—"],
+      ["Mar 23", "Unshakable", "Guest Speaker", "Visitor Weekend"], ["Mar 30", "Unshakable", "Executive Pastor", "Serve Day"],
+      ["Apr 6", "New Series TBD", "Senior Pastor", "—"], ["Apr 13", "Resurrection", "Senior Pastor", "Easter Eve"],
+    ]},
+    timeline: [
+      { date: "Mar 5", event: "Midweek gathering — worship rehearsal at 4 PM", status: "confirmed" },
+      { date: "Mar 7", event: "Morning prayer — 6:00 AM, Main Campus", status: "confirmed" },
+      { date: "Mar 9", event: "Sunday services — 9:00 AM + 11:30 AM", status: "confirmed" },
+      { date: "Mar 12", event: "Leadership meeting — Q2 strategic priorities", status: "prep" },
+      { date: "Mar 15", event: "Staff development day — systems training", status: "prep" },
+    ],
+    actions: [{ label: "Review runsheet", desc: "Confirm service order, transitions, and production cues for this Sunday", style: "primary" }, { label: "Message worship lead", desc: "Coordinate set list, rehearsal time, and any special elements", style: "secondary" }, { label: "Flag for leadership", desc: "Escalate unresolved items to ELT for decision", style: "ghost" }],
+  },
+  {
+    id: "finance", label: "FINANCE", tagline: "Budget Health + Capital Progress",
+    badges: 1, urgency: "warning", synced: "5m ago",
+    hero: { value: "$214,600", label: "WEEKLY GIVING (AVG)", delta: "+9.7%", up: true },
+    stats: [
+      { label: "Monthly Budget", value: "$890K", delta: "Target", up: null },
+      { label: "Budget Used", value: "91.6%", delta: "On Track", up: true, pct: 91.6 },
+      { label: "Capital Campaign", value: "$3.1M", delta: "+$240K", up: true },
+      { label: "Reserve", value: "3.8 mo", delta: "Stable", up: true },
+    ],
+    table: { title: "REVENUE BREAKDOWN — FEBRUARY", headers: ["Category", "Actual", "Budget", "Var."], rows: [
+      ["Tithes & Offerings", "$612,400", "$640,000", "-4.3%"], ["Capital Campaign", "$102,300", "$90,000", "+13.7%"],
+      ["Events & Programs", "$48,200", "$42,000", "+14.8%"], ["Digital Giving", "$31,800", "$25,000", "+27.2%"],
+      ["Resources & Media", "$20,420", "$18,000", "+13.4%"],
+    ]},
+    timeline: [
+      { date: "Mar 1", event: "February P&L closed — CFO reviewing", status: "confirmed" },
+      { date: "Mar 10", event: "Finance committee — Q1 review", status: "prep" },
+      { date: "Mar 15", event: "Capital disbursement — $420K to GC", status: "pending" },
+      { date: "Mar 22", event: "Annual generosity initiative launch", status: "prep" },
+      { date: "Apr 1", event: "Q2 budget adjustments deadline", status: "upcoming" },
+    ],
+    actions: [{ label: "Review P&L", desc: "February profit & loss statement ready for executive sign-off", style: "primary" }, { label: "Approve disbursement", desc: "Capital campaign disbursement of $420K pending your authorization", style: "secondary" }, { label: "Prep initiative", desc: "Draft plan for annual generosity initiative launch in March", style: "ghost" }],
+  },
+  {
+    id: "people", label: "PEOPLE", tagline: "Culture + Talent Pipeline",
+    badges: 2, urgency: "hot", synced: "1m ago",
+    hero: { value: "64", label: "TOTAL STAFF HEADCOUNT", delta: "+18 this year", up: true },
+    stats: [
+      { label: "Team Morale", value: "8.4/10", delta: "+0.6", up: true },
+      { label: "1:1 Completion", value: "94%", delta: "On Track", up: true, pct: 94 },
+      { label: "Burnout Risk", value: "Low", delta: "2 flagged", up: false },
+      { label: "Open Roles", value: "4", delta: "3 in pipeline", up: null },
+    ],
+    table: { title: "RECENT HIRES + ONBOARDING", headers: ["Name", "Role", "Start", "Status"], rows: [
+      ["Jordan Mitchell", "Social Media Coord.", "Mar 3", "Week 1"], ["Priya Okafor", "Staff Photographer", "Mar 3", "Week 1"],
+      ["David Chen", "Campus Ops Lead", "Feb 17", "Ramping"], ["Amara Jackson", "Executive Assistant", "Jan 6", "Onboarded"],
+      ["Kevin Reeves", "Events Coordinator", "Jan 13", "Onboarded"],
+    ]},
+    timeline: [
+      { date: "Mar 3", event: "All-staff — new hire introductions", status: "confirmed" },
+      { date: "Mar 5", event: "1:1 with executive assistant — quarterly review", status: "prep" },
+      { date: "Mar 10", event: "Leadership — staff health dashboard review", status: "prep" },
+      { date: "Mar 14", event: "Hiring panel — Creative Director candidates", status: "pending" },
+      { date: "Mar 21", event: "Staff development — EI workshop", status: "upcoming" },
+    ],
+    actions: [{ label: "Welcome new hires", desc: "Send personalized onboarding messages to Jordan and Priya — Week 1", style: "primary" }, { label: "Check burnout flags", desc: "Two staff members flagged for workload risk — review and intervene", style: "secondary" }, { label: "Prep hiring panel", desc: "Creative Director candidates ready — assemble interview panel", style: "ghost" }],
+  },
+  {
+    id: "growth", label: "GROWTH", tagline: "Expansion + Digital + Reach",
+    badges: 0, urgency: "normal", synced: "8m ago",
+    hero: { value: "487", label: "DAYS TO NEW FACILITY MOVE-IN", delta: "On Schedule", up: true },
+    stats: [
+      { label: "Construction", value: "82%", delta: "On track", up: true, pct: 82 },
+      { label: "Budget Used", value: "$9.4M", delta: "of $14M", up: null },
+      { label: "Launch Team", value: "18/40", delta: "45%", up: true, pct: 45 },
+      { label: "Digital Reach", value: "38.2K", delta: "+4,100", up: true },
+    ],
+    table: { title: "MAJOR MILESTONES", headers: ["Milestone", "Target", "Owner", "Status"], rows: [
+      ["MEP Rough-In", "Apr 2026", "General Contractor", "In Progress"], ["Interior Build-Out", "Jul 2026", "GC + Architect", "On Track"],
+      ["2nd Location Final", "Sep 2026", "Exec Team", "3 Finalists"], ["Launch Team Full", "Mar 2027", "Campus Lead TBD", "45%"],
+      ["Facility Move-In", "Nov 2027", "Operations", "On Schedule"],
+    ]},
+    timeline: [
+      { date: "Mar 4", event: "Venue walkthrough — vendor confirmation pending", status: "pending" },
+      { date: "Mar 12", event: "Contractor review — MEP + electrical", status: "prep" },
+      { date: "Mar 20", event: "Site tour — 2nd location finalists", status: "upcoming" },
+      { date: "Apr 1", event: "Q2 content calendar lock", status: "prep" },
+      { date: "Nov 2027", event: "New facility grand opening", status: "upcoming" },
+    ],
+    actions: [{ label: "Confirm walkthrough", desc: "Vendor confirmation pending — lock facility walkthrough date", style: "primary" }, { label: "View finalists", desc: "Three 2nd location finalists ready for site tour comparison", style: "secondary" }, { label: "Message contractor", desc: "Follow up on MEP rough-in timeline and electrical status", style: "ghost" }],
+  },
+];
 
-## About the Creator
+// ─── BIZ DATA ─────────────────────────────────────────────
+const BIZ = [
+  {
+    id: "ops", label: "REVENUE", tagline: "Speaking + Consulting + Products",
+    badges: 0, urgency: "normal", synced: "3m ago",
+    hero: { value: "$42,600", label: "MONTHLY REVENUE", delta: "+26%", up: true },
+    stats: [
+      { label: "Speaking (YTD)", value: "$58K", delta: "5 events", up: true },
+      { label: "Consulting", value: "$84K", delta: "7 active", up: true },
+      { label: "Products", value: "$12.8K", delta: "+420 units", up: true },
+      { label: "Courses", value: "$8.4K", delta: "New cohort", up: true },
+    ],
+    table: { title: "UPCOMING ENGAGEMENTS", headers: ["Date", "Event", "Type", "Fee"], rows: [
+      ["Mar 18", "Leadership Summit — ATL", "Keynote", "$10,000"], ["Apr 2", "Executive Network", "Workshop", "$6,000"],
+      ["Apr 22", "National Forum — DAL", "Keynote", "$14,000"], ["May 10", "Virtual Series", "Panel", "$3,500"],
+      ["Jun 8", "International Conference", "Breakout", "$8,000"],
+    ]},
+    timeline: [
+      { date: "Mar 5", event: "Consulting discovery — enterprise prospect", status: "confirmed" },
+      { date: "Mar 12", event: "Product launch planning — publisher", status: "prep" },
+      { date: "Mar 18", event: "ATL Summit — keynote + travel", status: "prep" },
+      { date: "Mar 25", event: "Podcast recording — leadership show", status: "pending" },
+      { date: "Apr 1", event: "Q2 consulting intake opens", status: "upcoming" },
+    ],
+    actions: [{ label: "Prep keynote", desc: "ATL Leadership Summit keynote on March 18 — finalize deck and talking points", style: "primary" }, { label: "Review proposals", desc: "Three pending consulting proposals need pricing review before send", style: "secondary" }, { label: "Update pricing", desc: "Q2 rate adjustments for speaking and consulting tiers", style: "ghost" }],
+  },
+  {
+    id: "finance", label: "AUDIENCE", tagline: "Newsletter + Social + Web",
+    badges: 1, urgency: "normal", synced: "1m ago",
+    hero: { value: "2,340", label: "NEWSLETTER SUBSCRIBERS", delta: "+310 this month", up: true },
+    stats: [
+      { label: "Website", value: "16.8K", delta: "+42% MoM", up: true },
+      { label: "Instagram", value: "11.2K", delta: "+840", up: true },
+      { label: "LinkedIn", value: "5,100", delta: "+380", up: true },
+      { label: "Open Rate", value: "44%", delta: "+2.8%", up: true, pct: 44 },
+    ],
+    table: { title: "TOP CONTENT — 30 DAYS", headers: ["Platform", "Content", "Reach", "Eng."], rows: [
+      ["YouTube", "Leading Without the Title", "31.2K", "9.1%"], ["Instagram", "Systems over hustle (Reel)", "24.6K", "12.8%"],
+      ["Newsletter", "The Builder's Playbook", "2,800", "44%"], ["LinkedIn", "Why I left corporate", "13.4K", "7.6%"],
+    ]},
+    timeline: [
+      { date: "Mar 4", event: "Newsletter issue — draft due tonight", status: "prep" },
+      { date: "Mar 8", event: "Content batch — 5 Reels, 2 carousels", status: "upcoming" },
+      { date: "Mar 11", event: "YouTube publish — leadership video", status: "prep" },
+      { date: "Mar 15", event: "Collaboration post — thought leader", status: "pending" },
+    ],
+    actions: [{ label: "Finalize newsletter", desc: "This week's Arise & Build issue — draft due tonight for Thursday publish", style: "primary" }, { label: "Schedule batch", desc: "5 Reels and 2 carousels queued for Saturday content batch", style: "secondary" }, { label: "Prep collab", desc: "Thought leader collaboration post scheduled for March 15", style: "ghost" }],
+  },
+  {
+    id: "people", label: "CONTENT", tagline: "Video + Podcast + Publishing",
+    badges: 0, urgency: "normal", synced: "4m ago",
+    hero: { value: "5,680", label: "YOUTUBE SUBSCRIBERS", delta: "+480 this month", up: true },
+    stats: [
+      { label: "Watch Time", value: "9:14", delta: "+1:40", up: true },
+      { label: "IG Engagement", value: "7.4%", delta: "+1.6%", up: true, pct: 7.4 },
+      { label: "Videos (YTD)", value: "11", delta: "Ahead", up: true },
+      { label: "Content Leads", value: "18", delta: "+7", up: true },
+    ],
+    table: { title: "MARCH CALENDAR", headers: ["Week", "YouTube", "Newsletter", "Short"], rows: [
+      ["Mar 3–9", "Leading Without Title", "Builder's Playbook", "3 Reels"],
+      ["Mar 10–16", "Systems Thinking", "Cost of Comfort", "3 Reels"],
+      ["Mar 17–23", "—", "Summit Recap", "2 + collab"],
+      ["Mar 24–30", "Operator's Edge", "Building in Public", "3 Reels"],
+    ]},
+    timeline: [
+      { date: "Mar 6", event: "Film day — studio, 2 videos", status: "prep" },
+      { date: "Mar 8", event: "Short-form batch — Saturday AM", status: "upcoming" },
+      { date: "Mar 11", event: "YouTube publish + SEO", status: "prep" },
+      { date: "Mar 18", event: "Event content capture", status: "upcoming" },
+    ],
+    actions: [{ label: "Start filming", desc: "Studio film day on March 6 — two long-form videos on deck", style: "primary" }, { label: "Review SEO", desc: "YouTube publish optimization — titles, tags, thumbnails for next drop", style: "secondary" }, { label: "Plan Q2", desc: "Map Q2 content calendar — topics, formats, and collaboration slots", style: "ghost" }],
+  },
+  {
+    id: "growth", label: "PIPELINE", tagline: "Leads + Bookings + Partnerships",
+    badges: 1, urgency: "hot", synced: "just now",
+    hero: { value: "22", label: "ACTIVE OPPORTUNITIES", delta: "+8 this quarter", up: true },
+    stats: [
+      { label: "Speaking", value: "9", delta: "4 new", up: true },
+      { label: "Consulting", value: "7", delta: "$84K pot.", up: true },
+      { label: "Podcasts", value: "5", delta: "3 confirmed", up: true },
+      { label: "Partners", value: "1", delta: "Evaluating", up: null },
+    ],
+    table: { title: "ACTIVE DEALS", headers: ["Contact", "Type", "Value", "Stage"], rows: [
+      ["Apex Org (CO)", "Consulting 6mo", "$28,000", "Proposal"], ["Summit Conf.", "Speaking", "$12,000", "Negotiating"],
+      ["Nat'l Leaders Net", "Workshop", "$18,000", "Confirmed"], ["Research Inst.", "Collab", "$7,500", "Discussion"],
+      ["Global Forum", "Breakout", "$8,000", "Confirmed"], ["Enterprise (TX)", "Consulting", "$16,000", "Discovery"],
+    ]},
+    timeline: [
+      { date: "Mar 3", event: "Discovery — Enterprise (TX)", status: "confirmed" },
+      { date: "Mar 7", event: "Proposal deadline — Apex Org", status: "prep" },
+      { date: "Mar 14", event: "Fee negotiation — Summit Conf.", status: "pending" },
+      { date: "Mar 20", event: "Partnership scope review", status: "upcoming" },
+    ],
+    actions: [{ label: "Prep discovery", desc: "Enterprise (TX) discovery call — research org, prep value proposition", style: "primary" }, { label: "Send proposal", desc: "Apex Org consulting proposal due March 7 — final review and send", style: "secondary" }, { label: "Update rates", desc: "Refresh speaking and workshop rate cards for Q2 pipeline", style: "ghost" }],
+  },
+];
 
-Lonnell Williams is an Executive Pastor, author, and systems architect who has built AI agent ecosystems, operational infrastructure, and leadership frameworks for rapidly growing organizations. Vantage is the productization of that expertise.
+// ═══════════════════════════════════════════════════════════
+// COMPONENTS
+// ═══════════════════════════════════════════════════════════
 
-Learn more at [ldw.build/vantage.html](https://ldw.build/vantage.html).
+function ProgressRing({ pct, color, size = 32 }) {
+  if (pct == null) return null;
+  const r = (size - 4) / 2, circ = 2 * Math.PI * r, offset = circ - (Math.min(pct, 100) / 100) * circ;
+  return (
+    <svg width={size} height={size} style={{ transform: "rotate(-90deg)", flexShrink: 0 }}>
+      <circle cx={size/2} cy={size/2} r={r} fill="none" stroke={B.border} strokeWidth="2.5" />
+      <circle cx={size/2} cy={size/2} r={r} fill="none" stroke={color} strokeWidth="2.5"
+        strokeDasharray={circ} strokeDashoffset={offset} strokeLinecap="round"
+        style={{ transition: "stroke-dashoffset 0.8s cubic-bezier(0.22,1,0.36,1)" }} />
+    </svg>
+  );
+}
+
+function MiniChart({ up, color }) {
+  const pts = up === true ? [30,26,28,22,18,14,10] : up === false ? [10,14,18,20,24,26,30] : [18,20,16,22,18,20,19];
+  const w = 48, h = 16, mx = Math.max(...pts), mn = Math.min(...pts), rg = mx - mn || 1;
+  const d = pts.map((v, i) => `${i===0?"M":"L"}${(i/(pts.length-1))*w},${h-((v-mn)/rg)*h}`).join(" ");
+  const c = color || (up === true ? B.green : up === false ? B.red : B.amber);
+  return <svg width={w} height={h} style={{ overflow: "visible" }}>
+    <path d={d + ` L${w},${h} L0,${h} Z`} fill={`${c}15`} />
+    <path d={d} fill="none" stroke={c} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx={w} cy={h-((pts[pts.length-1]-mn)/rg)*h} r="2" fill={c} />
+  </svg>;
+}
+
+function StatusDot({ s }) {
+  const c = { confirmed: B.green, prep: B.amber, pending: "#F97316", upcoming: B.muted };
+  return <span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: c[s]||B.muted, marginRight: 8, flexShrink: 0 }} />;
+}
+
+function Badge({ n }) {
+  if (!n) return null;
+  return <span style={{ position: "absolute", top: 12, right: 12, minWidth: 18, height: 18, borderRadius: 9, background: B.red, color: "#fff", fontSize: 9, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 5px", boxShadow: `0 0 12px ${B.red}44`, zIndex: 2 }}>{n}</span>;
+}
+
+function ActionBtn({ label, sty, accent, desc, idx }) {
+  const icons = {
+    primary: "▶",
+    secondary: "◇",
+    ghost: "○",
+  };
+  const styles = {
+    primary: {
+      background: `linear-gradient(145deg, ${accent || B.accent}DD, ${accent || B.accent}88)`,
+      color: "#0A0A0A",
+      border: `1px solid ${accent || B.accent}66`,
+      iconBg: "rgba(0,0,0,0.18)",
+      descColor: "rgba(0,0,0,0.55)",
+      labelTag: "ACTION",
+    },
+    secondary: {
+      background: B.card,
+      color: accent || B.accent,
+      border: `1px solid ${accent || B.accent}33`,
+      iconBg: `${accent || B.accent}18`,
+      descColor: B.dim,
+      labelTag: "REVIEW",
+    },
+    ghost: {
+      background: B.card,
+      color: B.dim,
+      border: `1px solid ${B.border}`,
+      iconBg: `${B.muted}12`,
+      descColor: B.muted,
+      labelTag: "QUEUE",
+    },
+  };
+  const s = styles[sty] || styles.ghost;
+
+  return (
+    <div style={{
+      background: s.background, color: s.color, border: s.border,
+      borderRadius: 16, padding: "28px 24px 24px", textAlign: "left",
+      fontFamily: "inherit",
+      position: "relative", overflow: "hidden",
+      display: "flex", flexDirection: "column", justifyContent: "space-between",
+      gap: 20, minHeight: 180, width: "100%",
+    }}>
+      {/* Ambient orb */}
+      <div style={{
+        position: "absolute", top: 0, right: 0,
+        width: 140, height: 140, borderRadius: "50%",
+        background: `radial-gradient(circle, ${sty === "primary" ? "rgba(0,0,0,0.1)" : (accent || B.accent) + "0A"} 0%, transparent 70%)`,
+        opacity: 0.5, pointerEvents: "none",
+      }} />
+
+      {/* Top row: icon + tag */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", position: "relative", zIndex: 1 }}>
+        <div style={{
+          width: 40, height: 40, borderRadius: 12,
+          background: s.iconBg,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontSize: 13,
+        }}>{icons[sty] || "○"}</div>
+        <span style={{ fontSize: 8, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", opacity: 0.45 }}>
+          {s.labelTag}
+        </span>
+      </div>
+
+      {/* Content */}
+      <div style={{ position: "relative", zIndex: 1, flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+        <div style={{ fontSize: 15, fontWeight: 800, letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: 6, lineHeight: 1.2 }}>{label}</div>
+        {desc && <div style={{ fontSize: 11.5, fontWeight: 400, color: s.descColor, lineHeight: 1.5 }}>{desc}</div>}
+      </div>
+    </div>
+  );
+}
+
+function LiveBadge() {
+  const [t, setT] = useState(timeStr());
+  useEffect(() => { const i = setInterval(() => setT(timeStr()), 30000); return () => clearInterval(i); }, []);
+  return <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+    <span style={{ width: 5, height: 5, borderRadius: "50%", background: B.green, boxShadow: `0 0 8px ${B.green}88`, animation: "pulse 2.5s ease-in-out infinite" }} />
+    <span style={{ fontSize: 9, fontWeight: 600, letterSpacing: "0.08em", color: B.dim }}>{t}</span>
+  </span>;
+}
+
+// ─── INTEGRATION FOOTER ───────────────────────────────────
+function IntegrationFooter({ vis }) {
+  const connected = INTEGRATIONS.filter(i => i.connected).length;
+  return (
+    <div style={{
+      marginTop: 32, padding: "20px 0 8px", borderTop: `1px solid ${B.border}`,
+      animation: vis ? "vS 0.5s ease 0.4s both" : "none",
+    }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <span style={{ width: 5, height: 5, borderRadius: "50%", background: B.green, boxShadow: `0 0 6px ${B.green}66` }} />
+          <span style={{ fontSize: 8, fontWeight: 700, letterSpacing: "0.2em", color: B.dim, textTransform: "uppercase" }}>
+            {connected} of {INTEGRATIONS.length} integrations connected
+          </span>
+        </div>
+        <span style={{ fontSize: 8, fontWeight: 600, color: B.muted, letterSpacing: "0.1em", textTransform: "uppercase" }}>LIVE DATA</span>
+      </div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+        {INTEGRATIONS.map((intg, i) => (
+          <div key={i} style={{
+            display: "inline-flex", alignItems: "center", gap: 5,
+            padding: "6px 12px", borderRadius: 6,
+            background: intg.connected ? `${B.green}08` : "transparent",
+            border: `1px solid ${intg.connected ? `${B.green}18` : B.border}`,
+            transition: "all 0.2s ease",
+          }}>
+            <span style={{
+              fontSize: 10, fontWeight: 700,
+              color: intg.connected ? B.green : B.muted,
+            }}>{intg.connected ? "✓" : "○"}</span>
+            <span style={{
+              fontSize: 10, fontWeight: 600, letterSpacing: "0.02em",
+              color: intg.connected ? B.text : B.muted,
+            }}>{intg.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════
+// MAIN
+// ═══════════════════════════════════════════════════════════
+function Vantage() {
+  const [phase, setPhase] = useState("intro");
+  const [step, setStep] = useState(0);
+  const [biz, setBiz] = useState(false);
+  const [active, setActive] = useState(null);
+  const [drillIn, setDrillIn] = useState(false);
+  const [vis, setVis] = useState(false);
+
+  const cards = biz ? BIZ : ORG;
+  const attn = biz ? BIZ_ATTN : ORG_ATTN;
+  const pulse = biz ? BIZ_PULSE : ORG_PULSE;
+
+  useEffect(() => {
+    if (phase !== "intro") return;
+    const t = [
+      setTimeout(() => setStep(1), 250),
+      setTimeout(() => setStep(2), 900),
+      setTimeout(() => setStep(3), 1600),
+      setTimeout(() => setStep(4), 2300),
+      setTimeout(() => setStep(5), 3000),
+      setTimeout(() => { setPhase("hub"); setTimeout(() => setVis(true), 60); }, 3800),
+    ];
+    return () => t.forEach(clearTimeout);
+  }, [phase]);
+
+  const open = useCallback((c) => { setVis(false); setTimeout(() => { setActive(c); setDrillIn(false); setPhase("drill"); requestAnimationFrame(() => requestAnimationFrame(() => setDrillIn(true))); }, 260); }, []);
+  const close = useCallback(() => { setDrillIn(false); setTimeout(() => { setPhase("hub"); setActive(null); setTimeout(() => setVis(true), 40); }, 300); }, []);
+  const toggle = useCallback(() => { setVis(false); setTimeout(() => { setBiz(e => !e); setTimeout(() => setVis(true), 60); }, 260); }, []);
+
+  // ═════ INTRO ═════
+  if (phase === "intro") {
+    return (
+      <div style={{ ...ROOT, justifyContent: "center", alignItems: "center", position: "relative" }}>
+        <div style={GRAIN} />
+        {/* Mesh */}
+        <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none", opacity: step >= 1 ? 1 : 0, transition: "opacity 2s ease" }}>
+          <div style={{ position: "absolute", top: "25%", left: "15%", width: 320, height: 320, borderRadius: "50%", background: "radial-gradient(circle, rgba(96,165,250,0.07) 0%, transparent 70%)", filter: "blur(60px)", animation: "mf1 8s ease-in-out infinite" }} />
+          <div style={{ position: "absolute", top: "45%", right: "15%", width: 260, height: 260, borderRadius: "50%", background: "radial-gradient(circle, rgba(167,139,250,0.05) 0%, transparent 70%)", filter: "blur(60px)", animation: "mf2 10s ease-in-out infinite" }} />
+          <div style={{ position: "absolute", bottom: "25%", left: "35%", width: 280, height: 280, borderRadius: "50%", background: `radial-gradient(circle, ${B.accent}0D 0%, transparent 70%)`, filter: "blur(60px)", animation: "mf3 9s ease-in-out infinite" }} />
+        </div>
+        <div style={{ fontSize: 24, color: B.accent, marginBottom: 20, opacity: step >= 1 ? 1 : 0, transform: step >= 1 ? "scale(1) rotate(0)" : "scale(0.2) rotate(-120deg)", transition: "all 1.2s cubic-bezier(0.34,1.56,0.64,1)" }}>◆</div>
+        <div style={{
+          fontSize: "clamp(42px, 10vw, 86px)", fontWeight: 800, letterSpacing: "0.2em",
+          color: "transparent", textTransform: "uppercase", fontFamily: FN,
+          backgroundImage: `linear-gradient(135deg, ${B.text} 0%, ${B.accent} 50%, ${B.text} 100%)`,
+          backgroundSize: "200% 100%", WebkitBackgroundClip: "text", backgroundClip: "text",
+          animation: step >= 2 ? "shimmer 3s ease-in-out infinite" : "none",
+          opacity: step >= 2 ? 1 : 0, transform: step >= 2 ? "translateY(0)" : "translateY(30px)",
+          transition: "opacity 1s ease, transform 1s ease",
+        }}>VANTAGE</div>
+        <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.45em", textTransform: "uppercase", color: B.dim, marginTop: 10, opacity: step >= 3 ? 1 : 0, transform: step >= 3 ? "translateY(0)" : "translateY(12px)", transition: "all 0.8s ease" }}>
+          EXECUTIVE COMMAND CENTER
+        </div>
+        <div style={{ display: "flex", gap: 4, marginTop: 20, opacity: step >= 4 ? 1 : 0, transition: "opacity 0.6s ease" }}>
+          {[CC.ops.m, CC.finance.m, CC.people.m, CC.growth.m].map((c, i) => (
+            <div key={i} style={{ width: step >= 4 ? 12 : 0, height: 2, background: c, borderRadius: 1, transition: `width 0.4s cubic-bezier(0.22,1,0.36,1) ${i * 0.1}s` }} />
+          ))}
+        </div>
+        <div style={{ fontSize: 13, color: B.dim, marginTop: 28, fontWeight: 500, opacity: step >= 5 ? 1 : 0, transition: "opacity 0.6s ease" }}>{greet()}</div>
+        <style>{KF}</style>
+      </div>
+    );
+  }
+
+  // ═════ DRILLDOWN ═════
+  if (phase === "drill" && active) {
+    const c = active, cl = CC[c.id] || CC.ops;
+    return (
+      <div style={{ ...ROOT, padding: 0, opacity: drillIn ? 1 : 0, transition: "opacity 0.3s ease" }}>
+        <div style={GRAIN} />
+        <div style={{ width: "100%", maxWidth: 960, margin: "0 auto", padding: "20px 20px 40px", position: "relative", transform: drillIn ? "translateY(0)" : "translateY(12px)", transition: "transform 0.45s cubic-bezier(0.22,1,0.36,1)" }}>
+
+          <button onClick={close} style={{ background: "none", border: "none", color: cl.m, cursor: "pointer", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", padding: "8px 0", marginBottom: 12, fontFamily: "inherit", display: "flex", alignItems: "center", gap: 6 }}>
+            <span style={{ fontSize: 14 }}>←</span> COMMAND CENTER
+          </button>
+
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 20 }}>
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+                <div style={{ width: 3, height: 16, borderRadius: 2, background: cl.m }} />
+                <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.2em", color: B.muted, textTransform: "uppercase" }}>{c.tagline}</span>
+              </div>
+              <div style={{ fontSize: "clamp(28px, 5vw, 44px)", fontWeight: 800, letterSpacing: "-0.02em", color: B.text, lineHeight: 1, fontFamily: FN }}>{c.label}<span style={{ color: cl.m }}>.</span></div>
+            </div>
+            <LiveBadge />
+          </div>
+
+          {/* Hero */}
+          <div style={{ background: `linear-gradient(135deg, ${cl.d}, ${B.surface})`, borderRadius: 14, padding: 1, marginBottom: 16 }}>
+            <div style={{ background: B.surface, borderRadius: 13, padding: "26px 24px", position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", top: -40, right: -40, width: 160, height: 160, borderRadius: "50%", background: `radial-gradient(circle, ${cl.d} 0%, transparent 70%)`, pointerEvents: "none" }} />
+              <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: "0.22em", color: B.muted, marginBottom: 8, textTransform: "uppercase" }}>{c.hero.label}</div>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 14 }}>
+                <span style={{ fontSize: "clamp(36px, 6vw, 54px)", fontWeight: 800, color: B.text, letterSpacing: "-0.02em", lineHeight: 1, fontFamily: FN }}>{c.hero.value}</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: c.hero.up === true ? B.green : c.hero.up === false ? B.red : B.dim }}>{c.hero.up === true ? "↑ " : c.hero.up === false ? "↓ " : ""}{c.hero.delta}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Actions */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 14, marginBottom: 24, animation: drillIn ? "vS 0.4s ease 0.1s both" : "none" }}>
+            {c.actions.map((a, i) => <ActionBtn key={i} label={a.label} sty={a.style} accent={cl.m} desc={a.desc} idx={i} />)}
+          </div>
+
+          {/* Stats with progress rings */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 10, marginBottom: 20 }}>
+            {c.stats.map((s, i) => (
+              <div key={i} style={{
+                background: B.card, borderRadius: 12, padding: "20px 18px",
+                borderLeft: `2px solid ${cl.m}44`,
+                animation: drillIn ? `vS 0.4s ease ${0.12 + i * 0.05}s both` : "none",
+                cursor: "pointer",
+                transition: "all 0.4s cubic-bezier(0.22,1,0.36,1)",
+                position: "relative", overflow: "hidden",
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.transform = "translateY(-5px) scale(1.03)";
+                e.currentTarget.style.boxShadow = `0 12px 32px rgba(0,0,0,0.35), 0 0 0 1px ${cl.m}44`;
+                e.currentTarget.style.borderLeftColor = cl.m;
+                e.currentTarget.style.background = B.cardHi || "#1A1A22";
+                const glow = e.currentTarget.querySelector('.stat-glow');
+                if (glow) { glow.style.opacity = "1"; glow.style.transform = "scale(1.5)"; }
+                const val = e.currentTarget.querySelector('.stat-value');
+                if (val) val.style.color = cl.m;
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.transform = "translateY(0) scale(1)";
+                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.borderLeftColor = `${cl.m}44`;
+                e.currentTarget.style.background = B.card;
+                const glow = e.currentTarget.querySelector('.stat-glow');
+                if (glow) { glow.style.opacity = "0"; glow.style.transform = "scale(1)"; }
+                const val = e.currentTarget.querySelector('.stat-value');
+                if (val) val.style.color = B.text;
+              }}>
+                {/* Hover glow orb */}
+                <div className="stat-glow" style={{
+                  position: "absolute", top: -20, right: -20,
+                  width: 80, height: 80, borderRadius: "50%",
+                  background: `radial-gradient(circle, ${cl.m}20 0%, transparent 70%)`,
+                  opacity: 0, transform: "scale(1)",
+                  transition: "all 0.5s cubic-bezier(0.22,1,0.36,1)",
+                  pointerEvents: "none",
+                }} />
+                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.15em", color: B.muted, marginBottom: 8, textTransform: "uppercase", position: "relative", zIndex: 1 }}>{s.label}</div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", position: "relative", zIndex: 1 }}>
+                  <div>
+                    <span className="stat-value" style={{ fontSize: 28, fontWeight: 800, color: B.text, letterSpacing: "-0.02em", lineHeight: 1, transition: "color 0.3s ease" }}>{s.value}</span>
+                    <div style={{ fontSize: 12, fontWeight: 600, marginTop: 6, color: s.up === true ? B.green : s.up === false ? B.red : B.dim }}>
+                      {s.up === true ? "↑ " : s.up === false ? "↓ " : ""}{s.delta}
+                    </div>
+                  </div>
+                  {s.pct != null ? <ProgressRing pct={s.pct} color={cl.m} /> : <MiniChart up={s.up} color={cl.m} />}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Table */}
+          <div style={{ background: B.surface, borderRadius: 12, padding: "16px 0", border: `1px solid ${B.border}`, marginBottom: 16, overflow: "hidden" }}>
+            <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: "0.18em", color: cl.m, textTransform: "uppercase", padding: "0 16px", marginBottom: 12 }}>{c.table.title}</div>
+            <div style={{ overflowX: "auto" }}>
+              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 11 }}>
+                <thead><tr>{c.table.headers.map((h, i) => <th key={i} style={{ textAlign: "left", padding: "6px 16px", fontSize: 7, fontWeight: 700, letterSpacing: "0.15em", color: B.muted, textTransform: "uppercase", borderBottom: `1px solid ${B.border}` }}>{h}</th>)}</tr></thead>
+                <tbody>{c.table.rows.map((row, ri) => <tr key={ri} style={{ borderBottom: ri < c.table.rows.length - 1 ? `1px solid ${B.border}` : "none" }}
+                  onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.015)"}
+                  onMouseLeave={e => e.currentTarget.style.background = "transparent"}>
+                  {row.map((cell, ci) => <td key={ci} style={{ padding: "9px 16px", color: ci === 0 ? B.text : B.dim, fontWeight: ci === 0 ? 600 : 400, whiteSpace: "nowrap" }}>{cell}</td>)}
+                </tr>)}</tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Timeline */}
+          <div style={{ background: B.surface, borderRadius: 12, padding: 16, border: `1px solid ${B.border}` }}>
+            <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: "0.18em", color: cl.m, textTransform: "uppercase", marginBottom: 12 }}>UPCOMING</div>
+            {c.timeline.map((t, i) => <div key={i} style={{
+              display: "flex", alignItems: "flex-start", gap: 10, padding: "8px 0",
+              borderBottom: i < c.timeline.length - 1 ? `1px solid ${B.border}` : "none",
+              animation: drillIn ? `vS 0.35s ease ${0.25 + i * 0.04}s both` : "none",
+            }}>
+              <StatusDot s={t.status} />
+              <div style={{ flex: 1, fontSize: 11, fontWeight: 500, color: B.text, lineHeight: 1.35 }}>{t.event}</div>
+              <div style={{ fontSize: 9, fontWeight: 600, color: B.muted, whiteSpace: "nowrap", flexShrink: 0 }}>{t.date}</div>
+            </div>)}
+          </div>
+
+          {/* Integration footer in drill too */}
+          <IntegrationFooter vis={drillIn} />
+        </div>
+        <style>{KF}</style>
+      </div>
+    );
+  }
+
+  // ═════ HUB ═════
+  return (
+    <div style={ROOT}>
+      <div style={GRAIN} />
+      <div style={{ width: "100%", maxWidth: 960, margin: "0 auto", padding: "20px 20px 12px", position: "relative", opacity: vis ? 1 : 0, transform: vis ? "translateY(0)" : "translateY(12px)", transition: "all 0.5s cubic-bezier(0.22,1,0.36,1)" }}>
+
+        {/* Header */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 2 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ color: B.accent, fontSize: 13 }}>◆</span>
+            <span style={{ fontSize: 8, fontWeight: 700, letterSpacing: "0.3em", color: B.accent, textTransform: "uppercase" }}>VANTAGE</span>
+          </div>
+          <LiveBadge />
+        </div>
+        <div style={{ fontSize: "clamp(22px, 4vw, 34px)", fontWeight: 800, letterSpacing: "-0.02em", color: B.text, lineHeight: 1.15, fontFamily: FN, marginBottom: 2, animation: vis ? "vS 0.5s ease 0s both" : "none" }}>
+          {greet()}<span style={{ color: B.accent }}>.</span>
+        </div>
+        <div style={{ fontSize: 11, color: B.dim, fontWeight: 500, marginBottom: 16, animation: vis ? "vS 0.5s ease 0.04s both" : "none" }}>{dateStr()}</div>
+
+        {/* ─── PULSE BAR ─── */}
+        <div style={{
+          display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8, marginBottom: 16,
+          animation: vis ? "vS 0.5s ease 0.08s both" : "none",
+        }}>
+          {pulse.map((p, i) => (
+            <div key={i} style={{
+              background: B.surface, borderRadius: 10, padding: "12px 14px",
+              borderTop: `2px solid ${p.color}`,
+              position: "relative", overflow: "hidden",
+            }}>
+              <div style={{ position: "absolute", top: 0, right: 0, width: 50, height: 50, borderRadius: "50%", background: `radial-gradient(circle, ${p.color}08 0%, transparent 70%)`, pointerEvents: "none" }} />
+              <div style={{ fontSize: 7, fontWeight: 700, letterSpacing: "0.12em", color: B.muted, textTransform: "uppercase", marginBottom: 4 }}>{p.label}</div>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
+                <span style={{ fontSize: 18, fontWeight: 800, color: B.text, letterSpacing: "-0.02em", lineHeight: 1 }}>{p.value}</span>
+                <span style={{ fontSize: 9, fontWeight: 600, color: p.up ? B.green : B.red }}>{p.up ? "↑" : "↓"} {p.delta}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* ─── MODE TOGGLE ─── */}
+        <div style={{
+          display: "flex", borderRadius: 10, overflow: "hidden", border: `1px solid ${B.border}`,
+          marginBottom: 14, position: "relative",
+          animation: vis ? "vS 0.5s ease 0.12s both" : "none",
+        }}>
+          <div style={{ position: "absolute", top: 0, bottom: 0, width: "50%", background: `linear-gradient(135deg, ${B.accent} 0%, #D4963A 100%)`, borderRadius: 9, transition: "left 0.35s cubic-bezier(0.22,1,0.36,1)", left: biz ? "50%" : "0%" }} />
+          {[false, true].map(isB => (
+            <button key={String(isB)} onClick={isB !== biz ? toggle : undefined} style={{
+              flex: 1, padding: "11px 16px", border: "none", cursor: "pointer", fontFamily: "inherit",
+              fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase",
+              transition: "color 0.3s ease", background: "transparent", position: "relative", zIndex: 1,
+              color: isB === biz ? "#0A0A0A" : B.muted,
+            }}>{isB ? "◈ Business" : "◆ Non-Profit"}</button>
+          ))}
+        </div>
+
+        {/* ─── ATTENTION BAR ─── */}
+        <div style={{
+          borderRadius: 12, padding: "14px 16px", marginBottom: 16,
+          background: `linear-gradient(135deg, rgba(251,191,36,0.04) 0%, rgba(251,191,36,0.01) 100%)`,
+          border: `1px solid rgba(251,191,36,0.12)`,
+          animation: vis ? "vS 0.5s ease 0.16s both" : "none",
+        }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+            <span style={{ width: 5, height: 5, borderRadius: "50%", background: B.amber, boxShadow: `0 0 8px ${B.amber}55`, animation: "pulse 2.5s ease-in-out infinite" }} />
+            <span style={{ fontSize: 8, fontWeight: 700, letterSpacing: "0.18em", color: B.amber, textTransform: "uppercase" }}>{attn.length} items need attention</span>
+          </div>
+          {attn.map((a, i) => <div key={i} style={{
+            fontSize: 11, color: B.text, lineHeight: 1.55, paddingLeft: 14,
+            borderLeft: `2px solid ${a.type === "action" ? B.blue : a.type === "warning" ? B.amber : B.muted}`,
+            marginBottom: i < attn.length - 1 ? 8 : 0, fontWeight: 500,
+          }}>{a.text}</div>)}
+        </div>
+
+        {/* ─── CARD GRID ─── */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 12 }}>
+          {cards.map((card, i) => {
+            const cl = CC[card.id] || CC.ops;
+            const hot = card.urgency === "hot", warn = card.urgency === "warning";
+            return (
+              <button key={card.id + biz} onClick={() => open(card)} style={{
+                background: B.card, borderRadius: 14, padding: 0,
+                border: `1px solid ${hot ? `${B.red}33` : warn ? `${B.amber}22` : B.border}`,
+                cursor: "pointer", textAlign: "left", color: B.text, fontFamily: "inherit",
+                position: "relative", overflow: "hidden",
+                transition: "all 0.35s cubic-bezier(0.22,1,0.36,1)",
+                animation: vis ? `vS 0.5s cubic-bezier(0.22,1,0.36,1) ${0.2 + i * 0.06}s both` : "none",
+              }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px) scale(1.005)"; e.currentTarget.style.boxShadow = `0 12px 32px rgba(0,0,0,0.35), 0 0 0 1px ${cl.b}`; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0) scale(1)"; e.currentTarget.style.boxShadow = "none"; }}>
+                <Badge n={card.badges} />
+                <div style={{ height: 2, background: `linear-gradient(90deg, ${cl.m} 0%, transparent 100%)` }} />
+                <div style={{ padding: "20px 20px 16px" }}>
+                  <div style={{ position: "absolute", top: -20, right: -20, width: 80, height: 80, borderRadius: "50%", background: `radial-gradient(circle, ${cl.d} 0%, transparent 70%)`, pointerEvents: "none" }} />
+                  {hot && <div style={{ position: "absolute", top: 12, right: 12, width: 26, height: 26, borderRadius: "50%", border: `1px solid ${B.red}22`, animation: "pr 2s ease-in-out infinite", pointerEvents: "none" }} />}
+
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 5 }}>
+                    <div style={{ width: 3, height: 12, borderRadius: 2, background: cl.m }} />
+                    <span style={{ fontSize: 7, fontWeight: 700, letterSpacing: "0.18em", color: B.muted, textTransform: "uppercase" }}>{card.tagline}</span>
+                  </div>
+                  <div style={{ fontSize: 20, fontWeight: 800, letterSpacing: "-0.02em", marginBottom: 14, lineHeight: 1, fontFamily: FN }}>{card.label}<span style={{ color: cl.m }}>.</span></div>
+
+                  <div style={{ background: B.bg, borderRadius: 10, padding: "14px 14px", marginBottom: 12, borderLeft: `2px solid ${cl.m}55` }}>
+                    <div style={{ fontSize: 7, fontWeight: 700, letterSpacing: "0.15em", color: B.muted, marginBottom: 4, textTransform: "uppercase" }}>{card.hero.label}</div>
+                    <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+                      <span style={{ fontSize: 26, fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1 }}>{card.hero.value}</span>
+                      <span style={{ fontSize: 10, fontWeight: 600, color: card.hero.up === true ? B.green : card.hero.up === false ? B.red : B.dim }}>
+                        {card.hero.up === true ? "↑ " : ""}{card.hero.delta}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 12 }}>
+                    {card.stats.slice(0, 2).map((s, si) => <div key={si}>
+                      <div style={{ fontSize: 7, fontWeight: 700, letterSpacing: "0.1em", color: B.muted, textTransform: "uppercase", marginBottom: 3 }}>{s.label}</div>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: B.text }}>{s.value}</div>
+                    </div>)}
+                  </div>
+
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{ fontSize: 8, color: B.muted, fontWeight: 500 }}>Synced {card.synced}</span>
+                    <span style={{ fontSize: 9, fontWeight: 600, letterSpacing: "0.1em", color: cl.m, textTransform: "uppercase" }}>OPEN →</span>
+                  </div>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* ─── INTEGRATION FOOTER ─── */}
+        <IntegrationFooter vis={vis} />
+
+        {/* Tagline */}
+        <div style={{ textAlign: "center", marginTop: 16, paddingBottom: 12, fontSize: 7, fontWeight: 700, letterSpacing: "0.4em", textTransform: "uppercase", color: "rgba(238,236,234,0.06)" }}>
+          VANTAGE · BUILT FOR LEADERS WHO BUILD
+        </div>
+      </div>
+      <style>{KF}</style>
+    </div>
+  );
+}
+
+const ROOT = { minHeight: "100vh", background: B.bg, color: B.text, fontFamily: FN, display: "flex", flexDirection: "column", overflow: "auto", position: "relative", WebkitFontSmoothing: "antialiased" };
+const GRAIN = { position: "fixed", inset: 0, opacity: 0.025, pointerEvents: "none", zIndex: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`, backgroundSize: "128px 128px" };
+const KF = `
+  @keyframes vS { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.35; } }
+  @keyframes pr { 0%,100% { transform:scale(1); opacity:0.4; } 50% { transform:scale(1.5); opacity:0; } }
+  @keyframes shimmer { 0% { background-position:200% 0; } 50% { background-position:0% 0; } 100% { background-position:200% 0; } }
+  @keyframes mf1 { 0%,100% { transform:translate(0,0); } 50% { transform:translate(30px,-20px); } }
+  @keyframes mf2 { 0%,100% { transform:translate(0,0); } 50% { transform:translate(-25px,15px); } }
+  @keyframes mf3 { 0%,100% { transform:translate(0,0); } 50% { transform:translate(15px,25px); } }
+`;
+
+ReactDOM.render(<Vantage />, document.getElementById("root"));
+  </script>
+</body>
+</html>
