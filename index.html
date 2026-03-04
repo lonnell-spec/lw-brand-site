@@ -900,6 +900,36 @@
   .vantage-cta-arrow {
     transition: transform 0.3s ease;
   }
+  .vantage-waitlist {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(193,127,89,0.15);
+  }
+  .vantage-waitlist-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--concrete); margin-bottom: 10px;
+  }
+  .vantage-waitlist-row {
+    display: flex; gap: 0; max-width: 420px;
+  }
+  .vantage-waitlist-row input {
+    flex: 1; padding: 12px 16px;
+    background: rgba(242,240,235,0.04); border: 1px solid rgba(193,127,89,0.25);
+    border-right: none; border-radius: 2px 0 0 2px;
+    color: var(--off-white); font-family: 'DM Sans', sans-serif; font-size: 14px;
+    outline: none; transition: border-color 0.3s;
+  }
+  .vantage-waitlist-row input:focus { border-color: var(--copper); }
+  .vantage-waitlist-row input::placeholder { color: var(--concrete); }
+  .vantage-waitlist-row button {
+    padding: 12px 20px; background: var(--copper); border: 1px solid var(--copper);
+    border-radius: 0 2px 2px 0; color: var(--obsidian);
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; cursor: pointer; white-space: nowrap;
+    transition: background 0.3s;
+  }
+  .vantage-waitlist-row button:hover { background: var(--warm-black); color: var(--off-white); }
   .vantage-cta:hover .vantage-cta-arrow {
     transform: translateX(4px);
   }
@@ -1340,9 +1370,12 @@
     <span class="site-nav-name">LONNELL WILLIAMS</span>
   </a>
   <div class="site-nav-links">
-    <a href="/">Home</a>
+    <a href="#about">About</a>
     <a href="/speaking.html">Speaking</a>
+    <a href="#books">Books</a>
+    <a href="#consulting">Work With Me</a>
     <a href="/media.html">Media</a>
+    <a href="#newsletter">Newsletter</a>
     <a href="/vantage.html">Vantage</a>
   </div>
   <button class="site-nav-btn" onclick="var l=document.querySelector('.site-nav-links');l.classList.toggle('open');">
@@ -1500,7 +1533,7 @@
     </div>
 
     <div style="text-align:center; margin-top:50px;">
-      <a href="/cdn-cgi/l/email-protection#a5d6d5c0c4cecccbc2e5c9cacbcbc0c9c9d2ccc9c9ccc4c8d68bc6cac8" class="btn-primary" style="background:var(--obsidian); color:var(--off-white);">Inquire About Speaking</a>
+      <a href="/cdn-cgi/l/email-protection#610d0e0f0f040d0d210d05164f0314080d055e1214030b0402155c321104000a080f06445351280f1014081318" class="btn-primary" style="background:var(--obsidian); color:var(--off-white);">Inquire About Speaking</a>
     </div>
   </section>
 
@@ -1518,7 +1551,7 @@
           <div class="book-card-title">ZAG<span class="dot">.</span></div>
           <div class="book-card-subtitle">Leading Ministry Jesus's Way</div>
           <div class="book-card-desc">This is not another leadership book. This is an operator's manual for people who are tired of being told to "pray about it" when the building is on fire. Counter-cultural frameworks for ministry leaders who build, not just believe.</div>
-          <a href="#" class="btn-book-zag">Get the Book</a>
+          <span class="btn-book-zag" style="opacity:0.7; cursor:default;">Coming Soon</span>
           <div class="book-color-strip">
             <div style="flex:1; background:var(--obsidian);"></div>
             <div style="flex:1; background:var(--copper);"></div>
@@ -1532,7 +1565,7 @@
           <div class="book-card-title" style="color:var(--aena-yellow);">ANYTHING,<br>EVERYTHING<span class="dot">.</span></div>
           <div class="book-card-subtitle">Or Nothing at All</div>
           <div class="book-card-desc">Not a how-to. A who-I-am. The manifesto of a man who refuses to do halfway. No "good enough." Full commitment or full absence. This is the book that crosses over beyond ministry into the human condition.</div>
-          <a href="#" class="btn-book-aena">Coming Soon</a>
+          <span class="btn-book-aena" style="opacity:0.7; cursor:default;">Coming Soon</span>
           <div class="book-color-strip">
             <div style="flex:1; background:var(--aena-cyan);"></div>
             <div style="flex:1; background:var(--aena-red);"></div>
@@ -1644,6 +1677,15 @@
         <a href="/vantage.html" class="vantage-cta">
           Enter Vantage <span class="vantage-cta-arrow">→</span>
         </a>
+
+        <div class="vantage-waitlist">
+          <div class="vantage-waitlist-label">Get early access</div>
+          <div class="vantage-waitlist-row">
+            <input type="email" id="vantage-waitlist-email" placeholder="Your email address">
+            <button type="button" id="vantage-waitlist-btn">Notify Me</button>
+          </div>
+          <div id="vantage-waitlist-msg" style="display:none; margin-top:8px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:1px; color:var(--copper);"></div>
+        </div>
       </div>
 
       <div class="vantage-preview">
@@ -1709,7 +1751,7 @@
         </div>
       </div>
       <div style="text-align:center; margin-top:40px;">
-        <a href="#" id="yt-subscribe-link" class="btn-secondary">Subscribe on YouTube →</a>
+        <a href="https://youtube.com/@AnyEveryOrNothingAtAll" target="_blank" id="yt-subscribe-link" class="btn-secondary">Subscribe on YouTube →</a>
       </div>
     </div>
   </div>
@@ -1790,15 +1832,15 @@
         </div>
         <div>
           <div class="footer-col-label">Books</div>
-          <a href="#" class="footer-link">Zag: Leading Ministry Jesus's Way</a>
-          <a href="#" class="footer-link">Anything, Everything, or Nothing at All</a>
+          <a href="#books" class="footer-link">Zag: Leading Ministry Jesus's Way</a>
+          <a href="#books" class="footer-link">Anything, Everything, or Nothing at All</a>
         </div>
         <div>
           <div class="footer-col-label">Connect</div>
           <div class="footer-social-row">
-            <a href="#" class="footer-social">IG</a>
-            <a href="#" class="footer-social">YT</a>
-            <a href="#" class="footer-social">TH</a>
+            <a href="https://instagram.com/lonnelldwilliams" target="_blank" class="footer-social">IG</a>
+            <a href="https://youtube.com/@AnyEveryOrNothingAtAll" target="_blank" class="footer-social">YT</a>
+            <a href="https://threads.com/@lonnelldwilliams" target="_blank" class="footer-social">TH</a>
           </div>
         </div>
       </div>
@@ -1810,7 +1852,7 @@
   </footer>
 
   <!-- ===== SUPABASE CLIENT ===== -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 
   <!-- ===== FORM HANDLING ===== -->
   <script>
@@ -1925,6 +1967,59 @@
       });
       nlInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') { e.preventDefault(); nlBtn.click(); }
+      });
+    }
+
+    // === VANTAGE WAITLIST ===
+    const vwBtn = document.getElementById('vantage-waitlist-btn');
+    const vwInput = document.getElementById('vantage-waitlist-email');
+    const vwMsg = document.getElementById('vantage-waitlist-msg');
+
+    async function handleVantageWaitlist(email) {
+      if (!email) { showMsg(vwMsg, 'Please enter your email.', true); return; }
+      if (!isValidEmail(email)) { showMsg(vwMsg, 'Please enter a valid email.', true); return; }
+      if (isRateLimited('vantage_waitlist', 10000)) { showMsg(vwMsg, 'Please wait before trying again.', true); return; }
+
+      setLoading(vwBtn, true);
+      try {
+        const { data, error } = await supabase
+          .from('vantage_waitlist')
+          .insert([{ email: email.toLowerCase(), source: 'homepage' }]);
+
+        // Sync to ConvertKit (fire-and-forget)
+        fetch(SUPABASE_URL + '/functions/v1/sync-convertkit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email.toLowerCase(), source: 'vantage_waitlist' })
+        }).catch(function(e) { console.log('ConvertKit sync:', e.message); });
+
+        if (error) {
+          if (error.code === '23505') {
+            vwMsg.style.color = 'var(--copper)';
+            showMsg(vwMsg, "You're already on the list. We'll be in touch.", false);
+          } else {
+            throw error;
+          }
+        } else {
+          vwInput.style.display = 'none';
+          vwBtn.style.display = 'none';
+          vwMsg.style.color = 'var(--copper)';
+          showMsg(vwMsg, "You're in. We'll notify you when Vantage launches.", false);
+        }
+      } catch (err) {
+        console.error('Vantage waitlist error:', err);
+        showMsg(vwMsg, 'Something went wrong. Try again.', true);
+      } finally {
+        setLoading(vwBtn, false);
+      }
+    }
+
+    if (vwBtn) {
+      vwBtn.addEventListener('click', () => {
+        handleVantageWaitlist(vwInput.value.trim());
+      });
+      vwInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); vwBtn.click(); }
       });
     }
 
@@ -2356,12 +2451,9 @@
       try { sessionStorage.setItem('ldw_cta_dismissed', '1'); } catch(e) {}
       setTimeout(hidePopup, 3000);
     });
-
-    emailInput.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') { e.preventDefault(); submitBtn.click(); }
-    });
-  })();
   </script>
 
+<!-- Metricool Tracking -->
+<script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"f78668ba20b7252b1560decfc42715d4"})});</script>
 </body>
 </html>

@@ -3,318 +3,620 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LDW.BUILD — Content</title>
+<title>Content Hub — Lonnell Williams</title>
+<meta name="description" content="Sermons, leadership insights, and behind-the-scenes content from Lonnell Williams. Builder. Operator. Author.">
+<meta property="og:title" content="Content Hub — Lonnell Williams">
+<meta property="og:description" content="Sermons, leadership insights, and behind-the-scenes content.">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PP+Monument+Extended:wght@200;300;400;500;600;700;800;900&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  .content-filters {
-    display: flex; gap: 12px; margin-bottom: 40px; flex-wrap: wrap;
-    justify-content: center;
-  }
-  .filter-pill {
-    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1px;
-    text-transform: uppercase; padding: 8px 18px;
-    border: 1px solid rgba(193,127,89,0.2); background: transparent;
-    color: var(--text-dim); cursor: none; transition: all 0.3s;
-  }
-  .filter-pill.active, .filter-pill:hover {
-    border-color: var(--copper); color: var(--copper); background: var(--copper-glow);
-  }
+:root {
+  --obsidian: #0D0D0D;
+  --copper: #C9842E;
+  --bone: #F2F0EB;
+  --graphite: #1A1A1A;
+  --smoke: #2D2D2D;
+  --ash: #888;
+  --warm-white: #FAF9F6;
+}
 
-  .masonry-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-    grid-auto-rows: 220px; max-width: 1200px; margin: 0 auto;
-  }
-  .masonry-item {
-    background: var(--warm-black); border: 1px solid rgba(193,127,89,0.08);
-    position: relative; overflow: hidden; cursor: none;
-    transition: transform 0.4s, border-color 0.4s;
-  }
-  .masonry-item:hover { border-color: var(--border-hover); transform: scale(1.02); }
-  .masonry-item.featured { grid-column: span 2; grid-row: span 2; }
-  .masonry-item .item-bg {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    transition: transform 0.6s;
-  }
-  .masonry-item:hover .item-bg { transform: scale(1.05); }
-  .masonry-item .item-overlay {
-    position: absolute; bottom: 0; left: 0; width: 100%; padding: 24px;
-    background: linear-gradient(transparent, rgba(13,13,13,0.9)); z-index: 2;
-  }
-  .masonry-item .item-category {
-    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--copper); margin-bottom: 6px;
-  }
-  .masonry-item .item-title {
-    font-family: 'Bebas Neue', cursive; font-size: 22px; letter-spacing: 1px;
-    color: var(--off-white); margin-bottom: 4px;
-  }
-  .masonry-item .item-date {
-    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px;
-    color: var(--text-dim);
-  }
-  .masonry-item .play-btn {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(0);
-    width: 60px; height: 60px; border-radius: 50%; background: rgba(193,127,89,0.9);
-    display: flex; align-items: center; justify-content: center; z-index: 3;
-    transition: transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
-  }
-  .masonry-item:hover .play-btn { transform: translate(-50%,-50%) scale(1); }
-  .play-btn svg { width: 20px; height: 20px; fill: var(--obsidian); margin-left: 3px; }
-  .latest-badge {
-    position: absolute; top: 16px; left: 16px; z-index: 3;
-    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px;
-    text-transform: uppercase; padding: 4px 10px;
-    background: var(--copper); color: var(--obsidian); font-weight: 700;
-  }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-  /* NEWSLETTER CTA */
-  .newsletter-section { text-align: center; max-width: 700px; margin: 0 auto; }
-  .newsletter-form { display: flex; gap: 0; max-width: 460px; margin: 32px auto 0; }
-  .newsletter-form input {
-    flex: 1; padding: 16px 20px; background: rgba(26,23,20,0.6);
-    border: 1px solid rgba(193,127,89,0.2); border-right: none;
-    font-family: 'DM Sans', sans-serif; font-size: 14px;
-    color: var(--off-white); outline: none; transition: border-color 0.3s;
-  }
-  .newsletter-form input::placeholder { color: rgba(242,240,235,0.25); }
-  .newsletter-form input:focus { border-color: var(--copper); }
-  .newsletter-form button {
-    padding: 16px 28px; background: var(--copper); border: 1px solid var(--copper);
-    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--obsidian); font-weight: 700;
-    cursor: none; transition: background 0.3s;
-  }
-  .newsletter-form button:hover { background: var(--signal); border-color: var(--signal); }
+body {
+  font-family: 'Instrument Sans', -apple-system, sans-serif;
+  background: var(--obsidian);
+  color: var(--bone);
+  -webkit-font-smoothing: antialiased;
+}
 
-  @media (max-width: 768px) {
-    .masonry-grid { grid-template-columns: 1fr 1fr; }
-    .masonry-item.featured { grid-column: span 2; }
-  }
-  @media (max-width: 480px) {
-    .masonry-grid { grid-template-columns: 1fr; grid-auto-rows: 200px; }
-    .masonry-item.featured { grid-column: span 1; grid-row: span 1; }
-  }
+/* ===== NAV ===== */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 40px;
+  background: rgba(13,13,13,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(242,240,235,0.06);
+}
+.nav-brand {
+  font-family: 'PP Monument Extended', sans-serif;
+  font-weight: 800; font-size: 14px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--bone); text-decoration: none;
+}
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a {
+  font-size: 13px; font-weight: 500; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--ash); text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--copper); }
+
+/* ===== HERO ===== */
+.hero {
+  padding: 140px 40px 60px;
+  max-width: 1200px; margin: 0 auto;
+}
+.hero-label {
+  font-family: 'PP Monument Extended', sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--copper);
+  margin-bottom: 16px;
+}
+.hero-title {
+  font-family: 'PP Monument Extended', sans-serif;
+  font-size: clamp(32px, 5vw, 56px); font-weight: 800;
+  letter-spacing: -1px; line-height: 1.1; margin-bottom: 16px;
+}
+.hero-title .accent { color: var(--copper); }
+.hero-desc {
+  font-size: 16px; color: var(--ash); max-width: 540px;
+  line-height: 1.6;
+}
+
+/* ===== FEATURED VIDEO ===== */
+.featured-section {
+  max-width: 1200px; margin: 0 auto; padding: 0 40px 60px;
+}
+.featured-video {
+  position: relative; width: 100%; padding-bottom: 56.25%;
+  background: var(--graphite); border-radius: 8px; overflow: hidden;
+  border: 1px solid rgba(242,240,235,0.06);
+}
+.featured-video iframe {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  border: none;
+}
+.featured-placeholder {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 16px;
+}
+.featured-placeholder svg { opacity: 0.15; }
+.featured-placeholder-text {
+  font-family: 'PP Monument Extended', sans-serif;
+  font-size: 13px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(242,240,235,0.2);
+}
+.featured-info {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 24px 0; gap: 24px; flex-wrap: wrap;
+}
+.featured-title {
+  font-family: 'PP Monument Extended', sans-serif;
+  font-size: 20px; font-weight: 700; letter-spacing: -0.5px;
+}
+.featured-meta {
+  font-size: 13px; color: var(--ash); margin-top: 6px;
+}
+.featured-badge {
+  font-family: 'PP Monument Extended', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--copper);
+  border: 1px solid var(--copper); padding: 6px 14px;
+  border-radius: 2px; white-space: nowrap;
+}
+
+/* ===== CATEGORY FILTERS ===== */
+.filters-section {
+  max-width: 1200px; margin: 0 auto; padding: 0 40px 40px;
+}
+.filter-bar {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  border-bottom: 1px solid rgba(242,240,235,0.08);
+  padding-bottom: 20px;
+}
+.filter-btn {
+  font-family: 'PP Monument Extended', sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--ash);
+  background: none; border: none; cursor: pointer;
+  padding: 8px 16px; border-radius: 2px;
+  transition: all 0.3s;
+}
+.filter-btn:hover { color: var(--bone); }
+.filter-btn.active {
+  color: var(--obsidian); background: var(--copper);
+}
+
+/* ===== VIDEO GRID ===== */
+.grid-section {
+  max-width: 1200px; margin: 0 auto; padding: 0 40px 80px;
+}
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 28px;
+}
+.video-card {
+  background: var(--graphite);
+  border: 1px solid rgba(242,240,235,0.06);
+  border-radius: 6px; overflow: hidden;
+  transition: transform 0.3s, border-color 0.3s;
+  cursor: pointer;
+}
+.video-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(201,132,46,0.3);
+}
+.video-thumb {
+  position: relative; width: 100%; padding-bottom: 56.25%;
+  background: var(--smoke); overflow: hidden;
+}
+.video-thumb img {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover; transition: transform 0.4s;
+}
+.video-card:hover .video-thumb img { transform: scale(1.04); }
+.video-play-icon {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 56px; height: 56px; background: rgba(13,13,13,0.7);
+  border: 2px solid rgba(242,240,235,0.2); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s;
+}
+.video-card:hover .video-play-icon {
+  background: var(--copper); border-color: var(--copper);
+}
+.video-play-icon svg { fill: var(--bone); width: 20px; height: 20px; margin-left: 2px; }
+.video-category-badge {
+  position: absolute; top: 12px; left: 12px;
+  font-family: 'PP Monument Extended', sans-serif;
+  font-size: 9px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--bone);
+  background: rgba(13,13,13,0.75); backdrop-filter: blur(8px);
+  padding: 4px 10px; border-radius: 2px;
+}
+.video-info { padding: 20px; }
+.video-title {
+  font-family: 'PP Monument Extended', sans-serif;
+  font-size: 14px; font-weight: 700; letter-spacing: -0.2px;
+  line-height: 1.3; margin-bottom: 8px;
+}
+.video-desc {
+  font-size: 13px; color: var(--ash); line-height: 1.5;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.video-date {
+  font-size: 11px; color: rgba(136,136,136,0.6); margin-top: 12px;
+  letter-spacing: 0.5px;
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+  grid-column: 1 / -1; text-align: center; padding: 80px 20px;
+}
+.empty-state-icon { opacity: 0.1; margin-bottom: 20px; }
+.empty-state-text {
+  font-family: 'PP Monument Extended', sans-serif;
+  font-size: 14px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(242,240,235,0.2);
+}
+.empty-state-sub {
+  font-size: 14px; color: var(--ash); margin-top: 8px;
+}
+
+/* ===== NEWSLETTER CTA ===== */
+.cta-section {
+  max-width: 1200px; margin: 0 auto; padding: 0 40px 100px;
+}
+.cta-box {
+  background: var(--graphite);
+  border: 1px solid rgba(201,132,46,0.15);
+  border-radius: 6px; padding: 60px; text-align: center;
+}
+.cta-label {
+  font-family: 'PP Monument Extended', sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--copper);
+  margin-bottom: 16px;
+}
+.cta-title {
+  font-family: 'PP Monument Extended', sans-serif;
+  font-size: clamp(24px, 3vw, 36px); font-weight: 800;
+  margin-bottom: 12px;
+}
+.cta-desc {
+  font-size: 15px; color: var(--ash); max-width: 480px; margin: 0 auto 28px;
+  line-height: 1.6;
+}
+.cta-form {
+  display: flex; gap: 12px; max-width: 440px; margin: 0 auto;
+}
+.cta-input {
+  flex: 1; padding: 14px 18px; background: var(--obsidian);
+  border: 1px solid rgba(242,240,235,0.1); border-radius: 4px;
+  color: var(--bone); font-size: 14px; font-family: inherit;
+  outline: none; transition: border-color 0.3s;
+}
+.cta-input:focus { border-color: var(--copper); }
+.cta-input::placeholder { color: var(--ash); }
+.cta-btn {
+  padding: 14px 28px; background: var(--copper);
+  color: var(--obsidian); border: none; border-radius: 4px;
+  font-family: 'PP Monument Extended', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; cursor: pointer;
+  transition: background 0.3s; white-space: nowrap;
+}
+.cta-btn:hover { background: #d4943a; }
+.cta-success {
+  display: none; padding: 16px; background: rgba(201,132,46,0.1);
+  border: 1px solid rgba(201,132,46,0.3); border-radius: 4px;
+  font-size: 14px; color: var(--copper); max-width: 440px; margin: 0 auto;
+}
+
+/* ===== VIDEO MODAL ===== */
+.modal-overlay {
+  display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.92); z-index: 200;
+  align-items: center; justify-content: center; padding: 40px;
+}
+.modal-overlay.active { display: flex; }
+.modal-content {
+  width: 100%; max-width: 960px; position: relative;
+}
+.modal-video {
+  position: relative; width: 100%; padding-bottom: 56.25%;
+  background: var(--graphite); border-radius: 8px; overflow: hidden;
+}
+.modal-video iframe {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
+}
+.modal-close {
+  position: absolute; top: -48px; right: 0;
+  width: 40px; height: 40px; background: none; border: none;
+  color: var(--bone); font-size: 24px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0.6; transition: opacity 0.3s;
+}
+.modal-close:hover { opacity: 1; }
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center; padding: 40px; border-top: 1px solid rgba(242,240,235,0.06);
+}
+.footer-scripture {
+  font-style: italic; font-size: 14px; color: var(--ash);
+  max-width: 500px; margin: 0 auto 8px;
+}
+.footer-ref {
+  font-size: 12px; color: rgba(136,136,136,0.5); letter-spacing: 1px;
+  margin-bottom: 24px;
+}
+.footer-brand {
+  font-family: 'PP Monument Extended', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 4px;
+  text-transform: uppercase; color: rgba(242,240,235,0.2);
+}
+.footer-year {
+  font-size: 11px; color: rgba(136,136,136,0.3); margin-top: 8px;
+  letter-spacing: 1px;
+}
+
+/* ===== LOADING ===== */
+.loading-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 28px;
+}
+.loading-card {
+  background: var(--graphite);
+  border: 1px solid rgba(242,240,235,0.04);
+  border-radius: 6px; overflow: hidden;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+.loading-thumb { width: 100%; padding-bottom: 56.25%; background: var(--smoke); }
+.loading-info { padding: 20px; }
+.loading-line {
+  height: 14px; background: var(--smoke); border-radius: 3px; margin-bottom: 10px;
+}
+.loading-line.short { width: 60%; }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .nav { padding: 16px 20px; }
+  .nav-links { gap: 16px; }
+  .nav-links a { font-size: 11px; letter-spacing: 1px; }
+  .hero { padding: 100px 20px 40px; }
+  .featured-section, .filters-section, .grid-section, .cta-section { padding-left: 20px; padding-right: 20px; }
+  .video-grid { grid-template-columns: 1fr; }
+  .cta-box { padding: 40px 24px; }
+  .cta-form { flex-direction: column; }
+  .featured-info { flex-direction: column; }
+  .filter-bar { gap: 8px; }
+  .filter-btn { font-size: 10px; padding: 6px 12px; }
+  .modal-overlay { padding: 20px; }
+}
 </style>
 </head>
 <body>
-<div class="grain"></div>
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-<div class="page-transition"><div class="wipe"></div><div class="copper-line"></div></div>
 
-<nav>
-  <a href="index.html" class="nav-logo">LONNELL <span>WILLIAMS</span></a>
-  <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+<!-- ===== NAV ===== -->
+<nav class="nav">
+  <a href="/" class="nav-brand">LDW</a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="speaking.html">Speaking</a>
-    <a href="media.html">Media</a>
-    <a href="vantage.html">Vantage</a>
-    <a href="content.html" class="active">Content</a>
+    <a href="/#about">About</a>
+    <a href="/speaking.html">Speaking</a>
+    <a href="/#books">Books</a>
+    <a href="/#consulting">Work With Me</a>
+    <a href="/media.html">Media</a>
+    <a href="/#newsletter">Newsletter</a>
+    <a href="/vantage.html">Vantage</a>
   </div>
 </nav>
 
-<div class="page-wrapper">
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-label">Content Hub</div>
+  <h1 class="hero-title">WATCH<span class="accent">.</span> LEARN<span class="accent">.</span> BUILD<span class="accent">.</span></h1>
+  <p class="hero-desc">Sermons, leadership insights, and behind-the-scenes content. Curated from the pulpit, the boardroom, and the building site.</p>
+</section>
 
-<!-- HERO -->
-<section class="page-hero">
-  <div class="hero-gradient"></div>
-  <div class="hero-vignette"></div>
-  <div class="hero-content">
-    <div class="hero-scripture" style="opacity:0;transform:translateY(10px);">Content Hub</div>
-    <h1 class="hero-title" style="font-size:clamp(64px,12vw,160px);">
-      <span class="word">WATCH.</span> <span class="word">LISTEN.</span>
-    </h1>
-    <p class="hero-sub">Messages, leadership insights, and behind-the-build content. Everything I'm teaching, preaching, and building &mdash; in one place.</p>
+<!-- ===== FEATURED VIDEO ===== -->
+<section class="featured-section" id="featured">
+  <div class="featured-video" id="featured-video">
+    <div class="featured-placeholder" id="featured-placeholder">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      <div class="featured-placeholder-text">Featured Video Coming Soon</div>
+    </div>
+  </div>
+  <div class="featured-info" id="featured-info" style="display:none;">
+    <div>
+      <div class="featured-title" id="featured-title"></div>
+      <div class="featured-meta" id="featured-meta"></div>
+    </div>
+    <div class="featured-badge">Featured</div>
   </div>
 </section>
 
-<!-- FILTERS + GRID -->
-<section class="section">
-  <div style="max-width:1200px;margin:0 auto;">
-    <div class="content-filters reveal">
-      <button class="filter-pill active" data-filter="all">All</button>
-      <button class="filter-pill" data-filter="message">Messages</button>
-      <button class="filter-pill" data-filter="leadership">Leadership</button>
-      <button class="filter-pill" data-filter="btb">Behind the Build</button>
-      <button class="filter-pill" data-filter="podcast">Podcast</button>
-    </div>
-
-    <div class="masonry-grid" id="contentGrid">
-
-      <div class="masonry-item featured" data-cat="message">
-        <span class="latest-badge">Latest</span>
-        <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #2a2420 50%, #1e1a16 100%);"></div>
-        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
-        <div class="item-overlay">
-          <div class="item-category">Message</div>
-          <div class="item-title">ARISE AND BUILD &mdash; LEADERSHIP SERIES PT. 4</div>
-          <div class="item-date">Feb 23, 2026</div>
-        </div>
-      </div>
-
-      <div class="masonry-item" data-cat="leadership">
-        <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #221e1a 100%);"></div>
-        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
-        <div class="item-overlay">
-          <div class="item-category">Leadership</div>
-          <div class="item-title">SCALING UNDER PRESSURE</div>
-          <div class="item-date">Feb 16, 2026</div>
-        </div>
-      </div>
-
-      <div class="masonry-item" data-cat="btb">
-        <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #1e1a16 100%);"></div>
-        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
-        <div class="item-overlay">
-          <div class="item-category">Behind the Build</div>
-          <div class="item-title">THE AI CHIEF OF STAFF</div>
-          <div class="item-date">Feb 10, 2026</div>
-        </div>
-      </div>
-
-      <div class="masonry-item" data-cat="message">
-        <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #2a2018 100%);"></div>
-        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
-        <div class="item-overlay">
-          <div class="item-category">Message</div>
-          <div class="item-title">THE ZAG PRINCIPLE</div>
-          <div class="item-date">Feb 2, 2026</div>
-        </div>
-      </div>
-
-      <div class="masonry-item" data-cat="leadership">
-        <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #201c18 100%);"></div>
-        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
-        <div class="item-overlay">
-          <div class="item-category">Leadership</div>
-          <div class="item-title">WORDS BUILD WORLDS</div>
-          <div class="item-date">Jan 26, 2026</div>
-        </div>
-      </div>
-
-      <div class="masonry-item" data-cat="btb">
-        <div class="item-bg" style="background:linear-gradient(135deg, #1e1a16 0%, #221e1a 100%);"></div>
-        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
-        <div class="item-overlay">
-          <div class="item-category">Behind the Build</div>
-          <div class="item-title">42 AGENTS. ONE SYSTEM.</div>
-          <div class="item-date">Jan 19, 2026</div>
-        </div>
-      </div>
-
-      <div class="masonry-item" data-cat="podcast">
-        <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #261e18 100%);"></div>
-        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
-        <div class="item-overlay">
-          <div class="item-category">Podcast</div>
-          <div class="item-title">ANYTHING OR NOTHING &mdash; EP. 01</div>
-          <div class="item-date">Jan 12, 2026</div>
-        </div>
-      </div>
-
-      <div class="masonry-item" data-cat="message">
-        <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #1e1c18 100%);"></div>
-        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
-        <div class="item-overlay">
-          <div class="item-category">Message</div>
-          <div class="item-title">I DID IT ANYWAY</div>
-          <div class="item-date">Jan 5, 2026</div>
-        </div>
-      </div>
-
-      <div class="masonry-item" data-cat="leadership">
-        <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #20201c 100%);"></div>
-        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
-        <div class="item-overlay">
-          <div class="item-category">Leadership</div>
-          <div class="item-title">IT'S YOURS UNTIL IT'S NOT</div>
-          <div class="item-date">Dec 29, 2025</div>
-        </div>
-      </div>
-
-      <div class="masonry-item" data-cat="btb">
-        <div class="item-bg" style="background:linear-gradient(135deg, #1e1a16 0%, #1a1714 100%);"></div>
-        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
-        <div class="item-overlay">
-          <div class="item-category">Behind the Build</div>
-          <div class="item-title">BUILDING LDW.BUILD</div>
-          <div class="item-date">Dec 22, 2025</div>
-        </div>
-      </div>
-
-      <div class="masonry-item" data-cat="message">
-        <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #241e18 100%);"></div>
-        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
-        <div class="item-overlay">
-          <div class="item-category">Message</div>
-          <div class="item-title">MAKE IT MAKE SENSE</div>
-          <div class="item-date">Dec 15, 2025</div>
-        </div>
-      </div>
-
-    </div>
+<!-- ===== FILTERS ===== -->
+<section class="filters-section">
+  <div class="filter-bar" id="filter-bar">
+    <button class="filter-btn active" data-category="all">All</button>
+    <button class="filter-btn" data-category="sermon">Sermons</button>
+    <button class="filter-btn" data-category="leadership">Leadership</button>
+    <button class="filter-btn" data-category="teaching">Teaching</button>
+    <button class="filter-btn" data-category="interview">Interviews</button>
+    <button class="filter-btn" data-category="behind the scenes">BTS</button>
   </div>
 </section>
 
-<!-- NEWSLETTER CTA -->
-<section class="section section-warm" id="newsletter">
-  <div class="newsletter-section">
-    <div class="section-label reveal">Don't Miss Anything</div>
-    <div class="section-title reveal">ARISE AND<br>BUILD.</div>
-    <p class="reveal" style="font-weight:300;font-size:16px;color:var(--text-muted);margin-bottom:8px;">New content drops weekly. Subscribe to get every message, leadership insight, and behind-the-build update delivered to your inbox.</p>
-    <div class="newsletter-form reveal">
-      <input type="email" placeholder="Your email">
-      <button>Subscribe</button>
-    </div>
+<!-- ===== VIDEO GRID ===== -->
+<section class="grid-section">
+  <div id="video-grid" class="video-grid">
+    <!-- Loading state -->
+    <div class="loading-card"><div class="loading-thumb"></div><div class="loading-info"><div class="loading-line"></div><div class="loading-line short"></div></div></div>
+    <div class="loading-card"><div class="loading-thumb"></div><div class="loading-info"><div class="loading-line"></div><div class="loading-line short"></div></div></div>
+    <div class="loading-card"><div class="loading-thumb"></div><div class="loading-info"><div class="loading-line"></div><div class="loading-line short"></div></div></div>
   </div>
 </section>
 
+<!-- ===== NEWSLETTER CTA ===== -->
+<section class="cta-section">
+  <div class="cta-box">
+    <div class="cta-label">Arise & Build</div>
+    <div class="cta-title">Don't Miss a Thing<span style="color:var(--copper);">.</span></div>
+    <div class="cta-desc">Subscribe to get new content, leadership insights, and updates delivered to your inbox.</div>
+    <div class="cta-form" id="cta-form">
+      <input type="email" class="cta-input" id="cta-email" placeholder="Your email address">
+      <button class="cta-btn" id="cta-btn" onclick="handleSubscribe()">Subscribe</button>
+    </div>
+    <div class="cta-success" id="cta-success">You're in. Welcome to the build.</div>
+  </div>
+</section>
+
+<!-- ===== VIDEO MODAL ===== -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal(event)">✕</button>
+    <div class="modal-video">
+      <iframe id="modal-iframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
 </div>
 
-<footer>
-  <div class="footer-inner">
-    <div>
-      <div class="footer-brand">LONNELL DAWSON WILLIAMS</div>
-      <div class="footer-verse">"The God of heaven will make us prosper, and we his servants will arise and build." &mdash; Nehemiah 2:20</div>
-    </div>
-    <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="speaking.html">Speaking</a>
-      <a href="media.html">Media</a>
-      <a href="vantage.html">Vantage</a>
-    </div>
-    <div class="footer-copy">&copy; 2026 LONNELL WILLIAMS. ALL RIGHTS RESERVED.</div>
-  </div>
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-scripture">"The God of heaven will make us prosper, and we his servants will arise and build."</div>
+  <div class="footer-ref">Nehemiah 2:20 — ESV</div>
+  <div class="footer-brand">LONNELL DAWSON WILLIAMS</div>
+  <div class="footer-year">&copy; 2026 LONNELL WILLIAMS. ALL RIGHTS RESERVED.</div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="scripts.js"></script>
 <script>
-  // Filter pills
-  document.querySelectorAll('.filter-pill').forEach(pill => {
-    pill.addEventListener('click', () => {
-      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-      const filter = pill.dataset.filter;
-      const items = document.querySelectorAll('.masonry-item');
-      items.forEach((item, i) => {
-        const cat = item.dataset.cat;
-        if (filter === 'all' || cat === filter) {
-          item.style.display = '';
-          // Animate in
-          if (typeof gsap !== 'undefined') {
-            gsap.fromTo(item, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, delay: i * 0.05, ease: 'power3.out' });
-          }
-        } else {
-          item.style.display = 'none';
-        }
-      });
+// ===== SUPABASE CONFIG =====
+const SUPABASE_URL = 'https://riqdcirsmckubkdfbtoj.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM';
+
+let allVideos = [];
+let currentCategory = 'all';
+
+// ===== EXTRACT YOUTUBE ID =====
+function getYouTubeId(url) {
+  if (!url) return null;
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?\s]+)/);
+  return match ? match[1] : null;
+}
+
+// ===== LOAD CONTENT =====
+async function loadContent() {
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/site_content_hub?visible=eq.true&status=eq.live&order=display_order.asc,publish_date.desc`,
+      { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } }
+    );
+    const data = await res.json();
+    allVideos = data || [];
+
+    // Set featured video
+    const featured = allVideos.find(v => v.featured);
+    if (featured) {
+      const fId = getYouTubeId(featured.youtube_url);
+      if (fId) {
+        document.getElementById('featured-placeholder').style.display = 'none';
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${fId}`;
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        iframe.allowFullscreen = true;
+        document.getElementById('featured-video').appendChild(iframe);
+      }
+      document.getElementById('featured-title').textContent = featured.title;
+      document.getElementById('featured-meta').textContent =
+        (featured.category ? featured.category.toUpperCase() : '') +
+        (featured.publish_date ? ' · ' + new Date(featured.publish_date).toLocaleDateString('en-US', {month:'long',day:'numeric',year:'numeric'}) : '');
+      document.getElementById('featured-info').style.display = 'flex';
+    }
+
+    renderGrid();
+  } catch (err) {
+    console.error('Failed to load content:', err);
+    renderEmptyState();
+  }
+}
+
+// ===== RENDER GRID =====
+function renderGrid() {
+  const grid = document.getElementById('video-grid');
+  const videos = currentCategory === 'all'
+    ? allVideos.filter(v => !v.featured)
+    : allVideos.filter(v => !v.featured && v.category && v.category.toLowerCase() === currentCategory);
+
+  if (videos.length === 0 && !allVideos.find(v => v.featured)) {
+    renderEmptyState();
+    return;
+  }
+
+  if (videos.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-text">No ${currentCategory} content yet</div>
+        <div class="empty-state-sub">Check back soon — new content drops weekly.</div>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = videos.map(v => {
+    const vid = getYouTubeId(v.youtube_url);
+    const thumb = vid ? `https://img.youtube.com/vi/${vid}/maxresdefault.jpg` : '';
+    const date = v.publish_date ? new Date(v.publish_date).toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'}) : '';
+    return `
+      <div class="video-card" onclick="openModal('${vid}')">
+        <div class="video-thumb">
+          ${thumb ? `<img src="${thumb}" alt="${v.title}" loading="lazy">` : ''}
+          <div class="video-play-icon">
+            <svg viewBox="0 0 24 24"><polygon points="8 5 19 12 8 19 8 5"></polygon></svg>
+          </div>
+          ${v.category ? `<div class="video-category-badge">${v.category}</div>` : ''}
+        </div>
+        <div class="video-info">
+          <div class="video-title">${v.title}</div>
+          ${v.description ? `<div class="video-desc">${v.description}</div>` : ''}
+          ${date ? `<div class="video-date">${date}</div>` : ''}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function renderEmptyState() {
+  document.getElementById('video-grid').innerHTML = `
+    <div class="empty-state">
+      <svg class="empty-state-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+      <div class="empty-state-text">Content Coming Soon</div>
+      <div class="empty-state-sub">Subscribe below to get notified when new content drops.</div>
+    </div>`;
+}
+
+// ===== FILTERS =====
+document.getElementById('filter-bar').addEventListener('click', function(e) {
+  if (e.target.classList.contains('filter-btn')) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+    currentCategory = e.target.dataset.category;
+    renderGrid();
+  }
+});
+
+// ===== MODAL =====
+function openModal(videoId) {
+  if (!videoId || videoId === 'null') return;
+  document.getElementById('modal-iframe').src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+  document.getElementById('modal-overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e.target.id === 'modal-overlay' || e.target.classList.contains('modal-close')) {
+    document.getElementById('modal-iframe').src = '';
+    document.getElementById('modal-overlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.getElementById('modal-iframe').src = '';
+    document.getElementById('modal-overlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+});
+
+// ===== SUBSCRIBE =====
+async function handleSubscribe() {
+  const email = document.getElementById('cta-email').value.trim();
+  if (!email || !email.includes('@')) return;
+  const btn = document.getElementById('cta-btn');
+  btn.textContent = '...';
+  btn.disabled = true;
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/newsletter_subscribers`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ email, source: 'content-hub', subscribed: true })
     });
-  });
+    document.getElementById('cta-form').style.display = 'none';
+    document.getElementById('cta-success').style.display = 'block';
+  } catch (err) {
+    btn.textContent = 'Try Again';
+    btn.disabled = false;
+  }
+}
+
+// ===== INIT =====
+loadContent();
 </script>
+<!-- Metricool Tracking -->
+<script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"f78668ba20b7252b1560decfc42715d4"})});</script>
 </body>
 </html>
