@@ -90,26 +90,7 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
 .done-list li { font-weight: 300; font-size: 14px; line-height: 1.7; color: var(--signal); padding: 6px 0; border-bottom: 1px solid rgba(242,240,235,0.03); display: flex; align-items: baseline; gap: 10px; }
 .done-list li::before { content: '✓'; font-weight: 700; flex-shrink: 0; }
 
-/* ── BRAND ASSETS SECTION ── */
-.brand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin: 20px 0 32px; }
-.brand-card { background: var(--warm-black); border: 1px solid rgba(242,240,235,0.08); border-radius: 2px; padding: 24px; text-align: center; transition: border-color 0.3s; }
-.brand-card:hover { border-color: rgba(193,127,89,0.3); }
-.brand-card .card-icon { width: 64px; height: 64px; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; }
-.brand-card .card-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--copper); margin-bottom: 4px; }
-.brand-card .card-name { font-weight: 300; font-size: 13px; color: var(--concrete); }
 
-/* ── BOOK CARDS ── */
-.book-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 24px 0 32px; }
-.book-card { background: var(--warm-black); border: 1px solid rgba(242,240,235,0.08); border-radius: 2px; padding: 32px; position: relative; overflow: hidden; transition: border-color 0.3s; }
-.book-card:hover { border-color: rgba(193,127,89,0.3); }
-.book-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--copper); }
-.book-number { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--copper); margin-bottom: 16px; }
-.book-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 3px; line-height: 1.1; margin-bottom: 16px; }
-.book-subtitle { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 12px; line-height: 1.6; color: var(--concrete); margin-bottom: 16px; letter-spacing: 0.3px; }
-.book-desc { font-weight: 300; font-size: 13px; line-height: 1.7; color: var(--concrete); }
-.book-status { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(242,240,235,0.06); }
-.book-status.concept { color: var(--amber); }
-.book-status.active { color: var(--signal); }
 
 /* ── FOOTER ── */
 .admin-sub-footer { padding: 24px 48px; border-top: 1px solid rgba(242,240,235,0.06); display: flex; justify-content: space-between; align-items: center; }
@@ -124,8 +105,7 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
   .admin-content { padding: 24px 24px 60px; }
   .stats-bar { flex-wrap: wrap; }
   .stat-block { flex: 1 1 50%; min-width: 120px; }
-  .book-grid { grid-template-columns: 1fr; }
-  .brand-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+
   .admin-sub-footer { padding: 16px 24px; flex-direction: column; gap: 8px; }
 }
 </style>
@@ -432,96 +412,16 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
     <hr>
 
     <!-- ═══════════════════════════════════════════════ -->
-    <!--  SECTION 7: BRAND ASSETS                       -->
+    <!--  BRAND ASSETS LINK                             -->
     <!-- ═══════════════════════════════════════════════ -->
 
     <h1>Brand Assets</h1>
-    <p class="section-desc">Logos and book covers exported and ready for use across all platforms.</p>
-
-    <h2>Logos</h2>
-
-    <div class="brand-grid">
-      <div class="brand-card">
-        <div class="card-icon">
-          <svg width="48" height="48" viewBox="0 0 240 240" fill="none"><polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/><polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/><polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.15)"/></svg>
-        </div>
-        <div class="card-label">Cornerstone</div>
-        <div class="card-name">Primary Mark &mdash; Light</div>
-      </div>
-      <div class="brand-card">
-        <div class="card-icon" style="background: var(--off-white); border-radius: 4px;">
-          <svg width="48" height="48" viewBox="0 0 240 240" fill="none"><polygon points="40,180 120,130 120,55 40,105" fill="#0D0D0D"/><polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/><polygon points="40,180 120,230 200,180 120,130" fill="rgba(13,13,13,0.08)"/></svg>
-        </div>
-        <div class="card-label">Cornerstone</div>
-        <div class="card-name">Primary Mark &mdash; Dark</div>
-      </div>
-      <div class="brand-card">
-        <div class="card-icon">
-          <svg width="48" height="16" viewBox="0 0 120 40" fill="none"><rect x="0" y="0" width="100" height="14" rx="1" fill="#F2F0EB"/><rect x="20" y="26" width="100" height="14" rx="1" fill="#C17F59"/></svg>
-        </div>
-        <div class="card-label">The Shift</div>
-        <div class="card-name">Secondary Mark &mdash; Light</div>
-      </div>
-      <div class="brand-card">
-        <div class="card-icon" style="background: var(--off-white); border-radius: 4px;">
-          <svg width="48" height="16" viewBox="0 0 120 40" fill="none"><rect x="0" y="0" width="100" height="14" rx="1" fill="#0D0D0D"/><rect x="20" y="26" width="100" height="14" rx="1" fill="#C17F59"/></svg>
-        </div>
-        <div class="card-label">The Shift</div>
-        <div class="card-name">Secondary Mark &mdash; Dark</div>
-      </div>
-    </div>
-
-    <h2>Books</h2>
-
-    <div class="book-grid">
-
-      <!-- BOOK 1: Anything, Everything, or Nothing at All -->
-      <div class="book-card">
-        <div class="book-number">Book 01</div>
-        <div class="book-title">ANYTHING, EVERYTHING, OR NOTHING AT ALL<span style="color:var(--copper);">.</span></div>
-        <div class="book-subtitle">The personal declaration. The line in the sand before the strategy.</div>
-        <div class="book-desc">
-          Before you can build anything worth standing on, you have to decide what you&rsquo;re willing to carry.
-          This isn&rsquo;t a motivational mantra &mdash; it&rsquo;s a confrontation. A mirror held up to the half-commitments, 
-          the &ldquo;I&rsquo;ll try,&rdquo; the safe middle ground that produces nothing of consequence. 
-          Full presence or full absence. All weight or no weight. 
-          The operator&rsquo;s creed before the operator ever picks up a tool.
-        </div>
-        <div class="book-status active">&#9670; Active</div>
-      </div>
-
-      <!-- BOOK 2: Zag -->
-      <div class="book-card">
-        <div class="book-number">Book 02</div>
-        <div class="book-title">ZAG<span style="color:var(--copper);">.</span></div>
-        <div class="book-subtitle">Leading Ministry Jesus&rsquo;s Way</div>
-        <div class="book-desc">
-          Zag is the outcome. The thing that happens <em>after</em> you learn how to listen.
-          It starts with being Holy Spirit-led &mdash; not following the playbook everyone else borrowed, 
-          but learning how to pump the brakes long enough to hear what God is actually doing. 
-          Then it gets practical: how to ask the right questions before you move, 
-          how to grip the handlebars of true ministry creativity instead of copying someone else&rsquo;s ride, 
-          how to identify the brakes that make disruption safe instead of reckless. 
-          Being willing to listen for what&rsquo;s actually happening &mdash; in the room, in the Spirit, in the culture &mdash;
-          and then actually applying it. Not theory. Process. The mechanics of the zag.
-        </div>
-        <div class="book-status active">&#9670; Active</div>
-      </div>
-
-      <!-- BOOK 3: Staff -->
-      <div class="book-card" style="opacity: 0.6;">
-        <div class="book-number">Book 03</div>
-        <div class="book-title">STAFF<span style="color:var(--copper);">.</span></div>
-        <div class="book-subtitle">What&rsquo;s Already in Your Hand</div>
-        <div class="book-desc">
-          What you&rsquo;ve been overlooking is what you&rsquo;ve been looking for. 
-          The resource, the authority, the tool &mdash; it&rsquo;s already in your grip. 
-          You just stopped seeing it.
-        </div>
-        <div class="book-status concept">&#9670; In Concept</div>
-      </div>
-
-    </div>
+    <ul class="item-list">
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-done">Live</span> <a href="/admin-brand-assets.html">Logos &amp; Books &rarr;</a></div>
+        <div class="item-desc">4 logo variants, 6 book covers (3 AENA + 3 Zag), ConvertKit email banner, and usage notes. All exported and documented on their own page.</div>
+      </li>
+    </ul>
 
     <hr>
 
