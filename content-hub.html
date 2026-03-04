@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Hub — Lonnell Williams</title>
+<meta name="description" content="Sermons, teachings, conversations, and resources from Lonnell Williams.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<!-- Metricool -->
+<script>(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://tracker.metricool.com/resources/be.js";js.onload=function(){beTracker.t({hash:"b4e8f2a1c3d5e6f7a8b9c0d1e2f3a4b5"});};fjs.parentNode.insertBefore(js,fjs);}(document,'script','metricool-tracker'));</script>
+<style>
+:root {
+  --obsidian: #0D0D0D;
+  --warm-black: #1A1714;
+  --off-white: #F2F0EB;
+  --concrete: #8A8A8A;
+  --copper: #C17F59;
+  --copper-light: #D4956A;
+  --signal: #E85D3A;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+
+/* NAV */
+.site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; background: rgba(13,13,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(242,240,235,0.06); }
+.site-nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--off-white); }
+.site-nav-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 4px; }
+.site-nav-links { display: flex; gap: 32px; align-items: center; }
+.site-nav-links a { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.3s; }
+.site-nav-links a:hover, .site-nav-links a.active { color: var(--off-white); }
+.site-nav-btn { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.site-nav-btn span { display: block; width: 20px; height: 2px; background: var(--off-white); margin: 4px 0; }
+@media (max-width: 768px) {
+  .site-nav { padding: 0 24px; }
+  .site-nav-links { display: none; position: fixed; top: 64px; left: 0; right: 0; flex-direction: column; background: rgba(13,13,13,0.96); padding: 24px; gap: 20px; }
+  .site-nav-links.open { display: flex; }
+  .site-nav-btn { display: block; }
+}
+
+/* PAGE HEADER */
+.page-header { padding: 120px 48px 60px; border-bottom: 1px solid rgba(242,240,235,0.06); }
+.page-header-inner { max-width: 1100px; margin: 0 auto; }
+.page-eyebrow { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--copper); margin-bottom: 16px; }
+.page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 7vw, 96px); letter-spacing: 2px; line-height: 0.95; margin-bottom: 20px; }
+.page-sub { font-size: 16px; font-weight: 300; color: var(--concrete); line-height: 1.7; max-width: 560px; }
+
+/* FILTERS */
+.filters { padding: 32px 48px; border-bottom: 1px solid rgba(242,240,235,0.04); position: sticky; top: 64px; background: rgba(13,13,13,0.96); backdrop-filter: blur(12px); z-index: 50; }
+.filters-inner { max-width: 1100px; margin: 0 auto; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.filter-btn { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; padding: 8px 16px; border: 1px solid rgba(242,240,235,0.08); background: none; color: var(--concrete); cursor: pointer; transition: all 0.3s; }
+.filter-btn:hover { border-color: rgba(242,240,235,0.2); color: var(--off-white); }
+.filter-btn.active { border-color: var(--copper); color: var(--copper); background: rgba(193,127,89,0.06); }
+
+/* CONTENT GRID */
+.content-section { padding: 60px 48px 100px; }
+.content-inner { max-width: 1100px; margin: 0 auto; }
+.content-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.content-card { background: var(--warm-black); border: 1px solid rgba(242,240,235,0.04); overflow: hidden; transition: border-color 0.3s; cursor: pointer; }
+.content-card:hover { border-color: rgba(193,127,89,0.2); }
+.card-thumb { aspect-ratio: 16/9; background: #111; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.card-thumb-bg { width: 100%; height: 100%; object-fit: cover; }
+.card-thumb-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, rgba(193,127,89,0.08) 0%, rgba(13,13,13,0.5) 100%); display: flex; align-items: center; justify-content: center; }
+.card-type-badge { position: absolute; top: 12px; left: 12px; font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; }
+.badge-sermon { background: rgba(232,93,58,0.9); color: #fff; }
+.badge-podcast { background: rgba(193,127,89,0.9); color: #fff; }
+.badge-teaching { background: rgba(0,100,200,0.8); color: #fff; }
+.card-play { width: 48px; height: 48px; border: 2px solid rgba(242,240,235,0.6); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.card-play::after { content: ''; border-left: 16px solid var(--off-white); border-top: 9px solid transparent; border-bottom: 9px solid transparent; margin-left: 4px; }
+.card-body { padding: 20px 22px 24px; }
+.card-meta { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--concrete); margin-bottom: 10px; }
+.card-title { font-size: 15px; font-weight: 600; color: var(--off-white); line-height: 1.4; margin-bottom: 8px; }
+.card-excerpt { font-size: 13px; font-weight: 300; color: var(--concrete); line-height: 1.65; }
+
+/* EMPTY STATE */
+.empty-state { text-align: center; padding: 80px 40px; }
+.empty-icon { font-size: 48px; margin-bottom: 24px; opacity: 0.2; }
+.empty-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 4px; color: var(--off-white); margin-bottom: 12px; }
+.empty-body { font-size: 15px; font-weight: 300; color: var(--concrete); line-height: 1.7; margin-bottom: 32px; max-width: 440px; margin-left: auto; margin-right: auto; }
+.empty-cta { display: inline-flex; align-items: center; gap: 10px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); text-decoration: none; border: 1px solid rgba(193,127,89,0.3); padding: 14px 24px; transition: all 0.3s; }
+.empty-cta:hover { background: rgba(193,127,89,0.06); border-color: var(--copper); }
+
+/* LOADING */
+.loading-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.loading-card { background: var(--warm-black); border: 1px solid rgba(242,240,235,0.04); }
+.loading-thumb { aspect-ratio: 16/9; background: linear-gradient(90deg, rgba(242,240,235,0.03) 25%, rgba(242,240,235,0.06) 50%, rgba(242,240,235,0.03) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+.loading-body { padding: 20px 22px 24px; }
+.loading-line { height: 10px; background: rgba(242,240,235,0.04); margin-bottom: 10px; animation: shimmer 1.5s infinite; }
+.loading-line.short { width: 60%; }
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+/* FOOTER */
+.footer { background: var(--obsidian); padding: 80px 48px 40px; border-top: 1px solid rgba(242,240,235,0.04); }
+.footer-inner { max-width: 1100px; margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 1.2fr 0.8fr 0.8fr 1.2fr; gap: 60px; padding-bottom: 60px; border-bottom: 1px solid rgba(242,240,235,0.04); }
+.footer-col-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); margin-bottom: 20px; }
+.footer-scripture { font-size: 14px; font-weight: 300; font-style: italic; color: rgba(242,240,235,0.3); line-height: 1.7; margin-bottom: 12px; }
+.footer-ref { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; color: var(--copper); }
+.footer-link { display: block; font-size: 13px; font-weight: 300; color: var(--concrete); text-decoration: none; margin-bottom: 12px; transition: color 0.3s; }
+.footer-link:hover { color: var(--off-white); }
+.footer-social-row { display: flex; gap: 12px; }
+.footer-social { width: 40px; height: 40px; border: 1px solid rgba(242,240,235,0.06); display: flex; align-items: center; justify-content: center; text-decoration: none; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--concrete); transition: all 0.3s; }
+.footer-social:hover { border-color: var(--copper); color: var(--copper); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 30px; }
+.footer-brand-text { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 6px; color: rgba(242,240,235,0.08); }
+.footer-legal { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(242,240,235,0.1); }
+
+@media (max-width: 1024px) { .content-grid, .loading-grid { grid-template-columns: 1fr 1fr; } .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; } }
+@media (max-width: 768px) { .page-header { padding: 100px 24px 40px; } .filters { padding: 20px 24px; } .content-section { padding: 40px 24px 60px; } .content-grid, .loading-grid { grid-template-columns: 1fr; } .footer { padding: 60px 24px 32px; } .footer-top { grid-template-columns: 1fr; gap: 32px; } }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/" class="site-nav-brand">
+    <svg width="28" height="28" viewBox="0 0 240 240" fill="none">
+      <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+      <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
+      <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/>
+    </svg>
+    <span class="site-nav-name">LONNELL WILLIAMS</span>
+  </a>
+  <div class="site-nav-links">
+    <a href="/#about">About</a>
+    <a href="/speaking.html">Speaking</a>
+    <a href="/books.html">Books</a>
+    <a href="/#consulting">Work With Me</a>
+    <a href="/media.html">Media</a>
+    <a href="/#newsletter">Newsletter</a>
+    <a href="/vantage.html">Vantage</a>
+  </div>
+  <button class="site-nav-btn" onclick="var l=document.querySelector('.site-nav-links');l.classList.toggle('open');">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="page-eyebrow">Content Hub</div>
+    <h1 class="page-title">SERMONS.<br>TEACHINGS.<br>CONVERSATIONS.</h1>
+    <p class="page-sub">Every sermon clip, podcast episode, and teaching resource. Searchable and organized in one place.</p>
+  </div>
+</div>
+
+<div class="filters">
+  <div class="filters-inner">
+    <button class="filter-btn active" onclick="filterContent('all', this)">All</button>
+    <button class="filter-btn" onclick="filterContent('sermon', this)">Sermons</button>
+    <button class="filter-btn" onclick="filterContent('podcast', this)">Podcast</button>
+    <button class="filter-btn" onclick="filterContent('teaching', this)">Teaching</button>
+  </div>
+</div>
+
+<section class="content-section">
+  <div class="content-inner">
+    <div id="loadingState" class="loading-grid">
+      <div class="loading-card"><div class="loading-thumb"></div><div class="loading-body"><div class="loading-line"></div><div class="loading-line short"></div></div></div>
+      <div class="loading-card"><div class="loading-thumb"></div><div class="loading-body"><div class="loading-line"></div><div class="loading-line short"></div></div></div>
+      <div class="loading-card"><div class="loading-thumb"></div><div class="loading-body"><div class="loading-line"></div><div class="loading-line short"></div></div></div>
+    </div>
+    <div id="contentGrid" class="content-grid" style="display:none;"></div>
+    <div id="emptyState" class="empty-state" style="display:none;">
+      <div class="empty-icon">◈</div>
+      <div class="empty-title">CONTENT INCOMING.</div>
+      <p class="empty-body">Sermon clips, podcast episodes, and teaching resources are being loaded. Subscribe to get notified when new content drops.</p>
+      <a href="/#newsletter" class="empty-cta">Get Notified →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-col-label">Foundation</div>
+        <p class="footer-scripture">"The God of heaven will make us prosper, and we his servants will arise and build."</p>
+        <div class="footer-ref">Nehemiah 2:20 — ESV</div>
+      </div>
+      <div>
+        <div class="footer-col-label">Navigate</div>
+        <a href="/#about" class="footer-link">About</a>
+        <a href="/speaking.html" class="footer-link">Speaking</a>
+        <a href="/books.html" class="footer-link">Books</a>
+        <a href="/#consulting" class="footer-link">Work With Me</a>
+        <a href="/#newsletter" class="footer-link">Newsletter</a>
+        <a href="/media.html" class="footer-link">Media</a>
+        <a href="/vantage.html" class="footer-link">Vantage</a>
+      </div>
+      <div>
+        <div class="footer-col-label">Books</div>
+        <a href="/books.html" class="footer-link">Anything, Everything, or Nothing at All</a>
+        <a href="/books.html" class="footer-link">Zag: Leading Ministry Jesus's Way</a>
+      </div>
+      <div>
+        <div class="footer-col-label">Connect</div>
+        <div class="footer-social-row">
+          <a href="https://instagram.com/lonnelldwilliams" target="_blank" class="footer-social">IG</a>
+          <a href="https://youtube.com/@lonnelldwilliams" target="_blank" class="footer-social">YT</a>
+          <a href="https://threads.net/@lonnelldwilliams" target="_blank" class="footer-social">TH</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-brand-text">LONNELL DAWSON WILLIAMS</div>
+      <div class="footer-legal">&copy; 2026 LONNELL WILLIAMS. ALL RIGHTS RESERVED.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = 'https://mhkiflfmshpfhpfkbnok.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1oa2lmbGZtc2hwZmhwZmtibm9rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzgxOTk2MTcsImV4cCI6MjA1Mzc3NTYxN30.VVAFuHqBRdU0bPbZXi3EHZLS_v8NqAUv-R4V1LmGSnQ';
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let allContent = [];
+let activeFilter = 'all';
+
+async function loadContent() {
+  try {
+    const { data, error } = await supabase
+      .from('site_content_hub')
+      .select('*')
+      .order('date', { ascending: false });
+
+    document.getElementById('loadingState').style.display = 'none';
+
+    if (error || !data || data.length === 0) {
+      document.getElementById('emptyState').style.display = 'block';
+      return;
+    }
+
+    allContent = data;
+    renderContent(allContent);
+  } catch (err) {
+    document.getElementById('loadingState').style.display = 'none';
+    document.getElementById('emptyState').style.display = 'block';
+  }
+}
+
+function renderContent(items) {
+  const grid = document.getElementById('contentGrid');
+  const empty = document.getElementById('emptyState');
+
+  if (!items || items.length === 0) {
+    grid.style.display = 'none';
+    empty.style.display = 'block';
+    return;
+  }
+
+  empty.style.display = 'none';
+  grid.style.display = 'grid';
+  grid.innerHTML = items.map(item => `
+    <div class="content-card" onclick="window.open('${item.url || '#'}', '_blank')">
+      <div class="card-thumb">
+        ${item.thumbnail
+          ? `<img class="card-thumb-bg" src="${item.thumbnail}" alt="${item.title}" loading="lazy">`
+          : `<div class="card-thumb-placeholder"><div class="card-play"></div></div>`
+        }
+        <span class="card-type-badge badge-${item.type || 'teaching'}">${item.type || 'Teaching'}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">${item.date ? new Date(item.date).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}) : ''}</div>
+        <div class="card-title">${item.title}</div>
+        ${item.excerpt ? `<div class="card-excerpt">${item.excerpt}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterContent(type, btn) {
+  activeFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const filtered = type === 'all' ? allContent : allContent.filter(i => i.type === type);
+  renderContent(filtered);
+}
+
+loadContent();
+</script>
+</body>
+</html>
