@@ -8,9 +8,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root { --obsidian: #0D0D0D; --warm-black: #1A1714; --off-white: #F2F0EB; --concrete: #8A8A8A; --copper: #C17F59; --copper-light: #D4956A; --signal: #00E676; }
+:root { --obsidian: #0D0D0D; --warm-black: #1A1714; --off-white: #F2F0EB; --concrete: #8A8A8A; --copper: #C17F59; --copper-light: #D4956A; --signal: #00E676; --signal-red: #E85D3A; --amber: #F5A623; }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+
+/* ── NAV ── */
 .site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; background: rgba(13,13,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(242,240,235,0.06); }
 .site-nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--off-white); }
 .site-nav-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 4px; }
@@ -25,6 +27,8 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
   .site-nav-links.open { display: flex; }
   .site-nav-btn { display: block; }
 }
+
+/* ── ADMIN LAYOUT ── */
 .admin-sub { padding: 64px 0 0; min-height: 100vh; }
 .admin-sub-header { padding: 48px 48px 32px; border-bottom: 1px solid rgba(242,240,235,0.06); }
 .admin-sub-back { display: inline-flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); text-decoration: none; margin-bottom: 24px; transition: color 0.3s; }
@@ -32,9 +36,23 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
 .admin-sub-eyebrow { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--copper); margin-bottom: 12px; }
 .admin-sub-title { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 6px; line-height: 1; }
 .admin-sub-title .accent { color: var(--copper); }
-.admin-content { padding: 40px 48px 80px; max-width: 900px; }
-.admin-content h1 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 4px; text-transform: uppercase; margin: 48px 0 16px; color: var(--off-white); }
+.admin-sub-subtitle { font-weight: 300; font-size: 15px; color: var(--concrete); margin-top: 12px; line-height: 1.6; }
+
+/* ── STATS BAR ── */
+.stats-bar { display: flex; gap: 1px; margin: 0; background: rgba(242,240,235,0.04); border-bottom: 1px solid rgba(242,240,235,0.06); }
+.stat-block { flex: 1; padding: 20px 24px; text-align: center; }
+.stat-number { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px; line-height: 1; }
+.stat-number.red { color: var(--signal-red); }
+.stat-number.amber { color: var(--amber); }
+.stat-number.green { color: var(--signal); }
+.stat-number.copper { color: var(--copper); }
+.stat-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); margin-top: 6px; }
+
+/* ── CONTENT ── */
+.admin-content { padding: 40px 48px 80px; max-width: 1000px; }
+.admin-content h1 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 4px; text-transform: uppercase; margin: 56px 0 8px; color: var(--off-white); }
 .admin-content h1:first-child { margin-top: 0; }
+.section-desc { font-weight: 300; font-size: 13px; color: var(--concrete); margin-bottom: 20px; line-height: 1.6; }
 .admin-content h2 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; text-transform: uppercase; margin: 36px 0 12px; color: var(--off-white); }
 .admin-content h3 { font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; margin: 24px 0 8px; color: var(--off-white); }
 .admin-content p { font-weight: 300; font-size: 15px; line-height: 1.7; color: var(--concrete); margin-bottom: 16px; }
@@ -42,128 +60,528 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
 .admin-content a { color: var(--copper); text-decoration: none; transition: color 0.3s; }
 .admin-content a:hover { color: var(--copper-light); }
 .admin-content hr { border: none; border-top: 1px solid rgba(242,240,235,0.08); margin: 32px 0; }
-.admin-content ul, .admin-content ol { padding-left: 24px; margin-bottom: 16px; }
-.admin-content li { font-weight: 300; font-size: 15px; line-height: 1.7; color: var(--concrete); margin-bottom: 8px; }
 .admin-content code { font-family: 'Space Mono', monospace; font-size: 13px; background: rgba(242,240,235,0.06); padding: 2px 8px; border-radius: 2px; color: var(--copper); }
-.admin-content pre { background: var(--warm-black); border: 1px solid rgba(242,240,235,0.08); border-radius: 2px; padding: 20px; margin: 16px 0; overflow-x: auto; }
-.admin-content pre code { background: none; padding: 0; font-size: 12px; line-height: 1.6; color: var(--off-white); }
 .admin-content blockquote { border-left: 3px solid var(--copper); padding: 12px 20px; margin: 16px 0; background: rgba(193,127,89,0.06); }
 .admin-content blockquote p { color: var(--off-white); margin-bottom: 4px; }
-.admin-content table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 14px; }
-.admin-content th { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--copper); text-align: left; padding: 12px 16px; border-bottom: 2px solid rgba(242,240,235,0.1); }
-.admin-content td { padding: 12px 16px; border-bottom: 1px solid rgba(242,240,235,0.06); color: var(--concrete); font-weight: 300; }
-.admin-content tr:hover td { background: rgba(242,240,235,0.02); }
-.swatch { display: inline-block; width: 16px; height: 16px; border-radius: 2px; vertical-align: middle; margin-right: 8px; border: 1px solid rgba(242,240,235,0.1); }
+
+/* ── ITEM CARDS ── */
+.item-list { list-style: none; padding: 0; margin: 0 0 16px; }
+.item-card { padding: 16px 20px; border: 1px solid rgba(242,240,235,0.06); border-radius: 2px; margin-bottom: 8px; transition: border-color 0.3s, background 0.3s; position: relative; }
+.item-card:hover { border-color: rgba(242,240,235,0.12); background: rgba(242,240,235,0.02); }
+.item-card .item-title { font-weight: 600; font-size: 15px; color: var(--off-white); margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+.item-card .item-desc { font-weight: 300; font-size: 13px; line-height: 1.6; color: var(--concrete); }
+.item-card .item-desc code { font-size: 11px; }
+
+/* Status badges */
+.badge { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; white-space: nowrap; }
+.badge-critical { background: rgba(232,93,58,0.15); color: var(--signal-red); border: 1px solid rgba(232,93,58,0.3); }
+.badge-open { background: rgba(245,166,35,0.12); color: var(--amber); border: 1px solid rgba(245,166,35,0.25); }
+.badge-ready { background: rgba(0,230,118,0.1); color: var(--signal); border: 1px solid rgba(0,230,118,0.2); }
+.badge-done { background: rgba(0,230,118,0.08); color: var(--signal); border: 1px solid rgba(0,230,118,0.15); }
+.badge-deferred { background: rgba(138,138,138,0.1); color: var(--concrete); border: 1px solid rgba(138,138,138,0.2); }
+.badge-new { background: rgba(193,127,89,0.15); color: var(--copper); border: 1px solid rgba(193,127,89,0.3); }
+.badge-scope { background: rgba(138,138,138,0.08); color: var(--concrete); border: 1px solid rgba(138,138,138,0.15); font-style: italic; }
+
+/* Source tag */
+.source-tag { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 1px; color: rgba(138,138,138,0.5); margin-top: 6px; }
+
+/* ── COMPLETED LIST ── */
+.done-list { list-style: none; padding: 0; }
+.done-list li { font-weight: 300; font-size: 14px; line-height: 1.7; color: var(--signal); padding: 6px 0; border-bottom: 1px solid rgba(242,240,235,0.03); display: flex; align-items: baseline; gap: 10px; }
+.done-list li::before { content: '✓'; font-weight: 700; flex-shrink: 0; }
+
+/* ── BRAND ASSETS SECTION ── */
+.brand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin: 20px 0 32px; }
+.brand-card { background: var(--warm-black); border: 1px solid rgba(242,240,235,0.08); border-radius: 2px; padding: 24px; text-align: center; transition: border-color 0.3s; }
+.brand-card:hover { border-color: rgba(193,127,89,0.3); }
+.brand-card .card-icon { width: 64px; height: 64px; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; }
+.brand-card .card-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--copper); margin-bottom: 4px; }
+.brand-card .card-name { font-weight: 300; font-size: 13px; color: var(--concrete); }
+
+/* ── BOOK CARDS ── */
+.book-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 24px 0 32px; }
+.book-card { background: var(--warm-black); border: 1px solid rgba(242,240,235,0.08); border-radius: 2px; padding: 32px; position: relative; overflow: hidden; transition: border-color 0.3s; }
+.book-card:hover { border-color: rgba(193,127,89,0.3); }
+.book-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--copper); }
+.book-number { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--copper); margin-bottom: 16px; }
+.book-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 3px; line-height: 1.1; margin-bottom: 16px; }
+.book-subtitle { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 12px; line-height: 1.6; color: var(--concrete); margin-bottom: 16px; letter-spacing: 0.3px; }
+.book-desc { font-weight: 300; font-size: 13px; line-height: 1.7; color: var(--concrete); }
+.book-status { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(242,240,235,0.06); }
+.book-status.concept { color: var(--amber); }
+.book-status.active { color: var(--signal); }
+
+/* ── FOOTER ── */
 .admin-sub-footer { padding: 24px 48px; border-top: 1px solid rgba(242,240,235,0.06); display: flex; justify-content: space-between; align-items: center; }
 .admin-sub-footer a { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.3s; }
 .admin-sub-footer a:hover { color: var(--off-white); }
 .admin-sub-footer span { font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(138,138,138,0.5); }
+
+/* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .admin-sub-header { padding: 32px 24px 24px; }
   .admin-sub-title { font-size: 32px; }
   .admin-content { padding: 24px 24px 60px; }
-  .admin-sub-footer { padding: 16px 24px; }
+  .stats-bar { flex-wrap: wrap; }
+  .stat-block { flex: 1 1 50%; min-width: 120px; }
+  .book-grid { grid-template-columns: 1fr; }
+  .brand-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .admin-sub-footer { padding: 16px 24px; flex-direction: column; gap: 8px; }
 }
 </style>
 </head>
 <body>
+
+<!-- ── NAV ── -->
 <nav class="site-nav">
   <a href="/" class="site-nav-brand">
     <svg width="28" height="28" viewBox="0 0 240 240" fill="none"><polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/><polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/><polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/></svg>
     <span class="site-nav-name">LONNELL WILLIAMS</span>
   </a>
-    <div class="site-nav-links">
+  <div class="site-nav-links">
     <a href="/">Home</a>
   </div>
   <button class="site-nav-btn" onclick="document.querySelector('.site-nav-links').classList.toggle('open');"><span></span><span></span><span></span></button>
 </nav>
+
+<!-- ── PAGE ── -->
 <div class="admin-sub">
   <div class="admin-sub-header">
     <a href="/admin.html" class="admin-sub-back">&larr; Back to Portal</a>
     <div class="admin-sub-eyebrow">&#9670; Admin / Outstanding Items</div>
     <div class="admin-sub-title">OUTSTANDING ITEMS<span class="accent">.</span></div>
+    <p class="admin-sub-subtitle">Full audit of <a href="https://ldw.build" target="_blank">ldw.build</a> &mdash; confirmed open items, new findings, and deferred scope. Updated March 3, 2026.</p>
   </div>
+
+  <!-- ── STATS ── -->
+  <div class="stats-bar">
+    <div class="stat-block"><div class="stat-number red">7</div><div class="stat-label">Critical</div></div>
+    <div class="stat-block"><div class="stat-number amber">6</div><div class="stat-label">Audit Finds</div></div>
+    <div class="stat-block"><div class="stat-number copper">6</div><div class="stat-label">Unfinished</div></div>
+    <div class="stat-block"><div class="stat-number green">16</div><div class="stat-label">Completed</div></div>
+  </div>
+
   <div class="admin-content">
 
-    <p>Everything still pending for <a href="https://ldw.build" target="_blank">ldw.build</a>. Updated March 2, 2026.</p>
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--  SECTION 1: CONFIRMED OPEN                     -->
+    <!-- ═══════════════════════════════════════════════ -->
 
-    <hr>
+    <h1>Confirmed Open &mdash; From Original List</h1>
+    <p class="section-desc">Items that were already tracked and the March 3 audit confirmed are still unresolved.</p>
 
-    <h1>Ready to Deploy</h1>
-    <ul>
-      <li><strong>Upload admin subpages to GitHub</strong> &mdash; admin.html + 7 admin-*.html files ready in outputs folder</li>
+    <ul class="item-list">
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-critical">Critical</span> ConvertKit API Key</div>
+        <div class="item-desc">Newsletter sync silently skips every cycle. Add <code>CONVERTKIT_API_KEY</code> to Supabase Edge Function secrets (Dashboard &rarr; Edge Functions &rarr; sync-convertkit &rarr; Secrets). Then create &ldquo;vantage-waitlist&rdquo; tag in ConvertKit, copy tag ID, add as <code>CK_TAG_VANTAGE_WAITLIST</code> in the same panel.</div>
+        <div class="source-tag">Original list &middot; Confirmed Mar 3</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-critical">Critical</span> Populate Content Hub DB</div>
+        <div class="item-desc">0 rows in Supabase <code>site_content_hub</code> table. Add sermon clips, podcast episodes, and teaching content to the Notion Content Hub database, then re-sync.</div>
+        <div class="source-tag">Original list &middot; Confirmed 0 rows</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Open</span> Populate Instagram DB</div>
+        <div class="item-desc">Only 1 test entry exists. Add real IG posts to the <a href="https://notion.so" target="_blank">LDW Site &mdash; Instagram</a> database. Display should be limited to the <strong>4 most recent posts</strong> (not 6).</div>
+        <div class="source-tag">Original list &middot; Confirmed 1 test entry</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Open</span> Vantage Waitlist on vantage.html</div>
+        <div class="item-desc">Homepage waitlist is live but has 0 signups. The dedicated product page (<code>vantage.html</code>) needs its own prominent waitlist form. Currently no capture mechanism on the page people actually land on.</div>
+        <div class="source-tag">Original list &middot; Confirmed 0 signups</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-ready">Ready to Deploy</span> AI-Friendly Content Hub</div>
+        <div class="item-desc"><code>llms.txt</code>, <code>robots.txt</code>, <code>sitemap.xml</code>, and <code>/content/</code> directory with 6 markdown files (about, speaking, books, consulting, principles, vantage). All built. All 404. Marked &ldquo;ready to deploy&rdquo; but never pushed to GitHub.</div>
+        <div class="source-tag">Original list &middot; Confirmed 404</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-critical">Critical</span> Mobile-Responsive Audit</div>
+        <div class="item-desc">Media page footer is broken, Vantage nav is completely empty, touch targets and spacing need a full pass. All 15 pages (7 public + 8 admin) need testing on iPhone and Android viewports.</div>
+        <div class="source-tag">Original list &middot; Confirmed broken</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-ready">Ready to Deploy</span> Upload Admin Subpages to GitHub</div>
+        <div class="item-desc">admin.html + 7 admin-*.html files ready in outputs. Three admin pages still return 404: <code>admin-quick-start.html</code>, <code>admin-notion.html</code>, <code>admin-changelog.html</code>.</div>
+        <div class="source-tag">Original list &middot; Confirmed 3 still 404</div>
+      </li>
+
     </ul>
 
     <hr>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--  SECTION 2: NEW FINDINGS FROM AUDIT            -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <h1>New Findings &mdash; Caught in Audit</h1>
+    <p class="section-desc">Issues the March 3 audit uncovered that were not on the original outstanding list.</p>
+
+    <ul class="item-list">
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-new">New Find</span> Speaking Page &rarr; Wrong Table</div>
+        <div class="item-desc">Booking form submits to <code>consulting_inquiries</code> instead of a dedicated speaking table. No <code>speaking_inquiries</code> table exists in Supabase. Needs new table + form rewiring.</div>
+        <div class="source-tag">Audit find #1 &middot; Mar 3</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-new">New Find</span> Scorecard Landing Page &rarr; 404</div>
+        <div class="item-desc">Page was built but never deployed to the new repo. Returns 404 in production.</div>
+        <div class="source-tag">Audit find #2 &middot; Mar 3</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-new">New Find</span> Content Hub Standalone Page &rarr; 404</div>
+        <div class="item-desc"><code>content-hub.html</code> was built but never pushed. Returns 404 in production.</div>
+        <div class="source-tag">Audit find #3 &middot; Mar 3</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-new">New Find</span> Media Page Footer Mismatch</div>
+        <div class="item-desc">Media page uses a one-liner footer while homepage and speaking page use the full 4-column footer. Inconsistent layout across site.</div>
+        <div class="source-tag">Audit find #4 &middot; Mar 3</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-critical">Critical</span> Vantage Nav Completely Empty</div>
+        <div class="item-desc">No nav items render at all on the Vantage page. The floating bar exists but contains nothing. Zero navigation.</div>
+        <div class="source-tag">Audit find #5 &middot; Mar 3</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-new">New Find</span> Nav HTML Structure Inconsistency</div>
+        <div class="item-desc">Homepage uses <code>&lt;div&gt;</code> for nav links, media page uses <code>&lt;ul&gt;</code>, Vantage has nothing. Needs a single unified nav pattern across all pages.</div>
+        <div class="source-tag">Audit find #6 &middot; Mar 3</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-critical">Critical</span> Repo Migration Broke Deployment</div>
+        <div class="item-desc">New public repo (<code>1172185035</code>) is missing files from the old private repo. Deployment chain is broken &mdash; multiple pages 404 because files weren&rsquo;t carried over.</div>
+        <div class="source-tag">Audit find #7 &middot; Mar 3</div>
+      </li>
+
+    </ul>
+
+    <hr>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--  SECTION 3: CONVERSATION HISTORY               -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <h1>From Conversation History &mdash; Never Tracked</h1>
+    <p class="section-desc">Items discussed in past build sessions that were never added to the outstanding list. Some may be partially done.</p>
+
+    <ul class="item-list">
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Open</span> Notion CRM Pipeline (Consulting)</div>
+        <div class="item-desc">Database was created and trigger was wired, but end-to-end flow was never confirmed after RLS/trigger fixes. Needs verification that form &rarr; Supabase &rarr; Notion &rarr; notification chain actually works.</div>
+        <div class="source-tag">Conversation history &middot; Unverified</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Open</span> Duplicate Notion Photo Gallery DBs</div>
+        <div class="item-desc">4 copies of the Photo Gallery database floating in Notion. Only 1 is wired to the Edge Function. The other 3 are orphaned and creating confusion. Need to archive duplicates and confirm the correct one is syncing.</div>
+        <div class="source-tag">Conversation history &middot; 4 copies found</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Open</span> Instagram API &mdash; Phase 2</div>
+        <div class="item-desc">Meta Developer App process for auto-populating IG feed was discussed but never started. This would replace manual Notion entry with live API pulls. Requires Meta app review.</div>
+        <div class="source-tag">Conversation history &middot; Never started</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Open</span> Subsplash Integration</div>
+        <div class="item-desc">Sermon content pipeline from Subsplash to ldw.build was on the original roadmap. Never built. Would automate sermon clips flowing into Content Hub.</div>
+        <div class="source-tag">Conversation history &middot; Never built</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Open</span> ConvertKit Welcome Sequence</div>
+        <div class="item-desc">5 emails were drafted for the welcome automation but were never confirmed as actually loaded into Kit. Sequence may not be firing at all for new subscribers.</div>
+        <div class="source-tag">Conversation history &middot; Unverified</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Open</span> Scorecard PDF Delivery</div>
+        <div class="item-desc">PDF was supposed to be hosted on Supabase Storage and linked in Email 1 of the welcome sequence. Storage bucket may not exist. Delivery chain unverified.</div>
+        <div class="source-tag">Conversation history &middot; Unverified</div>
+      </li>
+
+    </ul>
+
+    <hr>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--  SECTION 4: NEEDS YOUR ACTION                  -->
+    <!-- ═══════════════════════════════════════════════ -->
 
     <h1>Needs Your Action</h1>
-    <ul>
-      <li><strong>ConvertKit API Key</strong> &mdash; Add <code>CONVERTKIT_API_KEY</code> to Supabase Edge Function secrets (Dashboard &rarr; Edge Functions &rarr; sync-convertkit &rarr; Secrets). Without this, ConvertKit sync silently skips.</li>
-      <li><strong>ConvertKit Vantage Tag</strong> &mdash; Create &ldquo;vantage-waitlist&rdquo; tag in ConvertKit, copy tag ID, add as <code>CK_TAG_VANTAGE_WAITLIST</code> in same secrets panel.</li>
-      <li style="color:var(--signal);"><strong>Verify YouTube URL</strong> &mdash; Updated to <code>youtube.com/@AnyEveryOrNothingAtAll</code> &#10003;</li>
-      <li style="color:var(--signal);"><strong>Verify Threads handle</strong> &mdash; Updated to <code>threads.com/@lonnelldwilliams</code> &#10003;</li>
-      <li><strong>Substack URL</strong> &mdash; Provide your Substack publication URL (e.g., <code>yourname.substack.com</code>) so newsletter form can be rewired to subscribe directly there.</li>
+    <p class="section-desc">Items that only Lonnell can unblock. No one else can move these.</p>
+
+    <ul class="item-list">
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Waiting</span> Substack URL</div>
+        <div class="item-desc">Provide the Substack publication URL (e.g., <code>yourname.substack.com</code>) so newsletter form can be rewired to subscribe directly there instead of ConvertKit.</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Waiting</span> Gmail Forwarding</div>
+        <div class="item-desc">Forward <code>lonnell@ldw.build</code> to personal email. Google was blocking verification on new account &mdash; retry via Settings &rarr; Forwarding and POP/IMAP &rarr; Add forwarding address.</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Waiting</span> Change Out Photos on Site</div>
+        <div class="item-desc">Replace placeholder/stock images with actual photos. Update via Notion Photo Gallery database &rarr; sync. Only real photos should be on the live site.</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Waiting</span> Quote Graphics for Instagram</div>
+        <div class="item-desc">Pull quotes from social media strategy. Design branded quote cards in Canva (clean typography, LDW brand palette, 1080&times;1350). Batch and post as carousel or series.</div>
+      </li>
+
     </ul>
 
     <hr>
 
-    <h1>Content &amp; Creative</h1>
-    <ul>
-      <li><strong>Populate Notion Instagram DB</strong> &mdash; Pipeline works (tested), but only 1 test entry exists. Add real IG posts to <a href="https://notion.so" target="_blank">LDW Site &mdash; Instagram</a> database and re-sync.</li>
-      <li><strong>Populate Notion Content Hub DB</strong> &mdash; 0 entries currently. Add sermon clips, podcast episodes, etc. to Content Hub database.</li>
-      <li><strong>Quote graphics for Instagram</strong> &mdash; Pull quotes from social media strategy, design branded quote cards in Canva/Photoshop (clean typography, LDW brand palette, 1080&times;1350). Batch and post as carousel or series.</li>
-      <li><strong>Change out photos on site</strong> &mdash; Replace placeholder/stock images with actual photos. Update via Notion Photo Gallery database &rarr; sync.</li>
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--  SECTION 5: VERIFIED COMPLETE                  -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <h1>Verified Complete</h1>
+    <p class="section-desc">Everything that shipped and has been confirmed live.</p>
+
+    <ul class="done-list">
+      <li>Admin Portal with login gate</li>
+      <li>Admin subpages built on-site (no Notion dependency)</li>
+      <li>Nav bar consistency across all public pages</li>
+      <li>Logo links to home on all pages</li>
+      <li>Portal link in footer on all pages</li>
+      <li>Instructions page for Jadyn</li>
+      <li>Brand Identity page with full visual reference</li>
+      <li>Notion sync pipeline (Photos: 24, IG: 1 test, Content Hub: 0, YouTube: 1)</li>
+      <li>Vantage nav with floating bar</li>
+      <li>Vantage product page with coming soon messaging</li>
+      <li>Vantage waitlist on homepage (Supabase + ConvertKit)</li>
+      <li>Dead link cleanup (all footer socials verified, book buttons &rarr; Coming Soon)</li>
+      <li>Brand assets exported (4 logos + 6 book covers)</li>
+      <li>YouTube URL verified &mdash; <code>youtube.com/@AnyEveryOrNothingAtAll</code></li>
+      <li>Threads handle verified &mdash; <code>threads.com/@lonnelldwilliams</code></li>
+      <li>Google Workspace for @ldw.build &mdash; custom email domain active, <code>lonnell@ldw.build</code> operational</li>
     </ul>
 
     <hr>
 
-    <h1>Build &amp; Ship</h1>
-    <ul>
-      <li><strong>Vantage waitlist on vantage.html</strong> &mdash; Homepage waitlist is live, but the dedicated product page needs its own prominent version.</li>
-      <li><strong>Build sales funnel</strong> &mdash; Full funnel from content &rarr; lead magnet &rarr; email sequence &rarr; offer. Scope TBD.</li>
-      <li><strong>Newsletter &rarr; Substack only</strong> &mdash; Reroute newsletter subscribe form to Substack (not ConvertKit). Supabase keeps backup record, then redirect to Substack with email pre-filled. Need Substack URL.</li>
-      <li><strong>Google Workspace for @ldw.build</strong> &mdash; <span style="color:var(--signal);">LIVE</span> &mdash; Custom email domain active. lonnell@ldw.build is operational. Speaking inquiry button updated to mailto:lonnell@ldw.build.</li>
-      <li><strong>Gmail forwarding</strong> &mdash; Forward lonnell@ldw.build to personal email. Google blocking verification on new account &mdash; retry in 24 hrs via Settings &rarr; Forwarding and POP/IMAP &rarr; Add forwarding address.</li>
-      <li><strong>Personal assistant / auto-responder</strong> &mdash; Human or AI-powered assistant who responds to inquiries, speaking requests, and engagement on Lonnell&rsquo;s behalf. Triage, first response, and follow-up coordination.</li>
-      <li><strong>Quote graphics for Instagram</strong> &mdash; Pull quotes from social media strategy, design branded quote cards in Canva/Photoshop (clean typography, LDW brand palette, 1080&times;1350). Batch and post as carousel or series.</li>
-      <li><strong>Vantage &rarr; functional web app</strong> &mdash; Turn Vantage from a coming-soon landing page into a fully functional web application. Architecture, auth, core features, deployment.</li>
-      <li><strong>Mobile-responsive audit &amp; fix</strong> &mdash; Full pass on all 15 pages (7 public + 8 admin) to ensure every layout, form, nav, image, and section works cleanly on mobile. Touch targets, font scaling, overflow, spacing. Test on iPhone and Android viewports.</li>
-      <li><strong>AI-friendly content hub</strong> &mdash; <span style="color:var(--signal);">READY TO DEPLOY</span> &mdash; <code>llms.txt</code>, <code>robots.txt</code>, <code>sitemap.xml</code>, and <code>/content/</code> directory with 6 markdown files (about, speaking, books, consulting, principles, vantage). Push to GitHub to go live.</li>
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--  SECTION 6: SCOPE CREEP / DEFERRED             -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <h1>Deferred &mdash; Real but Not Site-Blocking</h1>
+    <p class="section-desc">Legitimate roadmap items that are Phase 3+ automation plays, full product builds, or operational decisions &mdash; not blocking the current site from being complete.</p>
+
+    <ul class="item-list">
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-deferred">Phase 3+</span> AI Content Team / Auto-Post / AI Comment Responder</div>
+        <div class="item-desc">Automated content creation, review &rarr; schedule &rarr; post pipeline, and AI comment engagement across IG, YouTube, Threads, and Substack. Full automation play that requires brand voice skills, Meta API, ManyChat, and Substack API integration.</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-deferred">Phase 3+</span> Content Page Management (Auto-Update)</div>
+        <div class="item-desc">AI team that keeps ldw.build content pages updated automatically. New sermon clips, podcast episodes, and press mentions flow in without manual intervention.</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-deferred">Product Build</span> Vantage &rarr; Functional Web App</div>
+        <div class="item-desc">Turn Vantage from a coming-soon landing page into a fully functional web application. That&rsquo;s architecture, auth, core features, deployment &mdash; a whole product build, not a site task.</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-deferred">Operational</span> Personal Assistant / Auto-Responder</div>
+        <div class="item-desc">Human or AI-powered assistant who responds to inquiries, speaking requests, and engagement on Lonnell&rsquo;s behalf. Triage, first response, and follow-up coordination. Operational decision, not site work.</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-deferred">Phase 3+</span> Build Full Sales Funnel</div>
+        <div class="item-desc">Content &rarr; lead magnet &rarr; email sequence &rarr; offer. Scope TBD. Requires content hub populated, ConvertKit working, and Substack active first.</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-scope">Infrastructure</span> Claude Project Folder</div>
+        <div class="item-desc">Move all ldw.build conversations into a dedicated Claude Project. Centralized context, persistent history, no orphaned chats. Organizational task.</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-scope">Infrastructure</span> Custom Skills from Build Sessions</div>
+        <div class="item-desc">Extract patterns, decisions, and standards from build sessions into reusable Claude Skills (site architecture, deployment, brand standards, content rules). Institutional knowledge that persists.</div>
+      </li>
+
     </ul>
 
     <hr>
 
-    <h1>Systems &amp; Infrastructure</h1>
-    <ul>
-      <li><strong>Claude Project folder</strong> &mdash; Move all ldw.build conversations into a dedicated Claude Project so nothing is lost. Centralized context, persistent history, no orphaned chats.</li>
-      <li><strong>Custom skills from our conversations</strong> &mdash; Extract patterns, decisions, and standards from our build sessions into reusable Claude Skills (site architecture, deployment, brand standards, content rules). Institutional knowledge that persists.</li>
-    </ul>
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--  SECTION 7: BRAND ASSETS                       -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <h1>Brand Assets</h1>
+    <p class="section-desc">Logos and book covers exported and ready for use across all platforms.</p>
+
+    <h2>Logos</h2>
+
+    <div class="brand-grid">
+      <div class="brand-card">
+        <div class="card-icon">
+          <svg width="48" height="48" viewBox="0 0 240 240" fill="none"><polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/><polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/><polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.15)"/></svg>
+        </div>
+        <div class="card-label">Cornerstone</div>
+        <div class="card-name">Primary Mark &mdash; Light</div>
+      </div>
+      <div class="brand-card">
+        <div class="card-icon" style="background: var(--off-white); border-radius: 4px;">
+          <svg width="48" height="48" viewBox="0 0 240 240" fill="none"><polygon points="40,180 120,130 120,55 40,105" fill="#0D0D0D"/><polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/><polygon points="40,180 120,230 200,180 120,130" fill="rgba(13,13,13,0.08)"/></svg>
+        </div>
+        <div class="card-label">Cornerstone</div>
+        <div class="card-name">Primary Mark &mdash; Dark</div>
+      </div>
+      <div class="brand-card">
+        <div class="card-icon">
+          <svg width="48" height="16" viewBox="0 0 120 40" fill="none"><rect x="0" y="0" width="100" height="14" rx="1" fill="#F2F0EB"/><rect x="20" y="26" width="100" height="14" rx="1" fill="#C17F59"/></svg>
+        </div>
+        <div class="card-label">The Shift</div>
+        <div class="card-name">Secondary Mark &mdash; Light</div>
+      </div>
+      <div class="brand-card">
+        <div class="card-icon" style="background: var(--off-white); border-radius: 4px;">
+          <svg width="48" height="16" viewBox="0 0 120 40" fill="none"><rect x="0" y="0" width="100" height="14" rx="1" fill="#0D0D0D"/><rect x="20" y="26" width="100" height="14" rx="1" fill="#C17F59"/></svg>
+        </div>
+        <div class="card-label">The Shift</div>
+        <div class="card-name">Secondary Mark &mdash; Dark</div>
+      </div>
+    </div>
+
+    <h2>Books</h2>
+
+    <div class="book-grid">
+
+      <!-- BOOK 1: Anything, Everything, or Nothing at All -->
+      <div class="book-card">
+        <div class="book-number">Book 01</div>
+        <div class="book-title">ANYTHING, EVERYTHING, OR NOTHING AT ALL<span style="color:var(--copper);">.</span></div>
+        <div class="book-subtitle">The personal declaration. The line in the sand before the strategy.</div>
+        <div class="book-desc">
+          Before you can build anything worth standing on, you have to decide what you&rsquo;re willing to carry.
+          This isn&rsquo;t a motivational mantra &mdash; it&rsquo;s a confrontation. A mirror held up to the half-commitments, 
+          the &ldquo;I&rsquo;ll try,&rdquo; the safe middle ground that produces nothing of consequence. 
+          Full presence or full absence. All weight or no weight. 
+          The operator&rsquo;s creed before the operator ever picks up a tool.
+        </div>
+        <div class="book-status active">&#9670; Active</div>
+      </div>
+
+      <!-- BOOK 2: Zag -->
+      <div class="book-card">
+        <div class="book-number">Book 02</div>
+        <div class="book-title">ZAG<span style="color:var(--copper);">.</span></div>
+        <div class="book-subtitle">Leading Ministry Jesus&rsquo;s Way</div>
+        <div class="book-desc">
+          Zag is the outcome. The thing that happens <em>after</em> you learn how to listen.
+          It starts with being Holy Spirit-led &mdash; not following the playbook everyone else borrowed, 
+          but learning how to pump the brakes long enough to hear what God is actually doing. 
+          Then it gets practical: how to ask the right questions before you move, 
+          how to grip the handlebars of true ministry creativity instead of copying someone else&rsquo;s ride, 
+          how to identify the brakes that make disruption safe instead of reckless. 
+          Being willing to listen for what&rsquo;s actually happening &mdash; in the room, in the Spirit, in the culture &mdash;
+          and then actually applying it. Not theory. Process. The mechanics of the zag.
+        </div>
+        <div class="book-status active">&#9670; Active</div>
+      </div>
+
+      <!-- BOOK 3: Staff -->
+      <div class="book-card" style="opacity: 0.6;">
+        <div class="book-number">Book 03</div>
+        <div class="book-title">STAFF<span style="color:var(--copper);">.</span></div>
+        <div class="book-subtitle">What&rsquo;s Already in Your Hand</div>
+        <div class="book-desc">
+          What you&rsquo;ve been overlooking is what you&rsquo;ve been looking for. 
+          The resource, the authority, the tool &mdash; it&rsquo;s already in your grip. 
+          You just stopped seeing it.
+        </div>
+        <div class="book-status concept">&#9670; In Concept</div>
+      </div>
+
+    </div>
 
     <hr>
 
-    <h1>AI Content &amp; Social Team</h1>
-    <ul>
-      <li><strong>AI content team</strong> &mdash; Automated system that creates content in Lonnell&rsquo;s voice across all platforms. Pulls from brand voice skill, content strategy, and social media playbook. Drafts posts, reels, carousels, newsletters.</li>
-      <li><strong>Auto-post to IG, social, and Substack</strong> &mdash; Automation pipeline that publishes approved content on Lonnell&rsquo;s behalf. Create &rarr; review &rarr; schedule &rarr; post. Integrates with ManyChat, Meta API, Substack API.</li>
-      <li><strong>AI comment responder</strong> &mdash; AI agent that monitors and responds to comments across IG, YouTube, Threads, and Substack in Lonnell&rsquo;s voice. Engages community, answers questions, flags important conversations for personal follow-up.</li>
-      <li><strong>Content page management</strong> &mdash; AI team that keeps ldw.build content pages (content hub, media, speaking) updated automatically. New sermon clips, podcast episodes, and press mentions flow in without manual intervention.</li>
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--  SECTION 8: LISTEN & LEARN                     -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <h1>Listen &amp; Learn</h1>
+    <p class="section-desc">The archive of what we built, why we built it that way, and what changed along the road. This is the institutional memory.</p>
+
+    <ul class="item-list">
+
+      <li class="item-card">
+        <div class="item-title">Repo Migration Decision</div>
+        <div class="item-desc">Moved from private repo to public repo (<code>1172185035</code>) for Vercel deployment simplicity. The migration broke the deployment chain because not all files were carried over. Lesson: always verify file parity after a repo migration before cutting over DNS.</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title">Notion as Source of Truth</div>
+        <div class="item-desc">Early decision to use Notion databases as CMS for all dynamic content (photos, IG feed, content hub, YouTube). Edge Functions pull from Notion &rarr; write to Supabase &rarr; site reads from Supabase. The benefit is non-technical updates via Notion. The cost is an extra sync step and multiple databases to maintain.</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title">Admin Portal Architecture</div>
+        <div class="item-desc">8 HTML files behind sessionStorage auth. No framework, no build step. Regenerated on request (&ldquo;sync admin pages&rdquo;). Notion is the source of truth for admin doc content. This was a deliberate choice for speed and simplicity &mdash; Jadyn can update content in Notion without touching code.</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title">Instagram Display &rarr; 4 Posts Max</div>
+        <div class="item-desc">Originally designed for 6 posts. Updated to <strong>4 most recent</strong> for cleaner layout, faster load, and tighter visual density. Any implementation should cap at 4.</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title">ConvertKit vs. Substack</div>
+        <div class="item-desc">Newsletter was initially wired to ConvertKit. Direction shifted to Substack as the primary publication platform. ConvertKit remains for automation triggers and the Vantage waitlist tag, but the subscribe form should route to Substack with Supabase keeping a backup record.</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title">Nav Structure Inconsistency</div>
+        <div class="item-desc">Pages were built at different times with different nav implementations. Homepage uses <code>&lt;div&gt;</code>, media uses <code>&lt;ul&gt;</code>, Vantage renders nothing. The fix is a single canonical nav component copy-pasted identically across all pages. No framework needed &mdash; just discipline.</div>
+      </li>
+
     </ul>
 
-    <hr>
+  </div>
 
-    <h1>Recently Completed</h1>
-    <ul>
-      <li style="color:var(--signal);">&#10003; Admin Portal with login gate</li>
-      <li style="color:var(--signal);">&#10003; Admin subpages built on-site (no Notion dependency)</li>
-      <li style="color:var(--signal);">&#10003; Nav bar consistency across all public pages</li>
-      <li style="color:var(--signal);">&#10003; Logo links to home on all pages</li>
-      <li style="color:var(--signal);">&#10003; Portal link in footer on all pages</li>
-      <li style="color:var(--signal);">&#10003; Instructions page for Jadyn</li>
-      <li style="color:var(--signal);">&#10003; Brand Identity page with full visual reference</li>
-      <li style="color:var(--signal);">&#10003; Notion sync pipeline (Photos: 24, IG: 1 test, Content Hub: 0, YouTube: 1)</li>
-      <li style="color:var(--signal);">&#10003; Vantage nav with floating bar</li>
-      <li style="color:var(--signal);">&#10003; Vantage product page with coming soon messaging</li>
-      <li style="color:var(--signal);">&#10003; Vantage waitlist on homepage (Supabase + ConvertKit)</li>
-      <li style="color:var(--signal);">&#10003; Dead link cleanup (all footer socials verified, book buttons &rarr; Coming Soon)</li>
-      <li style="color:var(--signal);">&#10003; Brand assets exported (4 logos + 6 book covers)</li>
-      <li sty
+  <!-- ── FOOTER ── -->
+  <div class="admin-sub-footer">
+    <a href="/admin.html">&larr; Portal</a>
+    <span>Last audit: March 3, 2026</span>
+    <a href="#">Top &uarr;</a>
+  </div>
+</div>
+
+<script>
+// Auth gate
+(function(){
+  if(sessionStorage.getItem('ldw_admin')!=='true'){window.location.href='/admin.html';}
+})();
+</script>
+
+</body>
+</html>
