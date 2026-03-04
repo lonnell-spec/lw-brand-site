@@ -7,7 +7,7 @@
   <meta name="description" content="Books by Lonnell Williams — ministry leadership, operational systems, and the theology of full commitment.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,600;1,700&family=Anton&display=swap" rel="stylesheet">
   <style>
     :root {
       --obsidian: #0D0D0D;
@@ -353,7 +353,7 @@
     }
 
 
-    /* ── STAFF COVER — STACKED TOWER ── */
+    
     .staff-cover-wrap {
       padding: 0 !important;
       border: 1px solid rgba(0,0,0,0.1) !important;
@@ -427,6 +427,62 @@
       font-size: 5px;
       color: #E85D3A;
       line-height: 1;
+    }
+
+
+    /* ── STAFF COVER — ANTON FULL COLOR ── */
+    .staff-cover-wrap {
+      padding: 0 !important;
+      border: 1px solid rgba(0,0,0,0.1) !important;
+      overflow: hidden;
+    }
+    .staff-css-cover {
+      width: 100%; height: 100%;
+      background: #FFFFFF;
+      display: flex; flex-direction: column;
+    }
+    .staff-top-band {
+      background: #C17F59;
+      padding: 6px 14px; flex-shrink: 0;
+    }
+    .staff-top-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 6.5px; letter-spacing: 3px;
+      text-transform: uppercase; color: #0D0D0D; font-weight: 700;
+    }
+    .staff-cover-body {
+      flex: 1; display: flex; flex-direction: column;
+      padding: 14px 14px 0; overflow: hidden;
+    }
+    .staff-the-word {
+      font-family: Georgia, serif; font-style: italic;
+      font-size: clamp(18px, 2.8vw, 26px);
+      color: #555; letter-spacing: 3px;
+      margin-bottom: 4px; flex-shrink: 0;
+    }
+    .staff-letter-tower {
+      display: flex; flex-direction: column;
+      flex: 1; justify-content: center;
+    }
+    .staff-letter {
+      font-family: 'Anton', sans-serif;
+      display: block;
+      font-size: clamp(68px, 12vw, 100px);
+      line-height: 0.87;
+    }
+    .staff-cover-bottom {
+      border-top: 1.5px solid #0D0D0D;
+      padding: 8px 14px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-shrink: 0;
+    }
+    .staff-author-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 5px; letter-spacing: 2.5px;
+      text-transform: uppercase; color: #0D0D0D;
+    }
+    .staff-red-dot {
+      width: 5px; height: 5px; border-radius: 50%; background: #E85D3A;
     }
 
     /* ── RESPONSIVE ── */
@@ -544,10 +600,28 @@
     <div class="book-cover-wrap staff-cover-wrap">
       <div class="staff-css-cover">
 
-        <div class="staff-top-row">
-          <span class="staff-the-word">The</span>
-          <div class="staff-signal-bar"></div>
+        <div class="staff-top-band">
+          <span class="staff-top-label">IN DEVELOPMENT</span>
         </div>
+
+        <div class="staff-cover-body">
+          <div class="staff-the-word">The</div>
+          <div class="staff-letter-tower">
+            <span class="staff-letter" style="color:#C17F59">S</span>
+            <span class="staff-letter" style="color:#E85D3A">T</span>
+            <span class="staff-letter" style="color:#1C3A28">A</span>
+            <span class="staff-letter" style="color:#1FAABD">F</span>
+            <span class="staff-letter" style="color:#0D0D0D">F</span>
+          </div>
+        </div>
+
+        <div class="staff-cover-bottom">
+          <span class="staff-author-name">LONNELL WILLIAMS</span>
+          <div class="staff-red-dot"></div>
+        </div>
+
+      </div>
+    </div>
 
         <div class="staff-letter-tower">
           <span class="staff-letter" style="color:#0D0D0D;">S</span>
