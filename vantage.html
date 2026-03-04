@@ -667,7 +667,7 @@ function Vantage() {
     return (
       <div style={{ ...ROOT, padding: 0, opacity: drillIn ? 1 : 0, transition: "opacity 0.3s ease" }}>
         <div style={GRAIN} />
-        <div style={{ width: "100%", maxWidth: 960, margin: "0 auto", padding: "20px 20px 40px", position: "relative", transform: drillIn ? "translateY(0)" : "translateY(12px)", transition: "transform 0.45s cubic-bezier(0.22,1,0.36,1)" }}>
+        <div style={{ width: "100%", maxWidth: 1280, margin: "0 auto", padding: "20px 32px 40px", position: "relative", transform: drillIn ? "translateY(0)" : "translateY(12px)", transition: "transform 0.45s cubic-bezier(0.22,1,0.36,1)" }}>
 
           <button onClick={close} style={{ background: "none", border: "none", color: cl.m, cursor: "pointer", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", padding: "8px 0", marginBottom: 12, fontFamily: "inherit", display: "flex", alignItems: "center", gap: 6 }}>
             <span style={{ fontSize: 14 }}>←</span> COMMAND CENTER
@@ -796,7 +796,7 @@ function Vantage() {
   return (
     <div style={ROOT}>
       <div style={GRAIN} />
-      <div style={{ width: "100%", maxWidth: 960, margin: "0 auto", padding: "20px 20px 12px", position: "relative", opacity: vis ? 1 : 0, transform: vis ? "translateY(0)" : "translateY(12px)", transition: "all 0.5s cubic-bezier(0.22,1,0.36,1)" }}>
+      <div style={{ width: "100%", maxWidth: 1280, margin: "0 auto", padding: "20px 32px 12px", position: "relative", opacity: vis ? 1 : 0, transform: vis ? "translateY(0)" : "translateY(12px)", transition: "all 0.5s cubic-bezier(0.22,1,0.36,1)" }}>
 
         {/* Header */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 2 }}>

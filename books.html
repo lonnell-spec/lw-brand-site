@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Books — Lonnell Williams</title>
+  <meta name="description" content="Books by Lonnell Williams — ministry leadership, operational systems, and the theology of full commitment.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --obsidian: #0D0D0D;
+      --warm-black: #111111;
+      --copper: #C17F59;
+      --signal: #E85D3A;
+      --off-white: #F2F0EB;
+      --concrete: #8A8A8A;
+      --aena-yellow: #E8C547;
+      --aena-cyan: #1FAABD;
+      --aena-red: #E85D3A;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--obsidian);
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ===== NAV ===== */
+    .site-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(13,13,13,0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(242,240,235,0.04);
+    }
+    .site-nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+    .site-nav-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      letter-spacing: 5px;
+      color: var(--off-white);
+    }
+    .site-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .site-nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--concrete);
+      transition: color 0.3s ease;
+    }
+    .site-nav-links a:hover,
+    .site-nav-links a.active { color: var(--off-white); }
+    .site-nav-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .site-nav-btn span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--off-white);
+      margin: 5px 0;
+    }
+
+    /* ===== HERO ===== */
+    .books-hero {
+      padding: 160px 60px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .books-hero-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 24px;
+    }
+    .books-hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 8vw, 120px);
+      letter-spacing: 4px;
+      line-height: 0.9;
+      color: var(--off-white);
+      margin-bottom: 32px;
+    }
+    .books-hero-title .accent { color: var(--signal); }
+    .books-hero-desc {
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--concrete);
+      max-width: 540px;
+      line-height: 1.7;
+    }
+
+    /* ===== BOOK LIST ===== */
+    .books-section {
+      padding: 40px 60px 120px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .book-entry {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 64px;
+      align-items: start;
+      padding: 64px 0;
+      border-top: 1px solid rgba(242,240,235,0.06);
+    }
+    .book-entry:last-child { border-bottom: 1px solid rgba(242,240,235,0.06); }
+
+    .book-cover-wrap {
+      width: 240px;
+      aspect-ratio: 2/3;
+      background: var(--warm-black);
+      border: 1px solid rgba(193,127,89,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .book-cover-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .book-cover-placeholder {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: rgba(242,240,235,0.1);
+      text-align: center;
+      padding: 24px;
+    }
+
+    .book-info { padding-top: 8px; }
+
+    .book-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border: 1px solid rgba(193,127,89,0.3);
+      color: var(--copper);
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .book-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 4vw, 56px);
+      letter-spacing: 3px;
+      line-height: 1;
+      margin-bottom: 8px;
+      word-break: break-word;
+    }
+
+    .book-subtitle {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--copper);
+      margin-bottom: 24px;
+      letter-spacing: 1px;
+    }
+
+    .book-desc {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--concrete);
+      line-height: 1.8;
+      max-width: 560px;
+      margin-bottom: 32px;
+    }
+
+    .book-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .book-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 28px;
+      border: 1px solid var(--copper);
+      color: var(--copper);
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+    .book-btn:hover {
+      background: var(--copper);
+      color: var(--obsidian);
+    }
+    .book-btn.primary {
+      background: var(--copper);
+      color: var(--obsidian);
+    }
+    .book-btn.primary:hover {
+      background: transparent;
+      color: var(--copper);
+    }
+    .book-btn.coming-soon {
+      border-color: rgba(242,240,235,0.12);
+      color: var(--concrete);
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--warm-black);
+      border-top: 1px solid rgba(242,240,235,0.04);
+      padding: 64px 60px 40px;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      margin-bottom: 16px;
+    }
+    .footer-brand-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      letter-spacing: 4px;
+      color: var(--off-white);
+    }
+    .footer-tagline {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--concrete);
+    }
+    .footer-col-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 20px;
+    }
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--concrete);
+      transition: color 0.3s ease;
+    }
+    .footer-link:hover { color: var(--off-white); }
+    .footer-bottom {
+      border-top: 1px solid rgba(242,240,235,0.04);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-legal {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: rgba(242,240,235,0.2);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .site-nav { padding: 0 20px; }
+      .site-nav-links {
+        display: none;
+        position: fixed;
+        top: 64px; left: 0; right: 0;
+        background: rgba(13,13,13,0.98);
+        flex-direction: column;
+        padding: 32px 28px;
+        gap: 20px;
+        border-bottom: 1px solid rgba(242,240,235,0.04);
+      }
+      .site-nav-links.open { display: flex; }
+      .site-nav-btn { display: block; }
+      .books-hero, .books-section { padding-left: 28px; padding-right: 28px; }
+      .book-entry { grid-template-columns: 1fr; gap: 32px; }
+      .book-cover-wrap { width: 180px; }
+      footer { padding: 48px 28px 32px; }
+      .footer-top { flex-direction: column; gap: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/" class="site-nav-brand">
+    <svg width="28" height="28" viewBox="0 0 240 240" fill="none">
+      <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+      <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
+      <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/>
+    </svg>
+    <span class="site-nav-name">LONNELL WILLIAMS</span>
+  </a>
+  <div class="site-nav-links">
+    <a href="/#about">About</a>
+    <a href="/speaking.html">Speaking</a>
+    <a href="/books.html" class="active">Books</a>
+    <a href="/#consulting">Work With Me</a>
+    <a href="/media.html">Media</a>
+    <a href="/#newsletter">Newsletter</a>
+    <a href="/vantage.html">Vantage</a>
+  </div>
+  <button class="site-nav-btn" onclick="var l=document.querySelector('.site-nav-links');l.classList.toggle('open');">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ===== HERO ===== -->
+<div class="books-hero">
+  <div class="books-hero-label">Written Work</div>
+  <div class="books-hero-title">BOOKS<span class="accent">.</span></div>
+  <p class="books-hero-desc">Three books. One thread — what it actually costs to lead, build, and commit without reservation.</p>
+</div>
+
+<!-- ===== BOOK LIST ===== -->
+<div class="books-section">
+
+  <!-- BOOK 1: Anything, Everything, or Nothing at All -->
+  <div class="book-entry">
+    <div class="book-cover-wrap" style="border-color:rgba(31,170,189,0.2);">
+      <div class="book-cover-placeholder">COVER COMING<br>SOON</div>
+    </div>
+    <div class="book-info">
+      <div class="book-badge" style="border-color:rgba(31,170,189,0.3); color:#1FAABD;">Coming Soon</div>
+      <div class="book-title" style="color:#E8C547;">ANYTHING, EVERYTHING<span style="color:#E85D3A;">.</span></div>
+      <div class="book-subtitle" style="color:#1FAABD;">Or Nothing at All</div>
+      <p class="book-desc">Not a how-to. A who-I-am. The manifesto of a man who refuses to do halfway. No "good enough." Full commitment or full withdrawal — and what happens when you finally choose.</p>
+      <div class="book-actions">
+        <a href="#" class="book-btn coming-soon">Coming Soon</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOK 2: Zag -->
+  <div class="book-entry">
+    <div class="book-cover-wrap">
+      <div class="book-cover-placeholder">COVER COMING<br>SOON</div>
+    </div>
+    <div class="book-info">
+      <div class="book-badge">Available Now</div>
+      <div class="book-title" style="color:var(--copper);">ZAG<span style="color:var(--signal);">.</span></div>
+      <div class="book-subtitle">Leading Ministry Jesus's Way</div>
+      <p class="book-desc">A field guide for ministry leaders who are tired of imitating the world's leadership frameworks. Zag cuts through the noise — drawing directly from how Jesus led, built, and sent. Practical, theological, and unapologetically different.</p>
+      <div class="book-actions">
+        <a href="https://zagwithme.com" target="_blank" class="book-btn primary">Get the Book</a>
+        <a href="https://zagwithme.com" target="_blank" class="book-btn">Learn More</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOK 3: Staff (Concept) -->
+  <div class="book-entry">
+    <div class="book-cover-wrap" style="border-color:rgba(242,240,235,0.06);">
+      <div class="book-cover-placeholder">IN<br>DEVELOPMENT</div>
+    </div>
+    <div class="book-info">
+      <div class="book-badge" style="border-color:rgba(242,240,235,0.1); color:var(--concrete);">In Development</div>
+      <div class="book-title" style="color:var(--off-white);">STAFF<span style="color:var(--signal);">.</span></div>
+      <div class="book-subtitle" style="color:var(--concrete);">The Book on Building Teams That Actually Work</div>
+      <p class="book-desc">The book for leaders who have scaled fast, hired wrong, and learned the hard way. What it means to build a staff culture that outlasts your best intentions — and your worst moments.</p>
+      <div class="book-actions">
+        <a href="/#newsletter" class="book-btn">Get Notified</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <a href="/" class="footer-brand">
+        <svg width="24" height="24" viewBox="0 0 240 240" fill="none">
+          <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+          <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
+          <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/>
+        </svg>
+        <span class="footer-brand-name">LONNELL WILLIAMS</span>
+      </a>
+      <div class="footer-tagline">Builder. Pastor. Operator.</div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">Navigate</div>
+      <a href="/#about" class="footer-link">About</a>
+      <a href="/speaking.html" class="footer-link">Speaking</a>
+      <a href="/books.html" class="footer-link">Books</a>
+      <a href="/#consulting" class="footer-link">Work With Me</a>
+      <a href="/media.html" class="footer-link">Media</a>
+      <a href="/#newsletter" class="footer-link">Newsletter</a>
+      <a href="/vantage.html" class="footer-link">Vantage</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">Books</div>
+      <a href="/books.html" class="footer-link">Anything, Everything, or Nothing at All</a>
+      <a href="/books.html" class="footer-link">Zag: Leading Ministry Jesus's Way</a>
+      <a href="/books.html" class="footer-link">Staff (Coming Soon)</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">Connect</div>
+      <a href="https://instagram.com/lonnellwilliams" target="_blank" class="footer-link">Instagram</a>
+      <a href="https://ldw.build/#newsletter" class="footer-link">Newsletter</a>
+      <a href="mailto:hello@ldw.build" class="footer-link">Email</a>
+      <a href="/admin.html" class="footer-link" style="color:var(--copper);margin-top:4px;">Portal</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-legal">&copy; 2026 LONNELL WILLIAMS. ALL RIGHTS RESERVED.</div>
+  </div>
+</footer>
+
+</body>
+</html>
