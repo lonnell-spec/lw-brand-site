@@ -3,326 +3,1312 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LDW.BUILD — Speaking</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<title>Book Lonnell Williams — Speaking &amp; Keynotes</title>
+<meta name="description" content="Book Lonnell Williams for keynotes, workshops, and leadership intensives. Executive Pastor. Builder. Operator. Author.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400i&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  .speaking-stats {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
-    max-width: 1000px; margin: 0 auto 80px; text-align: center;
-  }
-  .speaking-stat .num {
-    font-family: 'Bebas Neue', cursive; font-size: 64px; line-height: 1;
-    color: var(--off-white); margin-bottom: 4px;
-  }
-  .speaking-stat .label {
-    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--copper);
+  :root {
+    --obsidian: #0D0D0D;
+    --warm-black: #1A1714;
+    --copper: #C17F59;
+    --copper-light: #D4A07A;
+    --signal: #E85D3A;
+    --off-white: #F2F0EB;
+    --concrete: #8A8A8A;
   }
 
-  .topics-container { max-width: 1000px; margin: 0 auto; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
 
-  .testimonials-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 24px; max-width: 1200px; margin: 0 auto;
+  body {
+    background: var(--obsidian);
+    color: var(--off-white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
-  .testimonial {
-    padding: 36px; border: 1px solid var(--border-subtle);
-    background: rgba(13,13,13,0.4); transition: border-color 0.4s;
+
+  /* ===== NAV ===== */
+  .site-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 0 48px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(13,13,13,0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(242,240,235,0.04);
+  }
+
+  .site-nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+
+  .site-nav-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 5px;
+    color: var(--off-white);
+  }
+
+  .site-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .site-nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--concrete);
+    transition: color 0.3s ease;
+  }
+
+  .site-nav-links a:hover,
+  .site-nav-links a.active { color: var(--off-white); }
+
+  .site-nav-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  .site-nav-btn span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--off-white);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+  }
+
+  /* ===== HERO ===== */
+  .speak-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--obsidian);
+  }
+
+  .speak-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+      radial-gradient(ellipse at 80% 20%, rgba(193,127,89,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 20% 80%, rgba(232,93,58,0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .speak-hero-inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 140px 60px 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .speak-hero-content {}
+
+  .speak-hero-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .speak-hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 88px);
+    color: var(--off-white);
+    letter-spacing: 4px;
+    line-height: 0.95;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+
+  .speak-hero-title .accent { color: var(--signal); }
+  .speak-hero-title .copper { color: var(--copper); }
+
+  .speak-hero-desc {
+    font-size: 17px;
+    color: var(--concrete);
+    line-height: 1.7;
+    max-width: 500px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+
+  .speak-hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 16px 32px;
+    background: var(--copper);
+    color: var(--obsidian);
+    font-weight: 700;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover { background: var(--copper-light); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 16px 32px;
+    background: transparent;
+    color: var(--off-white);
+    border: 1px solid rgba(242,240,235,0.15);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .btn-secondary:hover { border-color: var(--copper); color: var(--copper); }
+
+  /* Hero image */
+  .speak-hero-image {
+    position: relative;
+    opacity: 0;
+    animation: fadeIn 1s ease 0.6s forwards;
+  }
+
+  .speak-hero-image img {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+    filter: grayscale(15%) contrast(1.05);
+  }
+
+  .speak-hero-image::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 40%;
+    background: linear-gradient(to top, var(--obsidian), transparent);
+    pointer-events: none;
+  }
+
+  /* ===== CREDIBILITY BAR ===== */
+  .cred-bar {
+    background: var(--warm-black);
+    border-top: 1px solid rgba(193,127,89,0.1);
+    border-bottom: 1px solid rgba(193,127,89,0.1);
+    padding: 48px 60px;
+  }
+
+  .cred-bar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    text-align: center;
+  }
+
+  .cred-item {}
+
+  .cred-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    letter-spacing: 2px;
+    color: var(--copper);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .cred-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--concrete);
+  }
+
+  /* ===== SIZZLE REEL ===== */
+  .sizzle {
+    padding: 120px 60px;
+    background: var(--obsidian);
     position: relative;
   }
-  .testimonial:hover { border-color: var(--border-hover); }
-  .testimonial .quote-mark {
-    font-family: 'Bebas Neue', cursive; font-size: 72px; line-height: 1;
-    color: rgba(193,127,89,0.15); position: absolute; top: 16px; left: 24px;
+
+  .sizzle-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
   }
-  .testimonial p {
-    font-weight: 300; font-size: 15px; line-height: 1.8; color: var(--text-muted);
-    position: relative; z-index: 1; margin-bottom: 20px; font-style: italic;
+
+  .sizzle-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 20px;
   }
-  .testimonial .attribution {
-    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1px;
+
+  .sizzle-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 4vw, 56px);
+    letter-spacing: 3px;
+    color: var(--off-white);
+    margin-bottom: 48px;
+  }
+
+  .sizzle-title .accent { color: var(--signal); }
+
+  .video-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--warm-black);
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(13,13,13,0.5);
+    transition: opacity 0.4s ease;
+  }
+
+  .video-overlay.hidden { opacity: 0; pointer-events: none; }
+
+  .play-btn {
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--copper);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .play-btn svg { fill: var(--copper); margin-left: 4px; }
+  .video-container:hover .play-btn { background: rgba(193,127,89,0.1); transform: scale(1.08); }
+
+  .play-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
     color: var(--copper);
   }
-  .testimonial .attribution span { color: var(--text-dim); }
 
-  .booking-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
-    max-width: 1100px; margin: 0 auto; align-items: start;
+  /* ===== TOPICS ===== */
+  .topics {
+    padding: 120px 60px;
+    background: var(--off-white);
+    color: var(--obsidian);
   }
-  .booking-info h3 {
-    font-family: 'Bebas Neue', cursive; font-size: 36px; letter-spacing: 1px;
-    color: var(--off-white); margin-bottom: 16px;
+
+  .topics-inner {
+    max-width: 1200px;
+    margin: 0 auto;
   }
-  .booking-info p {
-    font-weight: 300; font-size: 15px; line-height: 1.8; color: var(--text-muted);
+
+  .topics-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 20px;
+  }
+
+  .topics-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 4vw, 56px);
+    letter-spacing: 3px;
+    color: var(--obsidian);
     margin-bottom: 16px;
   }
-  .event-types {
-    display: flex; flex-direction: column; gap: 12px; margin-top: 32px;
-  }
-  .event-type {
-    display: flex; align-items: center; gap: 16px; padding: 16px;
-    border: 1px solid var(--border-subtle); transition: border-color 0.3s;
-  }
-  .event-type:hover { border-color: var(--border-hover); }
-  .event-type .et-icon {
-    width: 40px; height: 40px; border: 1px solid rgba(193,127,89,0.3);
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    font-family: 'Space Mono', monospace; font-size: 14px; color: var(--copper);
-  }
-  .event-type .et-text h5 {
-    font-family: 'Bebas Neue', cursive; font-size: 18px; letter-spacing: 1px;
-    color: var(--off-white); margin-bottom: 2px;
-  }
-  .event-type .et-text p {
-    font-size: 12px; color: var(--text-dim); margin: 0;
+
+  .topics-title .accent { color: var(--signal); }
+
+  .topics-subtitle {
+    color: var(--concrete);
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-bottom: 64px;
   }
 
-  @media (max-width: 768px) {
-    .speaking-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    .speaking-stats .num { font-size: 48px; }
-    .booking-grid { grid-template-columns: 1fr; }
-    .testimonials-grid { grid-template-columns: 1fr; }
+  .topic-row {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    padding: 48px 0;
+    border-top: 1px solid rgba(13,13,13,0.08);
+    align-items: start;
+    transition: all 0.3s ease;
+  }
+
+  .topic-row:last-child { border-bottom: 1px solid rgba(13,13,13,0.08); }
+
+  .topic-row:hover {
+    padding-left: 12px;
+  }
+
+  .topic-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: var(--copper);
+    line-height: 1;
+  }
+
+  .topic-content {}
+
+  .topic-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: var(--obsidian);
+    margin-bottom: 12px;
+    line-height: 1.1;
+  }
+
+  .topic-name .dot { color: var(--signal); }
+
+  .topic-desc {
+    color: var(--concrete);
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 700px;
+    margin-bottom: 16px;
+  }
+
+  .topic-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .topic-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    background: rgba(13,13,13,0.04);
+    color: var(--concrete);
+    border: 1px solid rgba(13,13,13,0.06);
+  }
+
+  /* ===== FORMATS ===== */
+  .formats {
+    padding: 120px 60px;
+    background: var(--warm-black);
+  }
+
+  .formats-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .formats-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 20px;
+  }
+
+  .formats-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 4vw, 56px);
+    letter-spacing: 3px;
+    color: var(--off-white);
+    margin-bottom: 64px;
+  }
+
+  .formats-title .accent { color: var(--signal); }
+
+  .formats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .format-card {
+    padding: 48px 36px;
+    background: rgba(242,240,235,0.02);
+    border: 1px solid rgba(242,240,235,0.06);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .format-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--copper);
+    transition: height 0.4s ease;
+  }
+
+  .format-card:hover::before { height: 100%; }
+  .format-card:hover { border-color: rgba(193,127,89,0.2); }
+
+  .format-icon {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: var(--copper);
+    margin-bottom: 24px;
+  }
+
+  .format-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 2px;
+    color: var(--off-white);
+    margin-bottom: 16px;
+  }
+
+  .format-desc {
+    color: var(--concrete);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .format-detail {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--copper);
+    text-transform: uppercase;
+    padding-top: 24px;
+    border-top: 1px solid rgba(242,240,235,0.06);
+  }
+
+  /* ===== GALLERY STRIP ===== */
+  .gallery-strip {
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    height: 300px;
+    overflow: hidden;
+  }
+
+  .gallery-strip img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(30%) contrast(1.05);
+    transition: all 0.5s ease;
+  }
+
+  .gallery-strip img:hover {
+    filter: grayscale(0%) contrast(1.1);
+    transform: scale(1.05);
+  }
+
+  /* ===== BOOKING CTA ===== */
+  .booking {
+    padding: 120px 60px;
+    background: var(--obsidian);
+    position: relative;
+  }
+
+  .booking::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(193,127,89,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .booking-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .booking-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 20px;
+  }
+
+  .booking-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 5vw, 72px);
+    letter-spacing: 3px;
+    color: var(--off-white);
+    margin-bottom: 20px;
+    line-height: 1;
+  }
+
+  .booking-title .accent { color: var(--signal); }
+
+  .booking-desc {
+    color: var(--concrete);
+    font-size: 16px;
+    line-height: 1.7;
+    max-width: 550px;
+    margin: 0 auto 48px;
+  }
+
+  /* Booking form */
+  .booking-form {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .form-row.full { grid-template-columns: 1fr; }
+
+  .form-field label {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 8px;
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--warm-black);
+    border: 1px solid rgba(242,240,235,0.08);
+    color: var(--off-white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.3s ease;
+    -webkit-appearance: none;
+  }
+
+  .form-field input::placeholder,
+  .form-field textarea::placeholder {
+    color: var(--concrete);
+    opacity: 0.5;
+  }
+
+  .form-field input:focus,
+  .form-field select:focus,
+  .form-field textarea:focus {
+    border-color: var(--copper);
+  }
+
+  .form-field select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%238A8A8A' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+  }
+
+  .form-field select option {
+    background: var(--warm-black);
+    color: var(--off-white);
+  }
+
+  .form-field textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .form-submit {
+    text-align: center;
+    margin-top: 32px;
+  }
+
+  .form-submit .btn-primary {
+    width: 100%;
+    padding: 18px 32px;
+    font-size: 11px;
+  }
+
+  .form-msg {
+    display: none;
+    margin-top: 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  .thank-you-box {
+    display: none;
+    text-align: center;
+    padding: 32px;
+    background: rgba(193,127,89,0.05);
+    border: 1px solid rgba(193,127,89,0.15);
+    margin-top: 24px;
+  }
+
+  .thank-you-box.show { display: block; }
+
+  .ty-icon { font-size: 28px; color: var(--copper); margin-bottom: 12px; }
+  .ty-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; color: var(--off-white); margin-bottom: 8px; }
+  .ty-subtitle { font-size: 14px; color: var(--concrete); }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--warm-black);
+    border-top: 1px solid rgba(242,240,235,0.04);
+    padding: 64px 60px 32px;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 48px;
+    gap: 48px;
+  }
+
+  .footer-col-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 16px;
+  }
+
+  .footer-link {
+    display: block;
+    font-size: 13px;
+    color: var(--concrete);
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+  }
+
+  .footer-link:hover { color: var(--off-white); }
+
+  .footer-scripture {
+    font-style: italic;
+    font-size: 13px;
+    color: var(--concrete);
+    max-width: 280px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+
+  .footer-ref {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--copper);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(242,240,235,0.04);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-brand-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 6px;
+    color: rgba(242,240,235,0.15);
+  }
+
+  .footer-legal {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: rgba(242,240,235,0.2);
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .reveal.d1 { animation-delay: 0.1s; }
+  .reveal.d2 { animation-delay: 0.2s; }
+  .reveal.d3 { animation-delay: 0.3s; }
+  .reveal.d4 { animation-delay: 0.4s; }
+  .reveal.d5 { animation-delay: 0.5s; }
+  .reveal.d6 { animation-delay: 0.6s; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .speak-hero-inner {
+      grid-template-columns: 1fr;
+      padding: 120px 28px 60px;
+      gap: 48px;
+    }
+
+    .speak-hero-image { order: -1; }
+    .speak-hero-image img { height: 400px; }
+
+    .cred-bar { padding: 36px 28px; }
+    .cred-bar-inner { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+
+    .sizzle,
+    .topics,
+    .formats,
+    .booking { padding: 80px 28px; }
+
+    .formats-grid { grid-template-columns: 1fr; }
+
+    .gallery-strip {
+      grid-template-columns: repeat(2, 1fr);
+      height: 400px;
+    }
+
+    .form-row { grid-template-columns: 1fr; }
+
+    .site-nav { padding: 0 20px; }
+    .site-nav-links {
+      display: none;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: rgba(13,13,13,0.98);
+      flex-direction: column;
+      padding: 32px 28px;
+      gap: 20px;
+      border-bottom: 1px solid rgba(242,240,235,0.04);
+    }
+    .site-nav-links.open { display: flex; }
+    .site-nav-btn { display: block; }
+
+    .footer-top { flex-direction: column; gap: 36px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  }
+
+  @media (max-width: 600px) {
+    .cred-bar-inner { grid-template-columns: repeat(2, 1fr); }
+    .gallery-strip { height: 300px; }
+    .speak-hero-image img { height: 300px; }
+    .topic-row { grid-template-columns: 60px 1fr; gap: 20px; padding: 32px 0; }
+    .topic-num { font-size: 36px; }
+    .topic-name { font-size: 22px; }
   }
 </style>
 </head>
 <body>
-<div class="grain"></div>
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-<div class="page-transition"><div class="wipe"></div><div class="copper-line"></div></div>
 
-<nav>
-  <a href="index.html" class="nav-logo">LONNELL <span>WILLIAMS</span></a>
-  <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="speaking.html" class="active">Speaking</a>
-    <a href="media.html">Media</a>
-    <a href="vantage.html">Vantage</a>
-    <a href="content.html">Content</a>
+<!-- ===== NAV ===== -->
+<nav class="site-nav">
+  <a href="/" class="site-nav-brand">
+    <svg width="28" height="28" viewBox="0 0 240 240" fill="none">
+      <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+      <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
+      <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/>
+    </svg>
+    <span class="site-nav-name">LONNELL WILLIAMS</span>
+  </a>
+  <div class="site-nav-links">
+    <a href="/">Home</a>
+    <a href="/speaking.html" class="active">Speaking</a>
+    <a href="/media.html">Media</a>
+    <a href="/vantage.html">Vantage</a>
+    <a href="/#newsletter">Newsletter</a>
   </div>
+  <button class="site-nav-btn" onclick="var l=document.querySelector('.site-nav-links');l.classList.toggle('open');">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<div class="page-wrapper">
 
-<!-- HERO -->
-<section class="page-hero">
-  <div class="hero-gradient"></div>
-  <div class="hero-vignette"></div>
-  <div class="hero-content">
-    <div class="hero-scripture" style="opacity:0;transform:translateY(10px);">Speaking</div>
-    <h1 class="hero-title" style="font-size:clamp(64px,12vw,160px);">
-      <span class="word">BOOK</span> <span class="word">LONNELL.</span>
-    </h1>
-    <p class="hero-sub">I don't do motivational pep talks. I bring frameworks, conviction, and the kind of truth that rearranges the room. If you want comfortable, I'm not your guy.</p>
-  </div>
-</section>
-
-<!-- STATS -->
-<section class="section" style="padding-top:40px;">
-  <div class="speaking-stats" data-stagger-parent>
-    <div class="speaking-stat">
-      <div class="num" data-count="200">0</div>
-      <div class="label">Events</div>
+<!-- ===== HERO ===== -->
+<section class="speak-hero">
+  <div class="speak-hero-inner">
+    <div class="speak-hero-content">
+      <div class="speak-hero-label">Speaking &amp; Keynotes</div>
+      <h1 class="speak-hero-title">
+        DON'T JUST<br>FILL ROOMS<span class="accent">.</span><br>SHIFT THEM<span class="copper">.</span>
+      </h1>
+      <p class="speak-hero-desc">
+        Keynotes, workshops, and leadership intensives for conferences, churches, and organizations that refuse to settle for "good enough." Not motivational speaking — operational conviction. The kind that builds infrastructure after the applause stops.
+      </p>
+      <div class="speak-hero-cta">
+        <a href="#booking" class="btn-primary">Book Lonnell</a>
+        <a href="#reel" class="btn-secondary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Watch Reel
+        </a>
+      </div>
     </div>
-    <div class="speaking-stat">
-      <div class="num" data-count="75000">0</div>
-      <div class="label">People Reached</div>
-    </div>
-    <div class="speaking-stat">
-      <div class="num" data-count="12">0</div>
-      <div class="label">States</div>
-    </div>
-    <div class="speaking-stat">
-      <div class="num" data-count="4">0</div>
-      <div class="label">Countries</div>
+    <div class="speak-hero-image">
+      <img src="https://riqdcirsmckubkdfbtoj.supabase.co/storage/v1/object/public/site-images/DSCF8315.jpeg" 
+           alt="Lonnell Williams at podium on stage, hand on chin, deep in thought at 2819 Church">
     </div>
   </div>
 </section>
 
-<!-- TOPICS -->
-<section class="section section-warm" id="topics">
-  <div class="topics-container">
-    <div class="section-label reveal">Signature Topics</div>
-    <div class="section-title reveal">WHAT I BRING<br>TO YOUR ROOM.</div>
-    <div class="copper-divider reveal"></div>
 
-    <div class="topic-row reveal">
-      <div class="topic-num">01</div>
-      <div>
-        <h4>ARISE AND BUILD.</h4>
-        <p>The operator-pastor framework. How to carry spiritual weight and organizational responsibility without choosing between them. Best for: church leadership conferences, pastor's retreats, organizational kickoffs.</p>
-      </div>
+<!-- ===== CREDIBILITY BAR ===== -->
+<div class="cred-bar reveal d1">
+  <div class="cred-bar-inner">
+    <div class="cred-item">
+      <div class="cred-number">50+</div>
+      <div class="cred-label">Staff Led</div>
     </div>
-    <div class="topic-row reveal">
-      <div class="topic-num">02</div>
-      <div>
-        <h4>BUILD WHAT DOESN'T EXIST.</h4>
-        <p>Infrastructure as ministry. Why the systems you build speak louder than the sermons you preach. Best for: operations teams, executive retreats, nonprofit boards.</p>
-      </div>
+    <div class="cred-item">
+      <div class="cred-number">3</div>
+      <div class="cred-label">Books Written</div>
     </div>
-    <div class="topic-row reveal">
-      <div class="topic-num">03</div>
-      <div>
-        <h4>LEADING WITH THE STAFF.</h4>
-        <p>What's already in your hand is enough. Stop looking for bigger resources and start activating what God has already placed in your grip. Best for: Sunday services, leadership training, young adult events.</p>
-      </div>
+    <div class="cred-item">
+      <div class="cred-number">13→50</div>
+      <div class="cred-label">Scaled in 6 Months</div>
     </div>
-    <div class="topic-row reveal">
-      <div class="topic-num">04</div>
-      <div>
-        <h4>THE ZAG PRINCIPLE.</h4>
-        <p>When everyone goes one direction, go the other &mdash; intentionally. Counter-cultural leadership in ministry, business, and life. Best for: conferences, commencement addresses, entrepreneurial events.</p>
-      </div>
-    </div>
-    <div class="topic-row reveal">
-      <div class="topic-num">05</div>
-      <div>
-        <h4>SCALING UNDER PRESSURE.</h4>
-        <p>13 to 50 staff in six months. What it takes to scale an organization rapidly without losing quality, culture, or your mind. Best for: growth-stage organizations, staff retreats, executive workshops.</p>
-      </div>
-    </div>
-    <div class="topic-row reveal">
-      <div class="topic-num">06</div>
-      <div>
-        <h4>ANYTHING, EVERYTHING, OR NOTHING AT ALL.</h4>
-        <p>Full commitment or full absence. The manifesto on refusing to do halfway. Best for: young adults, men's conferences, entrepreneurial gatherings, worship nights.</p>
-      </div>
+    <div class="cred-item">
+      <div class="cred-number">M.DIV</div>
+      <div class="cred-label">Princeton Seminary</div>
     </div>
   </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="section" id="testimonials">
-  <div style="max-width:1200px;margin:0 auto;">
-    <div class="section-label reveal">What They Say</div>
-    <div class="section-title reveal">THE ROOM<br>REMEMBERS.</div>
-    <div class="copper-divider reveal"></div>
-  </div>
-  <div class="testimonials-grid" data-stagger-parent>
-    <div class="testimonial">
-      <div class="quote-mark">&ldquo;</div>
-      <p>Lonnell doesn't just speak &mdash; he builds something in the room. By the time he's done, the framework is already in motion and people are ready to execute.</p>
-      <div class="attribution">Church Leadership Conference <span>&bull; Atlanta, GA</span></div>
-    </div>
-    <div class="testimonial">
-      <div class="quote-mark">&ldquo;</div>
-      <p>The most operationally-minded preacher I've ever heard. He gave our team a language for what we've been trying to say for years.</p>
-      <div class="attribution">Executive Retreat <span>&bull; Houston, TX</span></div>
-    </div>
-    <div class="testimonial">
-      <div class="quote-mark">&ldquo;</div>
-      <p>I've never left a session with this many actionable next steps. Lonnell brings conviction and clarity in equal measure.</p>
-      <div class="attribution">Staff Development Day <span>&bull; Charlotte, NC</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- BOOKING -->
-<section class="section section-warm" id="booking">
-  <div class="booking-grid">
-    <div class="booking-info reveal-left">
-      <div class="section-label">Book Lonnell</div>
-      <h3>LET'S BUILD SOMETHING IN YOUR ROOM.</h3>
-      <p>Whether it's a Sunday morning, a leadership retreat, a conference main stage, or an executive workshop &mdash; the goal is the same: leave the room different than you found it.</p>
-      <p>All inquiries receive a response within 48 hours. Availability is limited, especially Q4 and conference season.</p>
-      <div class="event-types">
-        <div class="event-type">
-          <div class="et-icon">S</div>
-          <div class="et-text"><h5>Sunday Service</h5><p>60-minute keynote message</p></div>
-        </div>
-        <div class="event-type">
-          <div class="et-icon">C</div>
-          <div class="et-text"><h5>Conference</h5><p>Main stage or breakout session</p></div>
-        </div>
-        <div class="event-type">
-          <div class="et-icon">R</div>
-          <div class="et-text"><h5>Retreat / Workshop</h5><p>Half-day or full-day intensive</p></div>
-        </div>
-        <div class="event-type">
-          <div class="et-icon">V</div>
-          <div class="et-text"><h5>Virtual</h5><p>Keynote or training via Zoom</p></div>
-        </div>
-      </div>
-    </div>
-    <div class="reveal-right">
-      <div class="form-group">
-        <label>Your Name</label>
-        <input type="text" class="form-input" placeholder="Full name">
-      </div>
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" class="form-input" placeholder="email@organization.com">
-      </div>
-      <div class="form-group">
-        <label>Organization</label>
-        <input type="text" class="form-input" placeholder="Church / Company / Event name">
-      </div>
-      <div class="form-group">
-        <label>Event Type</label>
-        <select class="form-select">
-          <option value="" disabled selected>Select event type</option>
-          <option>Sunday Service</option>
-          <option>Conference</option>
-          <option>Retreat / Workshop</option>
-          <option>Virtual Keynote</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Proposed Date(s)</label>
-        <input type="text" class="form-input" placeholder="Month / Year or specific dates">
-      </div>
-      <div class="form-group">
-        <label>Tell Me About Your Event</label>
-        <textarea class="form-input form-textarea" placeholder="Audience, theme, expected attendance, any specific topics..."></textarea>
-      </div>
-      <button class="btn" style="width:100%;text-align:center;margin-top:8px;">Submit Inquiry</button>
-    </div>
-  </div>
-</section>
-
 </div>
 
-<footer>
+
+<!-- ===== SIZZLE REEL ===== -->
+<section class="sizzle reveal d2" id="reel">
+  <div class="sizzle-inner">
+    <div class="sizzle-label">See It Before You Book It</div>
+    <div class="sizzle-title">THE REEL<span class="accent">.</span></div>
+    <div class="video-container" id="videoContainer">
+      <video id="sizzleVideo" preload="metadata" playsinline 
+             poster="https://riqdcirsmckubkdfbtoj.supabase.co/storage/v1/object/public/site-images/DSCF8179.jpeg">
+        <source src="https://riqdcirsmckubkdfbtoj.supabase.co/storage/v1/object/public/site-images/LONDON_PROMO_2.mp4" type="video/mp4">
+      </video>
+      <div class="video-overlay" id="videoOverlay">
+        <div class="play-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21"/></svg>
+        </div>
+        <div class="play-label">Play Reel</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== TOPICS ===== -->
+<section class="topics" id="topics">
+  <div class="topics-inner">
+    <div class="topics-label reveal d1">Signature Topics</div>
+    <div class="topics-title reveal d2">WHAT I SPEAK ON<span class="accent">.</span></div>
+    <div class="topics-subtitle reveal d3">Every session is customized to your audience. These are starting points, not scripts. The goal is transformation, not information.</div>
+
+    <div class="topic-row reveal d1">
+      <div class="topic-num">01</div>
+      <div class="topic-content">
+        <div class="topic-name">ARISE AND BUILD<span class="dot">.</span></div>
+        <div class="topic-desc">The operator-pastor framework. How to carry spiritual weight and organizational responsibility without choosing between them. Nehemiah didn't just pray — he submitted a project plan to the king. This talk bridges spiritual conviction with operational execution for leaders who are tired of being told to pick one.</div>
+        <div class="topic-tags">
+          <span class="topic-tag">Church Leaders</span>
+          <span class="topic-tag">Conferences</span>
+          <span class="topic-tag">Leadership Retreats</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-row reveal d2">
+      <div class="topic-num">02</div>
+      <div class="topic-content">
+        <div class="topic-name">BUILD WHAT DOESN'T EXIST<span class="dot">.</span></div>
+        <div class="topic-desc">Infrastructure as ministry. Why the systems you build speak louder than the sermons you preach. For organizations asking "how do we scale?" — this is the operational theology of growth. From 13 to 50 staff in six months, I'll walk through what it actually takes to architect organizations that scale without breaking.</div>
+        <div class="topic-tags">
+          <span class="topic-tag">Executive Teams</span>
+          <span class="topic-tag">Church Operations</span>
+          <span class="topic-tag">Startups</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-row reveal d3">
+      <div class="topic-num">03</div>
+      <div class="topic-content">
+        <div class="topic-name">LEADING WITH THE STAFF<span class="dot">.</span></div>
+        <div class="topic-desc">What's already in your hand is enough. Stop looking for bigger resources and start activating what God has already placed in your grip. Exodus 4:2 wasn't a question — it was a redirect. This message dismantles the scarcity mindset and replaces it with operational confidence.</div>
+        <div class="topic-tags">
+          <span class="topic-tag">All Audiences</span>
+          <span class="topic-tag">Church Services</span>
+          <span class="topic-tag">Motivational</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-row reveal d4">
+      <div class="topic-num">04</div>
+      <div class="topic-content">
+        <div class="topic-name">THE ZAG PRINCIPLE<span class="dot">.</span></div>
+        <div class="topic-desc">When everyone zigs, zag — intentionally. Counter-cultural leadership in ministry, business, and life. Why convention is comfortable but forgettable, and why the leaders who change industries are the ones willing to look foolish first. Based on the book "Zag: Leading Ministry Jesus's Way."</div>
+        <div class="topic-tags">
+          <span class="topic-tag">Young Leaders</span>
+          <span class="topic-tag">Conferences</span>
+          <span class="topic-tag">Innovation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-row reveal d5">
+      <div class="topic-num">05</div>
+      <div class="topic-content">
+        <div class="topic-name">SCALING UNDER PRESSURE<span class="dot">.</span></div>
+        <div class="topic-desc">Rapid growth breaks everything that isn't built to flex. Culture. Communication. Decision-making. This is the real talk about what scaling costs and what it requires — frameworks for hiring, delegation chains, KPI systems, and the mental health of the leader holding it all together.</div>
+        <div class="topic-tags">
+          <span class="topic-tag">Executive Leadership</span>
+          <span class="topic-tag">Workshops</span>
+          <span class="topic-tag">Operations</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-row reveal d6">
+      <div class="topic-num">06</div>
+      <div class="topic-content">
+        <div class="topic-name">WORDS BUILD WORLDS<span class="dot">.</span></div>
+        <div class="topic-desc">Your words don't just communicate — they construct. The power of voice, presence, and atmosphere. For leaders who want to shift rooms, not just fill them. How language creates culture, how declarations shape destiny, and why the most powerful infrastructure is verbal.</div>
+        <div class="topic-tags">
+          <span class="topic-tag">Preachers</span>
+          <span class="topic-tag">Communicators</span>
+          <span class="topic-tag">All Audiences</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== FORMATS ===== -->
+<section class="formats reveal d1">
+  <div class="formats-inner">
+    <div class="formats-label">Engagement Formats</div>
+    <div class="formats-title">HOW WE WORK TOGETHER<span class="accent">.</span></div>
+    <div class="formats-grid">
+
+      <div class="format-card">
+        <div class="format-icon">FORMAT 01</div>
+        <div class="format-name">KEYNOTE</div>
+        <div class="format-desc">High-impact, single-session delivery for conferences, summits, and large gatherings. 45–75 minutes. Designed to shift the atmosphere and leave a framework, not just a feeling.</div>
+        <div class="format-detail">Conferences · Summits · Sunday Services</div>
+      </div>
+
+      <div class="format-card">
+        <div class="format-icon">FORMAT 02</div>
+        <div class="format-name">WORKSHOP</div>
+        <div class="format-desc">Interactive, hands-on sessions where your team leaves with actual tools. Frameworks, templates, and action plans — not just notes. 2–4 hours with breakout components.</div>
+        <div class="format-detail">Leadership Teams · Staff Training · Retreats</div>
+      </div>
+
+      <div class="format-card">
+        <div class="format-icon">FORMAT 03</div>
+        <div class="format-name">INTENSIVE</div>
+        <div class="format-desc">Multi-day deep dives into organizational infrastructure, ministry operations, or leadership development. This is consulting dressed as teaching. You leave with a strategic plan.</div>
+        <div class="format-detail">Executive Teams · Pastoral Staff · Organizations</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ===== BOOKING FORM ===== -->
+<section class="booking" id="booking">
+  <div class="booking-inner">
+    <div class="booking-label">Let's Work</div>
+    <div class="booking-title">BOOK LONNELL<span class="accent">.</span></div>
+    <div class="booking-desc">Tell me about your event. I'll respond within 48 hours with availability and a custom proposal. No gatekeepers. No templated responses.</div>
+
+    <div class="booking-form" id="bookingForm">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="bk-name">Your Name</label>
+          <input type="text" id="bk-name" placeholder="Full name" required>
+        </div>
+        <div class="form-field">
+          <label for="bk-email">Email</label>
+          <input type="email" id="bk-email" placeholder="you@org.com" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="bk-org">Organization</label>
+          <input type="text" id="bk-org" placeholder="Church, company, or org name">
+        </div>
+        <div class="form-field">
+          <label for="bk-format">Format</label>
+          <select id="bk-format">
+            <option value="">Select format...</option>
+            <option value="Keynote">Keynote</option>
+            <option value="Workshop">Workshop</option>
+            <option value="Intensive">Intensive</option>
+            <option value="Sunday Service">Sunday Service</option>
+            <option value="Other">Other / Not Sure</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="bk-date">Event Date</label>
+          <input type="text" id="bk-date" placeholder="Month / Year or specific date">
+        </div>
+        <div class="form-field">
+          <label for="bk-audience">Expected Audience Size</label>
+          <select id="bk-audience">
+            <option value="">Select size...</option>
+            <option value="Under 100">Under 100</option>
+            <option value="100-500">100 – 500</option>
+            <option value="500-2000">500 – 2,000</option>
+            <option value="2000+">2,000+</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="form-field">
+          <label for="bk-details">Tell Me About the Event</label>
+          <textarea id="bk-details" placeholder="What's the event? What outcome are you looking for? Any specific topics you want covered?"></textarea>
+        </div>
+      </div>
+      <div class="form-submit">
+        <button type="button" class="btn-primary" id="bookingSubmitBtn">Submit Inquiry</button>
+      </div>
+      <div class="form-msg" id="bookingMsg"></div>
+      <div class="thank-you-box" id="bookingThankYou">
+        <div class="ty-icon">✦</div>
+        <div class="ty-title">INQUIRY RECEIVED</div>
+        <div class="ty-subtitle">I'll respond within 48 hours with availability and a custom proposal. Looking forward to it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
   <div class="footer-inner">
-    <div>
-      <div class="footer-brand">LONNELL DAWSON WILLIAMS</div>
-      <div class="footer-verse">"The God of heaven will make us prosper, and we his servants will arise and build." &mdash; Nehemiah 2:20</div>
+    <div class="footer-top">
+      <div>
+        <div class="footer-col-label">Foundation</div>
+        <p class="footer-scripture">"The God of heaven will make us prosper, and we his servants will arise and build."</p>
+        <div class="footer-ref">Nehemiah 2:20 — ESV</div>
+      </div>
+      <div>
+        <div class="footer-col-label">Navigate</div>
+        <a href="/" class="footer-link">Home</a>
+        <a href="/speaking.html" class="footer-link">Speaking</a>
+        <a href="/media.html" class="footer-link">Media</a>
+        <a href="/#newsletter" class="footer-link">Newsletter</a>
+        <a href="/vantage.html" class="footer-link">Vantage</a>
+        <a href="/admin.html" class="footer-link" style="color:var(--concrete);opacity:0.5;font-size:10px;margin-top:12px;">Portal</a>
+      </div>
+      <div>
+        <div class="footer-col-label">Books</div>
+        <a href="/#books" class="footer-link">Zag: Leading Ministry Jesus's Way</a>
+        <a href="/#books" class="footer-link">Anything, Everything, or Nothing at All</a>
+      </div>
+      <div>
+        <div class="footer-col-label">Connect</div>
+        <a href="#booking" class="footer-link">Book Lonnell</a>
+      </div>
     </div>
-    <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="media.html">Media</a>
-      <a href="vantage.html">Vantage</a>
-      <a href="content.html">Content</a>
+    <div class="footer-bottom">
+      <div class="footer-brand-text">LONNELL DAWSON WILLIAMS</div>
+      <div class="footer-legal">&copy; 2026 LONNELL WILLIAMS. ALL RIGHTS RESERVED.</div>
     </div>
-    <div class="footer-copy">&copy; 2026 LONNELL WILLIAMS. ALL RIGHTS RESERVED.</div>
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="scripts.js"></script>
+
+<!-- ===== SUPABASE ===== -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
-  // Animate speaking stats on scroll
-  const statsSection = document.querySelector('.speaking-stats');
-  if (statsSection) {
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          document.querySelectorAll('[data-count]').forEach(el => {
-            const target = parseInt(el.dataset.count);
-            animateValue(el, target, '', 2000);
-          });
-          obs.disconnect();
+  const SUPABASE_URL = 'https://riqdcirsmckubkdfbtoj.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM';
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // === VIDEO PLAYER ===
+  (function() {
+    const container = document.getElementById('videoContainer');
+    const video = document.getElementById('sizzleVideo');
+    const overlay = document.getElementById('videoOverlay');
+
+    if (container && video && overlay) {
+      container.addEventListener('click', function() {
+        if (video.paused) {
+          video.play();
+          overlay.classList.add('hidden');
+        } else {
+          video.pause();
+          overlay.classList.remove('hidden');
         }
       });
-    }, { threshold: 0.3 });
-    obs.observe(statsSection);
-  }
+
+      video.addEventListener('ended', function() {
+        overlay.classList.remove('hidden');
+      });
+    }
+  })();
+
+  // === BOOKING FORM ===
+  (function() {
+    const btn = document.getElementById('bookingSubmitBtn');
+    const msg = document.getElementById('bookingMsg');
+    const ty = document.getElementById('bookingThankYou');
+
+    function showMsg(text, isError) {
+      msg.style.display = 'block';
+      msg.textContent = text;
+      msg.style.color = isError ? '#E85D3A' : '#C17F59';
+    }
+
+    btn.addEventListener('click', async function() {
+      const name = document.getElementById('bk-name').value.trim();
+      const email = document.getElementById('bk-email').value.trim();
+      const org = document.getElementById('bk-org').value.trim();
+      const format = document.getElementById('bk-format').value;
+      const date = document.getElementById('bk-date').value.trim();
+      const audience = document.getElementById('bk-audience').value;
+      const details = document.getElementById('bk-details').value.trim();
+
+      if (!name || !email) {
+        showMsg('Name and email are required.', true);
+        return;
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showMsg('Please enter a valid email.', true);
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'SUBMITTING...';
+      msg.style.display = 'none';
+
+      try {
+        const { error } = await supabase.from('consulting_inquiries').insert([{
+          name: name,
+          email: email,
+          organization: org || null,
+          service_type: 'Speaking',
+          message: [
+            format ? 'Format: ' + format : '',
+            date ? 'Date: ' + date : '',
+            audience ? 'Audience: ' + audience : '',
+            details ? 'Details: ' + details : ''
+          ].filter(Boolean).join('\n')
+        }]);
+
+        if (error) throw error;
+
+        document.getElementById('bookingForm').querySelectorAll('input, select, textarea').forEach(function(el) {
+          el.value = '';
+        });
+        btn.style.display = 'none';
+        ty.classList.add('show');
+
+      } catch (err) {
+        showMsg('Something went wrong. Try emailing directly.', true);
+        btn.disabled = false;
+        btn.textContent = 'SUBMIT INQUIRY';
+      }
+    });
+  })();
+
+  // === SCROLL REVEAL (CSS keyframes handle animation) ===
 </script>
+
 </body>
 </html>
