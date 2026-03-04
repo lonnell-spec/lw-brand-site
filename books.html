@@ -248,43 +248,196 @@
   <div class="book-entry">
     <div class="book-cover-wrap staff-cover-wrap">
       <div class="staff-cover">
-        <!-- White bg, arm+hand from right holding wooden staff -->
-        <svg viewBox="0 0 240 360" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
-          <!-- White background -->
-          <rect width="240" height="360" fill="#FAFAF8"/>
-          <!-- Title block top -->
-          <text x="24" y="44" font-family="'Bebas Neue', serif" font-size="28" letter-spacing="4" fill="#0D0D0D">THE</text>
-          <text x="24" y="76" font-family="'Bebas Neue', serif" font-size="28" letter-spacing="4" fill="#0D0D0D">STAFF</text>
-          <!-- Thin accent rule under title -->
-          <rect x="24" y="84" width="40" height="2" fill="#C17F59"/>
-          <!-- Wooden staff — vertical rod, slight warmth -->
-          <rect x="108" y="60" width="11" height="260" rx="3" fill="#8B5E3C"/>
-          <rect x="109" y="60" width="3" height="260" rx="2" fill="#A8724A" opacity="0.5"/>
-          <!-- Wood grain lines -->
-          <line x1="110" y1="80"  x2="118" y2="95"  stroke="#6B4226" stroke-width="0.6" opacity="0.4"/>
-          <line x1="110" y1="120" x2="119" y2="138" stroke="#6B4226" stroke-width="0.6" opacity="0.4"/>
-          <line x1="110" y1="165" x2="118" y2="180" stroke="#6B4226" stroke-width="0.6" opacity="0.4"/>
-          <line x1="110" y1="210" x2="119" y2="228" stroke="#6B4226" stroke-width="0.6" opacity="0.4"/>
-          <!-- Staff tip (bottom) -->
-          <ellipse cx="113" cy="322" rx="5" ry="3" fill="#5C3D1E"/>
-          <!-- Arm entering from the right side, hand gripping the staff -->
-          <!-- Forearm / sleeve (dark) -->
-          <path d="M240,155 C210,150 185,158 165,165 C150,170 140,178 135,185 L130,195 C128,200 126,205 127,210 C128,215 132,218 138,216 C145,213 155,205 165,200 C178,193 195,188 215,183 Z" fill="#1A1714"/>
-          <!-- Wrist / skin -->
-          <path d="M130,195 C126,200 124,207 125,213 C126,219 131,222 137,220 L145,215 C150,210 153,203 150,197 Z" fill="#C4956A"/>
-          <!-- Hand gripping staff -->
-          <!-- Palm -->
-          <path d="M125,210 C122,215 121,222 123,228 C125,234 131,236 136,233 C140,230 142,224 140,218 Z" fill="#C4956A"/>
-          <!-- Fingers wrapped around staff -->
-          <path d="M122,218 C118,220 116,225 118,230 C120,234 124,234 127,231 L127,219 Z" fill="#B8845A"/>
-          <path d="M120,224 C117,227 117,232 120,235 C122,237 125,236 126,233 L126,222 Z" fill="#B8845A"/>
-          <path d="M121,230 C119,233 119,237 122,239 C124,240 127,239 127,236 L127,229 Z" fill="#B8845A"/>
-          <!-- Thumb -->
-          <path d="M136,212 C140,208 143,207 145,210 C146,213 144,217 140,219 L135,220 Z" fill="#C4956A"/>
-          <!-- Author name bottom -->
-          <text x="24" y="338" font-family="'Space Mono', monospace" font-size="7" letter-spacing="2.5" fill="#8A8A8A">LONNELL WILLIAMS</text>
-          <!-- Thin bottom bar -->
-          <rect x="0" y="352" width="240" height="8" fill="#0D0D0D"/>
+        <svg viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <!-- Page background: warm off-white -->
+            <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#F5F3EE"/>
+              <stop offset="100%" stop-color="#EDE9E2"/>
+            </linearGradient>
+            <!-- Staff wood: rich brown with highlight -->
+            <linearGradient id="staffGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%"   stop-color="#4A2C0A"/>
+              <stop offset="18%"  stop-color="#7B4A1E"/>
+              <stop offset="38%"  stop-color="#9E6230"/>
+              <stop offset="52%"  stop-color="#C4844A"/>
+              <stop offset="65%"  stop-color="#A06635"/>
+              <stop offset="82%"  stop-color="#6B3E18"/>
+              <stop offset="100%" stop-color="#3D1F08"/>
+            </linearGradient>
+            <!-- Staff shadow overlay -->
+            <linearGradient id="staffShadow" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stop-color="rgba(0,0,0,0.25)"/>
+              <stop offset="20%"  stop-color="rgba(0,0,0,0)"/>
+              <stop offset="80%"  stop-color="rgba(0,0,0,0)"/>
+              <stop offset="100%" stop-color="rgba(0,0,0,0.3)"/>
+            </linearGradient>
+            <!-- Sleeve: near-black with slight sheen -->
+            <linearGradient id="sleeveGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stop-color="#1C1A18"/>
+              <stop offset="40%"  stop-color="#2A2724"/>
+              <stop offset="100%" stop-color="#141210"/>
+            </linearGradient>
+            <!-- Wrist/skin: warm brown -->
+            <linearGradient id="skinGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"   stop-color="#C9895A"/>
+              <stop offset="45%"  stop-color="#B5723E"/>
+              <stop offset="100%" stop-color="#8C4E22"/>
+            </linearGradient>
+            <!-- Knuckle highlight -->
+            <radialGradient id="knuckleHL" cx="50%" cy="30%" r="60%">
+              <stop offset="0%"   stop-color="#E0A870" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#A0622A" stop-opacity="0"/>
+            </radialGradient>
+            <!-- Palm shadow -->
+            <radialGradient id="palmShadow" cx="70%" cy="60%" r="55%">
+              <stop offset="0%"   stop-color="rgba(60,25,5,0.45)"/>
+              <stop offset="100%" stop-color="rgba(60,25,5,0)"/>
+            </radialGradient>
+            <!-- Drop shadow filter for staff -->
+            <filter id="staffDropShadow" x="-30%" y="-5%" width="160%" height="110%">
+              <feDropShadow dx="4" dy="0" stdDeviation="4" flood-color="#2A1000" flood-opacity="0.35"/>
+            </filter>
+            <!-- Soft shadow under arm -->
+            <filter id="armShadow" x="-5%" y="-10%" width="120%" height="130%">
+              <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#1A0E05" flood-opacity="0.3"/>
+            </filter>
+          </defs>
+
+          <!-- Background -->
+          <rect width="300" height="450" fill="url(#bgGrad)"/>
+
+          <!-- Subtle paper texture lines -->
+          <line x1="0" y1="112" x2="300" y2="112" stroke="#D8D2C8" stroke-width="0.4" opacity="0.5"/>
+          <line x1="0" y1="224" x2="300" y2="224" stroke="#D8D2C8" stroke-width="0.4" opacity="0.3"/>
+          <line x1="0" y1="336" x2="300" y2="336" stroke="#D8D2C8" stroke-width="0.4" opacity="0.3"/>
+
+          <!-- THE STAFF title -->
+          <text x="28" y="64" font-family="Georgia, 'Times New Roman', serif" font-size="38" font-weight="700" letter-spacing="1" fill="#0D0D0D">THE</text>
+          <text x="28" y="108" font-family="Georgia, 'Times New Roman', serif" font-size="38" font-weight="700" letter-spacing="1" fill="#0D0D0D">STAFF</text>
+          <!-- Copper rule under title -->
+          <rect x="28" y="118" width="52" height="2.5" fill="#C17F59" rx="1"/>
+
+          <!-- Staff (wooden pole) with drop shadow -->
+          <rect x="134" y="0" width="22" height="450" rx="3" fill="url(#staffGrad)" filter="url(#staffDropShadow)"/>
+          <!-- Wood grain streaks -->
+          <line x1="139" y1="30"  x2="144" y2="90"  stroke="#3D1A05" stroke-width="0.7" opacity="0.25"/>
+          <line x1="143" y1="110" x2="147" y2="180" stroke="#3D1A05" stroke-width="0.8" opacity="0.2"/>
+          <line x1="140" y1="200" x2="145" y2="260" stroke="#3D1A05" stroke-width="0.6" opacity="0.22"/>
+          <line x1="144" y1="280" x2="148" y2="340" stroke="#3D1A05" stroke-width="0.7" opacity="0.18"/>
+          <line x1="141" y1="355" x2="146" y2="415" stroke="#3D1A05" stroke-width="0.6" opacity="0.2"/>
+          <!-- Highlight streak left edge -->
+          <rect x="136" y="0" width="3" height="450" fill="rgba(255,220,160,0.12)" rx="1"/>
+          <!-- Shadow overlay top/bottom -->
+          <rect x="134" y="0" width="22" height="450" rx="3" fill="url(#staffShadow)"/>
+
+          <!-- ARM + HAND: enters from right, gripping staff center ~240-290 height -->
+          <!-- Sleeve body — wide forearm from right -->
+          <path d="
+            M300,200
+            C275,195 252,198 235,205
+            C220,212 210,222 205,232
+            C200,242 198,255 200,264
+            C202,272 208,278 218,280
+            C228,282 242,278 255,272
+            C270,265 285,255 300,248
+            Z"
+            fill="url(#sleeveGrad)" filter="url(#armShadow)"/>
+          <!-- Sleeve underside / depth -->
+          <path d="
+            M300,248 C285,255 270,265 255,272 C242,278 228,282 218,280
+            C214,279 210,276 208,272
+            C210,278 216,284 226,286
+            C238,289 254,284 268,277
+            C282,270 291,260 300,254 Z"
+            fill="#0D0B09"/>
+
+          <!-- Wrist — skin transition from sleeve -->
+          <path d="
+            M218,278
+            C210,278 202,272 200,262
+            C197,250 200,237 208,228
+            C214,221 222,217 230,218
+            C238,219 244,226 244,235
+            C244,244 238,255 230,262
+            C224,268 220,275 218,278 Z"
+            fill="url(#skinGrad)"/>
+          <!-- Wrist highlight -->
+          <ellipse cx="222" cy="248" rx="10" ry="18" fill="rgba(220,160,100,0.25)"/>
+
+          <!-- HAND / PALM — wrapping around staff -->
+          <!-- Back of hand + knuckles, visible on right of staff -->
+          <path d="
+            M244,234
+            C248,228 252,224 256,222
+            C262,220 268,222 270,228
+            C272,234 270,242 265,248
+            C260,254 253,258 248,258
+            C243,258 239,254 238,248
+            C237,242 239,237 244,234 Z"
+            fill="url(#skinGrad)"/>
+          <!-- Knuckle highlights -->
+          <ellipse cx="252" cy="234" rx="8" ry="5" fill="url(#knuckleHL)" opacity="0.7"/>
+          <!-- Knuckle bumps -->
+          <ellipse cx="246" cy="238" rx="4"  ry="2.5" fill="rgba(200,140,80,0.5)"/>
+          <ellipse cx="254" cy="234" rx="3.5" ry="2"   fill="rgba(200,140,80,0.5)"/>
+          <ellipse cx="261" cy="232" rx="3"  ry="2"   fill="rgba(200,140,80,0.45)"/>
+          <!-- Knuckle shadow lines -->
+          <path d="M244,240 Q248,243 252,241" stroke="#7A4010" stroke-width="1.2" fill="none" opacity="0.4"/>
+          <path d="M251,237 Q255,240 259,238" stroke="#7A4010" stroke-width="1.1" fill="none" opacity="0.35"/>
+          <path d="M258,235 Q261,237 264,236" stroke="#7A4010" stroke-width="1"   fill="none" opacity="0.3"/>
+
+          <!-- Fingers on left side of staff (visible wrapping left) -->
+          <!-- Index finger -->
+          <path d="M133,230 C126,228 120,232 118,238 C116,244 119,252 125,256 C130,260 136,259 138,253 L140,240 Z"
+            fill="url(#skinGrad)"/>
+          <path d="M122,248 Q127,245 132,248" stroke="#7A4010" stroke-width="1" fill="none" opacity="0.3"/>
+          <!-- Middle finger -->
+          <path d="M133,246 C126,244 120,248 118,255 C116,262 119,270 125,274 C130,277 136,276 138,269 L140,256 Z"
+            fill="url(#skinGrad)"/>
+          <path d="M122,264 Q127,261 132,264" stroke="#7A4010" stroke-width="1" fill="none" opacity="0.3"/>
+          <!-- Ring finger -->
+          <path d="M134,262 C128,260 122,265 121,272 C120,279 123,286 128,288 C133,290 138,287 139,280 L140,268 Z"
+            fill="url(#skinGrad)"/>
+          <!-- Pinky -->
+          <path d="M135,276 C130,275 126,280 126,286 C126,292 130,296 134,295 C138,294 140,289 139,283 Z"
+            fill="url(#skinGrad)"/>
+          <!-- Finger nail hints -->
+          <ellipse cx="121" cy="237" rx="3" ry="2" fill="rgba(240,210,185,0.6)"/>
+          <ellipse cx="121" cy="254" rx="3" ry="2" fill="rgba(240,210,185,0.6)"/>
+          <ellipse cx="122" cy="271" rx="3" ry="2" fill="rgba(240,210,185,0.6)"/>
+          <ellipse cx="127" cy="285" rx="2.5" ry="1.8" fill="rgba(240,210,185,0.6)"/>
+
+          <!-- Thumb — coming from wrist side on right of staff -->
+          <path d="
+            M234,242
+            C230,238 226,236 223,238
+            C220,240 219,245 221,251
+            C223,257 228,261 233,260
+            C238,259 241,254 240,248
+            C239,245 237,243 234,242 Z"
+            fill="url(#skinGrad)"/>
+          <path d="M224,248 Q228,251 233,248" stroke="#7A4010" stroke-width="1.1" fill="none" opacity="0.35"/>
+          <!-- Thumb nail -->
+          <ellipse cx="222" cy="241" rx="3" ry="2" fill="rgba(240,210,185,0.55)" transform="rotate(-20,222,241)"/>
+
+          <!-- Palm shadow overlay for depth -->
+          <ellipse cx="225" cy="255" rx="24" ry="20" fill="url(#palmShadow)"/>
+
+          <!-- Skin crease lines on back of hand -->
+          <path d="M238,256 Q244,258 249,255" stroke="#8B4A15" stroke-width="0.9" fill="none" opacity="0.3"/>
+          <path d="M234,263 Q240,265 245,262" stroke="#8B4A15" stroke-width="0.8" fill="none" opacity="0.25"/>
+
+          <!-- Staff edge re-draw over hand for overlap realism -->
+          <rect x="134" y="220" width="5"  height="80" fill="#3D1A05" opacity="0.6"/>
+          <rect x="151" y="220" width="5"  height="80" fill="rgba(0,0,0,0.5)"/>
+
+          <!-- Bottom border bar -->
+          <rect x="0" y="430" width="300" height="20" fill="#0D0D0D"/>
+          <!-- Author name -->
+          <text x="28" y="423" font-family="'Space Mono', 'Courier New', monospace" font-size="9" letter-spacing="3.5" fill="#6B6258">LONNELL WILLIAMS</text>
+          <!-- Thin top border -->
+          <rect x="0" y="0" width="300" height="3" fill="#C17F59"/>
         </svg>
       </div>
     </div>
