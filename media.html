@@ -27,7 +27,7 @@
   }
 
   /* NAV */
-  .nav {
+  .site-nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
     padding: 0 48px; height: 64px;
     display: flex; align-items: center; justify-content: space-between;
@@ -36,28 +36,28 @@
     border-bottom: 1px solid rgba(242,240,235,0.04);
   }
 
-  .nav-brand {
+  .site-nav-brand {
     display: flex; align-items: center; gap: 14px; text-decoration: none;
   }
 
-  .nav-name {
+  .site-nav-name {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 16px; letter-spacing: 5px; color: var(--off-white);
   }
 
-  .nav-links {
+  .site-nav-links {
     display: flex; align-items: center; gap: 32px; list-style: none;
   }
 
-  .nav-links a {
+  .site-nav-links a {
     font-family: 'Space Mono', monospace; font-size: 10px;
     letter-spacing: 3px; text-transform: uppercase;
     text-decoration: none; color: var(--concrete);
     transition: color 0.3s ease;
   }
 
-  .nav-links a:hover { color: var(--off-white); }
-  .nav-links a.active { color: var(--copper); }
+  .site-nav-links a:hover { color: var(--off-white); }
+  .site-nav-links a.active { color: var(--copper); }
 
   .nav-menu-btn {
     display: none; background: none; border: none; cursor: pointer; padding: 8px;
@@ -266,8 +266,8 @@
   }
 
   @media (max-width: 768px) {
-    .nav { padding: 0 24px; }
-    .nav-links { display: none; }
+    .site-nav { padding: 0 24px; }
+    .site-nav-links { display: none; }
     .nav-menu-btn { display: block; }
     .page-header { padding: 120px 30px 40px; }
     .gallery-section { padding: 0 24px 80px; }
@@ -302,25 +302,25 @@
 <body>
 
 <!-- NAV -->
-<nav class="nav">
-  <a href="/" class="nav-brand">
+<nav class="site-nav">
+  <a href="/" class="site-nav-brand">
     <svg width="28" height="28" viewBox="0 0 240 240" fill="none">
       <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
       <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
       <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/>
     </svg>
-    <span class="nav-name">LONNELL WILLIAMS</span>
+    <span class="site-nav-name">LONNELL WILLIAMS</span>
   </a>
-  <ul class="nav-links">
-    <li><a href="/#about">About</a></li>
-    <li><a href="/speaking.html">Speaking</a></li>
-    <li><a href="/books.html">Books</a></li>
-    <li><a href="/#consulting">Work With Me</a></li>
-    <li><a href="/media.html" class="active">Media</a></li>
-    <li><a href="/#newsletter">Newsletter</a></li>
-    <li><a href="/vantage.html">Vantage</a></li>
-  </ul>
-  <button class="nav-menu-btn" onclick="var l=document.querySelector('.nav-links');l.style.display=l.style.display==='flex'?'none':'flex';l.style.flexDirection='column';l.style.position='fixed';l.style.top='64px';l.style.left='0';l.style.right='0';l.style.background='rgba(13,13,13,0.96)';l.style.padding='24px';l.style.gap='20px';l.style.listStyle='none';">
+  <div class="site-nav-links">
+    <a href="/#about">About</a>
+    <a href="/speaking.html">Speaking</a>
+    <a href="/books.html">Books</a>
+    <a href="/#consulting">Work With Me</a>
+    <a href="/media.html" class="active">Media</a>
+    <a href="/#newsletter">Newsletter</a>
+    <a href="/vantage.html">Vantage</a>
+  </div>
+  <button class="site-nav-btn" onclick="var l=document.querySelector('.site-nav-links');l.classList.toggle('open');">
     <span></span><span></span><span></span>
   </button>
 </nav>
