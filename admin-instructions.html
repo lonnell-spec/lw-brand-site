@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INSTRUCTIONS — Admin Portal — LDW</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--obsidian:#0D0D0D;--warm-black:#1A1714;--copper:#C17F59;--signal:#E85D3A;--off-white:#F2F0EB;--concrete:#8A8A8A;--display:'Bebas Neue',sans-serif;--body:'DM Sans',sans-serif;--mono:'Space Mono',monospace;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--obsidian);color:var(--off-white);font-family:var(--body);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;}
+::selection{background:var(--copper);color:var(--obsidian);}
+.login-overlay{position:fixed;inset:0;z-index:200;background:var(--obsidian);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.4s;}
+.login-overlay.hidden{opacity:0;pointer-events:none;}
+.login-mark{display:flex;align-items:center;gap:12px;margin-bottom:48px;}
+.login-mark span{font-family:var(--display);font-size:18px;letter-spacing:4px;color:var(--off-white);}
+.login-box{width:320px;text-align:center;}
+.login-box h2{font-family:var(--display);font-size:28px;letter-spacing:3px;margin-bottom:32px;}
+.login-box input{width:100%;padding:14px 16px;background:rgba(242,240,235,0.04);border:1px solid rgba(242,240,235,0.08);color:var(--off-white);font-family:var(--body);font-size:14px;margin-bottom:12px;outline:none;}
+.login-box input:focus{border-color:var(--copper);}
+.login-box input::placeholder{color:var(--concrete);}
+.login-btn{width:100%;padding:14px;background:var(--copper);border:none;color:var(--obsidian);font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:background 0.3s;}
+.login-btn:hover{background:var(--signal);}
+.login-error{display:none;color:var(--signal);font-family:var(--mono);font-size:10px;letter-spacing:1px;margin-top:12px;}
+.page-wrap{display:none;}
+.page-wrap.active{display:block;}
+.page-header{display:flex;align-items:center;justify-content:space-between;padding:16px 48px;border-bottom:1px solid rgba(242,240,235,0.04);background:rgba(13,13,13,0.95);}
+.page-header-left{display:flex;align-items:center;gap:20px;}
+.back-btn{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--copper);text-decoration:none;text-transform:uppercase;transition:color 0.3s;}
+.back-btn:hover{color:var(--signal);}
+.page-title-bar{display:flex;align-items:center;gap:12px;}
+.page-title-bar .icon{font-size:20px;}
+.page-title-bar h1{font-family:var(--display);font-size:22px;letter-spacing:3px;}
+.page-title-bar h1 .accent{color:var(--copper);}
+.page-header-right{display:flex;gap:24px;}
+.page-header-right a{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--concrete);text-decoration:none;transition:color 0.3s;}
+.page-header-right a:hover{color:var(--copper);}
+.content{max-width:800px;margin:0 auto;padding:48px;}
+.content h2{font-family:var(--display);font-size:32px;letter-spacing:2px;margin:48px 0 20px;padding-top:24px;border-top:1px solid rgba(242,240,235,0.06);}
+.content h2:first-child{margin-top:0;border-top:none;padding-top:0;}
+.content h2 .accent{color:var(--copper);}
+.content h3{font-family:var(--display);font-size:22px;letter-spacing:2px;margin:32px 0 12px;color:var(--copper);}
+.content p{font-size:14px;color:var(--concrete);margin-bottom:16px;line-height:1.8;}
+.content p strong{color:var(--off-white);font-weight:500;}
+.content code{font-family:var(--mono);font-size:12px;background:rgba(242,240,235,0.04);padding:2px 8px;border-radius:2px;color:var(--copper);}
+.content pre{background:rgba(242,240,235,0.03);padding:20px;margin:16px 0;overflow-x:auto;border:1px solid rgba(242,240,235,0.06);border-radius:2px;}
+.content pre code{background:none;padding:0;font-size:11px;color:var(--off-white);line-height:1.6;}
+.data-table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:13px;}
+.data-table th{font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--copper);text-align:left;padding:10px 12px;border-bottom:1px solid rgba(242,240,235,0.1);}
+.data-table td{padding:10px 12px;border-bottom:1px solid rgba(242,240,235,0.04);color:var(--concrete);font-weight:300;vertical-align:top;}
+.data-table tr:hover td{background:rgba(242,240,235,0.02);}
+.data-table td:first-child{color:var(--off-white);font-weight:400;}
+.color-swatch{display:inline-flex;align-items:center;gap:8px;}
+.color-swatch .swatch{width:20px;height:20px;border-radius:4px;border:1px solid rgba(242,240,235,0.1);display:inline-block;}
+.page-footer{padding:32px 48px;border-top:1px solid rgba(242,240,235,0.06);margin-top:48px;text-align:center;}
+.page-footer span{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(138,138,138,0.3);}
+@media(max-width:768px){.page-header{padding:16px 24px;flex-direction:column;align-items:flex-start;gap:12px;}.content{padding:32px 24px;}}
+</style>
+</head>
+<body>
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-mark"><svg width="28" height="28" viewBox="0 0 240 240" fill="none"><polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/><polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/><polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/></svg><span>LONNELL WILLIAMS</span></div>
+  <div class="login-box"><h2>ADMIN PORTAL<span style="color:var(--copper)">.</span></h2><input type="email" id="loginEmail" placeholder="Email" autocomplete="email"><input type="password" id="loginPass" placeholder="Password" autocomplete="current-password"><button class="login-btn" onclick="attemptLogin()">ENTER</button><div class="login-error" id="loginError">Invalid credentials</div></div>
+</div>
+<div class="page-wrap" id="pageWrap">
+  <header class="page-header">
+    <div class="page-header-left"><a href="/admin.html" class="back-btn">← PORTAL</a><div class="page-title-bar"><span class="icon">📋</span><h1>INSTRUCTIONS<span class="accent">.</span></h1></div></div>
+    <div class="page-header-right"><a href="/">HOME</a><a href="/admin.html">PORTAL</a></div>
+  </header>
+  <div class="content">
+
+    <h2>FOR JADYN &amp; TEAM<span class="accent">.</span></h2>
+    <p>This is a plain-language guide for updating the LDW website. No coding required — just follow the steps.</p>
+
+    <h2>UPDATING THE WEBSITE<span class="accent">.</span></h2>
+    <p><strong>Step 1:</strong> Get the updated file from Claude or Lonnell (it will be an .html file).</p>
+    <p><strong>Step 2:</strong> Go to <a href="https://github.com/lonnell-spec/lw-brand-site" style="color:var(--copper)">github.com/lonnell-spec/lw-brand-site</a> and sign in.</p>
+    <p><strong>Step 3:</strong> Click "Add file" → "Upload files" at the top right.</p>
+    <p><strong>Step 4:</strong> Drag and drop the file. If it has the same name as an existing file, it will replace it.</p>
+    <p><strong>Step 5:</strong> Click the green "Commit changes" button at the bottom.</p>
+    <p><strong>Step 6:</strong> Wait 30 seconds, then check <a href="https://ldw.build" style="color:var(--copper)">ldw.build</a> to confirm.</p>
+
+    <h2>IMPORTANT<span class="accent">.</span></h2>
+    <p><strong>Never rename files.</strong> The homepage is always <code>index.html</code>. The speaking page is always <code>speaking.html</code>. Changing the name will break the site.</p>
+    <p><strong>Never delete files</strong> unless Lonnell tells you to.</p>
+    <p><strong>If something looks wrong,</strong> don't panic. Just message Lonnell or Claude. The previous version can always be restored from GitHub history.</p>
+
+  </div>
+  <footer class="page-footer"><span>&copy; 2026 LONNELL WILLIAMS — ADMIN PORTAL</span></footer>
+</div>
+<script>
+const AUTH_EMAIL='lonnelldwilliams@gmail.com',AUTH_PASS='August11';
+function checkAuth(){if(sessionStorage.getItem('ldw_admin_auth')==='true'){document.getElementById('loginOverlay').classList.add('hidden');document.getElementById('pageWrap').classList.add('active');}}
+function attemptLogin(){const e=document.getElementById('loginEmail').value,p=document.getElementById('loginPass').value;if(e===AUTH_EMAIL&&p===AUTH_PASS){sessionStorage.setItem('ldw_admin_auth','true');document.getElementById('loginOverlay').classList.add('hidden');document.getElementById('pageWrap').classList.add('active');}else{document.getElementById('loginError').style.display='block';}}
+document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')attemptLogin();});
+checkAuth();
+</script>
+</body>
+</html>
