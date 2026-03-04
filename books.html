@@ -129,6 +129,11 @@
     .footer-bottom { border-top: 1px solid rgba(242,240,235,0.04); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
     .footer-legal { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(242,240,235,0.2); }
 
+
+    /* STAFF COVER */
+    .staff-cover-wrap { background: #FAFAF8; border: none; }
+    .staff-cover { width: 100%; height: 100%; }
+    .staff-cover svg { display: block; }
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       .site-nav { padding: 0 20px; }
@@ -234,20 +239,58 @@
       <div class="book-subtitle">Leading Ministry Jesus's Way</div>
       <p class="book-desc">A field guide for ministry leaders who are tired of imitating the world's leadership frameworks. Zag cuts through the noise — drawing directly from how Jesus led, built, and sent. Practical, theological, and unapologetically different.</p>
       <div class="book-actions">
-        <a href="https://zagwithme.com" target="_blank" class="book-btn primary">Get the Book</a>
-        <a href="https://zagwithme.com" target="_blank" class="book-btn">Learn More</a>
+        <a href="#" class="book-btn coming-soon">Coming Soon</a>
       </div>
     </div>
   </div>
 
   <!-- BOOK 3: STAFF -->
   <div class="book-entry">
-    <div class="book-cover-wrap" style="background:var(--warm-black); border:1px solid rgba(242,240,235,0.06); align-items:center; justify-content:center;">
-      <div style="font-family:'Bebas Neue',sans-serif; font-size:11px; letter-spacing:4px; color:rgba(242,240,235,0.08); text-align:center; padding:24px;">IN<br>DEVELOPMENT</div>
+    <div class="book-cover-wrap staff-cover-wrap">
+      <div class="staff-cover">
+        <!-- White bg, arm+hand from right holding wooden staff -->
+        <svg viewBox="0 0 240 360" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+          <!-- White background -->
+          <rect width="240" height="360" fill="#FAFAF8"/>
+          <!-- Title block top -->
+          <text x="24" y="44" font-family="'Bebas Neue', serif" font-size="28" letter-spacing="4" fill="#0D0D0D">THE</text>
+          <text x="24" y="76" font-family="'Bebas Neue', serif" font-size="28" letter-spacing="4" fill="#0D0D0D">STAFF</text>
+          <!-- Thin accent rule under title -->
+          <rect x="24" y="84" width="40" height="2" fill="#C17F59"/>
+          <!-- Wooden staff — vertical rod, slight warmth -->
+          <rect x="108" y="60" width="11" height="260" rx="3" fill="#8B5E3C"/>
+          <rect x="109" y="60" width="3" height="260" rx="2" fill="#A8724A" opacity="0.5"/>
+          <!-- Wood grain lines -->
+          <line x1="110" y1="80"  x2="118" y2="95"  stroke="#6B4226" stroke-width="0.6" opacity="0.4"/>
+          <line x1="110" y1="120" x2="119" y2="138" stroke="#6B4226" stroke-width="0.6" opacity="0.4"/>
+          <line x1="110" y1="165" x2="118" y2="180" stroke="#6B4226" stroke-width="0.6" opacity="0.4"/>
+          <line x1="110" y1="210" x2="119" y2="228" stroke="#6B4226" stroke-width="0.6" opacity="0.4"/>
+          <!-- Staff tip (bottom) -->
+          <ellipse cx="113" cy="322" rx="5" ry="3" fill="#5C3D1E"/>
+          <!-- Arm entering from the right side, hand gripping the staff -->
+          <!-- Forearm / sleeve (dark) -->
+          <path d="M240,155 C210,150 185,158 165,165 C150,170 140,178 135,185 L130,195 C128,200 126,205 127,210 C128,215 132,218 138,216 C145,213 155,205 165,200 C178,193 195,188 215,183 Z" fill="#1A1714"/>
+          <!-- Wrist / skin -->
+          <path d="M130,195 C126,200 124,207 125,213 C126,219 131,222 137,220 L145,215 C150,210 153,203 150,197 Z" fill="#C4956A"/>
+          <!-- Hand gripping staff -->
+          <!-- Palm -->
+          <path d="M125,210 C122,215 121,222 123,228 C125,234 131,236 136,233 C140,230 142,224 140,218 Z" fill="#C4956A"/>
+          <!-- Fingers wrapped around staff -->
+          <path d="M122,218 C118,220 116,225 118,230 C120,234 124,234 127,231 L127,219 Z" fill="#B8845A"/>
+          <path d="M120,224 C117,227 117,232 120,235 C122,237 125,236 126,233 L126,222 Z" fill="#B8845A"/>
+          <path d="M121,230 C119,233 119,237 122,239 C124,240 127,239 127,236 L127,229 Z" fill="#B8845A"/>
+          <!-- Thumb -->
+          <path d="M136,212 C140,208 143,207 145,210 C146,213 144,217 140,219 L135,220 Z" fill="#C4956A"/>
+          <!-- Author name bottom -->
+          <text x="24" y="338" font-family="'Space Mono', monospace" font-size="7" letter-spacing="2.5" fill="#8A8A8A">LONNELL WILLIAMS</text>
+          <!-- Thin bottom bar -->
+          <rect x="0" y="352" width="240" height="8" fill="#0D0D0D"/>
+        </svg>
+      </div>
     </div>
     <div class="book-info">
       <div class="book-badge" style="border-color:rgba(242,240,235,0.1); color:var(--concrete);">In Development</div>
-      <div class="book-title" style="color:var(--off-white);">STAFF<span style="color:var(--signal);">.</span></div>
+      <div class="book-title" style="color:var(--off-white);">THE STAFF<span style="color:var(--signal);">.</span></div>
       <div class="book-subtitle" style="color:var(--concrete);">The Book on Building Teams That Actually Work</div>
       <p class="book-desc">The book for leaders who have scaled fast, hired wrong, and learned the hard way. What it means to build a staff culture that outlasts your best intentions — and your worst moments.</p>
       <div class="book-actions">
@@ -300,7 +343,7 @@
       <div class="footer-col-label">Books</div>
       <a href="/books.html" class="footer-link">Anything, Everything, or Nothing at All</a>
       <a href="/books.html" class="footer-link">Zag: Leading Ministry Jesus's Way</a>
-      <a href="/books.html" class="footer-link">Staff (Coming Soon)</a>
+      <a href="/books.html" class="footer-link">The Staff (In Development)</a>
     </div>
     <div class="footer-col">
       <div class="footer-col-label">Connect</div>
