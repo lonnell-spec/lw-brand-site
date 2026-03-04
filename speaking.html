@@ -1355,7 +1355,7 @@
       msg.style.display = 'none';
 
       try {
-        const { error } = await supabase.from('consulting_inquiries').insert([{
+        const { error } = await supabase.from('speaking_inquiries').insert([{
           name: name,
           email: email,
           organization: org || null,
