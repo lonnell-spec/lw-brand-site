@@ -279,6 +279,24 @@
   @media (max-width: 480px) {
     .gallery-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
   }
+
+  .footer { background: var(--obsidian); padding: 80px 60px 40px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-top { display: grid; grid-template-columns: 1.2fr 0.8fr 0.8fr 1.2fr; gap: 60px; padding-bottom: 60px; border-bottom: 1px solid rgba(242,240,235,0.04); }
+  .footer-col-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); margin-bottom: 20px; }
+  .footer-scripture { font-size: 14px; font-weight: 300; font-style: italic; color: rgba(242,240,235,0.3); line-height: 1.7; margin-bottom: 12px; }
+  .footer-ref { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; color: var(--copper); }
+  .footer-link { display: block; font-size: 13px; font-weight: 300; color: var(--concrete); text-decoration: none; margin-bottom: 12px; transition: color 0.3s ease; }
+  .footer-link:hover { color: var(--off-white); }
+  .footer-social-row { display: flex; gap: 16px; }
+  .footer-social { width: 40px; height: 40px; border: 1px solid rgba(242,240,235,0.06); display: flex; align-items: center; justify-content: center; text-decoration: none; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--concrete); transition: all 0.3s ease; }
+  .footer-social:hover { border-color: var(--copper); color: var(--copper); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 30px; }
+  .footer-brand-text { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 6px; color: rgba(242,240,235,0.08); }
+  .footer-legal { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(242,240,235,0.1); }
+  @media (max-width: 1024px) { .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; } }
+  @media (max-width: 768px) { .footer { padding: 60px 24px 32px; } .footer-top { grid-template-columns: 1fr; gap: 32px; } }
+
 </style>
 </head>
 <body>
@@ -296,7 +314,7 @@
   <ul class="nav-links">
     <li><a href="/#about">About</a></li>
     <li><a href="/speaking.html">Speaking</a></li>
-    <li><a href="/#books">Books</a></li>
+    <li><a href="/books.html">Books</a></li>
     <li><a href="/#consulting">Work With Me</a></li>
     <li><a href="/media.html" class="active">Media</a></li>
     <li><a href="/#newsletter">Newsletter</a></li>
@@ -335,7 +353,43 @@
 
 <!-- FOOTER -->
 <footer class="footer">
-  <div class="footer-text">&copy; 2026 LONNELL WILLIAMS &middot; <a href="/">HOME</a> &middot; <a href="/speaking.html">SPEAKING</a> &middot; <a href="/vantage.html">VANTAGE</a> &middot; <a href="/#consulting">CONTACT</a> &middot; <a href="/admin.html" style="opacity:0.4;">PORTAL</a></div>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-col-label">Foundation</div>
+        <p class="footer-scripture">"The God of heaven will make us prosper, and we his servants will arise and build."</p>
+        <div class="footer-ref">Nehemiah 2:20 — ESV</div>
+      </div>
+      <div>
+        <div class="footer-col-label">Navigate</div>
+        <a href="/#about" class="footer-link">About</a>
+        <a href="/speaking.html" class="footer-link">Speaking</a>
+        <a href="/books.html" class="footer-link">Books</a>
+        <a href="/#consulting" class="footer-link">Work With Me</a>
+        <a href="/#newsletter" class="footer-link">Newsletter</a>
+        <a href="/media.html" class="footer-link">Media</a>
+        <a href="/vantage.html" class="footer-link">Vantage</a>
+        <a href="/admin.html" class="footer-link" style="color:var(--copper);margin-top:4px;">Portal</a>
+      </div>
+      <div>
+        <div class="footer-col-label">Books</div>
+        <a href="/books.html" class="footer-link">Anything, Everything, or Nothing at All</a>
+        <a href="/books.html" class="footer-link">Zag: Leading Ministry Jesus's Way</a>
+      </div>
+      <div>
+        <div class="footer-col-label">Connect</div>
+        <div class="footer-social-row">
+          <a href="https://instagram.com/lonnelldwilliams" target="_blank" class="footer-social">IG</a>
+          <a href="https://youtube.com/@lonnelldwilliams" target="_blank" class="footer-social">YT</a>
+          <a href="https://threads.net/@lonnelldwilliams" target="_blank" class="footer-social">TH</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-brand-text">LONNELL DAWSON WILLIAMS</div>
+      <div class="footer-legal">&copy; 2026 LONNELL WILLIAMS. ALL RIGHTS RESERVED.</div>
+    </div>
+  </div>
 </footer>
 
 <!-- LIGHTBOX -->
