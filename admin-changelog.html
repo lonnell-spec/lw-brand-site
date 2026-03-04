@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Changelog — Admin | LDW</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root { --obsidian: #0D0D0D; --warm-black: #1A1714; --off-white: #F2F0EB; --concrete: #8A8A8A; --copper: #C17F59; --signal: #00E676; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+.site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; background: rgba(13,13,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(242,240,235,0.06); }
+.site-nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--off-white); }
+.site-nav-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 4px; }
+.site-nav-links { display: flex; gap: 32px; align-items: center; }
+.site-nav-links a { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.3s; }
+.site-nav-links a:hover { color: var(--off-white); }
+.site-nav-btn { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.site-nav-btn span { display: block; width: 20px; height: 2px; background: var(--off-white); margin: 4px 0; }
+@media (max-width: 768px) {
+  .site-nav { padding: 0 24px; }
+  .site-nav-links { display: none; position: fixed; top: 64px; left: 0; right: 0; flex-direction: column; background: rgba(13,13,13,0.96); padding: 24px; gap: 20px; }
+  .site-nav-links.open { display: flex; }
+  .site-nav-btn { display: block; }
+}
+.page-wrap { max-width: 860px; margin: 0 auto; padding: 100px 48px 80px; }
+.back-link { display: inline-flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); text-decoration: none; margin-bottom: 48px; transition: color 0.3s; }
+.back-link:hover { color: var(--copper); }
+.page-eyebrow { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--copper); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.page-eyebrow::before { content: '◆'; }
+.page-title { font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 4px; line-height: 1; margin-bottom: 12px; }
+.page-subtitle { font-size: 15px; font-weight: 300; color: var(--concrete); margin-bottom: 56px; line-height: 1.6; }
+.divider { width: 100%; height: 1px; background: rgba(242,240,235,0.06); margin: 40px 0; }
+.release { margin-bottom: 56px; }
+.release-header { display: flex; align-items: baseline; gap: 20px; margin-bottom: 24px; flex-wrap: wrap; }
+.release-version { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 4px; color: var(--off-white); }
+.release-date { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); }
+.release-tag { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border: 1px solid; }
+.tag-major { color: var(--signal); border-color: rgba(0,230,118,0.3); }
+.tag-minor { color: var(--copper); border-color: rgba(193,127,89,0.3); }
+.tag-fix { color: #8A8AFF; border-color: rgba(138,138,255,0.3); }
+.change-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.change-item { display: flex; gap: 16px; align-items: flex-start; padding: 14px 18px; background: var(--warm-black); border: 1px solid rgba(242,240,235,0.04); }
+.change-type { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; min-width: 52px; padding-top: 2px; }
+.type-add { color: var(--signal); }
+.type-fix { color: #8A8AFF; }
+.type-update { color: var(--copper); }
+.type-remove { color: #E03B2F; }
+.change-desc { font-size: 14px; font-weight: 300; color: rgba(242,240,235,0.75); line-height: 1.7; }
+.change-desc strong { color: var(--off-white); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/" class="site-nav-brand">
+    <svg width="28" height="28" viewBox="0 0 240 240" fill="none">
+      <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+      <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
+      <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/>
+    </svg>
+    <span class="site-nav-name">LONNELL WILLIAMS</span>
+  </a>
+  <div class="site-nav-links">
+    <a href="/">Home</a>
+    <a href="/admin.html" style="color:var(--off-white);">← Portal</a>
+  </div>
+  <button class="site-nav-btn" onclick="this.previousElementSibling.classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="page-wrap">
+  <a href="/admin.html" class="back-link">← Back to Portal</a>
+
+  <div class="page-eyebrow">Admin / Changelog</div>
+  <h1 class="page-title">CHANGELOG.</h1>
+  <p class="page-subtitle">Every meaningful change to ldw.build, in order. What shipped, when, and why.</p>
+
+  <div class="divider"></div>
+
+  <!-- MARCH 2026 -->
+  <div class="release">
+    <div class="release-header">
+      <div class="release-version">MARCH 2026</div>
+      <div class="release-date">Mar 4, 2026</div>
+      <span class="release-tag tag-major">Active Sprint</span>
+    </div>
+    <ul class="change-list">
+      <li class="change-item"><span class="change-type type-fix">Fix</span><span class="change-desc"><strong>AENA book cover</strong> — Rebuilt as CSS component; "EVERYTHING" no longer bleeds off-edge at 280px width. Faithful recreation of original cover design.</span></li>
+      <li class="change-item"><span class="change-type type-update">Update</span><span class="change-desc"><strong>AENA description</strong> — Rewrote to reflect actual book origin story and thesis, grounded in manuscript review.</span></li>
+      <li class="change-item"><span class="change-type type-update">Update</span><span class="change-desc"><strong>Substack URL</strong> — Updated from <code>lonnellwilliams.substack.com</code> to <code>buildwithldw.substack.com</code> across index.html and vantage.html.</span></li>
+      <li class="change-item"><span class="change-type type-fix">Fix</span><span class="change-desc"><strong>Media page footer</strong> — Replaced one-liner footer with full 4-column footer matching site standard (navigation, books, connect, scripture).</span></li>
+      <li class="change-item"><span class="change-type type-add">Add</span><span class="change-desc"><strong>Admin pages</strong> — Created 3 missing admin subpages: Quick Start Guide, Notion Setup, and this Changelog.</span></li>
+      <li class="change-item"><span class="change-type type-remove">Remove</span><span class="change-desc"><strong>Dead index files</strong> — Deleted index-2.html, index-3.html, index-4.html, index-5.html from repo (orphaned iteration files).</span></li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- FEB 2026 -->
+  <div class="release">
+    <div class="release-header">
+      <div class="release-version">FEBRUARY 2026</div>
+      <div class="release-date">Feb 2026</div>
+      <span class="release-tag tag-major">Foundation Build</span>
+    </div>
+    <ul class="change-list">
+      <li class="change-item"><span class="change-type type-add">Add</span><span class="change-desc"><strong>VANTAGE dashboard</strong> — Interactive AI Chief of Staff demo panel with 42-agent ecosystem visualization, KPI cards, and calendar intelligence.</span></li>
+      <li class="change-item"><span class="change-type type-add">Add</span><span class="change-desc"><strong>Admin portal</strong> — Full sessionStorage-authenticated admin system with 7 subpages: brand assets, credentials, deployment, integrations, site architecture, social templates, outstanding tasks.</span></li>
+      <li class="change-item"><span class="change-type type-add">Add</span><span class="change-desc"><strong>Speaking page</strong> — Full speaking inquiry page with topic cards, testimonials, and Supabase-connected inquiry form.</span></li>
+      <li class="change-item"><span class="change-type type-add">Add</span><span class="change-desc"><strong>Books page</strong> — Dedicated books landing with AENA and Zag entries, Staff teaser, and Apple-style scroll animations.</span></li>
+      <li class="change-item"><span class="change-type type-add">Add</span><span class="change-desc"><strong>llms.txt + robots.txt</strong> — AI crawler optimization (GEO) and sitemap configuration deployed.</span></li>
+      <li class="change-item"><span class="change-type type-add">Add</span><span class="change-desc"><strong>Supabase integration</strong> — Newsletter signups, speaking inquiries, Instagram grid, and photo gallery all routed through Supabase Edge Functions.</span></li>
+      <li class="change-item"><span class="change-type type-update">Update</span><span class="change-desc"><strong>Homepage</strong> — Broken-grid book layout, enlarged VANTAGE section, masonry content grid, social media typography templates, animated hero.</span></li>
+      <li class="change-item"><span class="change-type type-add">Add</span><span class="change-desc"><strong>Metricool analytics</strong> — Tracking script confirmed installed on all public-facing pages.</span></li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- INITIAL LAUNCH -->
+  <div class="release">
+    <div class="release-header">
+      <div class="release-version">INITIAL LAUNCH</div>
+      <div class="release-date">Late 2025</div>
+      <span class="release-tag tag-minor">v1.0</span>
+    </div>
+    <ul class="change-list">
+      <li class="change-item"><span class="change-type type-add">Add</span><span class="change-desc"><strong>Site goes live</strong> — ldw.build migrated from aena.com. Single-file static HTML architecture established on Vercel + GitHub.</span></li>
+      <li class="change-item"><span class="change-type type-add">Add</span><span class="change-desc"><strong>DNS configuration</strong> — Cloudflare DNS-only with A record (76.76.21.21) and CNAME (cname.vercel-dns.com).</span></li>
+      <li class="change-item"><span class="change-type type-add">Add</span><span class="change-desc"><strong>Design system</strong> — Obsidian, Copper, Signal, Off-White color tokens. Bebas Neue, DM Sans, Space Mono type stack established.</span></li>
+      <li class="change-item"><span class="change-type type-add">Add</span><span class="change-desc"><strong>ZagWithMe.com</strong> — Purchased and pointed to Zag book landing via Cloudflare.</span></li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+  <p style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--concrete); text-align:center;">
+    <a href="/admin.html" style="color:var(--copper); text-decoration:none;">← Portal</a> &nbsp;·&nbsp; Updated with each deployment
+  </p>
+</div>
+
+</body>
+</html>
