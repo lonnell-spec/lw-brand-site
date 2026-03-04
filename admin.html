@@ -89,9 +89,7 @@ body {
   font-family: 'DM Sans', sans-serif; font-size: 14px;
   color: var(--concrete); font-weight: 300; margin-bottom: 40px;
 }
-.login-field {
-  width: 100%; margin-bottom: 16px;
-}
+.login-field { width: 100%; margin-bottom: 16px; }
 .login-field input {
   width: 100%; padding: 14px 16px;
   background: rgba(242,240,235,0.04);
@@ -101,22 +99,18 @@ body {
   transition: border-color 0.3s;
 }
 .login-field input::placeholder { color: var(--concrete); }
-.login-field input:focus {
-  outline: none; border-color: var(--copper);
-}
+.login-field input:focus { outline: none; border-color: var(--copper); }
 .login-btn {
   width: 100%; padding: 14px; margin-top: 8px;
   background: var(--copper); border: none; border-radius: 2px;
   font-family: 'Space Mono', monospace; font-size: 11px;
   letter-spacing: 3px; text-transform: uppercase;
-  color: var(--obsidian); cursor: pointer;
-  transition: background 0.3s;
+  color: var(--obsidian); cursor: pointer; transition: background 0.3s;
 }
 .login-btn:hover { background: var(--copper-light); }
 .login-error {
   font-family: 'DM Sans', sans-serif; font-size: 13px;
-  color: #FF6E6E; margin-top: 16px;
-  display: none;
+  color: #FF6E6E; margin-top: 16px; display: none;
 }
 
 /* === ADMIN DASHBOARD === */
@@ -140,10 +134,18 @@ body {
   color: var(--concrete); font-weight: 300; margin-top: 8px;
 }
 
+/* === SECTION LABELS === */
+.admin-section-label {
+  padding: 32px 48px 12px;
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 5px; text-transform: uppercase;
+  color: var(--copper); opacity: 0.7;
+}
+
 /* === GRID === */
 .admin-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 20px; padding: 40px 48px;
+  gap: 20px; padding: 12px 48px 8px;
   max-width: 1200px;
 }
 .admin-card {
@@ -166,9 +168,7 @@ body {
   transform: translateY(-4px);
   box-shadow: 0 12px 40px rgba(0,0,0,0.4);
 }
-.admin-card-icon {
-  font-size: 32px; margin-bottom: 16px;
-}
+.admin-card-icon { font-size: 32px; margin-bottom: 16px; }
 .admin-card-title {
   font-family: 'Bebas Neue', sans-serif; font-size: 22px;
   letter-spacing: 4px; text-align: center;
@@ -185,6 +185,13 @@ body {
   letter-spacing: 3px; text-transform: uppercase;
   color: var(--concrete); opacity: 0.5;
 }
+/* External cards get a subtle different border */
+.admin-card.external { border-color: rgba(242,240,235,0.04); }
+.admin-card.external::before { background: var(--signal); }
+/* Sync card special */
+.admin-card.sync-card { border-color: rgba(0,230,118,0.15); }
+.admin-card.sync-card::before { background: var(--signal); }
+.admin-card.sync-card .admin-card-icon { color: var(--signal); }
 
 /* === LOGOUT === */
 .admin-footer-bar {
@@ -206,9 +213,10 @@ body {
 }
 
 @media (max-width: 900px) {
-  .admin-grid { grid-template-columns: repeat(2, 1fr); padding: 24px; }
+  .admin-grid { grid-template-columns: repeat(2, 1fr); padding: 12px 24px 8px; }
   .admin-header { padding: 48px 24px 32px; }
   .admin-title { font-size: 36px; }
+  .admin-section-label { padding: 24px 24px 8px; }
   .admin-footer-bar { padding: 24px; flex-direction: column; gap: 16px; }
 }
 @media (max-width: 520px) {
@@ -229,11 +237,8 @@ body {
     </svg>
     <span class="site-nav-name">LONNELL WILLIAMS</span>
   </a>
-  <div class="site-nav-links">
+    <div class="site-nav-links">
     <a href="/">Home</a>
-    <a href="/speaking.html">Speaking</a>
-    <a href="/media.html">Media</a>
-    <a href="/vantage.html">Vantage</a>
   </div>
   <button class="site-nav-btn" onclick="var l=document.querySelector('.site-nav-links');l.classList.toggle('open');">
     <span></span><span></span><span></span>
@@ -262,110 +267,123 @@ body {
   <div class="admin-header">
     <div class="admin-eyebrow">◆ Site Management</div>
     <div class="admin-title">ADMIN PORTAL<span class="accent">.</span></div>
-    <div class="admin-subtitle">Non-public documentation, credentials, and site operations for ldw.build</div>
+    <div class="admin-subtitle">Documentation, operations, and site management for ldw.build</div>
   </div>
 
+  <!-- SECTION: Documentation -->
+  <div class="admin-section-label">◆ Documentation</div>
   <div class="admin-grid">
-
-    <!-- Row 1: Core Documentation -->
-    <a class="admin-card" href="https://www.notion.so/317e09b9c157817da202ed9e0aeef8ca" target="_blank">
+    <a class="admin-card" href="/admin-brand-identity.html">
       <div class="admin-card-icon">🎨</div>
       <div class="admin-card-title">BRAND IDENTITY</div>
       <div class="admin-card-desc">Colors, typography, brand rules</div>
-      <div class="admin-card-type">Notion</div>
+      <div class="admin-card-type">Subpage</div>
     </a>
 
-    <a class="admin-card" href="https://www.notion.so/317e09b9c15781c0b7e7ef9aacca7833" target="_blank">
+    <a class="admin-card" href="/admin-site-architecture.html">
       <div class="admin-card-icon">🏗️</div>
       <div class="admin-card-title">SITE ARCHITECTURE</div>
       <div class="admin-card-desc">Pages, sections, nav structure</div>
-      <div class="admin-card-type">Notion</div>
+      <div class="admin-card-type">Subpage</div>
     </a>
 
-    <a class="admin-card" href="https://www.notion.so/317e09b9c15781c3bfaded0e789487b8" target="_blank">
+    <a class="admin-card" href="/admin-deployment.html">
       <div class="admin-card-icon">🚀</div>
       <div class="admin-card-title">DEPLOYMENT GUIDE</div>
-      <div class="admin-card-desc">How to update & deploy the site</div>
-      <div class="admin-card-type">Notion</div>
+      <div class="admin-card-desc">How to update &amp; deploy the site</div>
+      <div class="admin-card-type">Subpage</div>
     </a>
 
-    <!-- Row 2: Operations -->
-    <a class="admin-card" href="https://www.notion.so/317e09b9c157817c8daad1b15babe16f" target="_blank">
+    <a class="admin-card" href="/admin-social-templates.html">
+      <div class="admin-card-icon">🔥</div>
+      <div class="admin-card-title">SOCIAL TEMPLATES</div>
+      <div class="admin-card-desc">Bold type templates for IG &amp; Threads</div>
+      <div class="admin-card-type">Subpage</div>
+    </a>
+  </div>
+
+  <!-- SECTION: Operations -->
+  <div class="admin-section-label">◆ Operations</div>
+  <div class="admin-grid">
+    <a class="admin-card" href="/admin-credentials.html">
       <div class="admin-card-icon">🔐</div>
-      <div class="admin-card-title">CREDENTIALS & ACCESS</div>
+      <div class="admin-card-title">CREDENTIALS &amp; ACCESS</div>
       <div class="admin-card-desc">Logins, API keys, project IDs</div>
-      <div class="admin-card-type">Notion</div>
+      <div class="admin-card-type">Subpage</div>
     </a>
 
-    <a class="admin-card" href="https://www.notion.so/317e09b9c15781cca3b6c0ccbc667458" target="_blank">
+    <a class="admin-card" href="/admin-integrations.html">
       <div class="admin-card-icon">🔌</div>
       <div class="admin-card-title">INTEGRATIONS MAP</div>
       <div class="admin-card-desc">Data flows, APIs, Edge Functions</div>
-      <div class="admin-card-type">Notion</div>
+      <div class="admin-card-type">Subpage</div>
     </a>
 
-    <a class="admin-card" href="https://www.notion.so/317e09b9c15781d1bd15d330365491c9" target="_blank">
+    <a class="admin-card" href="/admin-outstanding.html">
       <div class="admin-card-icon">☑️</div>
       <div class="admin-card-title">OUTSTANDING ITEMS</div>
       <div class="admin-card-desc">What's still pending</div>
-      <div class="admin-card-type">Notion</div>
+      <div class="admin-card-type">Subpage</div>
+    </a>
+  </div>
+
+  <!-- SECTION: Quick Access -->
+  <div class="admin-section-label">◆ Quick Access</div>
+  <div class="admin-grid">
+    <a class="admin-card" href="/admin-instructions.html">
+      <div class="admin-card-icon">📖</div>
+      <div class="admin-card-title">INSTRUCTIONS</div>
+      <div class="admin-card-desc">Quick-start guide for Jadyn</div>
+      <div class="admin-card-type">Subpage</div>
     </a>
 
-    <!-- Row 3: Tools & Quick Links -->
     <a class="admin-card" href="https://www.notion.so/317e09b9c15781658252d9995668b459" target="_blank">
       <div class="admin-card-icon">📋</div>
-      <div class="admin-card-title">OPERATIONS MANUAL</div>
-      <div class="admin-card-desc">Hub page — all docs in one place</div>
+      <div class="admin-card-title">NOTION WORKSPACE</div>
+      <div class="admin-card-desc">CMS databases &amp; operations manual</div>
       <div class="admin-card-type">Notion</div>
     </a>
 
-    <a class="admin-card" href="https://www.notion.so/317e09b9c157815e95e3dc72468d5a5e" target="_blank">
-      <div class="admin-card-icon">📖</div>
-      <div class="admin-card-title">INSTRUCTIONS ONLY</div>
-      <div class="admin-card-desc">Quick-start guide for Jadyn</div>
-      <div class="admin-card-type">Notion</div>
-    </a>
-
-    <a class="admin-card" href="https://riqdcirsmckubkdfbtoj.supabase.co/functions/v1/sync-notion-content?token=ldw-sync-2026-secure" target="_blank">
+    <a class="admin-card sync-card" href="https://riqdcirsmckubkdfbtoj.supabase.co/functions/v1/sync-notion-content?token=ldw-sync-2026-secure" target="_blank">
       <div class="admin-card-icon">⚡</div>
       <div class="admin-card-title">SYNC NOW</div>
       <div class="admin-card-desc">Push Notion content to site</div>
       <div class="admin-card-type">Supabase</div>
     </a>
+  </div>
 
-    <!-- Row 4: External Platforms -->
-    <a class="admin-card" href="https://github.com/lonnell-spec/lw-brand-site" target="_blank">
+  <!-- SECTION: External Platforms -->
+  <div class="admin-section-label">◆ External Platforms</div>
+  <div class="admin-grid">
+    <a class="admin-card external" href="https://github.com/lonnell-spec/lw-brand-site" target="_blank">
       <div class="admin-card-icon">⌨️</div>
       <div class="admin-card-title">GITHUB REPO</div>
       <div class="admin-card-desc">Source code — upload files here</div>
       <div class="admin-card-type">GitHub</div>
     </a>
 
-    <a class="admin-card" href="https://vercel.com/dashboard" target="_blank">
+    <a class="admin-card external" href="https://vercel.com/dashboard" target="_blank">
       <div class="admin-card-icon">▲</div>
       <div class="admin-card-title">VERCEL DASHBOARD</div>
       <div class="admin-card-desc">Hosting, deployments, domains</div>
       <div class="admin-card-type">Vercel</div>
     </a>
 
-    <a class="admin-card" href="https://supabase.com/dashboard/project/riqdcirsmckubkdfbtoj" target="_blank">
+    <a class="admin-card external" href="https://supabase.com/dashboard/project/riqdcirsmckubkdfbtoj" target="_blank">
       <div class="admin-card-icon">⚙️</div>
       <div class="admin-card-title">SUPABASE</div>
       <div class="admin-card-desc">Database, Edge Functions, storage</div>
       <div class="admin-card-type">Supabase</div>
     </a>
-
   </div>
 
   <div class="admin-footer-bar">
-    <div class="admin-footer-text">ldw.build — Admin Portal — v1.0</div>
+    <div class="admin-footer-text">ldw.build — Admin Portal — v2.0</div>
     <button class="logout-btn" onclick="logout()">Log Out</button>
   </div>
 </div>
 
 <script>
-// Simple client-side auth gate
-// This is NOT secure server-side auth — it's a lightweight lock for a personal admin page
 const VALID_EMAIL = 'lonnelldwilliams@gmail.com';
 const VALID_PASS = 'August11';
 
@@ -396,12 +414,10 @@ function logout() {
   document.getElementById('loginError').style.display = 'none';
 }
 
-// Check session on load
 if (sessionStorage.getItem('ldw_admin') === 'true') {
   showDashboard();
 }
 
-// Enter key submits
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Enter' && document.getElementById('loginScreen').style.display !== 'none') {
     attemptLogin();

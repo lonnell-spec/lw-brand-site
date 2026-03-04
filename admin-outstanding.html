@@ -100,8 +100,9 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
     <ul>
       <li><strong>ConvertKit API Key</strong> &mdash; Add <code>CONVERTKIT_API_KEY</code> to Supabase Edge Function secrets (Dashboard &rarr; Edge Functions &rarr; sync-convertkit &rarr; Secrets). Without this, ConvertKit sync silently skips.</li>
       <li><strong>ConvertKit Vantage Tag</strong> &mdash; Create &ldquo;vantage-waitlist&rdquo; tag in ConvertKit, copy tag ID, add as <code>CK_TAG_VANTAGE_WAITLIST</code> in same secrets panel.</li>
-      <li><strong>Verify YouTube URL</strong> &mdash; Confirm <code>youtube.com/@lonnelldwilliams</code> is correct channel handle.</li>
-      <li><strong>Verify Threads handle</strong> &mdash; Confirm <code>threads.net/@lonnelldwilliams</code> is correct.</li>
+      <li style="color:var(--signal);"><strong>Verify YouTube URL</strong> &mdash; Updated to <code>youtube.com/@AnyEveryOrNothingAtAll</code> &#10003;</li>
+      <li style="color:var(--signal);"><strong>Verify Threads handle</strong> &mdash; Updated to <code>threads.com/@lonnelldwilliams</code> &#10003;</li>
+      <li><strong>Substack URL</strong> &mdash; Provide your Substack publication URL (e.g., <code>yourname.substack.com</code>) so newsletter form can be rewired to subscribe directly there.</li>
     </ul>
 
     <hr>
@@ -120,6 +121,32 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
     <ul>
       <li><strong>Vantage waitlist on vantage.html</strong> &mdash; Homepage waitlist is live, but the dedicated product page needs its own prominent version.</li>
       <li><strong>Build sales funnel</strong> &mdash; Full funnel from content &rarr; lead magnet &rarr; email sequence &rarr; offer. Scope TBD.</li>
+      <li><strong>Newsletter &rarr; Substack only</strong> &mdash; Reroute newsletter subscribe form to Substack (not ConvertKit). Supabase keeps backup record, then redirect to Substack with email pre-filled. Need Substack URL.</li>
+      <li><strong>Google Workspace for @ldw.build</strong> &mdash; <span style="color:var(--signal);">LIVE</span> &mdash; Custom email domain active. lonnell@ldw.build is operational. Speaking inquiry button updated to mailto:lonnell@ldw.build.</li>
+      <li><strong>Gmail forwarding</strong> &mdash; Forward lonnell@ldw.build to personal email. Google blocking verification on new account &mdash; retry in 24 hrs via Settings &rarr; Forwarding and POP/IMAP &rarr; Add forwarding address.</li>
+      <li><strong>Personal assistant / auto-responder</strong> &mdash; Human or AI-powered assistant who responds to inquiries, speaking requests, and engagement on Lonnell&rsquo;s behalf. Triage, first response, and follow-up coordination.</li>
+      <li><strong>Quote graphics for Instagram</strong> &mdash; Pull quotes from social media strategy, design branded quote cards in Canva/Photoshop (clean typography, LDW brand palette, 1080&times;1350). Batch and post as carousel or series.</li>
+      <li><strong>Vantage &rarr; functional web app</strong> &mdash; Turn Vantage from a coming-soon landing page into a fully functional web application. Architecture, auth, core features, deployment.</li>
+      <li><strong>Mobile-responsive audit &amp; fix</strong> &mdash; Full pass on all 15 pages (7 public + 8 admin) to ensure every layout, form, nav, image, and section works cleanly on mobile. Touch targets, font scaling, overflow, spacing. Test on iPhone and Android viewports.</li>
+      <li><strong>AI-friendly content hub</strong> &mdash; <span style="color:var(--signal);">READY TO DEPLOY</span> &mdash; <code>llms.txt</code>, <code>robots.txt</code>, <code>sitemap.xml</code>, and <code>/content/</code> directory with 6 markdown files (about, speaking, books, consulting, principles, vantage). Push to GitHub to go live.</li>
+    </ul>
+
+    <hr>
+
+    <h1>Systems &amp; Infrastructure</h1>
+    <ul>
+      <li><strong>Claude Project folder</strong> &mdash; Move all ldw.build conversations into a dedicated Claude Project so nothing is lost. Centralized context, persistent history, no orphaned chats.</li>
+      <li><strong>Custom skills from our conversations</strong> &mdash; Extract patterns, decisions, and standards from our build sessions into reusable Claude Skills (site architecture, deployment, brand standards, content rules). Institutional knowledge that persists.</li>
+    </ul>
+
+    <hr>
+
+    <h1>AI Content &amp; Social Team</h1>
+    <ul>
+      <li><strong>AI content team</strong> &mdash; Automated system that creates content in Lonnell&rsquo;s voice across all platforms. Pulls from brand voice skill, content strategy, and social media playbook. Drafts posts, reels, carousels, newsletters.</li>
+      <li><strong>Auto-post to IG, social, and Substack</strong> &mdash; Automation pipeline that publishes approved content on Lonnell&rsquo;s behalf. Create &rarr; review &rarr; schedule &rarr; post. Integrates with ManyChat, Meta API, Substack API.</li>
+      <li><strong>AI comment responder</strong> &mdash; AI agent that monitors and responds to comments across IG, YouTube, Threads, and Substack in Lonnell&rsquo;s voice. Engages community, answers questions, flags important conversations for personal follow-up.</li>
+      <li><strong>Content page management</strong> &mdash; AI team that keeps ldw.build content pages (content hub, media, speaking) updated automatically. New sermon clips, podcast episodes, and press mentions flow in without manual intervention.</li>
     </ul>
 
     <hr>
@@ -139,16 +166,4 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
       <li style="color:var(--signal);">&#10003; Vantage waitlist on homepage (Supabase + ConvertKit)</li>
       <li style="color:var(--signal);">&#10003; Dead link cleanup (all footer socials verified, book buttons &rarr; Coming Soon)</li>
       <li style="color:var(--signal);">&#10003; Brand assets exported (4 logos + 6 book covers)</li>
-      <li style="color:var(--signal);">&#10003; Instagram column fix (resolved in Edge Function v16)</li>
-      <li style="color:var(--signal);">&#10003; Photo Gallery DB ID updated (resolved in Edge Function v16)</li>
-    </ul>
-
-  </div>
-  <div class="admin-sub-footer">
-    <a href="/admin.html">&larr; Portal</a>
-    <span>ldw.build &mdash; Admin</span>
-  </div>
-</div>
-<script>if(sessionStorage.getItem('ldw_admin')!=='true'){window.location.href='/admin.html';}</script>
-</body>
-</html>
+      <li sty
