@@ -2178,7 +2178,7 @@
       <p class="newsletter-desc">Weekly insights on leadership, systems, building, and the operational side of doing extraordinary things. No fluff. No "seasons." Just the instruction: arise and build.</p>
       <div class="newsletter-email" id="newsletter-subscribe-form">
         <input type="email" id="newsletter-email-input" placeholder="Your email address" required>
-        <button type="button" id="newsletter-subscribe-btn">Subscribe</button>
+        <button type="button" id="newsletter-subscribe-btn">Subscribe on Substack</button>
       </div>
       <div id="newsletter-subscribe-msg" style="display:none; margin-top:8px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:1px; text-align:center;"></div>
       <div class="thank-you-box" id="newsletter-thank-you" style="max-width:500px; margin:12px auto 0;">
@@ -2295,36 +2295,24 @@
 
       setLoading(btnEl, true);
       try {
-        const { data, error } = await supabase
+        // Save to Supabase as backup record
+        await supabase
           .from('newsletter_subscribers')
-          .insert([{ email: email.toLowerCase(), source: source }]);
+          .insert([{ email: email.toLowerCase(), source: source }])
+          .catch(function() {}); // non-blocking — don't fail on duplicate
 
-        // Also sync to ConvertKit (fire-and-forget)
-        fetch(SUPABASE_URL + '/functions/v1/sync-convertkit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email.toLowerCase(), source: source })
-        }).catch(function(e) { console.log('ConvertKit sync:', e.message); });
+        // Show thank-you state
+        inputEl.style.display = 'none';
+        btnEl.style.display = 'none';
+        msgEl.style.display = 'none';
+        var tyBox = document.getElementById(source === 'hero' ? 'hero-thank-you' : 'newsletter-thank-you');
+        if (tyBox) { tyBox.style.display = 'block'; }
 
-        if (error) {
-          if (error.code === '23505') {
-            showMsg(msgEl, "You're already on the list. Welcome back.", false);
-            inputEl.style.display = 'none';
-            btnEl.style.display = 'none';
-            // Show thank you box for returning subscribers too
-            var tyBox = document.getElementById(source === 'hero' ? 'hero-thank-you' : 'newsletter-thank-you');
-            if (tyBox) { tyBox.style.display = 'block'; }
-          } else {
-            throw error;
-          }
-        } else {
-          inputEl.style.display = 'none';
-          btnEl.style.display = 'none';
-          msgEl.style.display = 'none';
-          // Show thank you box
-          var tyBox = document.getElementById(source === 'hero' ? 'hero-thank-you' : 'newsletter-thank-you');
-          if (tyBox) { tyBox.style.display = 'block'; }
-        }
+        // Redirect to Substack after brief delay
+        setTimeout(function() {
+          window.open('https://substack.com/@buildwithldw', '_blank');
+        }, 800);
+
       } catch (err) {
         console.error('Subscribe error:', err);
         showMsg(msgEl, 'Something went wrong. Try again.', true);
