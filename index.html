@@ -1816,20 +1816,22 @@
       <div class="section-desc" style="color:var(--concrete);">Same author. Different universes. What it costs to lead, build, and commit without reservation.</div>
 
       <div class="books-staggered">
+
+        <!-- ── BOOK 1: AENA ── -->
         <div class="book-row left">
           <div class="book-cover-wrap">
-          <div class="aena-cover">
-            <div class="aena-band aena-cyan"><span>ANYTHING</span></div>
-            <div class="aena-band aena-yellow"><span>EVERYTHING</span></div>
-            <div class="aena-band aena-teal"><span>NOTHING<em>.</em></span></div>
-            <div class="aena-band aena-black">
-              <small>OR</small>
-              <strong>AT ALL</strong>
-              <span class="mono">LONNELL WILLIAMS</span>
+            <div class="aena-cover">
+              <div class="aena-band aena-cyan"><span>ANYTHING</span></div>
+              <div class="aena-band aena-yellow"><span>EVERYTHING</span></div>
+              <div class="aena-band aena-teal"><span>NOTHING<em>.</em></span></div>
+              <div class="aena-band aena-black">
+                <small>OR</small>
+                <strong>AT ALL</strong>
+                <span class="mono">LONNELL WILLIAMS</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="book-meta">
+          <div class="book-meta">
             <div class="book-badge" style="border-color:rgba(31,170,189,0.3); color:var(--aena-cyan);">Coming Soon</div>
             <h3 style="color:var(--aena-yellow);">ANYTHING,<br>EVERYTHING<span style="color:var(--aena-red)">.</span></h3>
             <div class="book-subtitle" style="color:var(--aena-cyan);">Or Nothing at All</div>
@@ -1841,6 +1843,7 @@
           </div>
         </div>
 
+        <!-- ── BOOK 2: ZAG ── -->
         <div class="book-row right">
           <div class="book-meta" style="text-align:right;">
             <div class="book-badge">Now Available</div>
@@ -1848,48 +1851,44 @@
             <div class="book-subtitle">Leading Ministry Jesus's Way</div>
             <p>Everyone wants the zag. Nobody wants the discipline it takes to get there. Being Holy Spirit-led means learning when to pump the brakes, how to ask the right questions, and where to listen before you move. This is the operator's guide to identifying the moments that demand disruption — and actually applying it. Not theory. Process. The kind that turns obedience into ministry creativity.</p>
             <div class="book-cta-row" style="margin-top:28px; justify-content:flex-end;">
-              
               <a href="/books.html" class="book-cta-link">View All Books →</a>
             </div>
           </div>
           <div class="book-cover-wrap">
-          <div class="zag-cover">
-            <div class="zag-top-bar"></div>
-            <div class="zag-main">
-              <div class="zag-word">ZAG<span class="dot">.</span></div>
-              <div class="zag-rule"></div>
-              <div class="zag-sub">LEADING MINISTRY<br>JESUS'S WAY</div>
+            <div class="zag-cover">
+              <div class="zag-top-bar"></div>
+              <div class="zag-main">
+                <div class="zag-word">ZAG<span class="dot">.</span></div>
+                <div class="zag-rule"></div>
+                <div class="zag-sub">LEADING MINISTRY<br>JESUS'S WAY</div>
+              </div>
+              <div class="zag-author">LONNELL WILLIAMS</div>
             </div>
-            <div class="zag-author">LONNELL WILLIAMS</div>
           </div>
         </div>
-          </div>
-        </div>
-      </div>
 
+        <!-- ── BOOK 3: THE STAFF ── -->
         <div class="book-row left">
           <div class="book-cover-wrap staff-cover-wrap">
-          <div class="staff-css-cover">
-            <div class="staff-top-band">
-              <span class="staff-top-label">IN DEVELOPMENT</span>
-            </div>
-            <div class="staff-cover-body">
-              <div class="staff-the-word">The</div>
-              <div class="staff-letter-tower">
-                <span class="staff-letter" style="color:#C17F59">S</span>
-                <span class="staff-letter" style="color:#E85D3A">T</span>
-                <span class="staff-letter" style="color:#1C3A28">A</span>
-                <span class="staff-letter" style="color:#1FAABD">F</span>
-                <span class="staff-letter" style="color:#0D0D0D">F</span>
+            <div class="staff-css-cover">
+              <div class="staff-top-band">
+                <span class="staff-top-label">IN DEVELOPMENT</span>
+              </div>
+              <div class="staff-cover-body">
+                <div class="staff-the-word">The</div>
+                <div class="staff-letter-tower">
+                  <span class="staff-letter" style="color:#C17F59">S</span>
+                  <span class="staff-letter" style="color:#E85D3A">T</span>
+                  <span class="staff-letter" style="color:#1C3A28">A</span>
+                  <span class="staff-letter" style="color:#1FAABD">F</span>
+                  <span class="staff-letter" style="color:#0D0D0D">F</span>
+                </div>
+              </div>
+              <div class="staff-cover-bottom">
+                <span class="staff-author-name">LONNELL WILLIAMS</span>
+                <div class="staff-red-dot"></div>
               </div>
             </div>
-            <div class="staff-cover-bottom">
-              <span class="staff-author-name">LONNELL WILLIAMS</span>
-              <div class="staff-red-dot"></div>
-            </div>
-          </div>
-        </div>
-        </div>
           </div>
           <div class="book-meta">
             <div class="book-badge" style="border-color:rgba(193,127,89,0.3); color:var(--copper);">In Development</div>
@@ -1902,9 +1901,13 @@
             </div>
           </div>
         </div>
-    </div>
-  </div>
 
+      </div><!-- /books-staggered -->
+    </div><!-- /section-inner -->
+  </div><!-- /section -->
+
+    HTMLEOF
+echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
 
     <!-- ===== CONSULTING ===== -->
   <div class="section-dark section-full" id="consulting">
