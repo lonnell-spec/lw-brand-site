@@ -488,6 +488,29 @@
     gap: 32px;
   }
 
+  .formats-scroll-outer {
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0 60px 48px;
+    cursor: grab;
+  }
+  .formats-scroll-outer:active { cursor: grabbing; }
+  .formats-scroll-outer::-webkit-scrollbar { display: none; }
+
+  .formats-scroll-track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    padding-bottom: 8px;
+  }
+
+  .formats-scroll-track .format-card {
+    width: 320px;
+    flex-shrink: 0;
+  }
+
   .format-card {
     padding: 48px 36px;
     background: rgba(242,240,235,0.02);
@@ -944,16 +967,16 @@
 <div class="cred-bar reveal d1">
   <div class="cred-bar-inner">
     <div class="cred-item">
-      <div class="cred-number">50+</div>
+      <div class="cred-number">500+</div>
       <div class="cred-label">Staff Led</div>
     </div>
     <div class="cred-item">
-      <div class="cred-number">3</div>
-      <div class="cred-label">Books Written</div>
+      <div class="cred-number">4</div>
+      <div class="cred-label">Campuses Launched</div>
     </div>
     <div class="cred-item">
-      <div class="cred-number">13→50</div>
-      <div class="cred-label">Scaled in 6 Months</div>
+      <div class="cred-number">$8-Fig</div>
+      <div class="cred-label">Budget Managed</div>
     </div>
     <div class="cred-item">
       <div class="cred-number">M.DIV</div>
@@ -1068,6 +1091,19 @@
         </div>
       </div>
     </div>
+
+    <div class="topic-row reveal d7">
+      <div class="topic-num">07</div>
+      <div class="topic-content">
+        <div class="topic-name">BRING YOUR TOPIC<span class="dot">.</span></div>
+        <div class="topic-desc">Have a vision for what your audience needs to hear? Bring it. Every engagement is built around your moment, your people, and your mission — not a pre-packaged message. If it matters to your organization, we can build a session around it.</div>
+        <div class="topic-tags">
+          <span class="topic-tag">Custom</span>
+          <span class="topic-tag">Any Audience</span>
+          <span class="topic-tag">Any Format</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1077,7 +1113,9 @@
   <div class="formats-inner">
     <div class="formats-label">Engagement Formats</div>
     <div class="formats-title">HOW WE WORK TOGETHER<span class="accent">.</span></div>
-    <div class="formats-grid">
+  </div>
+  <div class="formats-scroll-outer">
+    <div class="formats-scroll-track">
 
       <div class="format-card">
         <div class="format-icon">FORMAT 01</div>
@@ -1090,14 +1128,35 @@
         <div class="format-icon">FORMAT 02</div>
         <div class="format-name">WORKSHOP</div>
         <div class="format-desc">Interactive, hands-on sessions where your team leaves with actual tools. Frameworks, templates, and action plans — not just notes. 2–4 hours with breakout components.</div>
-        <div class="format-detail">Leadership Teams · Staff Training · Retreats</div>
+        <div class="format-detail">Leadership Teams · Staff Training</div>
       </div>
 
       <div class="format-card">
         <div class="format-icon">FORMAT 03</div>
-        <div class="format-name">INTENSIVE</div>
+        <div class="format-name">LEADERSHIP INTENSIVE</div>
         <div class="format-desc">Multi-day deep dives into organizational infrastructure, ministry operations, or leadership development. This is consulting dressed as teaching. You leave with a strategic plan.</div>
         <div class="format-detail">Executive Teams · Pastoral Staff · Organizations</div>
+      </div>
+
+      <div class="format-card">
+        <div class="format-icon">FORMAT 04</div>
+        <div class="format-name">RETREAT</div>
+        <div class="format-desc">Full or multi-day retreat facilitation for leadership teams that need to step back, think bigger, and return aligned. Strategy, culture, and clarity — in the same room.</div>
+        <div class="format-detail">Senior Leaders · Boards · Ministry Teams</div>
+      </div>
+
+      <div class="format-card">
+        <div class="format-icon">FORMAT 05</div>
+        <div class="format-name">EXECUTIVE LEADERSHIP MEETING</div>
+        <div class="format-desc">Targeted sessions for C-suite and executive leadership teams. High-stakes, low-noise. We get in, address the real issues, and build the framework to move forward with clarity.</div>
+        <div class="format-detail">C-Suite · Executive Pastors · Directors</div>
+      </div>
+
+      <div class="format-card">
+        <div class="format-icon">FORMAT 06</div>
+        <div class="format-name">COACHING</div>
+        <div class="format-desc">One-on-one or small-group coaching for leaders carrying disproportionate weight. Direct, practical, and built around your specific context. Not theory — operational reality.</div>
+        <div class="format-detail">Individual Leaders · CEO / XP · Cohorts</div>
       </div>
 
     </div>
@@ -1194,12 +1253,12 @@
         <a href="/media.html" class="footer-link">Media</a>
         <a href="/#newsletter" class="footer-link">Newsletter</a>
         <a href="/vantage.html" class="footer-link">Vantage</a>
-        <a href="/admin.html" class="footer-link" style="color:var(--concrete);opacity:0.5;font-size:10px;margin-top:12px;">Portal</a>
+        <a href="/admin.html" class="footer-link" style="color:var(--copper);margin-top:4px;">Portal</a>
       </div>
       <div>
         <div class="footer-col-label">Books</div>
-        <a href="/#books" class="footer-link">Zag: Leading Ministry Jesus's Way</a>
         <a href="/#books" class="footer-link">Anything, Everything, or Nothing at All</a>
+        <a href="/#books" class="footer-link">Zag: Leading Ministry Jesus's Way</a>
       </div>
       <div>
         <div class="footer-col-label">Connect</div>
@@ -1314,5 +1373,26 @@
 
 <!-- Metricool Tracking -->
 <script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"f78668ba20b7252b1560decfc42715d4"})});</script>
+<script>
+  // Drag-to-scroll for formats strip
+  (function() {
+    const el = document.querySelector('.formats-scroll-outer');
+    if (!el) return;
+    let isDown = false, startX, scrollLeft;
+    el.addEventListener('mousedown', e => {
+      isDown = true;
+      startX = e.pageX - el.offsetLeft;
+      scrollLeft = el.scrollLeft;
+    });
+    el.addEventListener('mouseleave', () => isDown = false);
+    el.addEventListener('mouseup', () => isDown = false);
+    el.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - el.offsetLeft;
+      el.scrollLeft = scrollLeft - (x - startX) * 1.5;
+    });
+  })();
+</script>
 </body>
 </html>
