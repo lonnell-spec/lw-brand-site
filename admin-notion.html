@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notion Setup — Admin | LDW</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root { --obsidian: #0D0D0D; --warm-black: #1A1714; --off-white: #F2F0EB; --concrete: #8A8A8A; --copper: #C17F59; --signal: #00E676; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+.site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; background: rgba(13,13,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(242,240,235,0.06); }
+.site-nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--off-white); }
+.site-nav-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 4px; }
+.site-nav-links { display: flex; gap: 32px; align-items: center; }
+.site-nav-links a { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.3s; }
+.site-nav-links a:hover { color: var(--off-white); }
+.site-nav-btn { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.site-nav-btn span { display: block; width: 20px; height: 2px; background: var(--off-white); margin: 4px 0; }
+@media (max-width: 768px) {
+  .site-nav { padding: 0 24px; }
+  .site-nav-links { display: none; position: fixed; top: 64px; left: 0; right: 0; flex-direction: column; background: rgba(13,13,13,0.96); padding: 24px; gap: 20px; }
+  .site-nav-links.open { display: flex; }
+  .site-nav-btn { display: block; }
+}
+.page-wrap { max-width: 860px; margin: 0 auto; padding: 100px 48px 80px; }
+.back-link { display: inline-flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); text-decoration: none; margin-bottom: 48px; transition: color 0.3s; }
+.back-link:hover { color: var(--copper); }
+.page-eyebrow { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--copper); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.page-eyebrow::before { content: '◆'; }
+.page-title { font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 4px; line-height: 1; margin-bottom: 12px; }
+.page-subtitle { font-size: 15px; font-weight: 300; color: var(--concrete); margin-bottom: 56px; line-height: 1.6; }
+.divider { width: 100%; height: 1px; background: rgba(242,240,235,0.06); margin: 40px 0; }
+.section-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--copper); margin-bottom: 20px; }
+.section-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; color: var(--off-white); margin-bottom: 16px; }
+.body-text { font-size: 15px; font-weight: 300; color: rgba(242,240,235,0.75); line-height: 1.85; margin-bottom: 16px; }
+.db-table { width: 100%; border-collapse: collapse; margin: 24px 0 40px; }
+.db-table th { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); text-align: left; padding: 12px 16px; border-bottom: 1px solid rgba(193,127,89,0.2); }
+.db-table td { font-size: 13px; font-weight: 300; color: rgba(242,240,235,0.7); padding: 14px 16px; border-bottom: 1px solid rgba(242,240,235,0.04); vertical-align: top; line-height: 1.6; }
+.db-table tr:hover td { background: rgba(242,240,235,0.02); }
+.status-dot { display: inline-flex; align-items: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; }
+.dot-green::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--signal); }
+.dot-yellow::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #F5C842; }
+.dot-red::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #E03B2F; }
+.tip-block { background: rgba(193,127,89,0.05); border: 1px solid rgba(193,127,89,0.15); border-left: 3px solid var(--copper); padding: 20px 24px; margin: 24px 0; }
+.tip-label { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 4px; text-transform: uppercase; color: var(--copper); margin-bottom: 8px; }
+.tip-text { font-size: 14px; font-weight: 300; color: rgba(242,240,235,0.7); line-height: 1.75; }
+.step-list { list-style: none; display: flex; flex-direction: column; gap: 20px; margin-bottom: 40px; }
+.step-item { display: flex; gap: 20px; align-items: flex-start; }
+.step-num { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: var(--copper); min-width: 28px; line-height: 1.2; }
+.step-body { font-size: 15px; font-weight: 300; color: rgba(242,240,235,0.75); line-height: 1.8; }
+.step-body strong { color: var(--off-white); font-weight: 600; }
+@media (max-width: 768px) { .page-wrap { padding: 88px 24px 60px; } }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/" class="site-nav-brand">
+    <svg width="28" height="28" viewBox="0 0 240 240" fill="none">
+      <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+      <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
+      <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/>
+    </svg>
+    <span class="site-nav-name">LONNELL WILLIAMS</span>
+  </a>
+  <div class="site-nav-links">
+    <a href="/">Home</a>
+    <a href="/admin.html" style="color:var(--off-white);">← Portal</a>
+  </div>
+  <button class="site-nav-btn" onclick="this.previousElementSibling.classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="page-wrap">
+  <a href="/admin.html" class="back-link">← Back to Portal</a>
+
+  <div class="page-eyebrow">Admin / Notion</div>
+  <h1 class="page-title">NOTION SETUP.</h1>
+  <p class="page-subtitle">The databases that power dynamic content on ldw.build, their sync status, and how to keep them updated.</p>
+
+  <div class="divider"></div>
+
+  <div class="section-label">Architecture</div>
+  <h2 class="section-title">HOW NOTION CONNECTS TO THE SITE</h2>
+  <p class="body-text">Notion is the source of truth for all dynamic content. The pipeline runs in one direction: Notion → Supabase Edge Function → Supabase database → site reads from Supabase. You update content in Notion, trigger a sync, and the site reflects the change. No code required for content updates.</p>
+
+  <div class="divider"></div>
+
+  <div class="section-label">Databases</div>
+  <h2 class="section-title">ACTIVE DATABASES</h2>
+
+  <table class="db-table">
+    <thead>
+      <tr>
+        <th>Database</th>
+        <th>Powers</th>
+        <th>Rows</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>LDW Site — Photos</strong></td>
+        <td>Media page photo gallery</td>
+        <td>24 entries</td>
+        <td><span class="status-dot dot-green">Synced</span></td>
+      </tr>
+      <tr>
+        <td><strong>LDW Site — Instagram</strong></td>
+        <td>Homepage IG grid (4 posts max)</td>
+        <td>1 test entry</td>
+        <td><span class="status-dot dot-yellow">Needs content</span></td>
+      </tr>
+      <tr>
+        <td><strong>LDW Site — Content Hub</strong></td>
+        <td>Sermon clips, podcast, teaching</td>
+        <td>0 rows</td>
+        <td><span class="status-dot dot-red">Empty — populate</span></td>
+      </tr>
+      <tr>
+        <td><strong>LDW Site — YouTube</strong></td>
+        <td>Media page YouTube section</td>
+        <td>1 entry</td>
+        <td><span class="status-dot dot-green">Synced</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip-block">
+    <div class="tip-label">Duplicate DBs — Action Required</div>
+    <div class="tip-text">There are 4 copies of the Photo Gallery database in Notion. Only 1 is wired to the Edge Function. The other 3 are orphaned. Archive the duplicates and confirm the correct one is named <strong>LDW Site — Photos</strong>.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-label">How to Add Content</div>
+  <h2 class="section-title">UPDATING INSTAGRAM GRID</h2>
+  <ol class="step-list">
+    <li class="step-item"><div class="step-num">01</div><div class="step-body">Open <strong>LDW Site — Instagram</strong> database in Notion.</div></li>
+    <li class="step-item"><div class="step-num">02</div><div class="step-body">Add a new row for each post. Required fields: <strong>Image URL</strong>, <strong>Caption</strong>, <strong>Post Date</strong>, <strong>Post URL</strong>.</div></li>
+    <li class="step-item"><div class="step-num">03</div><div class="step-body">Only the <strong>4 most recent posts</strong> display on the site. Order by date descending.</div></li>
+    <li class="step-item"><div class="step-num">04</div><div class="step-body">Trigger a sync from the Admin Portal → Integrations page.</div></li>
+  </ol>
+
+  <h2 class="section-title">UPDATING CONTENT HUB</h2>
+  <ol class="step-list">
+    <li class="step-item"><div class="step-num">01</div><div class="step-body">Open <strong>LDW Site — Content Hub</strong> database in Notion.</div></li>
+    <li class="step-item"><div class="step-num">02</div><div class="step-body">Add entries for sermon clips, podcast episodes, and teaching content. Required: <strong>Title</strong>, <strong>Type</strong> (sermon/podcast/teaching), <strong>URL</strong>, <strong>Thumbnail</strong>, <strong>Date</strong>.</div></li>
+    <li class="step-item"><div class="step-num">03</div><div class="step-body">Trigger a sync from Admin Portal → Integrations page.</div></li>
+  </ol>
+
+  <div class="divider"></div>
+  <p style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--concrete); text-align:center;">
+    <a href="/admin.html" style="color:var(--copper); text-decoration:none;">← Portal</a> &nbsp;·&nbsp; Last updated: March 2026
+  </p>
+</div>
+
+</body>
+</html>
