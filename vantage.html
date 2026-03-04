@@ -667,7 +667,7 @@ function Vantage() {
     return (
       <div style={{ ...ROOT, padding: 0, opacity: drillIn ? 1 : 0, transition: "opacity 0.3s ease" }}>
         <div style={GRAIN} />
-        <div style={{ width: "100%", maxWidth: 1280, margin: "0 auto", padding: "20px 32px 40px", position: "relative", transform: drillIn ? "translateY(0)" : "translateY(12px)", transition: "transform 0.45s cubic-bezier(0.22,1,0.36,1)" }}>
+        <div style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: "32px 48px 48px", position: "relative", transform: drillIn ? "translateY(0)" : "translateY(12px)", transition: "transform 0.45s cubic-bezier(0.22,1,0.36,1)" }}>
 
           <button onClick={close} style={{ background: "none", border: "none", color: cl.m, cursor: "pointer", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", padding: "8px 0", marginBottom: 12, fontFamily: "inherit", display: "flex", alignItems: "center", gap: 6 }}>
             <span style={{ fontSize: 14 }}>←</span> COMMAND CENTER
@@ -796,7 +796,7 @@ function Vantage() {
   return (
     <div style={ROOT}>
       <div style={GRAIN} />
-      <div style={{ width: "100%", maxWidth: 1280, margin: "0 auto", padding: "20px 32px 12px", position: "relative", opacity: vis ? 1 : 0, transform: vis ? "translateY(0)" : "translateY(12px)", transition: "all 0.5s cubic-bezier(0.22,1,0.36,1)" }}>
+      <div style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: "32px 48px 24px", position: "relative", opacity: vis ? 1 : 0, transform: vis ? "translateY(0)" : "translateY(12px)", transition: "all 0.6s cubic-bezier(0.22,1,0.36,1)" }}>
 
         {/* Header */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 2 }}>
@@ -813,7 +813,7 @@ function Vantage() {
 
         {/* ─── PULSE BAR ─── */}
         <div style={{
-          display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8, marginBottom: 16,
+          display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12, marginBottom: 20,
           animation: vis ? "vS 0.5s ease 0.08s both" : "none",
         }}>
           {pulse.map((p, i) => (
@@ -868,37 +868,38 @@ function Vantage() {
         </div>
 
         {/* ─── CARD GRID ─── */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 12 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
           {cards.map((card, i) => {
             const cl = CC[card.id] || CC.ops;
             const hot = card.urgency === "hot", warn = card.urgency === "warning";
             return (
               <button key={card.id + biz} onClick={() => open(card)} style={{
-                background: B.card, borderRadius: 14, padding: 0,
+                background: B.card, borderRadius: 16, padding: 0,
                 border: `1px solid ${hot ? `${B.red}33` : warn ? `${B.amber}22` : B.border}`,
                 cursor: "pointer", textAlign: "left", color: B.text, fontFamily: "inherit",
                 position: "relative", overflow: "hidden",
-                transition: "all 0.35s cubic-bezier(0.22,1,0.36,1)",
-                animation: vis ? `vS 0.5s cubic-bezier(0.22,1,0.36,1) ${0.2 + i * 0.06}s both` : "none",
+                transition: "all 0.4s cubic-bezier(0.22,1,0.36,1)",
+                animation: vis ? `vS 0.55s cubic-bezier(0.22,1,0.36,1) ${0.15 + i * 0.1}s both` : "none",
+                minHeight: 200,
               }}
-              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px) scale(1.005)"; e.currentTarget.style.boxShadow = `0 12px 32px rgba(0,0,0,0.35), 0 0 0 1px ${cl.b}`; }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-6px) scale(1.008)"; e.currentTarget.style.boxShadow = `0 20px 48px rgba(0,0,0,0.5), 0 0 0 1px ${cl.b}, 0 0 40px ${cl.d}`; }}
               onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0) scale(1)"; e.currentTarget.style.boxShadow = "none"; }}>
                 <Badge n={card.badges} />
-                <div style={{ height: 2, background: `linear-gradient(90deg, ${cl.m} 0%, transparent 100%)` }} />
-                <div style={{ padding: "20px 20px 16px" }}>
-                  <div style={{ position: "absolute", top: -20, right: -20, width: 80, height: 80, borderRadius: "50%", background: `radial-gradient(circle, ${cl.d} 0%, transparent 70%)`, pointerEvents: "none" }} />
+                <div style={{ height: 3, background: `linear-gradient(90deg, transparent 0%, ${cl.m} 30%, ${cl.b} 70%, transparent 100%)`, animation: "borderGlow 3s ease-in-out infinite", position: "relative" }}><div style={{ position: "absolute", inset: 0, background: `linear-gradient(90deg, transparent, ${cl.m}, transparent)`, filter: "blur(4px)", opacity: 0.6 }} /></div>
+                <div style={{ padding: "24px 24px 20px" }}>
+                  <div style={{ position: "absolute", top: -30, right: -30, width: 120, height: 120, borderRadius: "50%", background: `radial-gradient(circle, ${cl.d} 0%, transparent 70%)`, pointerEvents: "none", animation: "ambientPulse 4s ease-in-out infinite" }} />
                   {hot && <div style={{ position: "absolute", top: 12, right: 12, width: 26, height: 26, borderRadius: "50%", border: `1px solid ${B.red}22`, animation: "pr 2s ease-in-out infinite", pointerEvents: "none" }} />}
 
                   <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 5 }}>
                     <div style={{ width: 3, height: 12, borderRadius: 2, background: cl.m }} />
                     <span style={{ fontSize: 7, fontWeight: 700, letterSpacing: "0.18em", color: B.muted, textTransform: "uppercase" }}>{card.tagline}</span>
                   </div>
-                  <div style={{ fontSize: 20, fontWeight: 800, letterSpacing: "-0.02em", marginBottom: 14, lineHeight: 1, fontFamily: FN }}>{card.label}<span style={{ color: cl.m }}>.</span></div>
+                  <div style={{ fontSize: 22, fontWeight: 800, letterSpacing: "-0.01em", marginBottom: 16, lineHeight: 1, fontFamily: FN }}>{card.label}<span style={{ color: cl.m }}>.</span></div>
 
                   <div style={{ background: B.bg, borderRadius: 10, padding: "14px 14px", marginBottom: 12, borderLeft: `2px solid ${cl.m}55` }}>
                     <div style={{ fontSize: 7, fontWeight: 700, letterSpacing: "0.15em", color: B.muted, marginBottom: 4, textTransform: "uppercase" }}>{card.hero.label}</div>
                     <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
-                      <span style={{ fontSize: 26, fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1 }}>{card.hero.value}</span>
+                      <span style={{ fontSize: 36, fontWeight: 800, letterSpacing: "-0.03em", animation: "countUp 0.6s cubic-bezier(0.22,1,0.36,1) both", lineHeight: 1 }}>{card.hero.value}</span>
                       <span style={{ fontSize: 10, fontWeight: 600, color: card.hero.up === true ? B.green : card.hero.up === false ? B.red : B.dim }}>
                         {card.hero.up === true ? "↑ " : ""}{card.hero.delta}
                       </span>
@@ -935,7 +936,7 @@ function Vantage() {
   );
 }
 
-const ROOT = { minHeight: "100vh", background: B.bg, color: B.text, fontFamily: FN, display: "flex", flexDirection: "column", overflow: "auto", position: "relative", WebkitFontSmoothing: "antialiased" };
+const ROOT = { minHeight: "100vh", background: B.bg, color: B.text, fontFamily: FN, display: "flex", flexDirection: "column", overflow: "auto", position: "relative", WebkitFontSmoothing: "antialiased", paddingTop: "64px" };
 const GRAIN = { position: "fixed", inset: 0, opacity: 0.025, pointerEvents: "none", zIndex: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`, backgroundSize: "128px 128px" };
 const KF = `
   @keyframes vS { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
@@ -944,7 +945,12 @@ const KF = `
   @keyframes shimmer { 0% { background-position:200% 0; } 50% { background-position:0% 0; } 100% { background-position:200% 0; } }
   @keyframes mf1 { 0%,100% { transform:translate(0,0); } 50% { transform:translate(30px,-20px); } }
   @keyframes mf2 { 0%,100% { transform:translate(0,0); } 50% { transform:translate(-25px,15px); } }
-  @keyframes mf3 { 0%,100% { transform:translate(0,0); } 50% { transform:translate(15px,25px); } }
+  @keyframes mf3 { 0%,100% { transform:translate(0,0); } 50% { transform:translate(15px,25px); }
+    @keyframes borderGlow { 0%,100% { opacity:0.6; filter:blur(0px); } 50% { opacity:1; filter:blur(1px); } }
+    @keyframes countUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes cardFloat { 0%,100% { transform:translateY(0px); } 50% { transform:translateY(-3px); } }
+    @keyframes scanLine { 0% { transform:translateY(0%) scaleX(0.3); opacity:0; } 30% { opacity:1; scaleX:1; } 70% { opacity:1; } 100% { transform:translateY(100%) scaleX(0.3); opacity:0; } }
+    @keyframes ambientPulse { 0%,100% { transform:scale(1); opacity:0.3; } 50% { transform:scale(1.4); opacity:0.6; } } }
 `;
 
 ReactDOM.render(<Vantage />, document.getElementById("root"));
