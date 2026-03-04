@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lonnell Williams — Brand Identity System</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300i;1,400i&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --obsidian: #0D0D0D;
+    --warm-black: #1A1714;
+    --copper: #C17F59;
+    --copper-light: #D4A07A;
+    --signal: #E85D3A;
+    --off-white: #F2F0EB;
+    --concrete: #8A8A8A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    background: var(--off-white);
+    color: var(--obsidian);
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    background: var(--obsidian);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 140px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(193,127,89,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-scripture-ref {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 30px;
+    opacity: 0; animation: fadeIn 1s ease 0.3s forwards;
+  }
+
+  .hero-scripture {
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(22px, 3vw, 34px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--off-white);
+    max-width: 700px;
+    line-height: 1.6;
+    margin-bottom: 60px;
+    opacity: 0; animation: fadeIn 1s ease 0.6s forwards;
+  }
+
+  .hero-scripture em { font-style: normal; color: var(--copper); }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(60px, 10vw, 140px);
+    color: var(--off-white);
+    letter-spacing: 8px;
+    line-height: 0.9;
+    margin-bottom: 16px;
+    opacity: 0; animation: fadeIn 1s ease 0.9s forwards;
+  }
+
+  .hero-title .accent { color: var(--signal); }
+
+  .hero-subtitle {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(16px, 2vw, 22px);
+    letter-spacing: 10px;
+    color: var(--concrete);
+    margin-bottom: 50px;
+    opacity: 0; animation: fadeIn 1s ease 1.1s forwards;
+  }
+
+  .hero-tagline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--copper);
+    letter-spacing: 1px;
+    opacity: 0; animation: fadeIn 1s ease 1.3s forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== SECTION FRAMEWORK ===== */
+  .section {
+    padding: 100px 60px;
+  }
+
+  .section.dark { background: var(--obsidian); color: var(--off-white); }
+  .section.warm { background: var(--warm-black); color: var(--off-white); }
+  .section.light { background: var(--off-white); color: var(--obsidian); }
+  .section.copper-bg { background: var(--copper); color: var(--obsidian); }
+
+  .section-number {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 10px;
+  }
+
+  .section.dark .section-number,
+  .section.warm .section-number { color: var(--copper); }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 64px);
+    letter-spacing: 3px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .section-title .accent { color: var(--signal); }
+  .section-title .copper { color: var(--copper); }
+
+  .section-desc {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.8;
+    max-width: 620px;
+    margin-bottom: 50px;
+  }
+
+  .section.dark .section-desc,
+  .section.warm .section-desc { color: var(--concrete); }
+  .section.light .section-desc { color: #666; }
+
+  /* ===== FOUNDATION / PHILOSOPHY ===== */
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 40px;
+  }
+
+  .philosophy-block {
+    padding: 40px;
+    border-left: 3px solid var(--copper);
+  }
+
+  .philosophy-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--concrete);
+    margin-bottom: 14px;
+  }
+
+  .philosophy-text {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--off-white);
+  }
+
+  .philosophy-text strong {
+    font-weight: 700;
+    color: var(--off-white);
+  }
+
+  /* ===== STRENGTHS ===== */
+  .strengths-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .strength-item {
+    padding: 44px 0;
+    border-bottom: 1px solid rgba(13,13,13,0.06);
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 30px;
+    align-items: start;
+  }
+
+  .strength-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: rgba(13,13,13,0.06);
+    line-height: 1;
+  }
+
+  .strength-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(22px, 3vw, 32px);
+    letter-spacing: 2px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .strength-sub {
+    font-size: 14px;
+    font-weight: 300;
+    font-style: italic;
+    color: #777;
+    line-height: 1.6;
+  }
+
+  /* ===== COLOR SYSTEM ===== */
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+  }
+
+  .color-card {
+    padding: 0;
+  }
+
+  .color-swatch {
+    width: 100%;
+    aspect-ratio: 1;
+  }
+
+  .color-info {
+    padding: 20px 16px;
+    background: var(--obsidian);
+  }
+
+  .color-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--off-white);
+    margin-bottom: 4px;
+  }
+
+  .color-hex {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--copper);
+    margin-bottom: 8px;
+  }
+
+  .color-desc {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--concrete);
+    line-height: 1.5;
+  }
+
+  /* ===== TYPOGRAPHY ===== */
+  .type-specimen {
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid rgba(242,240,235,0.06);
+  }
+
+  .type-specimen:last-child { border-bottom: none; }
+
+  .type-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 16px;
+  }
+
+  .type-display {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 56px);
+    letter-spacing: 3px;
+    color: var(--off-white);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .type-body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--off-white);
+    line-height: 1.7;
+    max-width: 600px;
+    margin-bottom: 12px;
+  }
+
+  .type-mono {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--copper);
+    letter-spacing: 2px;
+    line-height: 1.8;
+  }
+
+  .type-note {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--concrete);
+    margin-top: 8px;
+  }
+
+  /* ===== BRAND LANGUAGE ===== */
+  .language-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .catchphrase {
+    padding: 30px;
+    border-left: 3px solid var(--signal);
+  }
+
+  .catchphrase-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+
+  .catchphrase-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  /* ===== LEXICON ===== */
+  .lexicon-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .lexicon-item {
+    padding: 24px;
+    background: rgba(242,240,235,0.03);
+    border: 1px solid rgba(242,240,235,0.06);
+  }
+
+  .lexicon-term {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    color: var(--copper);
+    margin-bottom: 8px;
+  }
+
+  .lexicon-def {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--concrete);
+    line-height: 1.6;
+  }
+
+  /* ===== VOICE & TONE ===== */
+  .voice-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .voice-col {
+    padding: 50px 40px;
+  }
+
+  .voice-col.yes { background: rgba(193,127,89,0.06); border-left: 4px solid var(--copper); }
+  .voice-col.no { background: rgba(138,138,138,0.04); border-left: 4px solid var(--concrete); }
+
+  .voice-col-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .voice-col.yes .voice-col-label { color: var(--copper); }
+  .voice-col.no .voice-col-label { color: var(--concrete); }
+
+  .voice-quote {
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    padding-left: 16px;
+    border-left: 2px solid rgba(13,13,13,0.08);
+  }
+
+  .voice-col.no .voice-quote { text-decoration: line-through; color: #aaa; }
+
+  /* ===== BRAND PRINCIPLES ===== */
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .principle {
+    padding: 40px 30px;
+    border: 1px solid rgba(242,240,235,0.04);
+    position: relative;
+  }
+
+  .principle-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    color: rgba(242,240,235,0.04);
+    position: absolute;
+    top: 12px; right: 16px;
+  }
+
+  .principle-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: var(--off-white);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .principle-desc {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--concrete);
+    line-height: 1.6;
+  }
+
+  /* ===== LOGO OPTIONS ===== */
+  .logo-section-intro {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 60px;
+  }
+
+  .logo-section-intro p {
+    font-size: 14px;
+    font-weight: 300;
+    color: #666;
+    line-height: 1.7;
+  }
+
+  .logo-option {
+    margin-bottom: 60px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid rgba(13,13,13,0.06);
+  }
+
+  .logo-option:last-child { border-bottom: none; }
+
+  .logo-option-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+
+  .logo-option-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--copper);
+  }
+
+  .logo-option-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 3px;
+  }
+
+  .logo-option-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: #666;
+    line-height: 1.7;
+    max-width: 500px;
+    margin-bottom: 30px;
+  }
+
+  .logo-display-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .logo-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .logo-cell.dark { background: var(--obsidian); }
+  .logo-cell.light { background: var(--off-white); border: 1px solid rgba(13,13,13,0.06); }
+  .logo-cell.copper { background: var(--copper); }
+
+  .logo-cell-label {
+    position: absolute;
+    bottom: 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 7px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.4;
+  }
+
+  .lockup-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .lockup-cell {
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .lockup-cell.dark { background: var(--obsidian); }
+  .lockup-cell.light { background: var(--off-white); border: 1px solid rgba(13,13,13,0.06); }
+
+  .lockup-divider-line { width: 28px; height: 2px; }
+  .lockup-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 8px;
+  }
+
+  .lockup-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 7px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--concrete);
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--obsidian);
+    padding: 80px 60px;
+    text-align: center;
+  }
+
+  .footer-scripture {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(242,240,235,0.3);
+    max-width: 500px;
+    margin: 0 auto 24px;
+    line-height: 1.6;
+  }
+
+  .footer-ref {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--copper);
+    margin-bottom: 40px;
+  }
+
+  .footer-line {
+    width: 40px;
+    height: 2px;
+    background: rgba(242,240,235,0.08);
+    margin: 0 auto 30px;
+  }
+
+  .footer-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 10px;
+    color: rgba(242,240,235,0.1);
+    margin-bottom: 8px;
+  }
+
+  .footer-year {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: rgba(242,240,235,0.08);
+  }
+
+  @media (max-width: 900px) {
+    .section { padding: 70px 30px; }
+    .philosophy-grid { grid-template-columns: 1fr; }
+    .color-grid { grid-template-columns: repeat(3, 1fr); }
+    .language-grid { grid-template-columns: 1fr; }
+    .lexicon-grid { grid-template-columns: 1fr; }
+    .voice-split { grid-template-columns: 1fr; }
+    .principles-grid { grid-template-columns: 1fr; }
+    .logo-display-grid { grid-template-columns: 1fr 1fr; }
+    .lockup-strip { grid-template-columns: 1fr; }
+  }
+
+/* ===== SHARED SITE NAV ===== */
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 0 48px; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(13,13,13,0.92);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(242,240,235,0.04);
+}
+.site-nav-brand {
+  display: flex; align-items: center; gap: 14px; text-decoration: none;
+}
+.site-nav-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px; letter-spacing: 5px; color: #F2F0EB;
+}
+.site-nav-links {
+  display: flex; align-items: center; gap: 32px;
+}
+.site-nav-links a {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  text-decoration: none; color: #8A8A8A; transition: color 0.3s ease;
+}
+.site-nav-links a:hover { color: #F2F0EB; }
+.site-nav-btn {
+  display: none; background: none; border: none; cursor: pointer; padding: 8px;
+}
+.site-nav-btn span {
+  display: block; width: 22px; height: 2px; background: #F2F0EB; margin: 5px 0;
+}
+@media (max-width: 768px) {
+  .site-nav { padding: 0 24px; }
+  .site-nav-links {
+    display: none; position: fixed; top: 64px; left: 0; right: 0;
+    background: rgba(13,13,13,0.96); flex-direction: column; padding: 24px; gap: 20px;
+  }
+  .site-nav-links.open { display: flex; }
+  .site-nav-btn { display: block; }
+}
+
+</style>
+</head>
+<body>
+<!-- ===== SITE NAV ===== -->
+<nav class="site-nav">
+  <a href="/" class="site-nav-brand">
+    <svg width="28" height="28" viewBox="0 0 240 240" fill="none">
+      <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+      <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
+      <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/>
+    </svg>
+    <span class="site-nav-name">LONNELL WILLIAMS</span>
+  </a>
+    <div class="site-nav-links">
+    <a href="/#about">About</a>
+    <a href="/speaking.html">Speaking</a>
+    <a href="/#books">Books</a>
+    <a href="/#consulting">Work With Me</a>
+    <a href="/media.html">Media</a>
+    <a href="/#newsletter">Newsletter</a>
+    <a href="/vantage.html">Vantage</a>
+  </div>
+  <button class="site-nav-btn" onclick="var l=document.querySelector('.site-nav-links');l.classList.toggle('open');">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ===================================================================
+     HERO — SCRIPTURAL FOUNDATION
+     =================================================================== -->
+<section class="hero">
+  <div class="hero-scripture-ref">Nehemiah 2:20 — ESV</div>
+  <div class="hero-scripture">
+    "The God of heaven will make us prosper, and we his servants will <em>arise and build</em>."
+  </div>
+  <div class="hero-title">LONNELL<br>WILLIAMS<span class="accent">.</span></div>
+  <div class="hero-subtitle">BRAND IDENTITY SYSTEM</div>
+  <div class="hero-tagline">Anything, Everything, or Nothing at All.</div>
+</section>
+
+
+<!-- ===================================================================
+     01 — FOUNDATION
+     =================================================================== -->
+<section class="section warm">
+  <div class="section-number">01</div>
+  <div class="section-title">FOUNDATION<span class="accent">.</span></div>
+  <div class="section-desc">
+    Nehemiah held a governmental position while carrying a spiritual burden. He didn't 
+    quit his post to go build — he leveraged it. He assessed the ruins at night, alone, 
+    before he told anyone his plan. He organized crews, delegated sections of the wall, 
+    and built while enemies mocked. He finished in 52 days what people said couldn't be done.
+    He was an operator-pastor before that term existed.
+  </div>
+
+  <div class="philosophy-grid">
+    <div class="philosophy-block">
+      <div class="philosophy-label">Brand Philosophy</div>
+      <div class="philosophy-text">
+        The operator who <strong>builds the plane while flying it</strong> — and lands it. 
+        Every system, every structure, every piece of infrastructure exists because someone 
+        decided it should. That someone is usually you.
+      </div>
+    </div>
+    <div class="philosophy-block">
+      <div class="philosophy-label">Core Ethos</div>
+      <div class="philosophy-text">
+        <strong>Build what doesn't exist.</strong> The default response to every gap, every need, 
+        every "we don't have that." I don't do halfway. I don't do "good enough." If it 
+        doesn't exist, I'll create it. If it can't be done, watch me.
+      </div>
+    </div>
+    <div class="philosophy-block">
+      <div class="philosophy-label">Brand Positioning</div>
+      <div class="philosophy-text">
+        At the intersection of <strong>Virgil Abloh</strong> (deconstructed luxury, quotation-mark 
+        redefinition) and <strong>Tyler Perry</strong> (self-built infrastructure, ownership of the 
+        platform). Builder. Operator. Executive Pastor. Author. The person who carries the 
+        weight and still delivers.
+      </div>
+    </div>
+    <div class="philosophy-block">
+      <div class="philosophy-label">The Instruction</div>
+      <div class="philosophy-text">
+        <strong>"Arise and build."</strong> Not "pray about building." Not "consider building." 
+        Not "form a committee about building." Arise. And build. Two verbs. One sentence. 
+        No room for hesitation.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================================================================
+     02 — WHAT I CARRY
+     =================================================================== -->
+<section class="section light">
+  <div class="section-number">02</div>
+  <div class="section-title">WHAT I <span class="copper">CARRY</span><span class="accent">.</span></div>
+  <div class="section-desc">
+    Five attributes that define the operator. Not aspirations — descriptions. 
+    Not potential — present tense.
+  </div>
+
+  <div class="strengths-grid">
+    <div class="strength-item">
+      <div class="strength-num">01</div>
+      <div>
+        <div class="strength-headline">VISION WITHOUT EXECUTION IS A DAYDREAM<span style="color:var(--signal);">.</span></div>
+        <div class="strength-sub">The operator who builds the plane while flying it — and lands it. You don't just dream. You implement. Then you dream bigger.</div>
+      </div>
+    </div>
+    <div class="strength-item">
+      <div class="strength-num">02</div>
+      <div>
+        <div class="strength-headline">THE ARCHITECT WHO SEES FRAMEWORKS WHERE OTHERS SEE CHAOS<span style="color:var(--signal);">.</span></div>
+        <div class="strength-sub">Where others see disorder, you see pipelines, dashboards, processes, organizational clarity. That's scalable leadership DNA.</div>
+      </div>
+    </div>
+    <div class="strength-item">
+      <div class="strength-num">03</div>
+      <div>
+        <div class="strength-headline">WEIGHT WAS MADE TO BE CARRIED<span style="color:var(--signal);">.</span></div>
+        <div class="strength-sub">Hard decisions. High stakes. Spiritual consequences. Financial responsibility. People's destinies. Public pressure. You stand in it.</div>
+      </div>
+    </div>
+    <div class="strength-item">
+      <div class="strength-num">04</div>
+      <div>
+        <div class="strength-headline">WORDS BUILD WORLDS<span style="color:var(--signal);">.</span></div>
+        <div class="strength-sub">Your voice shapes culture, raises standards, creates movement. Your presence shifts the atmosphere before the first word lands.</div>
+      </div>
+    </div>
+    <div class="strength-item" style="border-bottom:none;">
+      <div class="strength-num">05</div>
+      <div>
+        <div class="strength-headline">ASSIGNED, NOT WANDERING<span style="color:var(--signal);">.</span></div>
+        <div class="strength-sub">Purpose makes pain endurable. Calling makes leadership sustainable. You are not searching for purpose. You are executing it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================================================================
+     03 — COLOR SYSTEM
+     =================================================================== -->
+<section class="section" style="padding:0;">
+  <div style="padding:60px 60px 30px;">
+    <div class="section-number">03</div>
+    <div class="section-title">COLOR <span class="copper">SYSTEM</span></div>
+  </div>
+  <div class="color-grid">
+    <div class="color-card">
+      <div class="color-swatch" style="background:var(--obsidian);"></div>
+      <div class="color-info">
+        <div class="color-name">Obsidian</div>
+        <div class="color-hex">#0D0D0D</div>
+        <div class="color-desc">Primary. Foundation. The weight everything is built on.</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:var(--warm-black);"></div>
+      <div class="color-info">
+        <div class="color-name">Warm Black</div>
+        <div class="color-hex">#1A1714</div>
+        <div class="color-desc">Backgrounds. Depth without the coldness of true black.</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:var(--copper);"></div>
+      <div class="color-info">
+        <div class="color-name">Copper</div>
+        <div class="color-hex">#C17F59</div>
+        <div class="color-desc">Accent. Earned, oxidized, handmade. Not gold — copper says "I built this."</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:var(--signal);"></div>
+      <div class="color-info">
+        <div class="color-name">Signal</div>
+        <div class="color-hex">#E85D3A</div>
+        <div class="color-desc">The one thing that breaks the pattern. Use sparingly.</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:var(--off-white); border-bottom:1px solid rgba(13,13,13,0.06);"></div>
+      <div class="color-info">
+        <div class="color-name">Off-White</div>
+        <div class="color-hex">#F2F0EB</div>
+        <div class="color-desc">Breathing room. Space to think. Deconstructed canvas.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================================================================
+     04 — TYPOGRAPHY
+     =================================================================== -->
+<section class="section dark">
+  <div class="section-number">04</div>
+  <div class="section-title">TYPE<span class="copper">FACE</span></div>
+  
+  <div class="type-specimen">
+    <div class="type-label">Display — Headlines & Impact</div>
+    <div class="type-display">BUILD WHAT<br>DOESN'T EXIST.</div>
+    <div class="type-note">Bebas Neue — All Caps / Tracking +2-6px / Used for declarations, not decoration</div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-label">Body — Communication & Narrative</div>
+    <div class="type-body">
+      The operator who builds the plane while flying it — and lands it. Every system, every 
+      structure, every piece of infrastructure exists because someone decided it should. 
+      That someone is usually you.
+    </div>
+    <div class="type-note">DM Sans — 300/400/700 / Leading 1.6-1.8 / The voice that carries the message</div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-label">Mono — Technical, Labels & System</div>
+    <div class="type-mono">
+      CATEGORY: OPERATOR<br>
+      STATUS: BUILDING<br>
+      CAPACITY: UNLIMITED<br>
+      MODE: ARISE AND BUILD
+    </div>
+    <div class="type-note">Space Mono — Labels, data, captions, metadata / The Virgil quotation-mark energy</div>
+  </div>
+</section>
+
+
+<!-- ===================================================================
+     05 — BRAND LANGUAGE
+     =================================================================== -->
+<section class="section light">
+  <div class="section-number">05</div>
+  <div class="section-title">BRAND <span class="copper">LANGUAGE</span></div>
+  <div class="section-desc">Core catchphrases. Not slogans — operating instructions.</div>
+
+  <div class="language-grid">
+    <div class="catchphrase">
+      <div class="catchphrase-text">BUILD WHAT DOESN'T EXIST.</div>
+      <div class="catchphrase-desc">Core ethos. The default response to every gap, every need, every "we don't have that."</div>
+    </div>
+    <div class="catchphrase">
+      <div class="catchphrase-text">INFRASTRUCTURE IS THE SERMON.</div>
+      <div class="catchphrase-desc">What you build speaks louder than what you preach. Systems are spiritual work.</div>
+    </div>
+    <div class="catchphrase">
+      <div class="catchphrase-text">I DON'T HAVE LIMITED CAPACITY.</div>
+      <div class="catchphrase-desc">Direct rejection of the "slow down" narrative. You operate at a frequency most can't track.</div>
+    </div>
+    <div class="catchphrase">
+      <div class="catchphrase-text">LAND THE PLANE.</div>
+      <div class="catchphrase-desc">Build it mid-flight and still deliver. Vision without execution is just a daydream.</div>
+    </div>
+    <div class="catchphrase">
+      <div class="catchphrase-text">ARISE AND BUILD.</div>
+      <div class="catchphrase-desc">Nehemiah 2:20. Two verbs. One sentence. The instruction that anchors everything.</div>
+    </div>
+    <div class="catchphrase">
+      <div class="catchphrase-text">MAKE THE IMPOSSIBLE LOOK ROUTINE.</div>
+      <div class="catchphrase-desc">Your superpower isn't doing hard things — it's making hard things look easy.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================================================================
+     06 — THE LEXICON
+     =================================================================== -->
+<section class="section dark">
+  <div class="section-number">06</div>
+  <div class="section-title">THE <span class="copper">LEXICON</span></div>
+  <div class="section-desc">
+    Inspired by Virgil Abloh's quotation marks — words that look familiar but carry 
+    different weight in this brand. When you see these words in context, they mean something specific.
+  </div>
+
+  <div class="lexicon-grid">
+    <div class="lexicon-item">
+      <div class="lexicon-term">"Infrastructure"</div>
+      <div class="lexicon-def">Not just systems. The invisible architecture that lets everything above it look effortless.</div>
+    </div>
+    <div class="lexicon-item">
+      <div class="lexicon-term">"Operator"</div>
+      <div class="lexicon-def">The person who doesn't just cast vision — they wire the electricity, pour the concrete, and open the doors.</div>
+    </div>
+    <div class="lexicon-item">
+      <div class="lexicon-term">"Excellence"</div>
+      <div class="lexicon-def">Not perfection. The relentless refusal to settle for "good enough" when extraordinary is available.</div>
+    </div>
+    <div class="lexicon-item">
+      <div class="lexicon-term">"Build"</div>
+      <div class="lexicon-def">Verb. Always. Never a noun. Never a metaphor. The actual act of making something from nothing.</div>
+    </div>
+    <div class="lexicon-item">
+      <div class="lexicon-term">"Capacity"</div>
+      <div class="lexicon-def">A myth others use as an excuse. You don't have limited capacity — you have unlimited will.</div>
+    </div>
+    <div class="lexicon-item">
+      <div class="lexicon-term">"Staff"</div>
+      <div class="lexicon-def">What's already in your hand. The resource you overlook because you're looking for something bigger.</div>
+    </div>
+    <div class="lexicon-item">
+      <div class="lexicon-term">"Momentum"</div>
+      <div class="lexicon-def">The only acceptable velocity. Not speed — direction with acceleration.</div>
+    </div>
+    <div class="lexicon-item">
+      <div class="lexicon-term">"Arise"</div>
+      <div class="lexicon-def">Not permission. Not invitation. Instruction. The first verb before the second: build.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================================================================
+     07 — VOICE & TONE
+     =================================================================== -->
+<section class="section light">
+  <div class="section-number">07</div>
+  <div class="section-title">VOICE & <span class="copper">TONE</span></div>
+
+  <div class="voice-split">
+    <div class="voice-col yes">
+      <div class="voice-col-label">✦ This Is the Voice</div>
+      <div class="voice-quote">"We don't wait for resources. We become them."</div>
+      <div class="voice-quote">"The building isn't the vision. The building is the proof."</div>
+      <div class="voice-quote">"I built three systems before breakfast. What's the bottleneck?"</div>
+      <div class="voice-quote">"Stop planning the meeting about the meeting. Execute."</div>
+      <div class="voice-quote">"Arise and build. That's the whole strategy."</div>
+    </div>
+    <div class="voice-col no">
+      <div class="voice-col-label">✕ This Is Not the Voice</div>
+      <div class="voice-quote">"We're prayerfully considering our next steps."</div>
+      <div class="voice-quote">"Let's circle back and align on deliverables."</div>
+      <div class="voice-quote">"We're in a season of transition."</div>
+      <div class="voice-quote">"I'm just so blessed and grateful for this opportunity."</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================================================================
+     08 — BRAND PRINCIPLES
+     =================================================================== -->
+<section class="section dark">
+  <div class="section-number">08</div>
+  <div class="section-title">BRAND <span class="copper">PRINCIPLES</span></div>
+  <div class="section-desc" style="margin-bottom:40px;">Six operational truths. Non-negotiable. Inherited from Nehemiah.</div>
+
+  <div class="principles-grid">
+    <div class="principle">
+      <div class="principle-num">01</div>
+      <div class="principle-title">SPEED OVER PERFECTION.<br>EXCELLENCE OVER SPEED.</div>
+      <div class="principle-desc">Move fast, but never sloppy. The standard isn't "done" — it's "done at a level that silences doubt."</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">02</div>
+      <div class="principle-title">BUILD THE PLANE<br>WHILE FLYING IT.</div>
+      <div class="principle-desc">You don't need permission or precedent. Start building. Figure it out in motion. Land it clean.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">03</div>
+      <div class="principle-title">IF IT DOESN'T EXIST,<br>CREATE IT.</div>
+      <div class="principle-desc">The gap is the invitation. The absence is the assignment. Never complain about what's missing — build it.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">04</div>
+      <div class="principle-title">INFRASTRUCTURE<br>IS INVISIBLE.</div>
+      <div class="principle-desc">Until it's missing. The best operators build systems nobody notices — because everything just works.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">05</div>
+      <div class="principle-title">CARRY THE WEIGHT<br>OTHERS DON'T SEE.</div>
+      <div class="principle-desc">Leadership isn't a title. It's the willingness to hold what nobody asked you to hold — and still deliver.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">06</div>
+      <div class="principle-title">ARISE<br>AND BUILD.</div>
+      <div class="principle-desc">Nehemiah 2:20. Convention is comfortable. Convention is also forgettable. The instruction is clear.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================================================================
+     09 — LOGO OPTIONS
+     =================================================================== -->
+<section class="section light" style="padding-bottom: 40px;">
+  <div class="section-number">09</div>
+  <div class="section-title">LOGO <span class="copper">OPTIONS</span></div>
+
+  <div class="logo-section-intro">
+    <p>Two mark concepts — The Cornerstone (abstract builder mark) and The Shift (abstract disruption mark) — each explored in three color treatments. All six options shown with standalone icon and name lockup. Which one carries the brand?</p>
+  </div>
+
+  <!-- CORNERSTONE V1 -->
+  <div class="logo-option">
+    <div class="logo-option-header">
+      <div class="logo-option-tag">Option 01</div>
+      <div class="logo-option-name">CORNERSTONE — OBSIDIAN + COPPER</div>
+    </div>
+    <div class="logo-option-desc">Isometric cornerstone. Two planes meeting at the edge. Copper on the working face — earned, not given. The first block laid when building.</div>
+    <div class="logo-display-grid">
+      <div class="logo-cell dark">
+        <svg width="100" height="100" viewBox="0 0 240 240" fill="none">
+          <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+          <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
+          <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.05)"/>
+        </svg>
+        <div class="logo-cell-label" style="color:var(--concrete);">dark</div>
+      </div>
+      <div class="logo-cell light">
+        <svg width="100" height="100" viewBox="0 0 240 240" fill="none">
+          <polygon points="40,180 120,130 120,55 40,105" fill="#0D0D0D"/>
+          <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
+          <polygon points="40,180 120,230 200,180 120,130" fill="rgba(13,13,13,0.04)"/>
+        </svg>
+        <div class="logo-cell-label" style="color:var(--concrete);">light</div>
+      </div>
+      <div class="logo-cell copper">
+        <svg width="100" height="100" viewBox="0 0 240 240" fill="none">
+          <polygon points="40,180 120,130 120,55 40,105" fill="#0D0D0D"/>
+          <polygon points="120,55 200,105 200,180 120,130" fill="#1A1714"/>
+          <polygon points="40,180 120,230 200,180 120,130" fill="rgba(13,13,13,0.08)"/>
+        </svg>
+        <div class="logo-cell-label" style="color:var(--warm-black);">copper</div>
+      </div>
+    </div>
+    <div class="lockup-strip">
+      <div class="lockup-cell dark">
+        <svg width="60" height="60" viewBox="0 0 240 240" fill="none">
+          <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+          <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
+          <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.05)"/>
+        </svg>
+        <div class="lockup-divider-line" style="background:var(--copper);"></div>
+        <div class="lockup-text" style="color:var(--off-white);">LONNELL WILLIAMS</div>
+      </div>
+      <div class="lockup-cell light">
+        <svg width="60" height="60" viewBox="0 0 240 240" fill="none">
+          <polygon points="40,180 120,130 120,55 40,105" fill="#0D0D0D"/>
+          <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
+          <polygon points="40,180 120,230 200,180 120,130" fill="rgba(13,13,13,0.04)"/>
+        </svg>
+        <div class="lockup-divider-line" style="background:var(--copper);"></div>
+        <div class="lockup-text" style="color:var(--obsidian);">LONNELL WILLIAMS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CORNERSTONE V2 -->
+  <div class="logo-option">
+    <div class="logo-option-header">
+      <div class="logo-option-tag">Option 02</div>
+      <div class="logo-option-name">CORNERSTONE — OBSIDIAN + SIGNAL</div>
+    </div>
+    <div class="logo-option-desc">Same cornerstone, Signal red on the working face. More aggressive. More immediate. The side of the stone nobody expected to see.</div>
+    <div class="logo-display-grid">
+      <div class="logo-cell dark">
+        <svg width="100" height="100" viewBox="0 0 240 240" fill="none">
+          <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+          <polygon points="120,55 200,105 200,180 120,130" fill="#E85D3A"/>
+          <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.04)"/>
+        </svg>
+        <div class="logo-cell-label" style="color:var(--concrete);">dark</div>
+      </div>
+      <div class="logo-cell light">
+        <svg width="100" height="100" viewBox="0 0 240 240" fill="none">
+          <polygon points="40,180 120,130 120,55 40,105" fill="#0D0D0D"/>
+          <polygon points="120,55 200,105 200,180 120,130" fill="#E85D3A"/>
+          <polygon points="40,180 120,230 200,180 120,130" fill="rgba(13,13,13,0.04)"/>
+        </svg>
+        <div class="logo-cell-label" style="color:var(--concrete);">light</div>
+      </div>
+      <div class="logo-cell" style="background:var(--signal);">
+        <svg width="100" height="100" viewBox="0 0 240 240" fill="none">
+          <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+          <polygon points="120,55 200,105 200,180 120,130" fill="#0D0D0D"/>
+          <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/>
+        </svg>
+        <div class="logo-cell-label" style="color:rgba(242,240,235,0.5);">signal</div>
+      </div>
+    </div>
+    <div class="lockup-strip">
+      <div class="lockup-cell dark">
+        <svg width="60" height="60" viewBox="0 0 240 240" fill="none">
+          <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+          <polygon points="120,55 200,105 200,180 120,130" fill="#E85D3A"/>
+          <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.04)"/>
+        </svg>
+        <div class="lockup-divider-line" style="background:var(--signal);"></div>
+        <div class="lockup-text" style="color:var(--off-white);">LONNELL WILLIAMS</div>
+      </div>
+      <div class="lockup-cell light">
+        <svg width="60" height="60" viewBox="0 0 240 240" fill="none">
+          <polygon points="40,180 120,130 120,55 40,105" fill="#0D0D0D"/>
+          <polygon points="120,55 200,105 200,180 120,130" fill="#E85D3A"/>
+          <polygon points="40,180 120,230 200,180 120,130" fill="rgba(13,13,13,0.04)"/>
+        </svg>
+        <div class="lockup-divider-line" style="background:var(--signal);"></div>
+        <div class="lockup-text" style="color:var(--obsidian);">LONNELL WILLIAMS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CORNERSTONE V3 -->
+  <div class="logo-option">
+    <div class="logo-option-header">
+      <div class="logo-option-tag">Option 03</div>
+      <div class="logo-option-name">CORNERSTONE — MONOCHROME</div>
+    </div>
+    <div class="logo-option-desc">Full obsidian. Planes differentiated only by tonal value. Maximum restraint. The stone speaks through shadow, not color.</div>
+    <div class="logo-display-grid">
+      <div class="logo-cell dark">
+        <svg width="100" height="100" viewBox="0 0 240 240" fill="none">
+          <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+          <polygon points="120,55 200,105 200,180 120,130" fill="rgba(242,240,235,0.45)"/>
+          <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/>
+        </svg>
+        <div class="logo-cell-label" style="color:var(--concrete);">dark</div>
+      </div>
+      <div class="logo-cell light">
+        <svg width="100" height="100" viewBox="0 0 240 240" fill="none">
+          <polygon points="40,180 120,130 120,55 40,105" fill="#0D0D0D"/>
+          <polygon points="120,55 200,105 200,180 120,130" fill="rgba(13,13,13,0.4)"/>
+          <polygon points="40,180 120,230 200,180 120,130" fill="rgba(13,13,13,0.06)"/>
+        </svg>
+        <div class="logo-cell-label" style="color:var(--concrete);">light</div>
+      </div>
+      <div class="logo-cell" style="background:#333;">
+        <svg width="100" height="100" viewBox="0 0 240 240" fill="none">
+          <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+          <polygon points="120,55 200,105 200,180 120,130" fill="rgba(242,240,235,0.4)"/>
+          <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.05)"/>
+        </svg>
+        <div class="logo-cell-label" style="color:var(--concrete);">mid tone</div>
+      </div>
+    </div>
+    <div class="lockup-strip">
+      <div class="lockup-cell dark">
+        <svg width="60" height="60" viewBox="0 0 240 240" fill="none">
+          <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+          <polygon points="120,55 200,105 200,180 120,130" fill="rgba(242,240,235,0.45)"/>
+          <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/>
+        </svg>
+        <div class="lockup-divider-line" style="background:rgba(242,240,235,0.3);"></div>
+        <div class="lockup-text" style="color:var(--off-white);">LONNELL WILLIAMS</div>
+      </div>
+      <div class="lockup-cell light">
+        <svg width="60" height="60" viewBox="0 0 240 240" fill="none">
+          <polygon points="40,180 120,130 120,55 40,105" fill="#0D0D0D"/>
+          <polygon points="120,55 200,105 200,180 120,130" fill="rgba(13,13,13,0.4)"/>
+          <polygon points="40,180 120,230 200,180 120,130" fill="rgba(13,13,13,0.06)"/>
+        </svg>
+        <div class="lockup-divider-line" style="background:rgba(13,13,13,0.2);"></div>
+        <div class="lockup-text" style="color:var(--obsidian);">LONNELL WILLIAMS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHIFT V1 -->
+  <div class="logo-option">
+    <div class="logo-option-header">
+      <div class="logo-option-tag">Option 04</div>
+      <div class="logo-option-name">SHIFT — OBSIDIAN + COPPER</div>
+    </div>
+    <div class="logo-option-desc">Two offset bars. Top bar is expectation. Bottom bar is where you went instead. The simplest mark. The hardest to forget.</div>
+    <div class="logo-display-grid">
+      <div class="logo-cell dark">
+        <svg width="120" height="60" viewBox="0 0 260 150" fill="none">
+          <rect x="16" y="30" width="130" height="28" rx="2" fill="#F2F0EB"/>
+          <rect x="114" y="80" width="130" height="28" rx="2" fill="#C17F59"/>
+        </svg>
+        <div class="logo-cell-label" style="color:var(--concrete);">dark</div>
+      </div>
+      <div class="logo-cell light">
+        <svg width="120" height="60" viewBox="0 0 260 150" fill="none">
+          <rect x="16" y="30" width="130" height="28" rx="2" fill="#0D0D0D"/>
+          <rect x="114" y="80" width="130" height="28" rx="2" fill="#C17F59"/>
+        </svg>
+        <div class="logo-cell-label" style="color:var(--concrete);">light</div>
+      </div>
+      <div class="logo-cell copper">
+        <svg width="120" height="60" viewBox="0 0 260 150" fill="none">
+          <rect x="16" y="30" width="130" height="28" rx="2" fill="#0D0D0D"/>
+          <rect x="114" y="80" width="130" height="28" rx="2" fill="#F2F0EB"/>
+        </svg>
+        <div class="logo-cell-label" style="color:var(--warm-black);">copper</div>
+      </div>
+    </div>
+    <div class="lockup-strip">
+      <div class="lockup-cell dark">
+        <svg width="90" height="40" viewBox="0 0 260 150" fill="none">
+          <rect x="16" y="30" width="130" height="28" rx="2" fill="#F2F0EB"/>
+          <rect x="114" y="80" width="130" height="28" rx="2" fill="#C17F59"/>
+        </svg>
+        <div class="lockup-divider-line" style="background:var(--copper);"></div>
+        <div class="lockup-text" style="color:var(--off-white);">LONNELL WILLIAMS</div>
+      </div>
+      <div class="lockup-cell light">
+        <svg width="90" height="40" viewBox="0 0 260 150" fill="none">
+          <rect x="16" y="30" width="130" height="28" rx="2" fill="#0D0D0D"/>
+          <rect x="114" y="80" width="130" height="28" rx="2" fill="#C17F59"/>
+        </svg>
+        <div class="lockup-divider-line" style="background:var(--copper);"></div>
+        <div class="lockup-text" style="color:var(--obsidian);">LONNELL WILLIAMS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHIFT V2 -->
+  <div class="logo-option">
+    <div class="logo-option-header">
+      <div class="logo-option-tag">Option 05</div>
+      <div class="logo-option-name">SHIFT — OBSIDIAN + SIGNAL</div>
+    </div>
+    <div class="logo-option-desc">Signal red replaces copper on the offset bar. Higher contrast. Higher stakes. The shift becomes an alarm.</div>
+    <div class="logo-display-grid">
+      <div class="logo-cell dark">
+        <svg width="120" height="60" viewBox="0 0 260 150" fill="none">
+          <rect x="16" y="30" width="130" height="28" rx="2" fill="#F2F0EB"/>
+          <rect x="114" y="80" width="130" height="28" rx="2" fill="#E85D3A"/>
+        </svg>
+        <div class="logo-cell-label" style="color:var(--concrete);">dark</div>
+      </div>
+      <div class="logo-cell light">
+        <svg width="120" height="60" viewBox="0 0 260 150" fill="none">
+          <rect x="16" y="30" width="130" height="28" rx="2" fill="#0D0D0D"/>
+          <rect x="114" y="80" width="130" height="28" rx="2" fill="#E85D3A"/>
+        </svg>
+        <div class="logo-cell-label" style="color:var(--concrete);">light</div>
+      </div>
+      <div class="logo-cell" style="background:var(--signal);">
+        <svg width="120" height="60" viewBox="0 0 260 150" fill="none">
+          <rect x="16" y="30" width="130" height="28" rx="2" fill="#F2F0EB"/>
+          <rect x="114" y="80" width="130" height="28" rx="2" fill="#0D0D0D"/>
+        </svg>
+        <div class="logo-cell-label" style="color:rgba(242,240,235,0.5);">signal</div>
+      </div>
+    </div>
+    <div class="lockup-strip">
+      <div class="lockup-cell dark">
+        <svg width="90" height="40" viewBox="0 0 260 150" fill="none">
+          <rect x="16" y="30" width="130" height="28" rx="2" fill="#F2F0EB"/>
+          <rect x="114" y="80" width="130" height="28" rx="2" fill="#E85D3A"/>
+        </svg>
+        <div class="lockup-divider-line" style="background:var(--signal);"></div>
+        <div class="lockup-text" style="color:var(--off-white);">LONNELL WILLIAMS</div>
+      </div>
+      <div class="lockup-cell light">
+        <svg width="90" height="40" viewBox="0 0 260 150" fill="none">
+          <rect x="16" y="30" width="130" height="28" rx="2" fill="#0D0D0D"/>
+          <rect x="114" y="80" width="130" height="28" rx="2" fill="#E85D3A"/>
+        </svg>
+        <div class="lockup-divider-line" style="background:var(--signal);"></div>
+        <div class="lockup-text" style="color:var(--obsidian);">LONNELL WILLIAMS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHIFT V3 -->
+  <div class="logo-option">
+    <div class="logo-option-header">
+      <div class="logo-option-tag">Option 06</div>
+      <div class="logo-option-name">SHIFT — TRIPLE</div>
+    </div>
+    <div class="logo-option-desc">Three bars instead of two. Each offset further. Obsidian → copper → signal. Expectation → disruption → new position. Unstoppable momentum.</div>
+    <div class="logo-display-grid">
+      <div class="logo-cell dark">
+        <svg width="120" height="80" viewBox="0 0 260 190" fill="none">
+          <rect x="12" y="30" width="120" height="26" rx="2" fill="#F2F0EB"/>
+          <rect x="70" y="76" width="120" height="26" rx="2" fill="#C17F59"/>
+          <rect x="128" y="122" width="120" height="18" rx="2" fill="#E85D3A"/>
+        </svg>
+        <div class="logo-cell-label" style="color:var(--concrete);">dark</div>
+      </div>
+      <div class="logo-cell light">
+        <svg width="120" height="80" viewBox="0 0 260 190" fill="none">
+          <rect x="12" y="30" width="120" height="26" rx="2" fill="#0D0D0D"/>
+          <rect x="70" y="76" width="120" height="26" rx="2" fill="#C17F59"/>
+          <rect x="128" y="122" width="120" height="18" rx="2" fill="#E85D3A"/>
+        </svg>
+        <div class="logo-cell-label" style="color:var(--concrete);">light</div>
+      </div>
+      <div class="logo-cell copper">
+        <svg width="120" height="80" viewBox="0 0 260 190" fill="none">
+          <rect x="12" y="30" width="120" height="26" rx="2" fill="#0D0D0D"/>
+          <rect x="70" y="76" width="120" height="26" rx="2" fill="#F2F0EB"/>
+          <rect x="128" y="122" width="120" height="18" rx="2" fill="#E85D3A"/>
+        </svg>
+        <div class="logo-cell-label" style="color:var(--warm-black);">copper</div>
+      </div>
+    </div>
+    <div class="lockup-strip">
+      <div class="lockup-cell dark">
+        <svg width="90" height="50" viewBox="0 0 260 190" fill="none">
+          <rect x="12" y="30" width="120" height="26" rx="2" fill="#F2F0EB"/>
+          <rect x="70" y="76" width="120" height="26" rx="2" fill="#C17F59"/>
+          <rect x="128" y="122" width="120" height="18" rx="2" fill="#E85D3A"/>
+        </svg>
+        <div class="lockup-divider-line" style="background:var(--copper);"></div>
+        <div class="lockup-text" style="color:var(--off-white);">LONNELL WILLIAMS</div>
+      </div>
+      <div class="lockup-cell light">
+        <svg width="90" height="50" viewBox="0 0 260 190" fill="none">
+          <rect x="12" y="30" width="120" height="26" rx="2" fill="#0D0D0D"/>
+          <rect x="70" y="76" width="120" height="26" rx="2" fill="#C17F59"/>
+          <rect x="128" y="122" width="120" height="18" rx="2" fill="#E85D3A"/>
+        </svg>
+        <div class="lockup-divider-line" style="background:var(--copper);"></div>
+        <div class="lockup-text" style="color:var(--obsidian);">LONNELL WILLIAMS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================================================================
+     FOOTER
+     =================================================================== -->
+<footer class="footer">
+  <div class="footer-scripture">"The God of heaven will make us prosper, and we his servants will arise and build."</div>
+  <div class="footer-ref">Nehemiah 2:20 — ESV</div>
+  <div class="footer-line"></div>
+  <div class="footer-brand">LONNELL DAWSON WILLIAMS</div>
+  <div class="footer-year">Brand Identity System — 2025</div>
+</footer>
+
+</body>
+</html>

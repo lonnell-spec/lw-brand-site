@@ -1,0 +1,43 @@
+# robots.txt for ldw.build
+# Welcome to all crawlers — we want to be discovered.
+
+User-agent: *
+Allow: /
+
+# AI Crawlers — explicitly welcome
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Block admin pages from all crawlers
+Disallow: /admin.html
+Disallow: /admin-*.html
+
+# Sitemap
+Sitemap: https://ldw.build/sitemap.xml
+
+# AI content manifest
+# See /llms.txt for structured content about Lonnell Williams

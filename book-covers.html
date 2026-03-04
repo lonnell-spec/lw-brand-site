@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lonnell Williams — Book Cover Concepts</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700&family=Space+Mono:wght@400;700&family=Archivo+Black&family=Syne:wght@400;700;800&family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --obsidian: #0D0D0D;
+    --warm-black: #1A1714;
+    --copper: #C17F59;
+    --signal: #E85D3A;
+    --off-white: #F2F0EB;
+    --concrete: #8A8A8A;
+    /* AENA palette */
+    --aena-cyan: #1FAABD;
+    --aena-red: #E23636;
+    --aena-yellow: #F5C518;
+    --aena-teal: #0A6E7C;
+    --aena-black: #0A0A0A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #111; color: var(--off-white); font-family: 'DM Sans', sans-serif; }
+
+  .page-intro {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 60px 80px;
+  }
+
+  .page-intro-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 24px;
+    opacity: 0; animation: fadeIn 0.8s ease 0.2s forwards;
+  }
+
+  .page-intro-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(44px, 6vw, 80px);
+    letter-spacing: 3px;
+    line-height: 1.05;
+    margin-bottom: 20px;
+    opacity: 0; animation: fadeIn 0.8s ease 0.4s forwards;
+  }
+
+  .page-intro-title .accent { color: var(--signal); }
+
+  .page-intro-desc {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--concrete);
+    max-width: 520px;
+    line-height: 1.8;
+    opacity: 0; animation: fadeIn 0.8s ease 0.6s forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== BOOK SECTION ===== */
+  .book-section {
+    padding: 80px 60px;
+  }
+
+  .book-section-header {
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(242,240,235,0.06);
+  }
+
+  .book-section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .book-section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: 3px;
+    line-height: 1.1;
+  }
+
+  .book-section-subtitle {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--concrete);
+    margin-top: 8px;
+    line-height: 1.6;
+  }
+
+  .covers-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .cover-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .cover-option-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--copper);
+  }
+
+  .cover-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+
+  .cover-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--concrete);
+    line-height: 1.6;
+  }
+
+  /* ===== COVER WRAPPER ===== */
+  .cover-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 0.65;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .cover-wrapper:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 8px 20px rgba(0,0,0,0.4);
+  }
+
+  /* ============================================================
+     ZAG COVER OPTION A: THE DIAGONAL
+     ============================================================ */
+  .zag-a {
+    background: var(--obsidian);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+    position: relative;
+  }
+
+  .zag-a::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, transparent 0%, transparent 48%, var(--copper) 48%, var(--copper) 52%, transparent 52%);
+    opacity: 0.15;
+  }
+
+  .zag-a-top {
+    padding: 12% 10% 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .zag-a-category {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(6px, 1.2vw, 8px);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 8%;
+  }
+
+  .zag-a-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 72px);
+    letter-spacing: 6px;
+    color: var(--off-white);
+    line-height: 0.85;
+    position: relative;
+  }
+
+  .zag-a-title .period { color: var(--signal); }
+
+  .zag-a-diagonal {
+    position: absolute;
+    width: 100%;
+    height: 40%;
+    bottom: 25%;
+    left: 0;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .zag-a-diagonal::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 4px;
+    background: var(--copper);
+    top: 50%;
+    left: -20%;
+    transform: rotate(-25deg);
+    transform-origin: center;
+  }
+
+  .zag-a-bottom {
+    padding: 0 10% 10%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .zag-a-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(8px, 1.5vw, 12px);
+    font-weight: 300;
+    color: var(--concrete);
+    letter-spacing: 1px;
+    margin-bottom: 6%;
+  }
+
+  .zag-a-author {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(7px, 1.2vw, 9px);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--copper);
+  }
+
+  .zag-a-signal-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--signal);
+  }
+
+  /* ============================================================
+     ZAG COVER OPTION B: THE CORNERSTONE
+     ============================================================ */
+  .zag-b {
+    background: var(--warm-black);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .zag-b-mark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.06;
+  }
+
+  .zag-b-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 12% 10%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .zag-b-top-bar {
+    width: 40px;
+    height: 3px;
+    background: var(--copper);
+    margin-bottom: 8%;
+  }
+
+  .zag-b-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 9vw, 80px);
+    letter-spacing: 8px;
+    color: var(--off-white);
+    line-height: 0.85;
+    margin-bottom: 4%;
+  }
+
+  .zag-b-title .accent { color: var(--signal); }
+
+  .zag-b-subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(9px, 1.6vw, 13px);
+    font-weight: 300;
+    color: var(--copper);
+    letter-spacing: 1px;
+    line-height: 1.5;
+    max-width: 80%;
+  }
+
+  .zag-b-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .zag-b-stone {
+    width: 20px;
+    height: 20px;
+  }
+
+  .zag-b-author {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(7px, 1.1vw, 9px);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--concrete);
+  }
+
+  /* ============================================================
+     ZAG COVER OPTION C: THE SPLIT
+     ============================================================ */
+  .zag-c {
+    display: grid;
+    grid-template-rows: 55% 45%;
+    position: relative;
+  }
+
+  .zag-c-top {
+    background: var(--off-white);
+    padding: 14% 10% 6%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .zag-c-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 10vw, 86px);
+    letter-spacing: 6px;
+    color: var(--obsidian);
+    line-height: 0.85;
+  }
+
+  .zag-c-title .period { color: var(--signal); }
+
+  .zag-c-bottom {
+    background: var(--obsidian);
+    padding: 8% 10% 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .zag-c-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(9px, 1.6vw, 13px);
+    font-weight: 300;
+    color: var(--off-white);
+    line-height: 1.5;
+  }
+
+  .zag-c-copper-line {
+    width: 100%;
+    height: 2px;
+    background: var(--copper);
+    margin: 6% 0;
+  }
+
+  .zag-c-author {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(7px, 1.1vw, 9px);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--copper);
+  }
+
+  /* ============================================================
+     AENA COVER OPTION A: THE BLOCK LETTERS
+     ============================================================ */
+  .aena-a {
+    background: var(--aena-black);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10% 8%;
+    position: relative;
+  }
+
+  .aena-a-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4%;
+    margin: auto 0;
+  }
+
+  .aena-letter {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(48px, 10vw, 80px);
+    line-height: 1;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8% 4%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .aena-a-top {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(6px, 1vw, 8px);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+  }
+
+  .aena-a-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(10px, 1.8vw, 14px);
+    font-weight: 700;
+    color: var(--off-white);
+    text-align: center;
+    line-height: 1.4;
+    letter-spacing: 1px;
+    margin-top: 8%;
+  }
+
+  .aena-a-author {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(7px, 1.1vw, 9px);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+  }
+
+  /* ============================================================
+     AENA COVER OPTION B: STACKED TYPE
+     ============================================================ */
+  .aena-b {
+    background: var(--aena-black);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10% 8%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .aena-b::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -30%;
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(circle, rgba(31,170,189,0.12) 0%, transparent 70%);
+  }
+
+  .aena-b::after {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    left: -20%;
+    width: 50%;
+    height: 50%;
+    background: radial-gradient(circle, rgba(245,197,24,0.08) 0%, transparent 70%);
+  }
+
+  .aena-b-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .aena-b-word {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(36px, 7vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -1px;
+  }
+
+  .aena-b-comma {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(20px, 4vw, 32px);
+    display: inline;
+  }
+
+  .aena-b-or {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: clamp(14px, 2.5vw, 20px);
+    color: rgba(255,255,255,0.4);
+    margin: 2% 0;
+  }
+
+  .aena-b-divider {
+    width: 40px;
+    height: 3px;
+    margin: 8% 0 6%;
+  }
+
+  .aena-b-author {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(7px, 1vw, 9px);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ============================================================
+     AENA COVER OPTION C: THE MANIFESTO
+     ============================================================ */
+  .aena-c {
+    background: var(--aena-black);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .aena-c-stripe {
+    height: 25%;
+    display: flex;
+    align-items: center;
+    padding: 0 8%;
+  }
+
+  .aena-c-word {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 900;
+    font-size: clamp(32px, 7vw, 56px);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .aena-c-period {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 900;
+    color: var(--aena-red);
+  }
+
+  .aena-c-bottom {
+    height: 25%;
+    background: var(--aena-black);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 0 8%;
+  }
+
+  .aena-c-or {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: clamp(10px, 1.8vw, 14px);
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+  }
+
+  .aena-c-nothing {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 900;
+    font-size: clamp(12px, 2.2vw, 18px);
+    color: var(--off-white);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .aena-c-author {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(6px, 1vw, 8px);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    position: absolute;
+    bottom: 6%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  /* ===== FOOTER ===== */
+  .page-footer {
+    padding: 60px;
+    text-align: center;
+    border-top: 1px solid rgba(242,240,235,0.04);
+  }
+
+  .page-footer-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: rgba(242,240,235,0.15);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) {
+    .covers-row { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+    .book-section { padding: 60px 30px; }
+    .page-intro { padding: 60px 30px; }
+  }
+
+/* ===== SHARED SITE NAV ===== */
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 0 48px; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(13,13,13,0.92);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(242,240,235,0.04);
+}
+.site-nav-brand {
+  display: flex; align-items: center; gap: 14px; text-decoration: none;
+}
+.site-nav-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px; letter-spacing: 5px; color: #F2F0EB;
+}
+.site-nav-links {
+  display: flex; align-items: center; gap: 32px;
+}
+.site-nav-links a {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  text-decoration: none; color: #8A8A8A; transition: color 0.3s ease;
+}
+.site-nav-links a:hover { color: #F2F0EB; }
+.site-nav-btn {
+  display: none; background: none; border: none; cursor: pointer; padding: 8px;
+}
+.site-nav-btn span {
+  display: block; width: 22px; height: 2px; background: #F2F0EB; margin: 5px 0;
+}
+@media (max-width: 768px) {
+  .site-nav { padding: 0 24px; }
+  .site-nav-links {
+    display: none; position: fixed; top: 64px; left: 0; right: 0;
+    background: rgba(13,13,13,0.96); flex-direction: column; padding: 24px; gap: 20px;
+  }
+  .site-nav-links.open { display: flex; }
+  .site-nav-btn { display: block; }
+}
+
+</style>
+</head>
+<body>
+<!-- ===== SITE NAV ===== -->
+<nav class="site-nav">
+  <a href="/" class="site-nav-brand">
+    <svg width="28" height="28" viewBox="0 0 240 240" fill="none">
+      <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+      <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
+      <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/>
+    </svg>
+    <span class="site-nav-name">LONNELL WILLIAMS</span>
+  </a>
+    <div class="site-nav-links">
+    <a href="/#about">About</a>
+    <a href="/speaking.html">Speaking</a>
+    <a href="/#books">Books</a>
+    <a href="/#consulting">Work With Me</a>
+    <a href="/media.html">Media</a>
+    <a href="/#newsletter">Newsletter</a>
+    <a href="/vantage.html">Vantage</a>
+  </div>
+  <button class="site-nav-btn" onclick="var l=document.querySelector('.site-nav-links');l.classList.toggle('open');">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+  <!-- ===== INTRO ===== -->
+  <section class="page-intro">
+    <div class="page-intro-label">Book Cover Concepts</div>
+    <div class="page-intro-title">TWO BOOKS<span class="accent">.</span><br>TWO WORLDS<span class="accent">.</span></div>
+    <div class="page-intro-desc">
+      Three cover concepts for each book. Zag lives inside the brand system.
+      AENA gets its own palette and energy. Same author. Different visual universes.
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       ZAG COVERS
+       ============================================================ -->
+  <section class="book-section">
+    <div class="book-section-header">
+      <div class="book-section-label" style="color: var(--copper);">Book One — Brand System</div>
+      <div class="book-section-title">ZAG<span style="color:var(--signal);">.</span></div>
+      <div class="book-section-subtitle">Leading Ministry Jesus's Way &nbsp;|&nbsp; Obsidian / Copper / Signal / Off-White</div>
+    </div>
+
+    <div class="covers-row">
+
+      <!-- ZAG OPTION A: THE DIAGONAL -->
+      <div class="cover-card">
+        <div class="cover-option-label">Option A</div>
+        <div class="cover-wrapper zag-a">
+          <div class="zag-a-top">
+            <div class="zag-a-category">Leading Ministry Jesus's Way</div>
+            <div class="zag-a-title">ZAG<span class="period">.</span></div>
+          </div>
+          <div class="zag-a-diagonal"></div>
+          <div class="zag-a-bottom">
+            <div class="zag-a-sub">When everyone goes one direction,<br>go the other — intentionally.</div>
+            <div class="zag-a-author">Lonnell Williams</div>
+          </div>
+          <div class="zag-a-signal-bar"></div>
+        </div>
+        <div class="cover-name">THE DIAGONAL</div>
+        <div class="cover-desc">Clean obsidian field. Massive ZAG title. A single copper diagonal cuts across — the visual zag itself. Signal-red period. Minimal, confrontational, unforgettable on a shelf.</div>
+      </div>
+
+      <!-- ZAG OPTION B: THE CORNERSTONE -->
+      <div class="cover-card">
+        <div class="cover-option-label">Option B</div>
+        <div class="cover-wrapper zag-b">
+          <svg class="zag-b-mark" width="300" height="300" viewBox="0 0 240 240" fill="none">
+            <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+            <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
+            <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.08)"/>
+          </svg>
+          <div class="zag-b-content">
+            <div>
+              <div class="zag-b-top-bar"></div>
+              <div class="zag-b-title">ZAG<span class="accent">.</span></div>
+              <div class="zag-b-subtitle">Leading Ministry<br>Jesus's Way</div>
+            </div>
+            <div class="zag-b-footer">
+              <svg class="zag-b-stone" viewBox="0 0 240 240" fill="none">
+                <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+                <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
+              </svg>
+              <div class="zag-b-author">Lonnell Williams</div>
+            </div>
+          </div>
+        </div>
+        <div class="cover-name">THE CORNERSTONE</div>
+        <div class="cover-desc">Warm black field. The Cornerstone logo mark ghosted large in the background. Copper subtitle. Small cornerstone mark next to the author name. Brand system fully integrated.</div>
+      </div>
+
+      <!-- ZAG OPTION C: THE SPLIT -->
+      <div class="cover-card">
+        <div class="cover-option-label">Option C</div>
+        <div class="cover-wrapper zag-c">
+          <div class="zag-c-top">
+            <div class="zag-c-title">ZAG<span class="period">.</span></div>
+          </div>
+          <div class="zag-c-bottom">
+            <div class="zag-c-sub">Leading Ministry Jesus's Way</div>
+            <div>
+              <div class="zag-c-copper-line"></div>
+              <div class="zag-c-author">Lonnell Williams</div>
+            </div>
+          </div>
+        </div>
+        <div class="cover-name">THE SPLIT</div>
+        <div class="cover-desc">Cover divided: off-white top with massive obsidian ZAG, obsidian bottom with subtitle and author. The split itself is the zag — two halves that refuse to be the same. Signal-red period. Copper divider line.</div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       AENA COVERS
+       ============================================================ -->
+  <section class="book-section" style="margin-top: 40px;">
+    <div class="book-section-header">
+      <div class="book-section-label" style="color: var(--aena-cyan);">Book Two — AENA Palette</div>
+      <div class="book-section-title" style="color: var(--aena-yellow);">ANYTHING, EVERYTHING,<br>OR NOTHING AT ALL<span style="color:var(--aena-red);">.</span></div>
+      <div class="book-section-subtitle">Cyan / Red / Yellow / Teal on Black &nbsp;|&nbsp; Separate visual world</div>
+    </div>
+
+    <div class="covers-row">
+
+      <!-- AENA OPTION A: THE BLOCK LETTERS -->
+      <div class="cover-card">
+        <div class="cover-option-label" style="color:var(--aena-cyan);">Option A</div>
+        <div class="cover-wrapper aena-a">
+          <div class="aena-a-top">A Book by Lonnell Williams</div>
+          <div class="aena-a-grid">
+            <div class="aena-letter" style="background:var(--aena-cyan); color:var(--aena-black);">A</div>
+            <div class="aena-letter" style="background:var(--aena-red); color:var(--aena-black);">E</div>
+            <div class="aena-letter" style="background:var(--aena-yellow); color:var(--aena-black);">N</div>
+            <div class="aena-letter" style="background:var(--aena-teal); color:var(--off-white);">A</div>
+          </div>
+          <div>
+            <div class="aena-a-title">Anything, Everything,<br>or Nothing at All</div>
+            <div style="height: 12px;"></div>
+            <div class="aena-a-author">Lonnell Williams</div>
+          </div>
+        </div>
+        <div class="cover-name">THE BLOCK LETTERS</div>
+        <div class="cover-desc">Directly inspired by your AENA logo. Four bold block letters in the palette grid — cyan A, red E, yellow N, teal A. Playful, graphic, immediately recognizable. Album-cover energy. Maximum shelf impact.</div>
+      </div>
+
+      <!-- AENA OPTION B: STACKED TYPE -->
+      <div class="cover-card">
+        <div class="cover-option-label" style="color:var(--aena-cyan);">Option B</div>
+        <div class="cover-wrapper aena-b">
+          <div class="aena-b-content">
+            <div>
+              <div class="aena-b-word" style="color:var(--aena-cyan);">Anything<span class="aena-b-comma" style="color:var(--aena-red);">,</span></div>
+              <div class="aena-b-word" style="color:var(--aena-yellow);">Everything<span class="aena-b-comma" style="color:var(--aena-red);">,</span></div>
+              <div class="aena-b-or">or</div>
+              <div class="aena-b-word" style="color:var(--aena-teal);">Nothing<br><span style="font-weight:300; font-size:60%; color:rgba(255,255,255,0.4); letter-spacing: 2px;">AT ALL</span></div>
+            </div>
+            <div>
+              <div class="aena-b-divider" style="background:var(--aena-red);"></div>
+              <div class="aena-b-author">Lonnell Williams</div>
+            </div>
+          </div>
+        </div>
+        <div class="cover-name">THE STACKED TYPE</div>
+        <div class="cover-desc">Each word on its own line in a different AENA color. Bold, modern display type. Subtle color glows in the background. The title becomes a visual cascade — anything (cyan), everything (yellow), nothing (teal). Red commas as punctuation accents.</div>
+      </div>
+
+      <!-- AENA OPTION C: THE MANIFESTO -->
+      <div class="cover-card">
+        <div class="cover-option-label" style="color:var(--aena-cyan);">Option C</div>
+        <div class="cover-wrapper aena-c">
+          <div class="aena-c-stripe" style="background:var(--aena-cyan);">
+            <div class="aena-c-word" style="color:var(--aena-black);">ANYTHING</div>
+          </div>
+          <div class="aena-c-stripe" style="background:var(--aena-yellow);">
+            <div class="aena-c-word" style="color:var(--aena-black);">EVERYTHING</div>
+          </div>
+          <div class="aena-c-stripe" style="background:var(--aena-teal);">
+            <div class="aena-c-word" style="color:var(--off-white);">NOTHING<span class="aena-c-period">.</span></div>
+          </div>
+          <div class="aena-c-bottom">
+            <div class="aena-c-or">or</div>
+            <div class="aena-c-nothing">AT ALL</div>
+          </div>
+          <div class="aena-c-author">Lonnell Williams</div>
+        </div>
+        <div class="cover-name">THE MANIFESTO</div>
+        <div class="cover-desc">Three bold color stripes — each carrying one word. Cyan ANYTHING, yellow EVERYTHING, teal NOTHING. Black bottom section with "at all." Feels like a protest poster, an album drop, a statement. Maximum visual disruption. Nobody walks past this on a shelf.</div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <footer class="page-footer">
+    <div class="page-footer-text">Lonnell Dawson Williams — Book Cover Concepts — 2025</div>
+  </footer>
+
+</body>
+</html>

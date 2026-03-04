@@ -3,112 +3,229 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BRAND IDENTITY — Admin Portal — LDW</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<title>Brand Identity — Admin | LDW</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--obsidian:#0D0D0D;--warm-black:#1A1714;--copper:#C17F59;--signal:#E85D3A;--off-white:#F2F0EB;--concrete:#8A8A8A;--display:'Bebas Neue',sans-serif;--body:'DM Sans',sans-serif;--mono:'Space Mono',monospace;}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--obsidian);color:var(--off-white);font-family:var(--body);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;}
-::selection{background:var(--copper);color:var(--obsidian);}
-.login-overlay{position:fixed;inset:0;z-index:200;background:var(--obsidian);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.4s;}
-.login-overlay.hidden{opacity:0;pointer-events:none;}
-.login-mark{display:flex;align-items:center;gap:12px;margin-bottom:48px;}
-.login-mark span{font-family:var(--display);font-size:18px;letter-spacing:4px;color:var(--off-white);}
-.login-box{width:320px;text-align:center;}
-.login-box h2{font-family:var(--display);font-size:28px;letter-spacing:3px;margin-bottom:32px;}
-.login-box input{width:100%;padding:14px 16px;background:rgba(242,240,235,0.04);border:1px solid rgba(242,240,235,0.08);color:var(--off-white);font-family:var(--body);font-size:14px;margin-bottom:12px;outline:none;}
-.login-box input:focus{border-color:var(--copper);}
-.login-box input::placeholder{color:var(--concrete);}
-.login-btn{width:100%;padding:14px;background:var(--copper);border:none;color:var(--obsidian);font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:background 0.3s;}
-.login-btn:hover{background:var(--signal);}
-.login-error{display:none;color:var(--signal);font-family:var(--mono);font-size:10px;letter-spacing:1px;margin-top:12px;}
-.page-wrap{display:none;}
-.page-wrap.active{display:block;}
-.page-header{display:flex;align-items:center;justify-content:space-between;padding:16px 48px;border-bottom:1px solid rgba(242,240,235,0.04);background:rgba(13,13,13,0.95);}
-.page-header-left{display:flex;align-items:center;gap:20px;}
-.back-btn{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--copper);text-decoration:none;text-transform:uppercase;transition:color 0.3s;}
-.back-btn:hover{color:var(--signal);}
-.page-title-bar{display:flex;align-items:center;gap:12px;}
-.page-title-bar .icon{font-size:20px;}
-.page-title-bar h1{font-family:var(--display);font-size:22px;letter-spacing:3px;}
-.page-title-bar h1 .accent{color:var(--copper);}
-.page-header-right{display:flex;gap:24px;}
-.page-header-right a{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--concrete);text-decoration:none;transition:color 0.3s;}
-.page-header-right a:hover{color:var(--copper);}
-.content{max-width:800px;margin:0 auto;padding:48px;}
-.content h2{font-family:var(--display);font-size:32px;letter-spacing:2px;margin:48px 0 20px;padding-top:24px;border-top:1px solid rgba(242,240,235,0.06);}
-.content h2:first-child{margin-top:0;border-top:none;padding-top:0;}
-.content h2 .accent{color:var(--copper);}
-.content h3{font-family:var(--display);font-size:22px;letter-spacing:2px;margin:32px 0 12px;color:var(--copper);}
-.content p{font-size:14px;color:var(--concrete);margin-bottom:16px;line-height:1.8;}
-.content p strong{color:var(--off-white);font-weight:500;}
-.content code{font-family:var(--mono);font-size:12px;background:rgba(242,240,235,0.04);padding:2px 8px;border-radius:2px;color:var(--copper);}
-.content pre{background:rgba(242,240,235,0.03);padding:20px;margin:16px 0;overflow-x:auto;border:1px solid rgba(242,240,235,0.06);border-radius:2px;}
-.content pre code{background:none;padding:0;font-size:11px;color:var(--off-white);line-height:1.6;}
-.data-table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:13px;}
-.data-table th{font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--copper);text-align:left;padding:10px 12px;border-bottom:1px solid rgba(242,240,235,0.1);}
-.data-table td{padding:10px 12px;border-bottom:1px solid rgba(242,240,235,0.04);color:var(--concrete);font-weight:300;vertical-align:top;}
-.data-table tr:hover td{background:rgba(242,240,235,0.02);}
-.data-table td:first-child{color:var(--off-white);font-weight:400;}
-.color-swatch{display:inline-flex;align-items:center;gap:8px;}
-.color-swatch .swatch{width:20px;height:20px;border-radius:4px;border:1px solid rgba(242,240,235,0.1);display:inline-block;}
-.page-footer{padding:32px 48px;border-top:1px solid rgba(242,240,235,0.06);margin-top:48px;text-align:center;}
-.page-footer span{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(138,138,138,0.3);}
-@media(max-width:768px){.page-header{padding:16px 24px;flex-direction:column;align-items:flex-start;gap:12px;}.content{padding:32px 24px;}}
+:root { --obsidian: #0D0D0D; --warm-black: #1A1714; --off-white: #F2F0EB; --concrete: #8A8A8A; --copper: #C17F59; --copper-light: #D4956A; --signal: #00E676; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+.site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; background: rgba(13,13,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(242,240,235,0.06); }
+.site-nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--off-white); }
+.site-nav-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 4px; }
+.site-nav-links { display: flex; gap: 32px; align-items: center; }
+.site-nav-links a { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.3s; }
+.site-nav-links a:hover { color: var(--off-white); }
+.site-nav-btn { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.site-nav-btn span { display: block; width: 20px; height: 2px; background: var(--off-white); margin: 4px 0; }
+@media (max-width: 768px) {
+  .site-nav { padding: 0 24px; }
+  .site-nav-links { display: none; position: fixed; top: 64px; left: 0; right: 0; flex-direction: column; background: rgba(13,13,13,0.96); padding: 24px; gap: 20px; }
+  .site-nav-links.open { display: flex; }
+  .site-nav-btn { display: block; }
+}
+.admin-sub { padding: 64px 0 0; min-height: 100vh; }
+.admin-sub-header { padding: 48px 48px 32px; border-bottom: 1px solid rgba(242,240,235,0.06); }
+.admin-sub-back { display: inline-flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); text-decoration: none; margin-bottom: 24px; transition: color 0.3s; }
+.admin-sub-back:hover { color: var(--copper-light); }
+.admin-sub-eyebrow { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--copper); margin-bottom: 12px; }
+.admin-sub-title { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 6px; line-height: 1; }
+.admin-sub-title .accent { color: var(--copper); }
+.admin-content { padding: 40px 48px 80px; max-width: 900px; }
+.admin-content h1 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 4px; text-transform: uppercase; margin: 48px 0 16px; color: var(--off-white); }
+.admin-content h1:first-child { margin-top: 0; }
+.admin-content h2 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; text-transform: uppercase; margin: 36px 0 12px; color: var(--off-white); }
+.admin-content h3 { font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; margin: 24px 0 8px; color: var(--off-white); }
+.admin-content p { font-weight: 300; font-size: 15px; line-height: 1.7; color: var(--concrete); margin-bottom: 16px; }
+.admin-content strong { color: var(--off-white); font-weight: 600; }
+.admin-content a { color: var(--copper); text-decoration: none; transition: color 0.3s; }
+.admin-content a:hover { color: var(--copper-light); }
+.admin-content hr { border: none; border-top: 1px solid rgba(242,240,235,0.08); margin: 32px 0; }
+.admin-content ul, .admin-content ol { padding-left: 24px; margin-bottom: 16px; }
+.admin-content li { font-weight: 300; font-size: 15px; line-height: 1.7; color: var(--concrete); margin-bottom: 8px; }
+.admin-content code { font-family: 'Space Mono', monospace; font-size: 13px; background: rgba(242,240,235,0.06); padding: 2px 8px; border-radius: 2px; color: var(--copper); }
+.admin-content pre { background: var(--warm-black); border: 1px solid rgba(242,240,235,0.08); border-radius: 2px; padding: 20px; margin: 16px 0; overflow-x: auto; }
+.admin-content pre code { background: none; padding: 0; font-size: 12px; line-height: 1.6; color: var(--off-white); }
+.admin-content blockquote { border-left: 3px solid var(--copper); padding: 12px 20px; margin: 16px 0; background: rgba(193,127,89,0.06); }
+.admin-content blockquote p { color: var(--off-white); margin-bottom: 4px; }
+.admin-content table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 14px; }
+.admin-content th { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--copper); text-align: left; padding: 12px 16px; border-bottom: 2px solid rgba(242,240,235,0.1); }
+.admin-content td { padding: 12px 16px; border-bottom: 1px solid rgba(242,240,235,0.06); color: var(--concrete); font-weight: 300; }
+.admin-content tr:hover td { background: rgba(242,240,235,0.02); }
+.swatch { display: inline-block; width: 16px; height: 16px; border-radius: 2px; vertical-align: middle; margin-right: 8px; border: 1px solid rgba(242,240,235,0.1); }
+.admin-sub-footer { padding: 24px 48px; border-top: 1px solid rgba(242,240,235,0.06); display: flex; justify-content: space-between; align-items: center; }
+.admin-sub-footer a { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.3s; }
+.admin-sub-footer a:hover { color: var(--off-white); }
+.admin-sub-footer span { font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(138,138,138,0.5); }
+@media (max-width: 768px) {
+  .admin-sub-header { padding: 32px 24px 24px; }
+  .admin-sub-title { font-size: 32px; }
+  .admin-content { padding: 24px 24px 60px; }
+  .admin-sub-footer { padding: 16px 24px; }
+}
 </style>
 </head>
 <body>
-<div class="login-overlay" id="loginOverlay">
-  <div class="login-mark"><svg width="28" height="28" viewBox="0 0 240 240" fill="none"><polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/><polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/><polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/></svg><span>LONNELL WILLIAMS</span></div>
-  <div class="login-box"><h2>ADMIN PORTAL<span style="color:var(--copper)">.</span></h2><input type="email" id="loginEmail" placeholder="Email" autocomplete="email"><input type="password" id="loginPass" placeholder="Password" autocomplete="current-password"><button class="login-btn" onclick="attemptLogin()">ENTER</button><div class="login-error" id="loginError">Invalid credentials</div></div>
-</div>
-<div class="page-wrap" id="pageWrap">
-  <header class="page-header">
-    <div class="page-header-left"><a href="/admin.html" class="back-btn">← PORTAL</a><div class="page-title-bar"><span class="icon">🎨</span><h1>BRAND IDENTITY<span class="accent">.</span></h1></div></div>
-    <div class="page-header-right"><a href="/">HOME</a><a href="/admin.html">PORTAL</a></div>
-  </header>
-  <div class="content">
+<nav class="site-nav">
+  <a href="/" class="site-nav-brand">
+    <svg width="28" height="28" viewBox="0 0 240 240" fill="none"><polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/><polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/><polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/></svg>
+    <span class="site-nav-name">LONNELL WILLIAMS</span>
+  </a>
+  <div class="site-nav-links">
+    <a href="/#about">About</a>
+    <a href="/speaking.html">Speaking</a>
+    <a href="/#books">Books</a>
+    <a href="/#consulting">Work With Me</a>
+    <a href="/media.html">Media</a>
+    <a href="/#newsletter">Newsletter</a>
+    <a href="/vantage.html">Vantage</a>
+  </div>
+  <button class="site-nav-btn" onclick="document.querySelector('.site-nav-links').classList.toggle('open');"><span></span><span></span><span></span></button>
+</nav>
+<div class="admin-sub">
+  <div class="admin-sub-header">
+    <a href="/admin.html" class="admin-sub-back">&larr; Back to Portal</a>
+    <div class="admin-sub-eyebrow">&#9670; Admin / Brand Identity</div>
+    <div class="admin-sub-title">BRAND IDENTITY<span class="accent">.</span></div>
+  </div>
+  <div class="admin-content">
 
-    <h2>COLOR SYSTEM<span class="accent">.</span></h2>
-    <table class="data-table">
+    <p>The LDW brand is built on a dark, editorial aesthetic — luxury operator meets ministry leader. Every design decision reinforces authority, warmth, and intentionality.</p>
+
+    <hr>
+
+    <h1>Color System</h1>
+    <p>All colors are defined as CSS custom properties in <code>:root</code>. <strong>Never hardcode hex values</strong> — always reference the variable.</p>
+
+    <h2>Primary Palette</h2>
+    <table>
       <tr><th>Name</th><th>Variable</th><th>Hex</th><th>Usage</th></tr>
-      <tr><td><span class="color-swatch"><span class="swatch" style="background:#0D0D0D;"></span>Obsidian</span></td><td><code>--obsidian</code></td><td><code>#0D0D0D</code></td><td>Primary background. The weight everything is built on.</td></tr>
-      <tr><td><span class="color-swatch"><span class="swatch" style="background:#1A1714;"></span>Warm Black</span></td><td><code>--warm-black</code></td><td><code>#1A1714</code></td><td>Alternate sections. Depth without cold.</td></tr>
-      <tr><td><span class="color-swatch"><span class="swatch" style="background:#C17F59;"></span>Copper</span></td><td><code>--copper</code></td><td><code>#C17F59</code></td><td>Primary accent. Earned, oxidized, handmade.</td></tr>
-      <tr><td><span class="color-swatch"><span class="swatch" style="background:#E85D3A;"></span>Signal</span></td><td><code>--signal</code></td><td><code>#E85D3A</code></td><td>One per layout. Breaks the pattern.</td></tr>
-      <tr><td><span class="color-swatch"><span class="swatch" style="background:#F2F0EB;"></span>Off-White</span></td><td><code>--off-white</code></td><td><code>#F2F0EB</code></td><td>Text on dark. Never use pure #FFFFFF.</td></tr>
+      <tr><td><span class="swatch" style="background:#0D0D0D;"></span> Obsidian</td><td><code>--obsidian</code></td><td><code>#0D0D0D</code></td><td>Primary background</td></tr>
+      <tr><td><span class="swatch" style="background:#1A1714;"></span> Warm Black</td><td><code>--warm-black</code></td><td><code>#1A1714</code></td><td>Cards, forms, secondary dark</td></tr>
+      <tr><td><span class="swatch" style="background:#F2F0EB;"></span> Off-White</td><td><code>--off-white</code></td><td><code>#F2F0EB</code></td><td>Primary text on dark</td></tr>
+      <tr><td><span class="swatch" style="background:#8A8A8A;"></span> Concrete</td><td><code>--concrete</code></td><td><code>#8A8A8A</code></td><td>Body text, muted labels</td></tr>
+      <tr><td><span class="swatch" style="background:#C17F59;"></span> Copper</td><td><code>--copper</code></td><td><code>#C17F59</code></td><td><strong>PRIMARY ACCENT</strong> — CTAs, buttons, links</td></tr>
+      <tr><td><span class="swatch" style="background:#D4956A;"></span> Copper Light</td><td><code>--copper-light</code></td><td><code>#D4956A</code></td><td>Hover state for copper only</td></tr>
+      <tr><td><span class="swatch" style="background:#00E676;"></span> Signal Green</td><td><code>--signal</code></td><td><code>#00E676</code></td><td>Positive indicators ONLY</td></tr>
     </table>
 
-    <h2>TYPOGRAPHY<span class="accent">.</span></h2>
-    <table class="data-table">
-      <tr><th>Role</th><th>Font</th><th>Rules</th></tr>
-      <tr><td>Display</td><td><code>Bebas Neue</code></td><td>ALL CAPS always. Tracking +2-6px. Declarations only.</td></tr>
-      <tr><td>Body</td><td><code>DM Sans</code></td><td>Weights 300/400/700. Leading 1.6-1.8.</td></tr>
-      <tr><td>Mono</td><td><code>Space Mono</code></td><td>Labels, data, metadata. Never body copy.</td></tr>
+    <h2>Vantage Domain Colors</h2>
+    <p>Used only inside the Vantage Command Center:</p>
+    <table>
+      <tr><th>Domain</th><th>Color</th><th>Hex</th></tr>
+      <tr><td>Operations</td><td><span class="swatch" style="background:#00BFA5;"></span> Teal</td><td><code>#00BFA5</code></td></tr>
+      <tr><td>Finance</td><td><span class="swatch" style="background:#FFD740;"></span> Gold</td><td><code>#FFD740</code></td></tr>
+      <tr><td>People</td><td><span class="swatch" style="background:#FF6E6E;"></span> Coral</td><td><code>#FF6E6E</code></td></tr>
+      <tr><td>Growth</td><td><span class="swatch" style="background:#69F0AE;"></span> Emerald</td><td><code>#69F0AE</code></td></tr>
+      <tr><td>Revenue</td><td><span class="swatch" style="background:#FFD740;"></span> Gold</td><td><code>#FFD740</code></td></tr>
+      <tr><td>Audience</td><td><span class="swatch" style="background:#40C4FF;"></span> Cyan</td><td><code>#40C4FF</code></td></tr>
+      <tr><td>Content</td><td><span class="swatch" style="background:#B388FF;"></span> Purple</td><td><code>#B388FF</code></td></tr>
+      <tr><td>Pipeline</td><td><span class="swatch" style="background:#FF80AB;"></span> Pink</td><td><code>#FF80AB</code></td></tr>
     </table>
 
-    <h2>LOGO — THE CORNERSTONE<span class="accent">.</span></h2>
-    <p>Isometric cornerstone SVG. Two planes meeting at a central ridge. Left face is off-white, right face is copper.</p>
+    <h2>CSS Variables (copy-paste ready)</h2>
+    <pre><code>:root {
+  --obsidian: #0D0D0D;
+  --warm-black: #1A1714;
+  --off-white: #F2F0EB;
+  --concrete: #8A8A8A;
+  --copper: #C17F59;
+  --copper-light: #D4956A;
+  --signal: #00E676;
+}</code></pre>
+
+    <hr>
+
+    <h1>Typography</h1>
+
+    <h3>Bebas Neue (Headlines)</h3>
+    <p>Weight: 400. ALL headlines — always uppercase, always tight tracking.</p>
+    <pre><code>font-family: 'Bebas Neue'; letter-spacing: 6px; text-transform: uppercase;</code></pre>
+
+    <h3>DM Sans (Body)</h3>
+    <p>Weights: 300, 400, 600. Body copy, descriptions, paragraphs.</p>
+    <pre><code>font-family: 'DM Sans'; font-weight: 300;</code></pre>
+
+    <h3>Space Mono (Labels)</h3>
+    <p>Weights: 400, 700. Section labels, eyebrows, monospace UI elements.</p>
+    <pre><code>font-family: 'Space Mono'; font-size: 9px; letter-spacing: 5px; text-transform: uppercase;</code></pre>
+
+    <h3>Font Loading</h3>
+    <pre><code>&lt;link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=DM+Sans:wght@300;400;600&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"&gt;</code></pre>
+
+    <hr>
+
+    <h1>Logo / Brand Mark</h1>
+    <p>The LDW brand uses a <strong>geometric diamond mark</strong> rendered as inline SVG. No traditional logo file — the mark is code-based.</p>
+
+    <div style="text-align:center;padding:40px;background:var(--warm-black);border:1px solid rgba(242,240,235,0.08);border-radius:2px;margin:24px 0;">
+      <svg width="80" height="80" viewBox="0 0 240 240" fill="none">
+        <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+        <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
+        <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/>
+      </svg>
+      <p style="margin-top:16px;font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:6px;color:var(--off-white);">LONNELL WILLIAMS</p>
+    </div>
+
+    <h3>Diamond Mark SVG Code</h3>
     <pre><code>&lt;svg width="28" height="28" viewBox="0 0 240 240" fill="none"&gt;
   &lt;polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/&gt;
   &lt;polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/&gt;
   &lt;polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/&gt;
 &lt;/svg&gt;</code></pre>
 
-    <h2>SIGNATURE ELEMENTS<span class="accent">.</span></h2>
-    <p><strong>Copper period accent:</strong> Every headline ends with a copper-colored period. <code>&lt;span class="accent"&gt;.&lt;/span&gt;</code></p>
-    <p><strong>Diamond mark:</strong> ◆ — Used in Vantage branding, footer, premium eyebrows. 8-10px, copper or off-white.</p>
-    <p><strong>Brand is typographic.</strong> No traditional logo. "LDW" or "LONNELL WILLIAMS" in Bebas Neue with copper period IS the brand mark.</p>
+    <h3>Usage Rules</h3>
+    <ul>
+      <li>Always pair with "LONNELL WILLIAMS" in Bebas Neue at 18px with 4px letter-spacing</li>
+      <li>The mark always links to the homepage (<code>href="/"</code>)</li>
+      <li>Never distort, recolor, or add effects</li>
+      <li>Minimum size: 20x20px</li>
+      <li>On Vantage page, use 20px size; all other pages use 28px</li>
+    </ul>
+
+    <hr>
+
+    <h1>Brand Rules</h1>
+    <h2>Do</h2>
+    <ul>
+      <li>Use Bebas Neue for ALL headlines — always uppercase, always tight tracking</li>
+      <li>Use copper (<code>--copper</code>) as the primary action color</li>
+      <li>Use the period accent pattern: <code>HEADLINE&lt;span class="accent"&gt;.&lt;/span&gt;</code></li>
+      <li>Use the diamond mark &#9670; for premium/Vantage branding</li>
+      <li>Keep dark sections truly dark — <code>--obsidian</code> or <code>--warm-black</code> only</li>
+      <li>Use signal green exclusively for positive data indicators</li>
+      <li>Maintain generous whitespace — sections use 100px+ padding</li>
+    </ul>
+    <h2>Don't</h2>
+    <ul>
+      <li>Never use sentence case for headlines</li>
+      <li>Never use copper for negative indicators or warnings</li>
+      <li>Never mix brand fonts with system fonts in visible UI</li>
+      <li>Never use pure white (#FFFFFF) — use <code>--off-white</code> (#F2F0EB)</li>
+      <li>Never use signal green for text, buttons, or decoration</li>
+      <li>Never add drop shadows to text — the brand is flat and editorial</li>
+    </ul>
+
+    <hr>
+
+    <h1>Signature Elements</h1>
+    <h3>The Period Accent</h3>
+    <p>Every major headline ends with a colored period. Core brand element.</p>
+    <pre><code>&lt;h2&gt;YOUR HEADLINE&lt;span class="accent"&gt;.&lt;/span&gt;&lt;/h2&gt;</code></pre>
+
+    <h3>The Diamond Mark</h3>
+    <p>Symbol: &#9670; — Used in Vantage branding, footer, premium section eyebrows. Typically small (8-10px), copper or off-white colored.</p>
+
+    <h3>Brand Identity is Typographic</h3>
+    <p>There is no traditional logo. The brand is defined by typography, color, and editorial layout. The name "LDW" or "LONNELL WILLIAMS" in Bebas Neue with a copper period accent <strong>IS</strong> the brand mark.</p>
 
   </div>
-  <footer class="page-footer"><span>&copy; 2026 LONNELL WILLIAMS — ADMIN PORTAL</span></footer>
+  <div class="admin-sub-footer">
+    <a href="/admin.html">&larr; Portal</a>
+    <span>ldw.build &mdash; Admin</span>
+  </div>
 </div>
-<script>
-const AUTH_EMAIL='lonnelldwilliams@gmail.com',AUTH_PASS='August11';
-function checkAuth(){if(sessionStorage.getItem('ldw_admin_auth')==='true'){document.getElementById('loginOverlay').classList.add('hidden');document.getElementById('pageWrap').classList.add('active');}}
-function attemptLogin(){const e=document.getElementById('loginEmail').value,p=document.getElementById('loginPass').value;if(e===AUTH_EMAIL&&p===AUTH_PASS){sessionStorage.setItem('ldw_admin_auth','true');document.getElementById('loginOverlay').classList.add('hidden');document.getElementById('pageWrap').classList.add('active');}else{document.getElementById('loginError').style.display='block';}}
-document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')attemptLogin();});
-checkAuth();
-</script>
+<script>if(sessionStorage.getItem('ldw_admin')!=='true'){window.location.href='/admin.html';}</script>
 </body>
 </html>

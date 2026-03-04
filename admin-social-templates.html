@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Templates — Admin | LDW</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root { --obsidian: #0D0D0D; --warm-black: #1A1714; --off-white: #F2F0EB; --concrete: #8A8A8A; --copper: #C17F59; --copper-light: #D4956A; --signal: #00E676; --signal-red: #E85D3A; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+.site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; background: rgba(13,13,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(242,240,235,0.06); }
+.site-nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--off-white); }
+.site-nav-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 4px; }
+.site-nav-links { display: flex; gap: 32px; align-items: center; }
+.site-nav-links a { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.3s; }
+.site-nav-links a:hover { color: var(--off-white); }
+.site-nav-btn { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.site-nav-btn span { display: block; width: 20px; height: 2px; background: var(--off-white); margin: 4px 0; }
+@media (max-width: 768px) {
+  .site-nav { padding: 0 24px; }
+  .site-nav-links { display: none; position: fixed; top: 64px; left: 0; right: 0; flex-direction: column; background: rgba(13,13,13,0.96); padding: 24px; gap: 20px; }
+  .site-nav-links.open { display: flex; }
+  .site-nav-btn { display: block; }
+}
+.admin-sub { padding: 64px 0 0; min-height: 100vh; }
+.admin-sub-header { padding: 48px 48px 32px; border-bottom: 1px solid rgba(242,240,235,0.06); }
+.admin-sub-back { display: inline-flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); text-decoration: none; margin-bottom: 24px; transition: color 0.3s; }
+.admin-sub-back:hover { color: var(--copper-light); }
+.admin-sub-eyebrow { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--copper); margin-bottom: 12px; }
+.admin-sub-title { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 6px; line-height: 1; }
+.admin-sub-title .accent { color: var(--copper); }
+.admin-content { padding: 40px 48px 80px; }
+.admin-content h1 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 4px; text-transform: uppercase; margin: 48px 0 16px; color: var(--off-white); }
+.admin-content h1:first-child { margin-top: 0; }
+.admin-content h2 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; text-transform: uppercase; margin: 36px 0 12px; color: var(--off-white); }
+.admin-content h3 { font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; margin: 24px 0 8px; color: var(--off-white); }
+.admin-content p { font-weight: 300; font-size: 15px; line-height: 1.7; color: var(--concrete); margin-bottom: 16px; max-width: 800px; }
+.admin-content strong { color: var(--off-white); font-weight: 600; }
+.admin-content a { color: var(--copper); text-decoration: none; transition: color 0.3s; }
+.admin-content a:hover { color: var(--copper-light); }
+.admin-content hr { border: none; border-top: 1px solid rgba(242,240,235,0.08); margin: 32px 0; }
+.admin-content ul, .admin-content ol { padding-left: 24px; margin-bottom: 16px; }
+.admin-content li { font-weight: 300; font-size: 15px; line-height: 1.7; color: var(--concrete); margin-bottom: 8px; }
+.admin-content code { font-family: 'Space Mono', monospace; font-size: 13px; background: rgba(242,240,235,0.06); padding: 2px 8px; border-radius: 2px; color: var(--copper); }
+.admin-content table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 14px; max-width: 900px; }
+.admin-content th { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--copper); text-align: left; padding: 12px 16px; border-bottom: 2px solid rgba(242,240,235,0.1); }
+.admin-content td { padding: 12px 16px; border-bottom: 1px solid rgba(242,240,235,0.06); color: var(--concrete); font-weight: 300; }
+.admin-content tr:hover td { background: rgba(242,240,235,0.02); }
+.admin-sub-footer { padding: 24px 48px; border-top: 1px solid rgba(242,240,235,0.06); display: flex; justify-content: space-between; align-items: center; }
+.admin-sub-footer a { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.3s; }
+.admin-sub-footer a:hover { color: var(--off-white); }
+.admin-sub-footer span { font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(138,138,138,0.5); }
+
+/* ===== TEMPLATE MOCKUPS ===== */
+.tpl-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin: 24px 0 40px;
+}
+.tpl-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tpl-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--copper);
+  text-transform: uppercase;
+  margin-top: 12px;
+}
+.tpl-desc-sm {
+  font-size: 11px;
+  color: var(--concrete);
+  max-width: 280px;
+  text-align: center;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* Base post frame */
+.post {
+  width: 280px;
+  height: 350px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* T1: Declaration */
+.t1 { background: var(--obsidian); display: flex; flex-direction: column; justify-content: center; padding: 0; position: relative; }
+.t1::before { content:'BUILD'; position: absolute; bottom: -24px; left: -8px; font-family: 'Bebas Neue', sans-serif; font-size: 150px; color: rgba(193,127,89,0.06); letter-spacing: 12px; pointer-events: none; }
+.t1 .inner { padding: 28px; position: relative; z-index: 1; }
+.t1 .top-line { width: 36px; height: 3px; background: var(--signal-red); margin-bottom: 20px; }
+.t1 .headline { font-family: 'Bebas Neue', sans-serif; font-size: 50px; line-height: 0.88; letter-spacing: 2px; }
+.t1 .headline .sig { color: var(--signal-red); }
+.t1 .headline .cop { color: var(--copper); }
+.t1 .bottom { position: absolute; bottom: 20px; left: 28px; right: 28px; display: flex; justify-content: space-between; align-items: flex-end; }
+.t1 .attr { font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: 3px; color: var(--copper); }
+.t1 .mark { width: 24px; height: 24px; border: 2px solid var(--copper); display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 12px; color: var(--copper); }
+
+/* T2: Split */
+.t2 { background: var(--obsidian); display: grid; grid-template-columns: 1fr 1fr; }
+.t2 .photo-side { background: linear-gradient(135deg, #2a1f16 0%, #0D0D0D 60%); position: relative; overflow: hidden; }
+.t2 .photo-side::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 40%, rgba(193,127,89,0.3) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(232,93,58,0.15) 0%, transparent 40%); }
+.t2 .photo-side .corner-mark { position: absolute; top: 14px; left: 14px; width: 16px; height: 16px; border-top: 2px solid var(--copper); border-left: 2px solid var(--copper); }
+.t2 .photo-side .photo-txt { position: absolute; bottom: 10px; left: 10px; font-family: 'Space Mono', monospace; font-size: 6px; letter-spacing: 2px; color: rgba(242,240,235,0.25); writing-mode: vertical-lr; transform: rotate(180deg); }
+.t2 .type-side { padding: 22px 18px; display: flex; flex-direction: column; justify-content: center; position: relative; }
+.t2 .type-side::before { content: ''; position: absolute; left: 0; top: 20%; bottom: 20%; width: 2px; background: var(--copper); }
+.t2 .pillar { font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: 3px; color: var(--signal-red); margin-bottom: 12px; }
+.t2 .headline { font-family: 'Bebas Neue', sans-serif; font-size: 30px; line-height: 0.9; letter-spacing: 1px; }
+.t2 .headline .sig { color: var(--signal-red); }
+.t2 .body { font-size: 10px; color: var(--concrete); margin-top: 10px; line-height: 1.4; font-weight: 300; }
+.t2 .attr { font-family: 'Space Mono', monospace; font-size: 6px; letter-spacing: 3px; color: var(--copper); margin-top: auto; }
+
+/* T3: Manifesto */
+.t3 { background: var(--copper); position: relative; display: flex; flex-direction: column; justify-content: center; padding: 28px; overflow: hidden; }
+.t3::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.03) 4px, rgba(0,0,0,0.03) 5px); pointer-events: none; }
+.t3::after { content: 'ZAG'; position: absolute; right: -16px; bottom: -8px; font-family: 'Bebas Neue', sans-serif; font-size: 160px; color: rgba(0,0,0,0.06); letter-spacing: 8px; pointer-events: none; }
+.t3 .top-rule { position: absolute; top: 20px; left: 28px; right: 28px; height: 1px; background: rgba(0,0,0,0.15); }
+.t3 .headline { font-family: 'Bebas Neue', sans-serif; font-size: 44px; line-height: 0.88; letter-spacing: 2px; color: var(--obsidian); position: relative; z-index: 1; }
+.t3 .headline .inv { color: var(--off-white); }
+.t3 .body { font-size: 10px; color: rgba(13,13,13,0.7); margin-top: 12px; line-height: 1.4; position: relative; z-index: 1; }
+.t3 .bottom { position: absolute; bottom: 20px; left: 28px; right: 28px; display: flex; justify-content: space-between; border-top: 1px solid rgba(0,0,0,0.15); padding-top: 10px; }
+.t3 .bottom span { font-family: 'Space Mono', monospace; font-size: 6px; letter-spacing: 3px; color: rgba(13,13,13,0.5); }
+
+/* T4: Confrontation */
+.t4 { background: var(--signal-red); position: relative; display: flex; flex-direction: column; justify-content: center; padding: 28px; overflow: hidden; }
+.t4::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 80%, rgba(0,0,0,0.2) 0%, transparent 50%), repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(0,0,0,0.02) 3px, rgba(0,0,0,0.02) 4px); pointer-events: none; }
+.t4 .tag { font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: 4px; color: rgba(242,240,235,0.5); margin-bottom: 20px; position: relative; z-index: 1; }
+.t4 .headline { font-family: 'Bebas Neue', sans-serif; font-size: 48px; line-height: 0.88; letter-spacing: 2px; color: var(--off-white); position: relative; z-index: 1; }
+.t4 .headline .dark { color: var(--obsidian); }
+.t4 .bottom { position: absolute; bottom: 20px; left: 28px; right: 28px; display: flex; justify-content: space-between; align-items: flex-end; }
+.t4 .bottom .attr { font-family: 'Space Mono', monospace; font-size: 6px; letter-spacing: 3px; color: rgba(242,240,235,0.4); }
+.t4 .bottom .block { width: 20px; height: 20px; background: var(--obsidian); }
+
+/* T5: Editorial */
+.t5 { position: relative; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
+.t5 .bg { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,13,13,0.1) 0%, rgba(13,13,13,0.85) 60%, rgba(13,13,13,0.98) 100%), linear-gradient(135deg, #2a1f16 0%, #1a1410 30%, #0D0D0D 70%); }
+.t5 .bg::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 30%, rgba(193,127,89,0.25) 0%, transparent 50%), radial-gradient(circle at 20% 60%, rgba(232,93,58,0.1) 0%, transparent 40%); }
+.t5 .photo-ph { position: absolute; top: 0; left: 0; right: 0; height: 55%; display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 3px; color: rgba(193,127,89,0.25); border-bottom: 1px solid rgba(193,127,89,0.08); }
+.t5 .content { position: relative; z-index: 1; padding: 28px; }
+.t5 .headline { font-family: 'Bebas Neue', sans-serif; font-size: 42px; line-height: 0.88; letter-spacing: 2px; }
+.t5 .headline .sig { color: var(--signal-red); }
+.t5 .headline .cop { color: var(--copper); }
+.t5 .body { font-size: 10px; color: var(--concrete); margin-top: 10px; line-height: 1.4; }
+.t5 .attr { font-family: 'Space Mono', monospace; font-size: 6px; letter-spacing: 3px; color: var(--copper); margin-top: 16px; }
+
+/* T6: Stacker */
+.t6 { background: var(--obsidian); display: flex; flex-direction: column; justify-content: center; padding: 20px 28px; position: relative; overflow: hidden; }
+.t6::before { content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: linear-gradient(180deg, rgba(193,127,89,0.04) 0%, transparent 100%); pointer-events: none; }
+.t6 .top-bar { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--signal-red), var(--copper)); }
+.t6 .headline { font-family: 'Bebas Neue', sans-serif; font-size: 60px; line-height: 0.82; letter-spacing: 3px; position: relative; z-index: 1; }
+.t6 .headline .sig { color: var(--signal-red); }
+.t6 .headline .cop { color: var(--copper); }
+.t6 .sub { font-size: 10px; font-weight: 300; color: var(--concrete); margin-top: 14px; line-height: 1.4; max-width: 220px; position: relative; z-index: 1; }
+.t6 .bottom { position: absolute; bottom: 16px; left: 28px; right: 28px; display: flex; justify-content: space-between; align-items: center; }
+.t6 .attr { font-family: 'Space Mono', monospace; font-size: 6px; letter-spacing: 3px; color: var(--copper); }
+.t6 .cs { width: 16px; height: 16px; position: relative; }
+.t6 .cs::before, .t6 .cs::after { content: ''; position: absolute; background: var(--copper); }
+.t6 .cs::before { top: 0; left: 0; width: 100%; height: 2px; }
+.t6 .cs::after { top: 0; left: 0; width: 2px; height: 100%; }
+
+/* T7: Carousel Opener */
+.t7 { background: var(--warm-black); display: flex; flex-direction: column; position: relative; overflow: hidden; }
+.t7 .accent-block { height: 6px; background: var(--signal-red); }
+.t7 .num-bg { position: absolute; top: 30px; right: -8px; font-family: 'Bebas Neue', sans-serif; font-size: 220px; color: rgba(232,93,58,0.05); line-height: 1; pointer-events: none; }
+.t7 .inner { padding: 28px; flex: 1; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 1; }
+.t7 .swipe { font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: 4px; color: var(--signal-red); margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
+.t7 .swipe .arrow { display: inline-block; width: 16px; height: 1px; background: var(--signal-red); position: relative; }
+.t7 .swipe .arrow::after { content: ''; position: absolute; right: 0; top: -2px; border-left: 5px solid var(--signal-red); border-top: 2px solid transparent; border-bottom: 2px solid transparent; }
+.t7 .headline { font-family: 'Bebas Neue', sans-serif; font-size: 40px; line-height: 0.88; letter-spacing: 2px; }
+.t7 .headline .sig { color: var(--signal-red); }
+.t7 .headline .cop { color: var(--copper); }
+.t7 .body { font-size: 11px; color: var(--concrete); margin-top: 14px; line-height: 1.5; font-weight: 300; }
+.t7 .bottom { position: absolute; bottom: 20px; left: 28px; right: 28px; display: flex; justify-content: space-between; }
+.t7 .bottom span { font-family: 'Space Mono', monospace; font-size: 6px; letter-spacing: 3px; color: var(--concrete); }
+
+/* T8: Inverted Power */
+.t8 { background: var(--off-white); display: flex; flex-direction: column; justify-content: center; padding: 28px; position: relative; overflow: hidden; }
+.t8::before { content: ''; position: absolute; bottom: 0; right: 0; width: 100px; height: 100px; background: var(--copper); opacity: 0.08; }
+.t8 .stripe { position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--copper); }
+.t8 .tag { font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: 3px; color: var(--copper); margin-bottom: 16px; position: relative; z-index: 1; }
+.t8 .headline { font-family: 'Bebas Neue', sans-serif; font-size: 46px; line-height: 0.88; letter-spacing: 2px; color: var(--obsidian); position: relative; z-index: 1; }
+.t8 .headline .sig { color: var(--signal-red); }
+.t8 .headline .cop { color: var(--copper); }
+.t8 .body { font-size: 10px; color: var(--concrete); margin-top: 12px; line-height: 1.4; font-weight: 400; position: relative; z-index: 1; }
+.t8 .bottom { position: absolute; bottom: 20px; left: 28px; right: 28px; display: flex; justify-content: space-between; border-top: 1px solid rgba(13,13,13,0.1); padding-top: 10px; }
+.t8 .bottom span { font-family: 'Space Mono', monospace; font-size: 6px; letter-spacing: 3px; color: var(--copper); }
+
+/* ===== CONTENT BANK ===== */
+.bank-item {
+  display: grid;
+  grid-template-columns: 40px 1fr 70px 110px;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(193,127,89,0.06);
+}
+.bank-num { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: rgba(193,127,89,0.4); }
+.bank-text { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 1px; line-height: 1.1; }
+.bank-pillar { font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: 2px; color: var(--concrete); }
+.bank-tpl { font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: 1px; color: var(--copper); }
+
+@media (max-width: 768px) {
+  .admin-sub-header { padding: 48px 24px 24px; }
+  .admin-content { padding: 24px 24px 60px; }
+  .admin-sub-footer { padding: 24px; }
+  .tpl-grid { gap: 24px; }
+  .post { width: 240px; height: 300px; }
+  .t1 .headline { font-size: 40px; }
+  .t2 .headline { font-size: 24px; }
+  .t3 .headline { font-size: 36px; }
+  .t4 .headline { font-size: 38px; }
+  .t5 .headline { font-size: 34px; }
+  .t6 .headline { font-size: 48px; }
+  .t7 .headline { font-size: 32px; }
+  .t8 .headline { font-size: 38px; }
+  .bank-item { grid-template-columns: 30px 1fr; }
+  .bank-pillar, .bank-tpl { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="/admin.html" class="site-nav-brand"><span class="site-nav-name">LDW ADMIN</span></a>
+  <button class="site-nav-btn" onclick="document.querySelector('.site-nav-links').classList.toggle('open')"><span></span><span></span><span></span></button>
+  <div class="site-nav-links">
+    <a href="/admin.html">Portal</a>
+    <a href="/admin-brand-identity.html">Brand</a>
+    <a href="/admin-site-architecture.html">Architecture</a>
+    <a href="/admin-social-templates.html" class="active" style="color:var(--off-white);">Templates</a>
+    <a href="/admin-outstanding.html">Outstanding</a>
+  </div>
+</nav>
+
+<div class="admin-sub">
+
+  <!-- HEADER -->
+  <div class="admin-sub-header">
+    <a href="/admin.html" class="admin-sub-back">&larr; Back to Portal</a>
+    <div class="admin-sub-eyebrow">Social Media</div>
+    <div class="admin-sub-title">BOLD TYPE TEMPLATES<span class="accent">.</span></div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="admin-content">
+
+    <h1>Overview</h1>
+    <p>8 typography-forward templates for Instagram and Threads. Built on the LW brand identity system &mdash; Bebas Neue, Obsidian, Copper, Signal Red. Each template is designed to be recreated in <strong>Canva</strong> or <strong>Adobe Express</strong> using the exact specs below.</p>
+    <p>The 2026 typography trend is neo-brutalist: oversized type, raw layouts, intentional friction, editorial minimalism. Your brand already has this DNA. These templates are the execution layer.</p>
+
+    <hr>
+
+    <!-- ===== TEMPLATES 01-04 ===== -->
+    <h1>Templates 01&ndash;04 &mdash; The Core Four</h1>
+    <p>These four handle 80% of your content. Rotate through them for variety while maintaining brand consistency.</p>
+
+    <div class="tpl-grid">
+
+      <!-- T1 -->
+      <div class="tpl-wrap">
+        <div class="post t1">
+          <div class="inner">
+            <div class="top-line"></div>
+            <div class="headline">VISION<br>WITHOUT<br>EXECUTION<br>IS A<br><span class="cop">DAYDREAM</span><span class="sig">.</span></div>
+          </div>
+          <div class="bottom">
+            <div class="attr">LONNELL WILLIAMS</div>
+            <div class="mark">LW</div>
+          </div>
+        </div>
+        <div class="tpl-label">01 &mdash; The Declaration</div>
+        <div class="tpl-desc-sm">Full-bleed oversized type. Ghost text behind. Signal red period. Default power statement.</div>
+      </div>
+
+      <!-- T2 -->
+      <div class="tpl-wrap">
+        <div class="post t2">
+          <div class="photo-side">
+            <div class="corner-mark"></div>
+            <div class="photo-txt">Your photo</div>
+          </div>
+          <div class="type-side">
+            <div class="pillar">ZAG</div>
+            <div class="headline">YOUR<br>ANOINTING<br>NEEDS A<br>SYSTEM<span class="sig">.</span></div>
+            <div class="body">Gifts without infrastructure are performances, not ministries.</div>
+            <div class="attr">LONNELL WILLIAMS</div>
+          </div>
+        </div>
+        <div class="tpl-label">02 &mdash; The Split</div>
+        <div class="tpl-desc-sm">Half photo, half type. Magazine editorial. Copper vertical rule. Swap photo on left.</div>
+      </div>
+
+      <!-- T3 -->
+      <div class="tpl-wrap">
+        <div class="post t3">
+          <div class="top-rule"></div>
+          <div class="headline">SERVANT<br>LEADERSHIP<br>DOESN'T<br>MEAN <span class="inv">THREE<br>JOBS</span> FOR<br>ONE SALARY<span style="color:var(--off-white);">.</span></div>
+          <div class="body">Lead with integrity. But also lead with boundaries.</div>
+          <div class="bottom">
+            <span>LONNELL WILLIAMS</span>
+            <span>LDW.BUILD</span>
+          </div>
+        </div>
+        <div class="tpl-label">03 &mdash; The Manifesto</div>
+        <div class="tpl-desc-sm">Full copper background. Black type. Scan-line texture. Scroll-stopper energy.</div>
+      </div>
+
+      <!-- T4 -->
+      <div class="tpl-wrap">
+        <div class="post t4">
+          <div class="tag">HARD TRUTH</div>
+          <div class="headline">STOP<br>CALLING<br>EVERY<br><span class="dark">THING</span><br>A SEASON<span class="dark">.</span></div>
+          <div class="bottom">
+            <div class="attr">LONNELL WILLIAMS</div>
+            <div class="block"></div>
+          </div>
+        </div>
+        <div class="tpl-label">04 &mdash; The Confrontation</div>
+        <div class="tpl-desc-sm">Full signal red. Maximum urgency. 1x/week max. This is the alarm.</div>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <!-- ===== TEMPLATES 05-08 ===== -->
+    <h1>Templates 05&ndash;08 &mdash; The Expansion</h1>
+    <p>Photo-forward, carousel openers, and light-mode variants. Visual range while staying unmistakably yours.</p>
+
+    <div class="tpl-grid">
+
+      <!-- T5 -->
+      <div class="tpl-wrap">
+        <div class="post t5">
+          <div class="bg"></div>
+          <div class="photo-ph">&uarr; Your photo here &uarr;</div>
+          <div class="content">
+            <div class="headline">WEIGHT<br>WAS MADE<br>TO BE<br><span class="cop">CARRIED</span><span class="sig">.</span></div>
+            <div class="body">Hard decisions. High stakes. You stand in it.</div>
+            <div class="attr">LONNELL WILLIAMS</div>
+          </div>
+        </div>
+        <div class="tpl-label">05 &mdash; The Editorial</div>
+        <div class="tpl-desc-sm">Full photo background. Dark gradient overlay. Type at bottom. Cinematic feel.</div>
+      </div>
+
+      <!-- T6 -->
+      <div class="tpl-wrap">
+        <div class="post t6">
+          <div class="top-bar"></div>
+          <div class="headline"><span class="cop">BUILD</span><br>WHAT<br><span class="sig">DOESN'T</span><br>EXIST<span class="sig">.</span></div>
+          <div class="sub">The gap is the assignment. What's missing is what you were sent to create.</div>
+          <div class="bottom">
+            <div class="attr">LONNELL WILLIAMS</div>
+            <div class="cs"></div>
+          </div>
+        </div>
+        <div class="tpl-label">06 &mdash; The Stacker</div>
+        <div class="tpl-desc-sm">Massive stacked type. Gradient top bar. Color-coded emphasis. Cornerstone mark.</div>
+      </div>
+
+      <!-- T7 -->
+      <div class="tpl-wrap">
+        <div class="post t7">
+          <div class="accent-block"></div>
+          <div class="num-bg">5</div>
+          <div class="inner">
+            <div class="swipe">SWIPE <span class="arrow"></span></div>
+            <div class="headline"><span class="cop">5</span> SIGNS<br>YOU'RE<br><span class="sig">BUILDING</span><br>AND NOT<br>JUST BUSY</div>
+            <div class="body">Systems that survive without you. That's the standard.</div>
+          </div>
+          <div class="bottom">
+            <span>LONNELL WILLIAMS</span>
+            <span>01 / 06</span>
+          </div>
+        </div>
+        <div class="tpl-label">07 &mdash; The Carousel Opener</div>
+        <div class="tpl-desc-sm">First slide of any carousel. Swipe arrow. Ghost number. Signal red top bar.</div>
+      </div>
+
+      <!-- T8 -->
+      <div class="tpl-wrap">
+        <div class="post t8">
+          <div class="stripe"></div>
+          <div class="tag">WHAT I CARRY</div>
+          <div class="headline">I'D RATHER<br>BE AN<br><span class="cop">EXCELLENT</span><br>#2 THAN AN<br>AVERAGE <span class="sig">#1.</span></div>
+          <div class="body">The operator's creed. Excellence in the #2 seat is a choice.</div>
+          <div class="bottom">
+            <span>LONNELL WILLIAMS</span>
+            <span>LDW.BUILD</span>
+          </div>
+        </div>
+        <div class="tpl-label">08 &mdash; The Inverted Power</div>
+        <div class="tpl-desc-sm">Off-white background. Obsidian type. Copper sidebar. Feed contrast.</div>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <!-- ===== CANVA / ADOBE SPECS ===== -->
+    <h1>Canva + Adobe Express Build Specs</h1>
+
+    <h2>Canvas Sizes</h2>
+    <table>
+      <tr><th>Format</th><th>Size</th><th>Ratio</th></tr>
+      <tr><td>IG Post</td><td><code>1080 &times; 1350 px</code></td><td>4:5</td></tr>
+      <tr><td>IG Story / Reel Cover</td><td><code>1080 &times; 1920 px</code></td><td>9:16</td></tr>
+      <tr><td>Threads Image</td><td><code>1080 &times; 1080 px</code></td><td>1:1</td></tr>
+      <tr><td>Carousel Slides</td><td><code>1080 &times; 1350 px</code></td><td>4:5</td></tr>
+    </table>
+
+    <h2>Colors</h2>
+    <table>
+      <tr><th>Name</th><th>Hex</th><th>Usage</th></tr>
+      <tr><td><span style="display:inline-block;width:14px;height:14px;background:#0D0D0D;border:1px solid rgba(242,240,235,0.2);vertical-align:middle;margin-right:8px;"></span> Obsidian</td><td><code>#0D0D0D</code></td><td>Default background. 70% of posts.</td></tr>
+      <tr><td><span style="display:inline-block;width:14px;height:14px;background:#1A1714;border:1px solid rgba(242,240,235,0.2);vertical-align:middle;margin-right:8px;"></span> Warm Black</td><td><code>#1A1714</code></td><td>Carousel openers, depth variant</td></tr>
+      <tr><td><span style="display:inline-block;width:14px;height:14px;background:#C17F59;vertical-align:middle;margin-right:8px;"></span> Copper</td><td><code>#C17F59</code></td><td>Sidebars, labels, attribution, highlight words. Full BG for Manifesto.</td></tr>
+      <tr><td><span style="display:inline-block;width:14px;height:14px;background:#E85D3A;vertical-align:middle;margin-right:8px;"></span> Signal Red</td><td><code>#E85D3A</code></td><td>Periods, commas, ONE highlight word max. Full BG for Confrontation.</td></tr>
+      <tr><td><span style="display:inline-block;width:14px;height:14px;background:#F2F0EB;vertical-align:middle;margin-right:8px;"></span> Off-White</td><td><code>#F2F0EB</code></td><td>All text on dark. Never pure white. BG for Inverted Power.</td></tr>
+      <tr><td><span style="display:inline-block;width:14px;height:14px;background:#8A8A8A;vertical-align:middle;margin-right:8px;"></span> Concrete</td><td><code>#8A8A8A</code></td><td>Supporting body copy, subtext</td></tr>
+    </table>
+
+    <h2>Typography</h2>
+    <table>
+      <tr><th>Role</th><th>Font</th><th>Size (Canva)</th><th>Rules</th></tr>
+      <tr><td>Headlines</td><td><code>Bebas Neue</code></td><td><code>120&ndash;220pt</code></td><td>ALWAYS all caps. Letter spacing: +50 to +100</td></tr>
+      <tr><td>Body Copy</td><td><code>DM Sans Light</code></td><td><code>28&ndash;36pt</code></td><td>Weight 300. Line height 1.5. Mixed case.</td></tr>
+      <tr><td>Labels / Metadata</td><td><code>Space Mono</code></td><td><code>16&ndash;20pt</code></td><td>Letter spacing +300 to +500. ALL CAPS.</td></tr>
+      <tr><td>Attribution</td><td><code>Space Mono</code></td><td><code>14&ndash;16pt</code></td><td>Letter spacing +400. Copper color. Bottom of layout.</td></tr>
+    </table>
+
+    <h2>Layout Elements</h2>
+    <table>
+      <tr><th>Element</th><th>Spec</th></tr>
+      <tr><td>Safe Zone / Padding</td><td><code>100px</code> on all sides &mdash; no text in outer 100px</td></tr>
+      <tr><td>Sidebar Stripe</td><td><code>16px wide</code>, left edge, full height, Copper</td></tr>
+      <tr><td>Top Bar</td><td><code>12px tall</code>, full width, Signal Red or gradient (Signal &rarr; Copper)</td></tr>
+      <tr><td>Accent Line</td><td><code>60px &times; 4px</code>, Signal Red, above headline</td></tr>
+      <tr><td>Ghost Text</td><td>Bebas Neue at <code>500&ndash;700pt</code>, opacity <code>3&ndash;6%</code>, single word bleeding off edges</td></tr>
+      <tr><td>Scan Lines (texture)</td><td>Horizontal lines, 1px, 4&ndash;5px gap, <code>2&ndash;3%</code> opacity over Copper/Signal BGs</td></tr>
+      <tr><td>Photo Overlay</td><td>Linear gradient: transparent &rarr; <code>#0D0D0D</code> at 85&ndash;98% opacity. Start at 50&ndash;60% from top.</td></tr>
+    </table>
+
+    <h2>Canva Pro Tips</h2>
+    <ul>
+      <li><strong>Brand Kit:</strong> Add all 5 hex codes + 3 fonts. Set Obsidian as default background.</li>
+      <li><strong>Ghost Text:</strong> Add huge Bebas Neue text, color same as background, drop opacity to 3&ndash;6%. Position off-canvas edges.</li>
+      <li><strong>Sidebar Stripe:</strong> Rectangle element, 16px wide, full height, snap to left edge, Copper.</li>
+      <li><strong>Photo Templates:</strong> Add photo in upper half. Add black rectangle over it, transparency 85%. Bring type to front.</li>
+      <li><strong>Scan Lines:</strong> Search &ldquo;line texture&rdquo; in Canva elements, or create repeating thin rectangles at 2&ndash;3% opacity.</li>
+      <li><strong>Batch Workflow:</strong> Duplicate templates. Change only the text. Export all at once as PNG. 10 posts in 20 minutes.</li>
+    </ul>
+
+    <h2>Adobe Express Tips</h2>
+    <ul>
+      <li><strong>Brand Kit:</strong> Add 5 colors + 3 fonts under Brand &rarr; Brand Kit.</li>
+      <li><strong>Resize:</strong> Design at 1080&times;1350, then use Resize for Stories (1080&times;1920) and Square (1080&times;1080).</li>
+      <li><strong>Ghost Text:</strong> Same approach &mdash; large text element, low opacity, behind main content layer.</li>
+    </ul>
+
+    <hr>
+
+    <!-- ===== CONTENT BANK ===== -->
+    <h1>Content Bank &mdash; 25 Statements, Template-Mapped</h1>
+    <p>Each statement is pre-assigned to the template that hits hardest for that content. Pull from this bank during Saturday batch sessions.</p>
+
+    <div style="margin-top:20px;">
+      <div class="bank-item"><div class="bank-num">01</div><div class="bank-text">VISION WITHOUT EXECUTION IS A DAYDREAM.</div><div class="bank-pillar">BUILD</div><div class="bank-tpl">T1 DECLARATION</div></div>
+      <div class="bank-item"><div class="bank-num">02</div><div class="bank-text">INFRASTRUCTURE IS THE SERMON.</div><div class="bank-pillar">BUILD</div><div class="bank-tpl">T6 STACKER</div></div>
+      <div class="bank-item"><div class="bank-num">03</div><div class="bank-text">YOUR ANOINTING NEEDS A SYSTEM.</div><div class="bank-pillar">ZAG</div><div class="bank-tpl">T3 MANIFESTO</div></div>
+      <div class="bank-item"><div class="bank-num">04</div><div class="bank-text">STOP CALLING EVERYTHING A SEASON.</div><div class="bank-pillar">ZAG</div><div class="bank-tpl">T4 CONFRONTATION</div></div>
+      <div class="bank-item"><div class="bank-num">05</div><div class="bank-text">I'D RATHER BE AN EXCELLENT #2 THAN AN AVERAGE #1.</div><div class="bank-pillar">LEAD</div><div class="bank-tpl">T8 INVERTED</div></div>
+      <div class="bank-item"><div class="bank-num">06</div><div class="bank-text">WEIGHT WAS MADE TO BE CARRIED.</div><div class="bank-pillar">LEAD</div><div class="bank-tpl">T5 EDITORIAL</div></div>
+      <div class="bank-item"><div class="bank-num">07</div><div class="bank-text">BUILD WHAT DOESN'T EXIST.</div><div class="bank-pillar">BUILD</div><div class="bank-tpl">T6 STACKER</div></div>
+      <div class="bank-item"><div class="bank-num">08</div><div class="bank-text">ASSIGNED, NOT WANDERING.</div><div class="bank-pillar">WORD</div><div class="bank-tpl">T1 DECLARATION</div></div>
+      <div class="bank-item"><div class="bank-num">09</div><div class="bank-text">NEHEMIAH DIDN'T FORM A COMMITTEE.</div><div class="bank-pillar">WORD</div><div class="bank-tpl">T3 MANIFESTO</div></div>
+      <div class="bank-item"><div class="bank-num">10</div><div class="bank-text">THE GAP IS THE ASSIGNMENT.</div><div class="bank-pillar">BUILD</div><div class="bank-tpl">T1 DECLARATION</div></div>
+      <div class="bank-item"><div class="bank-num">11</div><div class="bank-text">ANYTHING, EVERYTHING, OR NOTHING AT ALL.</div><div class="bank-pillar">LEAD</div><div class="bank-tpl">T6 STACKER</div></div>
+      <div class="bank-item"><div class="bank-num">12</div><div class="bank-text">COMPENSATION IS CONFESSION.</div><div class="bank-pillar">ZAG</div><div class="bank-tpl">T4 CONFRONTATION</div></div>
+      <div class="bank-item"><div class="bank-num">13</div><div class="bank-text">SERVANT LEADERSHIP DOESN'T MEAN THREE JOBS FOR ONE SALARY.</div><div class="bank-pillar">ZAG</div><div class="bank-tpl">T3 MANIFESTO</div></div>
+      <div class="bank-item"><div class="bank-num">14</div><div class="bank-text">LAND THE PLANE.</div><div class="bank-pillar">BUILD</div><div class="bank-tpl">T1 DECLARATION</div></div>
+      <div class="bank-item"><div class="bank-num">15</div><div class="bank-text">WORDS BUILD WORLDS.</div><div class="bank-pillar">LEAD</div><div class="bank-tpl">T6 STACKER</div></div>
+      <div class="bank-item"><div class="bank-num">16</div><div class="bank-text">MAKE THE IMPOSSIBLE LOOK ROUTINE.</div><div class="bank-pillar">BUILD</div><div class="bank-tpl">T8 INVERTED</div></div>
+      <div class="bank-item"><div class="bank-num">17</div><div class="bank-text">I DON'T HAVE LIMITED CAPACITY.</div><div class="bank-pillar">BUILD</div><div class="bank-tpl">T4 CONFRONTATION</div></div>
+      <div class="bank-item"><div class="bank-num">18</div><div class="bank-text">ARISE AND BUILD.</div><div class="bank-pillar">WORD</div><div class="bank-tpl">T6 STACKER</div></div>
+      <div class="bank-item"><div class="bank-num">19</div><div class="bank-text">SANBALLAT IS STILL TALKING.</div><div class="bank-pillar">WORD</div><div class="bank-tpl">T3 MANIFESTO</div></div>
+      <div class="bank-item"><div class="bank-num">20</div><div class="bank-text">MOSES DIDN'T NEED A BIGGER STAFF. HE NEEDED TO USE THE ONE HE HAD.</div><div class="bank-pillar">WORD</div><div class="bank-tpl">T2 SPLIT</div></div>
+      <div class="bank-item"><div class="bank-num">21</div><div class="bank-text">DOCUMENTATION IS LOVE. CHAOS IS NEGLECT.</div><div class="bank-pillar">BUILD</div><div class="bank-tpl">T3 MANIFESTO</div></div>
+      <div class="bank-item"><div class="bank-num">22</div><div class="bank-text">YOUR CAPACITY ISN'T THE CEILING. YOUR SYSTEMS ARE.</div><div class="bank-pillar">BUILD</div><div class="bank-tpl">T8 INVERTED</div></div>
+      <div class="bank-item"><div class="bank-num">23</div><div class="bank-text">THE EXCELLENT #2 ISN'T WAITING FOR THE #1 SEAT. THEY'RE BUILDING THE TABLE.</div><div class="bank-pillar">LEAD</div><div class="bank-tpl">T5 EDITORIAL</div></div>
+      <div class="bank-item"><div class="bank-num">24</div><div class="bank-text">GOD BUILT CREATION IN SEQUENTIAL ORDER. YOUR MINISTRY SHOULDN'T BE RANDOM.</div><div class="bank-pillar">WORD</div><div class="bank-tpl">T2 SPLIT</div></div>
+      <div class="bank-item"><div class="bank-num">25</div><div class="bank-text">5 SIGNS YOU'RE BUILDING AND NOT JUST BUSY.</div><div class="bank-pillar">BUILD</div><div class="bank-tpl">T7 CAROUSEL</div></div>
+    </div>
+
+    <hr>
+
+    <!-- ===== POSTING RHYTHM ===== -->
+    <h1>Weekly Template Rotation</h1>
+
+    <h2>Instagram &mdash; 4 Posts/Week</h2>
+    <table>
+      <tr><th>Day</th><th>Template</th><th>Notes</th></tr>
+      <tr><td>Monday</td><td>T1 Declaration or T6 Stacker</td><td>Open the week with a power statement</td></tr>
+      <tr><td>Wednesday</td><td>T2 Split or T5 Editorial</td><td>Photo-forward mid-week. Personal connection.</td></tr>
+      <tr><td>Friday</td><td>T3 Manifesto or T4 Confrontation</td><td>End the week with heat. Zag energy.</td></tr>
+      <tr><td>Saturday</td><td>T7 Carousel</td><td>Teaching content. Numbered frameworks. Swipeable.</td></tr>
+    </table>
+
+    <h2>Feed Ratio Rules</h2>
+    <table>
+      <tr><th>Category</th><th>Ratio</th><th>Templates</th></tr>
+      <tr><td>Dark templates</td><td>70%</td><td>T1, T2, T5, T6, T7</td></tr>
+      <tr><td>Color templates</td><td>15%</td><td>T3 (Copper), T4 (Signal Red) &mdash; scroll-stoppers</td></tr>
+      <tr><td>Light templates</td><td>15%</td><td>T8 (Off-White) &mdash; visual contrast in feed</td></tr>
+      <tr><td>Photo-forward</td><td>50%</td><td>2 of every 4 posts include a photo (T2 or T5)</td></tr>
+    </table>
+
+    <h2>Saturday Batch Production</h2>
+    <ul>
+      <li><strong>Time:</strong> 60&ndash;90 minutes total</li>
+      <li><strong>Process:</strong> Open Canva &rarr; load all 8 templates &rarr; pull 4 statements from content bank &rarr; drop into templates &rarr; swap photos on T2/T5 &rarr; export as PNG &rarr; schedule</li>
+      <li><strong>Output:</strong> 4 IG posts + resize to 1080&times;1920 for Stories = 8 pieces of content in ~20 minutes</li>
+    </ul>
+
+    <hr>
+
+    <h1>Standalone Strategy Document</h1>
+    <p>The full visual strategy with larger mockups is available as a standalone HTML file: <a href="/lw-bold-type-templates.html" target="_blank">lw-bold-type-templates.html</a></p>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="admin-sub-footer">
+    <a href="/admin.html">&larr; Portal</a>
+    <span>ldw.build &mdash; Admin</span>
+  </div>
+</div>
+
+<script>if(sessionStorage.getItem('ldw_admin')!=='true'){window.location.href='/admin.html';}</script>
+</body>
+</html>

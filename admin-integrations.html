@@ -3,102 +3,176 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>INTEGRATIONS — Admin Portal — LDW</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<title>Integrations Map — Admin | LDW</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--obsidian:#0D0D0D;--warm-black:#1A1714;--copper:#C17F59;--signal:#E85D3A;--off-white:#F2F0EB;--concrete:#8A8A8A;--display:'Bebas Neue',sans-serif;--body:'DM Sans',sans-serif;--mono:'Space Mono',monospace;}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--obsidian);color:var(--off-white);font-family:var(--body);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;}
-::selection{background:var(--copper);color:var(--obsidian);}
-.login-overlay{position:fixed;inset:0;z-index:200;background:var(--obsidian);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.4s;}
-.login-overlay.hidden{opacity:0;pointer-events:none;}
-.login-mark{display:flex;align-items:center;gap:12px;margin-bottom:48px;}
-.login-mark span{font-family:var(--display);font-size:18px;letter-spacing:4px;color:var(--off-white);}
-.login-box{width:320px;text-align:center;}
-.login-box h2{font-family:var(--display);font-size:28px;letter-spacing:3px;margin-bottom:32px;}
-.login-box input{width:100%;padding:14px 16px;background:rgba(242,240,235,0.04);border:1px solid rgba(242,240,235,0.08);color:var(--off-white);font-family:var(--body);font-size:14px;margin-bottom:12px;outline:none;}
-.login-box input:focus{border-color:var(--copper);}
-.login-box input::placeholder{color:var(--concrete);}
-.login-btn{width:100%;padding:14px;background:var(--copper);border:none;color:var(--obsidian);font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:background 0.3s;}
-.login-btn:hover{background:var(--signal);}
-.login-error{display:none;color:var(--signal);font-family:var(--mono);font-size:10px;letter-spacing:1px;margin-top:12px;}
-.page-wrap{display:none;}
-.page-wrap.active{display:block;}
-.page-header{display:flex;align-items:center;justify-content:space-between;padding:16px 48px;border-bottom:1px solid rgba(242,240,235,0.04);background:rgba(13,13,13,0.95);}
-.page-header-left{display:flex;align-items:center;gap:20px;}
-.back-btn{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--copper);text-decoration:none;text-transform:uppercase;transition:color 0.3s;}
-.back-btn:hover{color:var(--signal);}
-.page-title-bar{display:flex;align-items:center;gap:12px;}
-.page-title-bar .icon{font-size:20px;}
-.page-title-bar h1{font-family:var(--display);font-size:22px;letter-spacing:3px;}
-.page-title-bar h1 .accent{color:var(--copper);}
-.page-header-right{display:flex;gap:24px;}
-.page-header-right a{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--concrete);text-decoration:none;transition:color 0.3s;}
-.page-header-right a:hover{color:var(--copper);}
-.content{max-width:800px;margin:0 auto;padding:48px;}
-.content h2{font-family:var(--display);font-size:32px;letter-spacing:2px;margin:48px 0 20px;padding-top:24px;border-top:1px solid rgba(242,240,235,0.06);}
-.content h2:first-child{margin-top:0;border-top:none;padding-top:0;}
-.content h2 .accent{color:var(--copper);}
-.content h3{font-family:var(--display);font-size:22px;letter-spacing:2px;margin:32px 0 12px;color:var(--copper);}
-.content p{font-size:14px;color:var(--concrete);margin-bottom:16px;line-height:1.8;}
-.content p strong{color:var(--off-white);font-weight:500;}
-.content code{font-family:var(--mono);font-size:12px;background:rgba(242,240,235,0.04);padding:2px 8px;border-radius:2px;color:var(--copper);}
-.content pre{background:rgba(242,240,235,0.03);padding:20px;margin:16px 0;overflow-x:auto;border:1px solid rgba(242,240,235,0.06);border-radius:2px;}
-.content pre code{background:none;padding:0;font-size:11px;color:var(--off-white);line-height:1.6;}
-.data-table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:13px;}
-.data-table th{font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--copper);text-align:left;padding:10px 12px;border-bottom:1px solid rgba(242,240,235,0.1);}
-.data-table td{padding:10px 12px;border-bottom:1px solid rgba(242,240,235,0.04);color:var(--concrete);font-weight:300;vertical-align:top;}
-.data-table tr:hover td{background:rgba(242,240,235,0.02);}
-.data-table td:first-child{color:var(--off-white);font-weight:400;}
-.color-swatch{display:inline-flex;align-items:center;gap:8px;}
-.color-swatch .swatch{width:20px;height:20px;border-radius:4px;border:1px solid rgba(242,240,235,0.1);display:inline-block;}
-.page-footer{padding:32px 48px;border-top:1px solid rgba(242,240,235,0.06);margin-top:48px;text-align:center;}
-.page-footer span{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(138,138,138,0.3);}
-@media(max-width:768px){.page-header{padding:16px 24px;flex-direction:column;align-items:flex-start;gap:12px;}.content{padding:32px 24px;}}
+:root { --obsidian: #0D0D0D; --warm-black: #1A1714; --off-white: #F2F0EB; --concrete: #8A8A8A; --copper: #C17F59; --copper-light: #D4956A; --signal: #00E676; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+.site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; background: rgba(13,13,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(242,240,235,0.06); }
+.site-nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--off-white); }
+.site-nav-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 4px; }
+.site-nav-links { display: flex; gap: 32px; align-items: center; }
+.site-nav-links a { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.3s; }
+.site-nav-links a:hover { color: var(--off-white); }
+.site-nav-btn { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.site-nav-btn span { display: block; width: 20px; height: 2px; background: var(--off-white); margin: 4px 0; }
+@media (max-width: 768px) {
+  .site-nav { padding: 0 24px; }
+  .site-nav-links { display: none; position: fixed; top: 64px; left: 0; right: 0; flex-direction: column; background: rgba(13,13,13,0.96); padding: 24px; gap: 20px; }
+  .site-nav-links.open { display: flex; }
+  .site-nav-btn { display: block; }
+}
+.admin-sub { padding: 64px 0 0; min-height: 100vh; }
+.admin-sub-header { padding: 48px 48px 32px; border-bottom: 1px solid rgba(242,240,235,0.06); }
+.admin-sub-back { display: inline-flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); text-decoration: none; margin-bottom: 24px; transition: color 0.3s; }
+.admin-sub-back:hover { color: var(--copper-light); }
+.admin-sub-eyebrow { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--copper); margin-bottom: 12px; }
+.admin-sub-title { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 6px; line-height: 1; }
+.admin-sub-title .accent { color: var(--copper); }
+.admin-content { padding: 40px 48px 80px; max-width: 900px; }
+.admin-content h1 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 4px; text-transform: uppercase; margin: 48px 0 16px; color: var(--off-white); }
+.admin-content h1:first-child { margin-top: 0; }
+.admin-content h2 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; text-transform: uppercase; margin: 36px 0 12px; color: var(--off-white); }
+.admin-content h3 { font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; margin: 24px 0 8px; color: var(--off-white); }
+.admin-content p { font-weight: 300; font-size: 15px; line-height: 1.7; color: var(--concrete); margin-bottom: 16px; }
+.admin-content strong { color: var(--off-white); font-weight: 600; }
+.admin-content a { color: var(--copper); text-decoration: none; transition: color 0.3s; }
+.admin-content a:hover { color: var(--copper-light); }
+.admin-content hr { border: none; border-top: 1px solid rgba(242,240,235,0.08); margin: 32px 0; }
+.admin-content ul, .admin-content ol { padding-left: 24px; margin-bottom: 16px; }
+.admin-content li { font-weight: 300; font-size: 15px; line-height: 1.7; color: var(--concrete); margin-bottom: 8px; }
+.admin-content code { font-family: 'Space Mono', monospace; font-size: 13px; background: rgba(242,240,235,0.06); padding: 2px 8px; border-radius: 2px; color: var(--copper); }
+.admin-content pre { background: var(--warm-black); border: 1px solid rgba(242,240,235,0.08); border-radius: 2px; padding: 20px; margin: 16px 0; overflow-x: auto; }
+.admin-content pre code { background: none; padding: 0; font-size: 12px; line-height: 1.6; color: var(--off-white); }
+.admin-content blockquote { border-left: 3px solid var(--copper); padding: 12px 20px; margin: 16px 0; background: rgba(193,127,89,0.06); }
+.admin-content blockquote p { color: var(--off-white); margin-bottom: 4px; }
+.admin-content table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 14px; }
+.admin-content th { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--copper); text-align: left; padding: 12px 16px; border-bottom: 2px solid rgba(242,240,235,0.1); }
+.admin-content td { padding: 12px 16px; border-bottom: 1px solid rgba(242,240,235,0.06); color: var(--concrete); font-weight: 300; }
+.admin-content tr:hover td { background: rgba(242,240,235,0.02); }
+.swatch { display: inline-block; width: 16px; height: 16px; border-radius: 2px; vertical-align: middle; margin-right: 8px; border: 1px solid rgba(242,240,235,0.1); }
+.admin-sub-footer { padding: 24px 48px; border-top: 1px solid rgba(242,240,235,0.06); display: flex; justify-content: space-between; align-items: center; }
+.admin-sub-footer a { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.3s; }
+.admin-sub-footer a:hover { color: var(--off-white); }
+.admin-sub-footer span { font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(138,138,138,0.5); }
+@media (max-width: 768px) {
+  .admin-sub-header { padding: 32px 24px 24px; }
+  .admin-sub-title { font-size: 32px; }
+  .admin-content { padding: 24px 24px 60px; }
+  .admin-sub-footer { padding: 16px 24px; }
+}
 </style>
 </head>
 <body>
-<div class="login-overlay" id="loginOverlay">
-  <div class="login-mark"><svg width="28" height="28" viewBox="0 0 240 240" fill="none"><polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/><polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/><polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/></svg><span>LONNELL WILLIAMS</span></div>
-  <div class="login-box"><h2>ADMIN PORTAL<span style="color:var(--copper)">.</span></h2><input type="email" id="loginEmail" placeholder="Email" autocomplete="email"><input type="password" id="loginPass" placeholder="Password" autocomplete="current-password"><button class="login-btn" onclick="attemptLogin()">ENTER</button><div class="login-error" id="loginError">Invalid credentials</div></div>
-</div>
-<div class="page-wrap" id="pageWrap">
-  <header class="page-header">
-    <div class="page-header-left"><a href="/admin.html" class="back-btn">← PORTAL</a><div class="page-title-bar"><span class="icon">🔗</span><h1>INTEGRATIONS<span class="accent">.</span></h1></div></div>
-    <div class="page-header-right"><a href="/">HOME</a><a href="/admin.html">PORTAL</a></div>
-  </header>
-  <div class="content">
+<nav class="site-nav">
+  <a href="/" class="site-nav-brand">
+    <svg width="28" height="28" viewBox="0 0 240 240" fill="none"><polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/><polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/><polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/></svg>
+    <span class="site-nav-name">LONNELL WILLIAMS</span>
+  </a>
+  <div class="site-nav-links">
+    <a href="/#about">About</a>
+    <a href="/speaking.html">Speaking</a>
+    <a href="/#books">Books</a>
+    <a href="/#consulting">Work With Me</a>
+    <a href="/media.html">Media</a>
+    <a href="/#newsletter">Newsletter</a>
+    <a href="/vantage.html">Vantage</a>
+  </div>
+  <button class="site-nav-btn" onclick="document.querySelector('.site-nav-links').classList.toggle('open');"><span></span><span></span><span></span></button>
+</nav>
+<div class="admin-sub">
+  <div class="admin-sub-header">
+    <a href="/admin.html" class="admin-sub-back">&larr; Back to Portal</a>
+    <div class="admin-sub-eyebrow">&#9670; Admin / Integrations</div>
+    <div class="admin-sub-title">INTEGRATIONS MAP<span class="accent">.</span></div>
+  </div>
+  <div class="admin-content">
 
-    <h2>SUPABASE<span class="accent">.</span></h2>
-    <p>Database backend for the site. Stores newsletter subscribers, consulting inquiries, speaking inquiries, and content hub items.</p>
-    <table class="data-table">
-      <tr><th>Table</th><th>Purpose</th></tr>
-      <tr><td><code>newsletter_subscribers</code></td><td>Email signups from homepage</td></tr>
-      <tr><td><code>consulting_inquiries</code></td><td>Form submissions from consulting section</td></tr>
-      <tr><td><code>speaking_inquiries</code></td><td>Booking requests from speaking page</td></tr>
-      <tr><td><code>site_content_hub</code></td><td>YouTube videos, sermons, content for Content Hub</td></tr>
+    <p>Everything connects through Supabase as the central data layer. Notion is the CMS. Vercel is the host. ConvertKit handles email automation.</p>
+
+    <hr>
+
+    <h1>Quick Sync</h1>
+    <blockquote>
+      <p><strong>Manual Notion &rarr; Supabase sync trigger:</strong></p>
+      <p><a href="https://riqdcirsmckubkdfbtoj.supabase.co/functions/v1/sync-notion-content?token=ldw-sync-2026-secure" target="_blank">Sync Now &rarr;</a></p>
+      <p style="font-size:13px;color:var(--concrete);">Syncs Photo Gallery, Instagram, Content Hub, and YouTube to Supabase in one shot. Also runs automatically every 15 minutes via cron.</p>
+    </blockquote>
+
+    <hr>
+
+    <h1>Master Data Flow</h1>
+    <pre><code>NOTION (Content Management)
+  &#9500;&#9472;&#9472; Photo Gallery DB &#9472;&#9472;&#9472;&rarr; sync-notion-content &#9472;&rarr; Supabase (site_photos) &#9472;&rarr; ldw.build
+  &#9500;&#9472;&#9472; Instagram DB &#9472;&#9472;&#9472;&#9472;&#9472;&rarr; sync-notion-content &#9472;&rarr; Supabase (site_instagram) &#9472;&rarr; ldw.build
+  &#9500;&#9472;&#9472; Content Hub DB &#9472;&#9472;&#9472;&rarr; sync-notion-content &#9472;&rarr; Supabase (site_content_hub) &#9472;&rarr; ldw.build
+  &#9492;&#9472;&#9472; YouTube DB &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&rarr; sync-notion-content &#9472;&rarr; Supabase (site_youtube) &#9472;&rarr; ldw.build
+
+SITE FORMS (User Input)
+  &#9500;&#9472;&#9472; Hero Subscribe &#9472;&#9472;&#9472;&#9472;&rarr; Supabase (newsletter_subscribers) &#9472;&rarr; ConvertKit
+  &#9500;&#9472;&#9472; Newsletter Subscribe &rarr; Supabase (newsletter_subscribers) &#9472;&rarr; ConvertKit
+  &#9500;&#9472;&#9472; Popup CTA &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&rarr; Supabase (newsletter_subscribers) &#9472;&rarr; ConvertKit
+  &#9492;&#9472;&#9472; Consulting Form &#9472;&#9472;&#9472;&rarr; Supabase (consulting_inquiries) &#9472;&rarr; Notion CRM</code></pre>
+
+    <hr>
+
+    <h1>Notion CMS Databases</h1>
+    <table>
+      <tr><th>Database</th><th>Syncs To</th><th>Status</th></tr>
+      <tr><td>Photo Gallery</td><td><code>site_photos</code></td><td style="color:#00E676;">&#10003; Connected</td></tr>
+      <tr><td>Instagram</td><td><code>site_instagram</code></td><td style="color:#FFD740;">&#9888; Column mismatch</td></tr>
+      <tr><td>Content Hub</td><td><code>site_content_hub</code></td><td style="color:#00E676;">&#10003; Connected</td></tr>
+      <tr><td>YouTube</td><td><code>site_youtube</code></td><td style="color:#00E676;">&#10003; Connected (0 entries)</td></tr>
     </table>
 
-    <h2>NOTION SYNC<span class="accent">.</span></h2>
-    <p>Notion is the source of truth for admin documentation. The sync endpoint pulls content from Notion and caches it in Supabase.</p>
-    <p><strong>Sync endpoint:</strong> <code>https://riqdcirsmckubkdfbtoj.supabase.co/functions/v1/sync-notion-content</code></p>
-    <p><strong>Trigger:</strong> Click "SYNC NOW" on the admin portal, or automatic every 15 minutes.</p>
+    <hr>
 
-    <h2>VERCEL<span class="accent">.</span></h2>
-    <p>Hosting and deployment. Connected to GitHub — every push to <code>main</code> triggers auto-deploy. Custom domain <code>ldw.build</code> configured.</p>
+    <h1>Supabase Tables</h1>
+    <h3>Content Tables (populated by Notion sync)</h3>
+    <table>
+      <tr><th>Table</th><th>Read Access</th><th>Write Access</th></tr>
+      <tr><td><code>site_photos</code></td><td>Public</td><td>Authenticated</td></tr>
+      <tr><td><code>site_instagram</code></td><td>Public</td><td>Authenticated</td></tr>
+      <tr><td><code>site_content_hub</code></td><td>Public</td><td>Authenticated</td></tr>
+      <tr><td><code>site_youtube</code></td><td>Public</td><td>Authenticated</td></tr>
+    </table>
 
-    <h2>CONVERTKIT / NEWSLETTER<span class="accent">.</span></h2>
-    <p>Newsletter subscriptions currently go to Supabase. ConvertKit integration available for email automation when ready.</p>
+    <h3>Form Capture Tables (populated by site visitors)</h3>
+    <table>
+      <tr><th>Table</th><th>Insert</th><th>Read</th></tr>
+      <tr><td><code>newsletter_subscribers</code></td><td>Public</td><td>Authenticated only</td></tr>
+      <tr><td><code>consulting_inquiries</code></td><td>Public</td><td>Authenticated only</td></tr>
+    </table>
+
+    <hr>
+
+    <h1>Edge Functions</h1>
+    <table>
+      <tr><th>Function</th><th>Purpose</th><th>Trigger</th><th>Secrets</th></tr>
+      <tr><td><code>sync-notion-content</code></td><td>Reads Notion DBs, upserts to Supabase</td><td>Cron (15 min) + manual URL</td><td><code>NOTION_TOKEN</code></td></tr>
+      <tr><td><code>sync-convertkit</code></td><td>Forwards subscribers to ConvertKit</td><td>DB trigger on new subscriber</td><td><code>CONVERTKIT_API_KEY</code>, <code>CONVERTKIT_FORM_ID</code></td></tr>
+    </table>
+
+    <hr>
+
+    <h1>Future Integrations (Not Yet Built)</h1>
+    <ul>
+      <li><strong>Instagram API (Meta)</strong> &mdash; Auto-pull IG feed. Requires Meta Developer App approval.</li>
+      <li><strong>Planning Center</strong> &mdash; Live attendance data for Vantage. Phase 2.</li>
+      <li><strong>Stripe</strong> &mdash; Live giving/revenue data for Vantage. Phase 2.</li>
+      <li><strong>Google Analytics / Vercel Analytics</strong> &mdash; Site traffic. Not yet added.</li>
+      <li><strong>Asana</strong> &mdash; Project/task data for Vantage. Phase 2.</li>
+    </ul>
 
   </div>
-  <footer class="page-footer"><span>&copy; 2026 LONNELL WILLIAMS — ADMIN PORTAL</span></footer>
+  <div class="admin-sub-footer">
+    <a href="/admin.html">&larr; Portal</a>
+    <span>ldw.build &mdash; Admin</span>
+  </div>
 </div>
-<script>
-const AUTH_EMAIL='lonnelldwilliams@gmail.com',AUTH_PASS='August11';
-function checkAuth(){if(sessionStorage.getItem('ldw_admin_auth')==='true'){document.getElementById('loginOverlay').classList.add('hidden');document.getElementById('pageWrap').classList.add('active');}}
-function attemptLogin(){const e=document.getElementById('loginEmail').value,p=document.getElementById('loginPass').value;if(e===AUTH_EMAIL&&p===AUTH_PASS){sessionStorage.setItem('ldw_admin_auth','true');document.getElementById('loginOverlay').classList.add('hidden');document.getElementById('pageWrap').classList.add('active');}else{document.getElementById('loginError').style.display='block';}}
-document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')attemptLogin();});
-checkAuth();
-</script>
+<script>if(sessionStorage.getItem('ldw_admin')!=='true'){window.location.href='/admin.html';}</script>
 </body>
 </html>

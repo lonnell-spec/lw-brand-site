@@ -3,355 +3,326 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Speaking — Lonnell Williams</title>
-<meta name="description" content="Book Lonnell Williams for keynotes, workshops, and leadership intensives.">
+<title>LDW.BUILD — Speaking</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 <style>
-:root {
-  --obsidian: #0D0D0D; --warm-black: #1A1714; --copper: #C17F59;
-  --signal: #E85D3A; --off-white: #F2F0EB; --concrete: #8A8A8A;
-  --display: 'Bebas Neue', sans-serif; --body: 'DM Sans', sans-serif; --mono: 'Space Mono', monospace;
-}
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { background: var(--obsidian); color: var(--off-white); font-family: var(--body); font-weight: 300; line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-::selection { background: var(--copper); color: var(--obsidian); }
+  .speaking-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    max-width: 1000px; margin: 0 auto 80px; text-align: center;
+  }
+  .speaking-stat .num {
+    font-family: 'Bebas Neue', cursive; font-size: 64px; line-height: 1;
+    color: var(--off-white); margin-bottom: 4px;
+  }
+  .speaking-stat .label {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--copper);
+  }
 
-/* NAV */
-.site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; background: rgba(13,13,13,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(242,240,235,0.04); }
-.site-nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.site-nav-name { font-family: var(--display); font-size: 16px; letter-spacing: 4px; color: var(--off-white); }
-.site-nav-links { display: flex; align-items: center; gap: 32px; }
-.site-nav-links a { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.3s; }
-.site-nav-links a:hover, .site-nav-links a.active { color: var(--copper); }
-.site-nav-btn { display: none; background: none; border: none; cursor: pointer; width: 28px; height: 20px; flex-direction: column; justify-content: space-between; }
-.site-nav-btn span { display: block; width: 100%; height: 2px; background: var(--off-white); }
+  .topics-container { max-width: 1000px; margin: 0 auto; }
 
-/* HERO */
-.speak-hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 48px 80px; }
-.speak-hero-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-.speak-hero-label { font-family: var(--mono); font-size: 10px; letter-spacing: 4px; color: var(--copper); text-transform: uppercase; margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards; }
-.speak-hero-title { font-family: var(--display); font-size: clamp(48px, 7vw, 80px); line-height: 0.95; letter-spacing: 2px; margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards; }
-.speak-hero-title .accent { color: var(--copper); }
-.speak-hero-title .copper { color: var(--copper); }
-.speak-hero-desc { font-size: 16px; color: var(--concrete); margin-bottom: 32px; opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards; }
-.speak-hero-cta { display: inline-flex; font-family: var(--mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--obsidian); background: var(--copper); text-decoration: none; padding: 16px 40px; transition: background 0.3s; opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards; }
-.speak-hero-cta:hover { background: var(--signal); }
-.speak-hero-image { opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards; }
-.speak-hero-image img { width: 100%; height: 500px; object-fit: cover; filter: grayscale(20%) contrast(1.05); }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px; max-width: 1200px; margin: 0 auto;
+  }
+  .testimonial {
+    padding: 36px; border: 1px solid var(--border-subtle);
+    background: rgba(13,13,13,0.4); transition: border-color 0.4s;
+    position: relative;
+  }
+  .testimonial:hover { border-color: var(--border-hover); }
+  .testimonial .quote-mark {
+    font-family: 'Bebas Neue', cursive; font-size: 72px; line-height: 1;
+    color: rgba(193,127,89,0.15); position: absolute; top: 16px; left: 24px;
+  }
+  .testimonial p {
+    font-weight: 300; font-size: 15px; line-height: 1.8; color: var(--text-muted);
+    position: relative; z-index: 1; margin-bottom: 20px; font-style: italic;
+  }
+  .testimonial .attribution {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1px;
+    color: var(--copper);
+  }
+  .testimonial .attribution span { color: var(--text-dim); }
 
-/* CREDENTIALS BAR */
-.cred-bar { padding: 48px; background: var(--warm-black); border-top: 1px solid rgba(242,240,235,0.04); border-bottom: 1px solid rgba(242,240,235,0.04); }
-.cred-bar-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; text-align: center; }
-.cred-item-num { font-family: var(--display); font-size: 36px; color: var(--copper); }
-.cred-item-label { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; color: var(--concrete); text-transform: uppercase; margin-top: 4px; }
+  .booking-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+    max-width: 1100px; margin: 0 auto; align-items: start;
+  }
+  .booking-info h3 {
+    font-family: 'Bebas Neue', cursive; font-size: 36px; letter-spacing: 1px;
+    color: var(--off-white); margin-bottom: 16px;
+  }
+  .booking-info p {
+    font-weight: 300; font-size: 15px; line-height: 1.8; color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+  .event-types {
+    display: flex; flex-direction: column; gap: 12px; margin-top: 32px;
+  }
+  .event-type {
+    display: flex; align-items: center; gap: 16px; padding: 16px;
+    border: 1px solid var(--border-subtle); transition: border-color 0.3s;
+  }
+  .event-type:hover { border-color: var(--border-hover); }
+  .event-type .et-icon {
+    width: 40px; height: 40px; border: 1px solid rgba(193,127,89,0.3);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    font-family: 'Space Mono', monospace; font-size: 14px; color: var(--copper);
+  }
+  .event-type .et-text h5 {
+    font-family: 'Bebas Neue', cursive; font-size: 18px; letter-spacing: 1px;
+    color: var(--off-white); margin-bottom: 2px;
+  }
+  .event-type .et-text p {
+    font-size: 12px; color: var(--text-dim); margin: 0;
+  }
 
-/* SIZZLE */
-.sizzle { padding: 120px 48px; text-align: center; }
-.sizzle-inner { max-width: 700px; margin: 0 auto; }
-.sizzle-text { font-size: 20px; color: var(--concrete); line-height: 1.8; }
-.sizzle-text strong { color: var(--off-white); font-weight: 500; }
-
-/* TOPICS */
-.topics { padding: 120px 48px; background: var(--warm-black); }
-.topics-inner { max-width: 900px; margin: 0 auto; }
-.section-label { font-family: var(--mono); font-size: 10px; letter-spacing: 3px; color: var(--copper); text-transform: uppercase; margin-bottom: 20px; }
-.section-title { font-family: var(--display); font-size: 48px; letter-spacing: 2px; margin-bottom: 56px; }
-.section-title .accent { color: var(--copper); }
-.topic-row { display: grid; grid-template-columns: 80px 1fr; gap: 32px; padding: 40px 0; border-top: 1px solid rgba(242,240,235,0.06); }
-.topic-num { font-family: var(--display); font-size: 48px; color: var(--copper); }
-.topic-name { font-family: var(--display); font-size: 28px; letter-spacing: 2px; margin-bottom: 12px; }
-.topic-name .dot { color: var(--copper); }
-.topic-desc { font-size: 14px; color: var(--concrete); line-height: 1.7; margin-bottom: 16px; }
-.topic-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-.topic-tag { font-family: var(--mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; padding: 4px 12px; border: 1px solid rgba(242,240,235,0.1); color: var(--concrete); }
-
-/* FORMATS */
-.formats { padding: 120px 48px; }
-.formats-inner { max-width: 900px; margin: 0 auto; }
-.formats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-.format-card { padding: 40px 32px; background: var(--warm-black); border: 1px solid rgba(242,240,235,0.04); transition: border-color 0.3s; }
-.format-card:hover { border-color: var(--copper); }
-.format-icon { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; color: var(--copper); margin-bottom: 16px; }
-.format-name { font-family: var(--display); font-size: 24px; letter-spacing: 2px; margin-bottom: 12px; }
-.format-desc { font-size: 13px; color: var(--concrete); line-height: 1.7; margin-bottom: 16px; }
-.format-detail { font-family: var(--mono); font-size: 9px; letter-spacing: 1px; color: var(--concrete); text-transform: uppercase; }
-
-/* BOOKING */
-.booking { padding: 120px 48px; background: var(--warm-black); }
-.booking-inner { max-width: 600px; margin: 0 auto; text-align: center; }
-.booking-label { font-family: var(--mono); font-size: 10px; letter-spacing: 3px; color: var(--copper); text-transform: uppercase; margin-bottom: 16px; }
-.booking-title { font-family: var(--display); font-size: 48px; letter-spacing: 2px; margin-bottom: 12px; }
-.booking-title .accent { color: var(--copper); }
-.booking-desc { font-size: 15px; color: var(--concrete); margin-bottom: 40px; }
-.booking-form input, .booking-form textarea, .booking-form select {
-  width: 100%; padding: 14px 16px; background: rgba(242,240,235,0.04); border: 1px solid rgba(242,240,235,0.08);
-  color: var(--off-white); font-family: var(--body); font-size: 14px; margin-bottom: 12px; outline: none; resize: vertical;
-}
-.booking-form input:focus, .booking-form textarea:focus, .booking-form select:focus { border-color: var(--copper); }
-.booking-form input::placeholder, .booking-form textarea::placeholder { color: var(--concrete); }
-.booking-form select { appearance: none; color: var(--concrete); }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.booking-form button {
-  width: 100%; padding: 16px; background: var(--copper); border: none; color: var(--obsidian);
-  font-family: var(--mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-  cursor: pointer; transition: background 0.3s; margin-top: 8px;
-}
-.booking-form button:hover { background: var(--signal); }
-
-/* FOOTER */
-.site-footer { padding: 64px 48px 32px; border-top: 1px solid rgba(242,240,235,0.06); }
-.footer-top { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 48px; }
-.footer-brand { display: flex; align-items: center; gap: 12px; }
-.footer-brand-name { font-family: var(--display); font-size: 18px; letter-spacing: 4px; }
-.footer-tagline { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; color: var(--concrete); text-transform: uppercase; margin-top: 8px; }
-.footer-links { display: flex; gap: 32px; }
-.footer-links a { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.3s; }
-.footer-links a:hover { color: var(--copper); }
-.footer-bottom { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(242,240,235,0.04); }
-.footer-copy { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; color: rgba(138,138,138,0.4); text-transform: uppercase; }
-.footer-scripture { font-style: italic; font-size: 12px; color: var(--concrete); }
-
-.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-
-@media (max-width: 768px) {
-  .site-nav { padding: 0 20px; }
-  .site-nav-links { display: none; position: fixed; top: 64px; left: 0; right: 0; background: rgba(13,13,13,0.98); flex-direction: column; padding: 32px 28px; gap: 20px; border-bottom: 1px solid rgba(242,240,235,0.04); }
-  .site-nav-links.open { display: flex; }
-  .site-nav-btn { display: flex; }
-  .speak-hero { padding: 100px 28px 60px; }
-  .speak-hero-inner { grid-template-columns: 1fr; gap: 40px; }
-  .speak-hero-image img { height: 300px; }
-  .cred-bar-inner { grid-template-columns: repeat(2, 1fr); }
-  .sizzle, .topics, .formats, .booking { padding: 80px 28px; }
-  .formats-grid { grid-template-columns: 1fr; }
-  .form-row { grid-template-columns: 1fr; }
-  .topic-row { grid-template-columns: 60px 1fr; gap: 20px; padding: 32px 0; }
-  .topic-num { font-size: 36px; }
-  .topic-name { font-size: 22px; }
-  .footer-top { flex-direction: column; gap: 36px; }
-  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-}
+  @media (max-width: 768px) {
+    .speaking-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .speaking-stats .num { font-size: 48px; }
+    .booking-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
+<div class="grain"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="page-transition"><div class="wipe"></div><div class="copper-line"></div></div>
 
-<!-- NAV -->
-<nav class="site-nav">
-  <a href="/" class="site-nav-brand">
-    <svg width="28" height="28" viewBox="0 0 240 240" fill="none"><polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/><polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/><polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/></svg>
-    <span class="site-nav-name">LONNELL WILLIAMS</span>
-  </a>
-  <div class="site-nav-links">
-    <a href="/">Home</a>
-    <a href="/speaking.html" class="active">Speaking</a>
-    <a href="/media.html">Media</a>
-    <a href="/vantage.html">Vantage</a>
-    <a href="/#newsletter">Newsletter</a>
+<nav>
+  <a href="index.html" class="nav-logo">LONNELL <span>WILLIAMS</span></a>
+  <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="speaking.html" class="active">Speaking</a>
+    <a href="media.html">Media</a>
+    <a href="vantage.html">Vantage</a>
+    <a href="content.html">Content</a>
   </div>
-  <button class="site-nav-btn" onclick="document.querySelector('.site-nav-links').classList.toggle('open');"><span></span><span></span><span></span></button>
 </nav>
 
+<div class="page-wrapper">
+
 <!-- HERO -->
-<section class="speak-hero">
-  <div class="speak-hero-inner">
-    <div class="speak-hero-content">
-      <div class="speak-hero-label">Speaking &amp; Keynotes</div>
-      <h1 class="speak-hero-title">I DON'T FILL<br>ROOMS<span class="accent">.</span><br>I SHIFT THEM<span class="copper">.</span></h1>
-      <p class="speak-hero-desc">Keynotes, workshops, and leadership intensives for conferences, churches, and organizations that refuse to settle for "good enough." Not motivational speaking — operational conviction. The kind that builds infrastructure after the applause stops.</p>
-      <a href="#booking" class="speak-hero-cta">BOOK ME →</a>
-    </div>
-    <div class="speak-hero-image">
-      <img src="https://riqdcirsmckubkdfbtoj.supabase.co/storage/v1/object/public/site-images/IMG_6643.jpeg" alt="Lonnell Williams speaking">
-    </div>
+<section class="page-hero">
+  <div class="hero-gradient"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-content">
+    <div class="hero-scripture" style="opacity:0;transform:translateY(10px);">Speaking</div>
+    <h1 class="hero-title" style="font-size:clamp(64px,12vw,160px);">
+      <span class="word">BOOK</span> <span class="word">LONNELL.</span>
+    </h1>
+    <p class="hero-sub">I don't do motivational pep talks. I bring frameworks, conviction, and the kind of truth that rearranges the room. If you want comfortable, I'm not your guy.</p>
   </div>
 </section>
 
-<!-- CREDENTIALS BAR -->
-<section class="cred-bar reveal">
-  <div class="cred-bar-inner">
-    <div class="cred-item"><div class="cred-item-num">50+</div><div class="cred-item-label">Staff Scaled</div></div>
-    <div class="cred-item"><div class="cred-item-num">2</div><div class="cred-item-label">Campuses</div></div>
-    <div class="cred-item"><div class="cred-item-num">M.DIV</div><div class="cred-item-label">Princeton Seminary</div></div>
-    <div class="cred-item"><div class="cred-item-num">2</div><div class="cred-item-label">Published Books</div></div>
-  </div>
-</section>
-
-<!-- SIZZLE -->
-<section class="sizzle reveal">
-  <div class="sizzle-inner">
-    <p class="sizzle-text">I've <strong>scaled a church staff from 13 to 50 in six months.</strong> Managed a $35M+ operation. Negotiated million-dollar leases. Built systems from scratch. I don't speak from theory — <strong>I speak from Tuesday morning.</strong></p>
+<!-- STATS -->
+<section class="section" style="padding-top:40px;">
+  <div class="speaking-stats" data-stagger-parent>
+    <div class="speaking-stat">
+      <div class="num" data-count="200">0</div>
+      <div class="label">Events</div>
+    </div>
+    <div class="speaking-stat">
+      <div class="num" data-count="75000">0</div>
+      <div class="label">People Reached</div>
+    </div>
+    <div class="speaking-stat">
+      <div class="num" data-count="12">0</div>
+      <div class="label">States</div>
+    </div>
+    <div class="speaking-stat">
+      <div class="num" data-count="4">0</div>
+      <div class="label">Countries</div>
+    </div>
   </div>
 </section>
 
 <!-- TOPICS -->
-<section class="topics reveal">
-  <div class="topics-inner">
-    <div class="section-label">What I Speak On</div>
-    <h2 class="section-title">TOPICS<span class="accent">.</span></h2>
+<section class="section section-warm" id="topics">
+  <div class="topics-container">
+    <div class="section-label reveal">Signature Topics</div>
+    <div class="section-title reveal">WHAT I BRING<br>TO YOUR ROOM.</div>
+    <div class="copper-divider reveal"></div>
 
-    <div class="topic-row">
+    <div class="topic-row reveal">
       <div class="topic-num">01</div>
-      <div class="topic-content">
-        <div class="topic-name">ARISE AND BUILD<span class="dot">.</span></div>
-        <div class="topic-desc">The flagship keynote. The Nehemiah framework for building what doesn't exist — governmental authority joined with spiritual assignment. For leaders who carry both the burden and the blueprint.</div>
-        <div class="topic-tags"><span class="topic-tag">All Audiences</span><span class="topic-tag">Keynote</span><span class="topic-tag">Ministry</span></div>
+      <div>
+        <h4>ARISE AND BUILD.</h4>
+        <p>The operator-pastor framework. How to carry spiritual weight and organizational responsibility without choosing between them. Best for: church leadership conferences, pastor's retreats, organizational kickoffs.</p>
       </div>
     </div>
-
-    <div class="topic-row">
+    <div class="topic-row reveal">
       <div class="topic-num">02</div>
-      <div class="topic-content">
-        <div class="topic-name">INFRASTRUCTURE IS THE SERMON<span class="dot">.</span></div>
-        <div class="topic-desc">For church and ministry conferences. Why what you build speaks louder than what you preach. Systems, processes, and operational excellence as pastoral care.</div>
-        <div class="topic-tags"><span class="topic-tag">Church Leaders</span><span class="topic-tag">Operations</span><span class="topic-tag">Conferences</span></div>
+      <div>
+        <h4>BUILD WHAT DOESN'T EXIST.</h4>
+        <p>Infrastructure as ministry. Why the systems you build speak louder than the sermons you preach. Best for: operations teams, executive retreats, nonprofit boards.</p>
       </div>
     </div>
-
-    <div class="topic-row">
+    <div class="topic-row reveal">
       <div class="topic-num">03</div>
-      <div class="topic-content">
-        <div class="topic-name">THE EXCELLENT #2<span class="dot">.</span></div>
-        <div class="topic-desc">The strategic power of operational excellence in the supporting role. Why "I'd rather be an excellent #2 than an average #1" is a leadership philosophy, not a consolation prize.</div>
-        <div class="topic-tags"><span class="topic-tag">Leadership</span><span class="topic-tag">Corporate</span><span class="topic-tag">Executive Teams</span></div>
+      <div>
+        <h4>LEADING WITH THE STAFF.</h4>
+        <p>What's already in your hand is enough. Stop looking for bigger resources and start activating what God has already placed in your grip. Best for: Sunday services, leadership training, young adult events.</p>
       </div>
     </div>
-
-    <div class="topic-row">
+    <div class="topic-row reveal">
       <div class="topic-num">04</div>
-      <div class="topic-content">
-        <div class="topic-name">ZAG<span class="dot">.</span></div>
-        <div class="topic-desc">Counter-cultural leadership in ministry, business, and life. Why convention is comfortable but forgettable, and why the leaders who change industries are the ones willing to look foolish first. Based on the book.</div>
-        <div class="topic-tags"><span class="topic-tag">Young Leaders</span><span class="topic-tag">Conferences</span><span class="topic-tag">Innovation</span></div>
+      <div>
+        <h4>THE ZAG PRINCIPLE.</h4>
+        <p>When everyone goes one direction, go the other &mdash; intentionally. Counter-cultural leadership in ministry, business, and life. Best for: conferences, commencement addresses, entrepreneurial events.</p>
       </div>
     </div>
-
-    <div class="topic-row">
+    <div class="topic-row reveal">
       <div class="topic-num">05</div>
-      <div class="topic-content">
-        <div class="topic-name">SCALING UNDER PRESSURE<span class="dot">.</span></div>
-        <div class="topic-desc">Rapid growth breaks everything that isn't built to flex. Frameworks for hiring, delegation chains, KPI systems, and the mental health of the leader holding it all together.</div>
-        <div class="topic-tags"><span class="topic-tag">Executive Leadership</span><span class="topic-tag">Workshops</span><span class="topic-tag">Operations</span></div>
+      <div>
+        <h4>SCALING UNDER PRESSURE.</h4>
+        <p>13 to 50 staff in six months. What it takes to scale an organization rapidly without losing quality, culture, or your mind. Best for: growth-stage organizations, staff retreats, executive workshops.</p>
       </div>
     </div>
-
-    <div class="topic-row">
+    <div class="topic-row reveal">
       <div class="topic-num">06</div>
-      <div class="topic-content">
-        <div class="topic-name">WORDS BUILD WORLDS<span class="dot">.</span></div>
-        <div class="topic-desc">Your words don't just communicate — they construct. The power of voice, presence, and atmosphere. For leaders who want to shift rooms, not just fill them.</div>
-        <div class="topic-tags"><span class="topic-tag">Preachers</span><span class="topic-tag">Communicators</span><span class="topic-tag">All Audiences</span></div>
+      <div>
+        <h4>ANYTHING, EVERYTHING, OR NOTHING AT ALL.</h4>
+        <p>Full commitment or full absence. The manifesto on refusing to do halfway. Best for: young adults, men's conferences, entrepreneurial gatherings, worship nights.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FORMATS -->
-<section class="formats reveal">
-  <div class="formats-inner">
-    <div class="section-label">Engagement Formats</div>
-    <h2 class="section-title">HOW WE WORK TOGETHER<span class="accent">.</span></h2>
-    <div class="formats-grid">
-      <div class="format-card">
-        <div class="format-icon">FORMAT 01</div>
-        <div class="format-name">KEYNOTE</div>
-        <div class="format-desc">High-impact, single-session delivery for conferences, summits, and large gatherings. 45–75 minutes. Designed to shift the atmosphere and leave a framework, not just a feeling.</div>
-        <div class="format-detail">Conferences · Summits · Sunday Services</div>
-      </div>
-      <div class="format-card">
-        <div class="format-icon">FORMAT 02</div>
-        <div class="format-name">WORKSHOP</div>
-        <div class="format-desc">Interactive, hands-on sessions where your team leaves with actual tools. Frameworks, templates, and action plans — not just notes. 2–4 hours with breakout components.</div>
-        <div class="format-detail">Leadership Teams · Staff Training · Retreats</div>
-      </div>
-      <div class="format-card">
-        <div class="format-icon">FORMAT 03</div>
-        <div class="format-name">INTENSIVE</div>
-        <div class="format-desc">Multi-day deep dives into organizational infrastructure, ministry operations, or leadership development. This is consulting dressed as teaching. You leave with a strategic plan.</div>
-        <div class="format-detail">Executive Teams · Pastoral Staff · Organizations</div>
-      </div>
+<!-- TESTIMONIALS -->
+<section class="section" id="testimonials">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-label reveal">What They Say</div>
+    <div class="section-title reveal">THE ROOM<br>REMEMBERS.</div>
+    <div class="copper-divider reveal"></div>
+  </div>
+  <div class="testimonials-grid" data-stagger-parent>
+    <div class="testimonial">
+      <div class="quote-mark">&ldquo;</div>
+      <p>Lonnell doesn't just speak &mdash; he builds something in the room. By the time he's done, the framework is already in motion and people are ready to execute.</p>
+      <div class="attribution">Church Leadership Conference <span>&bull; Atlanta, GA</span></div>
+    </div>
+    <div class="testimonial">
+      <div class="quote-mark">&ldquo;</div>
+      <p>The most operationally-minded preacher I've ever heard. He gave our team a language for what we've been trying to say for years.</p>
+      <div class="attribution">Executive Retreat <span>&bull; Houston, TX</span></div>
+    </div>
+    <div class="testimonial">
+      <div class="quote-mark">&ldquo;</div>
+      <p>I've never left a session with this many actionable next steps. Lonnell brings conviction and clarity in equal measure.</p>
+      <div class="attribution">Staff Development Day <span>&bull; Charlotte, NC</span></div>
     </div>
   </div>
 </section>
 
-<!-- BOOKING FORM -->
-<section class="booking" id="booking">
-  <div class="booking-inner">
-    <div class="booking-label">Let's Work</div>
-    <div class="booking-title">BOOK LONNELL<span class="accent">.</span></div>
-    <div class="booking-desc">Tell me about your event. I'll respond within 48 hours with availability and a custom proposal. No gatekeepers.</div>
-    <div class="booking-form" id="bookingForm">
-      <div class="form-row">
-        <input type="text" placeholder="Your Name" id="bkName">
-        <input type="email" placeholder="Your Email" id="bkEmail">
+<!-- BOOKING -->
+<section class="section section-warm" id="booking">
+  <div class="booking-grid">
+    <div class="booking-info reveal-left">
+      <div class="section-label">Book Lonnell</div>
+      <h3>LET'S BUILD SOMETHING IN YOUR ROOM.</h3>
+      <p>Whether it's a Sunday morning, a leadership retreat, a conference main stage, or an executive workshop &mdash; the goal is the same: leave the room different than you found it.</p>
+      <p>All inquiries receive a response within 48 hours. Availability is limited, especially Q4 and conference season.</p>
+      <div class="event-types">
+        <div class="event-type">
+          <div class="et-icon">S</div>
+          <div class="et-text"><h5>Sunday Service</h5><p>60-minute keynote message</p></div>
+        </div>
+        <div class="event-type">
+          <div class="et-icon">C</div>
+          <div class="et-text"><h5>Conference</h5><p>Main stage or breakout session</p></div>
+        </div>
+        <div class="event-type">
+          <div class="et-icon">R</div>
+          <div class="et-text"><h5>Retreat / Workshop</h5><p>Half-day or full-day intensive</p></div>
+        </div>
+        <div class="event-type">
+          <div class="et-icon">V</div>
+          <div class="et-text"><h5>Virtual</h5><p>Keynote or training via Zoom</p></div>
+        </div>
       </div>
-      <input type="text" placeholder="Organization / Church" id="bkOrg">
-      <input type="text" placeholder="Event Name & Date" id="bkEvent">
-      <select id="bkFormat">
-        <option value="" disabled selected>Format</option>
-        <option value="keynote">Keynote</option>
-        <option value="workshop">Workshop</option>
-        <option value="intensive">Intensive</option>
-        <option value="other">Other</option>
-      </select>
-      <textarea rows="4" placeholder="Tell me about your event and audience..." id="bkMessage"></textarea>
-      <button onclick="submitBooking()">SEND INQUIRY</button>
+    </div>
+    <div class="reveal-right">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" class="form-input" placeholder="Full name">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" class="form-input" placeholder="email@organization.com">
+      </div>
+      <div class="form-group">
+        <label>Organization</label>
+        <input type="text" class="form-input" placeholder="Church / Company / Event name">
+      </div>
+      <div class="form-group">
+        <label>Event Type</label>
+        <select class="form-select">
+          <option value="" disabled selected>Select event type</option>
+          <option>Sunday Service</option>
+          <option>Conference</option>
+          <option>Retreat / Workshop</option>
+          <option>Virtual Keynote</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Proposed Date(s)</label>
+        <input type="text" class="form-input" placeholder="Month / Year or specific dates">
+      </div>
+      <div class="form-group">
+        <label>Tell Me About Your Event</label>
+        <textarea class="form-input form-textarea" placeholder="Audience, theme, expected attendance, any specific topics..."></textarea>
+      </div>
+      <button class="btn" style="width:100%;text-align:center;margin-top:8px;">Submit Inquiry</button>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="site-footer">
-  <div class="footer-top">
+</div>
+
+<footer>
+  <div class="footer-inner">
     <div>
-      <div class="footer-brand">
-        <svg width="24" height="24" viewBox="0 0 240 240" fill="none"><polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/><polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/><polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/></svg>
-        <span class="footer-brand-name">LONNELL WILLIAMS</span>
-      </div>
-      <div class="footer-tagline">Builder. Operator. Author.</div>
+      <div class="footer-brand">LONNELL DAWSON WILLIAMS</div>
+      <div class="footer-verse">"The God of heaven will make us prosper, and we his servants will arise and build." &mdash; Nehemiah 2:20</div>
     </div>
     <div class="footer-links">
-      <a href="/">Home</a><a href="/speaking.html">Speaking</a><a href="/media.html">Media</a><a href="/vantage.html">Vantage</a>
+      <a href="index.html">Home</a>
+      <a href="media.html">Media</a>
+      <a href="vantage.html">Vantage</a>
+      <a href="content.html">Content</a>
     </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="footer-copy">&copy; 2026 Lonnell Williams. All Rights Reserved.</div>
-    <div class="footer-scripture">"The God of heaven will make us prosper, and we his servants will arise and build." — Nehemiah 2:20</div>
+    <div class="footer-copy">&copy; 2026 LONNELL WILLIAMS. ALL RIGHTS RESERVED.</div>
   </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="scripts.js"></script>
 <script>
-const revealEls = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-}, { threshold: 0.15 });
-revealEls.forEach(el => observer.observe(el));
-
-const SUPABASE_URL = 'https://riqdcirsmckubkdfbtoj.supabase.co';
-const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk2NjMxMzYsImV4cCI6MjA1NTIzOTEzNn0.JpSEKJOsMpYHB0hOgXS-KqPxOLxcFKdVmXWrx5gOv9s';
-
-async function submitBooking() {
-  const data = {
-    name: document.getElementById('bkName').value,
-    email: document.getElementById('bkEmail').value,
-    organization: document.getElementById('bkOrg').value,
-    event_info: document.getElementById('bkEvent').value,
-    format: document.getElementById('bkFormat').value,
-    message: document.getElementById('bkMessage').value
-  };
-  if (!data.email) return;
-  try {
-    await fetch(SUPABASE_URL + '/rest/v1/speaking_inquiries', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON, 'Prefer': 'return=minimal' },
-      body: JSON.stringify(data)
-    });
-    document.getElementById('bookingForm').innerHTML = '<div style="font-family:var(--mono);font-size:12px;letter-spacing:2px;color:var(--copper);padding:40px;">✦ RECEIVED. I\'LL BE IN TOUCH WITHIN 48 HOURS.</div>';
-  } catch(e) { console.error(e); }
-}
+  // Animate speaking stats on scroll
+  const statsSection = document.querySelector('.speaking-stats');
+  if (statsSection) {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('[data-count]').forEach(el => {
+            const target = parseInt(el.dataset.count);
+            animateValue(el, target, '', 2000);
+          });
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    obs.observe(statsSection);
+  }
 </script>
 </body>
 </html>

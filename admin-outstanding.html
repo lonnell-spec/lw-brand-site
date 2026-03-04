@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Site Architecture — Admin | LDW</title>
+<title>Outstanding Items — Admin | LDW</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -72,105 +72,76 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
     <svg width="28" height="28" viewBox="0 0 240 240" fill="none"><polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/><polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/><polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/></svg>
     <span class="site-nav-name">LONNELL WILLIAMS</span>
   </a>
-  <div class="site-nav-links">
-    <a href="/#about">About</a>
-    <a href="/speaking.html">Speaking</a>
-    <a href="/#books">Books</a>
-    <a href="/#consulting">Work With Me</a>
-    <a href="/media.html">Media</a>
-    <a href="/#newsletter">Newsletter</a>
-    <a href="/vantage.html">Vantage</a>
+    <div class="site-nav-links">
+    <a href="/">Home</a>
   </div>
   <button class="site-nav-btn" onclick="document.querySelector('.site-nav-links').classList.toggle('open');"><span></span><span></span><span></span></button>
 </nav>
 <div class="admin-sub">
   <div class="admin-sub-header">
     <a href="/admin.html" class="admin-sub-back">&larr; Back to Portal</a>
-    <div class="admin-sub-eyebrow">&#9670; Admin / Site Architecture</div>
-    <div class="admin-sub-title">SITE ARCHITECTURE<span class="accent">.</span></div>
+    <div class="admin-sub-eyebrow">&#9670; Admin / Outstanding Items</div>
+    <div class="admin-sub-title">OUTSTANDING ITEMS<span class="accent">.</span></div>
   </div>
   <div class="admin-content">
 
-    <p><a href="https://ldw.build">ldw.build</a> is a static HTML site. No frameworks, no build tools, no server-side rendering. Raw HTML + CSS + inline JavaScript, deployed directly to Vercel.</p>
+    <p>Everything still pending for <a href="https://ldw.build" target="_blank">ldw.build</a>. Updated March 2, 2026.</p>
 
     <hr>
 
-    <h1>Pages</h1>
-    <table>
-      <tr><th>Page</th><th>File</th><th>URL</th><th>Description</th></tr>
-      <tr><td>Homepage</td><td><code>index.html</code></td><td>/</td><td>Hero, About, What I Carry, Speaking, Books, Consulting, Vantage promo, Content, Instagram, Newsletter, Footer</td></tr>
-      <tr><td>Speaking</td><td><code>speaking.html</code></td><td>/speaking.html</td><td>Speaking bio, topic cards, booking form, photo gallery</td></tr>
-      <tr><td>Media</td><td><code>media.html</code></td><td>/media.html</td><td>Press photos (16 images), lightbox viewer, bio card</td></tr>
-      <tr><td>Vantage</td><td><code>vantage.html</code></td><td>/vantage.html</td><td>Executive Command Center &mdash; React 18 app via Babel CDN</td></tr>
-      <tr><td>Content Hub</td><td><code>content.html</code></td><td>/content.html</td><td>Video/content hub with category filtering</td></tr>
-      <tr><td>Admin Portal</td><td><code>admin.html</code></td><td>/admin.html</td><td>Password-protected admin dashboard</td></tr>
-    </table>
-
-    <h2>Admin Subpages (Behind Auth)</h2>
-    <table>
-      <tr><th>Page</th><th>File</th><th>Access</th></tr>
-      <tr><td>Brand Identity</td><td><code>admin-brand-identity.html</code></td><td>Auth required</td></tr>
-      <tr><td>Site Architecture</td><td><code>admin-site-architecture.html</code></td><td>Auth required</td></tr>
-      <tr><td>Deployment Guide</td><td><code>admin-deployment.html</code></td><td>Auth required</td></tr>
-      <tr><td>Credentials &amp; Access</td><td><code>admin-credentials.html</code></td><td>Auth required</td></tr>
-      <tr><td>Integrations Map</td><td><code>admin-integrations.html</code></td><td>Auth required</td></tr>
-      <tr><td>Outstanding Items</td><td><code>admin-outstanding.html</code></td><td>Auth required</td></tr>
-      <tr><td>Instructions (Jadyn)</td><td><code>admin-instructions.html</code></td><td>Auth required</td></tr>
-    </table>
+    <h1>Ready to Deploy</h1>
+    <ul>
+      <li><strong>Upload admin subpages to GitHub</strong> &mdash; admin.html + 7 admin-*.html files ready in outputs folder</li>
+    </ul>
 
     <hr>
 
-    <h1>Navigation Structure</h1>
-    <p>All public pages share a sticky top nav bar with links to: Home, Speaking, Media, Vantage. The footer on every page includes a subtle "Portal" link to admin.html.</p>
-    <pre><code>&lt;div class="site-nav-links"&gt;
-  &lt;a href="/"&gt;Home&lt;/a&gt;
-  &lt;a href="/speaking.html"&gt;Speaking&lt;/a&gt;
-  &lt;a href="/media.html"&gt;Media&lt;/a&gt;
-  &lt;a href="/vantage.html"&gt;Vantage&lt;/a&gt;
-&lt;/div&gt;</code></pre>
-    <p><strong>When adding a new page:</strong> Add the link to ALL nav structures on ALL pages.</p>
+    <h1>Needs Your Action</h1>
+    <ul>
+      <li><strong>ConvertKit API Key</strong> &mdash; Add <code>CONVERTKIT_API_KEY</code> to Supabase Edge Function secrets (Dashboard &rarr; Edge Functions &rarr; sync-convertkit &rarr; Secrets). Without this, ConvertKit sync silently skips.</li>
+      <li><strong>ConvertKit Vantage Tag</strong> &mdash; Create &ldquo;vantage-waitlist&rdquo; tag in ConvertKit, copy tag ID, add as <code>CK_TAG_VANTAGE_WAITLIST</code> in same secrets panel.</li>
+      <li><strong>Verify YouTube URL</strong> &mdash; Confirm <code>youtube.com/@lonnelldwilliams</code> is correct channel handle.</li>
+      <li><strong>Verify Threads handle</strong> &mdash; Confirm <code>threads.net/@lonnelldwilliams</code> is correct.</li>
+    </ul>
 
     <hr>
 
-    <h1>Homepage Section Map</h1>
-    <table>
-      <tr><th>#</th><th>Section</th><th>CSS Class</th><th>Background</th></tr>
-      <tr><td>1</td><td>Hero</td><td><code>.hero</code></td><td>Obsidian</td></tr>
-      <tr><td>2</td><td>About</td><td><code>.section</code></td><td>Light</td></tr>
-      <tr><td>3</td><td>What I Carry</td><td><code>.section-dark</code></td><td>Obsidian</td></tr>
-      <tr><td>4</td><td>Speaking</td><td><code>.section</code></td><td>Light</td></tr>
-      <tr><td>5</td><td>Books</td><td><code>.section-offwhite</code></td><td>#F7F5F1</td></tr>
-      <tr><td>6</td><td>Consulting</td><td><code>.section-dark</code></td><td>Obsidian</td></tr>
-      <tr><td>7</td><td>Vantage Promo</td><td><code>.vantage-section</code></td><td>Warm Black</td></tr>
-      <tr><td>8</td><td>Latest Content</td><td><code>.section-dark</code></td><td>Obsidian</td></tr>
-      <tr><td>9</td><td>Instagram</td><td><code>.section-offwhite</code></td><td>#F7F5F1</td></tr>
-      <tr><td>10</td><td>Newsletter</td><td><code>.section-warm</code></td><td>Warm Black</td></tr>
-      <tr><td>11</td><td>Footer</td><td><code>.site-footer</code></td><td>#0A0A0A</td></tr>
-    </table>
+    <h1>Content &amp; Creative</h1>
+    <ul>
+      <li><strong>Populate Notion Instagram DB</strong> &mdash; Pipeline works (tested), but only 1 test entry exists. Add real IG posts to <a href="https://notion.so" target="_blank">LDW Site &mdash; Instagram</a> database and re-sync.</li>
+      <li><strong>Populate Notion Content Hub DB</strong> &mdash; 0 entries currently. Add sermon clips, podcast episodes, etc. to Content Hub database.</li>
+      <li><strong>Quote graphics for Instagram</strong> &mdash; Pull quotes from social media strategy, design branded quote cards in Canva/Photoshop (clean typography, LDW brand palette, 1080&times;1350). Batch and post as carousel or series.</li>
+      <li><strong>Change out photos on site</strong> &mdash; Replace placeholder/stock images with actual photos. Update via Notion Photo Gallery database &rarr; sync.</li>
+    </ul>
 
     <hr>
 
-    <h1>Popup CTA</h1>
-    <table>
-      <tr><th>Property</th><th>Value</th></tr>
-      <tr><td>Trigger</td><td>3 seconds after page load</td></tr>
-      <tr><td>Persistence</td><td>sessionStorage &mdash; dismissed for entire session</td></tr>
-      <tr><td>Headline</td><td>JOIN THE BUILDERS.</td></tr>
-      <tr><td>Database target</td><td><code>newsletter_subscribers</code> (source: popup_cta)</td></tr>
-      <tr><td>Close methods</td><td>X button, click outside, Escape key</td></tr>
-    </table>
+    <h1>Build &amp; Ship</h1>
+    <ul>
+      <li><strong>Vantage waitlist on vantage.html</strong> &mdash; Homepage waitlist is live, but the dedicated product page needs its own prominent version.</li>
+      <li><strong>Build sales funnel</strong> &mdash; Full funnel from content &rarr; lead magnet &rarr; email sequence &rarr; offer. Scope TBD.</li>
+    </ul>
 
     <hr>
 
-    <h1>Vantage Technical Details</h1>
-    <table>
-      <tr><th>Property</th><th>Value</th></tr>
-      <tr><td>Framework</td><td>React 18 via CDN + Babel standalone</td></tr>
-      <tr><td>Rendering</td><td>Client-side only</td></tr>
-      <tr><td>Data</td><td>Static demo data (not connected to live APIs yet)</td></tr>
-      <tr><td>Layout</td><td>2&times;2 fixed grid for hub cards</td></tr>
-      <tr><td>Modes</td><td>Org (2819 Church) / Biz (LW Brand) toggle</td></tr>
-    </table>
+    <h1>Recently Completed</h1>
+    <ul>
+      <li style="color:var(--signal);">&#10003; Admin Portal with login gate</li>
+      <li style="color:var(--signal);">&#10003; Admin subpages built on-site (no Notion dependency)</li>
+      <li style="color:var(--signal);">&#10003; Nav bar consistency across all public pages</li>
+      <li style="color:var(--signal);">&#10003; Logo links to home on all pages</li>
+      <li style="color:var(--signal);">&#10003; Portal link in footer on all pages</li>
+      <li style="color:var(--signal);">&#10003; Instructions page for Jadyn</li>
+      <li style="color:var(--signal);">&#10003; Brand Identity page with full visual reference</li>
+      <li style="color:var(--signal);">&#10003; Notion sync pipeline (Photos: 24, IG: 1 test, Content Hub: 0, YouTube: 1)</li>
+      <li style="color:var(--signal);">&#10003; Vantage nav with floating bar</li>
+      <li style="color:var(--signal);">&#10003; Vantage product page with coming soon messaging</li>
+      <li style="color:var(--signal);">&#10003; Vantage waitlist on homepage (Supabase + ConvertKit)</li>
+      <li style="color:var(--signal);">&#10003; Dead link cleanup (all footer socials verified, book buttons &rarr; Coming Soon)</li>
+      <li style="color:var(--signal);">&#10003; Brand assets exported (4 logos + 6 book covers)</li>
+      <li style="color:var(--signal);">&#10003; Instagram column fix (resolved in Edge Function v16)</li>
+      <li style="color:var(--signal);">&#10003; Photo Gallery DB ID updated (resolved in Edge Function v16)</li>
+    </ul>
 
   </div>
   <div class="admin-sub-footer">

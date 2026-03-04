@@ -4,146 +4,426 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Portal — LDW</title>
+<meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--obsidian:#0D0D0D;--warm-black:#1A1714;--copper:#C17F59;--signal:#E85D3A;--off-white:#F2F0EB;--concrete:#8A8A8A;--display:'Bebas Neue',sans-serif;--body:'DM Sans',sans-serif;--mono:'Space Mono',monospace;}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--obsidian);color:var(--off-white);font-family:var(--body);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;}
-::selection{background:var(--copper);color:var(--obsidian);}
+:root {
+  --obsidian: #0D0D0D;
+  --warm-black: #1A1714;
+  --off-white: #F2F0EB;
+  --concrete: #8A8A8A;
+  --copper: #C17F59;
+  --copper-light: #D4956A;
+  --signal: #00E676;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--obsidian);
+  color: var(--off-white);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+}
 
-.login-overlay{position:fixed;inset:0;z-index:200;background:var(--obsidian);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.4s;}
-.login-overlay.hidden{opacity:0;pointer-events:none;}
-.login-mark{display:flex;align-items:center;gap:12px;margin-bottom:48px;}
-.login-mark span{font-family:var(--display);font-size:18px;letter-spacing:4px;color:var(--off-white);}
-.login-box{width:320px;text-align:center;}
-.login-box h2{font-family:var(--display);font-size:28px;letter-spacing:3px;margin-bottom:32px;}
-.login-box input{width:100%;padding:14px 16px;background:rgba(242,240,235,0.04);border:1px solid rgba(242,240,235,0.08);color:var(--off-white);font-family:var(--body);font-size:14px;margin-bottom:12px;outline:none;}
-.login-box input:focus{border-color:var(--copper);}
-.login-box input::placeholder{color:var(--concrete);}
-.login-btn{width:100%;padding:14px;background:var(--copper);border:none;color:var(--obsidian);font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:background 0.3s;}
-.login-btn:hover{background:var(--signal);}
-.login-error{display:none;color:var(--signal);font-family:var(--mono);font-size:10px;letter-spacing:1px;margin-top:12px;}
+/* === NAV === */
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 64px;
+  background: rgba(13,13,13,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(242,240,235,0.06);
+}
+.site-nav-brand {
+  display: flex; align-items: center; gap: 12px;
+  text-decoration: none; color: var(--off-white);
+}
+.site-nav-name {
+  font-family: 'Bebas Neue', sans-serif; font-size: 18px;
+  letter-spacing: 4px; color: var(--off-white);
+}
+.site-nav-links { display: flex; gap: 32px; align-items: center; }
+.site-nav-links a {
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--concrete); text-decoration: none; transition: color 0.3s;
+}
+.site-nav-links a:hover, .site-nav-links a.active { color: var(--off-white); }
+.site-nav-btn { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.site-nav-btn span {
+  display: block; width: 20px; height: 2px; background: var(--off-white);
+  margin: 4px 0; transition: 0.3s;
+}
+@media (max-width: 768px) {
+  .site-nav { padding: 0 24px; }
+  .site-nav-links {
+    display: none; position: fixed; top: 64px; left: 0; right: 0;
+    flex-direction: column; background: rgba(13,13,13,0.96);
+    padding: 24px; gap: 20px;
+  }
+  .site-nav-links.open { display: flex; }
+  .site-nav-btn { display: block; }
+}
 
-.portal{display:none;min-height:100vh;}
-.portal.active{display:block;}
+/* === LOGIN SCREEN === */
+.login-screen {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 100vh; padding: 24px;
+}
+.login-box {
+  width: 100%; max-width: 420px;
+  background: var(--warm-black);
+  border: 1px solid rgba(242,240,235,0.08);
+  border-radius: 2px; padding: 56px 40px;
+  text-align: center;
+}
+.login-eyebrow {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 5px; text-transform: uppercase;
+  color: var(--copper); margin-bottom: 16px;
+}
+.login-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: 36px;
+  letter-spacing: 6px; margin-bottom: 8px;
+}
+.login-subtitle {
+  font-family: 'DM Sans', sans-serif; font-size: 14px;
+  color: var(--concrete); font-weight: 300; margin-bottom: 40px;
+}
+.login-field { width: 100%; margin-bottom: 16px; }
+.login-field input {
+  width: 100%; padding: 14px 16px;
+  background: rgba(242,240,235,0.04);
+  border: 1px solid rgba(242,240,235,0.1);
+  border-radius: 2px; color: var(--off-white);
+  font-family: 'DM Sans', sans-serif; font-size: 14px;
+  transition: border-color 0.3s;
+}
+.login-field input::placeholder { color: var(--concrete); }
+.login-field input:focus { outline: none; border-color: var(--copper); }
+.login-btn {
+  width: 100%; padding: 14px; margin-top: 8px;
+  background: var(--copper); border: none; border-radius: 2px;
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--obsidian); cursor: pointer; transition: background 0.3s;
+}
+.login-btn:hover { background: var(--copper-light); }
+.login-error {
+  font-family: 'DM Sans', sans-serif; font-size: 13px;
+  color: #FF6E6E; margin-top: 16px; display: none;
+}
 
-.portal-header{display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;border-bottom:1px solid rgba(242,240,235,0.04);background:rgba(13,13,13,0.95);}
-.portal-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
-.portal-brand span{font-family:var(--display);font-size:16px;letter-spacing:4px;color:var(--off-white);}
-.portal-title{font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--copper);text-transform:uppercase;}
-.portal-actions{display:flex;align-items:center;gap:24px;}
-.portal-actions a{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--concrete);text-decoration:none;transition:color 0.3s;}
-.portal-actions a:hover{color:var(--copper);}
-.logout-btn{background:none;border:1px solid rgba(242,240,235,0.1);color:var(--concrete);font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;cursor:pointer;transition:all 0.3s;}
-.logout-btn:hover{border-color:var(--signal);color:var(--signal);}
+/* === ADMIN DASHBOARD === */
+.admin-dashboard { display: none; padding-top: 64px; }
+.admin-header {
+  padding: 60px 48px 40px;
+  border-bottom: 1px solid rgba(242,240,235,0.06);
+}
+.admin-eyebrow {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 5px; text-transform: uppercase;
+  color: var(--copper); margin-bottom: 12px;
+}
+.admin-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: 48px;
+  letter-spacing: 6px; line-height: 1;
+}
+.admin-title .accent { color: var(--copper); }
+.admin-subtitle {
+  font-family: 'DM Sans', sans-serif; font-size: 15px;
+  color: var(--concrete); font-weight: 300; margin-top: 8px;
+}
 
-.sync-bar{display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(242,240,235,0.02);border-bottom:1px solid rgba(242,240,235,0.04);}
-.sync-status{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--concrete);text-transform:uppercase;}
-.sync-dot{width:6px;height:6px;border-radius:50%;background:#00E676;animation:pulse 2s infinite;}
-.sync-btn{background:none;border:1px solid var(--copper);color:var(--copper);font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:8px 20px;cursor:pointer;transition:all 0.3s;}
-.sync-btn:hover{background:var(--copper);color:var(--obsidian);}
-.sync-btn.syncing{opacity:0.5;cursor:wait;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+/* === SECTION LABELS === */
+.admin-section-label {
+  padding: 32px 48px 12px;
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 5px; text-transform: uppercase;
+  color: var(--copper); opacity: 0.7;
+}
 
-.section-label{font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--copper);text-transform:uppercase;padding:32px 48px 16px;}
-.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;padding:0 48px 32px;}
-.card{display:block;padding:28px;background:var(--warm-black);border:1px solid rgba(242,240,235,0.04);text-decoration:none;color:inherit;transition:all 0.3s;position:relative;}
-.card:hover{border-color:var(--copper);transform:translateY(-2px);}
-.card-badge{position:absolute;top:12px;right:12px;font-family:var(--mono);font-size:8px;letter-spacing:1px;color:var(--copper);text-transform:uppercase;padding:2px 8px;border:1px solid rgba(193,127,89,0.3);border-radius:2px;}
-.card-icon{font-size:24px;margin-bottom:12px;}
-.card-title{font-family:var(--display);font-size:18px;letter-spacing:2px;margin-bottom:8px;}
-.card-desc{font-size:12px;color:var(--concrete);line-height:1.5;}
+/* === GRID === */
+.admin-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px; padding: 12px 48px 8px;
+  max-width: 1200px;
+}
+.admin-card {
+  aspect-ratio: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: var(--warm-black);
+  border: 1px solid rgba(242,240,235,0.08);
+  border-radius: 2px; text-decoration: none;
+  transition: all 0.35s ease; position: relative;
+  overflow: hidden; cursor: pointer;
+}
+.admin-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; background: var(--copper); transform: scaleX(0);
+  transform-origin: left; transition: transform 0.35s ease;
+}
+.admin-card:hover::before { transform: scaleX(1); }
+.admin-card:hover {
+  border-color: rgba(193,127,89,0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+.admin-card-icon { font-size: 32px; margin-bottom: 16px; }
+.admin-card-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: 22px;
+  letter-spacing: 4px; text-align: center;
+  color: var(--off-white); padding: 0 16px;
+}
+.admin-card-desc {
+  font-family: 'DM Sans', sans-serif; font-size: 12px;
+  color: var(--concrete); font-weight: 300;
+  margin-top: 8px; text-align: center; padding: 0 16px;
+}
+.admin-card-type {
+  position: absolute; bottom: 16px;
+  font-family: 'Space Mono', monospace; font-size: 8px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--concrete); opacity: 0.5;
+}
+/* External cards get a subtle different border */
+.admin-card.external { border-color: rgba(242,240,235,0.04); }
+.admin-card.external::before { background: var(--signal); }
+/* Sync card special */
+.admin-card.sync-card { border-color: rgba(0,230,118,0.15); }
+.admin-card.sync-card::before { background: var(--signal); }
+.admin-card.sync-card .admin-card-icon { color: var(--signal); }
 
-.portal-footer{padding:32px 48px;border-top:1px solid rgba(242,240,235,0.04);margin-top:48px;display:flex;justify-content:space-between;align-items:center;}
-.portal-footer span{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:rgba(138,138,138,0.3);text-transform:uppercase;}
-.portal-footer a{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--concrete);text-decoration:none;text-transform:uppercase;transition:color 0.3s;}
-.portal-footer a:hover{color:var(--copper);}
+/* === LOGOUT === */
+.admin-footer-bar {
+  padding: 40px 48px;
+  border-top: 1px solid rgba(242,240,235,0.06);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.logout-btn {
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--concrete); background: none; border: 1px solid rgba(242,240,235,0.1);
+  padding: 10px 24px; cursor: pointer; border-radius: 2px;
+  transition: all 0.3s;
+}
+.logout-btn:hover { color: var(--off-white); border-color: var(--copper); }
+.admin-footer-text {
+  font-family: 'DM Sans', sans-serif; font-size: 12px;
+  color: var(--concrete); font-weight: 300;
+}
 
-@media(max-width:768px){
-  .portal-header{padding:0 20px;flex-direction:column;height:auto;padding:16px 20px;gap:12px;}
-  .sync-bar{padding:12px 20px;flex-direction:column;gap:12px;}
-  .section-label{padding:24px 20px 12px;}
-  .card-grid{padding:0 20px 24px;grid-template-columns:1fr;}
-  .portal-footer{padding:24px 20px;flex-direction:column;gap:12px;}
+@media (max-width: 900px) {
+  .admin-grid { grid-template-columns: repeat(2, 1fr); padding: 12px 24px 8px; }
+  .admin-header { padding: 48px 24px 32px; }
+  .admin-title { font-size: 36px; }
+  .admin-section-label { padding: 24px 24px 8px; }
+  .admin-footer-bar { padding: 24px; flex-direction: column; gap: 16px; }
+}
+@media (max-width: 520px) {
+  .admin-grid { grid-template-columns: 1fr; }
+  .login-box { padding: 40px 24px; }
 }
 </style>
 </head>
 <body>
 
-<div class="login-overlay" id="loginOverlay">
-  <div class="login-mark">
-    <svg width="28" height="28" viewBox="0 0 240 240" fill="none"><polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/><polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/><polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/></svg>
-    <span>LONNELL WILLIAMS</span>
+<!-- === NAV === -->
+<nav class="site-nav">
+  <a href="/" class="site-nav-brand">
+    <svg width="28" height="28" viewBox="0 0 240 240" fill="none">
+      <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+      <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
+      <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/>
+    </svg>
+    <span class="site-nav-name">LONNELL WILLIAMS</span>
+  </a>
+    <div class="site-nav-links">
+    <a href="/">Home</a>
   </div>
+  <button class="site-nav-btn" onclick="var l=document.querySelector('.site-nav-links');l.classList.toggle('open');">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- === LOGIN SCREEN === -->
+<div class="login-screen" id="loginScreen">
   <div class="login-box">
-    <h2>ADMIN PORTAL<span style="color:var(--copper)">.</span></h2>
-    <input type="email" id="loginEmail" placeholder="Email" autocomplete="email">
-    <input type="password" id="loginPass" placeholder="Password" autocomplete="current-password">
-    <button class="login-btn" onclick="attemptLogin()">ENTER</button>
-    <div class="login-error" id="loginError">Invalid credentials</div>
+    <div class="login-eyebrow">◆ Restricted Access</div>
+    <div class="login-title">ADMIN PORTAL<span style="color:var(--copper)">.</span></div>
+    <div class="login-subtitle">ldw.build site management</div>
+    <div class="login-field">
+      <input type="email" id="loginEmail" placeholder="Email" autocomplete="email">
+    </div>
+    <div class="login-field">
+      <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password">
+    </div>
+    <button class="login-btn" onclick="attemptLogin()">Enter</button>
+    <div class="login-error" id="loginError">Invalid credentials. Try again.</div>
   </div>
 </div>
 
-<div class="portal" id="portal">
-  <header class="portal-header">
-    <div style="display:flex;align-items:center;gap:24px;">
-      <a href="/" class="portal-brand">
-        <svg width="28" height="28" viewBox="0 0 240 240" fill="none"><polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/><polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/><polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/></svg>
-        <span>LDW</span>
-      </a>
-      <span class="portal-title">ADMIN PORTAL</span>
-    </div>
-    <div class="portal-actions">
-      <a href="/">HOME</a>
-      <a href="/speaking.html">SPEAKING</a>
-      <a href="/media.html">MEDIA</a>
-      <a href="/vantage.html">VANTAGE</a>
-      <button class="logout-btn" onclick="logout()">LOGOUT</button>
-    </div>
-  </header>
-
-  <div class="sync-bar">
-    <div class="sync-status"><span class="sync-dot"></span>AUTO-SYNC ACTIVE — EVERY 15 MIN</div>
-    <button class="sync-btn" id="syncBtn" onclick="triggerSync()">SYNC NOW</button>
+<!-- === ADMIN DASHBOARD === -->
+<div class="admin-dashboard" id="adminDashboard">
+  <div class="admin-header">
+    <div class="admin-eyebrow">◆ Site Management</div>
+    <div class="admin-title">ADMIN PORTAL<span class="accent">.</span></div>
+    <div class="admin-subtitle">Documentation, operations, and site management for ldw.build</div>
   </div>
 
-  <div class="section-label">SITE DOCUMENTATION</div>
-  <div class="card-grid">
-    <a href="/admin-brand-identity.html" class="card"><span class="card-badge">ON-SITE</span><div class="card-icon">🎨</div><div class="card-title">BRAND IDENTITY</div><div class="card-desc">Colors, typography, logo SVG, brand rules, signature elements</div></a>
-    <a href="/admin-site-architecture.html" class="card"><span class="card-badge">ON-SITE</span><div class="card-icon">🏗️</div><div class="card-title">SITE ARCHITECTURE</div><div class="card-desc">Pages, sections, nav structure, technical specs</div></a>
-    <a href="/admin-deployment.html" class="card"><span class="card-badge">ON-SITE</span><div class="card-icon">🚀</div><div class="card-title">DEPLOYMENT GUIDE</div><div class="card-desc">How to update the site, add pages, push to Vercel</div></a>
-    <a href="/admin-instructions.html" class="card"><span class="card-badge">ON-SITE</span><div class="card-icon">📋</div><div class="card-title">INSTRUCTIONS</div><div class="card-desc">Plain-language guide for Jadyn and team</div></a>
-    <a href="/admin-credentials.html" class="card"><span class="card-badge">ON-SITE</span><div class="card-icon">🔑</div><div class="card-title">CREDENTIALS</div><div class="card-desc">API keys, service accounts, access info</div></a>
-    <a href="/admin-integrations.html" class="card"><span class="card-badge">ON-SITE</span><div class="card-icon">🔗</div><div class="card-title">INTEGRATIONS</div><div class="card-desc">Supabase, Notion, ConvertKit, Shopify connections</div></a>
+  <!-- SECTION: Documentation -->
+  <div class="admin-section-label">◆ Documentation</div>
+  <div class="admin-grid">
+    <a class="admin-card" href="/admin-brand-identity.html">
+      <div class="admin-card-icon">🎨</div>
+      <div class="admin-card-title">BRAND IDENTITY</div>
+      <div class="admin-card-desc">Colors, typography, brand rules</div>
+      <div class="admin-card-type">Subpage</div>
+    </a>
+
+    <a class="admin-card" href="/admin-site-architecture.html">
+      <div class="admin-card-icon">🏗️</div>
+      <div class="admin-card-title">SITE ARCHITECTURE</div>
+      <div class="admin-card-desc">Pages, sections, nav structure</div>
+      <div class="admin-card-type">Subpage</div>
+    </a>
+
+    <a class="admin-card" href="/admin-deployment.html">
+      <div class="admin-card-icon">🚀</div>
+      <div class="admin-card-title">DEPLOYMENT GUIDE</div>
+      <div class="admin-card-desc">How to update &amp; deploy the site</div>
+      <div class="admin-card-type">Subpage</div>
+    </a>
+
+    <a class="admin-card" href="/admin-social-templates.html">
+      <div class="admin-card-icon">🔥</div>
+      <div class="admin-card-title">SOCIAL TEMPLATES</div>
+      <div class="admin-card-desc">Bold type templates for IG &amp; Threads</div>
+      <div class="admin-card-type">Subpage</div>
+    </a>
   </div>
 
-  <div class="section-label">EXTERNAL TOOLS</div>
-  <div class="card-grid">
-    <a href="https://github.com/lonnell-spec/lw-brand-site" target="_blank" class="card"><span class="card-badge">EXTERNAL</span><div class="card-icon">🐙</div><div class="card-title">GITHUB REPO</div><div class="card-desc">Source code repository</div></a>
-    <a href="https://vercel.com/lonnell-s-projects/lw-brand-site-s5uv" target="_blank" class="card"><span class="card-badge">EXTERNAL</span><div class="card-icon">▲</div><div class="card-title">VERCEL DASHBOARD</div><div class="card-desc">Deployments, domains, analytics</div></a>
-    <a href="https://supabase.com/dashboard/project/riqdcirsmckubkdfbtoj" target="_blank" class="card"><span class="card-badge">EXTERNAL</span><div class="card-icon">⚡</div><div class="card-title">SUPABASE</div><div class="card-desc">Database, Edge Functions, form data</div></a>
+  <!-- SECTION: Operations -->
+  <div class="admin-section-label">◆ Operations</div>
+  <div class="admin-grid">
+    <a class="admin-card" href="/admin-credentials.html">
+      <div class="admin-card-icon">🔐</div>
+      <div class="admin-card-title">CREDENTIALS &amp; ACCESS</div>
+      <div class="admin-card-desc">Logins, API keys, project IDs</div>
+      <div class="admin-card-type">Subpage</div>
+    </a>
+
+    <a class="admin-card" href="/admin-integrations.html">
+      <div class="admin-card-icon">🔌</div>
+      <div class="admin-card-title">INTEGRATIONS MAP</div>
+      <div class="admin-card-desc">Data flows, APIs, Edge Functions</div>
+      <div class="admin-card-type">Subpage</div>
+    </a>
+
+    <a class="admin-card" href="/admin-outstanding.html">
+      <div class="admin-card-icon">☑️</div>
+      <div class="admin-card-title">OUTSTANDING ITEMS</div>
+      <div class="admin-card-desc">What's still pending</div>
+      <div class="admin-card-type">Subpage</div>
+    </a>
   </div>
 
-  <div class="section-label">NOTION</div>
-  <div class="card-grid">
-    <a href="https://notion.so" target="_blank" class="card"><span class="card-badge">EXTERNAL</span><div class="card-icon">📝</div><div class="card-title">NOTION WORKSPACE</div><div class="card-desc">Source of truth for admin documentation and content</div></a>
+  <!-- SECTION: Quick Access -->
+  <div class="admin-section-label">◆ Quick Access</div>
+  <div class="admin-grid">
+    <a class="admin-card" href="/admin-instructions.html">
+      <div class="admin-card-icon">📖</div>
+      <div class="admin-card-title">INSTRUCTIONS</div>
+      <div class="admin-card-desc">Quick-start guide for Jadyn</div>
+      <div class="admin-card-type">Subpage</div>
+    </a>
+
+    <a class="admin-card" href="https://www.notion.so/317e09b9c15781658252d9995668b459" target="_blank">
+      <div class="admin-card-icon">📋</div>
+      <div class="admin-card-title">NOTION WORKSPACE</div>
+      <div class="admin-card-desc">CMS databases &amp; operations manual</div>
+      <div class="admin-card-type">Notion</div>
+    </a>
+
+    <a class="admin-card sync-card" href="https://riqdcirsmckubkdfbtoj.supabase.co/functions/v1/sync-notion-content?token=ldw-sync-2026-secure" target="_blank">
+      <div class="admin-card-icon">⚡</div>
+      <div class="admin-card-title">SYNC NOW</div>
+      <div class="admin-card-desc">Push Notion content to site</div>
+      <div class="admin-card-type">Supabase</div>
+    </a>
   </div>
 
-  <footer class="portal-footer">
-    <span>&copy; 2026 LONNELL WILLIAMS</span>
-    <a href="/">BACK TO SITE</a>
-  </footer>
+  <!-- SECTION: External Platforms -->
+  <div class="admin-section-label">◆ External Platforms</div>
+  <div class="admin-grid">
+    <a class="admin-card external" href="https://github.com/lonnell-spec/lw-brand-site" target="_blank">
+      <div class="admin-card-icon">⌨️</div>
+      <div class="admin-card-title">GITHUB REPO</div>
+      <div class="admin-card-desc">Source code — upload files here</div>
+      <div class="admin-card-type">GitHub</div>
+    </a>
+
+    <a class="admin-card external" href="https://vercel.com/dashboard" target="_blank">
+      <div class="admin-card-icon">▲</div>
+      <div class="admin-card-title">VERCEL DASHBOARD</div>
+      <div class="admin-card-desc">Hosting, deployments, domains</div>
+      <div class="admin-card-type">Vercel</div>
+    </a>
+
+    <a class="admin-card external" href="https://supabase.com/dashboard/project/riqdcirsmckubkdfbtoj" target="_blank">
+      <div class="admin-card-icon">⚙️</div>
+      <div class="admin-card-title">SUPABASE</div>
+      <div class="admin-card-desc">Database, Edge Functions, storage</div>
+      <div class="admin-card-type">Supabase</div>
+    </a>
+  </div>
+
+  <div class="admin-footer-bar">
+    <div class="admin-footer-text">ldw.build — Admin Portal — v2.0</div>
+    <button class="logout-btn" onclick="logout()">Log Out</button>
+  </div>
 </div>
 
 <script>
-const AUTH_EMAIL='lonnelldwilliams@gmail.com',AUTH_PASS='August11';
-function checkAuth(){if(sessionStorage.getItem('ldw_admin_auth')==='true'){document.getElementById('loginOverlay').classList.add('hidden');document.getElementById('portal').classList.add('active');}}
-function attemptLogin(){const e=document.getElementById('loginEmail').value,p=document.getElementById('loginPass').value;if(e===AUTH_EMAIL&&p===AUTH_PASS){sessionStorage.setItem('ldw_admin_auth','true');document.getElementById('loginOverlay').classList.add('hidden');document.getElementById('portal').classList.add('active');}else{document.getElementById('loginError').style.display='block';}}
-function logout(){sessionStorage.removeItem('ldw_admin_auth');location.reload();}
-function triggerSync(){const btn=document.getElementById('syncBtn');btn.textContent='SYNCING...';btn.classList.add('syncing');fetch('https://riqdcirsmckubkdfbtoj.supabase.co/functions/v1/sync-notion-content?token=ldw-sync-2026-secure').then(r=>r.json()).then(()=>{btn.textContent='SYNCED ✓';btn.classList.remove('syncing');setTimeout(()=>{btn.textContent='SYNC NOW';},3000);}).catch(()=>{btn.textContent='ERROR';btn.classList.remove('syncing');setTimeout(()=>{btn.textContent='SYNC NOW';},3000);});}
-document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')attemptLogin();});
-checkAuth();
+const VALID_EMAIL = 'lonnelldwilliams@gmail.com';
+const VALID_PASS = 'August11';
+
+function attemptLogin() {
+  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pass = document.getElementById('loginPassword').value;
+  
+  if (email === VALID_EMAIL.toLowerCase() && pass === VALID_PASS) {
+    sessionStorage.setItem('ldw_admin', 'true');
+    showDashboard();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+    document.getElementById('loginPassword').value = '';
+  }
+}
+
+function showDashboard() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminDashboard').style.display = 'block';
+}
+
+function logout() {
+  sessionStorage.removeItem('ldw_admin');
+  document.getElementById('adminDashboard').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('loginEmail').value = '';
+  document.getElementById('loginPassword').value = '';
+  document.getElementById('loginError').style.display = 'none';
+}
+
+if (sessionStorage.getItem('ldw_admin') === 'true') {
+  showDashboard();
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && document.getElementById('loginScreen').style.display !== 'none') {
+    attemptLogin();
+  }
+});
 </script>
+
 </body>
 </html>

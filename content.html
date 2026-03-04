@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LDW.BUILD — Content</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .content-filters {
+    display: flex; gap: 12px; margin-bottom: 40px; flex-wrap: wrap;
+    justify-content: center;
+  }
+  .filter-pill {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1px;
+    text-transform: uppercase; padding: 8px 18px;
+    border: 1px solid rgba(193,127,89,0.2); background: transparent;
+    color: var(--text-dim); cursor: none; transition: all 0.3s;
+  }
+  .filter-pill.active, .filter-pill:hover {
+    border-color: var(--copper); color: var(--copper); background: var(--copper-glow);
+  }
+
+  .masonry-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    grid-auto-rows: 220px; max-width: 1200px; margin: 0 auto;
+  }
+  .masonry-item {
+    background: var(--warm-black); border: 1px solid rgba(193,127,89,0.08);
+    position: relative; overflow: hidden; cursor: none;
+    transition: transform 0.4s, border-color 0.4s;
+  }
+  .masonry-item:hover { border-color: var(--border-hover); transform: scale(1.02); }
+  .masonry-item.featured { grid-column: span 2; grid-row: span 2; }
+  .masonry-item .item-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    transition: transform 0.6s;
+  }
+  .masonry-item:hover .item-bg { transform: scale(1.05); }
+  .masonry-item .item-overlay {
+    position: absolute; bottom: 0; left: 0; width: 100%; padding: 24px;
+    background: linear-gradient(transparent, rgba(13,13,13,0.9)); z-index: 2;
+  }
+  .masonry-item .item-category {
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--copper); margin-bottom: 6px;
+  }
+  .masonry-item .item-title {
+    font-family: 'Bebas Neue', cursive; font-size: 22px; letter-spacing: 1px;
+    color: var(--off-white); margin-bottom: 4px;
+  }
+  .masonry-item .item-date {
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px;
+    color: var(--text-dim);
+  }
+  .masonry-item .play-btn {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(0);
+    width: 60px; height: 60px; border-radius: 50%; background: rgba(193,127,89,0.9);
+    display: flex; align-items: center; justify-content: center; z-index: 3;
+    transition: transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+  }
+  .masonry-item:hover .play-btn { transform: translate(-50%,-50%) scale(1); }
+  .play-btn svg { width: 20px; height: 20px; fill: var(--obsidian); margin-left: 3px; }
+  .latest-badge {
+    position: absolute; top: 16px; left: 16px; z-index: 3;
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px;
+    text-transform: uppercase; padding: 4px 10px;
+    background: var(--copper); color: var(--obsidian); font-weight: 700;
+  }
+
+  /* NEWSLETTER CTA */
+  .newsletter-section { text-align: center; max-width: 700px; margin: 0 auto; }
+  .newsletter-form { display: flex; gap: 0; max-width: 460px; margin: 32px auto 0; }
+  .newsletter-form input {
+    flex: 1; padding: 16px 20px; background: rgba(26,23,20,0.6);
+    border: 1px solid rgba(193,127,89,0.2); border-right: none;
+    font-family: 'DM Sans', sans-serif; font-size: 14px;
+    color: var(--off-white); outline: none; transition: border-color 0.3s;
+  }
+  .newsletter-form input::placeholder { color: rgba(242,240,235,0.25); }
+  .newsletter-form input:focus { border-color: var(--copper); }
+  .newsletter-form button {
+    padding: 16px 28px; background: var(--copper); border: 1px solid var(--copper);
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--obsidian); font-weight: 700;
+    cursor: none; transition: background 0.3s;
+  }
+  .newsletter-form button:hover { background: var(--signal); border-color: var(--signal); }
+
+  @media (max-width: 768px) {
+    .masonry-grid { grid-template-columns: 1fr 1fr; }
+    .masonry-item.featured { grid-column: span 2; }
+  }
+  @media (max-width: 480px) {
+    .masonry-grid { grid-template-columns: 1fr; grid-auto-rows: 200px; }
+    .masonry-item.featured { grid-column: span 1; grid-row: span 1; }
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="page-transition"><div class="wipe"></div><div class="copper-line"></div></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">LONNELL <span>WILLIAMS</span></a>
+  <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="speaking.html">Speaking</a>
+    <a href="media.html">Media</a>
+    <a href="vantage.html">Vantage</a>
+    <a href="content.html" class="active">Content</a>
+  </div>
+</nav>
+
+<div class="page-wrapper">
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="hero-gradient"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-content">
+    <div class="hero-scripture" style="opacity:0;transform:translateY(10px);">Content Hub</div>
+    <h1 class="hero-title" style="font-size:clamp(64px,12vw,160px);">
+      <span class="word">WATCH.</span> <span class="word">LISTEN.</span>
+    </h1>
+    <p class="hero-sub">Messages, leadership insights, and behind-the-build content. Everything I'm teaching, preaching, and building &mdash; in one place.</p>
+  </div>
+</section>
+
+<!-- FILTERS + GRID -->
+<section class="section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="content-filters reveal">
+      <button class="filter-pill active" data-filter="all">All</button>
+      <button class="filter-pill" data-filter="message">Messages</button>
+      <button class="filter-pill" data-filter="leadership">Leadership</button>
+      <button class="filter-pill" data-filter="btb">Behind the Build</button>
+      <button class="filter-pill" data-filter="podcast">Podcast</button>
+    </div>
+
+    <div class="masonry-grid" id="contentGrid">
+
+      <div class="masonry-item featured" data-cat="message">
+        <span class="latest-badge">Latest</span>
+        <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #2a2420 50%, #1e1a16 100%);"></div>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        <div class="item-overlay">
+          <div class="item-category">Message</div>
+          <div class="item-title">ARISE AND BUILD &mdash; LEADERSHIP SERIES PT. 4</div>
+          <div class="item-date">Feb 23, 2026</div>
+        </div>
+      </div>
+
+      <div class="masonry-item" data-cat="leadership">
+        <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #221e1a 100%);"></div>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        <div class="item-overlay">
+          <div class="item-category">Leadership</div>
+          <div class="item-title">SCALING UNDER PRESSURE</div>
+          <div class="item-date">Feb 16, 2026</div>
+        </div>
+      </div>
+
+      <div class="masonry-item" data-cat="btb">
+        <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #1e1a16 100%);"></div>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        <div class="item-overlay">
+          <div class="item-category">Behind the Build</div>
+          <div class="item-title">THE AI CHIEF OF STAFF</div>
+          <div class="item-date">Feb 10, 2026</div>
+        </div>
+      </div>
+
+      <div class="masonry-item" data-cat="message">
+        <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #2a2018 100%);"></div>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        <div class="item-overlay">
+          <div class="item-category">Message</div>
+          <div class="item-title">THE ZAG PRINCIPLE</div>
+          <div class="item-date">Feb 2, 2026</div>
+        </div>
+      </div>
+
+      <div class="masonry-item" data-cat="leadership">
+        <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #201c18 100%);"></div>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        <div class="item-overlay">
+          <div class="item-category">Leadership</div>
+          <div class="item-title">WORDS BUILD WORLDS</div>
+          <div class="item-date">Jan 26, 2026</div>
+        </div>
+      </div>
+
+      <div class="masonry-item" data-cat="btb">
+        <div class="item-bg" style="background:linear-gradient(135deg, #1e1a16 0%, #221e1a 100%);"></div>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        <div class="item-overlay">
+          <div class="item-category">Behind the Build</div>
+          <div class="item-title">42 AGENTS. ONE SYSTEM.</div>
+          <div class="item-date">Jan 19, 2026</div>
+        </div>
+      </div>
+
+      <div class="masonry-item" data-cat="podcast">
+        <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #261e18 100%);"></div>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        <div class="item-overlay">
+          <div class="item-category">Podcast</div>
+          <div class="item-title">ANYTHING OR NOTHING &mdash; EP. 01</div>
+          <div class="item-date">Jan 12, 2026</div>
+        </div>
+      </div>
+
+      <div class="masonry-item" data-cat="message">
+        <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #1e1c18 100%);"></div>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        <div class="item-overlay">
+          <div class="item-category">Message</div>
+          <div class="item-title">I DID IT ANYWAY</div>
+          <div class="item-date">Jan 5, 2026</div>
+        </div>
+      </div>
+
+      <div class="masonry-item" data-cat="leadership">
+        <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #20201c 100%);"></div>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        <div class="item-overlay">
+          <div class="item-category">Leadership</div>
+          <div class="item-title">IT'S YOURS UNTIL IT'S NOT</div>
+          <div class="item-date">Dec 29, 2025</div>
+        </div>
+      </div>
+
+      <div class="masonry-item" data-cat="btb">
+        <div class="item-bg" style="background:linear-gradient(135deg, #1e1a16 0%, #1a1714 100%);"></div>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        <div class="item-overlay">
+          <div class="item-category">Behind the Build</div>
+          <div class="item-title">BUILDING LDW.BUILD</div>
+          <div class="item-date">Dec 22, 2025</div>
+        </div>
+      </div>
+
+      <div class="masonry-item" data-cat="message">
+        <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #241e18 100%);"></div>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        <div class="item-overlay">
+          <div class="item-category">Message</div>
+          <div class="item-title">MAKE IT MAKE SENSE</div>
+          <div class="item-date">Dec 15, 2025</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER CTA -->
+<section class="section section-warm" id="newsletter">
+  <div class="newsletter-section">
+    <div class="section-label reveal">Don't Miss Anything</div>
+    <div class="section-title reveal">ARISE AND<br>BUILD.</div>
+    <p class="reveal" style="font-weight:300;font-size:16px;color:var(--text-muted);margin-bottom:8px;">New content drops weekly. Subscribe to get every message, leadership insight, and behind-the-build update delivered to your inbox.</p>
+    <div class="newsletter-form reveal">
+      <input type="email" placeholder="Your email">
+      <button>Subscribe</button>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">LONNELL DAWSON WILLIAMS</div>
+      <div class="footer-verse">"The God of heaven will make us prosper, and we his servants will arise and build." &mdash; Nehemiah 2:20</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="speaking.html">Speaking</a>
+      <a href="media.html">Media</a>
+      <a href="vantage.html">Vantage</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 LONNELL WILLIAMS. ALL RIGHTS RESERVED.</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="scripts.js"></script>
+<script>
+  // Filter pills
+  document.querySelectorAll('.filter-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const filter = pill.dataset.filter;
+      const items = document.querySelectorAll('.masonry-item');
+      items.forEach((item, i) => {
+        const cat = item.dataset.cat;
+        if (filter === 'all' || cat === filter) {
+          item.style.display = '';
+          // Animate in
+          if (typeof gsap !== 'undefined') {
+            gsap.fromTo(item, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, delay: i * 0.05, ease: 'power3.out' });
+          }
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

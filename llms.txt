@@ -1,0 +1,82 @@
+# Lonnell Williams — ldw.build
+
+> Builder. Operator. Author. Executive Pastor. Systems Architect.
+
+Lonnell Williams is a builder, operator, and author based in Atlanta, GA. He serves as Executive Pastor at 2819 Church under Senior Pastor Philip Anthony Mitchell, where he has scaled the organization from 13 to 50 staff members in six months. He holds a Master of Divinity from Princeton Theological Seminary and is the author of two books: "Zag: Leading Ministry Jesus's Way" and "Anything, Everything, or Nothing at All."
+
+## Core Identity
+
+Lonnell builds what doesn't exist. Every system, every structure, every piece of infrastructure exists because someone decided it should. He is an operator who refuses to believe in limited capacity. His instruction: arise and build.
+
+## Areas of Expertise
+
+- Organizational Architecture: Systems, pipelines, and infrastructure for scaling organizations
+- Leadership Coaching: Direct, confrontational, practical coaching for executive pastors and senior leaders
+- Church Growth Strategy: Staff scaling, operational readiness, campus launches, building projects
+- Technology & AI Integration: AI agent ecosystems, automation, and technology strategy for organizations
+- Speaking: Keynotes, workshops, and leadership intensives for conferences, churches, and organizations
+
+## Speaking Topics
+
+1. Arise and Build — The operator-pastor framework. How to carry spiritual weight and organizational responsibility without choosing between them.
+2. Build What Doesn't Exist — Infrastructure as ministry. Why the systems you build speak louder than the sermons you preach.
+3. Leading With the Staff — What's already in your hand is enough. Stop looking for bigger resources and start activating what God has already placed in your grip.
+4. The Zag Principle — When everyone goes one direction, go the other intentionally. Counter-cultural leadership in ministry, business, and life.
+5. Scaling Under Pressure — 13 to 50 staff in six months. What it takes to scale an organization rapidly without losing quality, culture, or your mind.
+6. Words Build Worlds — The power of voice, presence, and atmosphere. How your words don't just communicate, they construct.
+
+## Books
+
+### Zag: Leading Ministry Jesus's Way
+An operator's manual for people who are tired of being told to "pray about it" when the building is on fire. Counter-cultural frameworks for ministry leaders who build, not just believe.
+
+### Anything, Everything, or Nothing at All
+Not a how-to. A who-I-am. The manifesto of a man who refuses to do halfway. No "good enough." Full commitment or full absence. This crosses beyond ministry into the human condition.
+
+## Consulting & Coaching Services
+
+- Organizational Architecture: KPIs, project management, staff structure, scalable leadership DNA
+- Leadership Coaching: One-on-one coaching for leaders carrying disproportionate weight
+- Church Growth Strategy: Strategic consulting for churches in rapid growth phases
+- Technology & AI Integration: AI agent ecosystems and automation for organizations
+
+## Five Principles (What I Carry)
+
+1. Vision without execution is a daydream. The operator who builds the plane while flying it — and lands it.
+2. The architect who sees frameworks where others see chaos. Pipelines, dashboards, processes, organizational clarity.
+3. Weight was made to be carried. Hard decisions. High stakes. You stand in it.
+4. Words build worlds. Your voice shapes culture, raises standards, creates movement.
+5. Assigned, not wandering. Purpose makes pain endurable. Calling makes leadership sustainable.
+
+## Credentials
+
+- M.Div. — Princeton Theological Seminary
+- Executive Pastor — 2819 Church, Atlanta, GA
+- Author of two books
+- Speaker and leadership consultant
+- Systems Architect (AI agent ecosystems, operational infrastructure)
+
+## Products
+
+### Vantage
+A leadership intelligence product currently in development. Details at https://ldw.build/vantage.html
+
+## Links
+
+- Website: https://ldw.build
+- Instagram: https://instagram.com/lonnelldwilliams
+- YouTube: https://youtube.com/@AnyEveryOrNothingAtAll
+- Threads: https://threads.com/@lonnelldwilliams
+- Speaking: https://ldw.build/speaking.html
+- Media: https://ldw.build/media.html
+- Content: https://ldw.build/content.html
+
+## Content Files
+
+For detailed markdown content, see:
+- /content/about.md — Full bio and background
+- /content/speaking.md — Speaking topics with descriptions
+- /content/books.md — Book descriptions and themes
+- /content/consulting.md — Consulting services and approach
+- /content/principles.md — Core leadership principles and frameworks
+- /content/vantage.md — Vantage product overview
