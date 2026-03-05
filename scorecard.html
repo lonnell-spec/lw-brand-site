@@ -3,128 +3,79 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ministry Leadership Scorecard — Lonnell Williams</title>
-<meta name="description" content="Assess the operational health of your ministry. Free scorecard for church leaders, executive pastors, and ministry builders.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<!-- Metricool -->
-<script>(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://tracker.metricool.com/resources/be.js";js.onload=function(){beTracker.t({hash:"b4e8f2a1c3d5e6f7a8b9c0d1e2f3a4b5"});};fjs.parentNode.insertBefore(js,fjs);}(document,'script','metricool-tracker'));</script>
+<title>Scorecard — Lonnell Williams</title>
+<meta name="description" content="A live operational scorecard for Lonnell Williams — tracking ministry scale, content output, and platform reach.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --obsidian: #0D0D0D;
-  --warm-black: #1A1714;
-  --off-white: #F2F0EB;
-  --concrete: #8A8A8A;
-  --copper: #C17F59;
-  --copper-light: #D4956A;
-  --signal: #E85D3A;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sans', sans-serif; min-height: 100vh; overflow-x: hidden; }
+  :root{--obsidian:#0D0D0D;--warm-black:#1A1714;--copper:#C17F59;--signal:#E85D3A;--off-white:#F2F0EB;--concrete:#8A8A8A}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--obsidian);color:var(--off-white);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.7;font-size:15px;-webkit-font-smoothing:antialiased}
 
-/* NAV */
-.site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; background: rgba(13,13,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(242,240,235,0.06); }
-.site-nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--off-white); }
-.site-nav-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 4px; }
-.site-nav-links { display: flex; gap: 32px; align-items: center; }
-.site-nav-links a { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.3s; }
-.site-nav-links a:hover, .site-nav-links a.active { color: var(--off-white); }
-.site-nav-btn { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
-.site-nav-btn span { display: block; width: 20px; height: 2px; background: var(--off-white); margin: 4px 0; }
-@media (max-width: 768px) {
-  .site-nav { padding: 0 24px; }
-  .site-nav-links { display: none; position: fixed; top: 64px; left: 0; right: 0; flex-direction: column; background: rgba(13,13,13,0.96); padding: 24px; gap: 20px; }
-  .site-nav-links.open { display: flex; }
-  .site-nav-btn { display: block; }
-}
+  /* NAV */
+  .site-nav{position:fixed;top:0;left:0;right:0;z-index:9999;padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,13,13,0.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(242,240,235,0.04)}
+  .site-nav-brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+  .site-nav-name{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:5px;color:var(--off-white)}
+  .site-nav-links{display:flex;align-items:center;gap:32px}
+  .site-nav-links a{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;text-decoration:none;color:var(--concrete);transition:color 0.3s}
+  .site-nav-links a:hover{color:var(--off-white)}
 
-/* HERO */
-.hero { min-height: 100vh; display: flex; align-items: center; padding: 64px 48px 80px; position: relative; overflow: hidden; }
-.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 40%, rgba(193,127,89,0.06) 0%, transparent 60%); pointer-events: none; }
-.hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-.hero-eyebrow { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--copper); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
-.hero-eyebrow::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--copper); }
-.hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 7vw, 96px); letter-spacing: 2px; line-height: 0.95; margin-bottom: 28px; }
-.hero-title span { color: var(--copper); }
-.hero-sub { font-size: 17px; font-weight: 300; color: rgba(242,240,235,0.65); line-height: 1.8; margin-bottom: 40px; max-width: 480px; }
-.hero-form { display: flex; flex-direction: column; gap: 12px; max-width: 400px; }
-.hero-input { background: rgba(242,240,235,0.04); border: 1px solid rgba(242,240,235,0.1); padding: 14px 18px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--off-white); outline: none; transition: border-color 0.3s; }
-.hero-input::placeholder { color: var(--concrete); }
-.hero-input:focus { border-color: var(--copper); }
-.hero-btn { background: var(--copper); color: var(--obsidian); font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; padding: 16px 32px; border: none; cursor: pointer; transition: background 0.3s; font-weight: 700; }
-.hero-btn:hover { background: var(--copper-light); }
-.hero-btn:disabled { background: var(--concrete); cursor: not-allowed; }
-.hero-note { font-size: 11px; font-weight: 300; color: var(--concrete); margin-top: 4px; }
-.form-msg { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; padding: 12px 16px; margin-top: 8px; }
-.form-msg.error { background: rgba(232,93,58,0.1); border: 1px solid rgba(232,93,58,0.3); color: #E85D3A; }
-.form-msg.success { background: rgba(0,230,118,0.08); border: 1px solid rgba(0,230,118,0.2); color: #00E676; }
-.hero-visual { position: relative; }
-.scorecard-mock { background: var(--warm-black); border: 1px solid rgba(193,127,89,0.15); padding: 40px 36px; position: relative; }
-.scorecard-mock::before { content: 'MINISTRY LEADERSHIP'; font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 4px; text-transform: uppercase; color: var(--copper); display: block; margin-bottom: 24px; }
-.score-row { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-.score-label { font-size: 12px; font-weight: 300; color: var(--concrete); min-width: 120px; }
-.score-bar { flex: 1; height: 3px; background: rgba(242,240,235,0.06); position: relative; overflow: hidden; }
-.score-bar-fill { height: 100%; background: var(--copper); }
-.score-val { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--off-white); min-width: 32px; text-align: right; }
-.scorecard-total { border-top: 1px solid rgba(242,240,235,0.08); margin-top: 24px; padding-top: 24px; display: flex; justify-content: space-between; align-items: baseline; }
-.scorecard-total-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); }
-.scorecard-total-val { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--copper); letter-spacing: 2px; }
-.mock-stamp { position: absolute; top: 24px; right: 24px; width: 64px; height: 64px; border: 2px solid rgba(193,127,89,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-.mock-stamp span { font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 2px; color: var(--copper); text-align: center; line-height: 1.2; }
+  /* HERO */
+  .hero{padding:140px 60px 60px;max-width:1100px;margin:0 auto}
+  .hero-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:6px;text-transform:uppercase;color:var(--copper);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+  .hero-label::after{content:'';flex:0 0 40px;height:1px;background:var(--copper)}
+  .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,8vw,104px);letter-spacing:3px;line-height:0.9;margin-bottom:24px}
+  .hero-title span{color:var(--copper)}
+  .hero-desc{font-size:16px;font-weight:300;color:var(--concrete);max-width:520px;line-height:1.75}
+  .hero-meta{font-family:'Space Mono',monospace;font-size:10px;color:rgba(242,240,235,0.25);letter-spacing:2px;margin-top:16px}
 
-/* WHAT YOU GET */
-.section { padding: 100px 48px; }
-.section-inner { max-width: 1100px; margin: 0 auto; }
-.section-eyebrow { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--copper); margin-bottom: 16px; }
-.section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 5vw, 60px); letter-spacing: 3px; line-height: 1; margin-bottom: 16px; }
-.section-sub { font-size: 16px; font-weight: 300; color: var(--concrete); line-height: 1.7; max-width: 560px; margin-bottom: 64px; }
-.pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-.pillar-card { background: var(--warm-black); padding: 36px 28px; border: 1px solid rgba(242,240,235,0.04); transition: border-color 0.3s; }
-.pillar-card:hover { border-color: rgba(193,127,89,0.2); }
-.pillar-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 2px; color: rgba(193,127,89,0.25); line-height: 1; margin-bottom: 16px; }
-.pillar-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--off-white); margin-bottom: 12px; }
-.pillar-desc { font-size: 14px; font-weight: 300; color: var(--concrete); line-height: 1.75; }
+  /* STAT GRID */
+  .stat-wrap{max-width:1100px;margin:0 auto;padding:0 60px 80px}
+  .stat-section-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--copper);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+  .stat-section-label::after{content:'';flex:1;height:1px;background:rgba(193,127,89,0.25)}
+  .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(193,127,89,0.12);margin-bottom:48px}
+  .stat-box{background:var(--warm-black);padding:32px 28px}
+  .stat-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,5vw,68px);line-height:1;color:var(--copper);margin-bottom:4px}
+  .stat-num span{font-size:0.55em;letter-spacing:1px}
+  .stat-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--concrete)}
+  .stat-note{font-size:11px;color:rgba(242,240,235,0.3);margin-top:6px;line-height:1.4}
 
-/* FOR WHO */
-.for-who { padding: 80px 48px; background: var(--warm-black); border-top: 1px solid rgba(242,240,235,0.04); border-bottom: 1px solid rgba(242,240,235,0.04); }
-.for-who-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-.who-list { list-style: none; display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
-.who-item { display: flex; gap: 16px; align-items: flex-start; font-size: 15px; font-weight: 300; color: rgba(242,240,235,0.75); line-height: 1.6; }
-.who-item::before { content: '◆'; color: var(--copper); font-size: 8px; margin-top: 6px; flex-shrink: 0; }
-.quote-block { border-left: 2px solid var(--copper); padding: 28px 32px; }
-.quote-text { font-size: 20px; font-weight: 300; font-style: italic; color: var(--off-white); line-height: 1.65; margin-bottom: 20px; }
-.quote-attr { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); }
+  /* TRACK ROWS */
+  .tracks{max-width:1100px;margin:0 auto;padding:0 60px 80px}
+  .track{display:grid;grid-template-columns:220px 1fr;gap:40px;padding:32px 0;border-bottom:1px solid rgba(255,255,255,0.05);align-items:start}
+  .track:last-child{border-bottom:none}
+  .track-cat{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--copper);padding-top:4px}
+  .track-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+  .track-item{background:var(--warm-black);border:1px solid rgba(193,127,89,0.1);padding:16px}
+  .track-item-val{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--off-white);line-height:1}
+  .track-item-label{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--concrete);margin-top:4px}
 
-/* CTA */
-.cta-band { padding: 100px 48px; text-align: center; position: relative; overflow: hidden; }
-.cta-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(193,127,89,0.05) 0%, transparent 70%); }
-.cta-band-inner { max-width: 640px; margin: 0 auto; position: relative; }
-.cta-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 6vw, 72px); letter-spacing: 3px; line-height: 1; margin-bottom: 20px; }
-.cta-sub { font-size: 16px; font-weight: 300; color: var(--concrete); line-height: 1.7; margin-bottom: 40px; }
-.cta-form { display: flex; flex-direction: column; gap: 12px; max-width: 400px; margin: 0 auto; }
-.ty-state { display: none; padding: 28px; background: rgba(0,230,118,0.06); border: 1px solid rgba(0,230,118,0.15); }
-.ty-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; color: #00E676; margin-bottom: 8px; }
-.ty-body { font-size: 14px; font-weight: 300; color: rgba(242,240,235,0.7); line-height: 1.7; }
+  /* FOCUS ITEMS */
+  .focus{max-width:1100px;margin:0 auto;padding:0 60px 100px}
+  .focus-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+  .focus-card{background:var(--warm-black);border:1px solid rgba(193,127,89,0.12);padding:28px 24px}
+  .focus-icon{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--copper);margin-bottom:12px}
+  .focus-title{font-family:'DM Sans',sans-serif;font-weight:700;font-size:15px;color:var(--off-white);margin-bottom:8px}
+  .focus-desc{font-size:13px;color:var(--concrete);line-height:1.65}
+  .focus-status{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06)}
+  .status-live{color:#5A8C6B}
+  .status-in-progress{color:var(--copper)}
+  .status-planned{color:rgba(242,240,235,0.25)}
 
-/* FOOTER */
-.footer { background: var(--obsidian); padding: 80px 48px 40px; }
-.footer-inner { max-width: 1100px; margin: 0 auto; }
-.footer-top { display: grid; grid-template-columns: 1.2fr 0.8fr 0.8fr 1.2fr; gap: 60px; padding-bottom: 60px; border-bottom: 1px solid rgba(242,240,235,0.04); }
-.footer-col-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); margin-bottom: 20px; }
-.footer-scripture { font-size: 14px; font-weight: 300; font-style: italic; color: rgba(242,240,235,0.3); line-height: 1.7; margin-bottom: 12px; }
-.footer-ref { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; color: var(--copper); }
-.footer-link { display: block; font-size: 13px; font-weight: 300; color: var(--concrete); text-decoration: none; margin-bottom: 12px; transition: color 0.3s; }
-.footer-link:hover { color: var(--off-white); }
-.footer-social-row { display: flex; gap: 12px; }
-.footer-social { width: 40px; height: 40px; border: 1px solid rgba(242,240,235,0.06); display: flex; align-items: center; justify-content: center; text-decoration: none; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--concrete); transition: all 0.3s; }
-.footer-social:hover { border-color: var(--copper); color: var(--copper); }
-.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 30px; }
-.footer-brand-text { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 6px; color: rgba(242,240,235,0.08); }
-.footer-legal { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(242,240,235,0.1); }
+  /* FOOTER */
+  .footer-strip{border-top:1px solid rgba(193,127,89,0.15);padding:32px 60px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  .footer-strip-brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;color:rgba(242,240,235,0.15)}
+  .footer-strip-links{display:flex;gap:24px}
+  .footer-strip-links a{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--concrete);text-decoration:none;transition:color 0.2s}
+  .footer-strip-links a:hover{color:var(--copper)}
 
-@media (max-width: 1024px) { .hero-inner { grid-template-columns: 1fr; gap: 60px; } .pillars-grid { grid-template-columns: 1fr 1fr; } .for-who-inner { grid-template-columns: 1fr; } .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; } }
-@media (max-width: 768px) { .hero { padding: 100px 24px 60px; } .section { padding: 60px 24px; } .for-who { padding: 60px 24px; } .cta-band { padding: 60px 24px; } .pillars-grid { grid-template-columns: 1fr; } .footer { padding: 60px 24px 32px; } .footer-top { grid-template-columns: 1fr; gap: 32px; } }
+  @media(max-width:768px){
+    .site-nav{padding:0 20px}
+    .site-nav-links{display:none}
+    .hero,.stat-wrap,.tracks,.focus{padding-left:28px;padding-right:28px}
+    .stat-grid{grid-template-columns:repeat(2,1fr)}
+    .track{grid-template-columns:1fr;gap:16px}
+    .footer-strip{padding:24px 28px}
+  }
 </style>
 </head>
 <body>
@@ -143,195 +94,135 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
     <a href="/speaking.html">Speaking</a>
     <a href="/books.html">Books</a>
     <a href="/#consulting">Work With Me</a>
-    <a href="/media.html">Media</a>
-    <a href="/#newsletter">Newsletter</a>
     <a href="/vantage.html">Vantage</a>
   </div>
-  <button class="site-nav-btn" onclick="var l=document.querySelector('.site-nav-links');l.classList.toggle('open');">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-copy">
-      <div class="hero-eyebrow">Free Resource</div>
-      <h1 class="hero-title">MINISTRY<br>HEALTH<br><span>SCORECARD.</span></h1>
-      <p class="hero-sub">Most ministry leaders are too close to their own organization to see what's actually broken. This scorecard gives you a clear-eyed read on the 7 operational pillars that determine whether your ministry can scale — or is quietly losing ground.</p>
-      <div id="heroForm">
-        <div class="hero-form">
-          <input type="text" id="heroName" class="hero-input" placeholder="Your name">
-          <input type="email" id="heroEmail" class="hero-input" placeholder="Your email address">
-          <button class="hero-btn" id="heroBtn" onclick="handleSignup('hero')">GET THE SCORECARD →</button>
-          <p class="hero-note">Free. No spam. Unsubscribe anytime.</p>
-        </div>
-        <div id="heroMsg" class="form-msg" style="display:none;"></div>
-      </div>
-      <div id="heroTy" class="ty-state" style="display:none;">
-        <div class="ty-title">CHECK YOUR INBOX.</div>
-        <div class="ty-body">The scorecard is on its way. While you wait — follow along on <a href="https://buildwithldw.substack.com" target="_blank" style="color:var(--copper);">Substack</a> where I write about building ministry systems that actually work.</div>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="scorecard-mock">
-        <div class="mock-stamp"><span>FREE<br>PDF</span></div>
-        <div class="score-row"><span class="score-label">Vision Clarity</span><div class="score-bar"><div class="score-bar-fill" style="width:82%"></div></div><span class="score-val">82</span></div>
-        <div class="score-row"><span class="score-label">Staff Health</span><div class="score-bar"><div class="score-bar-fill" style="width:56%"></div></div><span class="score-val">56</span></div>
-        <div class="score-row"><span class="score-label">Systems & Ops</span><div class="score-bar"><div class="score-bar-fill" style="width:41%"></div></div><span class="score-val">41</span></div>
-        <div class="score-row"><span class="score-label">Financial Health</span><div class="score-bar"><div class="score-bar-fill" style="width:73%"></div></div><span class="score-val">73</span></div>
-        <div class="score-row"><span class="score-label">Guest Experience</span><div class="score-bar"><div class="score-bar-fill" style="width:88%"></div></div><span class="score-val">88</span></div>
-        <div class="score-row"><span class="score-label">Leadership Dev</span><div class="score-bar"><div class="score-bar-fill" style="width:34%"></div></div><span class="score-val">34</span></div>
-        <div class="score-row"><span class="score-label">Digital Presence</span><div class="score-bar"><div class="score-bar-fill" style="width:62%"></div></div><span class="score-val">62</span></div>
-        <div class="scorecard-total">
-          <span class="scorecard-total-label">Overall Score</span>
-          <span class="scorecard-total-val">62<span style="font-size:24px;color:var(--concrete);">/100</span></span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="hero">
+  <div class="hero-label">At a Glance</div>
+  <div class="hero-title">THE<br><span>SCORECARD</span></div>
+  <p class="hero-desc">Key numbers across ministry operations, content output, and organizational scale. Updated quarterly.</p>
+  <div class="hero-meta">Q1 2026 · 2819 CHURCH + LDW.BUILD</div>
+</div>
 
-<!-- PILLARS -->
-<section class="section" style="background:var(--warm-black); border-top: 1px solid rgba(242,240,235,0.04);">
-  <div class="section-inner">
-    <div class="section-eyebrow">What's Inside</div>
-    <h2 class="section-title">7 PILLARS.<br>HONEST SCORES.</h2>
-    <p class="section-sub">Each pillar includes a self-assessment rubric, a score, and a specific action if you're below the threshold.</p>
-    <div class="pillars-grid">
-      <div class="pillar-card"><div class="pillar-num">01</div><div class="pillar-title">VISION CLARITY</div><div class="pillar-desc">Does your team know where you're going and why? Clarity that stays in leadership doesn't move organizations.</div></div>
-      <div class="pillar-card"><div class="pillar-num">02</div><div class="pillar-title">STAFF HEALTH</div><div class="pillar-desc">Culture score, burnout risk, and communication health. The people are the ministry.</div></div>
-      <div class="pillar-card"><div class="pillar-num">03</div><div class="pillar-title">SYSTEMS & OPS</div><div class="pillar-desc">Are you running on documented processes or tribal knowledge? One departure shouldn't break anything.</div></div>
-      <div class="pillar-card"><div class="pillar-num">04</div><div class="pillar-title">FINANCIAL HEALTH</div><div class="pillar-desc">Runway, cash flow awareness, and giving trends. You can't build on a shaky financial foundation.</div></div>
-      <div class="pillar-card"><div class="pillar-num">05</div><div class="pillar-title">GUEST EXPERIENCE</div><div class="pillar-desc">From parking to follow-up — what does a first-time guest actually experience at your church?</div></div>
-      <div class="pillar-card"><div class="pillar-num">06</div><div class="pillar-title">LEADERSHIP DEV</div><div class="pillar-desc">Are you growing the next generation of leaders inside the house, or always recruiting from outside?</div></div>
-      <div class="pillar-card"><div class="pillar-num">07</div><div class="pillar-title">DIGITAL PRESENCE</div><div class="pillar-desc">Your digital footprint is your first impression. Online presence, content, and discoverability score.</div></div>
+<!-- MINISTRY STATS -->
+<div class="stat-wrap">
+  <div class="stat-section-label">Ministry Scale — 2819 Church</div>
+  <div class="stat-grid">
+    <div class="stat-box">
+      <div class="stat-num">50<span>+</span></div>
+      <div class="stat-label">Staff Members</div>
+      <div class="stat-note">Scaled from 13 in 6 months</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Campuses Launched</div>
+      <div class="stat-note">Multi-site operations</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">8<span>-fig</span></div>
+      <div class="stat-label">Budget Managed</div>
+      <div class="stat-note">Annual operational budget</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">42</div>
+      <div class="stat-label">AI Agents</div>
+      <div class="stat-note">Chief of Staff ecosystem</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Clusters</div>
+      <div class="stat-note">Ops / Brand / Ministry</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">15<span>min</span></div>
+      <div class="stat-label">Sync Interval</div>
+      <div class="stat-note">Live data infrastructure</div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- FOR WHO -->
-<section class="for-who">
-  <div class="for-who-inner">
-    <div>
-      <div class="section-eyebrow">Who This Is For</div>
-      <h2 class="section-title">IF YOU'RE BUILDING SOMETHING THAT MATTERS.</h2>
-      <ul class="who-list">
-        <li class="who-item">Senior Pastors who know something's off but can't name it</li>
-        <li class="who-item">Executive Pastors evaluating where to put time and resources</li>
-        <li class="who-item">Church planters who want to build the right systems early</li>
-        <li class="who-item">Ministry directors managing teams that keep losing people</li>
-        <li class="who-item">Leaders preparing for a building campaign, campus launch, or major transition</li>
-      </ul>
-    </div>
-    <div class="quote-block">
-      <p class="quote-text">"Most church leaders I've worked with aren't lacking vision. They're lacking a clear read on the gap between where they are and where they say they're going. This scorecard closes that gap."</p>
-      <div class="quote-attr">— Lonnell Williams, Executive Pastor</div>
+<!-- CONTENT TRACKS -->
+<div class="tracks">
+  <div class="stat-section-label">Content Output — ldw.build</div>
+  <div class="track">
+    <div class="track-cat">Video</div>
+    <div class="track-items">
+      <div class="track-item"><div class="track-item-val">24</div><div class="track-item-label">YouTube Videos</div></div>
+      <div class="track-item"><div class="track-item-val">15<span style="font-size:14px">min</span></div><div class="track-item-label">Avg Sync</div></div>
     </div>
   </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-band">
-  <div class="cta-band-inner">
-    <h2 class="cta-title">GET YOUR SCORE.</h2>
-    <p class="cta-sub">Takes 10 minutes. Tells you more than most leadership assessments that cost $500.</p>
-    <div id="ctaForm">
-      <div class="cta-form">
-        <input type="text" id="ctaName" class="hero-input" placeholder="Your name">
-        <input type="email" id="ctaEmail" class="hero-input" placeholder="Your email address">
-        <button class="hero-btn" id="ctaBtn" onclick="handleSignup('cta')">SEND ME THE SCORECARD →</button>
-        <p class="hero-note">Free. No spam. Unsubscribe anytime.</p>
-      </div>
-      <div id="ctaMsg" class="form-msg" style="display:none;"></div>
-    </div>
-    <div id="ctaTy" class="ty-state" style="display:none; margin-top:0;">
-      <div class="ty-title">YOU'RE IN.</div>
-      <div class="ty-body">Check your inbox. The scorecard PDF will be there shortly. Questions? Email <a href="mailto:lonnell@ldw.build" style="color:var(--copper);">lonnell@ldw.build</a></div>
+  <div class="track">
+    <div class="track-cat">Written</div>
+    <div class="track-items">
+      <div class="track-item"><div class="track-item-val">3</div><div class="track-item-label">Books</div></div>
+      <div class="track-item"><div class="track-item-val">Wkly</div><div class="track-item-label">Newsletter</div></div>
     </div>
   </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div>
-        <div class="footer-col-label">Foundation</div>
-        <p class="footer-scripture">"The God of heaven will make us prosper, and we his servants will arise and build."</p>
-        <div class="footer-ref">Nehemiah 2:20 — ESV</div>
-      </div>
-      <div>
-        <div class="footer-col-label">Navigate</div>
-        <a href="/#about" class="footer-link">About</a>
-        <a href="/speaking.html" class="footer-link">Speaking</a>
-        <a href="/books.html" class="footer-link">Books</a>
-        <a href="/#consulting" class="footer-link">Work With Me</a>
-        <a href="/#newsletter" class="footer-link">Newsletter</a>
-        <a href="/media.html" class="footer-link">Media</a>
-        <a href="/vantage.html" class="footer-link">Vantage</a>
-      </div>
-      <div>
-        <div class="footer-col-label">Books</div>
-        <a href="/books.html" class="footer-link">Anything, Everything, or Nothing at All</a>
-        <a href="/books.html" class="footer-link">Zag: Leading Ministry Jesus's Way</a>
-      </div>
-      <div>
-        <div class="footer-col-label">Connect</div>
-        <div class="footer-social-row">
-          <a href="https://instagram.com/lonnelldwilliams" target="_blank" class="footer-social">IG</a>
-          <a href="https://youtube.com/@lonnelldwilliams" target="_blank" class="footer-social">YT</a>
-          <a href="https://threads.net/@lonnelldwilliams" target="_blank" class="footer-social">TH</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="footer-brand-text">LONNELL DAWSON WILLIAMS</div>
-      <div class="footer-legal">&copy; 2026 LONNELL WILLIAMS. ALL RIGHTS RESERVED.</div>
+  <div class="track">
+    <div class="track-cat">Platform</div>
+    <div class="track-items">
+      <div class="track-item"><div class="track-item-val">7</div><div class="track-item-label">Supabase Tables</div></div>
+      <div class="track-item"><div class="track-item-val">11</div><div class="track-item-label">Admin Pages</div></div>
+      <div class="track-item"><div class="track-item-val">5</div><div class="track-item-label">Public Pages</div></div>
     </div>
   </div>
-</footer>
+</div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-const SUPABASE_URL = 'https://mhkiflfmshpfhpfkbnok.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1oa2lmbGZtc2hwZmhwZmtibm9rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzgxOTk2MTcsImV4cCI6MjA1Mzc3NTYxN30.VVAFuHqBRdU0bPbZXi3EHZLS_v8NqAUv-R4V1LmGSnQ';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+<!-- FOCUS AREAS -->
+<div class="focus">
+  <div class="stat-section-label">Current Focus</div>
+  <div class="focus-grid">
+    <div class="focus-card">
+      <div class="focus-icon">Infrastructure</div>
+      <div class="focus-title">AI Chief of Staff Ecosystem</div>
+      <div class="focus-desc">42-agent system managing Sunday ops, staff communications, content production, event planning, and executive briefings at 2819 Church.</div>
+      <div class="focus-status status-live">● Live — 2819 Church</div>
+    </div>
+    <div class="focus-card">
+      <div class="focus-icon">Book Launch</div>
+      <div class="focus-title">Anything, Everything, or Nothing at All</div>
+      <div class="focus-desc">Ministry commitment theology. Re-release in Fall 2026. Pre-order notification open.</div>
+      <div class="focus-status status-in-progress">◐ Fall 2026</div>
+    </div>
+    <div class="focus-card">
+      <div class="focus-icon">Vantage</div>
+      <div class="focus-title">Executive Command Center</div>
+      <div class="focus-desc">Live organizational dashboard for 2819 Church. Attendance, giving, staff health, and open directives in a single view.</div>
+      <div class="focus-status status-in-progress">◐ Demo → Live Integration</div>
+    </div>
+    <div class="focus-card">
+      <div class="focus-icon">Speaking</div>
+      <div class="focus-title">Conference Speaking</div>
+      <div class="focus-desc">Available for ministry conferences, leadership summits, and organizational events. Topics: AI for ministry, operations, and leadership theology.</div>
+      <div class="focus-status status-live">● Booking Open</div>
+    </div>
+    <div class="focus-card">
+      <div class="focus-icon">Publishing</div>
+      <div class="focus-title">Zag: Leading Ministry Jesus's Way</div>
+      <div class="focus-desc">Field guide for ministry leaders tired of imitating world's leadership frameworks. Drawing directly from how Jesus led.</div>
+      <div class="focus-status status-planned">○ Coming Soon</div>
+    </div>
+    <div class="focus-card">
+      <div class="focus-icon">Multi-Campus</div>
+      <div class="focus-title">South Atlanta Campus</div>
+      <div class="focus-desc">Second 2819 Church campus in development. Site selection, staffing, and launch architecture underway.</div>
+      <div class="focus-status status-planned">○ 2027 Target</div>
+    </div>
+  </div>
+</div>
 
-async function handleSignup(prefix) {
-  const name = document.getElementById(prefix + 'Name').value.trim();
-  const email = document.getElementById(prefix + 'Email').value.trim();
-  const btn = document.getElementById(prefix + 'Btn');
-  const msg = document.getElementById(prefix + 'Msg');
+<div class="footer-strip">
+  <div class="footer-strip-brand">LDW BUILD</div>
+  <div class="footer-strip-links">
+    <a href="/">Home</a>
+    <a href="/speaking.html">Speaking</a>
+    <a href="/books.html">Books</a>
+    <a href="/vantage.html">Vantage</a>
+  </div>
+  <div style="font-family:'Space Mono',monospace;font-size:9px;color:rgba(242,240,235,0.2);letter-spacing:2px;">Q1 2026</div>
+</div>
 
-  if (!name || !email) { showMsg(msg, 'Name and email are required.', true); return; }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showMsg(msg, 'Please enter a valid email.', true); return; }
-
-  btn.disabled = true;
-  btn.textContent = 'SENDING...';
-
-  try {
-    const { error } = await supabase.from('newsletter_signups').insert([{
-      name, email,
-      source: 'scorecard_page',
-      tags: ['scorecard', 'lead_magnet']
-    }]);
-    if (error) throw error;
-
-    document.getElementById(prefix + 'Form').style.display = 'none';
-    document.getElementById(prefix + 'Ty').style.display = 'block';
-  } catch (err) {
-    btn.disabled = false;
-    btn.textContent = prefix === 'hero' ? 'GET THE SCORECARD →' : 'SEND ME THE SCORECARD →';
-    showMsg(msg, 'Something went wrong. Email lonnell@ldw.build directly.', true);
-  }
-}
-
-function showMsg(el, text, isError) {
-  el.textContent = text;
-  el.className = 'form-msg ' + (isError ? 'error' : 'success');
-  el.style.display = 'block';
-}
-</script>
 </body>
 </html>

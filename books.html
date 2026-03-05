@@ -46,6 +46,9 @@
     .books-section { padding: 40px 60px 120px; max-width: 1200px; margin: 0 auto; }
     .book-entry { display: grid; grid-template-columns: 240px 1fr; gap: 64px; align-items: start; padding: 64px 0; border-top: 1px solid rgba(242,240,235,0.06); }
     .book-entry:last-child { border-bottom: 1px solid rgba(242,240,235,0.06); }
+    .book-entry.flip { grid-template-columns: 1fr 240px; }
+    .book-entry.flip .book-cover-wrap { order: 2; }
+    .book-entry.flip .book-info { order: 1; }
 
     /* ── CSS BOOK COVERS ── */
     .book-cover-wrap { width: 240px; aspect-ratio: 2/3; overflow: hidden; flex-shrink: 0; display: flex; }
@@ -293,7 +296,7 @@
   </div>
 
   <!-- BOOK 2: ZAG -->
-  <div class="book-entry">
+  <div class="book-entry flip">
     <div class="book-cover-wrap">
       <div class="zag-cover">
         <div class="zag-top-bar"></div>
@@ -420,8 +423,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const _sb = window.supabase.createClient(
-  'https://mhkiflfmshpfhpfkbnok.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1oa2lmbGZtc2hwZmhwZmtibm9rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzgxOTk2MTcsImV4cCI6MjA1Mzc3NTYxN30.VVAFuHqBRdU0bPbZXi3EHZLS_v8NqAUv-R4V1LmGSnQ'
+  'https://riqdcirsmckubkdfbtoj.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM'
 );
 
 async function handleAenaNotify() {
@@ -434,10 +437,9 @@ async function handleAenaNotify() {
   btn.disabled = true;
   btn.textContent = '...';
   try {
-    const { error } = await _sb.from('newsletter_signups').insert([{
+    const { error } = await _sb.from('newsletter_subscribers').insert([{
       email,
       source: 'aena_books_page',
-      tags: ['aena', 'book_notify']
     }]);
     if (error) throw error;
     document.getElementById('aenaNotifyRow').style.display = 'none';
