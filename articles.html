@@ -1,982 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Arise & Build — Weekly insights on leadership, systems, and the operational side of doing extraordinary things. All issues by Lonnell Williams.">
-  <meta name="keywords" content="Arise and Build newsletter, Lonnell Williams articles, ministry leadership, church operations, executive pastor insights, leadership newsletter">
-  <meta name="author" content="Lonnell Williams">
-  <meta property="og:title" content="Arise & Build — Articles by Lonnell Williams">
-  <meta property="og:description" content="Weekly insights on leadership, systems, building, and the operational side of doing extraordinary things.">
-  <meta property="og:url" content="https://ldw.build/articles.html">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://riqdcirsmckubkdfbtoj.supabase.co/storage/v1/object/public/site-images/photos/IMG_3385.jpeg">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Arise & Build — Articles by Lonnell Williams">
-  <meta name="twitter:description" content="Weekly insights on leadership, systems, building, and the operational side of doing extraordinary things.">
-  <title>Articles — Arise & Build | Lonnell Williams</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --obsidian:   #0D0D0D;
-      --warm-black: #1A1714;
-      --copper:     #C17F59;
-      --signal:     #E85D3A;
-      --off-white:  #F2F0EB;
-      --concrete:   #8A8A8A;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--obsidian);
-      color: var(--off-white);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      line-height: 1.7;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(13,13,13,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(193,127,89,0.15);
-      padding: 0 60px;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px;
-      letter-spacing: 3px;
-      color: var(--off-white);
-      text-decoration: none;
-    }
-
-    .nav-logo span { color: var(--copper); }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--concrete);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active { color: var(--copper); }
-
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-    }
-
-    .nav-hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--off-white);
-      transition: all 0.3s;
-    }
-
-    .nav-mobile-menu {
-      display: none;
-      position: fixed;
-      top: 64px; left: 0; right: 0;
-      background: rgba(13,13,13,0.98);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(193,127,89,0.2);
-      padding: 24px 28px;
-      z-index: 99;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .nav-mobile-menu.open { display: flex; }
-
-    .nav-mobile-menu a {
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--concrete);
-      text-decoration: none;
-      padding: 14px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      transition: color 0.2s;
-    }
-
-    .nav-mobile-menu a:last-child { border-bottom: none; }
-    .nav-mobile-menu a:hover { color: var(--copper); }
-
-    /* ── HERO ── */
-    .hero {
-      padding: 140px 60px 80px;
-      border-bottom: 1px solid rgba(193,127,89,0.15);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -100px; right: -200px;
-      width: 500px; height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(193,127,89,0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--copper);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .hero-label::before {
-      content: '';
-      width: 32px;
-      height: 1px;
-      background: var(--copper);
-    }
-
-    .hero h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(56px, 8vw, 100px);
-      line-height: 0.9;
-      letter-spacing: 3px;
-      margin-bottom: 24px;
-    }
-
-    .hero h1 span { color: var(--copper); }
-
-    .hero-desc {
-      font-size: 16px;
-      color: rgba(242,240,235,0.65);
-      max-width: 520px;
-      line-height: 1.75;
-      margin-bottom: 32px;
-    }
-
-    .hero-substack-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--copper);
-      text-decoration: none;
-      border: 1px solid rgba(193,127,89,0.4);
-      padding: 12px 20px;
-      transition: all 0.2s;
-    }
-
-    .hero-substack-cta:hover {
-      background: rgba(193,127,89,0.08);
-      border-color: var(--copper);
-    }
-
-    .hero-substack-cta svg {
-      width: 14px; height: 14px;
-      fill: var(--copper);
-    }
-
-    /* ── FILTER BAR ── */
-    .filter-bar {
-      background: var(--warm-black);
-      border-bottom: 1px solid rgba(193,127,89,0.12);
-      padding: 0 60px;
-      display: flex;
-      align-items: center;
-      gap: 0;
-      position: sticky;
-      top: 64px;
-      z-index: 90;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-
-    .filter-bar::-webkit-scrollbar { display: none; }
-
-    .filter-btn {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--concrete);
-      background: none;
-      border: none;
-      padding: 18px 20px;
-      cursor: pointer;
-      white-space: nowrap;
-      border-bottom: 2px solid transparent;
-      transition: all 0.2s;
-    }
-
-    .filter-btn:hover { color: var(--off-white); }
-    .filter-btn.active {
-      color: var(--copper);
-      border-bottom-color: var(--copper);
-    }
-
-    /* ── MAIN CONTENT ── */
-    .main {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 64px 60px 100px;
-    }
-
-    /* ── FEATURED ARTICLE ── */
-    .featured-article {
-      margin-bottom: 64px;
-      padding-bottom: 64px;
-      border-bottom: 1px solid rgba(193,127,89,0.15);
-    }
-
-    .featured-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--signal);
-      margin-bottom: 16px;
-    }
-
-    .featured-article h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(36px, 5vw, 56px);
-      line-height: 1;
-      letter-spacing: 2px;
-      color: var(--off-white);
-      margin-bottom: 16px;
-    }
-
-    .featured-article h2 a {
-      color: inherit;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .featured-article h2 a:hover { color: var(--copper); }
-
-    .featured-article .excerpt {
-      font-size: 15px;
-      color: rgba(242,240,235,0.65);
-      line-height: 1.8;
-      max-width: 680px;
-      margin-bottom: 24px;
-    }
-
-    .article-meta {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .article-date {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--concrete);
-    }
-
-    .article-tag {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--copper);
-      border: 1px solid rgba(193,127,89,0.3);
-      padding: 3px 10px;
-    }
-
-    .read-link {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--copper);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: gap 0.2s;
-    }
-
-    .read-link:hover { gap: 14px; }
-
-    /* ── ARTICLES GRID ── */
-    .articles-section-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--copper);
-      margin-bottom: 32px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .articles-section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: rgba(193,127,89,0.2);
-    }
-
-    .articles-list { display: flex; flex-direction: column; gap: 0; }
-
-    .article-row {
-      display: grid;
-      grid-template-columns: 80px 1fr auto;
-      gap: 24px;
-      align-items: start;
-      padding: 28px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      transition: background 0.2s;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .article-row:hover { background: rgba(193,127,89,0.03); }
-    .article-row:hover .article-row-title { color: var(--copper); }
-
-    .article-row-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 36px;
-      line-height: 1;
-      color: rgba(193,127,89,0.2);
-      padding-top: 4px;
-    }
-
-    .article-row-body { flex: 1; }
-
-    .article-row-tag {
-      font-family: 'Space Mono', monospace;
-      font-size: 8px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--copper);
-      margin-bottom: 6px;
-    }
-
-    .article-row-title {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 700;
-      font-size: 16px;
-      color: var(--off-white);
-      line-height: 1.4;
-      margin-bottom: 6px;
-      transition: color 0.2s;
-    }
-
-    .article-row-excerpt {
-      font-size: 13px;
-      color: rgba(242,240,235,0.5);
-      line-height: 1.6;
-      max-width: 560px;
-    }
-
-    .article-row-date {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 1px;
-      color: var(--concrete);
-      white-space: nowrap;
-      padding-top: 6px;
-    }
-
-    /* ── LOADING STATE ── */
-    .loading-state {
-      text-align: center;
-      padding: 80px 0;
-    }
-
-    .loading-spinner {
-      width: 32px;
-      height: 32px;
-      border: 2px solid rgba(193,127,89,0.2);
-      border-top-color: var(--copper);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto 20px;
-    }
-
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    .loading-text {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--concrete);
-    }
-
-    /* ── EMPTY STATE ── */
-    .empty-state {
-      text-align: center;
-      padding: 80px 0;
-      display: none;
-    }
-
-    .empty-state p {
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--concrete);
-      margin-bottom: 20px;
-    }
-
-    /* ── SUBSCRIBE STRIP ── */
-    .subscribe-strip {
-      background: var(--warm-black);
-      border-top: 1px solid rgba(193,127,89,0.15);
-      border-bottom: 1px solid rgba(193,127,89,0.15);
-      padding: 64px 60px;
-      text-align: center;
-      margin-bottom: 80px;
-    }
-
-    .subscribe-strip .strip-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--copper);
-      margin-bottom: 16px;
-    }
-
-    .subscribe-strip h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(36px, 5vw, 56px);
-      letter-spacing: 3px;
-      color: var(--off-white);
-      margin-bottom: 12px;
-    }
-
-    .subscribe-strip h3 span { color: var(--copper); }
-
-    .subscribe-strip p {
-      font-size: 14px;
-      color: rgba(242,240,235,0.55);
-      max-width: 440px;
-      margin: 0 auto 32px;
-      line-height: 1.75;
-    }
-
-    .subscribe-form {
-      display: flex;
-      gap: 0;
-      max-width: 440px;
-      margin: 0 auto;
-    }
-
-    .subscribe-form input {
-      flex: 1;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(193,127,89,0.3);
-      border-right: none;
-      padding: 14px 18px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      color: var(--off-white);
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .subscribe-form input::placeholder { color: var(--concrete); }
-    .subscribe-form input:focus { border-color: var(--copper); }
-
-    .subscribe-form button {
-      background: var(--copper);
-      border: 1px solid var(--copper);
-      padding: 14px 24px;
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--obsidian);
-      cursor: pointer;
-      font-weight: 700;
-      transition: opacity 0.2s;
-      white-space: nowrap;
-    }
-
-    .subscribe-form button:hover { opacity: 0.85; }
-
-    .subscribe-confirm {
-      display: none;
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 2px;
-      color: var(--copper);
-      text-transform: uppercase;
-      margin-top: 16px;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      background: #0A0A0A;
-      border-top: 1px solid rgba(193,127,89,0.12);
-      padding: 64px 60px 40px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 48px;
-      max-width: 900px;
-      margin: 0 auto 48px;
-    }
-
-    .footer-col-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--copper);
-      margin-bottom: 16px;
-    }
-
-    .footer-tagline {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      color: var(--concrete);
-      line-height: 1.75;
-    }
-
-    .footer-verse {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      color: rgba(138,138,138,0.6);
-      letter-spacing: 1px;
-      margin-top: 12px;
-    }
-
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-links a {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      color: var(--concrete);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--copper); }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.05);
-      padding-top: 28px;
-      max-width: 900px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .footer-mark {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px;
-      letter-spacing: 3px;
-      color: rgba(242,240,235,0.12);
-    }
-
-    .footer-copy {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 1px;
-      color: rgba(138,138,138,0.5);
-      text-transform: uppercase;
-    }
-
-    /* ── MOBILE ── */
-    @media (max-width: 768px) {
-      nav { padding: 0 24px; }
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
-
-      .hero { padding: 110px 24px 56px; }
-      .hero h1 { font-size: clamp(48px, 12vw, 72px); }
-      .hero-desc { font-size: 14px; }
-
-      .filter-bar { padding: 0 8px; }
-      .filter-btn { padding: 16px 14px; font-size: 8px; }
-
-      .main { padding: 40px 24px 80px; }
-
-      .featured-article h2 { font-size: clamp(32px, 8vw, 48px); }
-      .featured-article .excerpt { font-size: 14px; }
-
-      .article-row {
-        grid-template-columns: 48px 1fr;
-        gap: 16px;
-      }
-
-      .article-row-num { font-size: 28px; }
-      .article-row-date { display: none; }
-      .article-row-title { font-size: 15px; }
-      .article-row-excerpt { display: none; }
-
-      .subscribe-strip { padding: 48px 24px; }
-      .subscribe-form { flex-direction: column; }
-      .subscribe-form input { border-right: 1px solid rgba(193,127,89,0.3); border-bottom: none; }
-      .subscribe-form input:focus { border-color: var(--copper); }
-      .subscribe-form button { width: 100%; border-top: 1px solid var(--copper); }
-
-      footer { padding: 48px 24px 32px; }
-      .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-
-      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
-    }
-
-    @media (max-width: 480px) {
-      .hero { padding: 100px 20px 48px; }
-      .main { padding: 32px 20px 64px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Articles — Lonnell Williams</title>
+<meta name="description" content="Arise & Build — essays, frameworks, and field notes from Executive Pastor Lonnell Williams on ministry systems, AI infrastructure, and organizational leadership.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --obsidian: #0D0D0D;
+  --warm-black: #1A1714;
+  --copper: #C17F59;
+  --signal: #E85D3A;
+  --off-white: #F2F0EB;
+  --concrete: #8A8A8A;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(13,13,13,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(193,127,89,0.15);
+  padding: 0 48px; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-mark { font-family: 'Bebas Neue',sans-serif; font-size: 22px; letter-spacing: 4px; color: var(--off-white); text-decoration: none; }
+.nav-mark span { color: var(--copper); }
+.nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+.nav-links a { font-family: 'Space Mono',monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color .2s; }
+.nav-links a:hover { color: var(--off-white); }
+.nav-links a.active { color: var(--copper); }
+
+.hero { padding: 140px 80px 80px; max-width: 960px; margin: 0 auto; }
+.hero-label { font-family: 'Space Mono',monospace; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--copper); margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
+.hero-label::before { content: ''; width: 32px; height: 1px; background: var(--copper); }
+.hero h1 { font-family: 'Bebas Neue',sans-serif; font-size: clamp(52px,7vw,96px); line-height: .9; letter-spacing: 3px; color: var(--off-white); margin-bottom: 28px; }
+.hero h1 span { color: var(--copper); }
+.hero-desc { font-size: 16px; color: rgba(242,240,235,.65); max-width: 560px; line-height: 1.7; }
+
+.filter-bar { padding: 0 80px 48px; max-width: 960px; margin: 0 auto; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.filter-btn { font-family: 'Space Mono',monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 8px 18px; border: 1px solid rgba(193,127,89,.3); color: var(--concrete); background: none; cursor: pointer; transition: all .2s; }
+.filter-btn:hover { border-color: var(--copper); color: var(--off-white); }
+.filter-btn.active { border-color: var(--copper); color: var(--copper); background: rgba(193,127,89,.08); }
+
+.articles-wrap { max-width: 960px; margin: 0 auto; padding: 0 80px 120px; }
+
+.article-card {
+  display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: start;
+  background: var(--warm-black); border: 1px solid rgba(193,127,89,.1);
+  padding: 36px 40px; text-decoration: none; cursor: pointer; margin-bottom: 12px;
+  transition: border-color .2s, background .2s;
+}
+.article-card:hover { border-color: var(--copper); background: rgba(193,127,89,.04); }
+.article-tag { font-family: 'Space Mono',monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--copper); margin-bottom: 12px; }
+.article-title { font-family: 'DM Sans',sans-serif; font-weight: 700; font-size: 18px; color: var(--off-white); margin-bottom: 12px; line-height: 1.35; }
+.article-excerpt { font-size: 14px; color: rgba(242,240,235,.55); line-height: 1.65; max-width: 620px; }
+.article-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; min-width: 120px; padding-top: 4px; }
+.article-date { font-family: 'Space Mono',monospace; font-size: 10px; color: var(--concrete); letter-spacing: 1px; white-space: nowrap; }
+.article-arrow { font-size: 18px; color: var(--copper); opacity: .4; transition: opacity .2s, transform .2s; }
+.article-card:hover .article-arrow { opacity: 1; transform: translateX(4px); }
+
+.loading-state { text-align: center; padding: 80px 0; color: var(--concrete); }
+.loading-spinner { width: 32px; height: 32px; border: 2px solid rgba(193,127,89,.2); border-top-color: var(--copper); border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 20px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.load-more-wrap { text-align: center; margin-top: 48px; display: none; }
+.load-more-btn { font-family: 'Space Mono',monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); background: none; border: 1px solid rgba(193,127,89,.4); padding: 14px 32px; cursor: pointer; transition: all .2s; }
+.load-more-btn:hover { background: rgba(193,127,89,.08); border-color: var(--copper); }
+.load-more-btn:disabled { opacity: .3; cursor: default; }
+
+.subscribe-strip {
+  background: var(--warm-black); border-top: 1px solid rgba(193,127,89,.2); border-bottom: 1px solid rgba(193,127,89,.2);
+  padding: 64px 80px; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;
+}
+.subscribe-copy h3 { font-family: 'Bebas Neue',sans-serif; font-size: 36px; letter-spacing: 3px; color: var(--off-white); margin-bottom: 6px; }
+.subscribe-copy h3 span { color: var(--copper); }
+.subscribe-copy p { font-size: 14px; color: var(--concrete); }
+.subscribe-form { display: flex; gap: 0; min-width: 340px; }
+.subscribe-input { flex: 1; background: rgba(255,255,255,.04); border: 1px solid rgba(193,127,89,.3); border-right: none; color: var(--off-white); font-family: 'DM Sans',sans-serif; font-size: 14px; padding: 14px 18px; outline: none; }
+.subscribe-input::placeholder { color: var(--concrete); }
+.subscribe-input:focus { border-color: var(--copper); }
+.subscribe-btn { background: var(--copper); color: var(--obsidian); border: none; font-family: 'Bebas Neue',sans-serif; font-size: 16px; letter-spacing: 2px; padding: 14px 28px; cursor: pointer; transition: background .2s; white-space: nowrap; }
+.subscribe-btn:hover { background: #d4926b; }
+.sub-msg { font-family: 'Space Mono',monospace; font-size: 11px; color: var(--copper); margin-top: 8px; display: none; }
+
+footer { background: #0A0A0A; border-top: 1px solid rgba(193,127,89,.15); padding: 40px 80px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+.footer-mark { font-family: 'Bebas Neue',sans-serif; font-size: 24px; letter-spacing: 4px; color: rgba(242,240,235,.2); }
+.footer-links { display: flex; gap: 28px; }
+.footer-links a { font-family: 'Space Mono',monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: var(--off-white); }
+
+@media (max-width: 768px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .hero, .filter-bar, .articles-wrap { padding-left: 24px; padding-right: 24px; }
+  .hero { padding-top: 100px; }
+  .article-card { grid-template-columns: 1fr; padding: 24px; }
+  .article-meta { flex-direction: row; align-items: center; justify-content: space-between; }
+  .subscribe-strip { padding: 48px 24px; flex-direction: column; }
+  .subscribe-form { min-width: auto; width: 100%; }
+  footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; gap: 16px; }
+}
+</style>
 </head>
 <body>
 
-  <!-- ── NAV ── -->
-  <nav>
-    <a href="/" class="nav-logo">LDW<span>.</span>BUILD</a>
-    <ul class="nav-links">
-      <li><a href="/#about">About</a></li>
-      <li><a href="/speaking.html">Speaking</a></li>
-      <li><a href="/books.html">Books</a></li>
-      <li><a href="articles.html" class="active">Articles</a></li>
-      <li><a href="/#consulting">Work With Me</a></li>
-      <li><a href="/media.html">Media</a></li>
-      <li><a href="/vantage.html">Vantage</a></li>
-    </ul>
-    <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </div>
-  </nav>
+<nav>
+  <a href="/" class="nav-mark">LDW<span>.</span>BUILD</a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/speaking.html">Speaking</a></li>
+    <li><a href="/books.html">Books</a></li>
+    <li><a href="/articles.html" class="active">Articles</a></li>
+    <li><a href="/vantage.html">Vantage</a></li>
+  </ul>
+</nav>
 
-  <!-- Mobile Nav Menu -->
-  <div class="nav-mobile-menu" id="mobileMenu">
-    <a href="/#about" onclick="closeMenu()">About</a>
-    <a href="/speaking.html" onclick="closeMenu()">Speaking</a>
-    <a href="/books.html" onclick="closeMenu()">Books</a>
-    <a href="/articles.html" onclick="closeMenu()">Articles</a>
-    <a href="/#consulting" onclick="closeMenu()">Work With Me</a>
-    <a href="/media.html" onclick="closeMenu()">Media</a>
-    <a href="/vantage.html" onclick="closeMenu()">Vantage</a>
-  </div>
+<section class="hero">
+  <div class="hero-label">Arise &amp; Build</div>
+  <h1>FIELD NOTES<br>FROM THE <span>BUILD.</span></h1>
+  <p class="hero-desc">Essays, frameworks, and operating principles from the intersection of ministry leadership, organizational systems, and AI infrastructure. For the people in the room where it actually happens.</p>
+</section>
 
-  <!-- ── HERO ── -->
-  <section class="hero">
-    <div class="hero-label">Arise &amp; Build</div>
-    <h1>EVERY<br><span>ISSUE.</span></h1>
-    <p class="hero-desc">
-      Weekly insights on leadership, systems, building, and the operational side of doing extraordinary things. No fluff. No "seasons." Just the instruction.
-    </p>
-    <a href="https://buildwithldw.substack.com" target="_blank" rel="noopener" class="hero-substack-cta">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
-      Subscribe on Substack
-    </a>
-  </section>
+<div class="filter-bar">
+  <button class="filter-btn active" data-tag="all">All</button>
+  <button class="filter-btn" data-tag="ministry-systems">Ministry Systems</button>
+  <button class="filter-btn" data-tag="ai-for-leaders">AI for Leaders</button>
+  <button class="filter-btn" data-tag="executive-leadership">Executive Leadership</button>
+  <button class="filter-btn" data-tag="operator-pastor">Operator-Pastor</button>
+  <button class="filter-btn" data-tag="books">Book Content</button>
+</div>
 
-  <!-- ── FILTER BAR ── -->
-  <div class="filter-bar">
-    <button class="filter-btn active" onclick="filterArticles('all', this)">All Issues</button>
-    <button class="filter-btn" onclick="filterArticles('leadership', this)">Leadership</button>
-    <button class="filter-btn" onclick="filterArticles('systems', this)">Systems</button>
-    <button class="filter-btn" onclick="filterArticles('ministry', this)">Ministry</button>
-    <button class="filter-btn" onclick="filterArticles('ai', this)">AI &amp; Tech</button>
-    <button class="filter-btn" onclick="filterArticles('building', this)">Building</button>
-  </div>
-
-  <!-- ── MAIN ── -->
-  <main class="main">
-
-    <!-- Loading state -->
-    <div class="loading-state" id="loadingState">
+<div class="articles-wrap">
+  <div id="articlesGrid">
+    <div class="loading-state">
       <div class="loading-spinner"></div>
-      <p class="loading-text">Loading issues...</p>
+      <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;">Loading articles</div>
     </div>
+  </div>
+  <div class="load-more-wrap" id="loadMoreWrap">
+    <button class="load-more-btn" id="loadMoreBtn">Load More</button>
+  </div>
+</div>
 
-    <!-- Empty state -->
-    <div class="empty-state" id="emptyState">
-      <p>No issues found in this category.</p>
-      <a href="https://buildwithldw.substack.com" target="_blank" rel="noopener" class="read-link">
-        Read on Substack →
-      </a>
+<section class="subscribe-strip">
+  <div class="subscribe-copy">
+    <h3>ARISE &amp; <span>BUILD</span></h3>
+    <p>New issues every week. For operators who build.</p>
+  </div>
+  <div>
+    <div class="subscribe-form">
+      <input type="email" class="subscribe-input" id="stripEmail" placeholder="Enter your email">
+      <button class="subscribe-btn" id="stripBtn">SUBSCRIBE</button>
     </div>
+    <div class="sub-msg" id="stripMsg">You're in. Check your inbox.</div>
+  </div>
+</section>
 
-    <!-- Featured Article (first/latest) -->
-    <div class="featured-article" id="featuredArticle" style="display:none;">
-      <div class="featured-label">✦ Latest Issue</div>
-      <h2 id="featuredTitle"><a id="featuredLink" href="#" target="_blank" rel="noopener"></a></h2>
-      <p class="excerpt" id="featuredExcerpt"></p>
+<footer>
+  <div class="footer-mark">LDW.BUILD</div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/speaking.html">Speaking</a>
+    <a href="/books.html">Books</a>
+    <a href="/vantage.html">Vantage</a>
+  </div>
+  <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--concrete);letter-spacing:1px;">2026 Lonnell Williams</div>
+</footer>
+
+<script>
+const SUPABASE_URL='https://riqdcirsmckubkdfbtoj.supabase.co';
+const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM';
+
+const FALLBACK=[
+  {title:'Ministry, Technology, and the Things That Actually Scale',url:'https://arisenandbuild.substack.com',date:'2026-02-15',excerpt:'Most growing churches don\'t have a vision problem. They have a systems problem. The gap is infrastructure — and infrastructure is buildable.',tag:'ministry-systems'},
+  {title:'What 42 AI Agents Actually Did for My Church',url:'https://arisenandbuild.substack.com',date:'2026-02-08',excerpt:'Not theory. Not a thought experiment. A real account of what building an AI Chief of Staff ecosystem looks like inside a growing multi-campus church organization.',tag:'ai-for-leaders'},
+  {title:'The Number Two Seat: Leading Without the Title',url:'https://arisenandbuild.substack.com',date:'2026-01-25',excerpt:'Every movement has someone in the second chair holding the weight of the whole operation. This is for them.',tag:'executive-leadership'},
+  {title:'Building with Both Hands: The Operator-Pastor Identity',url:'https://arisenandbuild.substack.com',date:'2026-01-18',excerpt:'The calling doesn\'t ask you to choose between pastor and operator. It asks you to carry both.',tag:'operator-pastor'},
+  {title:'The Staffing System That Let Us Scale Without Breaking',url:'https://arisenandbuild.substack.com',date:'2026-01-10',excerpt:'13 to 50 staff in six months. The difference is what you build before you grow.',tag:'ministry-systems'},
+  {title:'Why Your Communication System Is Your Leadership System',url:'https://arisenandbuild.substack.com',date:'2025-12-28',excerpt:'If information lives in people instead of systems, you don\'t have a communication structure. You have a liability.',tag:'ministry-systems'},
+  {title:'Discipline Is Free: On Building Without Resources',url:'https://arisenandbuild.substack.com',date:'2025-12-15',excerpt:'Most leaders wait for the right moment and the right budget. That wait is the problem.',tag:'executive-leadership'},
+  {title:'The Wall Was Nehemiah\'s Response — What\'s Yours?',url:'https://arisenandbuild.substack.com',date:'2025-12-05',excerpt:'Nehemiah didn\'t build the wall to prove something. Leadership isn\'t about your legacy. It\'s about the gap.',tag:'operator-pastor'},
+  {title:'Using AI Without Losing the Room',url:'https://arisenandbuild.substack.com',date:'2025-11-22',excerpt:'The fear most ministry leaders have about AI isn\'t really about the technology. It\'s about identity.',tag:'ai-for-leaders'},
+  {title:'ZAG — Why the Church Needs Leaders Who Think Differently',url:'https://arisenandbuild.substack.com',date:'2025-11-10',excerpt:'Conventional leadership is comfortable. Conventional leadership is also forgettable. Jesus led with a model nobody expected.',tag:'books'},
+];
+
+const TAG_LABELS={'ministry-systems':'Ministry Systems','ai-for-leaders':'AI for Leaders','executive-leadership':'Executive Leadership','operator-pastor':'Operator-Pastor','books':'Book Content'};
+
+let all=[],activeTag='all',displayCount=6;
+
+function fmtDate(d){return new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
+
+function render(){
+  const grid=document.getElementById('articlesGrid');
+  const filtered=activeTag==='all'?all:all.filter(a=>a.tag===activeTag);
+  const visible=filtered.slice(0,displayCount);
+  if(!visible.length){
+    grid.innerHTML='<div class="loading-state" style="padding:60px 0;"><div style="font-family:\'Space Mono\',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--concrete);">No articles in this category yet.</div></div>';
+    document.getElementById('loadMoreWrap').style.display='none';
+    return;
+  }
+  grid.innerHTML=visible.map(a=>`
+    <a href="${a.url}" target="_blank" rel="noopener" class="article-card">
+      <div>
+        <div class="article-tag">${TAG_LABELS[a.tag]||'Arise & Build'}</div>
+        <div class="article-title">${a.title}</div>
+        <div class="article-excerpt">${a.excerpt}</div>
+      </div>
       <div class="article-meta">
-        <span class="article-date" id="featuredDate"></span>
-        <span class="article-tag" id="featuredTag"></span>
-        <a id="featuredReadLink" href="#" target="_blank" rel="noopener" class="read-link">Read Full Issue →</a>
+        <div class="article-date">${fmtDate(a.date)}</div>
+        <div class="article-arrow">&#8594;</div>
       </div>
-    </div>
+    </a>
+  `).join('');
+  const lmw=document.getElementById('loadMoreWrap');
+  lmw.style.display=filtered.length>displayCount?'block':'none';
+}
 
-    <!-- Articles List -->
-    <div id="articlesContainer">
-      <div class="articles-section-label" id="sectionLabel">All Issues</div>
-      <div class="articles-list" id="articlesList"></div>
-    </div>
+function guessTag(title){
+  const t=(title||'').toLowerCase();
+  if(t.includes('ai')||t.includes('agent')||t.includes('automat'))return'ai-for-leaders';
+  if(t.includes('staff')||t.includes('system')||t.includes('scale')||t.includes('infra'))return'ministry-systems';
+  if(t.includes('zag')||t.includes('aena')||t.includes('book'))return'books';
+  if(t.includes('pastor')||t.includes('operator')||t.includes('identity'))return'operator-pastor';
+  return'executive-leadership';
+}
 
-  </main>
-
-  <!-- ── SUBSCRIBE STRIP ── -->
-  <section class="subscribe-strip">
-    <div class="strip-label">Newsletter</div>
-    <h3>ARISE &amp;<br><span>BUILD.</span></h3>
-    <p>Weekly leadership insights. Operational frameworks. The stuff no one teaches in seminary or B-school. Every Thursday.</p>
-    <form class="subscribe-form" onsubmit="handleSubscribe(event)">
-      <input type="email" id="subEmail" placeholder="Your email address" required>
-      <button type="submit">Subscribe</button>
-    </form>
-    <div class="subscribe-confirm" id="subConfirm">✦ You're in — Welcome to the builders.</div>
-  </section>
-
-  <!-- ── FOOTER ── -->
-  <footer>
-    <div class="footer-grid">
-      <div>
-        <div class="footer-col-label">Foundation</div>
-        <p class="footer-tagline">"The God of heaven will make us prosper, and his servants will arise and build."</p>
-        <p class="footer-verse">Nehemiah 2:20 — ESV</p>
-      </div>
-      <div>
-        <div class="footer-col-label">Navigate</div>
-        <ul class="footer-links">
-          <li><a href="/#about">About</a></li>
-          <li><a href="/speaking.html">Speaking</a></li>
-          <li><a href="/books.html">Books</a></li>
-          <li><a href="/articles.html">Articles</a></li>
-          <li><a href="/#consulting">Work With Me</a></li>
-          <li><a href="/media.html">Media</a></li>
-          <li><a href="/vantage.html">Vantage</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-label">Connect</div>
-        <ul class="footer-links">
-          <li><a href="https://buildwithldw.substack.com" target="_blank">Arise &amp; Build (Substack)</a></li>
-          <li><a href="https://youtube.com/@lonnelldwilliams" target="_blank">YouTube</a></li>
-          <li><a href="https://instagram.com/lonnelldwilliams" target="_blank">Instagram</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="footer-mark">LDW</div>
-      <div class="footer-copy">© 2026 Lonnell Williams. All rights reserved.</div>
-    </div>
-  </footer>
-
-  <script>
-    // ── SUPABASE CONFIG ──
-    const SUPABASE_URL = 'https://riqdcirsmckubkdfbtoj.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM';
-    const SUBSTACK_RSS = 'https://buildwithldw.substack.com/feed';
-    const RSS_PROXY = `https://api.allorigins.win/get?url=${encodeURIComponent(SUBSTACK_RSS)}`;
-
-    let allArticles = [];
-    let currentFilter = 'all';
-
-    // ── TAG DETECTION ──
-    function detectTag(title, content) {
-      const text = (title + ' ' + content).toLowerCase();
-      if (text.includes('ai') || text.includes('automation') || text.includes('agent') || text.includes('tech')) return 'ai';
-      if (text.includes('system') || text.includes('infrastructure') || text.includes('process') || text.includes('framework')) return 'systems';
-      if (text.includes('church') || text.includes('ministry') || text.includes('pastor') || text.includes('sermon') || text.includes('spiritual')) return 'ministry';
-      if (text.includes('build') || text.includes('launch') || text.includes('create') || text.includes('start')) return 'building';
-      return 'leadership';
+async function load(){
+  // Try Substack RSS via rss2json
+  try{
+    const r=await fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Farisenandbuild.substack.com%2Ffeed&count=30');
+    const d=await r.json();
+    if(d.status==='ok'&&d.items&&d.items.length){
+      all=d.items.map(i=>({
+        title:i.title,url:i.link,
+        date:(i.pubDate||new Date().toISOString()).slice(0,10),
+        excerpt:(i.description||'').replace(/<[^>]+>/g,'').slice(0,190).trim()+'...',
+        tag:guessTag(i.title)
+      }));
+      render();return;
     }
+  }catch(e){}
+  // Fallback
+  all=FALLBACK;render();
+}
 
-    // ── FORMAT DATE ──
-    function formatDate(dateStr) {
-      const d = new Date(dateStr);
-      return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-    }
+document.querySelectorAll('.filter-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');activeTag=b.dataset.tag;displayCount=6;render();
+  });
+});
 
-    // ── STRIP HTML ──
-    function stripHtml(html) {
-      const tmp = document.createElement('div');
-      tmp.innerHTML = html;
-      return tmp.textContent || tmp.innerText || '';
-    }
+document.getElementById('loadMoreBtn').addEventListener('click',()=>{displayCount+=6;render();});
 
-    // ── FETCH RSS ──
-    async function fetchArticles() {
-      try {
-        const res = await fetch(RSS_PROXY);
-        const data = await res.json();
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(data.contents, 'text/xml');
-        const items = xml.querySelectorAll('item');
+document.getElementById('stripBtn').addEventListener('click',async()=>{
+  const email=document.getElementById('stripEmail').value.trim();
+  if(!email||!email.includes('@'))return;
+  const btn=document.getElementById('stripBtn');
+  btn.textContent='...';btn.disabled=true;
+  try{
+    await fetch(`${SUPABASE_URL}/rest/v1/newsletter_subscribers`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json',apikey:SUPABASE_KEY,Authorization:`Bearer ${SUPABASE_KEY}`,Prefer:'return=minimal'},
+      body:JSON.stringify({email,source:'articles_page'})
+    });
+  }catch(e){}
+  document.getElementById('stripMsg').style.display='block';
+  document.getElementById('stripEmail').value='';
+  btn.textContent='SUBSCRIBE';btn.disabled=false;
+});
 
-        allArticles = Array.from(items).map((item, i) => {
-          const title = item.querySelector('title')?.textContent || 'Untitled';
-          const link = item.querySelector('link')?.textContent || '#';
-          const pubDate = item.querySelector('pubDate')?.textContent || '';
-          const descRaw = item.querySelector('description')?.textContent || '';
-          const excerpt = stripHtml(descRaw).substring(0, 180).trim() + '...';
-          const tag = detectTag(title, descRaw);
-          return { title, link, pubDate, excerpt, tag, index: i + 1 };
-        });
-
-        renderArticles(allArticles);
-      } catch (err) {
-        console.error('RSS fetch error:', err);
-        showFallback();
-      }
-    }
-
-    // ── RENDER ──
-    function renderArticles(articles) {
-      document.getElementById('loadingState').style.display = 'none';
-
-      if (!articles.length) {
-        document.getElementById('emptyState').style.display = 'block';
-        document.getElementById('featuredArticle').style.display = 'none';
-        document.getElementById('articlesContainer').style.display = 'none';
-        return;
-      }
-
-      // Featured (first item)
-      const featured = articles[0];
-      document.getElementById('featuredArticle').style.display = 'block';
-      document.getElementById('featuredTitle').querySelector('a').textContent = featured.title;
-      document.getElementById('featuredLink').href = featured.link;
-      document.getElementById('featuredExcerpt').textContent = featured.excerpt;
-      document.getElementById('featuredDate').textContent = formatDate(featured.pubDate);
-      document.getElementById('featuredTag').textContent = featured.tag.toUpperCase();
-      document.getElementById('featuredReadLink').href = featured.link;
-
-      // Remaining articles
-      const rest = articles.slice(1);
-      const list = document.getElementById('articlesList');
-      list.innerHTML = '';
-
-      if (!rest.length) {
-        document.getElementById('articlesContainer').style.display = 'none';
-        return;
-      }
-
-      document.getElementById('articlesContainer').style.display = 'block';
-      document.getElementById('sectionLabel').textContent =
-        currentFilter === 'all' ? 'All Issues' : featured.tag.charAt(0).toUpperCase() + featured.tag.slice(1);
-
-      rest.forEach((article, i) => {
-        const row = document.createElement('a');
-        row.className = 'article-row';
-        row.href = article.link;
-        row.target = '_blank';
-        row.rel = 'noopener';
-        row.setAttribute('data-tag', article.tag);
-        row.innerHTML = `
-          <div class="article-row-num">${String(i + 2).padStart(2, '0')}</div>
-          <div class="article-row-body">
-            <div class="article-row-tag">${article.tag}</div>
-            <div class="article-row-title">${article.title}</div>
-            <div class="article-row-excerpt">${article.excerpt}</div>
-          </div>
-          <div class="article-row-date">${formatDate(article.pubDate)}</div>
-        `;
-        list.appendChild(row);
-      });
-    }
-
-    // ── FILTER ──
-    function filterArticles(tag, btn) {
-      currentFilter = tag;
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filtered = tag === 'all'
-        ? allArticles
-        : allArticles.filter(a => a.tag === tag);
-
-      renderArticles(filtered);
-    }
-
-    // ── FALLBACK (if RSS fails) ──
-    function showFallback() {
-      document.getElementById('loadingState').style.display = 'none';
-      document.getElementById('emptyState').style.display = 'block';
-      document.getElementById('emptyState').querySelector('p').textContent =
-        'Issues load from Substack. Read directly below.';
-    }
-
-    // ── SUBSCRIBE ──
-    async function handleSubscribe(e) {
-      e.preventDefault();
-      const email = document.getElementById('subEmail').value.trim();
-      if (!email) return;
-
-      try {
-        await fetch(`${SUPABASE_URL}/rest/v1/newsletter_subscribers`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-            'Prefer': 'return=minimal'
-          },
-          body: JSON.stringify({ email, source: 'articles_page' })
-        });
-      } catch (err) { console.error(err); }
-
-      document.querySelector('.subscribe-form').style.display = 'none';
-      document.getElementById('subConfirm').style.display = 'block';
-    }
-
-    // ── NAV ──
-    function toggleMenu() {
-      document.getElementById('mobileMenu').classList.toggle('open');
-    }
-    function closeMenu() {
-      document.getElementById('mobileMenu').classList.remove('open');
-    }
-
-    // ── INIT ──
-    document.addEventListener('DOMContentLoaded', fetchArticles);
-  </script>
-
+load();
+</script>
 </body>
 </html>

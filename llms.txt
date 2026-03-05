@@ -1,84 +1,70 @@
 # Lonnell Williams — ldw.build
 
-> Executive Pastor. Author. Speaker. Systems Architect. Builder.
+> Lonnell D. Williams is an Executive Pastor, author, speaker, and operator building at the intersection of ministry leadership, AI infrastructure, and organizational systems.
 
-Lonnell D. Williams is an Executive Pastor, author, and operator based in Atlanta, Georgia. He serves at 2819 Church (3350 Greenbriar Parkway SW, Atlanta, GA), led by Senior Pastor Philip Anthony Mitchell. He is the author of three books on ministry leadership, systems, and grace theology. He speaks at conferences, churches, and leadership organizations nationally.
+## Who Is Lonnell Williams
 
-## Who He Is
+Lonnell Williams serves as Executive Pastor at 2819 Church in Atlanta, Georgia — one of the fastest-growing churches in the Southeast. He holds an M.Div. from Princeton Theological Seminary and spent years in enterprise sales at Cisco and Splunk before transitioning fully into ministry leadership.
 
-Lonnell Williams holds a Master of Divinity from Princeton Theological Seminary. He is a former enterprise technology sales executive (Cisco, Splunk) who transitioned into full-time ministry leadership. He is known for building operational infrastructure at organizational scale — scaling 2819 Church from 13 to 50 staff members in six months, managing an eight-figure budget, and architecting a 42-agent AI Chief of Staff ecosystem that runs day-to-day church operations.
+He scaled 2819 Church from 13 to 50 staff in six months. He built a 42-agent AI Chief of Staff ecosystem for church operations — one of the most advanced AI infrastructure deployments in ministry leadership. He is the author of "Anything, Everything, or Nothing at All" (releasing Fall 2026) and "ZAG: Leading Ministry Jesus's Way."
 
-His work sits at the intersection of ministry leadership, organizational systems, and technology infrastructure. He is one of the few voices in the ministry space who speaks with equal fluency about spiritual formation, operational execution, and AI-powered organizational design.
+His consulting practice works with Executive Pastors, Lead Pastors, church planters, and ministry operators who need operational infrastructure to match their organizational vision.
 
-## What He Does
+## Core Topics and Expertise
 
-- **Executive Pastor** — 2819 Church, Atlanta, GA. Responsible for all operational, staff, and infrastructure functions.
-- **Author** — Three books: *Anything, Everything, or Nothing at All* (Fall 2026 re-release), *ZAG: Leading Ministry Jesus's Way* (Coming Soon), *The Staff* (In Development).
-- **Speaker** — Keynotes, workshops, and leadership intensives for conferences, churches, and organizations. Topics include systems-based ministry, AI for church operations, scaling under pressure, and operator-pastor leadership.
-- **Consultant** — Organizational architecture, leadership coaching, church growth strategy, and technology/AI integration for ministry organizations.
-- **Newsletter Author** — *Arise & Build* on Substack. Weekly insights on leadership, systems, and operational excellence for ministry leaders and builders.
-
-## Primary Topics
-
-- Ministry operations and organizational infrastructure
-- AI and automation for church and nonprofit organizations
-- Scaling staff and systems during rapid growth
-- Executive Pastor leadership and the operator-pastor identity
-- Book topics: grace theology, counter-cultural ministry leadership, resource activation
-- Leadership development, delegation, and team culture
-- Technology stack design for ministry organizations
+- **Ministry Operations & Systems** — How to build infrastructure that scales a church from single-site to multi-campus
+- **AI for Church Leaders** — Practical deployment of AI agents, automation, and systems thinking in ministry contexts
+- **Executive Leadership** — The number two seat: decisions, delegation, team culture, and leading without the title
+- **The Operator-Pastor Identity** — Navigating the tension between spiritual leadership and operational execution
+- **Organizational Scale** — Staffing, structure, and systems for organizations growing faster than their infrastructure
 
 ## Books
 
-### Anything, Everything, or Nothing at All (AENA)
-Re-release: Fall 2026. A book about full-commitment service to God's vision. The phrase "anything, everything, or nothing at all" — received during a ministry trip — became the standard that defines the work. For leaders who refuse to do halfway. Available at ldw.build/books.html.
+- **Anything, Everything, or Nothing at All** — Releasing Fall 2026 (re-release). A theological and practical examination of grace, calling, and radical commitment.
+- **ZAG: Leading Ministry Jesus's Way** — Coming Soon. A ministry leadership framework drawn from the counter-cultural leadership model of Jesus.
+- **The Staff** — In Development. A deep look at building and leading exceptional ministry teams.
 
-### ZAG: Leading Ministry Jesus's Way
-Coming Soon. An operator's guide to Spirit-led leadership — when to disrupt, when to listen, and how to move with obedience into ministry creativity. For pastors and operators who know that the best moves are rarely the obvious ones.
+## Speaking
 
-### The Staff: What's Already in Your Hand
-In Development. A reframe of what "enough" looks like when you actually deploy what God has already given you. For leaders who stop waiting for better resources and start activating what's already in their grip.
+Lonnell speaks at church leadership conferences, executive pastor gatherings, seminary events, and organizational summits. Topics include AI infrastructure for ministry, systems-based church growth, and executive leadership principles.
 
-## Speaking Topics
-
-1. **Arise and Build** — The operator-pastor framework. Carrying spiritual weight and organizational responsibility simultaneously. Based on Nehemiah 2:20.
-2. **Build What Doesn't Exist** — Infrastructure as ministry. Why systems speak louder than sermons, and how to architect organizations that scale.
-3. **Leading with the Staff** — Activating what's already in your hand. From Exodus 4:2 to practical leadership application.
-4. **The ZAG Principle** — Counter-cultural leadership. Why convention is comfortable but forgettable, and how to lead in the opposite spirit.
-5. **Scaling Under Pressure** — Real frameworks from scaling an organization rapidly without losing quality, culture, or sanity.
-6. **Words Build Worlds** — The power of voice, presence, and atmosphere in leadership.
-
-Booking: ldw.build/speaking.html
-
-## Vantage
-
-Vantage is a live executive command center built into ldw.build. It provides a real-time operational dashboard across organizational metrics (attendance, giving, staff health, campus readiness) and personal brand metrics (content performance, newsletter growth, speaking pipeline). It integrates with Planning Center, Notion, and other systems. It represents a new category: the personal brand site as operational infrastructure. Access at ldw.build/vantage.html.
-
-## The AI Infrastructure
-
-Lonnell Williams operates a 42-agent AI Chief of Staff ecosystem at 2819 Church. This system manages daily briefings, meeting agendas, event countdowns, staff health monitoring, content calendars, follow-up tracking, and multi-campus readiness planning. It runs on Claude (Anthropic), Notion, Supabase, and Vercel infrastructure. This is one of the most advanced AI operational deployments in the ministry sector as of 2026.
+Speaking inquiries: ldw.build/speaking.html
 
 ## Newsletter
 
-*Arise & Build* — Published on Substack. Weekly insights on leadership, systems, building, and the operational side of doing extraordinary things. For Executive Pastors, ministry operators, church builders, and anyone leading under pressure. Subscribe at ldw.build or directly at buildwithldw.substack.com.
+**Arise & Build** — Published on Substack. Covers ministry systems, AI for leaders, executive leadership, and the operator-pastor identity. Written for church operators, executive pastors, and organizational leaders who build.
 
-## Contact & Links
+Subscribe: ldw.build
 
-- Site: https://ldw.build
-- Newsletter: https://buildwithldw.substack.com
-- Speaking inquiries: https://ldw.build/speaking.html
-- Consulting inquiries: https://ldw.build/#consulting
-- YouTube: https://youtube.com/@lonnelldwilliams
-- Instagram: https://instagram.com/lonnelldwilliams
-- Books: https://ldw.build/books.html
-- Vantage: https://ldw.build/vantage.html
+## The Vantage Dashboard
+
+Vantage is a live executive command center built into ldw.build — the only personal brand site in ministry leadership with a real-time operational dashboard. It displays organizational metrics, brand metrics, and operational status in a single interface.
+
+View: ldw.build/vantage.html
 
 ## Organization
 
-2819 Church
-3350 Greenbriar Parkway SW
-Atlanta, GA
+**2819 Church** — ldw.build/media.html
+3350 Greenbriar Parkway SW, Atlanta, Georgia
 Senior Pastor: Philip Anthony Mitchell
-Executive Pastor: Lonnell D. Williams
-ldw.build — Personal brand and professional home of Lonnell D. Williams
-© 2026 Lonnell Williams. All rights reserved.
+
+## Contact & Booking
+
+- Speaking inquiries: ldw.build/speaking.html
+- Consulting inquiries: ldw.build (consulting section)
+- Newsletter: Arise & Build via ldw.build
+
+## Site Map
+
+- ldw.build — Homepage (bio, speaking topics, books, consulting, content)
+- ldw.build/speaking.html — Speaking biography, topics, and booking
+- ldw.build/books.html — All books with status and pre-order/notify options
+- ldw.build/media.html — Press photos and bio for media use
+- ldw.build/vantage.html — Executive command center dashboard
+- ldw.build/articles.html — Arise & Build newsletter archive
+
+## Key Phrases and Concepts
+
+"Infrastructure is the sermon." "Arise and build." "Build what doesn't exist." "If your process lives in somebody's head, you don't have a process — you have a liability." "We don't wait for resources. We become them."
+
+The Lonnell Williams content universe uses these frameworks: ministry systems thinking, the operator-pastor identity, AI infrastructure for organizations, and the number-two-seat leadership model.
