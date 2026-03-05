@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Books Layout Preview — LDW</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&family=Anton&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --obsidian: #0D0D0D;
+    --warm-black: #111111;
+    --copper: #C17F59;
+    --signal: #E85D3A;
+    --off-white: #F2F0EB;
+    --concrete: #8A8A8A;
+    --aena-cyan: #1FAABD;
+    --aena-yellow: #E8C547;
+    --aena-teal: #1A7A8A;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+
+  /* ── PREVIEW LABEL ── */
+  .preview-bar {
+    background: rgba(193,127,89,0.12);
+    border-bottom: 1px solid rgba(193,127,89,0.3);
+    padding: 12px 60px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .preview-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--copper); }
+  .preview-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--copper);
+  }
+  .preview-note {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--concrete);
+    margin-left: auto;
+  }
+
+  /* ── SECTION ── */
+  .books-section {
+    padding: 80px 60px 120px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ── BOOK ENTRY — ALTERNATING ── */
+  .book-entry {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 72px;
+    align-items: start;
+    padding: 72px 0;
+    border-top: 1px solid rgba(242,240,235,0.06);
+  }
+
+  /* Book 2: flip — info left, cover right */
+  .book-entry.flip {
+    grid-template-columns: 1fr 240px;
+  }
+  .book-entry.flip .book-cover-wrap {
+    order: 2;
+  }
+  .book-entry.flip .book-info {
+    order: 1;
+  }
+
+  .book-entry:last-child { border-bottom: 1px solid rgba(242,240,235,0.06); }
+
+  /* ── CSS BOOK COVERS ── */
+  .book-cover-wrap {
+    width: 240px;
+    aspect-ratio: 2/3;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+  }
+
+  /* AENA */
+  .aena-cover { width: 100%; display: flex; flex-direction: column; }
+  .aena-band { display: flex; align-items: center; padding: 0 16px; overflow: hidden; }
+  .aena-band span, .aena-band strong, .aena-band small, .aena-band .mono {
+    font-family: 'DM Sans', sans-serif; font-weight: 900; white-space: nowrap; line-height: 1; display: block;
+  }
+  .aena-cyan  { background: #1FAABD; flex: 1.1; }
+  .aena-cyan span  { font-size: clamp(22px, 3.8vw, 36px); color: #000; letter-spacing: -1px; }
+  .aena-yellow { background: #E8C547; flex: 1.3; padding: 0 14px; }
+  .aena-yellow span { font-size: clamp(17px, 3vw, 28px); color: #000; letter-spacing: -1px; display: inline-block; transform: scaleX(0.95); transform-origin: left; }
+  .aena-teal  { background: #1A7A8A; flex: 1.1; }
+  .aena-teal span  { font-size: clamp(19px, 3.2vw, 31px); color: #F2F0EB; letter-spacing: -1px; }
+  .aena-teal em    { color: #E03B2F; font-style: normal; }
+  .aena-black { background: #0D0D0D; flex: 1.05; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+  .aena-black small  { font-size: clamp(5px, 0.9vw, 8px); letter-spacing: 5px; color: rgba(242,240,235,0.35); text-transform: uppercase; font-weight: 300; }
+  .aena-black strong { font-size: clamp(10px, 1.8vw, 15px); letter-spacing: 5px; color: #F2F0EB; text-transform: uppercase; }
+  .aena-black .mono  { font-family: 'Space Mono', monospace; font-size: clamp(4px, 0.7vw, 6px); letter-spacing: 3px; color: rgba(242,240,235,0.2); text-transform: uppercase; margin-top: 3px; }
+
+  /* ZAG */
+  .zag-cover { width: 100%; background: #0D0D0D; border: 1px solid rgba(193,127,89,0.2); position: relative; display: flex; flex-direction: column; justify-content: space-between; padding: 28px 22px 22px; }
+  .zag-top-bar { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--copper); }
+  .zag-main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .zag-word { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 9vw, 84px); letter-spacing: 4px; color: #F2F0EB; line-height: 0.9; margin-bottom: 18px; }
+  .zag-word .dot { color: #E85D3A; }
+  .zag-rule { width: 32px; height: 2px; background: var(--copper); margin-bottom: 14px; }
+  .zag-sub { font-family: 'Space Mono', monospace; font-size: clamp(6px, 1vw, 8px); letter-spacing: 2px; text-transform: uppercase; color: rgba(242,240,235,0.4); line-height: 1.9; }
+  .zag-author { font-family: 'Space Mono', monospace; font-size: clamp(5px, 0.8vw, 7px); letter-spacing: 3px; text-transform: uppercase; color: var(--copper); padding-top: 16px; border-top: 1px solid rgba(193,127,89,0.15); }
+
+  /* STAFF */
+  .staff-cover-wrap { padding: 0 !important; border: 1px solid rgba(0,0,0,0.08) !important; overflow: hidden; background: #FFFFFF; }
+  .staff-css-cover { width: 100%; height: 100%; background: #FFFFFF; display: flex; flex-direction: column; overflow: hidden; }
+  .staff-top-band { background: #C17F59; padding: 5px 12px; flex-shrink: 0; display: flex; align-items: center; }
+  .staff-top-label { font-family: 'Space Mono', monospace; font-size: 6px; letter-spacing: 3px; text-transform: uppercase; color: #0D0D0D; font-weight: 700; }
+  .staff-cover-body { flex: 1; display: flex; flex-direction: column; padding: 10px 12px 0; overflow: hidden; }
+  .staff-the-word { font-family: Georgia, serif; font-style: italic; font-size: 15px; color: #555; letter-spacing: 2px; margin-bottom: 4px; flex-shrink: 0; line-height: 1; }
+  .staff-letter-tower { display: flex; flex-direction: column; overflow: hidden; }
+  .staff-letter { font-family: 'Anton', sans-serif; display: block; font-size: 52px; line-height: 1.04; flex-shrink: 0; }
+  .staff-cover-bottom { border-top: 1.5px solid #0D0D0D; padding: 6px 12px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; margin-top: auto; }
+  .staff-author-name { font-family: 'Space Mono', monospace; font-size: 5px; letter-spacing: 2.5px; text-transform: uppercase; color: #0D0D0D; }
+  .staff-red-dot { width: 5px; height: 5px; border-radius: 50%; background: #E85D3A; flex-shrink: 0; }
+
+  /* ── BOOK INFO ── */
+  .book-info { padding-top: 8px; }
+  .book-badge { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; padding: 5px 12px; border: 1px solid rgba(193,127,89,0.3); color: var(--copper); display: inline-block; margin-bottom: 20px; }
+  .book-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 4vw, 56px); letter-spacing: 3px; line-height: 1; margin-bottom: 8px; word-break: break-word; }
+  .book-subtitle { font-size: 15px; font-weight: 300; color: var(--copper); margin-bottom: 24px; letter-spacing: 1px; }
+  .book-desc { font-size: 15px; font-weight: 300; color: var(--concrete); line-height: 1.8; max-width: 560px; margin-bottom: 32px; }
+  .book-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .book-btn { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; padding: 14px 28px; border: 1px solid var(--copper); color: var(--copper); transition: all 0.3s ease; display: inline-block; }
+  .book-btn.coming-soon { border-color: rgba(242,240,235,0.12); color: var(--concrete); cursor: default; pointer-events: none; }
+
+  /* AENA notify */
+  .aena-notify { margin-top: 28px; padding: 24px; border: 1px solid rgba(31,170,189,0.14); background: rgba(31,170,189,0.03); max-width: 480px; }
+  .notify-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--aena-cyan); margin-bottom: 8px; }
+  .notify-text { font-size: 13px; font-weight: 300; color: var(--concrete); line-height: 1.65; margin-bottom: 16px; }
+  .notify-row { display: flex; gap: 8px; }
+  .notify-input { flex: 1; background: rgba(242,240,235,0.04); border: 1px solid rgba(242,240,235,0.1); padding: 11px 14px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--off-white); outline: none; }
+  .notify-input::placeholder { color: var(--concrete); }
+  .notify-btn { background: var(--aena-cyan); color: #0D0D0D; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; padding: 11px 18px; border: none; cursor: pointer; font-weight: 700; white-space: nowrap; }
+
+  /* ── FLIP ALIGNMENT FIX ── */
+  /* When flipped, desc max-width still reads well */
+  .book-entry.flip .book-desc { max-width: 100%; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .preview-bar { padding: 12px 28px; }
+    .books-section { padding: 40px 28px 80px; }
+    .book-entry,
+    .book-entry.flip { grid-template-columns: 1fr; gap: 32px; }
+    .book-entry.flip .book-cover-wrap { order: 0; }
+    .book-entry.flip .book-info { order: 0; }
+    .book-cover-wrap { width: 180px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PREVIEW LABEL -->
+<div class="preview-bar">
+  <div class="preview-dot"></div>
+  <div class="preview-label">Layout Preview — Alternating Books</div>
+  <div class="preview-note">Not deployed · For approval only</div>
+</div>
+
+<div class="books-section">
+
+  <!-- BOOK 1: AENA — Cover LEFT, Info RIGHT -->
+  <div class="book-entry">
+    <div class="book-cover-wrap">
+      <div class="aena-cover">
+        <div class="aena-band aena-cyan"><span>ANYTHING</span></div>
+        <div class="aena-band aena-yellow"><span>EVERYTHING</span></div>
+        <div class="aena-band aena-teal"><span>NOTHING<em>.</em></span></div>
+        <div class="aena-band aena-black">
+          <small>OR</small>
+          <strong>AT ALL</strong>
+          <span class="mono">LONNELL WILLIAMS</span>
+        </div>
+      </div>
+    </div>
+    <div class="book-info">
+      <div class="book-badge" style="border-color:rgba(31,170,189,0.3); color:#1FAABD;">Fall 2026 (Re-release)</div>
+      <div class="book-title" style="color:#E8C547;">ANYTHING, EVERYTHING<span style="color:#E85D3A;">.</span></div>
+      <div class="book-subtitle" style="color:#1FAABD;">Or Nothing at All</div>
+      <p class="book-desc">Six words changed everything. On a ministry trip, a resource developer answered a simple question with: "Anything, everything, or nothing at all." That phrase became the heartbeat of this book — and a standard that has no room for halfway. Whether you're sitting in the pew, running a campus, or leading a staff of fifty, this is the book that names what's at stake when you decide to serve God's vision for real.</p>
+      <div class="book-actions">
+        <a href="#" class="book-btn coming-soon">Coming Soon</a>
+      </div>
+      <div class="aena-notify">
+        <div class="notify-label">Be First to Know</div>
+        <p class="notify-text">The rewrite is in progress. Drop your email and you'll get the release date before anyone else.</p>
+        <div class="notify-row">
+          <input type="email" class="notify-input" placeholder="Your email address">
+          <button class="notify-btn">Notify Me</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOK 2: ZAG — Info LEFT, Cover RIGHT -->
+  <div class="book-entry flip">
+    <div class="book-cover-wrap">
+      <div class="zag-cover">
+        <div class="zag-top-bar"></div>
+        <div class="zag-main">
+          <div class="zag-word">ZAG<span class="dot">.</span></div>
+          <div class="zag-rule"></div>
+          <div class="zag-sub">LEADING MINISTRY<br>JESUS'S WAY</div>
+        </div>
+        <div class="zag-author">LONNELL WILLIAMS</div>
+      </div>
+    </div>
+    <div class="book-info">
+      <div class="book-badge">Coming Soon</div>
+      <div class="book-title" style="color:var(--copper);">ZAG<span style="color:var(--signal);">.</span></div>
+      <div class="book-subtitle">Leading Ministry Jesus's Way</div>
+      <p class="book-desc">A field guide for ministry leaders who are tired of imitating the world's leadership frameworks. Zag cuts through the noise — drawing directly from how Jesus led, built, and sent. Practical, theological, and unapologetically different.</p>
+      <div class="book-actions">
+        <a href="#" class="book-btn coming-soon">Coming Soon</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOK 3: THE STAFF — Cover LEFT, Info RIGHT -->
+  <div class="book-entry">
+    <div class="book-cover-wrap staff-cover-wrap">
+      <div class="staff-css-cover">
+        <div class="staff-top-band">
+          <span class="staff-top-label">IN DEVELOPMENT</span>
+        </div>
+        <div class="staff-cover-body">
+          <div class="staff-the-word">The</div>
+          <div class="staff-letter-tower">
+            <span class="staff-letter" style="color:#C17F59">S</span>
+            <span class="staff-letter" style="color:#E85D3A">T</span>
+            <span class="staff-letter" style="color:#1C3A28">A</span>
+            <span class="staff-letter" style="color:#1FAABD">F</span>
+            <span class="staff-letter" style="color:#0D0D0D">F</span>
+          </div>
+        </div>
+        <div class="staff-cover-bottom">
+          <span class="staff-author-name">LONNELL WILLIAMS</span>
+          <div class="staff-red-dot"></div>
+        </div>
+      </div>
+    </div>
+    <div class="book-info">
+      <div class="book-badge" style="border-color:rgba(193,127,89,0.3); color:var(--copper);">In Development</div>
+      <div class="book-title" style="color:var(--off-white);">THE STAFF<span style="color:var(--copper);">.</span></div>
+      <div class="book-subtitle" style="color:var(--concrete);">What's Already in Your Hand</div>
+      <p class="book-desc">Most leaders spend their entire ministry looking for better resources, better staff, better tools — when the most powerful thing they have is already in their hand. The Staff is a reckoning with what you've been given. A reframe of what "enough" looks like when you actually deploy it. This is the operator's guide to building with what's available, not what's ideal.</p>
+      <div class="book-actions">
+        <a href="#" class="book-btn coming-soon">In Development</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
