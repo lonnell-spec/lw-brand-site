@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://ldw.build/">
 <title>Lonnell Williams — Builder. Operator. Author.</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400i&family=Anton&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -1745,6 +1746,102 @@
   <meta name="twitter:title" content="Lonnell Williams — Builder. Operator. Author.">
   <meta name="twitter:description" content="Executive Pastor. Princeton M.Div. Systems architect. I build ministry infrastructure that scales.">
   <meta name="twitter:image" content="https://riqdcirsmckubkdfbtoj.supabase.co/storage/v1/object/public/site-images/photos/IMG_3385.jpeg">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Lonnell Williams",
+  "alternateName": "Lonnell Dawson Williams",
+  "url": "https://ldw.build",
+  "image": "https://riqdcirsmckubkdfbtoj.supabase.co/storage/v1/object/public/site-images/photos/IMG_3385.jpeg",
+  "jobTitle": "Executive Pastor",
+  "description": "Executive Pastor at 2819 Church in Atlanta, GA. Princeton M.Div. Author, speaker, and systems architect at the intersection of ministry leadership, AI infrastructure, and organizational scale.",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "2819 Church",
+    "url": "https://2819church.org",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Atlanta",
+      "addressRegion": "GA",
+      "addressCountry": "US"
+    }
+  },
+  "alumniOf": {
+    "@type": "EducationalOrganization",
+    "name": "Princeton Theological Seminary"
+  },
+  "sameAs": [
+    "https://instagram.com/lonnelldwilliams",
+    "https://linkedin.com/in/lonnelldwilliams",
+    "https://buildwithldw.substack.com",
+    "https://youtube.com/@lonnelldwilliams",
+    "https://threads.net/@lonnelldwilliams"
+  ],
+  "knowsAbout": [
+    "Ministry Operations",
+    "AI Infrastructure",
+    "Church Growth",
+    "Executive Leadership",
+    "Organizational Systems",
+    "Multi-Campus Church Strategy"
+  ],
+  "hasOccupation": {
+    "@type": "Occupation",
+    "name": "Executive Pastor",
+    "occupationLocation": {
+      "@type": "City",
+      "name": "Atlanta, GA"
+    }
+  }
+}
+</script>
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": "Anything, Everything, or Nothing at All",
+    "author": {
+      "@type": "Person",
+      "name": "Lonnell Williams",
+      "url": "https://ldw.build"
+    },
+    "url": "https://ldw.build/books.html",
+    "description": "A theological and practical examination of grace, calling, and radical commitment. Re-releasing Fall 2026.",
+    "datePublished": "2026",
+    "inLanguage": "en"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": "ZAG: Leading Ministry Jesus's Way",
+    "author": {
+      "@type": "Person",
+      "name": "Lonnell Williams",
+      "url": "https://ldw.build"
+    },
+    "url": "https://ldw.build/books.html",
+    "description": "A ministry leadership framework drawn from the counter-cultural leadership model of Jesus.",
+    "inLanguage": "en"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": "The Staff",
+    "author": {
+      "@type": "Person",
+      "name": "Lonnell Williams",
+      "url": "https://ldw.build"
+    },
+    "url": "https://ldw.build/books.html",
+    "description": "A deep look at building and leading exceptional ministry teams.",
+    "inLanguage": "en"
+  }
+]
+</script>
 </head>
 <body>
 <!-- ===== SITE NAV ===== -->
@@ -1764,6 +1861,7 @@
     <a href="#consulting">Work With Me</a>
     <a href="/media.html">Media</a>
     <a href="#newsletter">Newsletter</a>
+    <a href="/articles.html">Articles</a>
     <a href="/vantage.html">Vantage</a>
   </div>
   <button class="site-nav-btn" onclick="var l=document.querySelector('.site-nav-links');l.classList.toggle('open');">
@@ -2474,7 +2572,7 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
         }, 800);
 
       } catch (err) {
-        console.error('Subscribe error:', err);
+        // error suppressed
         showMsg(msgEl, 'Something went wrong. Try again.', true);
       } finally {
         setLoading(btnEl, false);
@@ -2539,7 +2637,7 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
           showMsg(vwMsg, "You're in. We'll notify you when Vantage launches.", false);
         }
       } catch (err) {
-        console.error('Vantage waitlist error:', err);
+        // error suppressed
         showMsg(vwMsg, 'Something went wrong. Try again.', true);
       } finally {
         setLoading(vwBtn, false);
@@ -2589,17 +2687,18 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
 
           if (error) throw error;
 
-          // Sync to ConvertKit with service-specific tagging
-          fetch(SUPABASE_URL + '/functions/v1/sync-convertkit', {
+          // Sync to ActiveCampaign
+          fetch(SUPABASE_URL + '/functions/v1/sync-activecampaign', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SUPABASE_KEY },
             body: JSON.stringify({
               email: email.toLowerCase(),
               first_name: name.split(' ')[0],
-              source: 'inquiry_' + serviceType,
-              service_type: serviceType
+              last_name: name.split(' ').slice(1).join(' ') || '',
+              tags: ['consulting-inquiry', 'source-' + serviceType],
+              list_id: 1
             })
-          }).catch(function(e) { console.log('ConvertKit sync:', e.message); });
+          }).catch(function(e) {});
 
           // Hide all form fields and show thank you
           document.getElementById('inquiry-name').value = '';
@@ -2615,7 +2714,7 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
           inquiryMsg.style.display = 'none';
           document.getElementById('inquiry-thank-you').style.display = 'block';
         } catch (err) {
-          console.error('Inquiry error:', err);
+          // error suppressed
           showMsg(inquiryMsg, 'Something went wrong. Try again or email directly.', true);
         } finally {
           if (!inquiryBtn.disabled) setLoading(inquiryBtn, false);
@@ -2715,7 +2814,7 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
         }
       }
     } catch (err) {
-      console.log('Content load info:', err.message || err);
+      // info suppressed
       // Graceful: placeholders remain visible if content load fails
     }
   })();
@@ -2761,7 +2860,7 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
         grid.style.opacity = '1';
       }
     } catch (err) {
-      console.log('Dynamic photo load:', err.message || err);
+      // info suppressed
       // Graceful fallback: static photos remain
     }
   })();
@@ -2958,7 +3057,163 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
       width: 5px; height: 5px; border-radius: 50%;
       background: #E85D3A; flex-shrink: 0;
     }
-  </style>
+  
+/* ===== MOBILE IMPROVEMENTS (added March 2026) ===== */
+@media (max-width: 768px) {
+  /* About section */
+  .about-inner {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .about-photo {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  .about-text h2 {
+    font-size: clamp(36px, 10vw, 56px) !important;
+  }
+  .credentials-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* Speaking section */
+  .speaking-topics {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .speaking-header {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  /* Books section */
+  .books-section {
+    padding: 60px 20px !important;
+  }
+  .book-row {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    text-align: center !important;
+  }
+  .book-cover {
+    max-width: 200px;
+    margin: 0 auto !important;
+  }
+  .book-meta {
+    text-align: left !important;
+  }
+  .book-meta h3 {
+    font-size: clamp(28px, 9vw, 42px) !important;
+  }
+
+  /* Consulting section */
+  .consulting-tiers {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .consulting-inner {
+    padding: 60px 20px !important;
+  }
+  .consulting-form-row {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  .audit-gate,
+  .consult-form {
+    padding: 24px 20px !important;
+  }
+
+  /* Hero text sizing */
+  .hero-headline {
+    font-size: clamp(52px, 14vw, 100px) !important;
+    letter-spacing: 2px !important;
+  }
+  .hero-subhead {
+    font-size: 14px !important;
+    letter-spacing: 2px !important;
+  }
+
+  /* What I Carry cards */
+  .carries-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* Nav text sizing */
+  .site-nav-name {
+    font-size: 13px !important;
+    letter-spacing: 3px !important;
+  }
+
+  /* Popup full-screen on mobile */
+  .popup-card {
+    padding: 32px 24px 28px !important;
+    border-radius: 12px !important;
+    max-width: calc(100vw - 32px) !important;
+  }
+  .popup-title {
+    font-size: 28px !important;
+  }
+
+  /* Footer mobile */
+  .footer-inner {
+    padding: 0 !important;
+  }
+
+  /* Vantage preview metrics stack */
+  .vantage-preview-metrics {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* YouTube section */
+  .yt-featured {
+    margin: 24px auto 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small screens */
+  .hero-headline {
+    font-size: clamp(44px, 16vw, 72px) !important;
+  }
+  .about-text h2 {
+    font-size: clamp(32px, 12vw, 48px) !important;
+  }
+  .credentials-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .ig-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .masonry-grid {
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: auto !important;
+  }
+  .masonry-item.featured {
+    grid-column: span 1 !important;
+  }
+  .newsletter-email {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .newsletter-email input {
+    border-right: 1px solid rgba(13,13,13,0.1) !important;
+    border-bottom: none !important;
+  }
+  .newsletter-email button {
+    width: 100% !important;
+    padding: 14px 20px !important;
+  }
+  .vantage-preview-metrics {
+    grid-template-columns: 1fr !important;
+  }
+  .popup-card {
+    padding: 28px 20px 24px !important;
+  }
+}
+
+</style>
 
   <div class="popup-overlay" id="popup-cta">
     <div class="popup-card">
@@ -2996,16 +3251,17 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
 
     // Check if already dismissed this session
     try {
-      if (sessionStorage.getItem('ldw_cta_dismissed') === '1') return;
+      if (localStorage.getItem('ldw_popup_seen') === '1') return;
     } catch(e) {}
 
     function showPopup() {
       overlay.classList.add('active');
+      try { localStorage.setItem('ldw_popup_seen', '1'); } catch(e) {}
     }
 
     function hidePopup() {
       overlay.classList.remove('active');
-      try { sessionStorage.setItem('ldw_cta_dismissed', '1'); } catch(e) {}
+      try { localStorage.setItem('ldw_popup_seen', '1'); } catch(e) {}
     }
 
     // Fire immediately on page load
@@ -3038,13 +3294,13 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
             source: 'popup_cta'
           }]);
         }
-      } catch(err) { console.log('Popup subscribe:', err); }
+      } catch(err) {}
 
       document.getElementById('popup-form-area').style.display = 'none';
       var ty = document.getElementById('popup-thank-you');
       ty.classList.add('show');
 
-      try { sessionStorage.setItem('ldw_cta_dismissed', '1'); } catch(e) {}
+      try { localStorage.setItem('ldw_popup_seen', '1'); } catch(e) {}
       setTimeout(hidePopup, 3000);
     });
 
@@ -3202,7 +3458,7 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
       const PDF_URL = 'https://drive.google.com/file/d/1xWvTHNH3pC58IwIDoqm43nFkArvv7O-e/view?usp=share_link';
       setTimeout(() => { window.open(PDF_URL, '_blank'); }, 800);
     } catch (err) {
-      console.error('Audit gate error:', err);
+      // error suppressed
       btn.disabled = false;
       btn.textContent = 'SEND ME THE AUDIT';
       alert('Something went wrong. Please try again.');
