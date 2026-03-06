@@ -3190,7 +3190,7 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
       const { error } = await supabase
         .from('newsletter_subscribers')
         .insert([{
-          name:       name,
+          first_name: name,
           email:      email,
           source:     'consulting_lead_magnet',
           created_at: new Date().toISOString()
@@ -3199,7 +3199,8 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
       document.getElementById('audit-form-wrap').style.display = 'none';
       document.getElementById('audit-success').style.display   = 'block';
       // REPLACE with your actual Google Drive shareable PDF link:
-      const PDF_URL = 'https://drive.google.com/file/d/1xWvTHNH3pC58IwIDoqm43nFkArvv7O-e/view?usp=share_link'
+      const PDF_URL = 'https://drive.google.com/YOUR-INFRASTRUCTURE-AUDIT-PDF-LINK';
+      setTimeout(() => { window.open(PDF_URL, '_blank'); }, 800);
     } catch (err) {
       console.error('Audit gate error:', err);
       btn.disabled = false;
