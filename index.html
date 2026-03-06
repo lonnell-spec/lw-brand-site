@@ -792,6 +792,114 @@
   }
   /* Book heading colors set via inline styles */
 
+  /* ===== AUDIT GATE ===== */
+  .audit-gate {
+    background: var(--warm-black);
+    border: 1px solid rgba(193,127,89,0.25);
+    margin-bottom: 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .audit-gate::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(193,127,89,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .audit-gate-inner { padding: 48px 52px; position: relative; z-index: 1; }
+  .audit-gate-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--signal); margin-bottom: 28px;
+    display: inline-block; border: 1px solid var(--signal); padding: 4px 10px;
+  }
+  .audit-gate-content {
+    display: grid; grid-template-columns: 1fr 360px;
+    gap: 52px; align-items: start;
+  }
+  .audit-gate-eyebrow {
+    font-family: 'Space Mono', monospace; font-size: 10px;
+    letter-spacing: 3px; color: var(--copper);
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .audit-gate-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 3.5vw, 48px);
+    line-height: 1.0; letter-spacing: 2px;
+    color: var(--off-white); margin-bottom: 20px;
+  }
+  .audit-gate-desc {
+    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 300;
+    color: rgba(242,240,235,0.75); line-height: 1.7; margin-bottom: 20px;
+  }
+  .audit-gate-list { list-style: none; padding: 0; margin: 0; }
+  .audit-gate-list li {
+    font-family: 'DM Sans', sans-serif; font-size: 13px;
+    color: rgba(242,240,235,0.65); padding: 6px 0 6px 20px;
+    position: relative; line-height: 1.5;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .audit-gate-list li::before {
+    content: '→'; position: absolute; left: 0;
+    color: var(--copper); font-size: 11px;
+  }
+  .audit-gate-right { min-width: 0; }
+  .audit-form-wrap {
+    background: rgba(13,13,13,0.6);
+    border: 1px solid rgba(193,127,89,0.2); padding: 32px 28px;
+  }
+  .audit-form-label {
+    font-family: 'Space Mono', monospace; font-size: 10px;
+    letter-spacing: 3px; color: var(--copper);
+    text-transform: uppercase; margin-bottom: 20px;
+  }
+  .audit-input {
+    width: 100%; background: transparent;
+    border: 1px solid rgba(242,240,235,0.12);
+    color: var(--off-white); font-family: 'DM Sans', sans-serif;
+    font-size: 14px; padding: 12px 16px; margin-bottom: 12px;
+    outline: none; transition: border-color 0.2s; box-sizing: border-box;
+  }
+  .audit-input::placeholder { color: var(--concrete); }
+  .audit-input:focus { border-color: var(--copper); }
+  .audit-btn {
+    width: 100%; background: var(--copper); color: var(--obsidian);
+    font-family: 'Bebas Neue', sans-serif; font-size: 16px;
+    letter-spacing: 2px; padding: 14px 20px; border: none;
+    cursor: pointer; transition: opacity 0.2s; margin-top: 4px;
+  }
+  .audit-btn:hover { opacity: 0.85; }
+  .audit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .audit-privacy {
+    font-family: 'Space Mono', monospace; font-size: 9px;
+    color: var(--concrete); letter-spacing: 1px;
+    margin-top: 12px; text-align: center;
+  }
+  .audit-success {
+    background: rgba(13,13,13,0.6);
+    border: 1px solid rgba(193,127,89,0.2);
+    padding: 40px 28px; text-align: center;
+  }
+  .audit-success-icon {
+    font-family: 'Space Mono', monospace; font-size: 28px;
+    color: var(--copper); margin-bottom: 16px;
+  }
+  .audit-success-title {
+    font-family: 'Bebas Neue', sans-serif; font-size: 22px;
+    letter-spacing: 3px; color: var(--off-white); margin-bottom: 12px;
+  }
+  .audit-success-msg {
+    font-family: 'DM Sans', sans-serif; font-size: 13px;
+    color: rgba(242,240,235,0.65); line-height: 1.65;
+  }
+  @media (max-width: 860px) {
+    .audit-gate-inner { padding: 36px 28px; }
+    .audit-gate-content { grid-template-columns: 1fr; gap: 32px; }
+  }
+
   /* ===== CONSULTING ===== */
   .consult-intro-row {
     display: grid;
@@ -1951,6 +2059,44 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
         </div>
       </div>
 
+      <!-- ── LEAD MAGNET GATE ────────────────────────────────── -->
+      <div class="audit-gate" id="audit-gate">
+        <div class="audit-gate-inner">
+          <div class="audit-gate-label">FREE RESOURCE</div>
+          <div class="audit-gate-content">
+            <div class="audit-gate-left">
+              <div class="audit-gate-eyebrow">THE INFRASTRUCTURE AUDIT</div>
+              <h3 class="audit-gate-title">IS YOUR ORGANIZATION<br>BUILT TO SCALE?</h3>
+              <p class="audit-gate-desc">
+                Most organizations don't know they're breaking until they're already broken.
+                This diagnostic framework identifies exactly where your systems are strained —
+                and what to fix first. 15 minutes. Specific answers.
+              </p>
+              <ul class="audit-gate-list">
+                <li>Pinpoints the 5 systems that break first under growth pressure</li>
+                <li>Includes a scoring framework — not just questions, but a clear diagnosis</li>
+                <li>Used in ENGAGE consulting engagements as the starting point</li>
+              </ul>
+            </div>
+            <div class="audit-gate-right">
+              <div class="audit-form-wrap" id="audit-form-wrap">
+                <p class="audit-form-label">GET THE FREE AUDIT</p>
+                <input type="text" id="audit-name" class="audit-input" placeholder="First name" autocomplete="given-name" />
+                <input type="email" id="audit-email" class="audit-input" placeholder="Email address" autocomplete="email" />
+                <button class="audit-btn" id="audit-submit" onclick="submitAuditGate()">SEND ME THE AUDIT</button>
+                <p class="audit-privacy">No spam. One-click unsubscribe. Ever.</p>
+              </div>
+              <div class="audit-success" id="audit-success" style="display:none;">
+                <div class="audit-success-icon">✓</div>
+                <p class="audit-success-title">CHECK YOUR INBOX</p>
+                <p class="audit-success-msg">The Infrastructure Audit is on its way. Check your email — including spam if you don't see it in 5 minutes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ── END LEAD MAGNET GATE ──────────────────────────────── -->
+
       <div class="consult-grid">
         <div class="consult-offers">
           <div class="offer-item">
@@ -3028,5 +3174,39 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
   </script>
 
 <script src="/nav-patch.js" defer></script>
+  <!-- ── AUDIT GATE SUBMIT ─────────────────────────────────── -->
+  <script>
+  async function submitAuditGate() {
+    const nameEl  = document.getElementById('audit-name');
+    const emailEl = document.getElementById('audit-email');
+    const btn     = document.getElementById('audit-submit');
+    const name    = (nameEl.value || '').trim();
+    const email   = (emailEl.value || '').trim();
+    if (!name)  { nameEl.focus(); return; }
+    if (!email || !email.includes('@')) { emailEl.focus(); return; }
+    btn.disabled = true;
+    btn.textContent = 'SENDING...';
+    try {
+      const { error } = await supabase
+        .from('newsletter_subscribers')
+        .insert([{
+          name:       name,
+          email:      email,
+          source:     'consulting_lead_magnet',
+          created_at: new Date().toISOString()
+        }]);
+      if (error && error.code !== '23505') throw error;
+      document.getElementById('audit-form-wrap').style.display = 'none';
+      document.getElementById('audit-success').style.display   = 'block';
+      // REPLACE with your actual Google Drive shareable PDF link:
+      const PDF_URL = 'https://drive.google.com/file/d/1xWvTHNH3pC58IwIDoqm43nFkArvv7O-e/view?usp=share_link'
+    } catch (err) {
+      console.error('Audit gate error:', err);
+      btn.disabled = false;
+      btn.textContent = 'SEND ME THE AUDIT';
+      alert('Something went wrong. Please try again.');
+    }
+  }
+  </script>
 </body>
 </html>
