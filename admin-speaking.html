@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speaking — Admin | LDW</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root { --obsidian: #0D0D0D; --warm-black: #1A1714; --off-white: #F2F0EB; --concrete: #8A8A8A; --copper: #C17F59; --copper-light: #D4956A; --signal: #E85D3A; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+.site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; background: rgba(13,13,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(242,240,235,0.06); }
+.site-nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--off-white); }
+.site-nav-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 4px; }
+.site-nav-links { display: flex; gap: 32px; align-items: center; }
+.site-nav-links a { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.3s; }
+.site-nav-links a:hover { color: var(--off-white); }
+.site-nav-btn { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.site-nav-btn span { display: block; width: 20px; height: 2px; background: var(--off-white); margin: 4px 0; }
+@media (max-width: 768px) {
+  .site-nav { padding: 0 24px; }
+  .site-nav-links { display: none; position: fixed; top: 64px; left: 0; right: 0; flex-direction: column; background: rgba(13,13,13,0.96); padding: 24px; gap: 20px; }
+  .site-nav-links.open { display: flex; }
+  .site-nav-btn { display: block; }
+}
+.admin-sub { padding: 64px 0 0; min-height: 100vh; }
+.admin-sub-header { padding: 48px 48px 32px; border-bottom: 1px solid rgba(242,240,235,0.06); }
+.admin-sub-back { display: inline-flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); text-decoration: none; margin-bottom: 24px; transition: color 0.3s; }
+.admin-sub-back:hover { color: var(--copper-light); }
+.admin-sub-eyebrow { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--copper); margin-bottom: 12px; }
+.admin-sub-title { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 6px; line-height: 1; }
+.admin-sub-title .accent { color: var(--copper); }
+.admin-content { padding: 40px 48px 80px; max-width: 1100px; }
+.inq-table-wrap { overflow-x: auto; margin-bottom: 48px; }
+.inq-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.inq-table th { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); text-align: left; padding: 12px 16px; border-bottom: 1px solid rgba(193,127,89,0.3); white-space: nowrap; }
+.inq-table td { padding: 14px 16px; border-bottom: 1px solid rgba(242,240,235,0.05); color: var(--concrete); font-weight: 300; vertical-align: top; }
+.inq-table td:first-child { color: var(--off-white); font-weight: 400; }
+.inq-table tr:hover td { background: rgba(242,240,235,0.02); }
+.inq-empty { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--concrete); letter-spacing: 2px; text-align: center; padding: 40px 0; }
+.inq-count { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--concrete); letter-spacing: 2px; margin-bottom: 16px; }
+.section-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--copper); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid rgba(193,127,89,0.2); }
+.admin-sub-footer { padding: 24px 48px; border-top: 1px solid rgba(242,240,235,0.06); display: flex; justify-content: space-between; align-items: center; }
+.admin-sub-footer a { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.3s; }
+.admin-sub-footer a:hover { color: var(--off-white); }
+.admin-sub-footer span { font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(138,138,138,0.5); }
+@media (max-width: 768px) {
+  .admin-sub-header { padding: 32px 24px 24px; }
+  .admin-sub-title { font-size: 32px; }
+  .admin-content { padding: 24px 24px 60px; }
+  .admin-sub-footer { padding: 16px 24px; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="/" class="site-nav-brand">
+    <svg width="28" height="28" viewBox="0 0 240 240" fill="none"><polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/><polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/><polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/></svg>
+    <span class="site-nav-name">LONNELL WILLIAMS</span>
+  </a>
+  <div class="site-nav-links"><a href="/">Home</a></div>
+  <button class="site-nav-btn" onclick="document.querySelector('.site-nav-links').classList.toggle('open');"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="admin-sub">
+  <div class="admin-sub-header">
+    <a href="/admin.html" class="admin-sub-back">&larr; Back to Portal</a>
+    <div class="admin-sub-eyebrow">&#9670; Admin / Speaking</div>
+    <div class="admin-sub-title">SPEAKING<span class="accent">.</span></div>
+  </div>
+
+  <div class="admin-content">
+
+    <!-- SPEAKING INQUIRIES -->
+    <div style="margin-bottom:60px;">
+      <div class="section-label">SPEAKING INQUIRIES</div>
+      <div class="inq-count" id="inq-count">Loading...</div>
+      <div class="inq-table-wrap">
+        <table class="inq-table">
+          <thead>
+            <tr>
+              <th>Name</th><th>Email</th><th>Organization</th><th>Event</th><th>Event Date</th><th>Submitted</th>
+            </tr>
+          </thead>
+          <tbody id="inq-tbody">
+            <tr><td colspan="6" class="inq-empty">Loading inquiries...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SPEAKING RIDER -->
+    <div class="section-label">SPEAKING RIDER</div>
+    <div id="speaking-rider" style="margin-bottom:48px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; padding-bottom:16px; border-bottom:1px solid rgba(193,127,89,0.2);">
+        <div>
+          <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--copper); margin-bottom:6px;">DOCUMENTS</div>
+          <h2 style="font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:2px; color:var(--off-white); margin:0;">SPEAKING RIDER</h2>
+        </div>
+        <div style="display:flex; gap:12px;">
+          <a href="https://drive.google.com/file/d/1sM4VmXNyBIhssFdfZZd0gInEOomdKVRY/view?usp=drivesdk" target="_blank" rel="noopener" style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#0D0D0D; background:var(--copper); padding:10px 18px; text-decoration:none;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">OPEN PDF</a>
+          <a href="https://drive.google.com/file/d/1sM4VmXNyBIhssFdfZZd0gInEOomdKVRY/view?usp=drivesdk" download style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--copper); background:transparent; border:1px solid rgba(193,127,89,0.4); padding:10px 18px; text-decoration:none;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">DOWNLOAD</a>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+        <div style="background:var(--warm-black); border:1px solid rgba(193,127,89,0.15); padding:24px;">
+          <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--copper); margin-bottom:16px;">PERSONAL INFO</div>
+          <table style="width:100%; border-collapse:collapse;">
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">NAME ON ID</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">Lonnell Dawson Williams</td></tr>
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">PASSPORT</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">556736566 — Exp. May 30, 2027</td></tr>
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">BASE AIRPORT</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">ATL</td></tr>
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">GLOBAL ENTRY</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">160549322</td></tr>
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">TSA PRECHECK</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">TT11YT1HH</td></tr>
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">DELTA SKYMILES</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">9266959478</td></tr>
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">PRIMARY CONTACT</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">assistant@ldw.build</td></tr>
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">DIRECT</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">lonnell@ldw.build</td></tr>
+          </table>
+        </div>
+        <div style="background:var(--warm-black); border:1px solid rgba(193,127,89,0.15); padding:24px;">
+          <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--copper); margin-bottom:16px;">TRAVEL</div>
+          <table style="width:100%; border-collapse:collapse;">
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">AIRLINE</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">Delta — First Class preferred</td></tr>
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">SEAT</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">Window | Non-stop | Refundable</td></tr>
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">LEAD TIME</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">21 days before engagement</td></tr>
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">SPOUSE TRAVEL</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">Email details — he books separately</td></tr>
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">HOTEL</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">King | Non-smoking | 20 min to venue</td></tr>
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">CONFIRM BY</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">48 hrs before arrival</td></tr>
+          </table>
+        </div>
+        <div style="background:rgba(232,93,58,0.08); border:1px solid rgba(232,93,58,0.4); padding:24px;">
+          <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--signal); margin-bottom:12px;">DIETARY — CRITICAL</div>
+          <p style="font-family:'DM Sans',sans-serif; font-size:14px; color:var(--off-white); font-weight:600; line-height:1.5; margin:0 0 8px;">NON-DAIRY STRICTLY</p>
+          <p style="font-family:'DM Sans',sans-serif; font-size:13px; color:rgba(242,240,235,0.75); line-height:1.6; margin:0;">No dairy in any food or beverage provided. Communicate to all catering, hospitality, and green room staff.</p>
+        </div>
+        <div style="background:var(--warm-black); border:1px solid rgba(193,127,89,0.15); padding:24px;">
+          <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--copper); margin-bottom:16px;">STAGE AND GREEN ROOM</div>
+          <table style="width:100%; border-collapse:collapse;">
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">MICROPHONE</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">Wireless lapel ONLY</td></tr>
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">SOUND CHECK</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">20-30 min before service</td></tr>
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">SLIDES</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">Does not use projected slides</td></tr>
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">GREEN ROOM</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">45 min before | Prayer only</td></tr>
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">ACCESS</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">Designated individuals only</td></tr>
+          </table>
+        </div>
+        <div style="grid-column:1/-1; background:var(--warm-black); border:1px solid rgba(193,127,89,0.15); padding:24px; display:flex; gap:40px; align-items:center;">
+          <div style="flex:0 0 auto;">
+            <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--copper); margin-bottom:8px;">HONORARIUM</div>
+            <div style="display:flex; gap:32px;">
+              <div><div style="font-family:'Bebas Neue',sans-serif; font-size:36px; color:var(--off-white);">$2,500</div><div style="font-family:'Space Mono',monospace; font-size:9px; color:var(--concrete); text-transform:uppercase; margin-top:4px;">Base</div></div>
+              <div style="width:1px; background:rgba(193,127,89,0.2);"></div>
+              <div><div style="font-family:'Bebas Neue',sans-serif; font-size:36px; color:var(--off-white);">$3,500</div><div style="font-family:'Space Mono',monospace; font-size:9px; color:var(--concrete); text-transform:uppercase; margin-top:4px;">Intl / 5+ hour flights</div></div>
+            </div>
+          </div>
+          <div style="width:1px; background:rgba(193,127,89,0.2); align-self:stretch;"></div>
+          <div>
+            <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--copper); margin-bottom:10px;">PAYMENT DETAILS</div>
+            <table style="border-collapse:collapse;">
+              <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:4px 16px 4px 0;">PAYABLE TO</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white);">Anchor Consulting Group</td></tr>
+              <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:4px 16px 4px 0;">W-9</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white);">Available upon request</td></tr>
+              <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:4px 16px 4px 0;">CONFIRM</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white);">In writing before confirming engagement</td></tr>
+            </table>
+          </div>
+        </div>
+        <div style="grid-column:1/-1; background:var(--warm-black); border:1px solid rgba(193,127,89,0.15); padding:24px;">
+          <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--copper); margin-bottom:14px;">SEND 10 DAYS BEFORE</div>
+          <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:16px;">
+            <div style="border-left:2px solid rgba(193,127,89,0.3); padding-left:12px;"><div style="font-family:'DM Sans',sans-serif; font-size:12px; color:rgba(242,240,235,0.65);">Expected sermon length</div></div>
+            <div style="border-left:2px solid rgba(193,127,89,0.3); padding-left:12px;"><div style="font-family:'DM Sans',sans-serif; font-size:12px; color:rgba(242,240,235,0.65);">Service order + placement</div></div>
+            <div style="border-left:2px solid rgba(193,127,89,0.3); padding-left:12px;"><div style="font-family:'DM Sans',sans-serif; font-size:12px; color:rgba(242,240,235,0.65);">Congregation size + demographic</div></div>
+            <div style="border-left:2px solid rgba(193,127,89,0.3); padding-left:12px;"><div style="font-family:'DM Sans',sans-serif; font-size:12px; color:rgba(242,240,235,0.65);">Series context or theme in motion</div></div>
+            <div style="border-left:2px solid rgba(193,127,89,0.3); padding-left:12px;"><div style="font-family:'DM Sans',sans-serif; font-size:12px; color:rgba(242,240,235,0.65);">Day-of point person name + contact</div></div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:16px; font-family:'Space Mono',monospace; font-size:9px; color:var(--concrete); text-align:right;">VERSION MARCH 2026 — PAYABLE TO ANCHOR CONSULTING GROUP</div>
+    </div>
+
+  </div>
+
+  <div class="admin-sub-footer">
+    <a href="/admin.html">&larr; Portal</a>
+    <span>ldw.build — Admin</span>
+  </div>
+</div>
+
+<script>
+if (sessionStorage.getItem('ldw_admin') !== 'true') { window.location.href = '/admin.html'; }
+(async function() {
+  const URL = 'https://riqdcirsmckubkdfbtoj.supabase.co';
+  const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM';
+  try {
+    const res = await fetch(`${URL}/rest/v1/speaking_inquiries?select=*&order=created_at.desc`, { headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY } });
+    const data = await res.json();
+    const tbody = document.getElementById('inq-tbody');
+    const count = document.getElementById('inq-count');
+    if (!data || data.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" class="inq-empty">NO INQUIRIES YET</td></tr>';
+      count.textContent = '0 INQUIRIES';
+      return;
+    }
+    count.textContent = data.length + ' INQUIR' + (data.length === 1 ? 'Y' : 'IES');
+    tbody.innerHTML = data.map(function(r) {
+      var d = r.created_at ? new Date(r.created_at).toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'}) : '-';
+      var name = (r.first_name || '') + ' ' + (r.last_name || '');
+      if (!name.trim()) name = r.name || '-';
+      return '<tr><td>' + name.trim() + '</td><td><a href="mailto:' + (r.email||'') + '" style="color:var(--copper);text-decoration:none;">' + (r.email||'-') + '</a></td><td>' + (r.organization||r.church||'-') + '</td><td>' + (r.event_name||r.event||r.topic||'-') + '</td><td>' + (r.event_date||r.date||'-') + '</td><td>' + d + '</td></tr>';
+    }).join('');
+  } catch(e) {
+    document.getElementById('inq-tbody').innerHTML = '<tr><td colspan="6" class="inq-empty">ERROR LOADING INQUIRIES</td></tr>';
+    document.getElementById('inq-count').textContent = 'ERROR';
+  }
+})();
+</script>
+</body>
+</html>
