@@ -982,7 +982,11 @@
     </div>
     <div class="cred-item">
       <div class="cred-number">7,000+</div>
-      <div class="cred-label">Weekly Reach</div>
+      <div class="cred-label">Live</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-number">1M+</div>
+      <div class="cred-label">Weekly Online Viewership</div>
     </div>
     <div class="cred-item">
       <div class="cred-number">3</div>
@@ -1131,7 +1135,7 @@
         <div class="format-icon">FORMAT 01</div>
         <div class="format-name">KEYNOTE</div>
         <div class="format-desc">High-impact, single-session delivery for conferences, summits, and large gatherings. 45–75 minutes. Designed to shift the atmosphere and leave a framework, not just a feeling.</div>
-        <div class="format-detail">Conferences · Summits · Sunday Services</div>
+        <div class="format-detail">Conferences · Summits · Sunday Gatherings</div>
       </div>
 
       <div class="format-card">
@@ -1203,10 +1207,12 @@
           <label for="bk-format">Format</label>
           <select id="bk-format">
             <option value="">Select format...</option>
-            <option value="Keynote">Keynote</option>
+            <option value="Leadership Session">Leadership Session</option>
             <option value="Workshop">Workshop</option>
             <option value="Intensive">Intensive</option>
-            <option value="Sunday Service">Sunday Service</option>
+            <option value="Staff Meeting">Staff Meeting</option>
+            <option value="Retreat">Retreat</option>
+            <option value="Sunday Gathering">Sunday Gathering</option>
             <option value="Other">Other / Not Sure</option>
           </select>
         </div>
@@ -1330,70 +1336,71 @@
   })();
 
   // === BOOKING FORM ===
-  (function() {
-    const btn = document.getElementById('bookingSubmitBtn');
-    const msg = document.getElementById('bookingMsg');
-    const ty = document.getElementById('bookingThankYou');
+  document.getElementById('bookingSubmitBtn').addEventListener('click', async function() {
+    const _sb = window.supabase.createClient(
+      'https://riqdcirsmckubkdfbtoj.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM'
+    );
 
-    function showMsg(text, isError) {
+    const btn      = this;
+    const msg      = document.getElementById('bookingMsg');
+    const ty       = document.getElementById('bookingThankYou');
+    const name     = document.getElementById('bk-name').value.trim();
+    const email    = document.getElementById('bk-email').value.trim();
+    const org      = document.getElementById('bk-org').value.trim();
+    const format   = document.getElementById('bk-format').value;
+    const date     = document.getElementById('bk-date').value.trim();
+    const audience = document.getElementById('bk-audience').value;
+    const details  = document.getElementById('bk-details').value.trim();
+
+    if (!name || !email) {
       msg.style.display = 'block';
-      msg.textContent = text;
-      msg.style.color = isError ? '#E85D3A' : '#C17F59';
+      msg.textContent = 'Name and email are required.';
+      msg.style.color = '#E85D3A';
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      msg.style.display = 'block';
+      msg.textContent = 'Please enter a valid email.';
+      msg.style.color = '#E85D3A';
+      return;
     }
 
-    btn.addEventListener('click', async function() {
-      const name = document.getElementById('bk-name').value.trim();
-      const email = document.getElementById('bk-email').value.trim();
-      const org = document.getElementById('bk-org').value.trim();
-      const format = document.getElementById('bk-format').value;
-      const date = document.getElementById('bk-date').value.trim();
-      const audience = document.getElementById('bk-audience').value;
-      const details = document.getElementById('bk-details').value.trim();
+    btn.disabled = true;
+    btn.textContent = 'SUBMITTING...';
+    msg.style.display = 'none';
 
-      if (!name || !email) {
-        showMsg('Name and email are required.', true);
-        return;
-      }
+    try {
+      const { error } = await _sb.from('speaking_inquiries').insert([{
+        name:         name,
+        email:        email,
+        organization: org || null,
+        service_type: 'Speaking',
+        source:       'speaking_page',
+        message: [
+          format   ? 'Format: '   + format   : '',
+          date     ? 'Date: '     + date     : '',
+          audience ? 'Audience: ' + audience : '',
+          details  ? 'Details: '  + details  : ''
+        ].filter(Boolean).join('\n')
+      }]);
 
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showMsg('Please enter a valid email.', true);
-        return;
-      }
+      if (error) throw error;
 
-      btn.disabled = true;
-      btn.textContent = 'SUBMITTING...';
-      msg.style.display = 'none';
+      document.getElementById('bookingForm')
+        .querySelectorAll('input, select, textarea')
+        .forEach(function(el) { el.value = ''; });
+      btn.style.display = 'none';
+      ty.classList.add('show');
 
-      try {
-        const { error } = await supabase.from('speaking_inquiries').insert([{
-          name: name,
-          email: email,
-          organization: org || null,
-          service_type: 'Speaking',
-          source: 'speaking_page',
-          message: [
-            format ? 'Format: ' + format : '',
-            date ? 'Date: ' + date : '',
-            audience ? 'Audience: ' + audience : '',
-            details ? 'Details: ' + details : ''
-          ].filter(Boolean).join('\n')
-        }]);
-
-        if (error) throw error;
-
-        document.getElementById('bookingForm').querySelectorAll('input, select, textarea').forEach(function(el) {
-          el.value = '';
-        });
-        btn.style.display = 'none';
-        ty.classList.add('show');
-
-      } catch (err) {
-        showMsg('Something went wrong. Try emailing directly.', true);
-        btn.disabled = false;
-        btn.textContent = 'SUBMIT INQUIRY';
-      }
-    });
-  })();
+    } catch(err) {
+      msg.style.display = 'block';
+      msg.textContent = 'Something went wrong. Please try again.';
+      msg.style.color = '#E85D3A';
+      btn.disabled = false;
+      btn.textContent = 'SUBMIT INQUIRY';
+    }
+  });
 
   // === SCROLL REVEAL (CSS keyframes handle animation) ===
 </script>
