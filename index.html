@@ -3443,7 +3443,7 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
     btn.disabled = true;
     btn.textContent = 'SENDING...';
     try {
-      const { error } = await supabase
+     const { error } = await supabase
         .from('newsletter_subscribers')
         .insert([{
           first_name: name,
@@ -3455,8 +3455,7 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
       document.getElementById('audit-form-wrap').style.display = 'none';
       document.getElementById('audit-success').style.display   = 'block';
       // REPLACE with your actual Google Drive shareable PDF link:
-      const PDF_URL = 'https://drive.google.com/file/d/1xWvTHNH3pC58IwIDoqm43nFkArvv7O-e/view?usp=share_link';
-      setTimeout(() => { window.open(PDF_URL, '_blank'); }, 800);
+const PDF_URL = 'https://drive.google.com/file/d/1m5CSgy9QelDm-AeJ4aYgDErT3tqjXiUr/view?usp=sharing';      setTimeout(() => { window.open(PDF_URL, '_blank'); }, 800);
     } catch (err) {
       // error suppressed
       btn.disabled = false;
