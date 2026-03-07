@@ -130,15 +130,15 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
     <a href="/admin.html" class="admin-sub-back">&larr; Back to Portal</a>
     <div class="admin-sub-eyebrow">&#9670; Admin / Outstanding Items</div>
     <div class="admin-sub-title">OUTSTANDING ITEMS<span class="accent">.</span></div>
-    <p class="admin-sub-subtitle">Full audit of <a href="https://ldw.build" target="_blank">ldw.build</a> &mdash; confirmed open items, new findings, and deferred scope. Updated March 7, 2026.</p>
+    <p class="admin-sub-subtitle">Full audit of <a href="https://ldw.build" target="_blank">ldw.build</a> &mdash; confirmed open items, new findings, and deferred scope. Updated March 7, 2026 — Session 2.</p>
   </div>
 
   <!-- ── STATS ── -->
   <div class="stats-bar">
-    <div class="stat-block"><div class="stat-number red">4</div><div class="stat-label">Critical</div></div>
-    <div class="stat-block"><div class="stat-number amber">12</div><div class="stat-label">Open</div></div>
-    <div class="stat-block"><div class="stat-number copper">5</div><div class="stat-label">Your Action</div></div>
-    <div class="stat-block"><div class="stat-number green">32</div><div class="stat-label">Completed</div></div>
+    <div class="stat-block"><div class="stat-number red">5</div><div class="stat-label">Critical</div></div>
+    <div class="stat-block"><div class="stat-number amber">14</div><div class="stat-label">Open</div></div>
+    <div class="stat-block"><div class="stat-number copper">8</div><div class="stat-label">Your Action</div></div>
+    <div class="stat-block"><div class="stat-number green">39</div><div class="stat-label">Completed</div></div>
   </div>
 
   <div class="admin-content">
@@ -148,7 +148,7 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
     <!-- ═══════════════════════════════════════════════ -->
 
     <h1>Confirmed Open &mdash; From Original List</h1>
-    <p class="section-desc">Items that were already tracked and remain unresolved. Updated March 7, 2026.</p>
+    <p class="section-desc">Items that were already tracked and remain unresolved. Updated March 7, 2026 — Session 2.</p>
 
     <ul class="item-list">
 
@@ -286,6 +286,66 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
         <div class="source-tag">Copy ready &middot; Build in AC dashboard when ready</div>
       </li>
 
+
+    <hr>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--  SECTION: MARCH 7 SESSION 2 — NEW BUILDS       -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <h1>March 7 Session 2 &mdash; New Tasks</h1>
+    <p class="section-desc">Infrastructure architecture shift: Notion is now the CRM. Zapier routes to AC. AC is postal service only. All items below stem from this decision.</p>
+
+    <ul class="item-list">
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-critical">Your Action</span> Review Consulting Inquiry Sequence</div>
+        <div class="item-desc">3-email sequence is written and waiting for your review in Notion: <a href="https://www.notion.so/31ce09b9c1578144a473d7f63f015581" target="_blank">Consulting Inquiry Sequence &rarr;</a>. Do NOT build in AC until you've approved the copy. Pays particular attention to Email 2 (the ABCD diagnostic question) &mdash; that question should match how you actually think about what's breaking in organizations.</div>
+        <div class="source-tag">Mar 7 Session 2 &middot; Awaiting review</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-critical">Critical</span> Update sync-email Edge Function &rarr; Notion CRM</div>
+        <div class="item-desc">Current edge function only writes to Supabase + AC. It needs to be updated to create a Notion CRM record in <strong>LDW &mdash; Contact CRM</strong> (database ID: <code>64501df2-6405-4b71-9b39-98141ea3d4b1</code>) for every new submission. Three submission types: newsletter signup, speaking inquiry, consulting inquiry. Without this update, the Notion CRM stays empty and the Zapier routing doesn't fire. This is what makes everything else work.</div>
+        <div class="source-tag">Mar 7 Session 2 &middot; Blocks Notion CRM + Zapier</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Open</span> Build 5 Zapier Zaps (Notion &rarr; AC Routing)</div>
+        <div class="item-desc">Full setup guide is in Notion: <a href="https://www.notion.so/31ce09b9c15781b1b31ffa1103b8fa96" target="_blank">Zapier + Notion CRM Setup Guide &rarr;</a>. Five Zaps: (1) Newsletter &rarr; AC Welcome tag, (2) Lead Magnet &rarr; AC Audit tag, (3) Consulting Inquiry &rarr; AC Consulting tag, (4) Speaking capture &rarr; AC List (no tag), (5) Speaking Status="Follow Up Needed" &rarr; AC Speaking tag. Build AFTER sync-email edge function is updated and AC sequences are live.</div>
+        <div class="source-tag">Mar 7 Session 2 &middot; Depends on edge function + AC sequences</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Open</span> Build Consulting Inquiry Sequence in AC</div>
+        <div class="item-desc">Copy is written and awaiting review (see above). Once approved, build in AC: trigger = tag <code>consulting-inquiry</code>, 3 emails, immediate + 72h + 5 days. Note: Email 2 contains a diagnostic question (A/B/C/D) &mdash; if AC reply detection is available, route replies to <code>consulting-inquiry-active</code> tag and end the sequence.</div>
+        <div class="source-tag">Mar 7 Session 2 &middot; Copy awaiting review</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Open</span> Speaking Inquiry Flow &mdash; Now Notion-First</div>
+        <div class="item-desc">Architecture change: speaking inquiries now captured to Notion CRM (Status: New) &mdash; Lonnell reviews manually. No AC sequence fires on submission. When Lonnell sets Status = "Follow Up Needed" in Notion, Zapier fires AC speaking sequence. When Status = "Meeting Scheduled", Zapier sends Cal.com link. Update speaking-inquiry-sequence-build.md to reflect this new trigger logic (no longer fires automatically on form submit).</div>
+        <div class="source-tag">Mar 7 Session 2 &middot; Architecture decision</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Your Action</span> Set Up Cal.com (Replaces Calendly)</div>
+        <div class="item-desc">Cal.com is the booking tool going forward (free, open source, Google Calendar native, Zapier-compatible). Setup: (1) Go to cal.com and create account, (2) Create a "20-min discovery call" event type, (3) Your URL will be <code>cal.com/ldw</code> or similar, (4) Connect Google Calendar, (5) Share the link so it can be dropped into AC sequences and admin portal. Required before speaking follow-up and consulting sequences can be fully activated.</div>
+        <div class="source-tag">Mar 7 Session 2 &middot; Blocks meeting-triggered sequences</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Your Action</span> Update vantage.html &mdash; The Commissioned Partnership</div>
+        <div class="item-desc">Vantage is a product of <strong>The Commissioned</strong> &mdash; built by Lonnell D. Williams and Pastor Philip Anthony Mitchell. The site needs to reflect this. Updates: (1) Add The Commissioned positioning: "a leadership development and spiritual development company for believers, lead pastors, church planners, church executives, and entrepreneurs," (2) Name both builders on the page, (3) Link to <a href="https://www.philipanthonymitchell.com" target="_blank">philipanthonymitchell.com</a> and <a href="https://www.2819church.org" target="_blank">2819church.org</a>, (4) Frame as "built by executive leaders for executive leaders." Ready to build on your go-ahead.</div>
+        <div class="source-tag">Mar 7 Session 2 &middot; Awaiting go-ahead to deploy</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Your Action</span> Claude Code Local Setup</div>
+        <div class="item-desc">Install Claude Code locally to enable autonomous builds, FUNNEL WATCH monitoring, and Vantage development without needing a browser conversation. Steps: (1) Verify Node.js is installed: <code>node --version</code> in Terminal, (2) Install: <code>npm install -g @anthropic-ai/claude-code</code>, (3) Launch: <code>claude</code> and log in with Anthropic account, (4) Create workspace: <code>mkdir ~/ldw-workspace && cd ~/ldw-workspace</code>, (5) Clone repo: <code>git clone https://github.com/lonnell-spec/lw-brand-site.git</code>, (6) Open in Claude Code: <code>cd lw-brand-site && claude</code>. GitHub PAT is already saved in project memory &mdash; will be available when needed.</div>
+        <div class="source-tag">Mar 7 Session 2 &middot; Required for Vantage Month 1</div>
+      </li>
+
     </ul>
 
     <hr>
@@ -338,6 +398,13 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
     <p class="section-desc">Everything that shipped and has been confirmed live.</p>
 
     <ul class="done-list">
+      <li>Notion CRM database built &mdash; LDW Contact CRM with 22 fields, Zapier-ready (Mar 7)</li>
+      <li>Consulting inquiry 3-email sequence written &mdash; copy in Notion awaiting review (Mar 7)</li>
+      <li>Zapier + Notion CRM setup guide written &mdash; 5 Zaps documented (Mar 7)</li>
+      <li>GitHub PAT saved to project memory &mdash; persistent across sessions (Mar 7)</li>
+      <li>admin-speaking.html built and deployed &mdash; live at ldw.build/admin-speaking.html (Mar 7)</li>
+      <li>admin-rider-section.html Drive link fixed and redeployed (Mar 7)</li>
+      <li>admin.html updated &mdash; Speaking card added to Operations section (Mar 7)</li>
       <li>Admin Portal with login gate</li>
       <li>Admin subpages built on-site (no Notion dependency)</li>
       <li>Admin subpages deployed &mdash; admin-quick-start, admin-notion, admin-changelog live (v2.5, Mar 5)</li>
@@ -490,7 +557,7 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
   <!-- ── FOOTER ── -->
   <div class="admin-sub-footer">
     <a href="/admin.html">&larr; Portal</a>
-    <span>Last audit: March 7, 2026</span>
+    <span>Last audit: March 7, 2026 — Session 2</span>
     <a href="#">Top &uarr;</a>
   </div>
 </div>
