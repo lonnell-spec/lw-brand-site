@@ -130,15 +130,15 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
     <a href="/admin.html" class="admin-sub-back">&larr; Back to Portal</a>
     <div class="admin-sub-eyebrow">&#9670; Admin / Outstanding Items</div>
     <div class="admin-sub-title">OUTSTANDING ITEMS<span class="accent">.</span></div>
-    <p class="admin-sub-subtitle">Full audit of <a href="https://ldw.build" target="_blank">ldw.build</a> &mdash; confirmed open items, new findings, and deferred scope. Updated March 3, 2026.</p>
+    <p class="admin-sub-subtitle">Full audit of <a href="https://ldw.build" target="_blank">ldw.build</a> &mdash; confirmed open items, new findings, and deferred scope. Updated March 7, 2026.</p>
   </div>
 
   <!-- ── STATS ── -->
   <div class="stats-bar">
-    <div class="stat-block"><div class="stat-number red">7</div><div class="stat-label">Critical</div></div>
-    <div class="stat-block"><div class="stat-number amber">6</div><div class="stat-label">Audit Finds</div></div>
-    <div class="stat-block"><div class="stat-number copper">6</div><div class="stat-label">Unfinished</div></div>
-    <div class="stat-block"><div class="stat-number green">16</div><div class="stat-label">Completed</div></div>
+    <div class="stat-block"><div class="stat-number red">4</div><div class="stat-label">Critical</div></div>
+    <div class="stat-block"><div class="stat-number amber">12</div><div class="stat-label">Open</div></div>
+    <div class="stat-block"><div class="stat-number copper">5</div><div class="stat-label">Your Action</div></div>
+    <div class="stat-block"><div class="stat-number green">32</div><div class="stat-label">Completed</div></div>
   </div>
 
   <div class="admin-content">
@@ -148,50 +148,32 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
     <!-- ═══════════════════════════════════════════════ -->
 
     <h1>Confirmed Open &mdash; From Original List</h1>
-    <p class="section-desc">Items that were already tracked and the March 3 audit confirmed are still unresolved.</p>
+    <p class="section-desc">Items that were already tracked and remain unresolved. Updated March 7, 2026.</p>
 
     <ul class="item-list">
 
       <li class="item-card">
-        <div class="item-title"><span class="badge badge-critical">Critical</span> ConvertKit API Key</div>
-        <div class="item-desc">Newsletter sync silently skips every cycle. Add <code>CONVERTKIT_API_KEY</code> to Supabase Edge Function secrets (Dashboard &rarr; Edge Functions &rarr; sync-convertkit &rarr; Secrets). Then create &ldquo;vantage-waitlist&rdquo; tag in ConvertKit, copy tag ID, add as <code>CK_TAG_VANTAGE_WAITLIST</code> in the same panel.</div>
-        <div class="source-tag">Original list &middot; Confirmed Mar 3</div>
-      </li>
-
-      <li class="item-card">
         <div class="item-title"><span class="badge badge-critical">Critical</span> Populate Content Hub DB</div>
-        <div class="item-desc">0 rows in Supabase <code>site_content_hub</code> table. Add sermon clips, podcast episodes, and teaching content to the Notion Content Hub database, then re-sync.</div>
+        <div class="item-desc">0 rows in Supabase <code>site_content_hub</code> table. Add sermon clips, podcast episodes, and teaching content to the Notion Content Hub database, then re-sync. articles.html is live but will show empty state until this is populated.</div>
         <div class="source-tag">Original list &middot; Confirmed 0 rows</div>
       </li>
 
       <li class="item-card">
         <div class="item-title"><span class="badge badge-open">Open</span> Populate Instagram DB</div>
-        <div class="item-desc">Only 1 test entry exists. Add real IG posts to the <a href="https://notion.so" target="_blank">LDW Site &mdash; Instagram</a> database. Display should be limited to the <strong>4 most recent posts</strong> (not 6).</div>
+        <div class="item-desc">Only 1 test entry exists. Add real IG posts to the LDW Site &mdash; Instagram database in Notion. Display is capped at <strong>4 most recent posts</strong>.</div>
         <div class="source-tag">Original list &middot; Confirmed 1 test entry</div>
       </li>
 
       <li class="item-card">
         <div class="item-title"><span class="badge badge-open">Open</span> Vantage Waitlist on vantage.html</div>
-        <div class="item-desc">Homepage waitlist is live but has 0 signups. The dedicated product page (<code>vantage.html</code>) needs its own prominent waitlist form. Currently no capture mechanism on the page people actually land on.</div>
-        <div class="source-tag">Original list &middot; Confirmed 0 signups</div>
-      </li>
-
-      <li class="item-card">
-        <div class="item-title"><span class="badge badge-ready">Ready to Deploy</span> AI-Friendly Content Hub</div>
-        <div class="item-desc"><code>llms.txt</code>, <code>robots.txt</code>, <code>sitemap.xml</code>, and <code>/content/</code> directory with 6 markdown files (about, speaking, books, consulting, principles, vantage). All built. All 404. Marked &ldquo;ready to deploy&rdquo; but never pushed to GitHub.</div>
-        <div class="source-tag">Original list &middot; Confirmed 404</div>
+        <div class="item-desc">Homepage waitlist is live. The dedicated product page (<code>vantage.html</code>) still has no capture mechanism. Visitors landing directly on Vantage have no way to sign up.</div>
+        <div class="source-tag">Original list &middot; No capture on vantage.html</div>
       </li>
 
       <li class="item-card">
         <div class="item-title"><span class="badge badge-critical">Critical</span> Mobile-Responsive Audit</div>
-        <div class="item-desc">Media page footer is broken, Vantage nav is completely empty, touch targets and spacing need a full pass. All 15 pages (7 public + 8 admin) need testing on iPhone and Android viewports.</div>
+        <div class="item-desc">All public pages need a full pass at 375px&ndash;430px viewports. Vantage nav is known broken. Touch targets and spacing need testing on iPhone and Android before any speaking planner or conference organizer sees the site on their phone.</div>
         <div class="source-tag">Original list &middot; Confirmed broken</div>
-      </li>
-
-      <li class="item-card">
-        <div class="item-title"><span class="badge badge-ready">Ready to Deploy</span> Upload Admin Subpages to GitHub</div>
-        <div class="item-desc">admin.html + 7 admin-*.html files ready in outputs. Three admin pages still return 404: <code>admin-quick-start.html</code>, <code>admin-notion.html</code>, <code>admin-changelog.html</code>.</div>
-        <div class="source-tag">Original list &middot; Confirmed 3 still 404</div>
       </li>
 
     </ul>
@@ -270,7 +252,7 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
 
       <li class="item-card">
         <div class="item-title"><span class="badge badge-open">Open</span> Duplicate Notion Photo Gallery DBs</div>
-        <div class="item-desc">4 copies of the Photo Gallery database floating in Notion. Only 1 is wired to the Edge Function. The other 3 are orphaned and creating confusion. Need to archive duplicates and confirm the correct one is syncing.</div>
+        <div class="item-desc">4 copies of the Photo Gallery database floating in Notion. Only 1 is wired to the Edge Function. The other 3 are orphaned and creating confusion. Archive duplicates and confirm the correct one is syncing.</div>
         <div class="source-tag">Conversation history &middot; 4 copies found</div>
       </li>
 
@@ -287,15 +269,21 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
       </li>
 
       <li class="item-card">
-        <div class="item-title"><span class="badge badge-open">Open</span> ConvertKit Welcome Sequence</div>
-        <div class="item-desc">5 emails were drafted for the welcome automation but were never confirmed as actually loaded into Kit. Sequence may not be firing at all for new subscribers.</div>
-        <div class="source-tag">Conversation history &middot; Unverified</div>
+        <div class="item-title"><span class="badge badge-open">Open</span> Build Speaking Inquiry Sequence in AC</div>
+        <div class="item-desc">Copy is fully written &mdash; see <code>speaking-inquiry-sequence-build.md</code>. 3 emails. Trigger: tag added = <code>speaking-inquiry</code>. Fires within 5 minutes of form submission. Not yet built in ActiveCampaign dashboard. Calendly link required before going live (Email 2).</div>
+        <div class="source-tag">Copy ready &middot; Build in AC dashboard when ready</div>
       </li>
 
       <li class="item-card">
-        <div class="item-title"><span class="badge badge-open">Open</span> Scorecard PDF Delivery</div>
-        <div class="item-desc">PDF was supposed to be hosted on Supabase Storage and linked in Email 1 of the welcome sequence. Storage bucket may not exist. Delivery chain unverified.</div>
-        <div class="source-tag">Conversation history &middot; Unverified</div>
+        <div class="item-title"><span class="badge badge-open">Open</span> Build Welcome Sequence in AC</div>
+        <div class="item-desc">Copy lives in Notion: <a href="https://www.notion.so/31ae09b9c15781bab3a6cedbdb0c9159" target="_blank">notion.so/31ae09b9c157&hellip;</a>. 5 emails, every 3 days. Trigger: added to List 3. Exclusion rule: do NOT fire for contacts tagged <code>speaking-inquiry</code>. Not yet built in AC dashboard.</div>
+        <div class="source-tag">Copy in Notion &middot; Build in AC dashboard when ready</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Open</span> Build Infrastructure Audit Sequence in AC</div>
+        <div class="item-desc">Copy is fully written &mdash; see <code>infrastructure-audit-sequence-build.md</code>. 5 emails, 12 days. Trigger: tag = <code>infrastructure-audit-download</code>. Ends routing to Cohort application or ENGAGE inquiry based on score. Not yet built in AC dashboard.</div>
+        <div class="source-tag">Copy ready &middot; Build in AC dashboard when ready</div>
       </li>
 
     </ul>
@@ -312,8 +300,15 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
     <ul class="item-list">
 
       <li class="item-card">
-        <div class="item-title"><span class="badge badge-open">Waiting</span> Substack URL</div>
-        <div class="item-desc">Provide the Substack publication URL (e.g., <code>yourname.substack.com</code>) so newsletter form can be rewired to subscribe directly there instead of ConvertKit.</div>
+        <div class="item-title"><span class="badge badge-open">Waiting</span> Deploy admin-rider-section.html</div>
+        <div class="item-desc">File is built and Drive links are wired. Upload <code>admin-rider-section.html</code> to GitHub repo (<code>lonnell-spec/lw-brand-site</code>) and insert before <code>&lt;div class="admin-section" id="speaking-inquiries"&gt;</code> in <code>admin-speaking.html</code>. Vercel auto-deploys on push.</div>
+        <div class="source-tag">Mar 7 session &middot; File ready in outputs</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Waiting</span> Set Up Calendly + Share Link</div>
+        <div class="item-desc">A booking link is required before the Speaking Inquiry AC sequence can go live. Email 2 routes planners to schedule a call. Create a Calendly event (20-min call), copy the link, and share it so it can be dropped into the sequence.</div>
+        <div class="source-tag">Blocks speaking inquiry sequence launch</div>
       </li>
 
       <li class="item-card">
@@ -328,7 +323,7 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
 
       <li class="item-card">
         <div class="item-title"><span class="badge badge-open">Waiting</span> Quote Graphics for Instagram</div>
-        <div class="item-desc">Pull quotes from social media strategy. Design branded quote cards in Canva (clean typography, LDW brand palette, 1080&times;1350). Batch and post as carousel or series.</div>
+        <div class="item-desc">Pull quotes from social media strategy. Design branded quote cards in Canva (LDW brand palette, 1080&times;1350). Batch and post as carousel or series.</div>
       </li>
 
     </ul>
@@ -345,20 +340,39 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
     <ul class="done-list">
       <li>Admin Portal with login gate</li>
       <li>Admin subpages built on-site (no Notion dependency)</li>
+      <li>Admin subpages deployed &mdash; admin-quick-start, admin-notion, admin-changelog live (v2.5, Mar 5)</li>
       <li>Nav bar consistency across all public pages</li>
       <li>Logo links to home on all pages</li>
       <li>Portal link in footer on all pages</li>
       <li>Instructions page for Jadyn</li>
       <li>Brand Identity page with full visual reference</li>
-      <li>Notion sync pipeline (Photos: 24, IG: 1 test, Content Hub: 0, YouTube: 1)</li>
+      <li>Notion sync pipeline (Photos: 24, IG: 1 test, Content Hub: 0, YouTube: live)</li>
       <li>Vantage nav with floating bar</li>
       <li>Vantage product page with coming soon messaging</li>
-      <li>Vantage waitlist on homepage (Supabase + ConvertKit)</li>
+      <li>Vantage waitlist on homepage (Supabase)</li>
       <li>Dead link cleanup (all footer socials verified, book buttons &rarr; Coming Soon)</li>
       <li>Brand assets exported (4 logos + 6 book covers)</li>
       <li>YouTube URL verified &mdash; <code>youtube.com/@AnyEveryOrNothingAtAll</code></li>
       <li>Threads handle verified &mdash; <code>threads.com/@lonnelldwilliams</code></li>
-      <li>Google Workspace for @ldw.build &mdash; custom email domain active, <code>lonnell@ldw.build</code> operational</li>
+      <li>Google Workspace for @ldw.build &mdash; <code>lonnell@ldw.build</code> operational</li>
+      <li>ConvertKit fully deprecated &mdash; removed from all triggers, edge function retired</li>
+      <li>ActiveCampaign migration &mdash; List 3 (Arise &amp; Build) active</li>
+      <li>sync-email edge function live &mdash; newsletter + speaking inquiries &rarr; AC</li>
+      <li>speaking_inquiries table &mdash; Supabase + RLS + AC sync trigger</li>
+      <li>newsletter_subscribers &mdash; first_name column + consulting_lead_magnet source added</li>
+      <li>Lead magnet gate live &mdash; consulting section of index.html, PDF delivery via Drive</li>
+      <li>Infrastructure Audit PDFs on Google Drive &mdash; static + fillable versions</li>
+      <li>articles.html live &mdash; Substack archive with RSS feed + tag filter</li>
+      <li>llms.txt live &mdash; AI crawler optimization (GEO)</li>
+      <li>robots.txt + sitemap.xml live</li>
+      <li>Meta descriptions &mdash; all 5 public pages</li>
+      <li>nav-patch.js sitewide &mdash; Articles link + Substack footer on every page</li>
+      <li>AC email copy &mdash; Speaking inquiry sequence (3 emails, build-ready)</li>
+      <li>AC email copy &mdash; Welcome series (5 emails, copy in Notion)</li>
+      <li>AC email copy &mdash; Infrastructure Audit sequence (5 emails, build-ready)</li>
+      <li>Brand Foundation document v1.0 &mdash; March 2026</li>
+      <li>Speaking rider PDF rebuilt &mdash; dark brand palette, Drive link wired</li>
+      <li>admin-rider-section.html built &mdash; rider admin block with Drive links ready to deploy</li>
     </ul>
 
     <hr>
@@ -394,7 +408,7 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
 
       <li class="item-card">
         <div class="item-title"><span class="badge badge-deferred">Phase 3+</span> Build Full Sales Funnel</div>
-        <div class="item-desc">Content &rarr; lead magnet &rarr; email sequence &rarr; offer. Scope TBD. Requires content hub populated, ConvertKit working, and Substack active first.</div>
+        <div class="item-desc">Content &rarr; lead magnet &rarr; email sequence &rarr; offer. Gate is live. AC sequences are written. Next gate: sequences built in AC dashboard + content hub populated. Full funnel closes when all three sequences are running.</div>
       </li>
 
       <li class="item-card">
@@ -419,7 +433,7 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
     <ul class="item-list">
       <li class="item-card">
         <div class="item-title"><span class="badge badge-done">Live</span> <a href="/admin-brand-assets.html">Logos &amp; Books &rarr;</a></div>
-        <div class="item-desc">4 logo variants, 6 book covers (3 AENA + 3 Zag), ConvertKit email banner, and usage notes. All exported and documented on their own page.</div>
+        <div class="item-desc">4 logo variants, 6 book covers (3 AENA + 3 Zag), email banner, and usage notes. All exported and documented on their own page.</div>
       </li>
     </ul>
 
@@ -455,8 +469,13 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
       </li>
 
       <li class="item-card">
-        <div class="item-title">ConvertKit vs. Substack</div>
-        <div class="item-desc">Newsletter was initially wired to ConvertKit. Direction shifted to Substack as the primary publication platform. Newsletter subscribe form now routes to Substack (buildwithldw). Supabase keeps a backup record. with Supabase keeping a backup record.</div>
+        <div class="item-title">ConvertKit &rarr; ActiveCampaign Migration</div>
+        <div class="item-desc">ConvertKit was fully deprecated in March 2026. All email automation now runs on ActiveCampaign (List 3 &mdash; Arise &amp; Build). sync-email edge function handles the Supabase &rarr; AC sync for both newsletter signups and speaking inquiries. Three sequences written and ready to build in AC dashboard. Substack remains the publication platform for the newsletter itself.</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title">Lead Magnet Gate Architecture</div>
+        <div class="item-desc">Gate lives inside the consulting section of index.html, positioned above the tier cards. Captures first_name + email into newsletter_subscribers (source: consulting_lead_magnet). PDF delivers via Google Drive link 800ms after success state renders. Drive file ID: <code>1xWvTHNH3pC58IwIDoqm43nFkArvv7O-e</code>. AC automation triggers on <code>infrastructure-audit-download</code> tag &mdash; sequence copy is written, not yet built in dashboard.</div>
       </li>
 
       <li class="item-card">
@@ -471,7 +490,7 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
   <!-- ── FOOTER ── -->
   <div class="admin-sub-footer">
     <a href="/admin.html">&larr; Portal</a>
-    <span>Last audit: March 3, 2026</span>
+    <span>Last audit: March 7, 2026</span>
     <a href="#">Top &uarr;</a>
   </div>
 </div>
