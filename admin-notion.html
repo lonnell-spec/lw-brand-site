@@ -105,6 +105,84 @@
   <div class="callout">
     <p><strong>Note on Instagram and YouTube:</strong> These no longer use Notion DBs. Instagram syncs via Zapier (on every new post). YouTube syncs directly from the YouTube API every 15 minutes. The Notion Instagram and YouTube databases were removed in March 2026 to reduce sync complexity.</p>
   </div>
+
+  <!-- ===== SOCIAL TEMPLATES ===== -->
+  <div style="margin-top:48px;">
+    <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--copper);margin-bottom:8px;">Brand Assets</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;margin-bottom:8px;">SOCIAL POST TEMPLATES</div>
+    <p style="font-weight:300;font-size:13px;color:var(--concrete);margin-bottom:28px;line-height:1.6;">Bold minimalism series — text only, 1080×1080. Four template directions. Full reference at <a href="/admin-social-templates.html" style="color:var(--copper);">admin-social-templates.html</a>.</p>
+
+    <style>
+      .notion-tpl-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:16px; }
+      .notion-tpl-item { display:flex; flex-direction:column; gap:8px; }
+      .notion-tpl-tag { font-family:'Space Mono',monospace; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--copper); }
+      .notion-tpl-note { font-size:11px; color:var(--concrete); font-weight:300; line-height:1.4; }
+      /* miniature post previews */
+      .mp { width:100%; aspect-ratio:1; position:relative; overflow:hidden; flex-shrink:0; }
+      .mp-a { background:#0D0D0D; }
+      .mp-a::after { content:''; position:absolute; top:0; left:57%; width:1px; height:100%; background:rgba(193,127,89,0.35); transform:skewX(-35deg); transform-origin:top left; }
+      .mp-a-t { position:absolute; bottom:20%; left:12%; font-family:'Bebas Neue',sans-serif; line-height:0.85; }
+      .mp-a-t span:nth-child(1) { display:block; font-size:32px; color:#F2F0EB; }
+      .mp-a-t span:nth-child(2) { display:block; font-size:32px; color:#C17F59; }
+      .mp-a-t span:nth-child(3) { display:block; font-size:32px; color:rgba(242,240,235,0.1); }
+      .mp-b { background:#F2F0EB; }
+      .mp-b-bar { position:absolute; top:0; left:0; right:0; height:18px; background:#0D0D0D; }
+      .mp-b-t { position:absolute; bottom:22%; left:10%; font-family:'Bebas Neue',sans-serif; line-height:0.82; }
+      .mp-b-t span:nth-child(1) { display:block; font-size:30px; color:#0D0D0D; }
+      .mp-b-t span:nth-child(2) { display:block; font-size:30px; color:#E85D3A; }
+      .mp-b-t span:nth-child(3) { display:block; font-size:30px; -webkit-text-stroke:1px #0D0D0D; color:transparent; }
+      .mp-c { background:#C17F59; }
+      .mp-c-t { position:absolute; bottom:20%; left:12%; font-family:'Bebas Neue',sans-serif; line-height:0.85; }
+      .mp-c-t span:nth-child(1) { display:block; font-size:30px; color:#0D0D0D; }
+      .mp-c-t span:nth-child(2) { display:block; font-size:30px; color:#F2F0EB; }
+      .mp-c-t span:nth-child(3) { display:block; font-size:30px; color:rgba(0,0,0,0.25); }
+      .mp-d { background:#0D0D0D; border-top:2px solid #C17F59; }
+      .mp-d-t { position:absolute; left:0; right:0; top:50%; transform:translateY(-50%); }
+      .mp-d-t span:nth-child(1) { display:block; font-family:'Bebas Neue',sans-serif; font-size:30px; color:#F2F0EB; padding-left:12%; }
+      .mp-d-t span:nth-child(2) { display:block; height:1px; background:rgba(193,127,89,0.3); margin:4px 12%; }
+      .mp-d-t span:nth-child(3) { display:block; font-family:'Bebas Neue',sans-serif; font-size:30px; color:#E85D3A; padding-left:12%; }
+      .mp-d-t span:nth-child(4) { display:block; font-family:'Bebas Neue',sans-serif; font-size:30px; -webkit-text-stroke:1px rgba(242,240,235,0.2); color:transparent; padding-left:12%; }
+    </style>
+
+    <div class="notion-tpl-grid">
+      <div class="notion-tpl-item">
+        <div class="mp mp-a">
+          <div class="mp-a-t"><span>INFORMED</span><span>LEADERS</span><span>DECIDE.</span></div>
+        </div>
+        <div class="notion-tpl-tag">A — Obsidian Break</div>
+        <div class="notion-tpl-note">Dark. Copper accent word. Weekly default.</div>
+      </div>
+      <div class="notion-tpl-item">
+        <div class="mp mp-b">
+          <div class="mp-b-bar"></div>
+          <div class="mp-b-t"><span>BUILD</span><span>WHAT</span><span>EXISTS.</span></div>
+        </div>
+        <div class="notion-tpl-tag">B — White Strike</div>
+        <div class="notion-tpl-note">Off-white base. Feed contrast post.</div>
+      </div>
+      <div class="notion-tpl-item">
+        <div class="mp mp-c">
+          <div class="mp-c-t"><span>ARISE</span><span>AND</span><span>BUILD.</span></div>
+        </div>
+        <div class="notion-tpl-tag">C — Copper Flood</div>
+        <div class="notion-tpl-note">Accent as environment. Max 1×/month.</div>
+      </div>
+      <div class="notion-tpl-item">
+        <div class="mp mp-d">
+          <div class="mp-d-t">
+            <span>VISION</span>
+            <span></span>
+            <span>WITHOUT</span>
+            <span>EXECUTION.</span>
+          </div>
+        </div>
+        <div class="notion-tpl-tag">D — Three-Line Break</div>
+        <div class="notion-tpl-note">Solid · Signal · Ghost. High impact.</div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--concrete);font-weight:300;">Full preview + HTML source → <a href="/admin-social-templates.html" style="color:var(--copper);">admin-social-templates.html</a></p>
+  </div>
+
 </div>
 
 </body>

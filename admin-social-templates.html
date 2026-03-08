@@ -534,6 +534,179 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
 
     <hr>
 
+    <!-- ===== BOLD MINIMALISM SERIES ===== -->
+    <h1>Bold Minimalism Series</h1>
+    <p>Four live post designs. Text-only. Built directly in brand palette. Copy the HTML source of any post into Canva's HTML embed or use as reference for production. 1080×1080 ratio.</p>
+
+    <style>
+      .bm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin: 28px 0 12px; }
+      .bm-post-wrap { display: flex; flex-direction: column; gap: 10px; }
+      .bm-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); }
+      .bm-desc { font-size: 12px; font-weight: 300; color: var(--concrete); line-height: 1.5; }
+      /* ── POST A ── */
+      .bm-post-a { width: 100%; aspect-ratio: 1; background: #0D0D0D; position: relative; overflow: hidden; }
+      .bm-post-a::before { content: ''; position: absolute; top:0;left:0;right:0;bottom:0; background: linear-gradient(135deg,transparent 0%,transparent 57%,rgba(193,127,89,0.08) 57%,rgba(193,127,89,0.08) 100%); pointer-events:none; }
+      .bm-post-a::after { content:''; position:absolute; top:0; left:57%; width:1px; height:100%; background:rgba(193,127,89,0.35); transform:skewX(-35deg); transform-origin:top left; }
+      .bm-a-inner { position:absolute; inset:0; padding:24px 28px; display:flex; flex-direction:column; justify-content:space-between; }
+      .bm-a-mark { font-family:'Space Mono',monospace; font-size:7px; letter-spacing:3px; text-transform:uppercase; color:rgba(193,127,89,0.6); }
+      .bm-a-headline { margin-top:-8px; }
+      .bm-a-line1 { display:block; font-family:'Bebas Neue',sans-serif; font-size:clamp(48px,12vw,80px); line-height:0.88; color:#F2F0EB; }
+      .bm-a-line2 { display:block; font-family:'Bebas Neue',sans-serif; font-size:clamp(48px,12vw,80px); line-height:0.88; color:#C17F59; }
+      .bm-a-line3 { display:block; font-family:'Bebas Neue',sans-serif; font-size:clamp(48px,12vw,80px); line-height:0.88; color:rgba(242,240,235,0.12); }
+      .bm-a-bottom { display:flex; justify-content:space-between; align-items:flex-end; }
+      .bm-a-sub { font-size:10px; font-weight:300; color:rgba(242,240,235,0.4); line-height:1.6; max-width:120px; }
+      .bm-a-brand { font-family:'Bebas Neue',sans-serif; font-size:9px; letter-spacing:4px; color:rgba(193,127,89,0.45); text-align:right; }
+      /* ── POST B ── */
+      .bm-post-b { width:100%; aspect-ratio:1; background:#F2F0EB; position:relative; overflow:hidden; }
+      .bm-b-topbar { position:absolute; top:0;left:0;right:0; height:36px; background:#0D0D0D; display:flex; align-items:center; justify-content:space-between; padding:0 20px; }
+      .bm-b-topbrand { font-family:'Space Mono',monospace; font-size:7px; letter-spacing:3px; color:rgba(242,240,235,0.45); text-transform:uppercase; }
+      .bm-b-toptag { font-family:'Space Mono',monospace; font-size:7px; letter-spacing:2px; color:#C17F59; text-transform:uppercase; }
+      .bm-b-inner { position:absolute; inset:0; padding:50px 24px 24px; display:flex; flex-direction:column; justify-content:space-between; }
+      .bm-b-wm { position:absolute; bottom:-16px; right:-8px; font-family:'Bebas Neue',sans-serif; font-size:160px; color:rgba(0,0,0,0.04); line-height:1; pointer-events:none; letter-spacing:-4px; }
+      .bm-b-small { font-family:'Space Mono',monospace; font-size:7px; letter-spacing:3px; text-transform:uppercase; color:#8A8A8A; margin-bottom:8px; }
+      .bm-b-big { font-family:'Bebas Neue',sans-serif; font-size:clamp(52px,13vw,90px); line-height:0.85; color:#0D0D0D; }
+      .bm-b-big span { color:#E85D3A; }
+      .bm-b-big .outline { -webkit-text-stroke:1.5px #0D0D0D; color:transparent; }
+      .bm-b-rule { width:36px; height:2px; background:#C17F59; margin:12px 0 10px; }
+      .bm-b-sub { font-size:11px; font-weight:300; color:#555; line-height:1.7; max-width:200px; }
+      .bm-b-bottom { display:flex; justify-content:space-between; align-items:flex-end; }
+      .bm-b-handle { font-family:'Space Mono',monospace; font-size:8px; letter-spacing:2px; color:#AAAAAA; text-transform:uppercase; }
+      .bm-b-dot { width:5px; height:5px; border-radius:50%; background:#C17F59; }
+      /* ── POST C ── */
+      .bm-post-c { width:100%; aspect-ratio:1; background:#C17F59; position:relative; overflow:hidden; }
+      .bm-c-tex { position:absolute; inset:0; background-image:repeating-linear-gradient(0deg,rgba(0,0,0,0.07) 0,rgba(0,0,0,0.07) 1px,transparent 1px,transparent 40px),repeating-linear-gradient(90deg,rgba(0,0,0,0.07) 0,rgba(0,0,0,0.07) 1px,transparent 1px,transparent 40px); pointer-events:none; }
+      .bm-c-ghost { position:absolute; bottom:-40px; left:-12px; font-family:'Bebas Neue',sans-serif; font-size:300px; line-height:1; letter-spacing:-8px; color:rgba(0,0,0,0.08); pointer-events:none; white-space:nowrap; }
+      .bm-c-inner { position:absolute; inset:0; padding:24px 28px; display:flex; flex-direction:column; justify-content:space-between; }
+      .bm-c-top { display:flex; justify-content:space-between; }
+      .bm-c-mark { font-family:'Space Mono',monospace; font-size:7px; letter-spacing:3px; text-transform:uppercase; color:rgba(0,0,0,0.4); }
+      .bm-c-num { font-family:'Bebas Neue',sans-serif; font-size:10px; letter-spacing:3px; color:rgba(0,0,0,0.25); }
+      .bm-c-headline { font-family:'Bebas Neue',sans-serif; font-size:clamp(52px,13vw,90px); line-height:0.85; letter-spacing:-1px; color:#0D0D0D; margin:auto 0; }
+      .bm-c-headline .inv { color:#F2F0EB; display:block; }
+      .bm-c-rule { width:32px; height:2px; background:rgba(0,0,0,0.3); margin:12px 0 10px; }
+      .bm-c-sub { font-size:11px; font-weight:300; color:rgba(0,0,0,0.5); line-height:1.65; max-width:200px; }
+      .bm-c-bottom { display:flex; justify-content:space-between; align-items:flex-end; }
+      .bm-c-handle { font-family:'Space Mono',monospace; font-size:7px; letter-spacing:2px; text-transform:uppercase; color:rgba(0,0,0,0.35); }
+      .bm-c-badge { background:#0D0D0D; color:#C17F59; font-family:'Space Mono',monospace; font-size:7px; letter-spacing:2px; text-transform:uppercase; padding:4px 8px; }
+      /* ── POST D ── */
+      .bm-post-d { width:100%; aspect-ratio:1; background:#0D0D0D; position:relative; overflow:hidden; }
+      .bm-d-border { position:absolute; top:0;left:0;right:0; height:3px; background:#C17F59; }
+      .bm-d-bleed { position:absolute; top:-40px; left:-20px; font-family:'Bebas Neue',sans-serif; font-size:160px; line-height:0.82; letter-spacing:-4px; color:rgba(242,240,235,0.05); pointer-events:none; white-space:nowrap; }
+      .bm-d-inner { position:absolute; inset:0; padding:28px; display:flex; flex-direction:column; justify-content:space-between; }
+      .bm-d-top { display:flex; justify-content:space-between; }
+      .bm-d-label { font-family:'Space Mono',monospace; font-size:7px; letter-spacing:3px; text-transform:uppercase; color:rgba(193,127,89,0.5); }
+      .bm-d-issue { font-family:'Space Mono',monospace; font-size:7px; letter-spacing:2px; color:rgba(242,240,235,0.15); }
+      .bm-d-main { position:absolute; left:0;right:0; top:50%; transform:translateY(-52%); }
+      .bm-d-w1 { display:block; font-family:'Bebas Neue',sans-serif; font-size:clamp(56px,14vw,108px); line-height:0.82; color:#F2F0EB; padding-left:28px; }
+      .bm-d-w2 { display:block; font-family:'Bebas Neue',sans-serif; font-size:clamp(56px,14vw,108px); line-height:0.82; color:#E85D3A; padding-left:28px; }
+      .bm-d-cut { display:block; height:2px; background:rgba(193,127,89,0.2); margin:8px 28px; }
+      .bm-d-w3 { display:block; font-family:'Bebas Neue',sans-serif; font-size:clamp(56px,14vw,108px); line-height:0.82; -webkit-text-stroke:1.5px rgba(242,240,235,0.18); color:transparent; padding-left:28px; }
+      .bm-d-bottom { display:flex; justify-content:space-between; align-items:flex-end; }
+      .bm-d-cap { font-size:10px; font-weight:300; color:rgba(242,240,235,0.3); line-height:1.6; max-width:160px; }
+      .bm-d-mark { font-family:'Space Mono',monospace; font-size:7px; letter-spacing:2px; text-transform:uppercase; color:rgba(193,127,89,0.35); text-align:right; }
+    </style>
+
+    <div class="bm-grid">
+
+      <!-- A -->
+      <div class="bm-post-wrap">
+        <div class="bm-label">A — Obsidian Break</div>
+        <div class="bm-post-a">
+          <div class="bm-a-inner">
+            <div class="bm-a-mark">LDW · Arise &amp; Build</div>
+            <div class="bm-a-headline">
+              <span class="bm-a-line1">INFORMED</span>
+              <span class="bm-a-line2">LEADERS</span>
+              <span class="bm-a-line3">DECIDE.</span>
+            </div>
+            <div class="bm-a-bottom">
+              <p class="bm-a-sub">That's not a lack of faith. It's stewardship.</p>
+              <span class="bm-a-brand">LDW<br>LONNELL<br>WILLIAMS</span>
+            </div>
+          </div>
+        </div>
+        <div class="bm-desc">Dark. Copper accent word. Diagonal rule. Default weekly use.</div>
+      </div>
+
+      <!-- B -->
+      <div class="bm-post-wrap">
+        <div class="bm-label">B — White Strike</div>
+        <div class="bm-post-b">
+          <div class="bm-b-topbar">
+            <span class="bm-b-topbrand">LDW · Lonnell Williams</span>
+            <span class="bm-b-toptag">Arise &amp; Build</span>
+          </div>
+          <div class="bm-b-wm">01</div>
+          <div class="bm-b-inner">
+            <div>
+              <div class="bm-b-small">The Builder's Posture</div>
+              <div class="bm-b-big">BUILD<br><span>WHAT</span><br><span class="outline">EXISTS.</span></div>
+              <div class="bm-b-rule"></div>
+              <p class="bm-b-sub">Most organizations don't know they're breaking until they already are.</p>
+            </div>
+            <div class="bm-b-bottom">
+              <span class="bm-b-handle">@ldw.build</span>
+              <div class="bm-b-dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="bm-desc">Off-white base. Black bar. Signal + outline type. Feed contrast.</div>
+      </div>
+
+      <!-- C -->
+      <div class="bm-post-wrap">
+        <div class="bm-label">C — Copper Flood</div>
+        <div class="bm-post-c">
+          <div class="bm-c-tex"></div>
+          <div class="bm-c-ghost">BUILD</div>
+          <div class="bm-c-inner">
+            <div class="bm-c-top">
+              <span class="bm-c-mark">LDW · Arise &amp; Build</span>
+              <span class="bm-c-num">03</span>
+            </div>
+            <div>
+              <div class="bm-c-headline">ARISE<br><span class="inv">AND</span>BUILD.</div>
+              <div class="bm-c-rule"></div>
+              <p class="bm-c-sub">Two verbs. One sentence. The only instruction that matters.</p>
+            </div>
+            <div class="bm-c-bottom">
+              <span class="bm-c-handle">@ldw.build</span>
+              <span class="bm-c-badge">Nehemiah 2:20</span>
+            </div>
+          </div>
+        </div>
+        <div class="bm-desc">Copper is the environment. Inverts every expectation. Use sparingly — max 1×/month.</div>
+      </div>
+
+      <!-- D -->
+      <div class="bm-post-wrap">
+        <div class="bm-label">D — Three-Line Break</div>
+        <div class="bm-post-d">
+          <div class="bm-d-border"></div>
+          <div class="bm-d-bleed">BUILD WHAT DOESN'T EXIST</div>
+          <div class="bm-d-inner">
+            <div class="bm-d-top">
+              <span class="bm-d-label">LDW · Lonnell Williams</span>
+              <span class="bm-d-issue">No. 04</span>
+            </div>
+            <div class="bm-d-main">
+              <span class="bm-d-w1">VISION</span>
+              <span class="bm-d-cut"></span>
+              <span class="bm-d-w2">WITHOUT</span>
+              <span class="bm-d-w3">EXECUTION.</span>
+            </div>
+            <div class="bm-d-bottom">
+              <p class="bm-d-cap">It's not a motivation problem. It's an infrastructure problem.</p>
+              <span class="bm-d-mark">ldw.build</span>
+            </div>
+          </div>
+        </div>
+        <div class="bm-desc">Solid · Signal · Ghost. Three typographic weights. One frame. High-impact statement posts.</div>
+      </div>
+
+    </div>
+
+    <hr>
+
     <h1>Standalone Strategy Document</h1>
     <p>The full visual strategy with larger mockups is available as a standalone HTML file: <a href="/lw-bold-type-templates.html" target="_blank">lw-bold-type-templates.html</a></p>
 
