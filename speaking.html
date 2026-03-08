@@ -1207,14 +1207,17 @@
           <label for="bk-format">Format</label>
           <select id="bk-format">
             <option value="">Select format...</option>
-            <option value="Leadership Session">Leadership Session</option>
-            <option value="Workshop">Workshop</option>
-            <option value="Intensive">Intensive</option>
-            <option value="Staff Meeting">Staff Meeting</option>
-            <option value="Retreat">Retreat</option>
             <option value="Sunday Gathering">Sunday Gathering</option>
+            <option value="Conference / Keynote">Conference / Keynote</option>
+            <option value="Leadership Session / Intensive">Leadership Session / Intensive</option>
             <option value="Other">Other / Not Sure</option>
           </select>
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="form-field">
+          <label for="bk-event-name">Event Name <span style="color:var(--concrete);font-weight:300;">(optional)</span></label>
+          <input type="text" id="bk-event-name" placeholder="e.g. Vision Sunday, Annual Leadership Summit, Regional Conference">
         </div>
       </div>
       <div class="form-row">
@@ -1342,6 +1345,7 @@
       var org      = (document.getElementById('bk-org').value      || '').trim();
       var format   = (document.getElementById('bk-format').value   || '').trim();
       var date     = (document.getElementById('bk-date').value     || '').trim();
+      var eventName = (document.getElementById('bk-event-name') ? document.getElementById('bk-event-name').value : '').trim();
       var audience = (document.getElementById('bk-audience').value || '').trim();
       var details  = (document.getElementById('bk-details').value  || '').trim();
 
@@ -1377,6 +1381,8 @@
             email:        email,
             organization: org || null,
             service_type: 'Speaking',
+            format:       format || null,
+            event_name:   eventName || null,
             source:       'speaking_page',
             message:      parts.join(' | ')
           })

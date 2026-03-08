@@ -52,6 +52,23 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
   .admin-content { padding: 24px 24px 60px; }
   .admin-sub-footer { padding: 16px 24px; }
 }
+
+.decision-panel { margin-top: 10px; padding: 14px 16px; background: rgba(193,127,89,0.05); border: 1px solid rgba(193,127,89,0.2); border-top: none; }
+.decision-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); margin-bottom: 10px; }
+.decision-btns  { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn-accept-rider { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; background:var(--copper); color:var(--obsidian); border:none; padding:9px 16px; cursor:pointer; transition:opacity 0.2s; }
+.btn-accept-rider:hover { opacity:0.85; }
+.btn-accept-call  { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; background:transparent; color:var(--copper); border:1px solid rgba(193,127,89,0.5); padding:9px 16px; cursor:pointer; transition:opacity 0.2s; }
+.btn-accept-call:hover  { opacity:0.7; }
+.btn-decline      { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; background:transparent; color:var(--concrete); border:1px solid rgba(138,138,138,0.3); padding:9px 16px; cursor:pointer; transition:opacity 0.2s; }
+.btn-decline:hover      { color:var(--signal); border-color:rgba(232,93,58,0.4); }
+.status-badge { display:inline-block; font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; padding:6px 12px; }
+.status-accept-rider { background:rgba(193,127,89,0.12); color:var(--copper); border:1px solid rgba(193,127,89,0.3); }
+.status-accept-call  { background:rgba(193,127,89,0.06); color:var(--copper); border:1px solid rgba(193,127,89,0.2); }
+.status-declined     { background:rgba(138,138,138,0.06); color:var(--concrete); border:1px solid rgba(138,138,138,0.2); }
+.status-pending      { background:rgba(242,240,235,0.04); color:var(--concrete); border:1px solid rgba(242,240,235,0.1); }
+.scope-note { font-family:'Space Mono',monospace; font-size:9px; color:var(--concrete); letter-spacing:1px; font-style:italic; }
+
 </style>
 </head>
 <body>
@@ -81,11 +98,11 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
         <table class="inq-table">
           <thead>
             <tr>
-              <th>Name</th><th>Email</th><th>Organization</th><th>Event</th><th>Event Date</th><th>Submitted</th>
+              <th>Name</th><th>Email</th><th>Organization</th><th>Format</th><th>Event Name</th><th>Event Date</th><th>Submitted</th><th>Status</th>
             </tr>
           </thead>
           <tbody id="inq-tbody">
-            <tr><td colspan="6" class="inq-empty">Loading inquiries...</td></tr>
+            <tr><td colspan="8" class="inq-empty">Loading inquiries...</td></tr>
           </tbody>
         </table>
       </div>
@@ -100,8 +117,8 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
           <h2 style="font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:2px; color:var(--off-white); margin:0;">SPEAKING RIDER</h2>
         </div>
         <div style="display:flex; gap:12px;">
-          <a href="https://drive.google.com/file/d/1sM4VmXNyBIhssFdfZZd0gInEOomdKVRY/view?usp=drivesdk" target="_blank" rel="noopener" style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#0D0D0D; background:var(--copper); padding:10px 18px; text-decoration:none;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">OPEN PDF</a>
-          <a href="https://drive.google.com/file/d/1sM4VmXNyBIhssFdfZZd0gInEOomdKVRY/view?usp=drivesdk" download style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--copper); background:transparent; border:1px solid rgba(193,127,89,0.4); padding:10px 18px; text-decoration:none;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">DOWNLOAD</a>
+          <a href="https://drive.google.com/file/d/1AqPJV52xWeVv_ExIlEKf92ghWIacBwCs/view?usp=sharing" target="_blank" rel="noopener" style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#0D0D0D; background:var(--copper); padding:10px 18px; text-decoration:none;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">OPEN PDF</a>
+          <a href="https://drive.google.com/file/d/1AqPJV52xWeVv_ExIlEKf92ghWIacBwCs/view?usp=sharing" download style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--copper); background:transparent; border:1px solid rgba(193,127,89,0.4); padding:10px 18px; text-decoration:none;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">DOWNLOAD</a>
         </div>
       </div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
@@ -187,28 +204,122 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
 
 <script>
 if (sessionStorage.getItem('ldw_admin') !== 'true') { window.location.href = '/admin.html'; }
+
+const SUPA_URL    = 'https://riqdcirsmckubkdfbtoj.supabase.co';
+const SUPA_KEY    = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM';
+const ACTION_TOKEN = 'ldw-admin-action-2026';
+
+const IN_SCOPE = ['Sunday Gathering', 'Conference / Keynote', 'Leadership Session / Intensive'];
+
+function statusBadge(status) {
+  const map = {
+    accept_rider: ['RIDER SENT',       'status-accept-rider'],
+    accept_call:  ['CALL REQUESTED',   'status-accept-call'],
+    declined:     ['DECLINED',         'status-declined'],
+    pending:      ['PENDING DECISION', 'status-pending'],
+  };
+  const [label, cls] = map[status] || ['PENDING', 'status-pending'];
+  return `<span class="status-badge ${cls}">${label}</span>`;
+}
+
+function decisionPanel(inq) {
+  const format = inq.format || inq.service_type || '';
+  const inScope = IN_SCOPE.some(f => format.includes(f));
+
+  if (!inScope) {
+    return `<div class="decision-panel"><span class="scope-note">Workflow coming — separate rider for this format</span></div>`;
+  }
+
+  if (inq.status && inq.status !== 'pending') {
+    return `<div class="decision-panel">${statusBadge(inq.status)}</div>`;
+  }
+
+  const isSunday = format.includes('Sunday Gathering');
+
+  const callBtn = isSunday ? '' :
+    `<button class="btn-accept-call"  onclick="triggerAction('${inq.id}', 'accept_call',  this)">&#128197; Accept &amp; Request Call</button>`;
+
+  return `
+    <div class="decision-panel" id="panel-${inq.id}">
+      <div class="decision-label">&#9670; Decision Required</div>
+      <div class="decision-btns">
+        <button class="btn-accept-rider" onclick="triggerAction('${inq.id}', 'accept_rider', this)">&#10003; Accept &amp; Send Rider</button>
+        ${callBtn}
+        <button class="btn-decline"      onclick="triggerAction('${inq.id}', 'declined',     this)">&#10005; Decline</button>
+      </div>
+    </div>`;
+}
+
+async function triggerAction(inquiryId, action, btn) {
+  const labels = {
+    accept_rider: 'SENDING RIDER...',
+    accept_call:  'REQUESTING CALL...',
+    declined:     'DECLINING...',
+  };
+  const panel = document.getElementById('panel-' + inquiryId);
+  if (panel) {
+    panel.innerHTML = `<div class="decision-label" style="color:var(--concrete);">${labels[action] || 'PROCESSING...'}</div>`;
+  }
+
+  try {
+    const res = await fetch(
+      SUPA_URL + '/functions/v1/speaking-action',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type':  'application/json',
+          'Authorization': 'Bearer ' + SUPA_KEY,
+        },
+        body: JSON.stringify({ inquiry_id: inquiryId, action, token: ACTION_TOKEN }),
+      }
+    );
+    const data = await res.json();
+
+    if (data.success) {
+      if (panel) panel.innerHTML = statusBadge(action);
+    } else {
+      if (panel) panel.innerHTML = `<span style="font-family:'Space Mono',monospace;font-size:9px;color:var(--signal);">ERROR: ${data.error || 'Unknown error'}</span>`;
+    }
+  } catch (err) {
+    if (panel) panel.innerHTML = `<span style="font-family:'Space Mono',monospace;font-size:9px;color:var(--signal);">NETWORK ERROR</span>`;
+    console.error('triggerAction error:', err);
+  }
+}
+
 (async function() {
-  const URL = 'https://riqdcirsmckubkdfbtoj.supabase.co';
-  const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM';
+  const URL = SUPA_URL;
+  const KEY = SUPA_KEY;
   try {
     const res = await fetch(`${URL}/rest/v1/speaking_inquiries?select=*&order=created_at.desc`, { headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY } });
     const data = await res.json();
     const tbody = document.getElementById('inq-tbody');
     const count = document.getElementById('inq-count');
     if (!data || data.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="6" class="inq-empty">NO INQUIRIES YET</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="8" class="inq-empty">NO INQUIRIES YET</td></tr>';
       count.textContent = '0 INQUIRIES';
       return;
     }
     count.textContent = data.length + ' INQUIR' + (data.length === 1 ? 'Y' : 'IES');
     tbody.innerHTML = data.map(function(r) {
-      var d = r.created_at ? new Date(r.created_at).toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'}) : '-';
+      var d    = r.created_at ? new Date(r.created_at).toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'}) : '-';
       var name = (r.first_name || '') + ' ' + (r.last_name || '');
       if (!name.trim()) name = r.name || '-';
-      return '<tr><td>' + name.trim() + '</td><td><a href="mailto:' + (r.email||'') + '" style="color:var(--copper);text-decoration:none;">' + (r.email||'-') + '</a></td><td>' + (r.organization||r.church||'-') + '</td><td>' + (r.event_name||r.event||r.topic||'-') + '</td><td>' + (r.event_date||r.date||'-') + '</td><td>' + d + '</td></tr>';
+      var format = r.format || r.service_type || '-';
+      var evName = r.event_name || r.event || r.topic || '-';
+      return '<tr>' +
+        '<td>' + name.trim() + '</td>' +
+        '<td><a href="mailto:' + (r.email||'') + '" style="color:var(--copper);text-decoration:none;">' + (r.email||'-') + '</a></td>' +
+        '<td>' + (r.organization||r.church||'-') + '</td>' +
+        '<td>' + format + '</td>' +
+        '<td>' + evName + '</td>' +
+        '<td>' + (r.event_date||r.date||'-') + '</td>' +
+        '<td>' + d + '</td>' +
+        '<td>' + statusBadge(r.status || 'pending') + '</td>' +
+        '</tr>' +
+        '<tr><td colspan="8" style="padding:0 0 8px 0; border-bottom: 1px solid rgba(242,240,235,0.05);">' + decisionPanel(r) + '</td></tr>';
     }).join('');
   } catch(e) {
-    document.getElementById('inq-tbody').innerHTML = '<tr><td colspan="6" class="inq-empty">ERROR LOADING INQUIRIES</td></tr>';
+    document.getElementById('inq-tbody').innerHTML = '<tr><td colspan="8" class="inq-empty">ERROR LOADING INQUIRIES</td></tr>';
     document.getElementById('inq-count').textContent = 'ERROR';
   }
 })();
