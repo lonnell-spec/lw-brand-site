@@ -216,11 +216,11 @@ const IN_SCOPE = ['Sunday Gathering', 'Conference / Keynote', 'Leadership Sessio
 
 function statusBadge(status) {
   const map = {
-    accept_rider:  ['RIDER SENT',       'status-accept-rider'],
-    accept_call:   ['CALL REQUESTED',   'status-accept-call'],
-    declined:      ['DECLINED',         'status-declined'],
-    pending:       ['PENDING DECISION', 'status-pending'],
-    followup_sent: ['FOLLOW-UP SENT',   'status-followup'],
+    accepted:       ['ACCEPTED — RIDER SENT', 'status-accept-rider'],
+    call_requested: ['CALL REQUESTED',         'status-accept-call'],
+    declined:       ['DECLINED',               'status-declined'],
+    pending:        ['PENDING DECISION',       'status-pending'],
+    new:            ['PENDING DECISION',       'status-pending'],
   };
   const [label, cls] = map[status] || ['PENDING', 'status-pending'];
   return `<span class="status-badge ${cls}">${label}</span>`;
@@ -234,38 +234,32 @@ function decisionPanel(inq) {
     return `<div class="decision-panel"><span class="scope-note">Workflow coming — separate rider for this format</span></div>`;
   }
 
-  // Terminal — decision made, no more buttons
-  const terminal = ['accept_rider', 'accept_call', 'declined'];
+  // Terminal — locked
+  const terminal = ['accepted', 'declined'];
   if (terminal.includes(inq.status)) {
     return `<div class="decision-panel">${statusBadge(inq.status)}</div>`;
   }
 
-  const isSunday = format.includes('Sunday Gathering');
-  const callBtn = isSunday ? '' :
-    `<button class="btn-accept-call" onclick="triggerAction('${inq.id}', 'accept_call', this)">&#128197; Accept &amp; Request Call</button>`;
-
-  // Follow-up already sent — badge + accept/decline only
-  if (inq.status === 'followup_sent') {
+  // Call already requested — show badge, offer Accept or Decline (no second call request)
+  if (inq.status === 'call_requested') {
     return `
       <div class="decision-panel" id="panel-${inq.id}">
-        <div style="margin-bottom:10px;">${statusBadge('followup_sent')}</div>
-        <div class="decision-label">&#9670; Final Decision</div>
+        <div style="margin-bottom:10px;">${statusBadge('call_requested')}</div>
+        <div class="decision-label">&#9670; Post-Call Decision</div>
         <div class="decision-btns">
-          <button class="btn-accept-rider" onclick="triggerAction('${inq.id}', 'accept_rider', this)">&#10003; Accept &amp; Send Rider</button>
-          ${callBtn}
+          <button class="btn-accept-rider" onclick="triggerAction('${inq.id}', 'accept', this)">&#10003; Accept &amp; Send Rider</button>
           <button class="btn-decline" onclick="triggerAction('${inq.id}', 'declined', this)">&#10005; Decline</button>
         </div>
       </div>`;
   }
 
-  // Default — pending / new: all options including Follow Up
+  // Default — new / pending: all three options
   return `
     <div class="decision-panel" id="panel-${inq.id}">
       <div class="decision-label">&#9670; Decision Required</div>
       <div class="decision-btns">
-        <button class="btn-accept-rider" onclick="triggerAction('${inq.id}', 'accept_rider', this)">&#10003; Accept &amp; Send Rider</button>
-        ${callBtn}
-        <button class="btn-followup" onclick="triggerAction('${inq.id}', 'followup', this)">&#8594; Follow Up</button>
+        <button class="btn-accept-rider" onclick="triggerAction('${inq.id}', 'accept', this)">&#10003; Accept &amp; Send Rider</button>
+        <button class="btn-followup" onclick="triggerAction('${inq.id}', 'request_call', this)">&#128197; Request Call</button>
         <button class="btn-decline" onclick="triggerAction('${inq.id}', 'declined', this)">&#10005; Decline</button>
       </div>
     </div>`;
@@ -273,10 +267,9 @@ function decisionPanel(inq) {
 
 async function triggerAction(inquiryId, action, btn) {
   const labels = {
-    accept_rider: 'SENDING RIDER...',
-    accept_call:  'REQUESTING CALL...',
-    declined:     'DECLINING...',
-    followup:     'SENDING FOLLOW-UP...',
+    accept:        'SENDING RIDER...',
+    request_call:  'REQUESTING CALL...',
+    declined:      'DECLINING...',
   };
   const panel = document.getElementById('panel-' + inquiryId);
   if (panel) {
@@ -298,11 +291,13 @@ async function triggerAction(inquiryId, action, btn) {
     const data = await res.json();
 
     if (data.success) {
-      if (action === 'followup') {
-        // Reload the page so followup_sent state renders with accept/decline buttons still live
+      if (action === 'request_call') {
+        // Reload so call_requested state renders with post-call buttons
         location.reload();
       } else {
-        if (panel) panel.innerHTML = statusBadge(action);
+        // accepted / declined — show terminal badge
+        const badgeMap = { accept: 'accepted', declined: 'declined' };
+        if (panel) panel.innerHTML = statusBadge(badgeMap[action] || action);
       }
     } else {
       if (panel) panel.innerHTML = `<span style="font-family:'Space Mono',monospace;font-size:9px;color:var(--signal);">ERROR: ${data.error || 'Unknown error'}</span>`;
