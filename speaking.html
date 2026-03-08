@@ -351,6 +351,100 @@
     color: var(--copper);
   }
 
+  /* ===== REEL CLIPS ===== */
+  .reel-clips-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-top: 56px;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  .reel-clips-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .reel-clip {
+    display: block;
+    text-decoration: none;
+    background: var(--warm-black);
+    border: 1px solid rgba(193,127,89,0.15);
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .reel-clip:hover {
+    border-color: rgba(193,127,89,0.45);
+    transform: translateY(-2px);
+  }
+
+  .reel-clip-thumb {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: #111;
+  }
+
+  .reel-clip-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+  }
+
+  .reel-clip:hover .reel-clip-thumb img { transform: scale(1.03); }
+
+  .reel-clip-play {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px; height: 48px;
+    background: rgba(193,127,89,0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--obsidian);
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .reel-clip:hover .reel-clip-play {
+    background: var(--copper);
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  .reel-clip-meta {
+    padding: 16px 18px 18px;
+    text-align: left;
+  }
+
+  .reel-clip-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 6px;
+  }
+
+  .reel-clip-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    color: var(--off-white);
+    line-height: 1.15;
+  }
+
+  @media (max-width: 640px) {
+    .reel-clips-grid { grid-template-columns: 1fr; }
+  }
+
   /* ===== TOPICS ===== */
   .topics {
     padding: 120px 60px;
@@ -936,7 +1030,6 @@
     <a href="/books.html">Books</a>
     <a href="/#consulting">Work With Me</a>
     <a href="/media.html">Media</a>
-    <a href="/#newsletter">Newsletter</a>
     <a href="/articles.html">Articles</a>
     <a href="/vantage.html">Vantage</a>
   </div>
@@ -1005,6 +1098,8 @@
   <div class="sizzle-inner">
     <div class="sizzle-label">See It Before You Book It</div>
     <div class="sizzle-title">THE REEL<span class="accent">.</span></div>
+
+    <!-- Primary video (existing reel) -->
     <div class="video-container" id="videoContainer">
       <video id="sizzleVideo" preload="metadata" playsinline 
              poster="https://riqdcirsmckubkdfbtoj.supabase.co/storage/v1/object/public/site-images/DSCF8179.jpeg">
@@ -1017,6 +1112,36 @@
         <div class="play-label">Play Reel</div>
       </div>
     </div>
+
+    <!-- Sermon clips grid -->
+    <div class="reel-clips-label">SERMONS &amp; MESSAGES</div>
+    <div class="reel-clips-grid">
+      <a href="https://youtu.be/rNdBF7PJVZE" target="_blank" rel="noopener" class="reel-clip">
+        <div class="reel-clip-thumb">
+          <img src="https://img.youtube.com/vi/rNdBF7PJVZE/maxresdefault.jpg" alt="Arise and Build — Leadership Series" loading="lazy">
+          <div class="reel-clip-play">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21"/></svg>
+          </div>
+        </div>
+        <div class="reel-clip-meta">
+          <div class="reel-clip-tag">Message</div>
+          <div class="reel-clip-title">ARISE AND BUILD — LEADERSHIP SERIES</div>
+        </div>
+      </a>
+      <a href="https://youtu.be/_WINdukMuxw" target="_blank" rel="noopener" class="reel-clip">
+        <div class="reel-clip-thumb">
+          <img src="https://img.youtube.com/vi/_WINdukMuxw/maxresdefault.jpg" alt="The Zag Principle" loading="lazy">
+          <div class="reel-clip-play">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21"/></svg>
+          </div>
+        </div>
+        <div class="reel-clip-meta">
+          <div class="reel-clip-tag">Message</div>
+          <div class="reel-clip-title">THE ZAG PRINCIPLE</div>
+        </div>
+      </a>
+    </div>
+
   </div>
 </section>
 

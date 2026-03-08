@@ -1871,7 +1871,6 @@
     <a href="/books.html">Books</a>
     <a href="#consulting">Work With Me</a>
     <a href="/media.html">Media</a>
-    <a href="#newsletter">Newsletter</a>
     <a href="/articles.html">Articles</a>
     <a href="/vantage.html">Vantage</a>
   </div>
@@ -2351,23 +2350,24 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
       <div class="section-title" style="color:var(--off-white);">WATCH<span class="accent">.</span> LISTEN<span class="copper">.</span></div>
 
       <div class="content-filters">
-        <button class="filter-pill active">All</button>
-        <button class="filter-pill">Messages</button>
-        <button class="filter-pill">Leadership</button>
-        <button class="filter-pill">Behind the Build</button>
+        <button class="filter-pill active" data-filter="all">All</button>
+        <button class="filter-pill" data-filter="messages">Messages</button>
+        <button class="filter-pill" data-filter="leadership">Leadership</button>
+        <button class="filter-pill" data-filter="behind-the-build">Behind the Build</button>
+        <button class="filter-pill" data-filter="zag-moment">Zag Moment</button>
       </div>
 
       <div class="masonry-grid" id="masonry-content-grid">
-        <div class="masonry-item featured">
+        <div class="masonry-item featured" data-category="messages" data-yt="rNdBF7PJVZE">
           <span class="latest-badge">Latest</span>
-          <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #2a2420 100%);"></div>
+          <div class="item-bg" style="background-image:url('https://img.youtube.com/vi/rNdBF7PJVZE/maxresdefault.jpg'); background-size:cover; background-position:center;"></div>
           <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
           <div class="item-overlay">
             <div class="item-category">Message</div>
             <div class="item-title">ARISE AND BUILD &mdash; LEADERSHIP SERIES</div>
           </div>
         </div>
-        <div class="masonry-item">
+        <div class="masonry-item" data-category="leadership">
           <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #221e1a 100%);"></div>
           <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
           <div class="item-overlay">
@@ -2375,7 +2375,7 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
             <div class="item-title">SCALING UNDER PRESSURE</div>
           </div>
         </div>
-        <div class="masonry-item">
+        <div class="masonry-item" data-category="behind-the-build">
           <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #1e1a16 100%);"></div>
           <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
           <div class="item-overlay">
@@ -2383,15 +2383,15 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
             <div class="item-title">THE AI CHIEF OF STAFF</div>
           </div>
         </div>
-        <div class="masonry-item">
-          <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #2a2018 100%);"></div>
+        <div class="masonry-item" data-category="messages" data-yt="_WINdukMuxw">
+          <div class="item-bg" style="background-image:url('https://img.youtube.com/vi/_WINdukMuxw/maxresdefault.jpg'); background-size:cover; background-position:center;"></div>
           <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
           <div class="item-overlay">
             <div class="item-category">Message</div>
             <div class="item-title">THE ZAG PRINCIPLE</div>
           </div>
         </div>
-        <div class="masonry-item">
+        <div class="masonry-item" data-category="leadership">
           <div class="item-bg" style="background:linear-gradient(135deg, #1a1714 0%, #201c18 100%);"></div>
           <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
           <div class="item-overlay">
@@ -3433,10 +3433,37 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
 
 
   <script>
+  // ── Content filter + YouTube click-through ──────────────────────────────
   document.querySelectorAll('.filter-pill').forEach(function(pill) {
     pill.addEventListener('click', function() {
       document.querySelectorAll('.filter-pill').forEach(function(p) { p.classList.remove('active'); });
       pill.classList.add('active');
+
+      var filter = pill.getAttribute('data-filter');
+      var items = document.querySelectorAll('#masonry-content-grid .masonry-item');
+
+      items.forEach(function(item) {
+        if (filter === 'all') {
+          item.style.display = '';
+        } else {
+          var cat = (item.getAttribute('data-category') || '').toLowerCase();
+          item.style.display = (cat === filter) ? '' : 'none';
+        }
+      });
+
+      // First visible item becomes featured
+      var visible = Array.from(items).filter(function(i) { return i.style.display !== 'none'; });
+      items.forEach(function(i) { i.classList.remove('featured'); });
+      if (visible.length > 0) { visible[0].classList.add('featured'); }
+    });
+  });
+
+  // ── YouTube click-through on cards with data-yt ──────────────────────────
+  document.querySelectorAll('#masonry-content-grid .masonry-item[data-yt]').forEach(function(item) {
+    item.style.cursor = 'pointer';
+    item.addEventListener('click', function() {
+      var ytId = item.getAttribute('data-yt');
+      if (ytId) { window.open('https://youtu.be/' + ytId, '_blank'); }
     });
   });
   </script>
