@@ -62,6 +62,9 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
 .btn-accept-call:hover  { opacity:0.7; }
 .btn-decline      { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; background:transparent; color:var(--concrete); border:1px solid rgba(138,138,138,0.3); padding:9px 16px; cursor:pointer; transition:opacity 0.2s; }
 .btn-decline:hover      { color:var(--signal); border-color:rgba(232,93,58,0.4); }
+.btn-followup     { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; background:transparent; color:var(--off-white); border:1px solid rgba(242,240,235,0.25); padding:9px 16px; cursor:pointer; transition:opacity 0.2s; }
+.btn-followup:hover     { border-color:rgba(242,240,235,0.5); opacity:0.85; }
+.status-followup  { background:rgba(242,240,235,0.06); color:var(--off-white); border:1px solid rgba(242,240,235,0.2); }
 .status-badge { display:inline-block; font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; padding:6px 12px; }
 .status-accept-rider { background:rgba(193,127,89,0.12); color:var(--copper); border:1px solid rgba(193,127,89,0.3); }
 .status-accept-call  { background:rgba(193,127,89,0.06); color:var(--copper); border:1px solid rgba(193,127,89,0.2); }
@@ -213,10 +216,11 @@ const IN_SCOPE = ['Sunday Gathering', 'Conference / Keynote', 'Leadership Sessio
 
 function statusBadge(status) {
   const map = {
-    accept_rider: ['RIDER SENT',       'status-accept-rider'],
-    accept_call:  ['CALL REQUESTED',   'status-accept-call'],
-    declined:     ['DECLINED',         'status-declined'],
-    pending:      ['PENDING DECISION', 'status-pending'],
+    accept_rider:  ['RIDER SENT',       'status-accept-rider'],
+    accept_call:   ['CALL REQUESTED',   'status-accept-call'],
+    declined:      ['DECLINED',         'status-declined'],
+    pending:       ['PENDING DECISION', 'status-pending'],
+    followup_sent: ['FOLLOW-UP SENT',   'status-followup'],
   };
   const [label, cls] = map[status] || ['PENDING', 'status-pending'];
   return `<span class="status-badge ${cls}">${label}</span>`;
@@ -230,22 +234,39 @@ function decisionPanel(inq) {
     return `<div class="decision-panel"><span class="scope-note">Workflow coming — separate rider for this format</span></div>`;
   }
 
-  if (inq.status && inq.status !== 'pending' && inq.status !== 'new') {
+  // Terminal — decision made, no more buttons
+  const terminal = ['accept_rider', 'accept_call', 'declined'];
+  if (terminal.includes(inq.status)) {
     return `<div class="decision-panel">${statusBadge(inq.status)}</div>`;
   }
 
   const isSunday = format.includes('Sunday Gathering');
-
   const callBtn = isSunday ? '' :
-    `<button class="btn-accept-call"  onclick="triggerAction('${inq.id}', 'accept_call',  this)">&#128197; Accept &amp; Request Call</button>`;
+    `<button class="btn-accept-call" onclick="triggerAction('${inq.id}', 'accept_call', this)">&#128197; Accept &amp; Request Call</button>`;
 
+  // Follow-up already sent — badge + accept/decline only
+  if (inq.status === 'followup_sent') {
+    return `
+      <div class="decision-panel" id="panel-${inq.id}">
+        <div style="margin-bottom:10px;">${statusBadge('followup_sent')}</div>
+        <div class="decision-label">&#9670; Final Decision</div>
+        <div class="decision-btns">
+          <button class="btn-accept-rider" onclick="triggerAction('${inq.id}', 'accept_rider', this)">&#10003; Accept &amp; Send Rider</button>
+          ${callBtn}
+          <button class="btn-decline" onclick="triggerAction('${inq.id}', 'declined', this)">&#10005; Decline</button>
+        </div>
+      </div>`;
+  }
+
+  // Default — pending / new: all options including Follow Up
   return `
     <div class="decision-panel" id="panel-${inq.id}">
       <div class="decision-label">&#9670; Decision Required</div>
       <div class="decision-btns">
         <button class="btn-accept-rider" onclick="triggerAction('${inq.id}', 'accept_rider', this)">&#10003; Accept &amp; Send Rider</button>
         ${callBtn}
-        <button class="btn-decline"      onclick="triggerAction('${inq.id}', 'declined',     this)">&#10005; Decline</button>
+        <button class="btn-followup" onclick="triggerAction('${inq.id}', 'followup', this)">&#8594; Follow Up</button>
+        <button class="btn-decline" onclick="triggerAction('${inq.id}', 'declined', this)">&#10005; Decline</button>
       </div>
     </div>`;
 }
@@ -255,6 +276,7 @@ async function triggerAction(inquiryId, action, btn) {
     accept_rider: 'SENDING RIDER...',
     accept_call:  'REQUESTING CALL...',
     declined:     'DECLINING...',
+    followup:     'SENDING FOLLOW-UP...',
   };
   const panel = document.getElementById('panel-' + inquiryId);
   if (panel) {
@@ -276,7 +298,12 @@ async function triggerAction(inquiryId, action, btn) {
     const data = await res.json();
 
     if (data.success) {
-      if (panel) panel.innerHTML = statusBadge(action);
+      if (action === 'followup') {
+        // Reload the page so followup_sent state renders with accept/decline buttons still live
+        location.reload();
+      } else {
+        if (panel) panel.innerHTML = statusBadge(action);
+      }
     } else {
       if (panel) panel.innerHTML = `<span style="font-family:'Space Mono',monospace;font-size:9px;color:var(--signal);">ERROR: ${data.error || 'Unknown error'}</span>`;
     }
