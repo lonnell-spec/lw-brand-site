@@ -534,6 +534,152 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
 
     <hr>
 
+    <!-- ===== STYLES 01 / 03 / 04 — BOLD EXPANDED ===== -->
+    <h1>Styles 01, 03, 04 — Expanded Bold Versions</h1>
+    <p>Maxed-out versions of the Annotated Proof, Dark Photo, and Data Stat. These are the production-intent designs — brighter, harder, more dramatic. Use these as the reference for final Canva/Figma production.</p>
+
+    <style>
+      .bold-trio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 28px 0 16px; }
+      .bold-trio-item { display: flex; flex-direction: column; gap: 10px; }
+      .bold-trio-tag { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); }
+      .bold-trio-note { font-size: 12px; font-weight: 300; color: var(--concrete); line-height: 1.5; }
+
+      /* ── 01 ANNOTATED ── */
+      .bt-01 { width: 100%; aspect-ratio: 1; background: #F5EBC4; position: relative; overflow: hidden; }
+      .bt-01-rules { position:absolute; inset:0; background-image:repeating-linear-gradient(transparent,transparent 32px,rgba(160,140,70,0.25) 32px,rgba(160,140,70,0.25) 33px); pointer-events:none; }
+      .bt-01-margin { position:absolute; top:0;bottom:0;left:56px; width:1px; background:rgba(210,50,30,0.25); pointer-events:none; }
+      .bt-01-stamp { position:absolute; top:50%;left:50%;transform:translate(-50%,-50%) rotate(-20deg); font-family:'Bebas Neue',sans-serif; font-size:80px; letter-spacing:8px; color:rgba(210,30,20,0.05); pointer-events:none; white-space:nowrap; user-select:none; }
+      .bt-01-inner { position:absolute; inset:0; padding:28px 24px 20px 68px; display:flex; flex-direction:column; justify-content:space-between; }
+      .bt-01-meta { font-family:'Space Mono',monospace; font-size:6px; letter-spacing:2px; text-transform:uppercase; color:rgba(0,0,0,0.3); }
+      .bt-01-body { flex:1; display:flex; flex-direction:column; justify-content:center; gap:2px; position:relative; }
+      .bt-01-correction { font-family:'Caveat',cursive; font-size:30px; font-weight:700; color:#D42020; display:block; transform:rotate(-2deg); padding-left:3px; line-height:1; }
+      .bt-01-wrongwrap { position:relative; display:inline-block; margin-bottom:2px; }
+      .bt-01-wrong { font-family:'EB Garamond',serif; font-size:48px; font-weight:800; line-height:1; color:rgba(0,0,0,0.6); display:block; }
+      .bt-01-strike { position:absolute; top:50%; left:-4px; right:-4px; height:4px; background:#D42020; transform:rotate(-2deg); margin-top:-2px; border-radius:1px; }
+      .bt-01-circle { position:absolute; top:-6px; left:-8px; right:-8px; bottom:-6px; border:2px solid rgba(212,32,32,0.5); border-radius:50%/40%; transform:rotate(-2deg); pointer-events:none; }
+      .bt-01-statement { font-family:'EB Garamond',serif; font-size:30px; font-weight:800; line-height:1.0; color:#1A1410; display:block; margin-top:8px; }
+      .bt-01-note { font-family:'Caveat',cursive; font-size:13px; color:rgba(0,0,0,0.4); margin-top:8px; display:block; transform:rotate(-0.5deg); }
+      .bt-01-footer { display:flex; justify-content:space-between; align-items:flex-end; }
+      .bt-01-sig { font-family:'Caveat',cursive; font-size:16px; color:rgba(0,0,0,0.35); }
+      .bt-01-issue { font-family:'Space Mono',monospace; font-size:6px; letter-spacing:2px; text-transform:uppercase; color:rgba(0,0,0,0.18); text-align:right; }
+
+      /* ── 03 PHOTO ── */
+      .bt-03 { width:100%; aspect-ratio:1; position:relative; overflow:hidden; }
+      .bt-03-photo { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(0.3) brightness(0.5); }
+      .bt-03-vig { position:absolute; inset:0; background:radial-gradient(ellipse at 70% 30%,rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 60%,rgba(0,0,0,0.88) 100%),linear-gradient(180deg,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0.75) 70%,rgba(0,0,0,0.96) 100%); pointer-events:none; }
+      .bt-03-flare { position:absolute; top:-40px; right:-20px; width:220px; height:220px; background:radial-gradient(circle,rgba(193,127,59,0.2) 0%,rgba(193,127,59,0.06) 40%,transparent 70%); pointer-events:none; }
+      .bt-03-streak { position:absolute; top:0;bottom:0;right:75px; width:1px; background:linear-gradient(180deg,transparent 0%,rgba(193,127,89,0.35) 30%,rgba(255,200,120,0.15) 50%,transparent 100%); pointer-events:none; }
+      .bt-03-topbar { position:absolute; top:0;left:0;right:0; height:2px; background:linear-gradient(90deg,#C17F59 0%,rgba(193,127,89,0.15) 70%,transparent 100%); }
+      .bt-03-inner { position:absolute; inset:0; padding:20px; display:flex; flex-direction:column; justify-content:flex-end; }
+      .bt-03-pre { display:block; font-family:'DM Sans',sans-serif; font-size:7px; font-weight:300; letter-spacing:4px; text-transform:uppercase; color:rgba(242,240,235,0.3); margin-bottom:6px; }
+      .bt-03-w1 { display:block; font-family:'EB Garamond',serif; font-style:italic; font-weight:800; font-size:68px; line-height:0.85; color:#F2F0EB; letter-spacing:-1px; white-space:nowrap; overflow:visible; }
+      .bt-03-w2 { display:block; font-family:'EB Garamond',serif; font-style:italic; font-weight:400; font-size:68px; line-height:0.85; color:rgba(193,127,89,0.9); letter-spacing:-1px; white-space:nowrap; overflow:visible; }
+      .bt-03-rule { width:28px; height:1px; background:rgba(193,127,89,0.6); margin:10px 0 6px; }
+      .bt-03-cap { font-family:'DM Sans',sans-serif; font-size:9px; font-weight:300; color:rgba(242,240,235,0.4); line-height:1.6; max-width:160px; }
+      .bt-03-handle { position:absolute; top:16px; right:16px; font-family:'Space Mono',monospace; font-size:6px; letter-spacing:2px; text-transform:uppercase; color:rgba(242,240,235,0.18); }
+
+      /* ── 04 DATA ── */
+      .bt-04 { width:100%; aspect-ratio:1; background:#0D0D0D; position:relative; overflow:hidden; }
+      .bt-04-pip { position:absolute; top:18px; right:18px; width:6px; height:6px; border-radius:50%; background:#C17F59; box-shadow:0 0 8px rgba(193,127,89,0.5); }
+      .bt-04-arc { position:absolute; top:-30px; left:-30px; width:260px; height:260px; }
+      .bt-04-num { position:absolute; top:28px; left:0; right:0; text-align:center; font-family:'Bebas Neue',sans-serif; font-size:160px; line-height:0.85; letter-spacing:-4px; color:#F2F0EB; text-shadow:0 0 50px rgba(232,93,58,0.12); }
+      .bt-04-unit { position:absolute; top:36px; right:20px; font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#C17F59; text-align:right; line-height:1.5; }
+      .bt-04-div { position:absolute; bottom:90px; left:20px; right:20px; height:1px; background:linear-gradient(90deg,rgba(193,127,89,0.7) 0%,rgba(193,127,89,0.1) 100%); }
+      .bt-04-bottom { position:absolute; bottom:0; left:0; right:0; padding:0 20px 20px; }
+      .bt-04-finding { font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:2px; color:rgba(242,240,235,0.5); line-height:1.2; margin-bottom:4px; }
+      .bt-04-reframe { font-family:'Bebas Neue',sans-serif; font-size:24px; letter-spacing:1px; line-height:1.0; color:#E85D3A; }
+      .bt-04-meta { display:flex; justify-content:space-between; margin-top:8px; }
+      .bt-04-mlabel { font-family:'Space Mono',monospace; font-size:6px; letter-spacing:2px; text-transform:uppercase; color:rgba(242,240,235,0.1); }
+      .bt-04-mhandle { font-family:'Space Mono',monospace; font-size:6px; letter-spacing:2px; text-transform:uppercase; color:rgba(193,127,89,0.25); }
+    </style>
+
+    <div class="bold-trio-grid">
+
+      <!-- 01 -->
+      <div class="bold-trio-item">
+        <div class="bt-01">
+          <div class="bt-01-rules"></div>
+          <div class="bt-01-margin"></div>
+          <div class="bt-01-stamp">WRONG</div>
+          <div class="bt-01-inner">
+            <div class="bt-01-meta">LDW · Arise & Build</div>
+            <div class="bt-01-body">
+              <span class="bt-01-correction">Stewardship</span>
+              <div class="bt-01-wrongwrap">
+                <span class="bt-01-wrong">Productivity</span>
+                <div class="bt-01-strike"></div>
+                <div class="bt-01-circle"></div>
+              </div>
+              <span class="bt-01-statement">is the<br>measure<br>of faith.</span>
+              <span class="bt-01-note">not output. not hustle.</span>
+            </div>
+            <div class="bt-01-footer">
+              <span class="bt-01-sig">— ldw</span>
+              <div class="bt-01-issue">ldw.build<br>Issue 04</div>
+            </div>
+          </div>
+        </div>
+        <div class="bold-trio-tag">01 — Annotated Proof</div>
+        <div class="bold-trio-note">Yellow legal pad. Violent red strike. Handwritten correction. Wrong belief → right belief. Max 1 correction per post.</div>
+      </div>
+
+      <!-- 03 -->
+      <div class="bold-trio-item">
+        <div class="bt-03">
+          <img class="bt-03-photo"
+            src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=70&auto=format&fit=crop"
+            alt="" crossorigin="anonymous" />
+          <div class="bt-03-vig"></div>
+          <div class="bt-03-flare"></div>
+          <div class="bt-03-streak"></div>
+          <div class="bt-03-topbar"></div>
+          <div class="bt-03-handle">@ldw.build</div>
+          <div class="bt-03-inner">
+            <div>
+              <span class="bt-03-pre">On leadership</span>
+              <span class="bt-03-w1">Build.</span>
+              <span class="bt-03-w2">Or break.</span>
+              <div class="bt-03-rule"></div>
+              <p class="bt-03-cap">No third option under growth pressure.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bold-trio-tag">03 — Dark Photo + 2 Words</div>
+        <div class="bold-trio-note">Real photo. Desaturated + dark. 2 words maximum. Copper glow. Replace photo weekly — same words, different image works.</div>
+      </div>
+
+      <!-- 04 -->
+      <div class="bold-trio-item">
+        <div class="bt-04">
+          <div class="bt-04-pip"></div>
+          <svg class="bt-04-arc" viewBox="0 0 260 260" fill="none">
+            <circle cx="130" cy="130" r="118" stroke="rgba(232,93,58,0.06)" stroke-width="1"/>
+            <path d="M 130 12 A 118 118 0 1 1 38 210" stroke="rgba(232,93,58,0.2)" stroke-width="1.5" stroke-linecap="round" fill="none" stroke-dasharray="5 8"/>
+            <circle cx="38" cy="210" r="3" fill="rgba(232,93,58,0.5)"/>
+            <circle cx="130" cy="12" r="2.5" fill="rgba(193,127,89,0.6)"/>
+          </svg>
+          <div class="bt-04-num">67<span style="font-size:70px;color:#C17F59;vertical-align:super;letter-spacing:0;">%</span></div>
+          <div class="bt-04-unit">of orgs that<br>doubled → 40%<br>turnover</div>
+          <div class="bt-04-div"></div>
+          <div class="bt-04-bottom">
+            <div class="bt-04-finding">That's not a people problem.</div>
+            <div class="bt-04-reframe">INFRASTRUCTURE.</div>
+            <div class="bt-04-meta">
+              <span class="bt-04-mlabel">LDW Research</span>
+              <span class="bt-04-mhandle">ldw.build</span>
+            </div>
+          </div>
+        </div>
+        <div class="bold-trio-tag">04 — Data Stat</div>
+        <div class="bold-trio-note">Number is the post. Reframe is 1 word. Signal arc behind. Use real data only — the credibility lives or dies on accuracy.</div>
+      </div>
+
+    </div>
+
+    <p style="font-size:11px;color:var(--concrete);font-weight:300;">Full large-scale preview → <a href="/social-bold-134.html" style="color:var(--copper);">social-bold-134.html</a></p>
+
+    <hr>
+
     <!-- ===== BOLD MINIMALISM SERIES ===== -->
     <h1>Bold Minimalism Series</h1>
     <p>Four live post designs. Text-only. Built directly in brand palette. Copy the HTML source of any post into Canva's HTML embed or use as reference for production. 1080×1080 ratio.</p>
