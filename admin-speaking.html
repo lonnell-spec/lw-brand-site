@@ -295,9 +295,21 @@ async function triggerAction(inquiryId, action, btn) {
         // Reload so call_requested state renders with post-call buttons
         location.reload();
       } else {
-        // accepted / declined — show terminal badge
-        const badgeMap = { accept: 'accepted', declined: 'declined' };
-        if (panel) panel.innerHTML = statusBadge(badgeMap[action] || action);
+        // accepted / declined — remove both the data row and the panel row
+        const dataRow  = document.getElementById('row-' + inquiryId);
+        const panelRow = panel ? panel.closest('tr') : null;
+        if (dataRow)  dataRow.style.transition  = 'opacity 0.3s';
+        if (panelRow) panelRow.style.transition = 'opacity 0.3s';
+        if (dataRow)  dataRow.style.opacity  = '0';
+        if (panelRow) panelRow.style.opacity = '0';
+        setTimeout(() => {
+          if (dataRow)  dataRow.remove();
+          if (panelRow) panelRow.remove();
+          // update the count
+          const remaining = document.querySelectorAll('#inq-tbody tr[id^="row-"]').length;
+          const countEl = document.getElementById('inq-count');
+          if (countEl) countEl.textContent = remaining + ' INQUIR' + (remaining === 1 ? 'Y' : 'IES');
+        }, 300);
       }
     } else {
       if (panel) panel.innerHTML = `<span style="font-family:'Space Mono',monospace;font-size:9px;color:var(--signal);">ERROR: ${data.error || 'Unknown error'}</span>`;
@@ -328,7 +340,7 @@ async function triggerAction(inquiryId, action, btn) {
       if (!name.trim()) name = r.name || '-';
       var format = r.format || r.service_type || '-';
       var evName = r.event_name || r.event || r.topic || '-';
-      return '<tr>' +
+      return '<tr id="row-' + r.id + '">' +
         '<td>' + name.trim() + '</td>' +
         '<td><a href="mailto:' + (r.email||'') + '" style="color:var(--copper);text-decoration:none;">' + (r.email||'-') + '</a></td>' +
         '<td>' + (r.organization||r.church||'-') + '</td>' +
