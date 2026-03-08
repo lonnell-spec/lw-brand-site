@@ -230,7 +230,7 @@ function decisionPanel(inq) {
     return `<div class="decision-panel"><span class="scope-note">Workflow coming — separate rider for this format</span></div>`;
   }
 
-  if (inq.status && inq.status !== 'pending') {
+  if (inq.status && inq.status !== 'pending' && inq.status !== 'new') {
     return `<div class="decision-panel">${statusBadge(inq.status)}</div>`;
   }
 
