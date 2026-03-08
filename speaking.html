@@ -1347,8 +1347,12 @@
       </div>
       <div class="form-row">
         <div class="form-field">
-          <label for="bk-date">Event Date</label>
-          <input type="text" id="bk-date" placeholder="Month / Year or specific date">
+          <label for="bk-date">Event Date <span style="color:var(--signal);font-size:11px;">*</span></label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <input type="date" id="bk-date" required style="color-scheme:dark;">
+            <input type="time" id="bk-time" required style="color-scheme:dark;">
+          </div>
+          <p style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--concrete);margin:6px 0 0;">DATE &nbsp;·&nbsp; START TIME</p>
         </div>
         <div class="form-field">
           <label for="bk-audience">Expected Audience Size</label>
@@ -1469,7 +1473,9 @@
       var email    = (document.getElementById('bk-email').value    || '').trim();
       var org      = (document.getElementById('bk-org').value      || '').trim();
       var format   = (document.getElementById('bk-format').value   || '').trim();
-      var date     = (document.getElementById('bk-date').value     || '').trim();
+      var dateRaw  = (document.getElementById('bk-date').value     || '').trim();
+      var timeRaw  = (document.getElementById('bk-time').value     || '').trim();
+      var date     = dateRaw && timeRaw ? dateRaw + ' at ' + timeRaw : (dateRaw || timeRaw);
       var eventName = (document.getElementById('bk-event-name') ? document.getElementById('bk-event-name').value : '').trim();
       var audience = (document.getElementById('bk-audience').value || '').trim();
       var details  = (document.getElementById('bk-details').value  || '').trim();
@@ -1478,7 +1484,8 @@
       if (!email)           { showError('Please enter your email address.');               return; }
       if (!email.includes('@')) { showError('Please enter a valid email address.');        return; }
       if (!format)          { showError('Please select a format.');                        return; }
-      if (!date)            { showError('Please enter your event date.');                  return; }
+      if (!dateRaw)         { showError('Please select your event date.');                 return; }
+      if (!timeRaw)         { showError('Please select your event start time.');           return; }
       if (!audience)        { showError('Please select your expected audience size.');     return; }
       if (!details)         { showError('Please tell me about your event.');               return; }
 
