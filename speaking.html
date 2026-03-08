@@ -244,8 +244,8 @@
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
     text-align: center;
   }
 
@@ -1305,32 +1305,31 @@
   </footer>
 
 
-<!-- ===== SUPABASE ===== -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<!-- ===== BOOKING FORM SCRIPT ===== -->
 <script>
-  // Wait for full page load — guarantees Supabase SDK is ready before any client call
-  window.addEventListener('load', function() {
+  // === VIDEO PLAYER ===
+  (function() {
+    var container = document.getElementById('videoContainer');
+    var video     = document.getElementById('sizzleVideo');
+    var overlay   = document.getElementById('videoOverlay');
+    if (container && video && overlay) {
+      container.addEventListener('click', function() {
+        if (video.paused) { video.play();  overlay.classList.add('hidden'); }
+        else              { video.pause(); overlay.classList.remove('hidden'); }
+      });
+      video.addEventListener('ended', function() { overlay.classList.remove('hidden'); });
+    }
+  })();
 
-    // === VIDEO PLAYER ===
-    (function() {
-      var container = document.getElementById('videoContainer');
-      var video     = document.getElementById('sizzleVideo');
-      var overlay   = document.getElementById('videoOverlay');
-      if (container && video && overlay) {
-        container.addEventListener('click', function() {
-          if (video.paused) { video.play();  overlay.classList.add('hidden'); }
-          else              { video.pause(); overlay.classList.remove('hidden'); }
-        });
-        video.addEventListener('ended', function() { overlay.classList.remove('hidden'); });
-      }
-    })();
+  // === BOOKING FORM — pure fetch(), no external SDK ===
+  (function() {
+    var SUPA_URL = 'https://riqdcirsmckubkdfbtoj.supabase.co';
+    var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM';
 
-    // === BOOKING FORM ===
     var btn = document.getElementById('bookingSubmitBtn');
     var msg = document.getElementById('bookingMsg');
     var ty  = document.getElementById('bookingThankYou');
-
-    if (!btn) return; // safety guard
+    if (!btn) return;
 
     function showError(text) {
       msg.style.cssText = 'display:block;color:#E85D3A;margin-top:12px;font-family:"DM Sans",sans-serif;font-size:13px;';
@@ -1338,72 +1337,72 @@
     }
 
     btn.addEventListener('click', async function() {
+      var name     = (document.getElementById('bk-name').value     || '').trim();
+      var email    = (document.getElementById('bk-email').value    || '').trim();
+      var org      = (document.getElementById('bk-org').value      || '').trim();
+      var format   = (document.getElementById('bk-format').value   || '').trim();
+      var date     = (document.getElementById('bk-date').value     || '').trim();
+      var audience = (document.getElementById('bk-audience').value || '').trim();
+      var details  = (document.getElementById('bk-details').value  || '').trim();
 
-      var name     = (document.getElementById('bk-name').value    || '').trim();
-      var email    = (document.getElementById('bk-email').value   || '').trim();
-      var org      = (document.getElementById('bk-org').value     || '').trim();
-      var format   = (document.getElementById('bk-format').value  || '').trim();
-      var date     = (document.getElementById('bk-date').value    || '').trim();
-      var audience = (document.getElementById('bk-audience').value|| '').trim();
-      var details  = (document.getElementById('bk-details').value || '').trim();
+      if (!name)            { showError('Please enter your name.');                        return; }
+      if (!email)           { showError('Please enter your email address.');               return; }
+      if (!email.includes('@')) { showError('Please enter a valid email address.');        return; }
+      if (!format)          { showError('Please select a format.');                        return; }
+      if (!date)            { showError('Please enter your event date.');                  return; }
+      if (!audience)        { showError('Please select your expected audience size.');     return; }
+      if (!details)         { showError('Please tell me about your event.');               return; }
 
-      // ── Required field validation ────────────────────────────────────────
-      if (!name)     { showError('Please enter your name.');           return; }
-      if (!email)    { showError('Please enter your email address.');  return; }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                       showError('Please enter a valid email address.'); return; }
-      if (!format)   { showError('Please select a format.');           return; }
-      if (!date)     { showError('Please enter your event date.');     return; }
-      if (!audience) { showError('Please select your expected audience size.'); return; }
-      if (!details)  { showError('Please tell me about your event.');  return; }
-
-      // ── Submit ───────────────────────────────────────────────────────────
       btn.disabled    = true;
       btn.textContent = 'SUBMITTING...';
       msg.style.display = 'none';
 
+      var parts = [];
+      if (format)   parts.push('Format: '   + format);
+      if (date)     parts.push('Date: '     + date);
+      if (audience) parts.push('Audience: ' + audience);
+      if (details)  parts.push('Details: '  + details);
+
       try {
-        var _sb = window.supabase.createClient(
-          'https://riqdcirsmckubkdfbtoj.supabase.co',
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM'
-        );
+        var resp = await fetch(SUPA_URL + '/rest/v1/speaking_inquiries', {
+          method:  'POST',
+          headers: {
+            'apikey':        SUPA_KEY,
+            'Authorization': 'Bearer ' + SUPA_KEY,
+            'Content-Type':  'application/json',
+            'Prefer':        'return=minimal'
+          },
+          body: JSON.stringify({
+            name:         name,
+            email:        email,
+            organization: org || null,
+            service_type: 'Speaking',
+            source:       'speaking_page',
+            message:      parts.join(' | ')
+          })
+        });
 
-        var result = await _sb.from('speaking_inquiries').insert([{
-          name:         name,
-          email:        email,
-          organization: org || null,
-          service_type: 'Speaking',
-          source:       'speaking_page',
-          message: [
-            format   ? 'Format: '   + format   : '',
-            date     ? 'Date: '     + date     : '',
-            audience ? 'Audience: ' + audience : '',
-            details  ? 'Details: '  + details  : ''
-          ].filter(Boolean).join('
-')
-        }]);
+        if (!resp.ok) {
+          var errBody = await resp.text();
+          throw new Error('HTTP ' + resp.status + ': ' + errBody);
+        }
 
-        if (result.error) throw result.error;
-
-        // ── Success: clear form, hide button, show confirmation ──────────
+        // Success — clear form, show confirmation
         document.getElementById('bookingForm')
           .querySelectorAll('input, select, textarea')
           .forEach(function(el) { el.value = ''; });
         btn.style.display = 'none';
-        ty.style.display  = 'block'; // belt-and-suspenders alongside .show class
+        ty.style.display  = 'block';
         ty.classList.add('show');
 
       } catch(err) {
-        console.error('Speaking form error:', err);
-        showError('Something went wrong. Please try again or email directly.');
+        console.error('Booking form error:', err);
+        showError('Something went wrong. Please try again.');
         btn.disabled    = false;
         btn.textContent = 'SUBMIT INQUIRY';
       }
     });
-
-  }); // end window.load
-
-  // === SCROLL REVEAL (CSS keyframes handle animation) ===
+  })();
 </script>
 
 <!-- Metricool Tracking -->
