@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LDW Email — Template 02: SIGNAL</title>
+<style>
+  @import url('https://api.fontshare.com/v2/css?f[]=thunder@800,700,600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;700&family=Space+Mono:wght@400;700&display=swap');
+  @keyframes sweepIn { from { transform: scaleX(0); transform-origin: left; } to { transform: scaleX(1); transform-origin: left; } }
+  @keyframes fadeSlideRight { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background: #111; font-family: 'DM Sans', Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  .email-wrap { max-width: 580px; margin: 0 auto; background: #1A1714; }
+  .top-bar { height: 4px; background: #E85D3A; animation: sweepIn 0.8s cubic-bezier(0.16,1,0.3,1) both; }
+  .header { padding: 24px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); animation: fadeSlideRight 0.6s ease 0.4s both; }
+  .header-brand { font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 1px; color: #F2F0EB; }
+  .header-tag { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: #E85D3A; border: 1px solid rgba(232,93,58,0.4); padding: 4px 8px; }
+  .announcement { padding: 52px 40px 40px; animation: fadeUp 0.7s ease 0.3s both; }
+  .announce-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: #E85D3A; margin-bottom: 20px; }
+  .announce-label::before { content: '▸ '; animation: blink 1.2s step-end 3; }
+  .announce-headline { font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 60px; line-height: 0.95; letter-spacing: 1px; color: #F2F0EB; margin-bottom: 28px; }
+  .announce-headline span { display: block; color: rgba(242,240,235,0.2); font-size: 42px; }
+  .announce-body { font-size: 15px; font-weight: 300; line-height: 1.8; color: rgba(242,240,235,0.7); max-width: 440px; margin-bottom: 36px; }
+  .announce-body strong { color: #F2F0EB; font-weight: 400; }
+  .stats { padding: 0 40px 36px; display: table; width: 100%; animation: fadeUp 0.7s ease 0.55s both; }
+  .stat-item { display: table-cell; padding: 20px 24px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); text-align: center; }
+  .stat-item + .stat-item { border-left: none; }
+  .stat-num { font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 36px; color: #C17F59; letter-spacing: 1px; line-height: 1; margin-bottom: 6px; }
+  .stat-label { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; color: rgba(242,240,235,0.4); text-transform: uppercase; }
+  .cta-section { padding: 8px 40px 48px; animation: fadeUp 0.7s ease 0.7s both; }
+  .cta-primary { display: block; background: #E85D3A; color: #F2F0EB; font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; padding: 18px 32px; text-align: center; margin-bottom: 12px; }
+  .cta-secondary { display: block; color: rgba(242,240,235,0.4); font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; text-align: center; text-decoration: none; }
+  .cta-secondary:hover { color: #C17F59; }
+  .mid-rule { margin: 0 40px 36px; height: 1px; background: rgba(255,255,255,0.05); }
+  .content { padding: 0 40px 32px; animation: fadeUp 0.7s ease 0.5s both; }
+  .content p { font-size: 14px; font-weight: 300; line-height: 1.85; color: rgba(242,240,235,0.6); margin-bottom: 16px; }
+  .content p strong { color: #F2F0EB; font-weight: 400; }
+  .footer { padding: 24px 40px; border-top: 1px solid rgba(255,255,255,0.05); background: #0D0D0D; animation: fadeUp 0.6s ease 0.8s both; }
+  .footer-inner { display: table; width: 100%; }
+  .footer-left { display: table-cell; vertical-align: middle; }
+  .footer-name { font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 1px; color: #F2F0EB; }
+  .footer-sub { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; color: #C17F59; text-transform: uppercase; margin-top: 2px; }
+  .footer-right { display: table-cell; text-align: right; vertical-align: middle; }
+  .footer-links { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 1.5px; color: rgba(242,240,235,0.25); text-transform: uppercase; line-height: 2; }
+  .footer-links a { color: rgba(242,240,235,0.25); text-decoration: none; }
+  .footer-links a:hover { color: #E85D3A; }
+  @media (max-width: 600px) {
+    .header, .announcement, .cta-section, .content, .footer { padding-left: 24px; padding-right: 24px; }
+    .stats { padding: 0 24px 32px; }
+    .mid-rule { margin: 0 24px 28px; }
+    .announce-headline { font-size: 44px; }
+    .announce-headline span { font-size: 32px; }
+    .stats, .stat-item { display: block; width: 100%; }
+    .stat-item + .stat-item { border-left: 1px solid rgba(255,255,255,0.05); border-top: none; }
+    .footer-inner, .footer-left, .footer-right { display: block; text-align: center; }
+    .footer-right { margin-top: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="email-wrap">
+  <div class="top-bar"></div>
+  <div class="header">
+    <div class="header-brand">LDW</div>
+    <div class="header-tag">Announcement</div>
+  </div>
+  <div class="announcement">
+    <div class="announce-label">NOW AVAILABLE</div>
+    <h1 class="announce-headline">THIS IS WHERE<br>YOUR BIG<br><span>NEWS LIVES.</span></h1>
+    <p class="announce-body">Use this template for launches, cohort openings, book announcements, or any moment that demands attention. <strong>The top bar draws the eye. The headline earns it.</strong> One paragraph. One direction.</p>
+  </div>
+  <div class="stats">
+    <div class="stat-item"><div class="stat-num">8</div><div class="stat-label">Weeks</div></div>
+    <div class="stat-item"><div class="stat-num">24</div><div class="stat-label">Leaders</div></div>
+    <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">Framework</div></div>
+  </div>
+  <div class="cta-section">
+    <a href="#" class="cta-primary">TAKE THE NEXT STEP →</a>
+    <a href="#" class="cta-secondary">Or reply to this email with questions</a>
+  </div>
+  <div class="mid-rule"></div>
+  <div class="content">
+    <p>This section is for the "one more thing" — the secondary context that earns trust. Who this is for. What it takes to get in. What happens after they say yes.</p>
+    <p>Keep it lean. <strong>The announcement block above already landed the point.</strong> This paragraph is just the fine print with a pulse.</p>
+  </div>
+  <div class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <div class="footer-name">LONNELL WILLIAMS</div>
+        <div class="footer-sub">Builder. Operator. Author.</div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-links"><a href="https://ldw.build">ldw.build</a><br><a href="%unsubscribe_url%">Unsubscribe</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
