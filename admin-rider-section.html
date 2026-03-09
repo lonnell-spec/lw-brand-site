@@ -1,136 +1,13 @@
-<!-- ============================================================
-     LDW SPEAKING RIDER — Admin Section
-     
-     PLACEMENT: Add this section to admin-speaking.html
-     
-     FIND this line in admin-speaking.html:
-       <div class="admin-section" id="speaking-inquiries">
-     
-     INSERT this entire block BEFORE that section (or after
-     the page header, before any existing content sections).
-     
-     This section is fully self-contained — no new CSS needed
-     if you're using the existing admin CSS variables.
-============================================================ -->
-
-<!-- ── SPEAKING RIDER SECTION ─────────────────────────────── -->
+<!-- LDW SPEAKING RIDER Admin Section -->
 <div class="admin-section" id="speaking-rider" style="margin-bottom:48px;">
-
-  <!-- Section Header -->
   <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; padding-bottom:16px; border-bottom:1px solid rgba(193,127,89,0.2);">
     <div>
       <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--copper); margin-bottom:6px;">DOCUMENTS</div>
       <h2 style="font-family:'Thunder',sans-serif; font-size:28px; letter-spacing:2px; color:var(--off-white); margin:0;">SPEAKING RIDER</h2>
     </div>
     <div style="display:flex; gap:12px;">
-      <a href="https://drive.google.com/file/d/1sM4VmXNyBIhssFdfZZd0gInEOomdKVRY/view?usp=drivesdk" target="_blank" rel="noopener"
-         style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--obsidian); background:var(--copper); padding:10px 18px; text-decoration:none; transition:opacity 0.2s;"
-         onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-        ↗ OPEN PDF
-      </a>
-      <a href="https://drive.google.com/file/d/1sM4VmXNyBIhssFdfZZd0gInEOomdKVRY/view?usp=drivesdk" download
-         style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--copper); background:transparent; border:1px solid rgba(193,127,89,0.4); padding:10px 18px; text-decoration:none; transition:opacity 0.2s;"
-         onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
-        ↓ DOWNLOAD
-      </a>
+      <a href="https://riqdcirsmckubkdfbtoj.supabase.co/storage/v1/object/public/documents/LDW_Speaking_Rider_v4.pdf" target="_blank" rel="noopener" style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--obsidian); background:var(--copper); padding:10px 18px; text-decoration:none;">OPEN PDF</a>
+      <a href="https://riqdcirsmckubkdfbtoj.supabase.co/storage/v1/object/public/documents/LDW_Speaking_Rider_v4.pdf" download style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--copper); background:transparent; border:1px solid rgba(193,127,89,0.4); padding:10px 18px; text-decoration:none;">DOWNLOAD</a>
     </div>
   </div>
-
-  <!-- Rider Grid -->
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
-
-    <!-- Personal Info -->
-    <div class="rider-card" style="background:var(--warm-black); border:1px solid rgba(193,127,89,0.15); padding:24px;">
-      <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--copper); margin-bottom:16px;">PERSONAL INFO</div>
-      <table style="width:100%; border-collapse:collapse;">
-        <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0; letter-spacing:1px;">NAME ON ID</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">Lonnell Dawson Williams</td></tr>
-        <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0; letter-spacing:1px;">PASSPORT</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">556736566 — Exp. May 30, 2027</td></tr>
-        <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0; letter-spacing:1px;">BASE AIRPORT</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">ATL</td></tr>
-        <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0; letter-spacing:1px;">GLOBAL ENTRY</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">160549322</td></tr>
-        <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0; letter-spacing:1px;">TSA PRECHECK</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">TT11YT1HH</td></tr>
-        <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0; letter-spacing:1px;">DELTA SKYMILES</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">9266959478</td></tr>
-        <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0; letter-spacing:1px;">PRIMARY CONTACT</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">assistant@ldw.build</td></tr>
-        <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0; letter-spacing:1px;">DIRECT</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">lonnell@ldw.build</td></tr>
-      </table>
-    </div>
-
-    <!-- Travel -->
-    <div class="rider-card" style="background:var(--warm-black); border:1px solid rgba(193,127,89,0.15); padding:24px;">
-      <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--copper); margin-bottom:16px;">TRAVEL</div>
-      <table style="width:100%; border-collapse:collapse;">
-        <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0; letter-spacing:1px;">AIRLINE</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">Delta — First Class preferred</td></tr>
-        <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0; letter-spacing:1px;">SEAT</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">Window | Non-stop | Refundable</td></tr>
-        <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0; letter-spacing:1px;">LEAD TIME</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">21 days before engagement</td></tr>
-        <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0; letter-spacing:1px;">SPOUSE TRAVEL</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">Email details — he books separately</td></tr>
-        <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0; letter-spacing:1px;">HOTEL</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">King | Non-smoking | 20 min to venue</td></tr>
-        <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0; letter-spacing:1px;">CONFIRM BY</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">48 hrs before arrival</td></tr>
-      </table>
-    </div>
-
-    <!-- Dietary — Signal alert -->
-    <div class="rider-card" style="background:rgba(232,93,58,0.08); border:1px solid rgba(232,93,58,0.4); padding:24px;">
-      <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--signal); margin-bottom:12px;">⚠ DIETARY — CRITICAL</div>
-      <p style="font-family:'DM Sans',sans-serif; font-size:14px; color:var(--off-white); font-weight:600; line-height:1.5; margin:0 0 8px;">NON-DAIRY STRICTLY</p>
-      <p style="font-family:'DM Sans',sans-serif; font-size:13px; color:rgba(242,240,235,0.75); line-height:1.6; margin:0;">No dairy in any food or beverage provided. Communicate to all catering, hospitality, and green room staff.</p>
-    </div>
-
-    <!-- Stage & Green Room -->
-    <div class="rider-card" style="background:var(--warm-black); border:1px solid rgba(193,127,89,0.15); padding:24px;">
-      <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--copper); margin-bottom:16px;">STAGE & GREEN ROOM</div>
-      <table style="width:100%; border-collapse:collapse;">
-        <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0; letter-spacing:1px;">MICROPHONE</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">Wireless lapel ONLY</td></tr>
-        <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0; letter-spacing:1px;">SOUND CHECK</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">20–30 min before service</td></tr>
-        <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0; letter-spacing:1px;">SLIDES</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">Does not use projected slides</td></tr>
-        <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0; letter-spacing:1px;">GREEN ROOM</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">45 min before | Prayer only</td></tr>
-        <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0; letter-spacing:1px;">ACCESS</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">Designated individuals only</td></tr>
-      </table>
-    </div>
-
-    <!-- Honorarium — full width -->
-    <div class="rider-card" style="grid-column:1/-1; background:var(--warm-black); border:1px solid rgba(193,127,89,0.15); padding:24px; display:flex; gap:40px; align-items:center;">
-      <div style="flex:0 0 auto;">
-        <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--copper); margin-bottom:8px;">HONORARIUM</div>
-        <div style="display:flex; gap:32px;">
-          <div>
-            <div style="font-family:'Thunder',sans-serif; font-size:36px; letter-spacing:2px; color:var(--off-white); line-height:1;">$2,500</div>
-            <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--concrete); text-transform:uppercase; margin-top:4px;">Base</div>
-          </div>
-          <div style="width:1px; background:rgba(193,127,89,0.2);"></div>
-          <div>
-            <div style="font-family:'Thunder',sans-serif; font-size:36px; letter-spacing:2px; color:var(--off-white); line-height:1;">$3,500</div>
-            <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--concrete); text-transform:uppercase; margin-top:4px;">Intl / 5+ hour flights</div>
-          </div>
-        </div>
-      </div>
-      <div style="width:1px; background:rgba(193,127,89,0.2); align-self:stretch;"></div>
-      <div>
-        <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--copper); margin-bottom:10px;">PAYMENT DETAILS</div>
-        <table style="border-collapse:collapse;">
-          <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:4px 16px 4px 0; letter-spacing:1px;">PAYABLE TO</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white);">Anchor Consulting Group</td></tr>
-          <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:4px 16px 4px 0; letter-spacing:1px;">W-9</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white);">Available upon request</td></tr>
-          <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:4px 16px 4px 0; letter-spacing:1px;">CONFIRM</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white);">In writing before confirming engagement</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <!-- Prep Needs — full width -->
-    <div class="rider-card" style="grid-column:1/-1; background:var(--warm-black); border:1px solid rgba(193,127,89,0.15); padding:24px;">
-      <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--copper); margin-bottom:14px;">SEND 10 DAYS BEFORE — WHAT HELPS LONNELL PREPARE</div>
-      <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:16px;">
-        <div style="border-left:2px solid rgba(193,127,89,0.3); padding-left:12px;"><div style="font-family:'DM Sans',sans-serif; font-size:12px; color:rgba(242,240,235,0.65); line-height:1.5;">Expected sermon length</div></div>
-        <div style="border-left:2px solid rgba(193,127,89,0.3); padding-left:12px;"><div style="font-family:'DM Sans',sans-serif; font-size:12px; color:rgba(242,240,235,0.65); line-height:1.5;">Service order + placement</div></div>
-        <div style="border-left:2px solid rgba(193,127,89,0.3); padding-left:12px;"><div style="font-family:'DM Sans',sans-serif; font-size:12px; color:rgba(242,240,235,0.65); line-height:1.5;">Congregation size + demographic</div></div>
-        <div style="border-left:2px solid rgba(193,127,89,0.3); padding-left:12px;"><div style="font-family:'DM Sans',sans-serif; font-size:12px; color:rgba(242,240,235,0.65); line-height:1.5;">Series context or theme in motion</div></div>
-        <div style="border-left:2px solid rgba(193,127,89,0.3); padding-left:12px;"><div style="font-family:'DM Sans',sans-serif; font-size:12px; color:rgba(242,240,235,0.65); line-height:1.5;">Day-of point person name + contact</div></div>
-      </div>
-    </div>
-
-  </div><!-- end rider grid -->
-
-  <!-- Last updated -->
-  <div style="margin-top:16px; font-family:'Space Mono',monospace; font-size:9px; color:var(--concrete); letter-spacing:1px; text-align:right;">
-    VERSION MARCH 2026 — PAYABLE TO ANCHOR CONSULTING GROUP
-  </div>
-
 </div>
-<!-- ── END SPEAKING RIDER SECTION ───────────────────────────── -->
