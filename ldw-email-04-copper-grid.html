@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LDW Email — Template 04: COPPER GRID</title>
+<style>
+  @import url('https://api.fontshare.com/v2/css?f[]=thunder@800,700,600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;700&family=Space+Mono:wght@400;700&display=swap');
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes countUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes borderFlash { 0% { border-color: rgba(193,127,89,0.1); } 40% { border-color: rgba(193,127,89,0.55); } 100% { border-color: rgba(193,127,89,0.18); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background: #111; font-family: 'DM Sans', Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  .email-wrap { max-width: 580px; margin: 0 auto; background: #0D0D0D; }
+  .header { padding: 0; display: table; width: 100%; animation: fadeIn 0.5s ease both; }
+  .header-left { display: table-cell; padding: 22px 40px; background: #C17F59; width: 1%; white-space: nowrap; vertical-align: middle; }
+  .header-brand { font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 1px; color: #0D0D0D; }
+  .header-right { display: table-cell; padding: 22px 28px; vertical-align: middle; border-bottom: 1px solid rgba(193,127,89,0.15); }
+  .header-meta { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: rgba(242,240,235,0.35); }
+  .header-date { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: #C17F59; margin-top: 3px; }
+  .intro { padding: 40px 40px 32px; animation: fadeUp 0.6s ease 0.15s both; }
+  .intro-eyebrow { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(242,240,235,0.35); margin-bottom: 12px; }
+  .intro-headline { font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 44px; letter-spacing: 1px; line-height: 1.0; color: #F2F0EB; margin-bottom: 18px; }
+  .intro-headline em { color: #C17F59; font-style: normal; }
+  .intro-body { font-size: 14px; font-weight: 300; line-height: 1.8; color: rgba(242,240,235,0.65); }
+  .intro-body strong { color: #F2F0EB; font-weight: 400; }
+  .grid { display: table; width: 100%; border-top: 1px solid rgba(193,127,89,0.12); animation: fadeUp 0.6s ease 0.3s both; }
+  .grid-cell { display: table-cell; padding: 24px 28px; border-right: 1px solid rgba(193,127,89,0.12); border-bottom: 1px solid rgba(193,127,89,0.12); vertical-align: top; animation: borderFlash 1.2s ease both; }
+  .grid-cell:last-child { border-right: none; }
+  .grid-cell-label { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: rgba(242,240,235,0.3); margin-bottom: 10px; }
+  .grid-cell-value { font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 34px; letter-spacing: 1px; color: #C17F59; line-height: 1; margin-bottom: 6px; animation: countUp 0.6s ease 0.5s both; }
+  .grid-cell-sub { font-size: 12px; font-weight: 300; color: rgba(242,240,235,0.45); line-height: 1.5; }
+  .section-label { padding: 28px 40px 0; animation: fadeUp 0.6s ease 0.4s both; }
+  .section-label-inner { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: #C17F59; padding-bottom: 12px; border-bottom: 1px solid rgba(193,127,89,0.2); }
+  .items { padding: 0 40px 32px; animation: fadeUp 0.6s ease 0.5s both; }
+  .item { padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; gap: 16px; align-items: flex-start; }
+  .item:last-child { border-bottom: none; }
+  .item-marker { width: 6px; height: 6px; border-radius: 50%; background: #C17F59; margin-top: 6px; flex-shrink: 0; }
+  .item-title { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; color: #F2F0EB; letter-spacing: 0.3px; margin-bottom: 4px; }
+  .item-desc { font-size: 13px; font-weight: 300; color: rgba(242,240,235,0.5); line-height: 1.65; }
+  .item-tag { display: inline-block; font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: 1.5px; text-transform: uppercase; padding: 2px 6px; border: 1px solid rgba(193,127,89,0.3); color: #C17F59; margin-top: 6px; }
+  .cta-bar { margin: 0 40px 40px; padding: 28px 32px; background: #1A1714; border: 1px solid rgba(193,127,89,0.18); display: table; width: calc(100% - 80px); animation: fadeUp 0.6s ease 0.65s both; }
+  .cta-bar-left { display: table-cell; vertical-align: middle; }
+  .cta-bar-title { font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 1px; color: #F2F0EB; margin-bottom: 4px; }
+  .cta-bar-sub { font-size: 12px; font-weight: 300; color: rgba(242,240,235,0.4); }
+  .cta-bar-right { display: table-cell; vertical-align: middle; text-align: right; width: 1%; white-space: nowrap; padding-left: 20px; }
+  .cta-btn { display: inline-block; background: #C17F59; color: #0D0D0D; font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 2px; text-decoration: none; padding: 12px 20px; }
+  .footer { padding: 24px 40px; border-top: 1px solid rgba(255,255,255,0.05); animation: fadeIn 0.5s ease 0.8s both; }
+  .footer-name { font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 1px; color: #F2F0EB; margin-bottom: 3px; }
+  .footer-tagline { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; color: #C17F59; text-transform: uppercase; margin-bottom: 16px; }
+  .footer-links { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 1.5px; color: rgba(242,240,235,0.25); text-transform: uppercase; }
+  .footer-links a { color: rgba(242,240,235,0.25); text-decoration: none; }
+  .footer-links a:hover { color: #C17F59; }
+  @media (max-width: 600px) {
+    .header, .header-left, .header-right { display: block; width: 100%; }
+    .intro, .section-label, .items, .footer { padding-left: 24px; padding-right: 24px; }
+    .cta-bar { margin: 0 24px 36px; width: calc(100% - 48px); }
+    .cta-bar, .cta-bar-left, .cta-bar-right { display: block; text-align: left; }
+    .cta-bar-right { padding-left: 0; margin-top: 16px; }
+    .grid, .grid-cell { display: block; width: 100%; border-right: none; }
+    .intro-headline { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+<div class="email-wrap">
+  <div class="header">
+    <div class="header-left"><div class="header-brand">LDW</div></div>
+    <div class="header-right"><div class="header-meta">Arise & Build &nbsp;·&nbsp; Field Report</div><div class="header-date">[MONTH YEAR] &nbsp;·&nbsp; Issue [XX]</div></div>
+  </div>
+  <div class="intro">
+    <div class="intro-eyebrow">%FIRSTNAME% — HERE'S WHAT'S BEEN BUILT</div>
+    <h1 class="intro-headline">THE WORK IS<br>THE <em>REPORT.</em></h1>
+    <p class="intro-body">Use this template when you want to show receipts — not just talk about building, but <strong>show what got built.</strong> Numbers, milestones, what's next. The reader should feel like they're getting an insider look at the operation.</p>
+  </div>
+  <div class="grid">
+    <div class="grid-cell"><div class="grid-cell-label">Organizations Served</div><div class="grid-cell-value">12</div><div class="grid-cell-sub">Q1 consulting + advisory</div></div>
+    <div class="grid-cell"><div class="grid-cell-label">Newsletter Readers</div><div class="grid-cell-value">2.4K</div><div class="grid-cell-sub">+18% this quarter</div></div>
+    <div class="grid-cell"><div class="grid-cell-label">Avg Read Time</div><div class="grid-cell-value">6:40</div><div class="grid-cell-sub">People are staying in</div></div>
+  </div>
+  <div class="section-label"><div class="section-label-inner">WHAT MOVED THIS CYCLE</div></div>
+  <div class="items">
+    <div class="item"><div class="item-marker"></div><div class="item-content"><div class="item-title">First thing that shipped or happened</div><div class="item-desc">Short description. What it was, what it means for the reader, why it matters that it's done. Two sentences maximum.</div><span class="item-tag">Delivered</span></div></div>
+    <div class="item"><div class="item-marker"></div><div class="item-content"><div class="item-title">Second milestone or decision made</div><div class="item-desc">This is the one that was harder than it looked. Name the friction. It makes the delivery feel earned.</div><span class="item-tag">In Motion</span></div></div>
+    <div class="item"><div class="item-marker"></div><div class="item-content"><div class="item-title">What's coming next — and why it matters</div><div class="item-desc">End with forward motion. The reader should feel the momentum building. Leave them wanting to be in the room.</div><span class="item-tag">Next</span></div></div>
+  </div>
+  <div class="cta-bar">
+    <div class="cta-bar-left"><div class="cta-bar-title">WANT THE FULL FRAMEWORK?</div><div class="cta-bar-sub">The Infrastructure Audit — free, 15 minutes</div></div>
+    <div class="cta-bar-right"><a href="https://ldw.build" class="cta-btn">GET IT →</a></div>
+  </div>
+  <div class="footer">
+    <div class="footer-name">LONNELL WILLIAMS</div>
+    <div class="footer-tagline">Builder. Operator. Author.</div>
+    <div class="footer-links"><a href="https://ldw.build">ldw.build</a> &nbsp;·&nbsp; <a href="https://buildwithldw.substack.com">Arise & Build</a> &nbsp;·&nbsp; <a href="%unsubscribe_url%">Unsubscribe</a></div>
+  </div>
+</div>
+</body>
+</html>
