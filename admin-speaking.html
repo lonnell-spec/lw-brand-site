@@ -122,8 +122,8 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
           <h2 style="font-family:'Thunder',sans-serif; font-size:28px; letter-spacing:2px; color:var(--off-white); margin:0;">SPEAKING RIDER</h2>
         </div>
         <div style="display:flex; gap:12px;">
-          <a href="https://drive.google.com/file/d/1AqPJV52xWeVv_ExIlEKf92ghWIacBwCs/view?usp=sharing" target="_blank" rel="noopener" style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#0D0D0D; background:var(--copper); padding:10px 18px; text-decoration:none;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">OPEN PDF</a>
-          <a href="https://drive.google.com/file/d/1AqPJV52xWeVv_ExIlEKf92ghWIacBwCs/view?usp=sharing" download style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--copper); background:transparent; border:1px solid rgba(193,127,89,0.4); padding:10px 18px; text-decoration:none;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">DOWNLOAD</a>
+          <a href="https://riqdcirsmckubkdfbtoj.supabase.co/storage/v1/object/public/documents/LDW_Speaking_Rider_v4.pdf" target="_blank" rel="noopener" style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#0D0D0D; background:var(--copper); padding:10px 18px; text-decoration:none;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">OPEN PDF</a>
+          <a href="https://riqdcirsmckubkdfbtoj.supabase.co/storage/v1/object/public/documents/LDW_Speaking_Rider_v4.pdf" download style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--copper); background:transparent; border:1px solid rgba(193,127,89,0.4); padding:10px 18px; text-decoration:none;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">DOWNLOAD</a>
         </div>
       </div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
@@ -136,8 +136,8 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
             <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">GLOBAL ENTRY</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">160549322</td></tr>
             <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">TSA PRECHECK</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">TT11YT1HH</td></tr>
             <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">DELTA SKYMILES</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">9266959478</td></tr>
-            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">PRIMARY CONTACT</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8feefcfce6fcfbeee1fbcfe3ebf8a1edfae6e3eb">[email&#160;protected]</a></td></tr>
-            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">DIRECT</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5c303332323930301c30382b723e29353038">[email&#160;protected]</a></td></tr>
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">PRIMARY CONTACT</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">assistant@ldw.build</td></tr>
+            <tr><td style="font-family:'Space Mono',monospace; font-size:10px; color:var(--concrete); padding:5px 0;">DIRECT</td><td style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--off-white); text-align:right; padding:5px 0;">lonnell@ldw.build</td></tr>
           </table>
         </div>
         <div style="background:var(--warm-black); border:1px solid rgba(193,127,89,0.15); padding:24px;">
@@ -207,7 +207,7 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 if (sessionStorage.getItem('ldw_admin') !== 'true') { window.location.href = '/admin.html'; }
 
 const SUPA_URL    = 'https://riqdcirsmckubkdfbtoj.supabase.co';
@@ -352,4 +352,13 @@ async function triggerAction(inquiryId, action, btn) {
         '<td>' + d + '</td>' +
         '<td>' + statusBadge(r.status || 'pending') + '</td>' +
         '</tr>' +
-        '<tr><td colspan="8" style="padding:0 0 8px 
+        '<tr><td colspan="8" style="padding:0 0 8px 0; border-bottom: 1px solid rgba(242,240,235,0.05);">' + decisionPanel(r) + '</td></tr>';
+    }).join('');
+  } catch(e) {
+    document.getElementById('inq-tbody').innerHTML = '<tr><td colspan="8" class="inq-empty">ERROR LOADING INQUIRIES</td></tr>';
+    document.getElementById('inq-count').textContent = 'ERROR';
+  }
+})();
+</script>
+</body>
+</html>
