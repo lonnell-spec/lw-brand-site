@@ -6,7 +6,7 @@
 <title>Outstanding Items — Admin | LDW</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=thunder@800,700,600&display=swap" rel="stylesheet">
 <style>
 :root { --obsidian: #0D0D0D; --warm-black: #1A1714; --off-white: #F2F0EB; --concrete: #8A8A8A; --copper: #C17F59; --copper-light: #D4956A; --signal: #00E676; --signal-red: #E85D3A; --amber: #F5A623; }
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -15,7 +15,8 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
 /* ── NAV ── */
 .site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; background: rgba(13,13,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(242,240,235,0.06); }
 .site-nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--off-white); }
-.site-nav-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 4px; }
+.site-nav-name { font-family: 'Thunder', sans-serif;
+        font-weight: 700; font-size: 18px; letter-spacing: 1px; }
 .site-nav-links { display: flex; gap: 32px; align-items: center; }
 .site-nav-links a { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.3s; }
 .site-nav-links a:hover { color: var(--off-white); }
@@ -34,14 +35,16 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
 .admin-sub-back { display: inline-flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); text-decoration: none; margin-bottom: 24px; transition: color 0.3s; }
 .admin-sub-back:hover { color: var(--copper-light); }
 .admin-sub-eyebrow { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--copper); margin-bottom: 12px; }
-.admin-sub-title { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 6px; line-height: 1; }
+.admin-sub-title { font-family: 'Thunder', sans-serif;
+        font-weight: 700; font-size: 42px; letter-spacing: 1px; line-height: 1; }
 .admin-sub-title .accent { color: var(--copper); }
 .admin-sub-subtitle { font-weight: 300; font-size: 15px; color: var(--concrete); margin-top: 12px; line-height: 1.6; }
 
 /* ── STATS BAR ── */
 .stats-bar { display: flex; gap: 1px; margin: 0; background: rgba(242,240,235,0.04); border-bottom: 1px solid rgba(242,240,235,0.06); }
 .stat-block { flex: 1; padding: 20px 24px; text-align: center; }
-.stat-number { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px; line-height: 1; }
+.stat-number { font-family: 'Thunder', sans-serif;
+        font-weight: 700; font-size: 36px; letter-spacing: 2px; line-height: 1; }
 .stat-number.red { color: var(--signal-red); }
 .stat-number.amber { color: var(--amber); }
 .stat-number.green { color: var(--signal); }
@@ -50,10 +53,12 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
 
 /* ── CONTENT ── */
 .admin-content { padding: 40px 48px 80px; max-width: 1000px; }
-.admin-content h1 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 4px; text-transform: uppercase; margin: 56px 0 8px; color: var(--off-white); }
+.admin-content h1 { font-family: 'Thunder', sans-serif;
+        font-weight: 700; font-size: 28px; letter-spacing: 1px; text-transform: uppercase; margin: 56px 0 8px; color: var(--off-white); }
 .admin-content h1:first-child { margin-top: 0; }
 .section-desc { font-weight: 300; font-size: 13px; color: var(--concrete); margin-bottom: 20px; line-height: 1.6; }
-.admin-content h2 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; text-transform: uppercase; margin: 36px 0 12px; color: var(--off-white); }
+.admin-content h2 { font-family: 'Thunder', sans-serif;
+        font-weight: 700; font-size: 22px; letter-spacing: 3px; text-transform: uppercase; margin: 36px 0 12px; color: var(--off-white); }
 .admin-content h3 { font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; margin: 24px 0 8px; color: var(--off-white); }
 .admin-content p { font-weight: 300; font-size: 15px; line-height: 1.7; color: var(--concrete); margin-bottom: 16px; }
 .admin-content strong { color: var(--off-white); font-weight: 600; }
@@ -373,7 +378,7 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
 
       <li class="item-card">
         <div class="item-title"><span class="badge badge-open">Waiting</span> Gmail Forwarding</div>
-        <div class="item-desc">Forward <code>lonnell@ldw.build</code> to personal email. Google was blocking verification on new account &mdash; retry via Settings &rarr; Forwarding and POP/IMAP &rarr; Add forwarding address.</div>
+        <div class="item-desc">Forward <code><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bed2d1d0d0dbd2d2fed2dac990dccbd7d2da">[email&#160;protected]</a></code> to personal email. Google was blocking verification on new account &mdash; retry via Settings &rarr; Forwarding and POP/IMAP &rarr; Add forwarding address.</div>
       </li>
 
       <li class="item-card">
@@ -421,7 +426,7 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
       <li>Brand assets exported (4 logos + 6 book covers)</li>
       <li>YouTube URL verified &mdash; <code>youtube.com/@AnyEveryOrNothingAtAll</code></li>
       <li>Threads handle verified &mdash; <code>threads.com/@lonnelldwilliams</code></li>
-      <li>Google Workspace for @ldw.build &mdash; <code>lonnell@ldw.build</code> operational</li>
+      <li>Google Workspace for @ldw.build &mdash; <code><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="573b383939323b3b173b33207935223e3b33">[email&#160;protected]</a></code> operational</li>
       <li>ConvertKit fully deprecated &mdash; removed from all triggers, edge function retired</li>
       <li>ActiveCampaign migration &mdash; List 3 (Arise &amp; Build) active</li>
       <li>sync-email edge function live &mdash; newsletter + speaking inquiries &rarr; AC</li>
@@ -557,17 +562,4 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
   <!-- ── FOOTER ── -->
   <div class="admin-sub-footer">
     <a href="/admin.html">&larr; Portal</a>
-    <span>Last audit: March 7, 2026 — Session 2</span>
-    <a href="#">Top &uarr;</a>
-  </div>
-</div>
-
-<script>
-// Auth gate
-(function(){
-  if(sessionStorage.getItem('ldw_admin')!=='true'){window.location.href='/admin.html';}
-})();
-</script>
-
-</body>
-</html>
+    <span>Last audit:

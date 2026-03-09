@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quick Start — LDW Admin</title>
 <link href="https://api.fontshare.com/v2/css?f[]=thunder@800,700,600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root { --obsidian:#0D0D0D; --warm-black:#1A1714; --copper:#C17F59; --signal:#E85D3A; --off-white:#F2F0EB; --concrete:#8A8A8A; }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -16,13 +15,16 @@
   .nav-back:hover{color:var(--off-white)}
   .wrap{max-width:800px;margin:0 auto;padding:96px 40px 80px}
   .page-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--copper);margin-bottom:16px}
-  h1{font-family:'Thunder',sans-serif;font-weight:700;font-size:clamp(40px,6vw,72px);letter-spacing:1px;line-height:1;margin-bottom:32px}
+  h1{font-family:'Thunder',sans-serif;
+        font-weight: 700;font-size:clamp(40px,6vw,72px);letter-spacing:3px;line-height:1;margin-bottom:32px}
   .intro{font-size:16px;color:rgba(242,240,235,0.7);max-width:600px;margin-bottom:48px;line-height:1.75}
   .section{margin-bottom:48px}
-  .section-title{font-family:'Thunder',sans-serif;font-weight:700;font-size:28px;letter-spacing:1px;color:var(--copper);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(193,127,89,0.2)}
+  .section-title{font-family:'Thunder',sans-serif;
+        font-weight: 700;font-size:28px;letter-spacing:2px;color:var(--copper);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(193,127,89,0.2)}
   .step{display:flex;gap:20px;margin-bottom:20px;padding:20px 24px;background:var(--warm-black);border:1px solid rgba(193,127,89,0.1)}
   .step:hover{border-color:rgba(193,127,89,0.3)}
-  .step-num{font-family:'Thunder',sans-serif;font-weight:700;font-size:36px;color:var(--copper);opacity:0.4;line-height:1;min-width:36px}
+  .step-num{font-family:'Thunder',sans-serif;
+        font-weight: 700;font-size:36px;color:var(--copper);opacity:0.4;line-height:1;min-width:36px}
   .step-body{}
   .step-title{font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;color:var(--off-white);margin-bottom:6px;letter-spacing:0.3px}
   .step-desc{font-size:13px;color:var(--concrete);line-height:1.65}
@@ -38,39 +40,98 @@
 </style>
 </head>
 <body>
+
 <nav class="admin-nav">
   <a href="/admin.html" class="nav-brand">LDW Admin</a>
   <a href="/admin.html" class="nav-back">← Back to Portal</a>
 </nav>
+
 <div class="wrap">
   <div class="page-label">Admin Portal</div>
   <h1>QUICK<br>START</h1>
   <p class="intro">Everything you need to manage ldw.build from day one. Content updates, subscriber views, speaking inquiries, and YouTube — all in one place.</p>
+
   <div class="section">
     <div class="section-title">HOW THE SITE WORKS</div>
-    <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Notion Is the CMS</div><div class="step-desc">Photos and Content Hub items are managed in Notion. The site syncs automatically every 15 minutes.</div></div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Instagram Syncs via Zapier</div><div class="step-desc">Every new Instagram post fires a Zapier webhook to Supabase to homepage grid. No manual work.</div></div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">YouTube Syncs Every 15 Minutes</div><div class="step-desc">YouTube videos pull from the YouTube API on a 15-minute cron. New videos appear automatically.</div></div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Forms Route to Supabase</div><div class="step-desc">Newsletter signups, speaking, and consulting inquiries all route to <code>newsletter_subscribers</code>, <code>speaking_inquiries</code>, and <code>consulting_inquiries</code> tables.</div></div></div>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Notion Is the CMS</div>
+        <div class="step-desc">Photos and Content Hub items are managed in Notion. When you add or update content in the Notion databases, the site syncs automatically every 15 minutes. You never need to touch code.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Instagram Syncs via Zapier</div>
+        <div class="step-desc">Every new Instagram post fires a Zapier webhook → Supabase → homepage grid. No manual work. Just post to Instagram as normal.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">YouTube Syncs Every 15 Minutes</div>
+        <div class="step-desc">YouTube videos pull directly from the YouTube API on a 15-minute cron. New videos appear on the site automatically after they go live on YouTube.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Forms Route to Supabase</div>
+        <div class="step-desc">Newsletter signups, speaking inquiries, and consulting inquiries all route to the <code>newsletter_subscribers</code>, <code>speaking_inquiries</code>, and <code>consulting_inquiries</code> tables. View them in the admin portal.</div>
+      </div>
+    </div>
   </div>
+
   <div class="section">
     <div class="section-title">COMMON TASKS</div>
-    <div class="step"><div class="step-num">→</div><div class="step-body"><div class="step-title">Add a photo</div><div class="step-desc">Notion → Photos DB → Add a row. Appears on the site within 15 minutes.</div></div></div>
-    <div class="step"><div class="step-num">→</div><div class="step-body"><div class="step-title">View speaking inquiries</div><div class="step-desc">Admin Portal → Speaking Inquiries. All form submissions appear in real time.</div></div></div>
-    <div class="step"><div class="step-num">→</div><div class="step-body"><div class="step-title">View newsletter subscribers</div><div class="step-desc">Admin Portal → Newsletter Subscribers. Shows all email signups with source and timestamp.</div></div></div>
+    <div class="step">
+      <div class="step-num">→</div>
+      <div class="step-body">
+        <div class="step-title">Add a photo to the gallery</div>
+        <div class="step-desc">Go to Notion → Photos DB → Add a row with the photo URL, caption, and category. It will appear on the site within 15 minutes.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">→</div>
+      <div class="step-body">
+        <div class="step-title">View new speaking inquiries</div>
+        <div class="step-desc">Go to Admin Portal → Speaking Inquiries. All form submissions appear there in real time.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">→</div>
+      <div class="step-body">
+        <div class="step-title">View newsletter subscribers</div>
+        <div class="step-desc">Go to Admin Portal → Newsletter Subscribers. Shows all email signups with source and timestamp.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">→</div>
+      <div class="step-body">
+        <div class="step-title">Check YouTube sync status</div>
+        <div class="step-desc">Go to Admin Portal → YouTube. Shows all synced videos and last sync time.</div>
+      </div>
+    </div>
   </div>
-  <div class="callout"><p><strong>Important:</strong> The admin portal is protected by sessionStorage. Visit <code>/admin.html</code> and enter the portal password. Session lasts until you close the browser tab.</p></div>
+
+  <div class="callout">
+    <p><strong>Important:</strong> The admin portal is protected by sessionStorage. To log in, visit <code>/admin.html</code> and enter the portal password. Your session lasts until you close the browser tab.</p>
+  </div>
+
   <div class="section">
     <div class="section-title">ADMIN SECTIONS</div>
     <div class="link-grid">
+      <a href="/admin-content.html" class="link-card"><div class="link-card-label">Content</div><div class="link-card-title">Content Hub</div></a>
+      <a href="/admin-photos.html" class="link-card"><div class="link-card-label">Media</div><div class="link-card-title">Photo Gallery</div></a>
+      <a href="/admin-youtube.html" class="link-card"><div class="link-card-label">Video</div><div class="link-card-title">YouTube Sync</div></a>
+      <a href="/admin-instagram.html" class="link-card"><div class="link-card-label">Social</div><div class="link-card-title">Instagram Feed</div></a>
       <a href="/admin-speaking.html" class="link-card"><div class="link-card-label">Leads</div><div class="link-card-title">Speaking Inquiries</div></a>
-      <a href="/admin-brand-identity.html" class="link-card"><div class="link-card-label">Brand</div><div class="link-card-title">Brand Identity</div></a>
-      <a href="/admin-site-architecture.html" class="link-card"><div class="link-card-label">Tech</div><div class="link-card-title">Site Architecture</div></a>
-      <a href="/admin-deployment.html" class="link-card"><div class="link-card-label">Deploy</div><div class="link-card-title">Deployment Guide</div></a>
-      <a href="/admin-credentials.html" class="link-card"><div class="link-card-label">Access</div><div class="link-card-title">Credentials</div></a>
-      <a href="/admin-integrations.html" class="link-card"><div class="link-card-label">Data</div><div class="link-card-title">Integrations</div></a>
+      <a href="/admin-newsletter.html" class="link-card"><div class="link-card-label">Email</div><div class="link-card-title">Newsletter Subscribers</div></a>
+      <a href="/admin-analytics.html" class="link-card"><div class="link-card-label">Data</div><div class="link-card-title">Analytics</div></a>
     </div>
   </div>
 </div>
+
 </body>
 </html>

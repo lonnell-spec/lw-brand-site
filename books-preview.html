@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Books Layout Preview — LDW</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&family=Anton&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=thunder@800,700,600&display=swap" rel="stylesheet">
 <style>
   :root {
     --obsidian: #0D0D0D;
@@ -107,7 +107,8 @@
   .zag-cover { width: 100%; background: #0D0D0D; border: 1px solid rgba(193,127,89,0.2); position: relative; display: flex; flex-direction: column; justify-content: space-between; padding: 28px 22px 22px; }
   .zag-top-bar { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--copper); }
   .zag-main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-  .zag-word { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 9vw, 84px); letter-spacing: 4px; color: #F2F0EB; line-height: 0.9; margin-bottom: 18px; }
+  .zag-word { font-family: 'Thunder', sans-serif;
+        font-weight: 700; font-size: clamp(56px, 9vw, 84px); letter-spacing: 1px; color: #F2F0EB; line-height: 0.9; margin-bottom: 18px; }
   .zag-word .dot { color: #E85D3A; }
   .zag-rule { width: 32px; height: 2px; background: var(--copper); margin-bottom: 14px; }
   .zag-sub { font-family: 'Space Mono', monospace; font-size: clamp(6px, 1vw, 8px); letter-spacing: 2px; text-transform: uppercase; color: rgba(242,240,235,0.4); line-height: 1.9; }
@@ -129,7 +130,8 @@
   /* ── BOOK INFO ── */
   .book-info { padding-top: 8px; }
   .book-badge { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; padding: 5px 12px; border: 1px solid rgba(193,127,89,0.3); color: var(--copper); display: inline-block; margin-bottom: 20px; }
-  .book-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 4vw, 56px); letter-spacing: 3px; line-height: 1; margin-bottom: 8px; word-break: break-word; }
+  .book-title { font-family: 'Thunder', sans-serif;
+        font-weight: 700; font-size: clamp(36px, 4vw, 56px); letter-spacing: 3px; line-height: 1; margin-bottom: 8px; word-break: break-word; }
   .book-subtitle { font-size: 15px; font-weight: 300; color: var(--copper); margin-bottom: 24px; letter-spacing: 1px; }
   .book-desc { font-size: 15px; font-weight: 300; color: var(--concrete); line-height: 1.8; max-width: 560px; margin-bottom: 32px; }
   .book-actions { display: flex; gap: 16px; flex-wrap: wrap; }

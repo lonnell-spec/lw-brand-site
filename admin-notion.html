@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Notion CMS — LDW Admin</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=thunder@800,700,600&display=swap" rel="stylesheet">
 <style>
   :root{--obsidian:#0D0D0D;--warm-black:#1A1714;--copper:#C17F59;--signal:#E85D3A;--off-white:#F2F0EB;--concrete:#8A8A8A}
   *{box-sizing:border-box;margin:0;padding:0}
@@ -15,10 +15,12 @@
   .nav-back:hover{color:var(--off-white)}
   .wrap{max-width:800px;margin:0 auto;padding:96px 40px 80px}
   .page-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--copper);margin-bottom:16px}
-  h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,72px);letter-spacing:3px;line-height:1;margin-bottom:32px}
+  h1{font-family:'Thunder',sans-serif;
+        font-weight: 700;font-size:clamp(40px,6vw,72px);letter-spacing:3px;line-height:1;margin-bottom:32px}
   .intro{font-size:16px;color:rgba(242,240,235,0.7);max-width:600px;margin-bottom:48px;line-height:1.75}
   .section{margin-bottom:48px}
-  .section-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--copper);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(193,127,89,0.2)}
+  .section-title{font-family:'Thunder',sans-serif;
+        font-weight: 700;font-size:28px;letter-spacing:2px;color:var(--copper);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(193,127,89,0.2)}
   .db-card{background:var(--warm-black);border:1px solid rgba(193,127,89,0.15);padding:24px;margin-bottom:16px}
   .db-card:hover{border-color:rgba(193,127,89,0.35)}
   .db-name{font-family:'DM Sans',sans-serif;font-weight:700;font-size:15px;color:var(--off-white);margin-bottom:4px}
@@ -109,7 +111,7 @@
   <!-- ===== SOCIAL TEMPLATES ===== -->
   <div style="margin-top:48px;">
     <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--copper);margin-bottom:8px;">Brand Assets</div>
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;margin-bottom:8px;">SOCIAL POST TEMPLATES</div>
+    <div style="font-family:'Thunder',sans-serif;font-size:28px;letter-spacing:4px;margin-bottom:8px;">SOCIAL POST TEMPLATES</div>
     <p style="font-weight:300;font-size:13px;color:var(--concrete);margin-bottom:28px;line-height:1.6;">Bold minimalism series — text only, 1080×1080. Four template directions. Full reference at <a href="/admin-social-templates.html" style="color:var(--copper);">admin-social-templates.html</a>.</p>
 
     <style>
@@ -121,27 +123,33 @@
       .mp { width:100%; aspect-ratio:1; position:relative; overflow:hidden; flex-shrink:0; }
       .mp-a { background:#0D0D0D; }
       .mp-a::after { content:''; position:absolute; top:0; left:57%; width:1px; height:100%; background:rgba(193,127,89,0.35); transform:skewX(-35deg); transform-origin:top left; }
-      .mp-a-t { position:absolute; bottom:20%; left:12%; font-family:'Bebas Neue',sans-serif; line-height:0.85; }
+      .mp-a-t { position:absolute; bottom:20%; left:12%; font-family:'Thunder',sans-serif;
+        font-weight: 700; line-height:0.85; }
       .mp-a-t span:nth-child(1) { display:block; font-size:32px; color:#F2F0EB; }
       .mp-a-t span:nth-child(2) { display:block; font-size:32px; color:#C17F59; }
       .mp-a-t span:nth-child(3) { display:block; font-size:32px; color:rgba(242,240,235,0.1); }
       .mp-b { background:#F2F0EB; }
       .mp-b-bar { position:absolute; top:0; left:0; right:0; height:18px; background:#0D0D0D; }
-      .mp-b-t { position:absolute; bottom:22%; left:10%; font-family:'Bebas Neue',sans-serif; line-height:0.82; }
+      .mp-b-t { position:absolute; bottom:22%; left:10%; font-family:'Thunder',sans-serif;
+        font-weight: 700; line-height:0.82; }
       .mp-b-t span:nth-child(1) { display:block; font-size:30px; color:#0D0D0D; }
       .mp-b-t span:nth-child(2) { display:block; font-size:30px; color:#E85D3A; }
       .mp-b-t span:nth-child(3) { display:block; font-size:30px; -webkit-text-stroke:1px #0D0D0D; color:transparent; }
       .mp-c { background:#C17F59; }
-      .mp-c-t { position:absolute; bottom:20%; left:12%; font-family:'Bebas Neue',sans-serif; line-height:0.85; }
+      .mp-c-t { position:absolute; bottom:20%; left:12%; font-family:'Thunder',sans-serif;
+        font-weight: 700; line-height:0.85; }
       .mp-c-t span:nth-child(1) { display:block; font-size:30px; color:#0D0D0D; }
       .mp-c-t span:nth-child(2) { display:block; font-size:30px; color:#F2F0EB; }
       .mp-c-t span:nth-child(3) { display:block; font-size:30px; color:rgba(0,0,0,0.25); }
       .mp-d { background:#0D0D0D; border-top:2px solid #C17F59; }
       .mp-d-t { position:absolute; left:0; right:0; top:50%; transform:translateY(-50%); }
-      .mp-d-t span:nth-child(1) { display:block; font-family:'Bebas Neue',sans-serif; font-size:30px; color:#F2F0EB; padding-left:12%; }
+      .mp-d-t span:nth-child(1) { display:block; font-family:'Thunder',sans-serif;
+        font-weight: 700; font-size:30px; color:#F2F0EB; padding-left:12%; }
       .mp-d-t span:nth-child(2) { display:block; height:1px; background:rgba(193,127,89,0.3); margin:4px 12%; }
-      .mp-d-t span:nth-child(3) { display:block; font-family:'Bebas Neue',sans-serif; font-size:30px; color:#E85D3A; padding-left:12%; }
-      .mp-d-t span:nth-child(4) { display:block; font-family:'Bebas Neue',sans-serif; font-size:30px; -webkit-text-stroke:1px rgba(242,240,235,0.2); color:transparent; padding-left:12%; }
+      .mp-d-t span:nth-child(3) { display:block; font-family:'Thunder',sans-serif;
+        font-weight: 700; font-size:30px; color:#E85D3A; padding-left:12%; }
+      .mp-d-t span:nth-child(4) { display:block; font-family:'Thunder',sans-serif;
+        font-weight: 700; font-size:30px; -webkit-text-stroke:1px rgba(242,240,235,0.2); color:transparent; padding-left:12%; }
     </style>
 
     <div class="notion-tpl-grid">
