@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LDW Email — Template 03: EDITORIAL</title>
+<style>
+  @import url('https://api.fontshare.com/v2/css?f[]=thunder@800,700,600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;700&family=Space+Mono:wght@400;700&display=swap');
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes dropIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes scaleX { from { transform: scaleX(0); transform-origin: left; } to { transform: scaleX(1); transform-origin: left; } }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background: #E8E6E0; font-family: 'DM Sans', Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  .email-wrap { max-width: 580px; margin: 0 auto; background: #F2F0EB; }
+  .header { padding: 28px 40px; display: flex; justify-content: space-between; align-items: center; animation: dropIn 0.5s ease both; }
+  .header-brand { font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 1px; color: #0D0D0D; }
+  .header-meta { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: #8A8A8A; }
+  .copper-rule { height: 2px; background: #C17F59; transform: scaleX(0); transform-origin: left; animation: scaleX 0.8s cubic-bezier(0.16,1,0.3,1) 0.2s both; }
+  .hero { padding: 48px 40px 36px; background: #0D0D0D; animation: fadeUp 0.7s ease 0.3s both; }
+  .hero-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: #C17F59; margin-bottom: 16px; }
+  .hero-headline { font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 54px; line-height: 1.0; letter-spacing: 1px; color: #F2F0EB; margin-bottom: 20px; }
+  .hero-sub { font-size: 14px; font-weight: 300; color: rgba(242,240,235,0.55); font-family: 'Space Mono', monospace; letter-spacing: 1px; border-left: 2px solid rgba(193,127,89,0.5); padding-left: 14px; }
+  .content { padding: 40px 40px 28px; animation: fadeUp 0.7s ease 0.45s both; }
+  .content-p { font-size: 15px; font-weight: 300; line-height: 1.9; color: #1A1714; margin-bottom: 20px; }
+  .content-p strong { font-weight: 700; color: #0D0D0D; }
+  .pull-quote { margin: 0 40px 36px; padding: 32px 36px; background: #0D0D0D; position: relative; animation: fadeUp 0.7s ease 0.55s both; }
+  .pull-quote::before { content: '"'; position: absolute; top: -12px; left: 28px; font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 80px; color: #C17F59; line-height: 1; opacity: 0.5; }
+  .pull-quote-text { font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 1px; line-height: 1.4; color: #F2F0EB; margin-bottom: 12px; }
+  .pull-quote-attr { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: #C17F59; }
+  .section-rule { margin: 0 40px 28px; height: 1px; background: rgba(0,0,0,0.08); }
+  .points { padding: 0 40px 36px; animation: fadeUp 0.7s ease 0.65s both; }
+  .point { padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.06); display: flex; gap: 18px; align-items: flex-start; }
+  .point:last-child { border-bottom: none; padding-bottom: 0; }
+  .point-num { font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 24px; color: #C17F59; min-width: 28px; line-height: 1.2; }
+  .point-title { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; color: #0D0D0D; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .point-body { font-size: 13px; font-weight: 300; color: #5A5A5A; line-height: 1.7; }
+  .cta-wrap { padding: 4px 40px 44px; text-align: center; animation: fadeUp 0.7s ease 0.75s both; }
+  .cta-btn { display: inline-block; background: #0D0D0D; color: #F2F0EB; font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; padding: 16px 40px; margin-bottom: 14px; }
+  .cta-note { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1.5px; color: #8A8A8A; text-transform: uppercase; }
+  .footer { padding: 24px 40px; border-top: 2px solid #0D0D0D; animation: dropIn 0.5s ease 0.9s both; }
+  .footer-name { font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 1px; color: #0D0D0D; margin-bottom: 3px; }
+  .footer-tagline { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; color: #C17F59; text-transform: uppercase; margin-bottom: 16px; }
+  .footer-links { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 1.5px; color: #8A8A8A; text-transform: uppercase; }
+  .footer-links a { color: #8A8A8A; text-decoration: none; }
+  .footer-links a:hover { color: #C17F59; }
+  @media (max-width: 600px) {
+    .header, .content, .cta-wrap, .footer, .points, .hero { padding-left: 24px; padding-right: 24px; }
+    .pull-quote { margin: 0 24px 28px; }
+    .section-rule { margin: 0 24px 24px; }
+    .hero-headline { font-size: 40px; }
+  }
+</style>
+</head>
+<body>
+<div class="email-wrap">
+  <div class="header">
+    <div class="header-brand">LDW</div>
+    <div class="header-meta">[Month Year] &nbsp;·&nbsp; Arise & Build</div>
+  </div>
+  <div class="copper-rule"></div>
+  <div class="hero">
+    <div class="hero-label">ARISE & BUILD — ISSUE [XX]</div>
+    <h1 class="hero-headline">THE HEADLINE<br>GOES HERE.</h1>
+    <div class="hero-sub">The first sentence that makes the reader stop scrolling.</div>
+  </div>
+  <div class="content">
+    <p class="content-p">This template works for longer-form issues where you want breathing room. Light background, dark hero block, copper accents. Architectural. The kind of email that feels like a journal entry and a boardroom memo at the same time.</p>
+    <p class="content-p"><strong>Name the thing.</strong> The reader already knows something is off. Your job isn't to tell them what's wrong — it's to tell them you've seen it too, and here's what you did about it.</p>
+  </div>
+  <div class="pull-quote">
+    <div class="pull-quote-text">INFORMED LEADERS MAKE BETTER DECISIONS. THAT'S NOT A LACK OF FAITH — IT'S STEWARDSHIP.</div>
+    <div class="pull-quote-attr">— LONNELL D. WILLIAMS</div>
+  </div>
+  <div class="section-rule"></div>
+  <div class="points">
+    <div class="point"><div class="point-num">01</div><div class="point-content"><div class="point-title">FIRST THING YOU WANT THEM TO KNOW</div><div class="point-body">Short. Specific. One idea per point. If this takes more than two sentences you've already lost them.</div></div></div>
+    <div class="point"><div class="point-num">02</div><div class="point-content"><div class="point-title">SECOND THING — THE HARDER ONE</div><div class="point-body">This is where most people stop reading. Don't let them. The second point should feel like a reveal.</div></div></div>
+    <div class="point"><div class="point-num">03</div><div class="point-content"><div class="point-title">THE DIRECTION FORWARD</div><div class="point-body">Not motivation. Not inspiration. A next step that is specific enough that they can do it today.</div></div></div>
+  </div>
+  <div class="cta-wrap">
+    <a href="#" class="cta-btn">READ THE FULL ISSUE →</a><br>
+    <span class="cta-note">ldw.build &nbsp;·&nbsp; Arise & Build Newsletter</span>
+  </div>
+  <div class="footer">
+    <div class="footer-name">LONNELL WILLIAMS</div>
+    <div class="footer-tagline">Builder. Operator. Author.</div>
+    <div class="footer-links">
+      <a href="https://ldw.build">ldw.build</a> &nbsp;·&nbsp;
+      <a href="https://buildwithldw.substack.com">Substack</a> &nbsp;·&nbsp;
+      <a href="%unsubscribe_url%">Unsubscribe</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
