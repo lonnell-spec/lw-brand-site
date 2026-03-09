@@ -1,0 +1,19 @@
+{
+  "redirects": [
+    {
+      "source": "/LDW_Speaking_Rider_v4.pdf",
+      "destination": "https://riqdcirsmckubkdfbtoj.supabase.co/storage/v1/object/public/documents/LDW_Speaking_Rider_v4.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/ldw-infrastructure-scorecard.pdf",
+      "destination": "https://riqdcirsmckubkdfbtoj.supabase.co/storage/v1/object/public/documents/ldw-infrastructure-scorecard.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/ldw-infrastructure-audit.pdf",
+      "destination": "https://riqdcirsmckubkdfbtoj.supabase.co/storage/v1/object/public/documents/ldw-infrastructure-audit.pdf",
+      "permanent": false
+    }
+  ]
+}
