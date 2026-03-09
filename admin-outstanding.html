@@ -141,7 +141,7 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
   <!-- ── STATS ── -->
   <div class="stats-bar">
     <div class="stat-block"><div class="stat-number red">5</div><div class="stat-label">Critical</div></div>
-    <div class="stat-block"><div class="stat-number amber">14</div><div class="stat-label">Open</div></div>
+    <div class="stat-block"><div class="stat-number amber">18</div><div class="stat-label">Open</div></div>
     <div class="stat-block"><div class="stat-number copper">8</div><div class="stat-label">Your Action</div></div>
     <div class="stat-block"><div class="stat-number green">39</div><div class="stat-label">Completed</div></div>
   </div>
@@ -356,7 +356,45 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
     <hr>
 
     <!-- ═══════════════════════════════════════════════ -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--  SECTION: MARCH 8 — TOMORROW'S DECISIONS       -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <h1>Tomorrow &mdash; Brand &amp; Site Decisions</h1>
+    <p class="section-desc">Added March 8, 2026. Four items that need a decision or build session before moving forward.</p>
+
+    <ul class="item-list">
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-critical">Decision</span> Brand Positioning — Leadership Development vs. Ministry Framing</div>
+        <div class="item-desc">Full argument built, destroyed, and rebuilt in session (Mar 8). Verdict: lean into <strong>organizational operator + leadership development</strong> as the primary frame. Ministry is the proof arena, not the identity. Once confirmed, update: hero bio, speaking page intro, About section, and all meta descriptions. The title is Executive Pastor — the work is organizational architecture. The brand should reflect the work, not the title.</div>
+        <div class="source-tag">Mar 8 Session &middot; Argument complete, decision pending</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Open</span> Homepage Content Section — Image Cropping</div>
+        <div class="item-desc">Video/content cards in the "Watch. Listen." section: thumbnail images don't fill their squares properly. Fix <code>object-fit: cover</code> on thumbnail containers so all cards render consistently regardless of source image ratio. Visible in screenshot taken Mar 8 at 11:01 PM.</div>
+        <div class="source-tag">Mar 8 Session &middot; Visual bug confirmed in screenshot</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Open</span> YouTube Content Audit + Homepage Sync</div>
+        <div class="item-desc">More videos exist on the channel than are showing on the homepage grid. Audit what's in the <code>site_youtube</code> Supabase table vs. what's actually published on the channel. Ensure categories map correctly (Message / Leadership / Behind the Build / How to ZAG) and that the latest content is surfaced. May need to re-run sync or update category tagging logic in the edge function.</div>
+        <div class="source-tag">Mar 8 Session &middot; Channel has more content than site shows</div>
+      </li>
+
+      <li class="item-card">
+        <div class="item-title"><span class="badge badge-open">Open</span> Consolidate All LDW.Build Notion Pages into One Hub</div>
+        <div class="item-desc">Multiple ldw.build-related pages are scattered across Notion with no clear hierarchy: Operations Manual, Operations Manual v2, Integrations Map, Site Architecture, Phase 2 Roadmap, Outstanding Items, Brand Audit, Scripts, Reels, etc. Move them all under a single parent page. Either rename <strong>LDW Brand Site</strong> as the master command center or create a dedicated <strong>LDW.Build — Command Center</strong> page. Everything under one roof.</div>
+        <div class="source-tag">Mar 8 Session &middot; Organizational cleanup</div>
+      </li>
+
+    </ul>
+
+    <hr>
+
     <!--  SECTION 4: NEEDS YOUR ACTION                  -->
+
     <!-- ═══════════════════════════════════════════════ -->
 
     <h1>Needs Your Action</h1>
