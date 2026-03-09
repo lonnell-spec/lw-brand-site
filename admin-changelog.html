@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Changelog — LDW Admin</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=thunder@800,700,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{--obsidian:#0D0D0D;--warm-black:#1A1714;--copper:#C17F59;--signal:#E85D3A;--off-white:#F2F0EB;--concrete:#8A8A8A}
   *{box-sizing:border-box;margin:0;padding:0}
@@ -15,7 +16,7 @@
   .nav-back:hover{color:var(--off-white)}
   .wrap{max-width:760px;margin:0 auto;padding:96px 40px 80px}
   .page-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--copper);margin-bottom:16px}
-  h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,72px);letter-spacing:3px;line-height:1;margin-bottom:32px}
+  h1{font-family:'Thunder',sans-serif;font-weight:700;font-size:clamp(40px,6vw,72px);letter-spacing:1px;line-height:1;margin-bottom:32px}
   .intro{font-size:15px;color:rgba(242,240,235,0.7);max-width:560px;margin-bottom:48px;line-height:1.75}
   .entry{display:grid;grid-template-columns:120px 1fr;gap:32px;padding:28px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
   .entry:last-child{border-bottom:none}
@@ -34,94 +35,56 @@
 </style>
 </head>
 <body>
-
 <nav class="admin-nav">
   <a href="/admin.html" class="nav-brand">LDW Admin</a>
   <a href="/admin.html" class="nav-back">← Back to Portal</a>
 </nav>
-
 <div class="wrap">
   <div class="page-label">Admin Portal</div>
   <h1>SITE<br>CHANGELOG</h1>
-  <p class="intro">A running log of what's been built, fixed, and deployed on ldw.build.</p>
-
+  <p class="intro">A running log of what has been built, fixed, and deployed on ldw.build.</p>
+  <div class="entry">
+    <div class="entry-date">Mar 8, 2026</div>
+    <div class="entry-body">
+      <div class="entry-version">v2.6</div>
+      <div class="entry-title">Font Migration — Bebas Neue to Thunder</div>
+      <ul class="entry-items">
+        <li>Migrated display font from Bebas Neue (Google Fonts) to Thunder 700/800 (Fontshare) across all 26 HTML files</li>
+        <li>Font import updated on every page to api.fontshare.com Thunder CDN</li>
+        <li>Letter-spacing tightened from 4-6px to 0-1px for display blocks</li>
+        <li>Font-weight 700 explicitly set on all Thunder CSS rules</li>
+        <li>All documentation and brand board updated to reference Thunder</li>
+        <li>Notion Brand Identity page updated to reflect new font system</li>
+        <li>Book covers excluded from migration per brand decision</li>
+      </ul>
+    </div>
+  </div>
   <div class="entry">
     <div class="entry-date">Mar 5, 2026</div>
     <div class="entry-body">
       <div class="entry-version">v2.5</div>
       <div class="entry-title">AI-Friendly Content Layer + Admin Expansion</div>
       <ul class="entry-items">
-        <li>Added llms.txt, robots.txt, sitemap.xml for AI crawler optimization (GEO layer)</li>
-        <li>Added /content/ directory with 6 machine-readable markdown pages</li>
-        <li>Built articles.html — Substack archive RSS feed on ldw.build domain</li>
+        <li>Added llms.txt, robots.txt, sitemap.xml for AI crawler optimization</li>
+        <li>Built articles.html — Substack archive on ldw.build domain</li>
         <li>Added admin-quick-start.html, admin-notion.html, admin-changelog.html</li>
-        <li>Fixed Supabase credentials in books.html (wrong project ID resolved)</li>
-        <li>Corrected books.html table name from newsletter_signups to newsletter_subscribers</li>
+        <li>Fixed Supabase credentials and table names in books.html</li>
       </ul>
     </div>
   </div>
-
   <div class="entry">
-    <div class="entry-date">Mar 4, 2026</div>
-    <div class="entry-body">
-      <div class="entry-version">v2.4</div>
-      <div class="entry-title">Mobile Responsive + LinkedIn Footer Fix</div>
-      <ul class="entry-items">
-        <li>Full mobile responsive pass on index.html, speaking.html, media.html, books.html, vantage.html</li>
-        <li>Fixed LinkedIn footer URL (was pointing to wrong domain)</li>
-        <li>Built books alternating layout preview (AENA left / ZAG right / Staff left)</li>
-        <li>Added meta descriptions to all 5 public pages (SEO pass)</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="entry">
-    <div class="entry-date">Mar 3, 2026</div>
-    <div class="entry-body">
-      <div class="entry-version">v2.3</div>
-      <div class="entry-title">Admin Portal Full Audit</div>
-      <ul class="entry-items">
-        <li>Ran full admin portal audit — identified 7 critical issues, 6 unfinished items</li>
-        <li>Fixed ConvertKit API key (invalid key replaced, sync-convertkit edge function updated)</li>
-        <li>Admin portal sessionStorage auth confirmed working across all 11 admin pages</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="entry">
-    <div class="entry-date">Mar 2026</div>
-    <div class="entry-body">
-      <div class="entry-version">v2.0–2.2</div>
-      <div class="entry-title">Phase 2 Foundation — Sync Infrastructure</div>
-      <ul class="entry-items">
-        <li>YouTube auto-sync live — 24 videos pulling from YouTube API every 15 min</li>
-        <li>Instagram auto-sync live — Zapier fires on every new post → Supabase</li>
-        <li>Admin portal built (11 pages) — sessionStorage gated auth</li>
-        <li>Notion sync v20 deployed — syncs Content Hub + Photos only (Instagram/YouTube now direct)</li>
-        <li>All form tables + RLS configured: newsletter_subscribers, speaking_inquiries, consulting_inquiries</li>
-        <li>Book status badges corrected — AENA=Fall 2026, ZAG=Coming Soon</li>
-        <li>Strategic Intelligence document built (ldw-brand-intelligence.html)</li>
-        <li>Site Manager skill created</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="entry">
-    <div class="entry-date">Jan–Feb 2026</div>
+    <div class="entry-date">Jan-Feb 2026</div>
     <div class="entry-body">
       <div class="entry-version">v1.0</div>
       <div class="entry-title">Initial Site Launch</div>
       <ul class="entry-items">
         <li>5 public pages launched: index, speaking, books, media, vantage</li>
         <li>Supabase backend configured with 7 tables</li>
-        <li>DNS via Cloudflare (A record + CNAME), Vercel hosting</li>
-        <li>Vantage executive dashboard (React, demo mode)</li>
-        <li>LDW design system established — Bebas Neue + DM Sans + Space Mono</li>
+        <li>DNS via Cloudflare, Vercel hosting</li>
+        <li>LDW design system established — Thunder + DM Sans + Space Mono</li>
       </ul>
     </div>
   </div>
-
 </div>
-
 </body>
 </html>
