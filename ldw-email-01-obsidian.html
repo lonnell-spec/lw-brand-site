@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LDW Email — Template 01: OBSIDIAN</title>
+<style>
+  @import url('https://api.fontshare.com/v2/css?f[]=thunder@800,700,600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;700&family=Space+Mono:wght@400;700&display=swap');
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes lineGrow { from { width: 0; } to { width: 48px; } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes pulseCopper { 0%,100% { box-shadow: 0 0 0 0 rgba(193,127,89,0); } 50% { box-shadow: 0 0 0 6px rgba(193,127,89,0.18); } }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background: #111; font-family: 'DM Sans', Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  .email-wrap { max-width: 580px; margin: 0 auto; background: #0D0D0D; }
+  .header { padding: 32px 40px 24px; border-bottom: 1px solid rgba(193,127,89,0.15); animation: fadeIn 0.6s ease both; }
+  .header-brand { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: #C17F59; }
+  .header-rule { display: inline-block; height: 1px; background: #C17F59; margin-right: 10px; vertical-align: middle; width: 0; animation: lineGrow 0.7s ease 0.3s both; }
+  .hero { padding: 48px 40px 40px; animation: fadeUp 0.7s ease 0.2s both; }
+  .hero-eyebrow { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: #C17F59; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+  .hero-eyebrow::after { content: ''; display: inline-block; height: 1px; background: rgba(193,127,89,0.4); flex: 1; animation: lineGrow 0.8s ease 0.6s both; max-width: 60px; }
+  .hero-headline { font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 52px; line-height: 1.0; letter-spacing: 1px; color: #F2F0EB; margin-bottom: 24px; }
+  .hero-headline em { color: #C17F59; font-style: normal; }
+  .hero-body { font-size: 15px; font-weight: 300; line-height: 1.8; color: rgba(242,240,235,0.75); margin-bottom: 32px; }
+  .hero-body strong { color: #F2F0EB; font-weight: 400; }
+  .cta-btn { display: inline-block; background: #C17F59; color: #0D0D0D; font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; padding: 14px 32px; animation: pulseCopper 2.5s ease 1.2s infinite; }
+  .divider { padding: 0 40px; animation: fadeIn 0.6s ease 0.5s both; }
+  .divider-line { height: 1px; background: rgba(193,127,89,0.12); }
+  .callout { margin: 0 40px; padding: 28px 32px; border-left: 2px solid #C17F59; background: rgba(193,127,89,0.04); animation: fadeUp 0.7s ease 0.5s both; }
+  .callout-text { font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 1px; color: #F2F0EB; line-height: 1.3; margin-bottom: 8px; }
+  .callout-sub { font-size: 12px; font-weight: 300; color: rgba(242,240,235,0.5); font-family: 'Space Mono', monospace; letter-spacing: 1px; }
+  .content { padding: 36px 40px; animation: fadeUp 0.7s ease 0.6s both; }
+  .content p { font-size: 15px; font-weight: 300; line-height: 1.85; color: rgba(242,240,235,0.72); margin-bottom: 18px; }
+  .content p:last-child { margin-bottom: 0; }
+  .content p strong { color: #F2F0EB; font-weight: 400; }
+  .footer { padding: 28px 40px 36px; border-top: 1px solid rgba(255,255,255,0.05); animation: fadeIn 0.6s ease 0.8s both; }
+  .footer-sig { font-family: 'Thunder', Impact, sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 2px; color: #F2F0EB; margin-bottom: 4px; }
+  .footer-title { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: #C17F59; text-transform: uppercase; margin-bottom: 20px; }
+  .footer-links { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(242,240,235,0.3); text-transform: uppercase; line-height: 2; }
+  .footer-links a { color: rgba(242,240,235,0.3); text-decoration: none; }
+  .footer-links a:hover { color: #C17F59; }
+  @media (max-width: 600px) {
+    .hero, .content, .header, .footer, .divider { padding-left: 24px; padding-right: 24px; }
+    .callout { margin: 0 24px; }
+    .hero-headline { font-size: 38px; }
+  }
+</style>
+</head>
+<body>
+<div class="email-wrap">
+  <div class="header"><span class="header-brand"><span class="header-rule"></span>ARISE & BUILD &nbsp;·&nbsp; LONNELL D. WILLIAMS</span></div>
+  <div class="hero">
+    <div class="hero-eyebrow">ISSUE NO. [XX] &nbsp;·&nbsp; [MONTH YEAR]</div>
+    <h1 class="hero-headline">THE TITLE OF<br>YOUR <em>ISSUE</em><br>GOES HERE.</h1>
+    <p class="hero-body">Open with the tension. Name the thing your reader already feels but hasn't been able to say out loud. <strong>Make it specific.</strong> Not "leadership is hard" — but the exact moment the system breaks and they're standing in it.</p>
+    <a href="https://buildwithldw.substack.com" class="cta-btn">READ THIS ISSUE →</a>
+  </div>
+  <div class="divider" style="margin: 8px 0 32px;"><div class="divider-line"></div></div>
+  <div class="callout">
+    <div class="callout-text">"The infrastructure is the sermon. What you build speaks louder than what you preach."</div>
+    <div class="callout-sub">— LONNELL D. WILLIAMS &nbsp;·&nbsp; ARISE & BUILD</div>
+  </div>
+  <div class="content">
+    <p>This is the body of your newsletter. One idea. Done fully. The reader should feel like this specific paragraph was written for the exact moment they're in — not content in general. Write to the senior pastor at 6am on a Sunday who already knows something isn't working.</p>
+    <p><strong>Here's what most leaders miss:</strong> it's not a motivation problem. It's an infrastructure problem. The system is working exactly as it was designed — and it was designed for a smaller version of this organization.</p>
+    <p>Two short paragraphs are enough. End with a clear next step. Not a question. A direction.</p>
+  </div>
+  <div class="divider" style="margin-bottom: 28px;"><div class="divider-line"></div></div>
+  <div class="footer">
+    <div class="footer-sig">LONNELL WILLIAMS</div>
+    <div class="footer-title">Builder. Operator. Author.</div>
+    <div class="footer-links"><a href="https://ldw.build">ldw.build</a> &nbsp;·&nbsp; <a href="https://buildwithldw.substack.com">Arise & Build</a> &nbsp;·&nbsp; <a href="%unsubscribe_url%">Unsubscribe</a></div>
+  </div>
+</div>
+</body>
+</html>
