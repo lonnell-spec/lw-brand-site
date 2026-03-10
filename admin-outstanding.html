@@ -176,9 +176,9 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
       </li>
 
       <li class="item-card">
-        <div class="item-title"><span class="badge badge-critical">Critical</span> Mobile-Responsive Audit</div>
-        <div class="item-desc">All public pages need a full pass at 375px&ndash;430px viewports. Vantage nav is known broken. Touch targets and spacing need testing on iPhone and Android before any speaking planner or conference organizer sees the site on their phone.</div>
-        <div class="source-tag">Original list &middot; Confirmed broken</div>
+        <div class="item-title"><span class="badge badge-done">Done</span> Mobile-Responsive Audit</div>
+        <div class="item-desc">Full audit completed across all public pages at 375px&ndash;430px. Fixes shipped in two files: <code>nav-patch.js</code> (v2) and <code>vantage.html</code>. Issues resolved: Vantage dashboard overflow (48px padding → 16px on mobile), 4-col KPI pulse bar → 2-col on mobile, <code>consult-intro-row</code> missing collapse breakpoint, inline padding on <code>#media</code> and <code>#newsletter</code> sections, 3-col media grid → 2-col at 480px, nav hamburger tap target (38px → 48px), speaking form inputs and lead magnet gate enforced at 44px min-height. All touch targets now meet WCAG/Apple HIG 44px minimum. Deployed March 10, 2026.</div>
+        <div class="source-tag">Original list &middot; Resolved Mar 10, 2026</div>
       </li>
 
     </ul>
