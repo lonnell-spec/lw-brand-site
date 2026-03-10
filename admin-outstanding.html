@@ -225,9 +225,9 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
       </li>
 
       <li class="item-card">
-        <div class="item-title"><span class="badge badge-new">New Find</span> Nav HTML Structure Inconsistency</div>
-        <div class="item-desc">Homepage uses <code>&lt;div&gt;</code> for nav links, media page uses <code>&lt;ul&gt;</code>, Vantage has nothing. Needs a single unified nav pattern across all pages.</div>
-        <div class="source-tag">Audit find #6 &middot; Mar 3</div>
+        <div class="item-title"><span class="badge badge-done">Done</span> Nav HTML Structure Inconsistency</div>
+        <div class="item-desc"><code>articles.html</code> was the outlier — it used a bare <code>&lt;nav&gt;</code> (no class), <code>&lt;ul&gt;</code>/<code>&lt;li&gt;</code> wrappers, a different brand mark (<code>.nav-mark</code>), an incomplete link set (missing About, Work With Me, Media), and no hamburger button. Fixed March 10, 2026: replaced with the canonical <code>.site-nav</code> pattern used on all other pages — SVG logo, <code>.site-nav-brand</code>, <code>&lt;div class="site-nav-links"&gt;</code>, full 7-link set with correct active state, hamburger with 44px tap target. All six public pages now share identical nav structure and CSS.</div>
+        <div class="source-tag">Audit find #6 &middot; Resolved Mar 10, 2026</div>
       </li>
 
       <li class="item-card">
