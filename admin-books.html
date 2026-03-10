@@ -430,6 +430,105 @@ function renderAENA() {
   </div>`;
 }
 
+const crossoverBooks = [
+  {
+    id: 'arise-build',
+    num: '01',
+    title: 'ARISE & BUILD',
+    subtitle: 'An Operator\'s Framework for Organizations That Last',
+    type: 'Blueprint · Operator Framework',
+    accent: '#C8F400',
+    accentDim: 'rgba(200,244,0,0.12)',
+    accentBorder: 'rgba(200,244,0,0.25)',
+    synopsis: [
+      'Most organizations don\'t fail to grow — they fail to be built. Growth exposes what was never properly constructed. Staff relationships become inadequate substitutes for accountability systems. Institutional knowledge becomes a liability when it lives only in the founder\'s head.',
+      'Arise & Build extracts seven principles of organizational architecture from the book of Nehemiah — not its devotional content, but its project management genius. Principles that apply across every sector, every size, and every leadership style.',
+      'The framework addresses the five systems that break first under growth pressure: information flow, decision authority, staff infrastructure, resource stewardship, and external trust.',
+      'This book is for the leader who knows something needs to change but has been told the answer is better vision, better culture, or better hiring. It isn\'t. The answer is infrastructure. And infrastructure is buildable.'
+    ]
+  },
+  {
+    id: 'stewardship',
+    num: '02',
+    title: 'Stewardship',
+    subtitle: 'Why the Best Leaders Build Like They\'re Borrowing',
+    type: 'Manifesto · Posture Shift',
+    accent: '#CC2200',
+    accentDim: 'rgba(204,34,0,0.12)',
+    accentBorder: 'rgba(204,34,0,0.3)',
+    synopsis: [
+      'Every leader eventually confronts the same quiet question: Am I building this — or am I just managing it until I hand it off?',
+      'Leaders who believe they own what they lead build differently than leaders who understand they are stewards of it. The difference is not semantic. It is structural.',
+      'The dominant leadership crisis of our era is not a lack of capability. It is a crisis of posture. Leaders at every level are making decisions from an ownership posture that produces hoarding, protectionism, short-termism, and eventually, organizational fragility.',
+      'Through seven case studies drawn from across sectors, Stewardship shows what the shift looks like in practice. This is not a book you read in an afternoon and agree with. It is a book you argue with for five years — until you realize it was right.'
+    ]
+  },
+  {
+    id: 'architecture-of-decisions',
+    num: '03',
+    title: 'The Architecture of Decisions',
+    subtitle: 'A Field Guide for Leaders Who Build',
+    type: 'Field Guide · Decision Systems',
+    accent: '#FFE600',
+    accentDim: 'rgba(255,230,0,0.1)',
+    accentBorder: 'rgba(255,230,0,0.25)',
+    synopsis: [
+      'The most consequential thing any leader builds is not the product, the team, or the culture. It is the decision-making infrastructure — the invisible architecture that determines which information reaches the table, who has authority over what, and how fast course corrections get made.',
+      'When this architecture is well-designed, organizations make good decisions consistently — not because they have brilliant people, but because they have built a system that surfaces the right information at the right time to the right person.',
+      'When this architecture is poorly designed, organizations rely on exceptional individuals to compensate for structural dysfunction. And eventually, those individuals burn out, leave, or both.',
+      'Organized around five architectural elements — Information Design, Authority Distribution, Accountability Architecture, Resource Stewardship Systems, and Crisis Management Protocols. This book gives you the blueprint.'
+    ]
+  },
+  {
+    id: 'after-the-data',
+    num: '04',
+    title: 'After the Data',
+    subtitle: 'A Framework for Leading When Certainty Runs Out',
+    type: 'Framework · Complexity Leadership',
+    accent: '#FF2D00',
+    accentDim: 'rgba(255,45,0,0.1)',
+    accentBorder: 'rgba(255,45,0,0.25)',
+    synopsis: [
+      'Every leader has been there. You\'ve run the analysis. You\'ve studied the metrics. You\'ve consulted the advisors. And you still don\'t know what to do.',
+      'This is not a failure of intelligence. It is the structural condition of consequential leadership: the most important decisions arrive in environments of genuine uncertainty, where the data is incomplete and the stakes are irreversible.',
+      'After the Data is a framework for what happens in the gap between information and decision — the space every leadership book claims to address and none of them actually enter.',
+      'The book delivers a three-part framework: Clarity Protocol, Conviction Architecture, and Consequence Infrastructure. For every leader who has done everything right and still doesn\'t know what to do next — this is where the real work begins.'
+    ]
+  }
+];
+
+function renderCrossoverConcepts() {
+  const cards = crossoverBooks.map(b => `
+  <div class="book-card" id="${b.id}" style="border-color:${b.accentBorder};">
+    <div class="book-card-header" style="border-bottom:1px solid rgba(242,240,235,0.06);">
+      <div class="book-card-meta">
+        <div class="book-card-series" style="color:${b.accent};">Crossover Concept &middot; ${b.num} of 04</div>
+        <div class="book-card-title">${b.title}</div>
+        <div class="book-card-subtitle">${b.subtitle}</div>
+      </div>
+      <div class="book-card-badges">
+        <span class="badge" style="background:${b.accentDim};color:${b.accent};border:1px solid ${b.accentBorder};">${b.type}</span>
+        <span class="badge" style="background:rgba(138,138,138,0.08);color:var(--concrete);border:1px solid rgba(138,138,138,0.15);">Concept Stage</span>
+      </div>
+    </div>
+    <div class="book-card-body">
+      <div class="thesis-label" style="color:${b.accent};">Synopsis</div>
+      <div style="width:28px;height:2px;background:${b.accent};margin-bottom:20px;"></div>
+      ${b.synopsis.map(p => `<p style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;color:rgba(242,240,235,0.8);line-height:1.8;margin:0 0 16px 0;">${p}</p>`).join('')}
+    </div>
+  </div>`).join('');
+
+  return `
+  <div style="margin-top:64px;padding-top:48px;border-top:1px solid rgba(242,240,235,0.06);">
+    <div style="margin-bottom:32px;">
+      <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--copper);margin-bottom:10px;">Crossover Book Concepts</div>
+      <div style="font-family:'Thunder',sans-serif;font-weight:700;font-size:36px;letter-spacing:1px;color:var(--off-white);line-height:1;">Four Concepts. Zero Comfort.</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;color:var(--concrete);margin-top:10px;max-width:560px;line-height:1.6;">Secular-crossover leadership books anchored in infrastructure, posture, decision systems, and complexity leadership. These expand the audience beyond ministry into executive, nonprofit, and corporate contexts.</div>
+    </div>
+    ${cards}
+  </div>`;
+}
+
 async function init() {
   const container = document.getElementById('books-content');
   try {
@@ -440,6 +539,7 @@ async function init() {
     let html = renderAENA();
     if (zag) html += renderZAG(zag);
     if (staff) html += renderSTAFF(staff);
+    html += renderCrossoverConcepts();
 
     container.innerHTML = html;
   } catch (err) {
