@@ -19,12 +19,12 @@
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
-  background: var(--obsidian);
-  color: var(--off-white);
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 300;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  background:var(--obsidian);
+  color:var(--off-white);
+  font-family:'DM Sans',sans-serif;
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
 
 /* ── NAV ── */
@@ -78,10 +78,8 @@ body {
 
 /* ── GRID SECTION ── */
 .grid-section { padding:52px 0 0; }
-.grid-header {
-  display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;
-}
-.grid-label { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--concrete); }
+.grid-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
+.grid-label  { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--concrete); }
 .grid-status { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:rgba(138,138,138,0.4); }
 
 .articles-grid {
@@ -94,8 +92,6 @@ body {
 /* ── CARD ── */
 .article-card {
   background:var(--obsidian);
-  padding:36px 28px 28px;
-  min-height:290px;
   text-decoration:none;
   display:flex; flex-direction:column;
   position:relative; overflow:hidden;
@@ -108,31 +104,73 @@ body {
 }
 .article-card:hover { background:var(--warm-black); }
 .article-card:hover::after { transform:scaleX(1); }
+.article-card:hover .card-img { transform:scale(1.04); }
 .article-card:hover .card-arrow { transform:translate(3px,-3px); opacity:1; }
 
-.card-num   { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:rgba(193,127,89,.25); margin-bottom:18px; }
-.card-tag   { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--copper); margin-bottom:12px; }
-.card-title { font-family:'DM Sans',sans-serif; font-weight:700; font-size:17px; line-height:1.35; color:var(--off-white); margin-bottom:12px; flex-grow:1; }
-.card-excerpt { font-size:13px; font-weight:300; color:rgba(242,240,235,.45); line-height:1.7; margin-bottom:20px; }
-.card-footer {
-  margin-top:auto; padding-top:16px;
+/* Image zone */
+.card-img-wrap {
+  width:100%; height:180px; overflow:hidden;
+  position:relative; background:rgba(26,23,20,0.8);
+  flex-shrink:0;
+}
+.card-img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .5s cubic-bezier(.22,1,.36,1);
+  filter:brightness(0.75) saturate(0.8);
+  display:block;
+}
+/* Copper tint overlay on image */
+.card-img-wrap::after {
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(13,13,13,0) 30%,
+    rgba(13,13,13,0.7) 100%
+  );
+  pointer-events:none;
+}
+/* Category badge over the image */
+.card-badge {
+  position:absolute; bottom:12px; left:16px; z-index:2;
+  font-family:'Space Mono',monospace; font-size:8px; letter-spacing:3px;
+  text-transform:uppercase; color:var(--copper);
+  background:rgba(13,13,13,0.75);
+  backdrop-filter:blur(4px);
+  padding:4px 8px;
+  border:1px solid rgba(193,127,89,0.3);
+}
+
+/* Text zone */
+.card-body {
+  padding:24px 24px 20px;
+  display:flex; flex-direction:column; flex-grow:1;
+}
+.card-num     { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:rgba(193,127,89,.25); margin-bottom:10px; }
+.card-title   { font-family:'DM Sans',sans-serif; font-weight:700; font-size:16px; line-height:1.35; color:var(--off-white); margin-bottom:10px; flex-grow:1; }
+.card-excerpt { font-size:13px; font-weight:300; color:rgba(242,240,235,.45); line-height:1.65; margin-bottom:16px; }
+.card-footer  {
+  margin-top:auto; padding-top:14px;
   border-top:1px solid rgba(242,240,235,.05);
   display:flex; align-items:center; justify-content:space-between;
 }
 .card-date  { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:rgba(138,138,138,.45); text-transform:uppercase; }
-.card-arrow { font-size:14px; color:var(--copper); opacity:.35; transition:transform .25s,opacity .25s; }
+.card-arrow { font-size:13px; color:var(--copper); opacity:.35; transition:transform .25s,opacity .25s; }
 
 /* ── SKELETON ── */
-.skeleton-card { background:var(--obsidian); padding:36px 28px 28px; min-height:290px; display:flex; flex-direction:column; gap:10px; }
-.skel { background:rgba(242,240,235,0.05); border-radius:2px; animation:pulse 1.8s ease-in-out infinite; }
-.s-tag  { height:10px; width:72px; }
-.s-t1   { height:15px; width:88%; }
-.s-t2   { height:15px; width:62%; }
-.s-d1   { height:10px; width:100%; margin-top:4px; }
-.s-d2   { height:10px; width:88%; }
-.s-d3   { height:10px; width:70%; }
-.s-foot { height:1px; width:100%; margin-top:auto; background:rgba(242,240,235,.04); }
-@keyframes pulse { 0%,100%{opacity:.35} 50%{opacity:.8} }
+.skeleton-card { background:var(--obsidian); display:flex; flex-direction:column; overflow:hidden; }
+.skel-img-wrap { width:100%; height:180px; overflow:hidden; }
+.skel          { background:rgba(242,240,235,0.05); border-radius:2px; animation:pulse 1.8s ease-in-out infinite; }
+.skel-img      { width:100%; height:100%; border-radius:0; }
+.skel-body     { padding:24px 24px 20px; display:flex; flex-direction:column; gap:9px; }
+.s-num  { height:9px;  width:32px; }
+.s-t1   { height:14px; width:88%; }
+.s-t2   { height:14px; width:62%; }
+.s-d1   { height:9px;  width:100%; margin-top:3px; }
+.s-d2   { height:9px;  width:88%; }
+.s-d3   { height:9px;  width:70%; }
+.s-foot { height:1px;  width:100%; margin-top:auto; background:rgba(242,240,235,.04); }
+@keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:.75} }
 
 /* ── EMPTY STATE ── */
 .empty-state {
@@ -145,17 +183,15 @@ body {
 
 /* ── SUBSCRIBE BAND ── */
 .sub-band {
-  margin-top:1px;
+  margin-top:1px; padding:52px 48px;
   background:var(--warm-black);
-  border-top:2px solid var(--copper);
   border:1px solid rgba(193,127,89,.15);
   border-top:2px solid var(--copper);
-  padding:52px 48px;
   display:flex; align-items:center; justify-content:space-between; gap:48px;
 }
 .sub-eyebrow { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--copper); margin-bottom:12px; }
-.sub-title { font-family:'Thunder',sans-serif; font-weight:700; font-size:clamp(36px,4vw,56px); line-height:.92; color:var(--off-white); margin-bottom:14px; }
-.sub-desc { font-size:15px; font-weight:300; color:rgba(242,240,235,.5); line-height:1.7; max-width:440px; }
+.sub-title   { font-family:'Thunder',sans-serif; font-weight:700; font-size:clamp(36px,4vw,56px); line-height:.92; color:var(--off-white); margin-bottom:14px; }
+.sub-desc    { font-size:15px; font-weight:300; color:rgba(242,240,235,.5); line-height:1.7; max-width:440px; }
 .sub-btn {
   display:inline-flex; align-items:center; gap:12px;
   background:var(--copper); color:var(--obsidian);
@@ -169,11 +205,9 @@ body {
 
 /* ── FOOTER ── */
 .site-footer {
-  padding:56px 48px 32px;
-  max-width:1200px; margin:0 auto;
+  padding:56px 48px 32px; max-width:1200px; margin:0 auto;
   display:flex; align-items:center; justify-content:space-between;
-  border-top:1px solid rgba(242,240,235,.04);
-  margin-top:80px;
+  border-top:1px solid rgba(242,240,235,.04); margin-top:80px;
 }
 .footer-brand { font-family:'Thunder',sans-serif; font-weight:700; font-size:12px; letter-spacing:3px; color:rgba(242,240,235,.18); text-decoration:none; text-transform:uppercase; }
 .footer-links { display:flex; gap:24px; }
@@ -194,7 +228,6 @@ body {
 @media(max-width:540px){
   .page { padding:0 20px; }
   .articles-grid { grid-template-columns:1fr; }
-  .article-card { min-height:auto; }
 }
 </style>
 </head>
@@ -242,13 +275,13 @@ body {
     </div>
 
     <div class="articles-grid" id="articles-grid">
-      <!-- 6 skeleton cards shown while RSS loads -->
-      <div class="skeleton-card"><div class="skel s-tag"></div><div class="skel s-t1"></div><div class="skel s-t2"></div><div class="skel s-d1"></div><div class="skel s-d2"></div><div class="skel s-d3"></div><div class="skel s-foot"></div></div>
-      <div class="skeleton-card"><div class="skel s-tag"></div><div class="skel s-t1" style="width:72%"></div><div class="skel s-t2" style="width:90%"></div><div class="skel s-d1"></div><div class="skel s-d2" style="width:80%"></div><div class="skel s-d3" style="width:60%"></div><div class="skel s-foot"></div></div>
-      <div class="skeleton-card"><div class="skel s-tag"></div><div class="skel s-t1" style="width:90%"></div><div class="skel s-t2" style="width:55%"></div><div class="skel s-d1"></div><div class="skel s-d2" style="width:92%"></div><div class="skel s-d3" style="width:72%"></div><div class="skel s-foot"></div></div>
-      <div class="skeleton-card"><div class="skel s-tag"></div><div class="skel s-t1" style="width:80%"></div><div class="skel s-t2"></div><div class="skel s-d1"></div><div class="skel s-d2" style="width:70%"></div><div class="skel s-d3" style="width:85%"></div><div class="skel s-foot"></div></div>
-      <div class="skeleton-card"><div class="skel s-tag"></div><div class="skel s-t1"></div><div class="skel s-t2" style="width:68%"></div><div class="skel s-d1"></div><div class="skel s-d2"></div><div class="skel s-d3" style="width:58%"></div><div class="skel s-foot"></div></div>
-      <div class="skeleton-card"><div class="skel s-tag"></div><div class="skel s-t1" style="width:76%"></div><div class="skel s-t2" style="width:88%"></div><div class="skel s-d1"></div><div class="skel s-d2" style="width:78%"></div><div class="skel s-d3" style="width:50%"></div><div class="skel s-foot"></div></div>
+      <!-- 6 skeleton cards -->
+      <div class="skeleton-card"><div class="skel-img-wrap"><div class="skel skel-img"></div></div><div class="skel-body"><div class="skel s-num"></div><div class="skel s-t1"></div><div class="skel s-t2"></div><div class="skel s-d1"></div><div class="skel s-d2"></div><div class="skel s-d3"></div><div class="skel s-foot"></div></div></div>
+      <div class="skeleton-card"><div class="skel-img-wrap"><div class="skel skel-img"></div></div><div class="skel-body"><div class="skel s-num"></div><div class="skel s-t1" style="width:72%"></div><div class="skel s-t2" style="width:90%"></div><div class="skel s-d1"></div><div class="skel s-d2" style="width:80%"></div><div class="skel s-d3" style="width:60%"></div><div class="skel s-foot"></div></div></div>
+      <div class="skeleton-card"><div class="skel-img-wrap"><div class="skel skel-img"></div></div><div class="skel-body"><div class="skel s-num"></div><div class="skel s-t1" style="width:90%"></div><div class="skel s-t2" style="width:55%"></div><div class="skel s-d1"></div><div class="skel s-d2" style="width:92%"></div><div class="skel s-d3" style="width:72%"></div><div class="skel s-foot"></div></div></div>
+      <div class="skeleton-card"><div class="skel-img-wrap"><div class="skel skel-img"></div></div><div class="skel-body"><div class="skel s-num"></div><div class="skel s-t1" style="width:80%"></div><div class="skel s-t2"></div><div class="skel s-d1"></div><div class="skel s-d2" style="width:70%"></div><div class="skel s-d3" style="width:85%"></div><div class="skel s-foot"></div></div></div>
+      <div class="skeleton-card"><div class="skel-img-wrap"><div class="skel skel-img"></div></div><div class="skel-body"><div class="skel s-num"></div><div class="skel s-t1"></div><div class="skel s-t2" style="width:68%"></div><div class="skel s-d1"></div><div class="skel s-d2"></div><div class="skel s-d3" style="width:58%"></div><div class="skel s-foot"></div></div></div>
+      <div class="skeleton-card"><div class="skel-img-wrap"><div class="skel skel-img"></div></div><div class="skel-body"><div class="skel s-num"></div><div class="skel s-t1" style="width:76%"></div><div class="skel s-t2" style="width:88%"></div><div class="skel s-d1"></div><div class="skel s-d2" style="width:78%"></div><div class="skel s-d3" style="width:50%"></div><div class="skel s-foot"></div></div></div>
     </div>
   </section>
 </div>
@@ -287,20 +320,20 @@ body {
 <script src="/nav-patch.js" defer></script>
 
 <script>
-// ── RSS FEED LOADER ──────────────────────────────────────────────────────────
-// Pulls the 6 most recent Substack posts via the rss-proxy Supabase edge function.
-// New post published → shows up automatically. Old post rolls off when #7 comes in.
+// ── ARTICLES FEED LOADER ─────────────────────────────────────────────────────
+// Priority 1: Uses cover image you set on Substack (RSS enclosure / media:content / first img)
+// Priority 2: Falls back to category-mapped image based on article keywords
+// New issue published → auto-appears. 7th issue → oldest rolls off. Zero maintenance.
 
-const RSS_PROXY   = 'https://riqdcirsmckubkdfbtoj.supabase.co/functions/v1/rss-proxy';
-const SUBSTACK    = 'https://buildwithldw.substack.com';
+const RSS_PROXY = 'https://riqdcirsmckubkdfbtoj.supabase.co/functions/v1/rss-proxy';
 
 async function loadArticles() {
   const grid   = document.getElementById('articles-grid');
   const status = document.getElementById('grid-status');
 
   try {
-    const res  = await fetch(RSS_PROXY);
-    const data = await res.json();
+    const res   = await fetch(RSS_PROXY);
+    const data  = await res.json();
     const items = Array.isArray(data.items) ? data.items : [];
 
     if (items.length === 0) {
@@ -309,7 +342,7 @@ async function loadArticles() {
         <div class="empty-state">
           <div class="empty-label">Coming Soon</div>
           <div class="empty-head">FIRST ISSUE INCOMING.</div>
-          <p class="empty-body">Subscribe below and you'll be the first to get it when it lands.</p>
+          <p class="empty-body">Subscribe below — you'll be first when it lands.</p>
         </div>`;
       return;
     }
@@ -318,13 +351,24 @@ async function loadArticles() {
 
     grid.innerHTML = items.map((item, i) => `
       <a class="article-card" href="${x(item.link)}" target="_blank" rel="noopener">
-        <div class="card-num">0${i + 1}</div>
-        <div class="card-tag">${x(item.category || 'Arise &amp; Build')}</div>
-        <div class="card-title">${x(item.title)}</div>
-        <div class="card-excerpt">${x(item.excerpt)}</div>
-        <div class="card-footer">
-          <span class="card-date">${x(item.pubDate)}</span>
-          <span class="card-arrow">↗</span>
+        <div class="card-img-wrap">
+          <img
+            class="card-img"
+            src="${x(item.image)}"
+            alt="${x(item.title)}"
+            loading="lazy"
+            onerror="this.parentElement.style.background='#1A1714'; this.style.display='none';"
+          >
+          <span class="card-badge">${x(item.category || 'Arise &amp; Build')}</span>
+        </div>
+        <div class="card-body">
+          <div class="card-num">0${i + 1}</div>
+          <div class="card-title">${x(item.title)}</div>
+          <div class="card-excerpt">${x(item.excerpt)}</div>
+          <div class="card-footer">
+            <span class="card-date">${x(item.pubDate)}</span>
+            <span class="card-arrow">↗</span>
+          </div>
         </div>
       </a>`).join('');
 
@@ -339,9 +383,12 @@ async function loadArticles() {
   }
 }
 
-// Minimal HTML escape
 function x(s) {
-  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(s || '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
 }
 
 loadArticles();
