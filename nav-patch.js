@@ -159,7 +159,13 @@
     style.textContent = [
 
       /* ─── Nav hamburger: increase tap target to 44px min ─── */
-      '.site-nav-btn { padding: 11px !important; }',
+      /* 11px × 2 + ~26px icon content = 48px ✓ */
+      '.site-nav-btn { padding: 11px !important; min-height: 44px !important; min-width: 44px !important; }',
+
+      /* ─── Form inputs: enforce 44px touch target (all pages) ─── */
+      /* Fixes select on iOS Safari where -webkit-appearance: none strips height */
+      '.form-field input, .form-field select, .form-field textarea,',
+      '.audit-input { min-height: 44px !important; }',
 
       /* ─── 768px: collapse consult-intro-row (missing breakpoint) ─── */
       '@media (max-width: 768px) {',
