@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Books — Admin | LDW</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://api.fontshare.com/v2/css?f[]=thunder@800,700,600&display=swap" rel="stylesheet">
+<style>
+:root { --obsidian: #0D0D0D; --warm-black: #1A1714; --off-white: #F2F0EB; --concrete: #8A8A8A; --copper: #C17F59; --copper-light: #D4956A; --signal: #00E676; --signal-red: #E85D3A; --amber: #F5A623; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+
+/* ── NAV ── */
+.site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; background: rgba(13,13,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(242,240,235,0.06); }
+.site-nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--off-white); }
+.site-nav-name { font-family: 'Thunder', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 1px; }
+.site-nav-links { display: flex; gap: 32px; align-items: center; }
+.site-nav-links a { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.3s; }
+.site-nav-links a:hover { color: var(--off-white); }
+.site-nav-btn { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.site-nav-btn span { display: block; width: 20px; height: 2px; background: var(--off-white); margin: 4px 0; }
+@media (max-width: 768px) {
+  .site-nav { padding: 0 24px; }
+  .site-nav-links { display: none; position: fixed; top: 64px; left: 0; right: 0; flex-direction: column; background: rgba(13,13,13,0.96); padding: 24px; gap: 20px; }
+  .site-nav-links.open { display: flex; }
+  .site-nav-btn { display: block; }
+}
+
+/* ── ADMIN LAYOUT ── */
+.admin-sub { padding: 64px 0 0; min-height: 100vh; }
+.admin-sub-header { padding: 48px 48px 32px; border-bottom: 1px solid rgba(242,240,235,0.06); }
+.admin-sub-back { display: inline-flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); text-decoration: none; margin-bottom: 24px; transition: color 0.3s; }
+.admin-sub-back:hover { color: var(--copper-light); }
+.admin-sub-eyebrow { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--copper); margin-bottom: 12px; }
+.admin-sub-title { font-family: 'Thunder', sans-serif; font-weight: 700; font-size: 42px; letter-spacing: 1px; line-height: 1; }
+.admin-sub-title .accent { color: var(--copper); }
+.admin-sub-subtitle { font-weight: 300; font-size: 15px; color: var(--concrete); margin-top: 12px; line-height: 1.6; }
+
+/* ── STATS BAR ── */
+.stats-bar { display: flex; gap: 1px; margin: 0; background: rgba(242,240,235,0.04); border-bottom: 1px solid rgba(242,240,235,0.06); }
+.stat-block { flex: 1; padding: 20px 24px; text-align: center; }
+.stat-number { font-family: 'Thunder', sans-serif; font-weight: 700; font-size: 36px; letter-spacing: 2px; line-height: 1; }
+.stat-number.copper { color: var(--copper); }
+.stat-number.green { color: var(--signal); }
+.stat-number.amber { color: var(--amber); }
+.stat-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); margin-top: 6px; }
+
+/* ── CONTENT ── */
+.admin-content { padding: 40px 48px 80px; max-width: 1100px; }
+
+/* ── BOOK CARD ── */
+.book-card {
+  border: 1px solid rgba(193,127,89,0.2);
+  background: var(--warm-black);
+  margin-bottom: 48px;
+  position: relative;
+  overflow: hidden;
+}
+.book-card::before {
+  content: '';
+  position: absolute; top: -80px; right: -80px;
+  width: 280px; height: 280px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(193,127,89,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.book-card-header {
+  padding: 32px 36px 24px;
+  border-bottom: 1px solid rgba(242,240,235,0.06);
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 24px;
+}
+.book-card-meta { flex: 1; }
+.book-card-series {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--copper); margin-bottom: 10px;
+}
+.book-card-title {
+  font-family: 'Thunder', sans-serif; font-weight: 700;
+  font-size: 32px; letter-spacing: 1px; line-height: 1.05;
+  color: var(--off-white); margin-bottom: 8px;
+}
+.book-card-subtitle {
+  font-family: 'DM Sans', sans-serif; font-size: 14px;
+  font-weight: 300; color: var(--concrete); line-height: 1.5;
+}
+.book-card-badges { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0; }
+.badge { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; white-space: nowrap; }
+.badge-complete { background: rgba(0,230,118,0.1); color: var(--signal); border: 1px solid rgba(0,230,118,0.2); }
+.badge-architecture { background: rgba(193,127,89,0.15); color: var(--copper); border: 1px solid rgba(193,127,89,0.3); }
+
+.book-card-body { padding: 28px 36px 32px; }
+
+/* Thesis block */
+.thesis-block {
+  background: rgba(193,127,89,0.06);
+  border-left: 3px solid var(--copper);
+  padding: 16px 20px; margin-bottom: 28px;
+}
+.thesis-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); margin-bottom: 10px; }
+.thesis-row { margin-bottom: 8px; }
+.thesis-row:last-child { margin-bottom: 0; }
+.thesis-dir { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--concrete); display: inline-block; width: 90px; }
+.thesis-text { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; color: var(--off-white); line-height: 1.6; }
+
+/* Pillars (ZAG) */
+.pillars-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+.pillar-item {
+  background: rgba(13,13,13,0.5); border: 1px solid rgba(242,240,235,0.06);
+  padding: 14px 16px;
+}
+.pillar-num { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--copper); margin-bottom: 4px; }
+.pillar-name { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: var(--off-white); margin-bottom: 4px; }
+.pillar-desc { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 300; color: var(--concrete); line-height: 1.5; }
+
+/* Chapter list */
+.section-label {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--concrete); margin-bottom: 12px; margin-top: 24px;
+}
+.chapter-list { list-style: none; padding: 0; margin-bottom: 24px; }
+.chapter-item {
+  display: grid; grid-template-columns: 80px 1fr;
+  gap: 0; padding: 12px 0;
+  border-bottom: 1px solid rgba(242,240,235,0.04);
+}
+.chapter-item:first-child { border-top: 1px solid rgba(242,240,235,0.04); }
+.chapter-num { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--copper); padding-top: 2px; }
+.chapter-info {}
+.chapter-title { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: var(--off-white); margin-bottom: 2px; }
+.chapter-scripture { font-family: 'Space Mono', monospace; font-size: 9px; color: rgba(193,127,89,0.7); margin-bottom: 4px; }
+.chapter-desc { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300; color: var(--concrete); line-height: 1.5; }
+
+/* Part divider */
+.part-divider {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--copper);
+  padding: 10px 0 4px; margin-top: 8px;
+}
+
+/* Positioning block */
+.positioning-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+.pos-item { background: rgba(13,13,13,0.5); border: 1px solid rgba(242,240,235,0.06); padding: 14px 16px; }
+.pos-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--concrete); margin-bottom: 6px; }
+.pos-value { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300; color: var(--off-white); line-height: 1.5; }
+
+/* Trilogy position */
+.trilogy-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px;
+  background: rgba(242,240,235,0.04); margin-top: 28px;
+  border: 1px solid rgba(242,240,235,0.06);
+}
+.trilogy-cell { padding: 16px 20px; background: var(--warm-black); }
+.trilogy-cell.active { background: rgba(193,127,89,0.08); }
+.trilogy-book { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--copper); margin-bottom: 4px; }
+.trilogy-q { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300; color: var(--concrete); line-height: 1.4; }
+
+/* Notion links */
+.doc-links { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+.doc-link {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--copper); text-decoration: none;
+  border: 1px solid rgba(193,127,89,0.25); padding: 6px 12px; transition: all 0.2s;
+}
+.doc-link:hover { background: rgba(193,127,89,0.1); border-color: var(--copper); }
+
+/* loading state */
+.loading-state { text-align: center; padding: 80px 24px; }
+.loading-state p { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); }
+
+/* ── FOOTER ── */
+.admin-sub-footer { padding: 24px 48px; border-top: 1px solid rgba(242,240,235,0.06); display: flex; justify-content: space-between; align-items: center; }
+.admin-sub-footer a { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.3s; }
+.admin-sub-footer a:hover { color: var(--off-white); }
+.admin-sub-footer span { font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(138,138,138,0.5); }
+
+@media (max-width: 768px) {
+  .admin-sub-header { padding: 32px 24px 24px; }
+  .admin-sub-title { font-size: 32px; }
+  .admin-content { padding: 24px 24px 60px; }
+  .book-card-header { flex-direction: column; }
+  .book-card-badges { flex-direction: row; align-items: center; }
+  .pillars-grid { grid-template-columns: 1fr; }
+  .positioning-grid { grid-template-columns: 1fr; }
+  .trilogy-row { grid-template-columns: 1fr; }
+  .chapter-item { grid-template-columns: 60px 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="site-nav">
+  <a href="/" class="site-nav-brand">
+    <svg width="28" height="28" viewBox="0 0 240 240" fill="none"><polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/><polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/><polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/></svg>
+    <span class="site-nav-name">LONNELL WILLIAMS</span>
+  </a>
+  <div class="site-nav-links">
+    <a href="/">Home</a>
+  </div>
+  <button class="site-nav-btn" onclick="document.querySelector('.site-nav-links').classList.toggle('open');"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- ── PAGE ── -->
+<div class="admin-sub">
+  <div class="admin-sub-header">
+    <a href="/admin.html" class="admin-sub-back">&larr; Back to Portal</a>
+    <div class="admin-sub-eyebrow">&#9670; Admin / Books</div>
+    <div class="admin-sub-title">BOOK ARCHITECTURE<span class="accent">.</span></div>
+    <p class="admin-sub-subtitle">Full architecture for the LDW trilogy — AENA, ZAG, and STAFF. Stored in Supabase + Notion. Last updated March 2026.</p>
+  </div>
+
+  <!-- ── STATS ── -->
+  <div class="stats-bar">
+    <div class="stat-block"><div class="stat-number copper">3</div><div class="stat-label">Books in Trilogy</div></div>
+    <div class="stat-block"><div class="stat-number green">2</div><div class="stat-label">Architecture Complete</div></div>
+    <div class="stat-block"><div class="stat-number amber">1</div><div class="stat-label">In Development</div></div>
+    <div class="stat-block"><div class="stat-number copper">Fall '26</div><div class="stat-label">AENA Launch</div></div>
+  </div>
+
+  <div class="admin-content" id="books-content">
+    <div class="loading-state"><p>Loading book architectures&hellip;</p></div>
+  </div>
+
+  <div class="admin-sub-footer">
+    <a href="/admin.html">&larr; Back to Portal</a>
+    <span>ldw.build admin &mdash; books</span>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://riqdcirsmckubkdfbtoj.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM';
+
+async function loadBooks() {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/ldw_documents?category=eq.books&order=created_at.asc`, {
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+  });
+  const docs = await res.json();
+  return docs;
+}
+
+function renderZAG(doc) {
+  return `
+  <div class="book-card" id="zag">
+    <div class="book-card-header">
+      <div class="book-card-meta">
+        <div class="book-card-series">Trilogy — Book 2 of 3 &middot; Version ${doc.version}</div>
+        <div class="book-card-title">ZAG: Leading Ministry Jesus's Way</div>
+        <div class="book-card-subtitle">45,000&ndash;55,000 words &middot; Architecture complete &middot; Market: ministry leaders, Christian executives, faith-rooted entrepreneurs</div>
+      </div>
+      <div class="book-card-badges">
+        <span class="badge badge-complete">Architecture Complete</span>
+        <span class="badge badge-architecture">Coming Soon</span>
+      </div>
+    </div>
+    <div class="book-card-body">
+
+      <div class="thesis-label">Transformation Thesis</div>
+      <div class="thesis-block">
+        <div class="thesis-row"><span class="thesis-dir">Enters believing:</span><span class="thesis-text">Zagging is about being strategically counter-cultural &mdash; a posture, a brand, a differentiator.</span></div>
+        <div class="thesis-row"><span class="thesis-dir">Leaves knowing:</span><span class="thesis-text">The Zag is the fruit of Holy Spirit sensitivity. Authentic culture is the only proof it actually happened.</span></div>
+      </div>
+
+      <div class="section-label">The Spiritual Framework &mdash; 5 Pillars</div>
+      <div class="pillars-grid">
+        <div class="pillar-item"><div class="pillar-num">01</div><div class="pillar-name">The Authentic Sacrifice</div><div class="pillar-desc">Bringing God what is real, not what is impressive. Abel vs. Cain.</div></div>
+        <div class="pillar-item"><div class="pillar-num">02</div><div class="pillar-name">The Commercialization Trap</div><div class="pillar-desc">When what God is doing becomes a product, zagging stops.</div></div>
+        <div class="pillar-item"><div class="pillar-num">03</div><div class="pillar-name">Sensitivity as Process</div><div class="pillar-desc">Cultivated through investment: time, stillness, willingness to sit with uncertainty.</div></div>
+        <div class="pillar-item"><div class="pillar-num">04</div><div class="pillar-name">Culture vs. Process</div><div class="pillar-desc">Process is what you do. Culture is what you become.</div></div>
+        <div class="pillar-item" style="grid-column: 1 / -1;"><div class="pillar-num">05</div><div class="pillar-name">Culture as Primary Goal</div><div class="pillar-desc">Not platform, not reach &mdash; culture is the primary goal of Zagging. Everything else is downstream.</div></div>
+      </div>
+
+      <div class="section-label">Chapter Architecture &mdash; 5 Parts / 10 Chapters</div>
+
+      <div class="part-divider">Part One &mdash; The Counterfeit</div>
+      <ul class="chapter-list">
+        <li class="chapter-item"><div class="chapter-num">Ch 01</div><div class="chapter-info"><div class="chapter-title">Everyone's Zagging</div><div class="chapter-desc">When counter-cultural becomes the culture, it is no longer counter-cultural.</div></div></li>
+        <li class="chapter-item"><div class="chapter-num">Ch 02</div><div class="chapter-info"><div class="chapter-title">What God Builds Gets Sold</div><div class="chapter-desc">The move from steward to vendor happens slowly. It starts with good motives.</div></div></li>
+      </ul>
+
+      <div class="part-divider">Part Two &mdash; The Posture</div>
+      <ul class="chapter-list">
+        <li class="chapter-item"><div class="chapter-num">Ch 03</div><div class="chapter-info"><div class="chapter-title">The Authentic Sacrifice</div><div class="chapter-desc">You cannot Zag with an offering you curated for an audience.</div></div></li>
+        <li class="chapter-item"><div class="chapter-num">Ch 04</div><div class="chapter-info"><div class="chapter-title">The Investment</div><div class="chapter-desc">You cannot be sensitive to a voice you haven't spent time with.</div></div></li>
+      </ul>
+
+      <div class="part-divider">Part Three &mdash; The Process</div>
+      <ul class="chapter-list">
+        <li class="chapter-item"><div class="chapter-num">Ch 05</div><div class="chapter-info"><div class="chapter-title">Pattern and Process</div><div class="chapter-desc">Sensitivity doesn't appear in a crisis. It grows in a rhythm.</div></div></li>
+        <li class="chapter-item"><div class="chapter-num">Ch 06</div><div class="chapter-info"><div class="chapter-title">Against the Grain</div><div class="chapter-desc">The Zag costs something. Always. If it's free, it's probably not a Zag.</div></div></li>
+      </ul>
+
+      <div class="part-divider">Part Four &mdash; The Fruit</div>
+      <ul class="chapter-list">
+        <li class="chapter-item"><div class="chapter-num">Ch 07</div><div class="chapter-info"><div class="chapter-title">Culture vs. Process</div><div class="chapter-desc">You can have perfect processes and a broken culture. The reverse is also true.</div></div></li>
+        <li class="chapter-item"><div class="chapter-num">Ch 08</div><div class="chapter-info"><div class="chapter-title">Defining Culture Is the Work</div><div class="chapter-desc">Platform grows. Reach expands. Neither of those is culture. Only one lasts.</div></div></li>
+      </ul>
+
+      <div class="part-divider">Part Five &mdash; The Application</div>
+      <ul class="chapter-list">
+        <li class="chapter-item"><div class="chapter-num">Ch 09</div><div class="chapter-info"><div class="chapter-title">What Zagging Costs Your Organization</div><div class="chapter-desc">Counter-cultural leadership reshapes everything around you.</div></div></li>
+        <li class="chapter-item"><div class="chapter-num">Ch 10</div><div class="chapter-info"><div class="chapter-title">The Ministry vs. The Machine</div><div class="chapter-desc">At some point, every growing leader has to choose what they are actually building.</div></div></li>
+      </ul>
+
+      <div class="section-label">Market Positioning</div>
+      <div class="positioning-grid">
+        <div class="pos-item"><div class="pos-label">Primary Audience</div><div class="pos-value">Ministry leaders at the moment of platform pressure</div></div>
+        <div class="pos-item"><div class="pos-label">Secondary Audience</div><div class="pos-value">Christian executives &amp; faith-rooted entrepreneurs</div></div>
+        <div class="pos-item"><div class="pos-label">Comp Titles</div><div class="pos-value">Let Your Life Speak &middot; Ruthless Elimination of Hurry &middot; Emotionally Healthy Spirituality</div></div>
+        <div class="pos-item"><div class="pos-label">Differentiator</div><div class="pos-value">Written by someone leading 50-person staff, building second campus, deploying AI &mdash; arguing none of it matters if the Spirit isn't leading</div></div>
+      </div>
+
+      <div class="doc-links">
+        <a href="https://www.notion.so/31ee09b9c157818bb6f4cf32df465dd2" target="_blank" class="doc-link">&#8599; Notion Architecture</a>
+      </div>
+
+      <div class="trilogy-row">
+        <div class="trilogy-cell"><div class="trilogy-book">Book 1 &mdash; AENA</div><div class="trilogy-q">Who am I before God?</div></div>
+        <div class="trilogy-cell active"><div class="trilogy-book">Book 2 &mdash; ZAG &larr; This</div><div class="trilogy-q">How do I lead &mdash; and from what posture?</div></div>
+        <div class="trilogy-cell"><div class="trilogy-book">Book 3 &mdash; STAFF</div><div class="trilogy-q">Who do I lead &mdash; and how?</div></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderSTAFF(doc) {
+  return `
+  <div class="book-card" id="staff">
+    <div class="book-card-header">
+      <div class="book-card-meta">
+        <div class="book-card-series">Trilogy — Book 3 of 3 &middot; Version ${doc.version}</div>
+        <div class="book-card-title">STAFF: How to Lead the People Who Build the Church</div>
+        <div class="book-card-subtitle">55,000&ndash;65,000 words &middot; Biblical staff metaphor layer added &middot; Market: executive pastors, lead pastors, campus pastors</div>
+      </div>
+      <div class="book-card-badges">
+        <span class="badge badge-complete">Architecture Complete</span>
+        <span class="badge badge-architecture">In Development</span>
+      </div>
+    </div>
+    <div class="book-card-body">
+
+      <div class="thesis-label">Transformation Thesis</div>
+      <div class="thesis-block">
+        <div class="thesis-row"><span class="thesis-dir">Enters believing:</span><span class="thesis-text">Staff leadership is just pastoral care at scale.</span></div>
+        <div class="thesis-row"><span class="thesis-dir">Leaves operating as:</span><span class="thesis-text">A builder who develops people with clarity, accountability, and a growth architecture.</span></div>
+      </div>
+
+      <div class="section-label">Prologue &mdash; The Staff at Your Hand</div>
+      <div class="thesis-block">
+        <div class="thesis-label" style="margin-bottom: 6px;">Anchor: Exodus 4:2 &mdash; &ldquo;What is that in your hand? A staff.&rdquo;</div>
+        <p style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;color:rgba(242,240,235,0.75);line-height:1.7;margin-bottom:10px;">The word <em>staff</em> carries two meanings throughout Scripture &mdash; and this book holds both at once. The instrument of leadership: the rod that parts seas, guides sheep, strikes rocks. And the people: the men and women a leader cannot succeed without.</p>
+        <p style="font-family:'Space Mono',monospace;font-size:9px;color:var(--concrete);letter-spacing:1px;">Biblical anchors: Moses (Ex 14, Num 20) &middot; David (Ps 23) &middot; Aaron (Num 17) &middot; Gehazi (2 Ki 4) &middot; Jethro (Ex 18) &middot; Elijah/Elisha (2 Ki 2)</p>
+      </div>
+
+      <div class="section-label">Chapter Architecture &mdash; 4 Parts / 10 Chapters</div>
+
+      <div class="part-divider">Part One &mdash; The Myth</div>
+      <ul class="chapter-list">
+        <li class="chapter-item"><div class="chapter-num">Ch 01</div><div class="chapter-info"><div class="chapter-title">The Staff Meeting Nobody Wants to Be In</div><div class="chapter-scripture">Zechariah 11 &mdash; The Broken Staff of Favor</div><div class="chapter-desc">Most church staff problems are leadership problems in disguise.</div></div></li>
+        <li class="chapter-item"><div class="chapter-num">Ch 02</div><div class="chapter-info"><div class="chapter-title">How We Got Here: The Pastoral Mythology</div><div class="chapter-scripture">Numbers 17 &mdash; Aaron's Staff That Budded</div><div class="chapter-desc">Calling requires evidence. We built a theology around the gap.</div></div></li>
+      </ul>
+
+      <div class="part-divider">Part Two &mdash; The Framework</div>
+      <ul class="chapter-list">
+        <li class="chapter-item"><div class="chapter-num">Ch 03</div><div class="chapter-info"><div class="chapter-title">What Staff Actually Need From You</div><div class="chapter-scripture">Psalm 23 &mdash; The Rod and the Staff</div><div class="chapter-desc">Clarity. Accountability. Growth. In that order.</div></div></li>
+        <li class="chapter-item"><div class="chapter-num">Ch 04</div><div class="chapter-info"><div class="chapter-title">Hiring Like a Builder, Not a Pastor</div><div class="chapter-scripture">Exodus 4:2 &mdash; What Is In Your Hand?</div><div class="chapter-desc">Pastors hire for heart. Builders hire for fit. You need both &mdash; in the right order.</div></div></li>
+        <li class="chapter-item"><div class="chapter-num">Ch 05</div><div class="chapter-info"><div class="chapter-title">The Rhythm of Leading People</div><div class="chapter-scripture">Exodus 17 &mdash; The Staff Raised in Battle</div><div class="chapter-desc">Leadership is sustained posture, not episodic heroism.</div></div></li>
+        <li class="chapter-item"><div class="chapter-num">Ch 06</div><div class="chapter-info"><div class="chapter-title">Hard Conversations and Why Pastors Avoid Them</div><div class="chapter-scripture">Numbers 20 &mdash; Moses Strikes the Rock</div><div class="chapter-desc">How you misuse a moment of frustration can cost you the next level.</div></div></li>
+      </ul>
+
+      <div class="part-divider">Part Three &mdash; The Culture</div>
+      <ul class="chapter-list">
+        <li class="chapter-item"><div class="chapter-num">Ch 07</div><div class="chapter-info"><div class="chapter-title">Culture Is What You Tolerate</div><div class="chapter-scripture">2 Kings 4 &mdash; Gehazi's Staff Accomplishes Nothing</div><div class="chapter-desc">Culture cannot be delegated without the spirit of the leader who built it.</div></div></li>
+        <li class="chapter-item"><div class="chapter-num">Ch 08</div><div class="chapter-info"><div class="chapter-title">When the Staff IS the Problem</div><div class="chapter-scripture">1 Samuel 17 &mdash; David Sets Aside Saul's Armor</div><div class="chapter-desc">Sometimes the wrong tools are in the room.</div></div></li>
+      </ul>
+
+      <div class="part-divider">Part Four &mdash; The Future</div>
+      <ul class="chapter-list">
+        <li class="chapter-item"><div class="chapter-num">Ch 09</div><div class="chapter-info"><div class="chapter-title">Scale: What Changes When the Team Grows</div><div class="chapter-scripture">Exodus 18 &mdash; Jethro's Intervention</div><div class="chapter-desc">The first organizational intervention in Scripture is not a sermon. It is about structure.</div></div></li>
+        <li class="chapter-item"><div class="chapter-num">Ch 10</div><div class="chapter-info"><div class="chapter-title">The Staff You're Building Them to Be</div><div class="chapter-scripture">2 Kings 2 &mdash; Elijah's Mantle to Elisha</div><div class="chapter-desc">The highest expression is not managing people well. It is developing them beyond you.</div></div></li>
+      </ul>
+
+      <div class="section-label">Market Positioning</div>
+      <div class="positioning-grid">
+        <div class="pos-item"><div class="pos-label">Primary Audience</div><div class="pos-value">Executive pastors, lead pastors, campus pastors managing 5&ndash;75 staff</div></div>
+        <div class="pos-item"><div class="pos-label">Secondary Audience</div><div class="pos-value">Ministry directors with 2&ndash;10 direct reports &amp; faith-adjacent nonprofit EDs</div></div>
+        <div class="pos-item"><div class="pos-label">Comp Titles</div><div class="pos-value">The Advantage &middot; Leaders Eat Last &middot; Unreasonable Hospitality &middot; No Silver Bullets</div></div>
+        <div class="pos-item"><div class="pos-label">Differentiator</div><div class="pos-value">Only book written by someone currently running a 50-person church staff through rapid scale + AI deployment simultaneously</div></div>
+      </div>
+
+      <div class="doc-links">
+        <a href="https://www.notion.so/31ee09b9c157815eafb7f5318f699644" target="_blank" class="doc-link">&#8599; Notion Architecture</a>
+      </div>
+
+      <div class="trilogy-row">
+        <div class="trilogy-cell"><div class="trilogy-book">Book 1 &mdash; AENA</div><div class="trilogy-q">Who am I before God?</div></div>
+        <div class="trilogy-cell"><div class="trilogy-book">Book 2 &mdash; ZAG</div><div class="trilogy-q">How do I lead?</div></div>
+        <div class="trilogy-cell active"><div class="trilogy-book">Book 3 &mdash; STAFF &larr; This</div><div class="trilogy-q">Who do I lead &mdash; and how?</div></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderAENA() {
+  return `
+  <div class="book-card" id="aena" style="border-color: rgba(242,240,235,0.08); opacity: 0.7;">
+    <div class="book-card-header">
+      <div class="book-card-meta">
+        <div class="book-card-series">Trilogy — Book 1 of 3 &middot; LEADS</div>
+        <div class="book-card-title">AENA: Anything, Everything, or Nothing at All</div>
+        <div class="book-card-subtitle">Grace theology for leaders. The foundation. Restores posture before framework is introduced. Launching Fall 2026.</div>
+      </div>
+      <div class="book-card-badges">
+        <span class="badge" style="background:rgba(245,166,35,0.12);color:#F5A623;border:1px solid rgba(245,166,35,0.25);">Fall 2026</span>
+        <span class="badge" style="background:rgba(138,138,138,0.1);color:var(--concrete);border:1px solid rgba(138,138,138,0.2);">Full architecture pending</span>
+      </div>
+    </div>
+    <div class="book-card-body">
+      <div class="thesis-block">
+        <div class="thesis-label">Why AENA Leads</div>
+        <p style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;color:rgba(242,240,235,0.75);line-height:1.7;margin:0;">You earn the right to talk about <em>how</em> to build by first addressing <em>why</em>. Without AENA, ZAG reads as another productivity system. With it, it reads as liberation. The series order is non-negotiable.</p>
+      </div>
+      <div class="trilogy-row">
+        <div class="trilogy-cell active"><div class="trilogy-book">Book 1 &mdash; AENA &larr; This</div><div class="trilogy-q">Who am I before God?</div></div>
+        <div class="trilogy-cell"><div class="trilogy-book">Book 2 &mdash; ZAG</div><div class="trilogy-q">How do I lead?</div></div>
+        <div class="trilogy-cell"><div class="trilogy-book">Book 3 &mdash; STAFF</div><div class="trilogy-q">Who do I lead?</div></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+const crossoverBooks = [
+  {
+    id: 'arise-build',
+    num: '01',
+    title: 'ARISE & BUILD',
+    subtitle: 'An Operator\'s Framework for Organizations That Last',
+    type: 'Blueprint · Operator Framework',
+    accent: '#C8F400',
+    accentDim: 'rgba(200,244,0,0.12)',
+    accentBorder: 'rgba(200,244,0,0.25)',
+    synopsis: [
+      'Most organizations don\'t fail to grow — they fail to be built. Growth exposes what was never properly constructed. Staff relationships become inadequate substitutes for accountability systems. Institutional knowledge becomes a liability when it lives only in the founder\'s head.',
+      'Arise & Build extracts seven principles of organizational architecture from the book of Nehemiah — not its devotional content, but its project management genius. Principles that apply across every sector, every size, and every leadership style.',
+      'The framework addresses the five systems that break first under growth pressure: information flow, decision authority, staff infrastructure, resource stewardship, and external trust.',
+      'This book is for the leader who knows something needs to change but has been told the answer is better vision, better culture, or better hiring. It isn\'t. The answer is infrastructure. And infrastructure is buildable.'
+    ]
+  },
+  {
+    id: 'stewardship',
+    num: '02',
+    title: 'Stewardship',
+    subtitle: 'Why the Best Leaders Build Like They\'re Borrowing',
+    type: 'Manifesto · Posture Shift',
+    accent: '#CC2200',
+    accentDim: 'rgba(204,34,0,0.12)',
+    accentBorder: 'rgba(204,34,0,0.3)',
+    synopsis: [
+      'Every leader eventually confronts the same quiet question: Am I building this — or am I just managing it until I hand it off?',
+      'Leaders who believe they own what they lead build differently than leaders who understand they are stewards of it. The difference is not semantic. It is structural.',
+      'The dominant leadership crisis of our era is not a lack of capability. It is a crisis of posture. Leaders at every level are making decisions from an ownership posture that produces hoarding, protectionism, short-termism, and eventually, organizational fragility.',
+      'Through seven case studies drawn from across sectors, Stewardship shows what the shift looks like in practice. This is not a book you read in an afternoon and agree with. It is a book you argue with for five years — until you realize it was right.'
+    ]
+  },
+  {
+    id: 'architecture-of-decisions',
+    num: '03',
+    title: 'The Architecture of Decisions',
+    subtitle: 'A Field Guide for Leaders Who Build',
+    type: 'Field Guide · Decision Systems',
+    accent: '#FFE600',
+    accentDim: 'rgba(255,230,0,0.1)',
+    accentBorder: 'rgba(255,230,0,0.25)',
+    synopsis: [
+      'The most consequential thing any leader builds is not the product, the team, or the culture. It is the decision-making infrastructure — the invisible architecture that determines which information reaches the table, who has authority over what, and how fast course corrections get made.',
+      'When this architecture is well-designed, organizations make good decisions consistently — not because they have brilliant people, but because they have built a system that surfaces the right information at the right time to the right person.',
+      'When this architecture is poorly designed, organizations rely on exceptional individuals to compensate for structural dysfunction. And eventually, those individuals burn out, leave, or both.',
+      'Organized around five architectural elements — Information Design, Authority Distribution, Accountability Architecture, Resource Stewardship Systems, and Crisis Management Protocols. This book gives you the blueprint.'
+    ]
+  },
+  {
+    id: 'decide-anyway',
+    num: '04',
+    title: 'DECIDE ANYWAY',
+    subtitle: 'A Framework for Leading When the Data Runs Out',
+    type: 'Framework · Complexity Leadership',
+    accent: '#FF2D00',
+    accentDim: 'rgba(255,45,0,0.1)',
+    accentBorder: 'rgba(255,45,0,0.25)',
+    synopsis: [
+      'Every leader has been there. You\'ve run the analysis. You\'ve studied the metrics. You\'ve consulted the advisors. And you still don\'t know what to do.',
+      'This is not a failure of intelligence. It is the structural condition of consequential leadership: the most important decisions arrive in environments of genuine uncertainty, where the data is incomplete and the stakes are irreversible.',
+      'Decide Anyway is a framework for what happens in the gap between information and decision — the space every leadership book claims to address and none of them actually enter.',
+      'The book delivers a three-part framework: Clarity Protocol, Conviction Architecture, and Consequence Infrastructure. For every leader who has done everything right and still doesn\'t know what to do next — this is where the real work begins.'
+    ]
+  }
+];
+
+function renderCrossoverConcepts() {
+  const cards = crossoverBooks.map(b => `
+  <div class="book-card" id="${b.id}" style="border-color:${b.accentBorder};">
+    <div class="book-card-header" style="border-bottom:1px solid rgba(242,240,235,0.06);">
+      <div class="book-card-meta">
+        <div class="book-card-series" style="color:${b.accent};">Crossover Concept &middot; ${b.num} of 04</div>
+        <div class="book-card-title">${b.title}</div>
+        <div class="book-card-subtitle">${b.subtitle}</div>
+      </div>
+      <div class="book-card-badges">
+        <span class="badge" style="background:${b.accentDim};color:${b.accent};border:1px solid ${b.accentBorder};">${b.type}</span>
+        <span class="badge" style="background:rgba(138,138,138,0.08);color:var(--concrete);border:1px solid rgba(138,138,138,0.15);">Concept Stage</span>
+      </div>
+    </div>
+    <div class="book-card-body">
+      <div class="thesis-label" style="color:${b.accent};">Synopsis</div>
+      <div style="width:28px;height:2px;background:${b.accent};margin-bottom:20px;"></div>
+      ${b.synopsis.map(p => `<p style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;color:rgba(242,240,235,0.8);line-height:1.8;margin:0 0 16px 0;">${p}</p>`).join('')}
+    </div>
+  </div>`).join('');
+
+  return `
+  <div style="margin-top:64px;padding-top:48px;border-top:1px solid rgba(242,240,235,0.06);">
+    <div style="margin-bottom:32px;">
+      <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--copper);margin-bottom:10px;">Crossover Book Concepts</div>
+      <div style="font-family:'Thunder',sans-serif;font-weight:700;font-size:36px;letter-spacing:1px;color:var(--off-white);line-height:1;">Four Concepts. Zero Comfort.</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;color:var(--concrete);margin-top:10px;max-width:560px;line-height:1.6;">Secular-crossover leadership books anchored in infrastructure, posture, decision systems, and complexity leadership. These expand the audience beyond ministry into executive, nonprofit, and corporate contexts.</div>
+    </div>
+    ${cards}
+  </div>`;
+}
+
+async function init() {
+  const container = document.getElementById('books-content');
+  try {
+    const docs = await loadBooks();
+    const zag = docs.find(d => d.subcategory === 'zag');
+    const staff = docs.find(d => d.subcategory === 'staff');
+
+    let html = renderAENA();
+    if (zag) html += renderZAG(zag);
+    if (staff) html += renderSTAFF(staff);
+    html += renderCrossoverConcepts();
+
+    container.innerHTML = html;
+  } catch (err) {
+    container.innerHTML = `<div class="loading-state"><p>Error loading books: ${err.message}</p></div>`;
+  }
+}
+
+init();
+</script>
+</body>
+</html>
