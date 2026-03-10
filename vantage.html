@@ -25,7 +25,8 @@
     .vantage-footer-legal { font-size: 10px; color: rgba(238,236,234,0.15); letter-spacing: 1px; }
     .vantage-footer-portal { font-size: 9px; letter-spacing: 2px; color: rgba(238,236,234,0.12); text-decoration: none; transition: color 0.3s; }
     .vantage-footer-portal:hover { color: rgba(238,236,234,0.4); }
-    @media (max-width: 600px) { .vantage-footer-inner { flex-direction: column; gap: 28px; } .vantage-footer-bottom { flex-direction: column; align-items: flex-start; } }
+    @media (max-width: 600px) { .vantage-footer { padding: 36px 20px 24px !important; } .vantage-footer-inner { flex-direction: column; gap: 28px; } .vantage-footer-bottom { flex-direction: column; align-items: flex-start; } }
+    .site-nav-btn { padding: 11px !important; }
   
   /* ===== SITE NAV (shared) ===== */
   .site-nav {
@@ -653,6 +654,13 @@ function Vantage() {
   const [active, setActive] = useState(null);
   const [drillIn, setDrillIn] = useState(false);
   const [vis, setVis] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 640);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const cards = biz ? BIZ : ORG;
   const attn = biz ? BIZ_ATTN : ORG_ATTN;
@@ -716,7 +724,7 @@ function Vantage() {
     return (
       <div style={{ ...ROOT, padding: 0, opacity: drillIn ? 1 : 0, transition: "opacity 0.3s ease" }}>
         <div style={GRAIN} />
-        <div style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: "32px 48px 48px", position: "relative", transform: drillIn ? "translateY(0)" : "translateY(12px)", transition: "transform 0.45s cubic-bezier(0.22,1,0.36,1)" }}>
+        <div style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: isMobile ? "20px 16px 40px" : "32px 48px 48px", position: "relative", transform: drillIn ? "translateY(0)" : "translateY(12px)", transition: "transform 0.45s cubic-bezier(0.22,1,0.36,1)" }}>
 
           <button onClick={close} style={{ background: "none", border: "none", color: cl.m, cursor: "pointer", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", padding: "8px 0", marginBottom: 12, fontFamily: "inherit", display: "flex", alignItems: "center", gap: 6 }}>
             <span style={{ fontSize: 14 }}>←</span> COMMAND CENTER
@@ -845,7 +853,7 @@ function Vantage() {
   return (
     <div style={ROOT}>
       <div style={GRAIN} />
-      <div style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: "32px 48px 24px", position: "relative", opacity: vis ? 1 : 0, transform: vis ? "translateY(0)" : "translateY(12px)", transition: "all 0.6s cubic-bezier(0.22,1,0.36,1)" }}>
+      <div style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: isMobile ? "20px 16px 24px" : "32px 48px 24px", position: "relative", opacity: vis ? 1 : 0, transform: vis ? "translateY(0)" : "translateY(12px)", transition: "all 0.6s cubic-bezier(0.22,1,0.36,1)" }}>
 
         {/* Header */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 2 }}>
@@ -862,7 +870,7 @@ function Vantage() {
 
         {/* ─── PULSE BAR ─── */}
         <div style={{
-          display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12, marginBottom: 20,
+          display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)", gap: 12, marginBottom: 20,
           animation: vis ? "vS 0.5s ease 0.08s both" : "none",
         }}>
           {pulse.map((p, i) => (
