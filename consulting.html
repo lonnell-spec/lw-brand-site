@@ -441,14 +441,50 @@
   </div>
 </footer>
 
-<!-- Supabase form handler — adapt from existing consulting form in index.html -->
+<!-- Supabase client + form handler -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  // TODO: Wire up to Supabase using the same pattern as the homepage consulting form
-  document.getElementById('consultForm').addEventListener('submit', function(e) {
+  const _sb = window.supabase.createClient(
+    'https://riqdcirsmckubkdfbtoj.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM'
+  );
+
+  document.getElementById('consultForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    // Supabase insert logic here
-    alert('Thank you for your inquiry. I will respond within 48 hours.');
-    this.reset();
+    const btn = this.querySelector('button[type="submit"]');
+    const orig = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'SENDING...';
+
+    const data = Object.fromEntries(new FormData(this));
+
+    try {
+      const { error } = await _sb.from('consulting_inquiries').insert([{
+        name:         data.name,
+        email:        data.email,
+        organization: data.organization || null,
+        service_type: data.service || null,
+        message:      data.message || null,
+        source:       'consulting-page',
+        status:       'new',
+        created_at:   new Date().toISOString()
+      }]);
+
+      if (error) throw error;
+
+      this.innerHTML = `
+        <div style="text-align:center; padding: 40px 0;">
+          <div style="font-family:'Space Mono',monospace; font-size:28px; color:var(--copper); margin-bottom:16px;">✓</div>
+          <p style="font-family:'Thunder',sans-serif; font-size:28px; letter-spacing:2px; color:var(--off-white); margin-bottom:12px;">INQUIRY RECEIVED</p>
+          <p style="font-family:'DM Sans',sans-serif; font-size:14px; color:rgba(242,240,235,0.6); line-height:1.6;">I review every consulting request personally.<br>You'll hear back within 48 business hours.</p>
+        </div>`;
+
+    } catch (err) {
+      console.error('Consulting inquiry error:', err);
+      btn.disabled = false;
+      btn.textContent = orig;
+      alert('Something went wrong. Please try again or email directly.');
+    }
   });
 </script>
 
