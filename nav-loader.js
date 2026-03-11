@@ -22,7 +22,6 @@
     { label: 'Books',        href: '/books.html' },
     { label: 'Work With Me', href: '/#consulting' },
     { label: 'Media',        href: '/media.html' },
-    { label: 'Content',      href: '/content-hub.html' },
     { label: 'Vantage',      href: '/vantage.html' }
   ];
 
