@@ -4,12 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Notion CMS — LDW Admin</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;700&family=Space+Mono&display=swap" rel="stylesheet">
+
+<link href="https://api.fontshare.com/v2/css?f[]=thunder@800,700,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --obsidian: #0D0D0D; --warm-black: #1A1714; --copper: #C17F59;
-    --signal: #E85D3A; --off-white: #F2F0EB; --concrete: #8A8A8A;
+    --signal: #00E676;
+    --copper-light: #D4956A; --off-white: #F2F0EB; --concrete: #8A8A8A;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
@@ -28,7 +30,7 @@
 
   .page-header { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid rgba(193,127,89,0.2); }
   .page-header .label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; color: var(--copper); text-transform: uppercase; margin-bottom: 12px; }
-  .page-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 3px; }
+  .page-header h1 { font-family: 'Thunder', sans-serif; font-size: 48px; letter-spacing: 3px; }
   .page-header .sub { font-size: 14px; font-weight: 300; color: var(--concrete); margin-top: 10px; }
 
   .section { margin-bottom: 52px; }
@@ -37,7 +39,7 @@
   /* DB CARDS */
   .db-card { background: var(--warm-black); border: 1px solid rgba(193,127,89,0.15); padding: 28px; margin-bottom: 16px; }
   .db-card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; gap: 16px; }
-  .db-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: var(--off-white); }
+  .db-card h3 { font-family: 'Thunder', sans-serif; font-size: 20px; letter-spacing: 2px; color: var(--off-white); }
   .db-card .db-id { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--concrete); margin-top: 4px; }
   .db-badge { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; padding: 4px 8px; border: 1px solid; white-space: nowrap; }
   .db-badge-auto { color: #6ee7b7; border-color: rgba(110,231,183,0.3); background: rgba(110,231,183,0.05); }
@@ -65,7 +67,7 @@
   .step-list { list-style: none; }
   .step-list li { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
   .step-list li:last-child { border-bottom: none; }
-  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: rgba(193,127,89,0.4); min-width: 32px; line-height: 1; }
+  .step-num { font-family: 'Thunder', sans-serif; font-size: 24px; color: rgba(193,127,89,0.4); min-width: 32px; line-height: 1; }
   .step-content h4 { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; color: var(--off-white); margin-bottom: 4px; }
   .step-content p { font-size: 13px; font-weight: 300; color: var(--concrete); line-height: 1.5; }
 
