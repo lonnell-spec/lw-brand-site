@@ -14,230 +14,24 @@
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: rgba(238,236,234,0.08); border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: rgba(238,236,234,0.14); }
-    .vantage-footer { background: #08080A; border-top: 1px solid rgba(238,236,234,0.06); padding: 48px 40px 32px; font-family: 'SF Pro Display', -apple-system, sans-serif; }
-    .vantage-footer-inner { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap; }
-    .vantage-footer-col { display: flex; flex-direction: column; gap: 10px; }
-    .vantage-footer-label { font-size: 8px; letter-spacing: 4px; text-transform: uppercase; color: rgba(238,236,234,0.2); margin-bottom: 4px; }
-    .vantage-footer a { font-size: 12px; letter-spacing: 1px; color: rgba(238,236,234,0.35); text-decoration: none; transition: color 0.3s; }
-    .vantage-footer a:hover { color: #EEECEA; }
-    .vantage-footer-bottom { width: 100%; margin-top: 32px; padding-top: 20px; border-top: 1px solid rgba(238,236,234,0.04); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-    .vantage-footer-brand { font-size: 11px; letter-spacing: 6px; text-transform: uppercase; color: rgba(238,236,234,0.12); }
-    .vantage-footer-legal { font-size: 10px; color: rgba(238,236,234,0.15); letter-spacing: 1px; }
-    .vantage-footer-portal { font-size: 9px; letter-spacing: 2px; color: rgba(238,236,234,0.12); text-decoration: none; transition: color 0.3s; }
-    .vantage-footer-portal:hover { color: rgba(238,236,234,0.4); }
-    .commissioned-builder-link { color: #C17F59; text-decoration: none; font-size: 11px; letter-spacing: 1px; transition: opacity 0.2s; }
-    .commissioned-builder-link:hover { opacity: 0.7; }
-    @media (max-width: 600px) { .vantage-footer { padding: 36px 20px 24px !important; } .vantage-footer-inner { flex-direction: column; gap: 28px; } .vantage-footer-bottom { flex-direction: column; align-items: flex-start; } }
-    .site-nav-btn { padding: 11px !important; }
-  
-  /* ===== SITE NAV (shared) ===== */
-  .site-nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 10000;
-    padding: 0 48px;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(13,13,13,0.94);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(242,240,235,0.04);
-  }
-  .site-nav-brand {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    text-decoration: none;
-  }
-  .site-nav-name {
-    font-family: 'Thunder', sans-serif;
-        font-weight: 700;
-    font-size: 16px;
-    letter-spacing: 1px;
-    color: #F2F0EB;
-  }
-  .site-nav-links {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-  }
-  .site-nav-links a {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: #8A8A8A;
-    transition: color 0.3s ease;
-  }
-  .site-nav-links a:hover,
-  .site-nav-links a.active { color: #F2F0EB; }
-  .site-nav-btn {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-  }
-  .site-nav-btn span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: #F2F0EB;
-    margin: 5px 0;
-    transition: all 0.3s ease;
-  }
-  @media (max-width: 768px) {
-    .site-nav { padding: 0 20px; }
-    .site-nav-links {
-      display: none;
-      position: fixed;
-      top: 64px; left: 0; right: 0;
-      background: rgba(13,13,13,0.98);
-      flex-direction: column;
-      padding: 32px 28px;
-      gap: 20px;
-      border-bottom: 1px solid rgba(242,240,235,0.04);
-      z-index: 9999;
-    }
-    .site-nav-links.open { display: flex; }
-    .site-nav-btn { display: block; }
-  }
+    .vantage-  /* ── FOOTER ── */
+    footer { background: var(--warm-black); border-top: 1px solid rgba(242,240,235,0.04); padding: 64px 60px 40px; }
+    .footer-top { display: flex; justify-content: space-between; gap: 48px; margin-bottom: 48px; }
+    .footer-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-bottom: 16px; }
+    .footer-brand-name { font-family: 'Thunder', sans-serif;
+        font-weight: 700; font-size: 14px; letter-spacing: 1px; color: var(--off-white); }
+    .footer-tagline { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); }
+    .footer-col-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--copper); margin-bottom: 20px; }
+    .footer-col { display: flex; flex-direction: column; gap: 12px; }
+    .footer-link { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; color: var(--concrete); transition: color 0.3s ease; }
+    .footer-link:hover { color: var(--off-white); }
+    .footer-bottom { border-top: 1px solid rgba(242,240,235,0.04); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-legal { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(242,240,235,0.2); }
+    /* "The" header row */
 
-    /* ── Commissioned Section ─────────────────────────────── */
-    .commissioned-section {
-      background: #0D0D0D;
-      padding: 96px 48px;
-      font-family: 'DM Sans', -apple-system, sans-serif;
-    }
-    .commissioned-inner {
-      max-width: 860px;
-      margin: 0 auto;
-    }
-    .commissioned-eyebrow {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: #C17F59;
-      margin-bottom: 28px;
-    }
-    .commissioned-headline {
-      font-family: 'Thunder', sans-serif;
-      font-size: clamp(40px, 6vw, 72px);
-      font-weight: 800;
-      line-height: 1.0;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: #F2F0EB;
-      margin-bottom: 28px;
-    }
-    .commissioned-headline span {
-      color: #C17F59;
-    }
-    .commissioned-desc {
-      font-size: 16px;
-      font-weight: 300;
-      color: rgba(242,240,235,0.65);
-      line-height: 1.75;
-      max-width: 680px;
-      margin-bottom: 52px;
-    }
-    .commissioned-builders {
-      display: flex;
-      gap: 32px;
-      margin-bottom: 52px;
-      flex-wrap: wrap;
-    }
-    .commissioned-builder {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      background: rgba(242,240,235,0.03);
-      border: 1px solid rgba(242,240,235,0.06);
-      padding: 20px 24px;
-      flex: 1;
-      min-width: 260px;
-    }
-    .commissioned-builder-avatar {
-      width: 44px;
-      height: 44px;
-      background: rgba(193,127,89,0.12);
-      border: 1px solid rgba(193,127,89,0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      font-weight: 700;
-      color: #C17F59;
-      letter-spacing: 1px;
-      flex-shrink: 0;
-    }
-    .commissioned-builder-info {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .commissioned-builder-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: #F2F0EB;
-      letter-spacing: 0.3px;
-    }
-    .commissioned-builder-role {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 2px;
-      color: #8A8A8A;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    .commissioned-divider {
-      height: 1px;
-      background: rgba(242,240,235,0.06);
-      margin-bottom: 40px;
-    }
-    .commissioned-company {
-      display: flex;
-      align-items: flex-start;
-      gap: 24px;
-    }
-    .commissioned-company-mark {
-      font-family: 'Thunder', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: rgba(242,240,235,0.15);
-      white-space: nowrap;
-      padding-top: 3px;
-    }
-    .commissioned-company-text {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .commissioned-company-name {
-      font-size: 13px;
-      font-weight: 600;
-      color: rgba(242,240,235,0.5);
-      display: none;
-    }
-    .commissioned-company-desc {
-      font-size: 13px;
-      font-weight: 300;
-      color: rgba(242,240,235,0.35);
-      line-height: 1.7;
-      max-width: 600px;
-    }
-    @media (max-width: 640px) {
-      .commissioned-section { padding: 64px 24px; }
-      .commissioned-builders { flex-direction: column; }
-    }
-</style>
+    
+
+  </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
@@ -324,33 +118,53 @@
   </section>
 
   <!-- === FOOTER === -->
-  <footer class="vantage-footer">
-    <div class="vantage-footer-inner">
-      <div class="vantage-footer-col">
-        <div class="vantage-footer-label">Navigate</div>
-        <a href="/">Home</a>
-        <a href="/speaking.html">Speaking</a>
-        <a href="/media.html">Media</a>
-        <a href="/#books">Books</a>
-        <a href="/#consulting">Work With Me</a>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-col-label">Foundation</div>
+          <p class="footer-scripture">"The God of heaven will make us prosper, and we his servants will arise and build."</p>
+          <div class="footer-ref">Nehemiah 2:20 — ESV</div>
+        </div>
+        <div>
+          <div class="footer-col-label">Navigate</div>
+          <a href="/#about" class="footer-link">About</a>
+          <a href="/#speaking" class="footer-link">Speaking</a>
+          <a href="/books.html" class="footer-link">Books</a>
+          <a href="/#consulting" class="footer-link">Work With Me</a>
+          <a href="/#newsletter" class="footer-link">Newsletter</a>
+          <a href="/media.html" class="footer-link">Media</a>
+          <a href="/vantage.html" class="footer-link">Vantage</a>
+          <a href="/admin.html" class="footer-link" style="color:var(--copper);margin-top:4px;">Portal</a>
+        </div>
+        <div>
+          <div class="footer-col-label">Books</div>
+          <a href="/books.html" class="footer-link">Anything, Everything, or Nothing at All</a>
+          <a href="/books.html" class="footer-link">Zag: Leading Ministry Jesus's Way</a>
+          <a href="/books.html" class="footer-link">The Staff (In Development)</a>
+        </div>
+        <div>
+                    <div class="footer-col-label">Connect</div>
+          <div class="footer-social-row">
+            <a href="https://instagram.com/lonnelldwilliams" target="_blank" class="footer-social" aria-label="Instagram" style="color:var(--concrete);">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://youtube.com/@lonnelldwilliams" target="_blank" class="footer-social" aria-label="YouTube" style="color:var(--concrete);">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://threads.net/@lonnelldwilliams" target="_blank" class="footer-social" aria-label="Threads" style="color:var(--concrete);">
+              <svg width="17" height="17" viewBox="0 0 192 192" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.347-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.141-23.82 1.374-39.134 15.369-38.105 34.809.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.35-22.809-.169-40.06-7.484-51.275-21.741C35.236 139.966 29.808 120.682 29.605 96c.203-24.682 5.63-43.966 16.133-57.317C56.954 24.435 74.206 17.12 97.015 16.951c22.975.17 40.526 7.52 52.171 21.847 5.71 7.026 9.986 15.976 12.838 26.52l16.2-4.325c-3.486-12.961-9-24.386-16.525-33.813C147.377 9.012 125.133-.281 97.105 0h-.195C68.988.28 47.019 9.616 32.162 27.773 18.956 44.001 12.026 67.04 11.768 95.952v.096c.258 28.912 7.188 51.951 20.394 68.179 14.857 18.157 36.826 27.493 65.633 27.772h.195c25.925-.242 44.188-6.977 59.208-22 18.263-18.243 17.717-40.706 11.718-54.614-4.297-10.016-12.653-18.101-26.379-23.397z"/><path d="M98.44 133.332c-10.654.618-21.804-4.185-22.372-14.463-.412-7.75 5.52-16.397 23.493-17.426 2.057-.119 4.075-.178 6.057-.178 5.88 0 11.396.545 16.435 1.6-1.87 23.384-13.039 29.853-23.613 30.467z"/></svg>
+            </a>
+            <a href="https://linkedin.com/in/lonnelldwilliams" target="_blank" class="footer-social" aria-label="LinkedIn" style="color:var(--concrete);">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
       </div>
-      <div class="vantage-footer-col">
-        <div class="vantage-footer-label">Connect</div>
-        <a href="/#newsletter">Newsletter</a>
-        <a href="https://buildwithldw.substack.com" target="_blank">Substack</a>
-        <a href="https://linkedin.com/in/lonnelldwilliams" target="_blank">LinkedIn</a>
-        <a href="https://www.2819church.org" target="_blank">2819 Church</a>
-      </div>
-      <div class="vantage-footer-col">
-        <div class="vantage-footer-label">Foundation</div>
-        <p style="font-size:11px;color:rgba(238,236,234,0.2);max-width:260px;line-height:1.6;font-style:italic;">"The God of heaven will make us prosper, and we his servants will arise and build."</p>
-        <span style="font-size:9px;letter-spacing:2px;color:rgba(238,236,234,0.12);">NEHEMIAH 2:20 — ESV</span>
-      </div>
-      <div class="vantage-footer-bottom">
-        <span class="vantage-footer-brand">LONNELL DAWSON WILLIAMS</span>
-        <span class="vantage-footer-legal">&copy; 2026 THE COMMISSIONED &mdash; LONNELL D. WILLIAMS &amp; PHILIP ANTHONY MITCHELL</span>
-        <a href="/admin.html" class="vantage-footer-portal">Portal</a>
-      </div>
+      <div class="footer-bottom">
+        <div class="footer-brand-text">LONNELL DAWSON WILLIAMS</div>
+        <div class="footer-legal">&copy; 2026 LONNELL WILLIAMS. ALL RIGHTS RESERVED.</div>
+        </div>
     </div>
   </footer>
   <script type="text/babel">
