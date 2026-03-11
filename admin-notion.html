@@ -4,194 +4,209 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Notion CMS — LDW Admin</title>
-<link href="https://api.fontshare.com/v2/css?f[]=thunder@800,700,600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;700&family=Space+Mono&display=swap" rel="stylesheet">
 <style>
-  :root{--obsidian:#0D0D0D;--warm-black:#1A1714;--copper:#C17F59;--signal:#E85D3A;--off-white:#F2F0EB;--concrete:#8A8A8A}
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--obsidian);color:var(--off-white);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.7;font-size:15px}
-  .admin-nav{position:fixed;top:0;left:0;right:0;z-index:9999;padding:0 40px;height:56px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,13,13,0.97);border-bottom:1px solid rgba(193,127,89,0.2)}
-  .nav-brand{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--copper);text-decoration:none}
-  .nav-back{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--concrete);text-decoration:none;transition:color 0.2s}
-  .nav-back:hover{color:var(--off-white)}
-  .wrap{max-width:800px;margin:0 auto;padding:96px 40px 80px}
-  .page-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--copper);margin-bottom:16px}
-  h1{font-family:'Thunder',sans-serif;
-        font-weight: 700;font-size:clamp(40px,6vw,72px);letter-spacing:3px;line-height:1;margin-bottom:32px}
-  .intro{font-size:16px;color:rgba(242,240,235,0.7);max-width:600px;margin-bottom:48px;line-height:1.75}
-  .section{margin-bottom:48px}
-  .section-title{font-family:'Thunder',sans-serif;
-        font-weight: 700;font-size:28px;letter-spacing:2px;color:var(--copper);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(193,127,89,0.2)}
-  .db-card{background:var(--warm-black);border:1px solid rgba(193,127,89,0.15);padding:24px;margin-bottom:16px}
-  .db-card:hover{border-color:rgba(193,127,89,0.35)}
-  .db-name{font-family:'DM Sans',sans-serif;font-weight:700;font-size:15px;color:var(--off-white);margin-bottom:4px}
-  .db-id{font-family:'Space Mono',monospace;font-size:9px;color:var(--concrete);letter-spacing:1px;margin-bottom:12px}
-  .db-desc{font-size:13px;color:rgba(242,240,235,0.65);line-height:1.65;margin-bottom:12px}
-  .db-fields{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.05)}
-  .db-field-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--copper);margin-bottom:8px}
-  table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px}
-  td,th{padding:6px 10px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.05)}
-  th{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--copper);border-bottom:1px solid rgba(193,127,89,0.2)}
-  td:first-child{color:var(--off-white);font-weight:600}
-  td:last-child{color:var(--concrete)}
-  .callout{padding:20px 24px;border-left:3px solid var(--copper);background:rgba(193,127,89,0.06);margin:24px 0}
-  .callout p{font-size:13px;color:rgba(242,240,235,0.7);line-height:1.7}
-  .callout strong{color:var(--off-white)}
-  .pill{display:inline-block;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;border:1px solid;margin-left:8px;vertical-align:middle}
-  .pill-green{border-color:#5A8C6B;color:#5A8C6B}
-  .pill-yellow{border-color:#C4A84A;color:#C4A84A}
+  :root {
+    --obsidian: #0D0D0D; --warm-black: #1A1714; --copper: #C17F59;
+    --signal: #E85D3A; --off-white: #F2F0EB; --concrete: #8A8A8A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+
+  .admin-nav {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 32px; border-bottom: 1px solid rgba(193,127,89,0.2);
+    background: var(--warm-black);
+  }
+  .admin-nav a { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.2s; }
+  .admin-nav a:hover { color: var(--copper); }
+  .admin-nav .sep { color: rgba(193,127,89,0.3); }
+  .admin-nav .current { color: var(--copper); font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; }
+
+  .page-wrap { max-width: 900px; margin: 0 auto; padding: 48px 32px; }
+
+  .page-header { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid rgba(193,127,89,0.2); }
+  .page-header .label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; color: var(--copper); text-transform: uppercase; margin-bottom: 12px; }
+  .page-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 3px; }
+  .page-header .sub { font-size: 14px; font-weight: 300; color: var(--concrete); margin-top: 10px; }
+
+  .section { margin-bottom: 52px; }
+  .section-title { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; color: var(--copper); text-transform: uppercase; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid rgba(193,127,89,0.15); }
+
+  /* DB CARDS */
+  .db-card { background: var(--warm-black); border: 1px solid rgba(193,127,89,0.15); padding: 28px; margin-bottom: 16px; }
+  .db-card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; gap: 16px; }
+  .db-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: var(--off-white); }
+  .db-card .db-id { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--concrete); margin-top: 4px; }
+  .db-badge { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; padding: 4px 8px; border: 1px solid; white-space: nowrap; }
+  .db-badge-auto { color: #6ee7b7; border-color: rgba(110,231,183,0.3); background: rgba(110,231,183,0.05); }
+  .db-badge-manual { color: #fbbf24; border-color: rgba(251,191,36,0.3); background: rgba(251,191,36,0.05); }
+
+  .db-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-bottom: 16px; border-top: 1px solid rgba(255,255,255,0.05); }
+  .db-field { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .db-field:nth-child(odd) { padding-right: 16px; }
+  .db-field .field-name { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--copper); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
+  .db-field .field-desc { font-size: 12px; font-weight: 300; color: rgba(242,240,235,0.6); line-height: 1.4; }
+
+  .db-note { background: rgba(13,13,13,0.5); border-left: 3px solid rgba(193,127,89,0.4); padding: 12px 16px; }
+  .db-note p { font-size: 13px; font-weight: 300; color: rgba(242,240,235,0.65); line-height: 1.6; }
+  .db-note strong { color: var(--off-white); font-weight: 400; }
+
+  .notion-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--copper); text-transform: uppercase; text-decoration: none; border-bottom: 1px solid rgba(193,127,89,0.3); padding-bottom: 2px; }
+  .notion-link:hover { border-color: var(--copper); }
+
+  /* FLOW DIAGRAM */
+  .flow { display: flex; align-items: center; gap: 0; margin: 16px 0; flex-wrap: wrap; }
+  .flow-step { background: rgba(193,127,89,0.08); border: 1px solid rgba(193,127,89,0.2); padding: 10px 16px; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--off-white); letter-spacing: 1px; white-space: nowrap; }
+  .flow-arrow { font-family: 'Space Mono', monospace; font-size: 12px; color: rgba(193,127,89,0.5); padding: 0 8px; }
+
+  /* STEP LIST */
+  .step-list { list-style: none; }
+  .step-list li { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .step-list li:last-child { border-bottom: none; }
+  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: rgba(193,127,89,0.4); min-width: 32px; line-height: 1; }
+  .step-content h4 { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; color: var(--off-white); margin-bottom: 4px; }
+  .step-content p { font-size: 13px; font-weight: 300; color: var(--concrete); line-height: 1.5; }
+
+  @media (max-width: 640px) { .db-fields { grid-template-columns: 1fr; } .page-wrap { padding: 32px 20px; } }
 </style>
 </head>
 <body>
 
+<script>
+  if (sessionStorage.getItem('ldw_admin_auth') !== 'true') { window.location.href = '/admin.html'; }
+</script>
+
 <nav class="admin-nav">
-  <a href="/admin.html" class="nav-brand">LDW Admin</a>
-  <a href="/admin.html" class="nav-back">← Back to Portal</a>
+  <a href="/admin.html">LDW Admin</a>
+  <span class="sep">›</span>
+  <span class="current">Notion CMS</span>
 </nav>
 
-<div class="wrap">
-  <div class="page-label">Admin Portal</div>
-  <h1>NOTION<br>CMS</h1>
-  <p class="intro">Notion is the content management system for ldw.build. Two Notion databases feed the site — Content Hub and Photos. Here's how each works.</p>
+<div class="page-wrap">
 
+  <div class="page-header">
+    <div class="label">Content Management</div>
+    <h1>NOTION CMS</h1>
+    <p class="sub">Everything on the site that syncs from Notion — what the databases contain, how to update them, and what happens when you do.</p>
+  </div>
+
+  <!-- HOW IT WORKS -->
   <div class="section">
-    <div class="section-title">CONNECTED DATABASES</div>
-
-    <div class="db-card">
-      <div class="db-name">Content Hub <span class="pill pill-green">Live Sync</span></div>
-      <div class="db-id">Notion DB ID: f69e7146cb2940ba92d5460001d8611d → Supabase: site_content_hub</div>
-      <div class="db-desc">Stores content pieces: articles, resources, featured links, and written work. Syncs to the site every 15 minutes via the sync-notion-content edge function.</div>
-      <div class="db-fields">
-        <div class="db-field-label">Required Fields</div>
-        <table>
-          <tr><th>Field</th><th>Type</th><th>Notes</th></tr>
-          <tr><td>Title</td><td>Title</td><td>Required — appears as content title on site</td></tr>
-          <tr><td>Type</td><td>Select</td><td>article / resource / link</td></tr>
-          <tr><td>Status</td><td>Select</td><td>Set to "Published" to display on site</td></tr>
-          <tr><td>URL</td><td>URL</td><td>Link for the content piece</td></tr>
-          <tr><td>Description</td><td>Text</td><td>Short description shown on site</td></tr>
-          <tr><td>Published Date</td><td>Date</td><td>Used for sorting</td></tr>
-        </table>
-      </div>
+    <div class="section-title">How the Sync Works</div>
+    <div class="flow">
+      <div class="flow-step">Notion DB</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">sync-notion-content (v20)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">Supabase Tables</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">ldw.build</div>
     </div>
-
-    <div class="db-card">
-      <div class="db-name">Photos <span class="pill pill-green">Live Sync</span></div>
-      <div class="db-id">Notion DB ID: 074724b874a640e1b48cd7667f9addbd → Supabase: site_photos</div>
-      <div class="db-desc">Stores gallery photos that appear on the homepage. Syncs every 15 minutes. Add a photo row in Notion and it appears on the site automatically.</div>
-      <div class="db-fields">
-        <div class="db-field-label">Required Fields</div>
-        <table>
-          <tr><th>Field</th><th>Type</th><th>Notes</th></tr>
-          <tr><td>Title</td><td>Title</td><td>Caption or photo title</td></tr>
-          <tr><td>Photo URL</td><td>URL</td><td>Direct image URL (Cloudinary recommended)</td></tr>
-          <tr><td>Category</td><td>Select</td><td>speaking / ministry / personal / event</td></tr>
-          <tr><td>Active</td><td>Checkbox</td><td>Must be checked to display on site</td></tr>
-          <tr><td>Display Order</td><td>Number</td><td>Lower numbers appear first</td></tr>
-        </table>
-      </div>
-    </div>
+    <p style="font-size:13px;font-weight:300;color:var(--concrete);margin-top:12px;line-height:1.6;">The edge function runs on a cron every 15 minutes. You can also trigger it manually. Changes in Notion appear on the site within 15 minutes automatically — or immediately if you trigger the sync.</p>
   </div>
 
+  <!-- DATABASES -->
   <div class="section">
-    <div class="section-title">SYNC SCHEDULE</div>
+    <div class="section-title">Notion Databases — What's Wired</div>
+
+    <!-- PHOTO GALLERY -->
     <div class="db-card">
-      <div class="db-name">sync-notion-content (Edge Function v20)</div>
-      <div class="db-desc">Runs every 15 minutes via Supabase cron. Syncs Content Hub and Photos from Notion. Also runs the YouTube API sync at the same time.</div>
+      <div class="db-card-header">
+        <div>
+          <h3>PHOTO GALLERY</h3>
+          <div class="db-id">ID: 074724b8-74a6-40e1-b48c-d7667f9addbd</div>
+        </div>
+        <span class="db-badge db-badge-auto">AUTO-SYNC · 15 MIN</span>
+      </div>
       <div class="db-fields">
-        <div class="db-field-label">Manual Trigger</div>
-        <p style="font-family:'Space Mono',monospace;font-size:10px;color:var(--concrete);margin-top:6px;">GET https://riqdcirsmckubkdfbtoj.supabase.co/functions/v1/sync-notion-content?token=ldw-sync-2026-secure</p>
+        <div class="db-field"><div class="field-name">Name</div><div class="field-desc">Photo label / caption</div></div>
+        <div class="db-field"><div class="field-name">Files</div><div class="field-desc">Upload image here — syncs to site</div></div>
+        <div class="db-field"><div class="field-name">Category</div><div class="field-desc">speaking, press, headshot, etc.</div></div>
+        <div class="db-field"><div class="field-name">Active</div><div class="field-desc">Checkbox — uncheck to hide from site</div></div>
       </div>
+      <div class="db-note">
+        <p><strong>To update site photos:</strong> Add or replace rows in this database. Upload the image to the Files field. Check Active to show on site. The next 15-min sync (or manual trigger) will update Supabase → site reflects immediately.</p>
+      </div>
+      <a href="https://www.notion.so" target="_blank" class="notion-link">↗ Open in Notion</a>
     </div>
+
+    <!-- CONTENT HUB -->
+    <div class="db-card">
+      <div class="db-card-header">
+        <div>
+          <h3>CONTENT HUB</h3>
+          <div class="db-id">ID: f69e7146-cb29-40ba-92d5-460001d8611d</div>
+        </div>
+        <span class="db-badge db-badge-auto">AUTO-SYNC · 15 MIN</span>
+      </div>
+      <div class="db-fields">
+        <div class="db-field"><div class="field-name">Title</div><div class="field-desc">Sermon, episode, or article title</div></div>
+        <div class="db-field"><div class="field-name">Type</div><div class="field-desc">sermon / podcast / article / youtube</div></div>
+        <div class="db-field"><div class="field-name">URL</div><div class="field-desc">Link to full content</div></div>
+        <div class="db-field"><div class="field-name">Published</div><div class="field-desc">Date — used for sorting</div></div>
+        <div class="db-field"><div class="field-name">Thumbnail</div><div class="field-desc">Cover image (optional)</div></div>
+        <div class="db-field"><div class="field-name">Active</div><div class="field-desc">Checkbox — uncheck to hide</div></div>
+      </div>
+      <div class="db-note">
+        <p><strong>Currently 0 rows.</strong> This is the highest-value thing to populate right now. Add sermon clips, podcast episodes, and teaching content here. Each row becomes a card in the site's content section.</p>
+      </div>
+      <a href="https://www.notion.so" target="_blank" class="notion-link">↗ Open in Notion</a>
+    </div>
+
   </div>
 
-  <div class="callout">
-    <p><strong>Note on Instagram and YouTube:</strong> These no longer use Notion DBs. Instagram syncs via Zapier (on every new post). YouTube syncs directly from the YouTube API every 15 minutes. The Notion Instagram and YouTube databases were removed in March 2026 to reduce sync complexity.</p>
+  <!-- HOW TO ADD CONTENT -->
+  <div class="section">
+    <div class="section-title">How to Add a Photo — Step by Step</div>
+    <ul class="step-list">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-content"><h4>Open the Photo Gallery DB in Notion</h4><p>Navigate to LDW Brand Site → Photo Gallery. Or use the link above.</p></div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-content"><h4>Add a new row</h4><p>Click + at the bottom or New at the top. Give it a name (caption or label).</p></div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-content"><h4>Upload the image to Files field</h4><p>Click the Files cell → upload the image. Notion hosts it.</p></div>
+      </li>
+      <li>
+        <div class="step-num">4</div>
+        <div class="step-content"><h4>Set Category and check Active</h4><p>Choose the right category. Check the Active checkbox to show it on the site.</p></div>
+      </li>
+      <li>
+        <div class="step-num">5</div>
+        <div class="step-content"><h4>Trigger the sync or wait 15 minutes</h4><p>Hit the manual sync URL to see it immediately. Otherwise it'll appear on the next cron run.</p></div>
+      </li>
+    </ul>
   </div>
 
-  <!-- ===== SOCIAL TEMPLATES ===== -->
-  <div style="margin-top:48px;">
-    <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--copper);margin-bottom:8px;">Brand Assets</div>
-    <div style="font-family:'Thunder',sans-serif;font-size:28px;letter-spacing:4px;margin-bottom:8px;">SOCIAL POST TEMPLATES</div>
-    <p style="font-weight:300;font-size:13px;color:var(--concrete);margin-bottom:28px;line-height:1.6;">Bold minimalism series — text only, 1080×1080. Four template directions. Full reference at <a href="/admin-social-templates.html" style="color:var(--copper);">admin-social-templates.html</a>.</p>
-
-    <style>
-      .notion-tpl-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:16px; }
-      .notion-tpl-item { display:flex; flex-direction:column; gap:8px; }
-      .notion-tpl-tag { font-family:'Space Mono',monospace; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--copper); }
-      .notion-tpl-note { font-size:11px; color:var(--concrete); font-weight:300; line-height:1.4; }
-      /* miniature post previews */
-      .mp { width:100%; aspect-ratio:1; position:relative; overflow:hidden; flex-shrink:0; }
-      .mp-a { background:#0D0D0D; }
-      .mp-a::after { content:''; position:absolute; top:0; left:57%; width:1px; height:100%; background:rgba(193,127,89,0.35); transform:skewX(-35deg); transform-origin:top left; }
-      .mp-a-t { position:absolute; bottom:20%; left:12%; font-family:'Thunder',sans-serif;
-        font-weight: 700; line-height:0.85; }
-      .mp-a-t span:nth-child(1) { display:block; font-size:32px; color:#F2F0EB; }
-      .mp-a-t span:nth-child(2) { display:block; font-size:32px; color:#C17F59; }
-      .mp-a-t span:nth-child(3) { display:block; font-size:32px; color:rgba(242,240,235,0.1); }
-      .mp-b { background:#F2F0EB; }
-      .mp-b-bar { position:absolute; top:0; left:0; right:0; height:18px; background:#0D0D0D; }
-      .mp-b-t { position:absolute; bottom:22%; left:10%; font-family:'Thunder',sans-serif;
-        font-weight: 700; line-height:0.82; }
-      .mp-b-t span:nth-child(1) { display:block; font-size:30px; color:#0D0D0D; }
-      .mp-b-t span:nth-child(2) { display:block; font-size:30px; color:#E85D3A; }
-      .mp-b-t span:nth-child(3) { display:block; font-size:30px; -webkit-text-stroke:1px #0D0D0D; color:transparent; }
-      .mp-c { background:#C17F59; }
-      .mp-c-t { position:absolute; bottom:20%; left:12%; font-family:'Thunder',sans-serif;
-        font-weight: 700; line-height:0.85; }
-      .mp-c-t span:nth-child(1) { display:block; font-size:30px; color:#0D0D0D; }
-      .mp-c-t span:nth-child(2) { display:block; font-size:30px; color:#F2F0EB; }
-      .mp-c-t span:nth-child(3) { display:block; font-size:30px; color:rgba(0,0,0,0.25); }
-      .mp-d { background:#0D0D0D; border-top:2px solid #C17F59; }
-      .mp-d-t { position:absolute; left:0; right:0; top:50%; transform:translateY(-50%); }
-      .mp-d-t span:nth-child(1) { display:block; font-family:'Thunder',sans-serif;
-        font-weight: 700; font-size:30px; color:#F2F0EB; padding-left:12%; }
-      .mp-d-t span:nth-child(2) { display:block; height:1px; background:rgba(193,127,89,0.3); margin:4px 12%; }
-      .mp-d-t span:nth-child(3) { display:block; font-family:'Thunder',sans-serif;
-        font-weight: 700; font-size:30px; color:#E85D3A; padding-left:12%; }
-      .mp-d-t span:nth-child(4) { display:block; font-family:'Thunder',sans-serif;
-        font-weight: 700; font-size:30px; -webkit-text-stroke:1px rgba(242,240,235,0.2); color:transparent; padding-left:12%; }
-    </style>
-
-    <div class="notion-tpl-grid">
-      <div class="notion-tpl-item">
-        <div class="mp mp-a">
-          <div class="mp-a-t"><span>INFORMED</span><span>LEADERS</span><span>DECIDE.</span></div>
-        </div>
-        <div class="notion-tpl-tag">A — Obsidian Break</div>
-        <div class="notion-tpl-note">Dark. Copper accent word. Weekly default.</div>
-      </div>
-      <div class="notion-tpl-item">
-        <div class="mp mp-b">
-          <div class="mp-b-bar"></div>
-          <div class="mp-b-t"><span>BUILD</span><span>WHAT</span><span>EXISTS.</span></div>
-        </div>
-        <div class="notion-tpl-tag">B — White Strike</div>
-        <div class="notion-tpl-note">Off-white base. Feed contrast post.</div>
-      </div>
-      <div class="notion-tpl-item">
-        <div class="mp mp-c">
-          <div class="mp-c-t"><span>ARISE</span><span>AND</span><span>BUILD.</span></div>
-        </div>
-        <div class="notion-tpl-tag">C — Copper Flood</div>
-        <div class="notion-tpl-note">Accent as environment. Max 1×/month.</div>
-      </div>
-      <div class="notion-tpl-item">
-        <div class="mp mp-d">
-          <div class="mp-d-t">
-            <span>VISION</span>
-            <span></span>
-            <span>WITHOUT</span>
-            <span>EXECUTION.</span>
-          </div>
-        </div>
-        <div class="notion-tpl-tag">D — Three-Line Break</div>
-        <div class="notion-tpl-note">Solid · Signal · Ghost. High impact.</div>
-      </div>
-    </div>
-    <p style="font-size:11px;color:var(--concrete);font-weight:300;">Full preview + HTML source → <a href="/admin-social-templates.html" style="color:var(--copper);">admin-social-templates.html</a></p>
+  <!-- WHAT DOESN'T SYNC FROM NOTION -->
+  <div class="section">
+    <div class="section-title">What Does NOT Sync From Notion</div>
+    <table style="width:100%;border-collapse:collapse;">
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+        <td style="padding:12px 8px;font-family:'Space Mono',monospace;font-size:10px;color:var(--copper);width:200px;">Speaking inquiries</td>
+        <td style="padding:12px 8px;font-size:13px;font-weight:300;color:rgba(242,240,235,0.65);">Managed in admin-speaking.html — form goes direct to Supabase</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+        <td style="padding:12px 8px;font-family:'Space Mono',monospace;font-size:10px;color:var(--copper);">YouTube videos</td>
+        <td style="padding:12px 8px;font-size:13px;font-weight:300;color:rgba(242,240,235,0.65);">Direct YouTube API → site_youtube (Notion not involved)</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+        <td style="padding:12px 8px;font-family:'Space Mono',monospace;font-size:10px;color:var(--copper);">Instagram posts</td>
+        <td style="padding:12px 8px;font-size:13px;font-weight:300;color:rgba(242,240,235,0.65);">Zapier fires on post → site_instagram (Notion not involved)</td>
+      </tr>
+      <tr>
+        <td style="padding:12px 8px;font-family:'Space Mono',monospace;font-size:10px;color:var(--copper);">Substack articles</td>
+        <td style="padding:12px 8px;font-size:13px;font-weight:300;color:rgba(242,240,235,0.65);">RSS proxy → articles.html fetches live on page load (Notion not involved)</td>
+      </tr>
+    </table>
   </div>
 
 </div>
-
 </body>
 </html>
