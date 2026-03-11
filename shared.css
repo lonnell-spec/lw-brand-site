@@ -1,0 +1,393 @@
+/* ============================================================
+   LDW.BUILD — Shared Stylesheet
+   Consolidates duplicated CSS from inline <style> blocks
+   across index.html, speaking.html, books.html, articles.html,
+   content-hub.html, media.html, and vantage.html.
+   ============================================================ */
+
+/* ── DESIGN TOKENS ── */
+:root {
+  --obsidian:      #0D0D0D;
+  --warm-black:    #1A1714;
+  --copper:        #C17F59;
+  --copper-light:  #D4956A;
+  --signal:        #00E676;
+  --off-white:     #F2F0EB;
+  --concrete:      #8A8A8A;
+
+  /* AENA book palette */
+  --aena-cyan:     #1FAABD;
+  --aena-red:      #E23636;
+  --aena-yellow:   #F5C518;
+  --aena-teal:     #0A6E7C;
+
+  /* Transparency helpers */
+  --glass-bg:      rgba(13, 13, 13, 0.92);
+  --glass-border:  rgba(242, 240, 235, 0.04);
+  --copper-muted:  rgba(193, 127, 89, 0.12);
+}
+
+/* ── RESET ── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Light pages (homepage) */
+body.page-light {
+  background: var(--off-white);
+  color: var(--obsidian);
+}
+
+/* Dark pages (speaking, books, articles, content-hub, media, vantage) */
+body.page-dark {
+  background: var(--obsidian);
+  color: var(--off-white);
+}
+
+/* ── NAVIGATION ── */
+.site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 9999;
+  padding: 0 48px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+}
+
+.site-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.site-nav-brand svg { display: block; }
+
+.site-nav-name {
+  font-family: 'Thunder', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: var(--off-white);
+}
+
+.site-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.site-nav-links a {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--concrete);
+  transition: color 0.3s ease;
+}
+
+.site-nav-links a:hover { color: var(--off-white); }
+.site-nav-links a.active { color: var(--copper); }
+
+/* Nav CTA button (e.g., "Work With Me") */
+.nav-cta {
+  background: var(--copper) !important;
+  color: var(--obsidian) !important;
+  padding: 8px 18px;
+  font-weight: 700 !important;
+  transition: background 0.3s ease !important;
+}
+.nav-cta:hover { background: var(--copper-light) !important; }
+
+/* Mobile menu toggle */
+.site-nav-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 11px;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.site-nav-btn span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--off-white);
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+/* ── BUTTONS ── */
+.btn-primary {
+  display: inline-block;
+  background: var(--copper);
+  color: var(--obsidian);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 36px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.btn-primary:hover { background: var(--copper-light); }
+
+.btn-secondary {
+  display: inline-block;
+  background: none;
+  color: var(--off-white);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 36px;
+  border: 1px solid rgba(242, 240, 235, 0.15);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-secondary:hover {
+  border-color: var(--copper);
+  color: var(--copper);
+}
+
+/* ── SECTION EYEBROW ── */
+.section-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-eyebrow::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--copper);
+}
+
+/* ── NEWSLETTER CTA BAND ── */
+.newsletter-band {
+  border-top: 1px solid rgba(242, 240, 235, 0.06);
+  padding: 72px 60px;
+  background: var(--warm-black);
+}
+
+.newsletter-inner {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.newsletter-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 16px;
+}
+
+.newsletter-title {
+  font-family: 'Thunder', sans-serif;
+  font-weight: 700;
+  font-size: 48px;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+}
+
+.newsletter-desc {
+  font-size: 14px;
+  color: var(--concrete);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 8px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.newsletter-input {
+  flex: 1;
+  background: rgba(242, 240, 235, 0.05);
+  border: 1px solid rgba(242, 240, 235, 0.1);
+  padding: 13px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--off-white);
+  outline: none;
+  transition: border-color 0.3s;
+}
+.newsletter-input:focus { border-color: var(--copper); }
+.newsletter-input::placeholder { color: var(--concrete); }
+
+.newsletter-btn {
+  background: var(--copper);
+  color: var(--obsidian);
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 13px 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.3s;
+  white-space: nowrap;
+}
+.newsletter-btn:hover { background: var(--copper-light); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--warm-black);
+  border-top: 1px solid var(--glass-border);
+  padding: 48px 60px 32px;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-brand {
+  font-family: 'Thunder', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: rgba(242, 240, 235, 0.2);
+}
+
+.footer-legal {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(242, 240, 235, 0.15);
+}
+
+/* ── PAGE SHELL ── */
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ── CONTENT CARDS (shared by content-hub, articles) ── */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.content-card {
+  background: var(--warm-black);
+  border: 1px solid rgba(193, 127, 89, 0.1);
+  padding: 28px 24px;
+  text-decoration: none;
+  display: block;
+  transition: border-color 0.25s;
+}
+.content-card:hover { border-color: var(--copper); }
+
+.card-type {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 12px;
+}
+
+.card-title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--off-white);
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--concrete);
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+
+.card-date {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  color: rgba(242, 240, 235, 0.25);
+  letter-spacing: 1px;
+}
+
+.card-arrow {
+  font-size: 12px;
+  color: var(--copper);
+  float: right;
+  transition: transform 0.2s;
+}
+.content-card:hover .card-arrow { transform: translateX(4px); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .site-nav { padding: 0 24px; }
+
+  .site-nav-links {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0; right: 0;
+    background: rgba(13, 13, 13, 0.96);
+    flex-direction: column;
+    padding: 24px;
+    gap: 20px;
+  }
+  .site-nav-links.open { display: flex; }
+  .site-nav-btn { display: block; }
+
+  .page { padding: 0 24px; }
+
+  .newsletter-band { padding: 48px 24px; }
+  .newsletter-form { flex-direction: column; }
+
+  footer { padding: 36px 24px 24px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
