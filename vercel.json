@@ -16,11 +16,6 @@
       "permanent": false
     },
     {
-      "source": "/articles.html",
-      "destination": "/content-hub.html",
-      "permanent": true
-    },
-    {
       "source": "/content.html",
       "destination": "/content-hub.html",
       "permanent": true
