@@ -853,84 +853,22 @@
         font-weight: 700; font-size: 28px; letter-spacing: 3px; color: var(--off-white); margin-bottom: 8px; }
   .ty-subtitle { font-size: 14px; color: var(--concrete); }
 
-  /* ===== FOOTER ===== */
-  .footer {
-    background: var(--warm-black);
-    border-top: 1px solid rgba(242,240,235,0.04);
-    padding: 64px 60px 32px;
-  }
+    /* ── FOOTER ── */
+    footer { background: var(--warm-black); border-top: 1px solid rgba(242,240,235,0.04); padding: 64px 60px 40px; }
+    .footer-top { display: flex; justify-content: space-between; gap: 48px; margin-bottom: 48px; }
+    .footer-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-bottom: 16px; }
+    .footer-brand-name { font-family: 'Thunder', sans-serif;
+        font-weight: 700; font-size: 14px; letter-spacing: 1px; color: var(--off-white); }
+    .footer-tagline { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); }
+    .footer-col-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--copper); margin-bottom: 20px; }
+    .footer-col { display: flex; flex-direction: column; gap: 12px; }
+    .footer-link { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; color: var(--concrete); transition: color 0.3s ease; }
+    .footer-link:hover { color: var(--off-white); }
+    .footer-bottom { border-top: 1px solid rgba(242,240,235,0.04); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-legal { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(242,240,235,0.2); }
+    /* "The" header row */
 
-  .footer-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .footer-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    margin-bottom: 48px;
-    gap: 48px;
-  }
-
-  .footer-col-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--copper);
-    margin-bottom: 16px;
-  }
-
-  .footer-link {
-    display: block;
-    font-size: 13px;
-    color: var(--concrete);
-    text-decoration: none;
-    margin-bottom: 10px;
-    transition: color 0.3s ease;
-  }
-
-  .footer-link:hover { color: var(--off-white); }
-
-  .footer-scripture {
-    font-style: italic;
-    font-size: 13px;
-    color: var(--concrete);
-    max-width: 280px;
-    line-height: 1.6;
-    margin-bottom: 8px;
-  }
-
-  .footer-ref {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 2px;
-    color: var(--copper);
-  }
-
-  .footer-bottom {
-    border-top: 1px solid rgba(242,240,235,0.04);
-    padding-top: 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .footer-brand-text {
-    font-family: 'Thunder', sans-serif;
-        font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 1px;
-    color: rgba(242,240,235,0.15);
-  }
-
-  .footer-legal {
-    font-family: 'Space Mono', monospace;
-    font-size: 8px;
-    letter-spacing: 2px;
-    color: rgba(242,240,235,0.2);
-  }
+    
 
   /* ===== ANIMATIONS ===== */
   @keyframes fadeUp {
@@ -1410,11 +1348,11 @@
         </div>
         <div>
           <div class="footer-col-label">Navigate</div>
-          <a href="#about" class="footer-link">About</a>
-          <a href="#speaking" class="footer-link">Speaking</a>
+          <a href="/#about" class="footer-link">About</a>
+          <a href="/#speaking" class="footer-link">Speaking</a>
           <a href="/books.html" class="footer-link">Books</a>
-          <a href="#consulting" class="footer-link">Work With Me</a>
-          <a href="#newsletter" class="footer-link">Newsletter</a>
+          <a href="/#consulting" class="footer-link">Work With Me</a>
+          <a href="/#newsletter" class="footer-link">Newsletter</a>
           <a href="/media.html" class="footer-link">Media</a>
           <a href="/vantage.html" class="footer-link">Vantage</a>
           <a href="/admin.html" class="footer-link" style="color:var(--copper);margin-top:4px;">Portal</a>
