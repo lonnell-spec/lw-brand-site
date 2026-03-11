@@ -1878,6 +1878,7 @@
   }
 ]
 </script>
+<link rel="stylesheet" href="/shared.css">
 </head>
 <body>
 <!-- ===== SITE NAV ===== -->
@@ -1890,13 +1891,13 @@
     </svg>
     <span class="site-nav-name">LONNELL WILLIAMS</span>
   </a>
-  <div class="site-nav-links">
+  <div class="site-nav-links" id="navLinks">
     <a href="#about">About</a>
     <a href="/speaking.html">Speaking</a>
     <a href="/books.html">Books</a>
     <a href="#consulting">Work With Me</a>
     <a href="/media.html">Media</a>
-    <a href="/articles.html">Articles</a>
+    <a href="/content-hub.html">Content</a>
     <a href="/vantage.html">Vantage</a>
   </div>
   <button class="site-nav-btn" onclick="var l=document.querySelector('.site-nav-links');l.classList.toggle('open');">
@@ -2298,9 +2299,6 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
       </div>
     </div>
   </div>
-
-
-
 
   <!-- ===== VANTAGE ===== -->
   <section class="vantage-section" id="vantage">
