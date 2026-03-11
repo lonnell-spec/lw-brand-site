@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://ldw.build/consulting.html">
+<title>Consulting — Lonnell Williams</title>
+<meta name="description" content="Operational consulting for churches and organizations — systems architecture, AI infrastructure, leadership development, and organizational scaling. Work with Lonnell Williams.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;700&family=Space+Mono&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=thunder@800,700,600&display=swap" rel="stylesheet">
+
+<!-- Shared styles — replace with <link rel="stylesheet" href="/shared.css"> when extracted -->
+<link rel="stylesheet" href="/shared.css">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Lonnell Williams Consulting",
+  "description": "Operational consulting for churches and organizations — systems architecture, AI infrastructure, and leadership development.",
+  "url": "https://ldw.build/consulting.html",
+  "provider": {
+    "@type": "Person",
+    "name": "Lonnell Williams",
+    "url": "https://ldw.build"
+  },
+  "areaServed": "US",
+  "serviceType": ["Organizational Consulting", "AI Infrastructure", "Leadership Development", "Systems Architecture"]
+}
+</script>
+
+<style>
+  /* Page-specific styles only — shared styles come from shared.css */
+
+  .consult-hero {
+    min-height: 80vh;
+    padding: 140px 48px 80px;
+    display: flex;
+    align-items: flex-end;
+    background: var(--obsidian);
+    border-bottom: 1px solid var(--copper-muted);
+  }
+
+  .consult-hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 60px;
+  }
+
+  .consult-hero-title {
+    font-family: 'Thunder', sans-serif;
+    font-weight: 700;
+    font-size: clamp(56px, 8vw, 104px);
+    line-height: 0.88;
+    letter-spacing: 2px;
+    color: var(--off-white);
+  }
+  .consult-hero-title .accent { color: var(--copper); }
+
+  .consult-hero-desc {
+    font-size: 15px;
+    color: rgba(242, 240, 235, 0.5);
+    line-height: 1.75;
+    max-width: 380px;
+  }
+
+  /* Process section */
+  .process {
+    padding: 100px 48px;
+    background: var(--warm-black);
+  }
+
+  .process-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .process-title {
+    font-family: 'Thunder', sans-serif;
+    font-weight: 700;
+    font-size: clamp(40px, 5vw, 64px);
+    letter-spacing: 2px;
+    color: var(--off-white);
+    margin-bottom: 56px;
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: rgba(193, 127, 89, 0.1);
+  }
+
+  .process-step {
+    background: var(--warm-black);
+    padding: 40px 32px;
+  }
+
+  .step-number {
+    font-family: 'Thunder', sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    color: rgba(193, 127, 89, 0.15);
+    margin-bottom: 16px;
+  }
+
+  .step-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 12px;
+  }
+
+  .step-desc {
+    font-size: 14px;
+    color: var(--concrete);
+    line-height: 1.7;
+  }
+
+  /* Services */
+  .services {
+    padding: 100px 48px;
+    background: var(--obsidian);
+  }
+
+  .services-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .services-title {
+    font-family: 'Thunder', sans-serif;
+    font-weight: 700;
+    font-size: clamp(40px, 5vw, 64px);
+    letter-spacing: 2px;
+    color: var(--off-white);
+    margin-bottom: 48px;
+  }
+
+  .service-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 36px 0;
+    border-bottom: 1px solid rgba(242, 240, 235, 0.06);
+    gap: 40px;
+  }
+
+  .service-name {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--off-white);
+    min-width: 240px;
+  }
+
+  .service-desc {
+    font-size: 14px;
+    color: var(--concrete);
+    line-height: 1.7;
+    max-width: 500px;
+  }
+
+  .service-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--copper);
+    white-space: nowrap;
+  }
+
+  /* CTA / Inquiry form */
+  .consult-cta {
+    padding: 100px 48px;
+    background: var(--warm-black);
+    border-top: 1px solid var(--copper-muted);
+  }
+
+  .consult-cta-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .consult-cta-title {
+    font-family: 'Thunder', sans-serif;
+    font-weight: 700;
+    font-size: clamp(36px, 5vw, 56px);
+    letter-spacing: 2px;
+    color: var(--off-white);
+    margin-bottom: 16px;
+  }
+
+  .consult-cta-desc {
+    font-size: 15px;
+    color: var(--concrete);
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .consult-form { display: flex; flex-direction: column; gap: 16px; }
+
+  .consult-form input,
+  .consult-form select,
+  .consult-form textarea {
+    background: rgba(242, 240, 235, 0.04);
+    border: 1px solid rgba(242, 240, 235, 0.1);
+    padding: 14px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--off-white);
+    outline: none;
+    transition: border-color 0.3s;
+    width: 100%;
+  }
+  .consult-form input:focus,
+  .consult-form select:focus,
+  .consult-form textarea:focus { border-color: var(--copper); }
+  .consult-form input::placeholder,
+  .consult-form textarea::placeholder { color: var(--concrete); }
+  .consult-form select { color: var(--concrete); }
+
+  .consult-form textarea { min-height: 120px; resize: vertical; }
+
+  .form-row { display: flex; gap: 16px; }
+  .form-row > * { flex: 1; }
+
+  .pricing-note {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--concrete);
+    margin-top: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .consult-hero { padding: 120px 24px 60px; }
+    .consult-hero-inner { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .process, .services, .consult-cta { padding: 60px 24px; }
+    .service-row { flex-direction: column; gap: 12px; }
+    .form-row { flex-direction: column; }
+  }
+</style>
+</head>
+
+<body class="page-dark">
+
+<!-- NAV — use unified nav from nav.html template -->
+<nav class="site-nav">
+  <a href="/" class="site-nav-brand">
+    <svg width="28" height="28" viewBox="0 0 240 240" fill="none">
+      <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+      <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
+      <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/>
+    </svg>
+    <span class="site-nav-name">LONNELL WILLIAMS</span>
+  </a>
+  <div class="site-nav-links" id="navLinks">
+    <a href="/#about">About</a>
+    <a href="/speaking.html">Speaking</a>
+    <a href="/books.html">Books</a>
+    <a href="/consulting.html" class="active">Work With Me</a>
+    <a href="/media.html">Media</a>
+    <a href="/content-hub.html">Content</a>
+    <a href="/vantage.html">Vantage</a>
+  </div>
+  <button class="site-nav-btn" aria-label="Toggle navigation menu"
+    onclick="document.getElementById('navLinks').classList.toggle('open');">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+
+<!-- ===== HERO ===== -->
+<section class="consult-hero">
+  <div class="consult-hero-inner">
+    <div>
+      <div class="section-eyebrow">Consulting</div>
+      <h1 class="consult-hero-title">
+        DON'T JUST<br>GROW<span class="accent">.</span><br>BUILD THE<br>INFRASTRUCTURE<span class="accent">.</span>
+      </h1>
+    </div>
+    <p class="consult-hero-desc">
+      Operational consulting for churches, nonprofits, and organizations
+      that need systems, not slogans. I help leaders build what's missing
+      beneath what's visible.
+    </p>
+  </div>
+</section>
+
+
+<!-- ===== PROCESS ===== -->
+<section class="process">
+  <div class="process-inner">
+    <div class="section-eyebrow">How It Works</div>
+    <h2 class="process-title">THE PROCESS</h2>
+
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="step-number">01</div>
+        <div class="step-title">Infrastructure Audit</div>
+        <p class="step-desc">
+          A comprehensive assessment of your current systems, workflows, team
+          structure, and operational gaps. You'll receive a scored report with
+          clear priorities.
+        </p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">02</div>
+        <div class="step-title">Strategy & Architecture</div>
+        <p class="step-desc">
+          A custom roadmap that maps your mission to your operations —
+          staffing plans, systems architecture, technology stack, and
+          communication frameworks.
+        </p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">03</div>
+        <div class="step-title">Build & Implement</div>
+        <p class="step-desc">
+          Hands-on partnership to build and deploy the systems. Not just a
+          plan — actual infrastructure that your team can run, measure,
+          and iterate on.
+        </p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">04</div>
+        <div class="step-title">Sustain & Scale</div>
+        <p class="step-desc">
+          Ongoing advisory support to ensure systems stick. Training,
+          documentation, and quarterly check-ins to keep your infrastructure
+          growing with your organization.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SERVICES ===== -->
+<section class="services">
+  <div class="services-inner">
+    <div class="section-eyebrow">What I Build</div>
+    <h2 class="services-title">SERVICES</h2>
+
+    <div class="service-row">
+      <div class="service-name">Organizational Systems</div>
+      <p class="service-desc">
+        Staff onboarding, communication infrastructure, meeting cadences,
+        accountability frameworks, and operational documentation that
+        scales with your team.
+      </p>
+      <span class="service-tag">Churches &amp; Nonprofits</span>
+    </div>
+
+    <div class="service-row">
+      <div class="service-name">AI Infrastructure</div>
+      <p class="service-desc">
+        Custom AI agent workflows, automation pipelines, and intelligent
+        systems — from a 42-agent Chief of Staff build to targeted
+        single-purpose automations.
+      </p>
+      <span class="service-tag">All Organizations</span>
+    </div>
+
+    <div class="service-row">
+      <div class="service-name">Leadership Development</div>
+      <p class="service-desc">
+        Executive coaching, leadership pipeline design, and team development
+        programs rooted in operational clarity. For leaders who build, not
+        just manage.
+      </p>
+      <span class="service-tag">Executive Teams</span>
+    </div>
+
+    <div class="service-row">
+      <div class="service-name">Growth Architecture</div>
+      <p class="service-desc">
+        The operational blueprint for scaling — from 13 staff to 50, from
+        one campus to many, from manual processes to automated systems.
+        Growth requires infrastructure.
+      </p>
+      <span class="service-tag">Scaling Orgs</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== TESTIMONIALS ===== -->
+<!-- Include testimonials-section.html here once testimonials are collected -->
+
+
+<!-- ===== INQUIRY FORM ===== -->
+<section class="consult-cta" id="inquiry">
+  <div class="consult-cta-inner">
+    <div class="section-eyebrow">Get Started</div>
+    <h2 class="consult-cta-title">LET'S BUILD</h2>
+    <p class="consult-cta-desc">
+      Tell me about your organization and what you're trying to build.
+      I'll respond within 48 hours with next steps.
+    </p>
+
+    <form class="consult-form" id="consultForm">
+      <div class="form-row">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Email address" required>
+      </div>
+      <input type="text" name="organization" placeholder="Organization name">
+      <select name="service" required>
+        <option value="" disabled selected>What are you looking for?</option>
+        <option value="infrastructure-audit">Infrastructure Audit</option>
+        <option value="organizational-systems">Organizational Systems</option>
+        <option value="ai-infrastructure">AI Infrastructure</option>
+        <option value="leadership-development">Leadership Development</option>
+        <option value="growth-architecture">Growth Architecture</option>
+        <option value="not-sure">Not sure yet — let's talk</option>
+      </select>
+      <textarea name="message" placeholder="Tell me what you're building and where you're stuck..."></textarea>
+      <button type="submit" class="btn-primary">Submit Inquiry</button>
+      <p class="pricing-note">Engagements start at $5,000. Flexible structures available.</p>
+    </form>
+  </div>
+</section>
+
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-bottom">
+    <div class="footer-brand">LONNELL WILLIAMS</div>
+    <div class="footer-legal">&copy; 2026 All Rights Reserved</div>
+  </div>
+</footer>
+
+<!-- Supabase form handler — adapt from existing consulting form in index.html -->
+<script>
+  // TODO: Wire up to Supabase using the same pattern as the homepage consulting form
+  document.getElementById('consultForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // Supabase insert logic here
+    alert('Thank you for your inquiry. I will respond within 48 hours.');
+    this.reset();
+  });
+</script>
+
+</body>
+</html>
