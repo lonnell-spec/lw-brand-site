@@ -105,6 +105,138 @@
     .site-nav-links.open { display: flex; }
     .site-nav-btn { display: block; }
   }
+
+    /* ── Commissioned Section ─────────────────────────────── */
+    .commissioned-section {
+      background: #0D0D0D;
+      padding: 96px 48px;
+      font-family: 'DM Sans', -apple-system, sans-serif;
+    }
+    .commissioned-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .commissioned-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #C17F59;
+      margin-bottom: 28px;
+    }
+    .commissioned-headline {
+      font-family: 'Thunder', sans-serif;
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #F2F0EB;
+      margin-bottom: 28px;
+    }
+    .commissioned-headline span {
+      color: #C17F59;
+    }
+    .commissioned-desc {
+      font-size: 16px;
+      font-weight: 300;
+      color: rgba(242,240,235,0.65);
+      line-height: 1.75;
+      max-width: 680px;
+      margin-bottom: 52px;
+    }
+    .commissioned-builders {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 52px;
+      flex-wrap: wrap;
+    }
+    .commissioned-builder {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: rgba(242,240,235,0.03);
+      border: 1px solid rgba(242,240,235,0.06);
+      padding: 20px 24px;
+      flex: 1;
+      min-width: 260px;
+    }
+    .commissioned-builder-avatar {
+      width: 44px;
+      height: 44px;
+      background: rgba(193,127,89,0.12);
+      border: 1px solid rgba(193,127,89,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: #C17F59;
+      letter-spacing: 1px;
+      flex-shrink: 0;
+    }
+    .commissioned-builder-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .commissioned-builder-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #F2F0EB;
+      letter-spacing: 0.3px;
+    }
+    .commissioned-builder-role {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: #8A8A8A;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .commissioned-divider {
+      height: 1px;
+      background: rgba(242,240,235,0.06);
+      margin-bottom: 40px;
+    }
+    .commissioned-company {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+    }
+    .commissioned-company-mark {
+      font-family: 'Thunder', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(242,240,235,0.15);
+      white-space: nowrap;
+      padding-top: 3px;
+    }
+    .commissioned-company-text {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .commissioned-company-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(242,240,235,0.5);
+      display: none;
+    }
+    .commissioned-company-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(242,240,235,0.35);
+      line-height: 1.7;
+      max-width: 600px;
+    }
+    @media (max-width: 640px) {
+      .commissioned-section { padding: 64px 24px; }
+      .commissioned-builders { flex-direction: column; }
+    }
 </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
@@ -139,7 +271,6 @@
     <a href="/books.html">Books</a>
     <a href="/#consulting">Work With Me</a>
     <a href="/media.html">Media</a>
-    <a href="/content-hub.html">Content</a>
     <a href="/vantage.html" class="active">Vantage</a>
   </div>
   <button class="site-nav-btn" onclick="var l=document.querySelector('.site-nav-links');l.classList.toggle('open');">
