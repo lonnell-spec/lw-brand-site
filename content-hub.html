@@ -86,6 +86,28 @@
     .newsletter-band{padding:56px 28px}
     footer{padding:40px 28px 28px}
   }
+
+  /* ── Footer ── */
+  footer { background: var(--warm-black); border-top: 1px solid rgba(242,240,235,0.04); padding: 64px 60px 40px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-top { display: flex; justify-content: space-between; gap: 48px; margin-bottom: 48px; }
+  .footer-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-bottom: 16px; }
+  .footer-brand-name { font-family: 'Thunder', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--off-white); }
+  .footer-tagline { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); }
+  .footer-col-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--copper); margin-bottom: 20px; }
+  .footer-col { display: flex; flex-direction: column; gap: 12px; }
+  .footer-link { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; color: var(--concrete); transition: color 0.3s ease; }
+  .footer-link:hover { color: var(--off-white); }
+  .footer-scripture { font-size: 14px; font-weight: 300; font-style: italic; color: rgba(242,240,235,0.3); line-height: 1.7; margin-bottom: 12px; }
+  .footer-ref { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; color: var(--copper); }
+  .footer-social-row { display: flex; gap: 16px; }
+  .footer-social { width: 40px; height: 40px; border: 1px solid rgba(242,240,235,0.06); display: flex; align-items: center; justify-content: center; text-decoration: none; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--concrete); transition: all 0.3s ease; }
+  .footer-social:hover { border-color: var(--copper); color: var(--copper); }
+  .footer-bottom { border-top: 1px solid rgba(242,240,235,0.04); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-brand-text { font-family: 'Thunder', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(242,240,235,0.08); }
+  .footer-legal { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(242,240,235,0.2); }
+  @media (max-width: 768px) { footer { padding: 60px 24px 32px; } .footer-top { flex-direction: column; gap: 28px; } .footer-bottom { flex-direction: column; gap: 16px; text-align: center; } }
+
 </style>
 <link rel="stylesheet" href="/shared.css">
 </head>
@@ -151,12 +173,55 @@
 </div>
 
 <!-- FOOTER -->
-<footer>
-  <div class="footer-bottom">
-    <div class="footer-brand">LONNELL WILLIAMS</div>
-    <div class="footer-legal">&copy; 2026 LONNELL WILLIAMS. ALL RIGHTS RESERVED.</div>
-  </div>
-</footer>
+<footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-col-label">Foundation</div>
+          <p class="footer-scripture">"The God of heaven will make us prosper, and we his servants will arise and build."</p>
+          <div class="footer-ref">Nehemiah 2:20 — ESV</div>
+        </div>
+        <div>
+          <div class="footer-col-label">Navigate</div>
+          <a href="#about" class="footer-link">About</a>
+          <a href="#speaking" class="footer-link">Speaking</a>
+          <a href="/books.html" class="footer-link">Books</a>
+          <a href="#consulting" class="footer-link">Work With Me</a>
+          <a href="#newsletter" class="footer-link">Newsletter</a>
+          <a href="/media.html" class="footer-link">Media</a>
+          <a href="/vantage.html" class="footer-link">Vantage</a>
+          <a href="/admin.html" class="footer-link" style="color:var(--copper);margin-top:4px;">Portal</a>
+        </div>
+        <div>
+          <div class="footer-col-label">Books</div>
+          <a href="/books.html" class="footer-link">Anything, Everything, or Nothing at All</a>
+          <a href="/books.html" class="footer-link">Zag: Leading Ministry Jesus's Way</a>
+          <a href="/books.html" class="footer-link">The Staff (In Development)</a>
+        </div>
+        <div>
+                    <div class="footer-col-label">Connect</div>
+          <div class="footer-social-row">
+            <a href="https://instagram.com/lonnelldwilliams" target="_blank" class="footer-social" aria-label="Instagram" style="color:var(--concrete);">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://youtube.com/@lonnelldwilliams" target="_blank" class="footer-social" aria-label="YouTube" style="color:var(--concrete);">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://threads.net/@lonnelldwilliams" target="_blank" class="footer-social" aria-label="Threads" style="color:var(--concrete);">
+              <svg width="17" height="17" viewBox="0 0 192 192" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.347-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.141-23.82 1.374-39.134 15.369-38.105 34.809.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.35-22.809-.169-40.06-7.484-51.275-21.741C35.236 139.966 29.808 120.682 29.605 96c.203-24.682 5.63-43.966 16.133-57.317C56.954 24.435 74.206 17.12 97.015 16.951c22.975.17 40.526 7.52 52.171 21.847 5.71 7.026 9.986 15.976 12.838 26.52l16.2-4.325c-3.486-12.961-9-24.386-16.525-33.813C147.377 9.012 125.133-.281 97.105 0h-.195C68.988.28 47.019 9.616 32.162 27.773 18.956 44.001 12.026 67.04 11.768 95.952v.096c.258 28.912 7.188 51.951 20.394 68.179 14.857 18.157 36.826 27.493 65.633 27.772h.195c25.925-.242 44.188-6.977 59.208-22 18.263-18.243 17.717-40.706 11.718-54.614-4.297-10.016-12.653-18.101-26.379-23.397z"/><path d="M98.44 133.332c-10.654.618-21.804-4.185-22.372-14.463-.412-7.75 5.52-16.397 23.493-17.426 2.057-.119 4.075-.178 6.057-.178 5.88 0 11.396.545 16.435 1.6-1.87 23.384-13.039 29.853-23.613 30.467z"/></svg>
+            </a>
+            <a href="https://linkedin.com/in/lonnelldwilliams" target="_blank" class="footer-social" aria-label="LinkedIn" style="color:var(--concrete);">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-brand-text">LONNELL DAWSON WILLIAMS</div>
+        <div class="footer-legal">&copy; 2026 LONNELL WILLIAMS. ALL RIGHTS RESERVED.</div>
+        </div>
+    </div>
+  </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
