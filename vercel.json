@@ -14,6 +14,16 @@
       "source": "/ldw-infrastructure-audit.pdf",
       "destination": "https://riqdcirsmckubkdfbtoj.supabase.co/storage/v1/object/public/documents/ldw-infrastructure-audit.pdf",
       "permanent": false
+    },
+    {
+      "source": "/articles.html",
+      "destination": "/content-hub.html",
+      "permanent": true
+    },
+    {
+      "source": "/content.html",
+      "destination": "/content-hub.html",
+      "permanent": true
     }
   ]
 }
