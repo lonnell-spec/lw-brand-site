@@ -1214,6 +1214,205 @@
 </section>
 
 
+<!-- ===== ENGAGEMENTS ===== -->
+<section class="engagements reveal d1" id="engagements">
+  <div class="engagements-inner">
+    <div class="engagements-label">Confirmed Appearances</div>
+    <div class="engagements-title">ON THE ROAD<span class="accent">.</span></div>
+    <div class="engagements-grid">
+
+      <!-- ARC Conference -->
+      <a href="https://arcconference.com" target="_blank" rel="noopener" class="engagement-card">
+        <div class="ec-header">
+          <div class="ec-org-wordmark">ARC CONFERENCE</div>
+          <div class="ec-badge upcoming">UPCOMING</div>
+        </div>
+        <div class="ec-meta">
+          <div class="ec-date">APR 21–22, 2026</div>
+          <div class="ec-location">Sea Coast Church</div>
+        </div>
+        <div class="ec-session">Managing Tension Between Mission and Management</div>
+        <div class="ec-link">arcconference.com ↗</div>
+      </a>
+
+      <!-- Reformation Memphis -->
+      <a href="https://www.reformationmemphis.org" target="_blank" rel="noopener" class="engagement-card">
+        <div class="ec-header">
+          <div class="ec-logo-wrap">
+            <img src="https://static.wixstatic.com/media/c02cd8_fed8bdb8f6c545578f361340adb4ca97~mv2.png" alt="Reformation Memphis" class="ec-logo" loading="lazy" />
+          </div>
+          <div class="ec-badge upcoming">UPCOMING</div>
+        </div>
+        <div class="ec-meta">
+          <div class="ec-date">SEP 5, 2026</div>
+          <div class="ec-location">Memphis, TN</div>
+        </div>
+        <div class="ec-session">Visit site for session details</div>
+        <div class="ec-link">reformationmemphis.org ↗</div>
+      </a>
+
+      <!-- 2819 Crusades -->
+      <a href="https://www.2819crusades.com" target="_blank" rel="noopener" class="engagement-card ec-past">
+        <div class="ec-header">
+          <div class="ec-logo-wrap">
+            <img src="https://static.wixstatic.com/media/34d156_fac206d720364c96a14478d2d03414af~mv2.png" alt="2819 Crusades" class="ec-logo" loading="lazy" />
+          </div>
+          <div class="ec-badge past">PAST</div>
+        </div>
+        <div class="ec-meta">
+          <div class="ec-date">JAN 31, 2026</div>
+          <div class="ec-location">Pastoral Intensive</div>
+        </div>
+        <div class="ec-session">Operating in the Second Chair</div>
+        <div class="ec-link">2819crusades.com ↗</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===== ENGAGEMENTS ===== */
+.engagements {
+  padding: clamp(80px, 10vw, 140px) 0;
+  border-top: 1px solid rgba(242,240,235,0.08);
+}
+.engagements-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 80px);
+}
+.engagements-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 12px;
+}
+.engagements-title {
+  font-family: 'Thunder', sans-serif;
+  font-weight: 700;
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 0.95;
+  color: var(--off-white);
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+.engagements-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+@media (max-width: 900px) {
+  .engagements-grid { grid-template-columns: 1fr; }
+}
+.engagement-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--warm-black);
+  padding: 32px 28px;
+  text-decoration: none;
+  color: var(--off-white);
+  transition: background 0.25s ease;
+  min-height: 260px;
+}
+.engagement-card:hover {
+  background: #221E1A;
+}
+.engagement-card.ec-past {
+  opacity: 0.6;
+}
+.engagement-card.ec-past:hover {
+  opacity: 0.8;
+}
+.ec-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.ec-logo-wrap {
+  height: 36px;
+  display: flex;
+  align-items: center;
+}
+.ec-logo {
+  max-height: 36px;
+  max-width: 140px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}
+.ec-org-wordmark {
+  font-family: 'Thunder', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  color: var(--off-white);
+  line-height: 1;
+  padding-top: 6px;
+}
+.ec-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border: 1px solid;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+.ec-badge.upcoming {
+  color: var(--copper);
+  border-color: var(--copper);
+}
+.ec-badge.past {
+  color: var(--concrete);
+  border-color: var(--concrete);
+}
+.ec-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+.ec-date {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--copper);
+  text-transform: uppercase;
+}
+.ec-location {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--concrete);
+  text-transform: uppercase;
+}
+.ec-session {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--off-white);
+  line-height: 1.4;
+  flex: 1;
+  margin-bottom: 20px;
+}
+.ec-link {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--concrete);
+  text-transform: lowercase;
+  transition: color 0.2s ease;
+}
+.engagement-card:hover .ec-link {
+  color: var(--copper);
+}
+</style>
+
 <!-- ===== FORMATS ===== -->
 <section class="formats reveal d1">
   <div class="formats-inner">
@@ -1536,4 +1735,5 @@
 <script src="/nav-patch.js" defer></script>
 </body>
 </html>
+
 
