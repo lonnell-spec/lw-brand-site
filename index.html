@@ -3248,10 +3248,11 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
   }
   .masonry-grid {
     grid-template-columns: 1fr !important;
-    grid-auto-rows: auto !important;
+    grid-auto-rows: 220px !important;
   }
   .masonry-item.featured {
     grid-column: span 1 !important;
+    grid-row: span 1 !important;
   }
   .newsletter-email {
     flex-direction: column !important;
@@ -3558,3 +3559,4 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
   </script>
 </body>
 </html>
+
