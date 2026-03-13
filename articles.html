@@ -387,7 +387,7 @@ async function loadArticles() {
             loading="lazy"
             onerror="this.parentElement.style.background='#1A1714'; this.style.display='none';"
           >
-          <span class="card-badge">${x(item.category || 'Arise &amp; Build')}</span>
+          <span class="card-badge">${x(item.category && item.category !== 'DEFAULT' ? item.category : 'Arise &amp; Build')}</span>
         </div>
         <div class="card-body">
           <div class="card-num">0${i + 1}</div>
@@ -423,3 +423,4 @@ loadArticles();
 </script>
 </body>
 </html>
+
