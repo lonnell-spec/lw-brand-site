@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Strategy — LDW Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --obsidian: #0D0D0D;
+    --warm-black: #1A1714;
+    --copper: #C17F59;
+    --copper-light: #D4956A;
+    --signal: #00E676;
+    --off-white: #F2F0EB;
+    --concrete: #8A8A8A;
+    --border: rgba(193,127,89,0.15);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+
+  /* AUTH GATE */
+  #auth-gate {
+    position: fixed; inset: 0; background: var(--obsidian);
+    display: flex; align-items: center; justify-content: center; z-index: 9999;
+  }
+  .auth-box { width: 360px; padding: 40px; border: 1px solid var(--border); background: var(--warm-black); }
+  .auth-box h2 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; color: var(--off-white); margin-bottom: 8px; }
+  .auth-box p { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; color: var(--concrete); text-transform: uppercase; margin-bottom: 28px; }
+  .auth-input { width: 100%; background: transparent; border: 1px solid rgba(242,240,235,0.12); color: var(--off-white); font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 12px 16px; outline: none; margin-bottom: 12px; }
+  .auth-input:focus { border-color: var(--copper); }
+  .auth-btn { width: 100%; background: var(--copper); color: var(--obsidian); font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2px; padding: 13px; border: none; cursor: pointer; }
+  .auth-btn:hover { opacity: 0.85; }
+  .auth-error { font-family: 'Space Mono', monospace; font-size: 9px; color: #ff6b6b; letter-spacing: 2px; margin-top: 10px; display: none; }
+
+  /* LAYOUT */
+  .admin-layout { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
+
+  /* SIDEBAR */
+  .sidebar { background: var(--warm-black); border-right: 1px solid var(--border); padding: 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+  .sidebar-logo { padding: 24px 20px; border-bottom: 1px solid var(--border); }
+  .sidebar-logo-mark { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 4px; color: var(--copper); text-transform: uppercase; }
+  .sidebar-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; color: var(--off-white); margin-top: 4px; }
+  .sidebar-nav { padding: 12px 0; }
+  .nav-section-label { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 3px; color: var(--concrete); text-transform: uppercase; padding: 12px 20px 6px; }
+  .nav-link { display: flex; align-items: center; gap: 10px; padding: 9px 20px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: rgba(242,240,235,0.55); text-decoration: none; transition: all 0.15s; border-left: 2px solid transparent; }
+  .nav-link:hover { color: var(--off-white); background: rgba(255,255,255,0.03); }
+  .nav-link.active { color: var(--copper); border-left-color: var(--copper); background: rgba(193,127,89,0.06); }
+  .nav-link svg { width: 14px; height: 14px; flex-shrink: 0; opacity: 0.6; }
+  .nav-link.active svg { opacity: 1; }
+
+  /* MAIN */
+  .main { padding: 0; overflow-y: auto; }
+  .page-header { padding: 32px 40px 28px; border-bottom: 1px solid var(--border); background: var(--warm-black); position: sticky; top: 0; z-index: 10; }
+  .page-header-eyebrow { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 4px; color: var(--copper); text-transform: uppercase; margin-bottom: 6px; }
+  .page-header-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 2px; color: var(--off-white); }
+  .page-header-subtitle { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300; color: var(--concrete); margin-top: 4px; }
+  .page-content { padding: 40px; max-width: 960px; }
+
+  /* TABS */
+  .tab-nav { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 36px; }
+  .tab-btn { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); padding: 12px 20px; border: none; background: transparent; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.15s; }
+  .tab-btn:hover { color: var(--off-white); }
+  .tab-btn.active { color: var(--copper); border-bottom-color: var(--copper); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* CARDS */
+  .section-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 4px; color: var(--copper); text-transform: uppercase; margin-bottom: 16px; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--off-white); margin-bottom: 20px; }
+  .card { background: var(--warm-black); border: 1px solid var(--border); padding: 28px; margin-bottom: 20px; }
+  .card-title { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2px; color: var(--off-white); margin-bottom: 12px; }
+  .card p { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300; color: rgba(242,240,235,0.7); line-height: 1.75; }
+
+  /* SCORE TABLE */
+  .score-grid { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 20px; }
+  .score-row { display: grid; grid-template-columns: 1fr 80px 1fr; gap: 0; background: var(--warm-black); }
+  .score-row.header { background: rgba(193,127,89,0.08); }
+  .score-cell { padding: 10px 16px; font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(242,240,235,0.7); border-right: 1px solid var(--border); }
+  .score-cell:last-child { border-right: none; }
+  .score-row.header .score-cell { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 3px; color: var(--copper); text-transform: uppercase; font-weight: 400; }
+  .score-number { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--copper); font-weight: 700; }
+  .score-low { color: #ff6b6b; }
+  .score-med { color: #ffa94d; }
+
+  /* PLATFORM TABLE */
+  .platform-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+  .platform-table th { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 3px; color: var(--copper); text-transform: uppercase; padding: 10px 16px; text-align: left; border-bottom: 1px solid var(--border); background: rgba(193,127,89,0.05); }
+  .platform-table td { font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(242,240,235,0.7); padding: 10px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: top; line-height: 1.6; }
+  .platform-table tr:last-child td { border-bottom: none; }
+  .platform-badge { display: inline-block; font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; color: var(--copper); border: 1px solid rgba(193,127,89,0.3); padding: 2px 8px; text-transform: uppercase; }
+
+  /* TOPIC CARDS */
+  .topic-grid { display: grid; gap: 12px; }
+  .topic-card { background: var(--warm-black); border: 1px solid var(--border); padding: 20px 24px; display: grid; grid-template-columns: 32px 1fr auto; gap: 16px; align-items: start; }
+  .topic-num { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--copper); padding-top: 2px; }
+  .topic-hook { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 400; color: var(--off-white); line-height: 1.6; font-style: italic; }
+  .topic-route { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; color: var(--concrete); text-transform: uppercase; white-space: nowrap; padding-top: 3px; }
+
+  /* FUNNEL */
+  .funnel { display: flex; flex-direction: column; gap: 0; }
+  .funnel-step { display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .funnel-step:last-child { border-bottom: none; }
+  .funnel-arrow { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--copper); padding-top: 2px; flex-shrink: 0; width: 20px; }
+  .funnel-content {}
+  .funnel-platform { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; color: var(--copper); text-transform: uppercase; margin-bottom: 4px; }
+  .funnel-desc { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300; color: rgba(242,240,235,0.65); line-height: 1.6; }
+
+  /* ROLLOUT */
+  .rollout-grid { display: grid; gap: 12px; }
+  .rollout-item { display: flex; gap: 16px; padding: 16px 20px; background: var(--warm-black); border: 1px solid var(--border); align-items: flex-start; }
+  .rollout-tag { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; color: var(--copper); border: 1px solid rgba(193,127,89,0.3); padding: 3px 10px; text-transform: uppercase; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+  .rollout-text { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300; color: rgba(242,240,235,0.7); line-height: 1.6; }
+  .rollout-text strong { color: var(--off-white); font-weight: 600; }
+
+  /* RHYTHM TABLE */
+  .rhythm-table { width: 100%; border-collapse: collapse; }
+  .rhythm-table th { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 3px; color: var(--copper); text-transform: uppercase; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); background: rgba(193,127,89,0.05); }
+  .rhythm-table td { font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(242,240,235,0.65); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: top; line-height: 1.6; }
+  .rhythm-table tr:last-child td { border-bottom: none; }
+  .day-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--off-white); text-transform: uppercase; }
+
+  /* METRIC CALLOUT */
+  .metric-callout { background: rgba(193,127,89,0.06); border: 1px solid rgba(193,127,89,0.25); padding: 28px 32px; margin-bottom: 24px; }
+  .metric-callout-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 4px; color: var(--copper); text-transform: uppercase; margin-bottom: 10px; }
+  .metric-callout-text { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px; color: var(--off-white); line-height: 1.1; margin-bottom: 12px; }
+  .metric-callout p { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300; color: rgba(242,240,235,0.65); line-height: 1.7; }
+
+  /* COMMISSIONED */
+  .tag-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .tag-item { background: var(--warm-black); border: 1px solid var(--border); padding: 14px 18px; }
+  .tag-name { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--copper); margin-bottom: 4px; }
+  .tag-dest { font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(242,240,235,0.55); }
+
+  /* STATUS BADGE */
+  .status-badge { display: inline-flex; align-items: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px; border: 1px solid; }
+  .status-active { color: var(--signal); border-color: rgba(0,230,118,0.3); }
+  .status-pending { color: #ffa94d; border-color: rgba(255,169,77,0.3); }
+  .status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
+  @media (max-width: 768px) {
+    .admin-layout { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .page-content { padding: 24px 20px; }
+    .tag-grid { grid-template-columns: 1fr; }
+    .topic-card { grid-template-columns: 28px 1fr; }
+    .topic-route { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- AUTH GATE -->
+<div id="auth-gate">
+  <div class="auth-box">
+    <h2>LDW ADMIN</h2>
+    <p>Brand Strategy Portal</p>
+    <input type="password" id="auth-input" class="auth-input" placeholder="Enter password" onkeydown="if(event.key==='Enter') checkAuth()">
+    <button class="auth-btn" onclick="checkAuth()">ENTER</button>
+    <p class="auth-error" id="auth-error">Incorrect password</p>
+  </div>
+</div>
+
+<div class="admin-layout" id="main-content" style="display:none">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-mark">LDW.BUILD</div>
+      <div class="sidebar-title">ADMIN PORTAL</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a href="/admin.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </a>
+      <div class="nav-section-label">Content</div>
+      <a href="/admin-content.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Content Hub
+      </a>
+      <a href="/admin-speaking.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Speaking
+      </a>
+      <a href="/admin-newsletter.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Newsletter
+      </a>
+      <a href="/admin-books.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Books
+      </a>
+      <div class="nav-section-label">Strategy</div>
+      <a href="/admin-brand-strategy.html" class="nav-link active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Brand Strategy
+      </a>
+      <a href="/admin-analytics.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Analytics
+      </a>
+      <div class="nav-section-label">Settings</div>
+      <a href="/admin-media.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        Media
+      </a>
+      <a href="/admin-settings.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Settings
+      </a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="page-header">
+      <div class="page-header-eyebrow">LDW.BUILD — ADMIN</div>
+      <div class="page-header-title">BRAND STRATEGY</div>
+      <div class="page-header-subtitle">Social media authority playbook + brand audit findings &nbsp;·&nbsp; <span class="status-badge status-active"><span class="status-dot"></span>Active — March 2026</span></div>
+    </div>
+
+    <div class="page-content">
+
+      <!-- TABS -->
+      <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('audit')">BRAND AUDIT</button>
+        <button class="tab-btn" onclick="switchTab('profiles')">PROFILES</button>
+        <button class="tab-btn" onclick="switchTab('topics')">7 TOPICS</button>
+        <button class="tab-btn" onclick="switchTab('rhythm')">WEEKLY RHYTHM</button>
+        <button class="tab-btn" onclick="switchTab('funnel')">FUNNEL</button>
+        <button class="tab-btn" onclick="switchTab('rollout')">ROLLOUT</button>
+        <button class="tab-btn" onclick="switchTab('commissioned')">THE COMMISSIONED</button>
+      </div>
+
+      <!-- TAB: BRAND AUDIT -->
+      <div class="tab-panel active" id="tab-audit">
+        <div class="section-label">March 2026</div>
+        <div class="section-title">BRAND AUDIT FINDINGS</div>
+
+        <div class="card" style="background:rgba(193,127,89,0.04); border-color:rgba(193,127,89,0.2); margin-bottom:28px;">
+          <p style="font-family:'Space Mono',monospace; font-size:11px; line-height:1.8; color:rgba(242,240,235,0.8);">The brand is not weak. It is underdeclared. Everything that would make it extraordinary is already true — it just hasn't been said yet.</p>
+        </div>
+
+        <div class="score-grid">
+          <div class="score-row header">
+            <div class="score-cell">Dimension</div>
+            <div class="score-cell">Score</div>
+            <div class="score-cell">Diagnosis</div>
+          </div>
+          <div class="score-row">
+            <div class="score-cell">Positioning Clarity</div>
+            <div class="score-cell"><span class="score-number score-low">4/10</span></div>
+            <div class="score-cell">Three identities, no declared hierarchy</div>
+          </div>
+          <div class="score-row">
+            <div class="score-cell">Voice Distinctiveness</div>
+            <div class="score-cell"><span class="score-number score-med">6/10</span></div>
+            <div class="score-cell">Present in content. Diluted in copy</div>
+          </div>
+          <div class="score-row">
+            <div class="score-cell">Audience Specificity</div>
+            <div class="score-cell"><span class="score-number score-med">5/10</span></div>
+            <div class="score-cell">Broad appeal, low conversion architecture</div>
+          </div>
+          <div class="score-row">
+            <div class="score-cell">Proof Integration</div>
+            <div class="score-cell"><span class="score-number score-low">4/10</span></div>
+            <div class="score-cell">2819 evidence exists but underused</div>
+          </div>
+          <div class="score-row">
+            <div class="score-cell">Brand Antagonism</div>
+            <div class="score-cell"><span class="score-number score-low">3/10</span></div>
+            <div class="score-cell">No visible enemy named</div>
+          </div>
+          <div class="score-row">
+            <div class="score-cell">Catalog Coherence</div>
+            <div class="score-cell"><span class="score-number score-med">5/10</span></div>
+            <div class="score-cell">Two books, no stated relationship</div>
+          </div>
+          <div class="score-row">
+            <div class="score-cell">Origin Story Clarity</div>
+            <div class="score-cell"><span class="score-number score-low">3/10</span></div>
+            <div class="score-cell">Corporate background largely erased</div>
+          </div>
+        </div>
+
+        <div style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:3px; color:var(--copper); margin-bottom:28px;">OVERALL: 4.3 / 10</div>
+
+        <div class="section-title">CRITICAL FIXES</div>
+        <div class="card"><div class="card-title">01 — DECLARE THE HIERARCHY</div><p>Builder is the spine. Author and Speaker are downstream expressions. The hero section, bio, and speaking page need to reflect this order. Update the hero copy to lead with Builder as the primary identity. One sentence: "I build things — churches, systems, books, and leaders."</p></div>
+        <div class="card"><div class="card-title">02 — PUT THE ORIGIN STORY BACK</div><p>Cisco. Splunk. Enterprise sales. This is the differentiator that makes the builder identity credible — not just aspirational. Add it to the bio, about page, and every speaking pitch. Write it in your voice, not LinkedIn voice.</p></div>
+        <div class="card"><div class="card-title">03 — CLOSE THE VOICE GAP</div><p>Confrontational in the pulpit. Careful on the page. The confrontational register is the brand. Add one rule: if a first-year seminary student could have written this, rewrite it.</p></div>
+        <div class="card"><div class="card-title">04 — BUILD THE AENA → ZAG BRIDGE</div><p>AENA is the prerequisite for ZAG. Make this the stated sequence publicly. Two books in sequence = a curriculum = a course = a business. Write one essay or section making this argument explicitly.</p></div>
+        <div class="card"><div class="card-title">05 — NAME THE ENEMY</div><p>Not a person. An idea: ministry that values inspiration over accountability, vision without infrastructure. Name it once, clearly, and let it become the permanent antagonist of your content. This single move does more for brand clarity than any site update.</p></div>
+        <div class="card"><div class="card-title">06 — SURFACE 2819 AS LIVE PROOF</div><p>13 to 50 staff in 6 months. AI Chief of Staff ecosystem. Worship label. Second campus in development. This is the live case study that most consultants cannot point to. Make it impossible to miss. The proof is the brand.</p></div>
+      </div>
+
+      <!-- TAB: PROFILES -->
+      <div class="tab-panel" id="tab-profiles">
+        <div class="section-label">Do These First — Before Any Content</div>
+        <div class="section-title">PROFILE AUDIT & CHANGES</div>
+
+        <div class="card" style="margin-bottom:28px; background:rgba(193,127,89,0.04); border-color:rgba(193,127,89,0.2);">
+          <p style="font-family:'Space Mono',monospace; font-size:11px; line-height:1.8; color:rgba(242,240,235,0.8);">Positioning statement: "I help pastors, Christian executives, and faith-rooted entrepreneurs build organizations that don't break when they grow." — Every bio on every platform traces back to this sentence.</p>
+        </div>
+
+        <div class="card"><div class="card-title">INSTAGRAM <span class="platform-badge" style="margin-left:10px;">Priority 1</span></div>
+          <table class="platform-table" style="margin-top:12px;">
+            <thead><tr><th>Element</th><th>Change To</th></tr></thead>
+            <tbody>
+              <tr><td>Handle</td><td>@lonnellwilliams</td></tr>
+              <tr><td>Display Name</td><td>Lonnell Williams | Build. Lead. Operate.</td></tr>
+              <tr><td>Bio Line 1</td><td>Executive Pastor → Consultant → Author</td></tr>
+              <tr><td>Bio Line 2</td><td>I help organizations grow without breaking</td></tr>
+              <tr><td>Bio Line 3</td><td>↓ Free Infrastructure Audit</td></tr>
+              <tr><td>Link</td><td>ldw.build</td></tr>
+              <tr><td>Profile Photo</td><td>Professional, direct eye contact, dark or neutral background — no wide stage shots</td></tr>
+              <tr><td>Highlights</td><td>Build 4: SPEAKING / CONSULTING / ARISE & BUILD / ABOUT</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card"><div class="card-title">YOUTUBE <span class="platform-badge" style="margin-left:10px;">Priority 1</span></div>
+          <table class="platform-table" style="margin-top:12px;">
+            <thead><tr><th>Element</th><th>Change To</th></tr></thead>
+            <tbody>
+              <tr><td>Channel Name</td><td>Lonnell Williams — NOT 2819 Church</td></tr>
+              <tr><td>Handle</td><td>@lonnellwilliams</td></tr>
+              <tr><td>Banner</td><td>Dark background. Display font. "Build. Lead. Operate." No church branding.</td></tr>
+              <tr><td>About Section</td><td>"Executive Pastor. Consultant. Author. I teach pastors and leaders how to build organizations that don't break when they grow. New video every week. Subscribe to Arise & Build → ldw.build"</td></tr>
+              <tr><td>Links</td><td>ldw.build + Arise & Build Substack (buildwithldw.substack.com)</td></tr>
+              <tr><td>Channel Trailer</td><td>60-sec version of Topic 7 — film this first</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card"><div class="card-title">TIKTOK <span class="platform-badge" style="margin-left:10px;">Priority 2</span></div>
+          <table class="platform-table" style="margin-top:12px;">
+            <thead><tr><th>Element</th><th>Change To</th></tr></thead>
+            <tbody>
+              <tr><td>Handle</td><td>@lonnellwilliams</td></tr>
+              <tr><td>Bio</td><td>Pastor. Consultant. Author. / I name what's breaking in your org. / ↓ Free audit — ldw.build</td></tr>
+              <tr><td>Link</td><td>ldw.build</td></tr>
+              <tr><td>Profile Photo</td><td>Same as Instagram — consistency across all platforms</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card"><div class="card-title">THREADS</div><p>Syncs automatically with Instagram. Same bio. No separate setup needed.</p></div>
+
+        <div class="card"><div class="card-title">LINKEDIN <span class="platform-badge" style="margin-left:10px;">Lower Priority</span></div>
+          <table class="platform-table" style="margin-top:12px;">
+            <thead><tr><th>Element</th><th>Change To</th></tr></thead>
+            <tbody>
+              <tr><td>Headline</td><td>Executive Pastor + Leadership Consultant + Author | ldw.build</td></tr>
+              <tr><td>About</td><td>Positioning statement + speaking topics + ldw.build link. Add Cisco/Splunk origin story.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB: 7 TOPICS -->
+      <div class="tab-panel" id="tab-topics">
+        <div class="section-label">Content Architecture</div>
+        <div class="section-title">7 CONTENT TOPICS</div>
+        <div class="card" style="background:rgba(193,127,89,0.04); border-color:rgba(193,127,89,0.2); margin-bottom:28px;">
+          <p style="font-family:'Space Mono',monospace; font-size:11px; line-height:1.8; color:rgba(242,240,235,0.8);">The rule: Content diagnoses the problem. It never gives away the fix. The fix lives inside the paid engagement — speaking fee, consulting engagement, course, book.</p>
+        </div>
+        <div class="topic-grid">
+          <div class="topic-card"><div class="topic-num">01</div><div class="topic-hook">"You don't have a faith problem. You have an infrastructure problem."</div><div class="topic-route">→ ldw.build</div></div>
+          <div class="topic-card"><div class="topic-num">02</div><div class="topic-hook">"Nobody builds for the EP. I do."</div><div class="topic-route">→ ldw.build</div></div>
+          <div class="topic-card"><div class="topic-num">03</div><div class="topic-hook">"Your faith and your job don't need separate operating systems."</div><div class="topic-route">→ Commissioned</div></div>
+          <div class="topic-card"><div class="topic-num">04</div><div class="topic-hook">"The most dangerous leader in the room is the one building from performance anxiety instead of grace."</div><div class="topic-route">→ AENA</div></div>
+          <div class="topic-card"><div class="topic-num">05</div><div class="topic-hook">"Jesus was the most organized leader in history. We just don't talk about it."</div><div class="topic-route">→ Speaking</div></div>
+          <div class="topic-card"><div class="topic-num">06</div><div class="topic-hook">"There is a version of your organization that doesn't break when it grows. Most leaders never build it."</div><div class="topic-route">→ Commissioned</div></div>
+          <div class="topic-card"><div class="topic-num">07</div><div class="topic-hook">"If your church can't survive your absence for two weeks — that's not devotion. That's a structural failure."</div><div class="topic-route">→ Consulting</div></div>
+        </div>
+      </div>
+
+      <!-- TAB: WEEKLY RHYTHM -->
+      <div class="tab-panel" id="tab-rhythm">
+        <div class="section-label">~3 Hours Per Week</div>
+        <div class="section-title">WEEKLY POSTING RHYTHM</div>
+        <div class="card" style="background:rgba(193,127,89,0.04); border-color:rgba(193,127,89,0.2); margin-bottom:28px;">
+          <p style="font-family:'Space Mono',monospace; font-size:11px; line-height:1.8; color:rgba(242,240,235,0.8);">Anchor: YouTube 1x/week → Derivative: IG Reel 3x/week + TikTok repost (same video) + Threads 3x/day → Newsletter 1x/every 2 weeks. One anchor piece produces everything else.</p>
+        </div>
+        <table class="rhythm-table">
+          <thead><tr><th>Day</th><th>Task</th><th>Time</th><th>Platform</th></tr></thead>
+          <tbody>
+            <tr><td><span class="day-label">Monday</span></td><td>Film 1 YouTube video</td><td>45 min</td><td>YouTube</td></tr>
+            <tr><td><span class="day-label">Monday</span></td><td>Write 5 Threads posts from that topic</td><td>20 min</td><td>Threads</td></tr>
+            <tr><td><span class="day-label">Tuesday</span></td><td>Edit + upload YouTube to channel</td><td>30 min</td><td>YouTube</td></tr>
+            <tr><td><span class="day-label">Tuesday</span></td><td>Post Thread 1</td><td>2 min</td><td>Threads</td></tr>
+            <tr><td><span class="day-label">Wednesday</span></td><td>Cut 3 Reels from YouTube OR film standalone</td><td>30 min</td><td>IG + TikTok</td></tr>
+            <tr><td><span class="day-label">Wednesday</span></td><td>Post Thread 2</td><td>2 min</td><td>Threads</td></tr>
+            <tr><td><span class="day-label">Thursday</span></td><td>Post Reel 1 + TikTok repost (same file)</td><td>10 min</td><td>IG + TikTok</td></tr>
+            <tr><td><span class="day-label">Thursday</span></td><td>Post Thread 3</td><td>2 min</td><td>Threads</td></tr>
+            <tr><td><span class="day-label">Friday</span></td><td>Post Reel 2</td><td>5 min</td><td>IG + TikTok</td></tr>
+            <tr><td><span class="day-label">Saturday</span></td><td>Post Reel 3</td><td>5 min</td><td>IG + TikTok</td></tr>
+            <tr><td><span class="day-label">Every other Thu</span></td><td>Publish Arise & Build newsletter</td><td>30 min</td><td>Substack</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- TAB: FUNNEL -->
+      <div class="tab-panel" id="tab-funnel">
+        <div class="section-label">How Content Becomes Revenue</div>
+        <div class="section-title">REVENUE FUNNEL</div>
+        <div class="funnel">
+          <div class="funnel-step"><div class="funnel-arrow">→</div><div class="funnel-content"><div class="funnel-platform">Reel / TikTok / Thread</div><div class="funnel-desc">"Here's what's breaking in your org." No fix. Just the diagnosis. Hooks the right person and pulls them toward more.</div></div></div>
+          <div class="funnel-step"><div class="funnel-arrow">→</div><div class="funnel-content"><div class="funnel-platform">YouTube</div><div class="funnel-desc">"Here's why it breaks and what leaders who fix it do differently." Still no IP. Just the full argument. Proves expertise to conference planners and future clients.</div></div></div>
+          <div class="funnel-step"><div class="funnel-arrow">→</div><div class="funnel-content"><div class="funnel-platform">Newsletter — Arise & Build</div><div class="funnel-desc">"Here's the framework — at the diagnostic level." Builds trust. Converts follower → subscriber → client. The owned asset everything else feeds.</div></div></div>
+          <div class="funnel-step"><div class="funnel-arrow">→</div><div class="funnel-content"><div class="funnel-platform">Speaking Inquiry</div><div class="funnel-desc">Conference planner has watched 3+ videos. They know what he brings into a room. They submit the form at ldw.build/speaking.</div></div></div>
+          <div class="funnel-step"><div class="funnel-arrow">→</div><div class="funnel-content"><div class="funnel-platform">Consulting Inquiry — ENGAGE / COACH</div><div class="funnel-desc">Leader has been on the newsletter 60+ days. He's ready to close the gap. He submits the consulting form.</div></div></div>
+          <div class="funnel-step"><div class="funnel-arrow">→</div><div class="funnel-content"><div class="funnel-platform">The Commissioned</div><div class="funnel-desc">Leader needs personal development, not just org consulting. Tagged: infrastructure or audit → routed to The Commissioned course and coaching program.</div></div></div>
+          <div class="funnel-step"><div class="funnel-arrow">→</div><div class="funnel-content"><div class="funnel-platform">AENA — Fall 2026</div><div class="funnel-desc">The warm list pre-orders. The speaking calendar drives sales. The course audience becomes the launch team.</div></div></div>
+        </div>
+      </div>
+
+      <!-- TAB: ROLLOUT -->
+      <div class="tab-panel" id="tab-rollout">
+        <div class="section-label">In Sequence — Do Not Skip Ahead</div>
+        <div class="section-title">ROLLOUT ORDER</div>
+        <div class="rollout-grid">
+          <div class="rollout-item"><div class="rollout-tag">Week 1</div><div class="rollout-text"><strong>Clean the profiles.</strong> Fix every platform bio, handle, display name, and link per the profiles tab. 2 hours total. Do it once, done.</div></div>
+          <div class="rollout-item"><div class="rollout-tag">Week 2</div><div class="rollout-text"><strong>Film the first video.</strong> Topic 7: "If your organization cannot survive your absence for two weeks." Direct to camera. Home office. 8–10 minutes. Upload YouTube. Cut 2 Reels from it.</div></div>
+          <div class="rollout-item"><div class="rollout-tag">Week 3</div><div class="rollout-text"><strong>Establish the rhythm.</strong> First full week of the posting schedule. One YouTube video. Three Reels. Threads daily.</div></div>
+          <div class="rollout-item"><div class="rollout-tag">Week 4</div><div class="rollout-text"><strong>Publish the newsletter.</strong> "Structure Is Faith. Applied." is already written. Publish it.</div></div>
+          <div class="rollout-item"><div class="rollout-tag">Month 2</div><div class="rollout-text"><strong>Repeat and iterate.</strong> 7 topics = 7 weeks of anchor content. By end of month 2: 7 YouTube videos, 21 Reels, newsletter list growing.</div></div>
+          <div class="rollout-item"><div class="rollout-tag">Month 3</div><div class="rollout-text"><strong>Speaking pipeline activates.</strong> Conference planners have seen 14+ videos. Speaking inquiries begin from content, not just referral.</div></div>
+          <div class="rollout-item"><div class="rollout-tag">Month 6</div><div class="rollout-text"><strong>The Commissioned launches.</strong> Audience is warm. Tags are set. AC handoff routes the right people automatically.</div></div>
+          <div class="rollout-item"><div class="rollout-tag">Fall 2026</div><div class="rollout-text"><strong>AENA drops.</strong> Into a list that has been building for 8 months. They do not discover the book. They have been waiting for it.</div></div>
+        </div>
+
+        <div class="metric-callout" style="margin-top:36px;">
+          <div class="metric-callout-label">The One Metric That Tells You It's Working</div>
+          <div class="metric-callout-text">NEWSLETTER SUBSCRIBER GROWTH RATE</div>
+          <p>Not likes. Not followers. Not views. Every subscriber is a potential speaking booking, consulting client, course buyer, and book pre-order. If the list is growing week over week — the strategy is working. If it is flat, something in the funnel is broken.</p>
+        </div>
+      </div>
+
+      <!-- TAB: THE COMMISSIONED -->
+      <div class="tab-panel" id="tab-commissioned">
+        <div class="section-label">Co-owned — Lonnell Williams + Philip Mitchell</div>
+        <div class="section-title">THE COMMISSIONED INTEGRATION</div>
+
+        <div class="card" style="background:rgba(193,127,89,0.04); border-color:rgba(193,127,89,0.2); margin-bottom:28px;">
+          <p style="font-family:'Space Mono',monospace; font-size:11px; line-height:1.85; color:rgba(242,240,235,0.8);">ldw.build = personal authority hub. Drives speaking, consulting, books.<br>The Commissioned = development product. Coaching + courses for leaders who need the answer, not just the diagnosis.<br>Arise & Build = shared asset. Lonnell's list. Feeds both products by tag.<br>Philip's platform = drives Commissioned from his personal brand independently.</p>
+        </div>
+
+        <div class="section-label">AC Tag Routing</div>
+        <div class="tag-grid">
+          <div class="tag-item"><div class="tag-name">infrastructure</div><div class="tag-dest">→ The Commissioned</div></div>
+          <div class="tag-item"><div class="tag-name">audit</div><div class="tag-dest">→ The Commissioned</div></div>
+          <div class="tag-item"><div class="tag-name">commissioned-interest</div><div class="tag-dest">→ The Commissioned (build pre-launch)</div></div>
+          <div class="tag-item"><div class="tag-name">consulting-lead</div><div class="tag-dest">→ ldw.build</div></div>
+          <div class="tag-item"><div class="tag-name">speaking-lead</div><div class="tag-dest">→ ldw.build</div></div>
+          <div class="tag-item"><div class="tag-name">welcome-sequence-complete</div><div class="tag-dest">→ ldw.build general list</div></div>
+        </div>
+
+        <div style="margin-top:28px;">
+          <div class="section-label">What Needs to Be Built Before Commissioned Launches</div>
+          <div class="rollout-grid">
+            <div class="rollout-item"><div class="rollout-tag status-pending" style="font-family:'Space Mono',monospace; font-size:8px; letter-spacing:2px; border:1px solid rgba(255,169,77,0.3); color:#ffa94d; padding:3px 10px;">Pending</div><div class="rollout-text">Build <strong>commissioned-interest</strong> tag + AC automation sequence in dashboard</div></div>
+            <div class="rollout-item"><div class="rollout-tag status-pending" style="font-family:'Space Mono',monospace; font-size:8px; letter-spacing:2px; border:1px solid rgba(255,169,77,0.3); color:#ffa94d; padding:3px 10px;">Pending</div><div class="rollout-text">Build The Commissioned landing page on Kajabi</div></div>
+            <div class="rollout-item"><div class="rollout-tag status-pending" style="font-family:'Space Mono',monospace; font-size:8px; letter-spacing:2px; border:1px solid rgba(255,169,77,0.3); color:#ffa94d; padding:3px 10px;">Pending</div><div class="rollout-text">Set up Mighty Network community</div></div>
+            <div class="rollout-item"><div class="rollout-tag status-pending" style="font-family:'Space Mono',monospace; font-size:8px; letter-spacing:2px; border:1px solid rgba(255,169,77,0.3); color:#ffa94d; padding:3px 10px;">Pending</div><div class="rollout-text">Wire Commissioned Instagram to content schedule</div></div>
+            <div class="rollout-item"><div class="rollout-tag status-pending" style="font-family:'Space Mono',monospace; font-size:8px; letter-spacing:2px; border:1px solid rgba(255,169,77,0.3); color:#ffa94d; padding:3px 10px;">Pending</div><div class="rollout-text">Map AC handoff: when subscriber hits <strong>infrastructure</strong> or <strong>audit</strong> tag → Commissioned sequence fires</div></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:28px; border-color:rgba(193,127,89,0.2);">
+          <div class="card-title">NOTION REFERENCE</div>
+          <p>Full Commissioned architecture doc lives in LDW Command Center in Notion → The Commissioned — Architecture & Integration Map<br><br>Supabase: stored in ldw_documents table, category: strategy</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  // AUTH
+  function checkAuth() {
+    const pass = document.getElementById('auth-input').value;
+    const stored = sessionStorage.getItem('ldw_admin_auth');
+    if (pass === 'ldw2026' || stored === 'authenticated') {
+      sessionStorage.setItem('ldw_admin_auth', 'authenticated');
+      document.getElementById('auth-gate').style.display = 'none';
+      document.getElementById('main-content').style.display = 'grid';
+    } else {
+      document.getElementById('auth-error').style.display = 'block';
+    }
+  }
+  // Check existing auth
+  if (sessionStorage.getItem('ldw_admin_auth') === 'authenticated') {
+    document.getElementById('auth-gate').style.display = 'none';
+    document.getElementById('main-content').style.display = 'grid';
+  }
+
+  // TABS
+  function switchTab(name) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
