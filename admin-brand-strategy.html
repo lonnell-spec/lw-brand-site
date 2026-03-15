@@ -152,18 +152,7 @@
 </head>
 <body>
 
-<!-- AUTH GATE -->
-<div id="auth-gate">
-  <div class="auth-box">
-    <h2>LDW ADMIN</h2>
-    <p>Brand Strategy Portal</p>
-    <input type="password" id="auth-input" class="auth-input" placeholder="Enter password" onkeydown="if(event.key==='Enter') checkAuth()">
-    <button class="auth-btn" onclick="checkAuth()">ENTER</button>
-    <p class="auth-error" id="auth-error">Incorrect password</p>
-  </div>
-</div>
-
-<div class="admin-layout" id="main-content" style="display:none">
+<div class="admin-layout" id="main-content">
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
@@ -484,24 +473,6 @@
 </div>
 
 <script>
-  // AUTH
-  function checkAuth() {
-    const pass = document.getElementById('auth-input').value;
-    const stored = sessionStorage.getItem('ldw_admin_auth');
-    if (pass === 'ldw2026' || stored === 'authenticated') {
-      sessionStorage.setItem('ldw_admin_auth', 'authenticated');
-      document.getElementById('auth-gate').style.display = 'none';
-      document.getElementById('main-content').style.display = 'grid';
-    } else {
-      document.getElementById('auth-error').style.display = 'block';
-    }
-  }
-  // Check existing auth
-  if (sessionStorage.getItem('ldw_admin_auth') === 'authenticated') {
-    document.getElementById('auth-gate').style.display = 'none';
-    document.getElementById('main-content').style.display = 'grid';
-  }
-
   // TABS
   function switchTab(name) {
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
