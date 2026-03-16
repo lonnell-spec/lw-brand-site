@@ -2566,14 +2566,14 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
   </footer>
 
   <!-- ===== SUPABASE CLIENT ===== -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@db/supabase-js@2/dist/umd/supabase.min.js"></script>
 
   <!-- ===== FORM HANDLING ===== -->
   <script>
     // === SUPABASE INIT (global) ===
     const SUPABASE_URL = 'https://riqdcirsmckubkdfbtoj.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM';
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   (function() {
     'use strict';
@@ -2619,7 +2619,7 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
       setLoading(btnEl, true);
       try {
         // Save to Supabase as backup record
-        await supabase
+        await db
           .from('newsletter_subscribers')
           .insert([{ email: email.toLowerCase(), source: source }])
           .catch(function() {}); // non-blocking — don't fail on duplicate
@@ -2684,7 +2684,7 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
 
       setLoading(vwBtn, true);
       try {
-        const { data, error } = await supabase
+        const { data, error } = await db
           .from('vantage_waitlist')
           .insert([{ email: email.toLowerCase(), source: 'homepage' }]);
 
@@ -2739,7 +2739,7 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
 
         setLoading(inquiryBtn, true);
         try {
-          const { data, error } = await supabase
+          const { data, error } = await db
             .from('consulting_inquiries')
             .insert([{
               name: name,
@@ -2793,7 +2793,7 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
   // --- YouTube: Load featured video (isolated) ---
   (async function loadYouTube() {
     try {
-      const { data: ytRows, error: ytErr } = await supabase
+      const { data: ytRows, error: ytErr } = await db
         .from('site_youtube')
         .select('*')
         .eq('visible', true)
@@ -2835,7 +2835,7 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
   // --- Instagram: Load posts (isolated) ---
   (async function loadInstagram() {
     try {
-      const { data: igData, error: igErr } = await supabase
+      const { data: igData, error: igErr } = await db
         .from('site_instagram')
         .select('*')
         .eq('visible', true)
@@ -3357,8 +3357,8 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
       submitBtn.disabled = true;
 
       try {
-        if (typeof supabase !== 'undefined') {
-          await supabase.from('newsletter_subscribers').insert([{
+        if (typeof db !== 'undefined') {
+          await db.from('newsletter_subscribers').insert([{
             email: email.toLowerCase(),
             source: 'popup_cta'
           }]);
