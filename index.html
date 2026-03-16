@@ -840,12 +840,17 @@
     letter-spacing: 3px; color: var(--copper);
     text-transform: uppercase; margin-bottom: 12px;
   }
+  .audit-gate-content {
+    display: grid; grid-template-columns: 1fr 320px;
+    gap: 40px; align-items: start;
+  }
   .audit-gate-title {
     font-family: 'Thunder', sans-serif;
         font-weight: 700;
-    font-size: clamp(32px, 3.5vw, 48px);
+    font-size: clamp(28px, 3vw, 48px);
     line-height: 1.0; letter-spacing: 2px;
     color: var(--off-white); margin-bottom: 20px;
+    word-break: break-word;
   }
   .audit-gate-desc {
     font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 300;
@@ -913,9 +918,11 @@
     font-family: 'DM Sans', sans-serif; font-size: 13px;
     color: rgba(242,240,235,0.65); line-height: 1.65;
   }
+  @media (max-width: 1024px) {
+    .audit-gate-content { grid-template-columns: 1fr; gap: 32px; }
+  }
   @media (max-width: 860px) {
     .audit-gate-inner { padding: 36px 28px; }
-    .audit-gate-content { grid-template-columns: 1fr; gap: 32px; }
   }
 
   /* ===== CONSULTING ===== */
@@ -2782,18 +2789,19 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
   })();
 
   // ===== DYNAMIC CONTENT LOADER =====
-  (async function loadSiteContent() {
+
+  // --- YouTube: Load featured video (isolated) ---
+  (async function loadYouTube() {
     try {
-      // --- YouTube: Load featured video ---
-      const { data: ytData, error: ytErr } = await supabase
+      const { data: ytRows, error: ytErr } = await supabase
         .from('site_youtube')
         .select('*')
         .eq('visible', true)
-        .limit(1)
-        .single();
+        .limit(1);
 
-      if (!ytErr && ytData && ytData.youtube_url) {
-        // Extract video ID from various YouTube URL formats
+      const ytData = (!ytErr && ytRows && ytRows.length > 0) ? ytRows[0] : null;
+
+      if (ytData && ytData.youtube_url) {
         let videoId = '';
         const url = ytData.youtube_url;
         if (url.includes('youtu.be/')) {
@@ -2803,7 +2811,6 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
         } else if (url.includes('/embed/')) {
           videoId = url.split('/embed/')[1].split(/[?&#]/)[0];
         }
-
         if (videoId) {
           const placeholder = document.getElementById('yt-placeholder');
           const embed = document.getElementById('yt-embed');
@@ -2822,8 +2829,12 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
           if (metaEl) metaEl.textContent = ytData.description;
         }
       }
+    } catch (err) { /* YouTube load failed gracefully */ }
+  })();
 
-      // --- Instagram: Load posts ---
+  // --- Instagram: Load posts (isolated) ---
+  (async function loadInstagram() {
+    try {
       const { data: igData, error: igErr } = await supabase
         .from('site_instagram')
         .select('*')
@@ -2861,8 +2872,8 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
             }
             grid.appendChild(cell);
           });
-          // Fill remaining slots with placeholders if < 6
-          const remaining = 6 - igData.length;
+          // Fill remaining slots with placeholders
+          const remaining = 4 - igData.length;
           for (let i = 0; i < remaining; i++) {
             const cell = document.createElement('div');
             cell.className = 'ig-cell';
@@ -2871,10 +2882,7 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
           }
         }
       }
-    } catch (err) {
-      // info suppressed
-      // Graceful: placeholders remain visible if content load fails
-    }
+    } catch (err) { /* Instagram load failed gracefully */ }
   })();
 
   // === Dynamic Photo Loading from Supabase ===
