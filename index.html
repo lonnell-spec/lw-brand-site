@@ -2623,7 +2623,19 @@ setLoading(btnEl, true);
             .insert([{ email: email.toLowerCase(), source: source }]);
         } catch(insertErr) { /* silent — duplicate or constraint errors ignored */ }
 
-        // Show thank-you state
+        // Sync to ActiveCampaign — fire and forget
+        fetch(SUPABASE_URL + '/functions/v1/sync-activecampaign', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
+          body: JSON.stringify({
+            email:      email.toLowerCase(),
+            first_name: '',
+            last_name:  '',
+            tags:       ['newsletter-subscriber', 'source-' + source],
+            list_id:    1
+          })
+        }).catch(function(e) { console.error('AC sync error (newsletter):', e); });
+
         // Show thank-you state
         inputEl.style.display = 'none';
         btnEl.style.display = 'none';
