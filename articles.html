@@ -3,28 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Articles — Lonnell Williams</title>
-<meta name="description" content="Arise & Build — essays, frameworks, and field notes from Lonnell Williams on ministry systems, AI infrastructure, and organizational leadership.">
+<link rel="canonical" href="https://ldw.build/articles.html">
+<title>Arise & Build — Lonnell Williams</title>
+<meta name="description" content="Arise & Build — weekly essays, frameworks, and field notes on ministry systems, leadership, and building what doesn't exist yet.">
+<meta property="og:title" content="Arise & Build — Lonnell Williams">
+<meta property="og:description" content="Weekly essays on ministry systems, leadership infrastructure, and building at scale.">
+<meta property="og:image" content="https://riqdcirsmckubkdfbtoj.supabase.co/storage/v1/object/public/site-images/photos/IMG_3385.jpeg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link href="https://api.fontshare.com/v2/css?f[]=thunder@800,700,600&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;700&family=Space+Mono&display=swap" rel="stylesheet">
-<link href="https://api.fontshare.com/v2/css?f[]=thunder@800,700&display=swap" rel="stylesheet">
 <style>
 :root {
   --obsidian:   #0D0D0D;
   --warm-black: #1A1714;
   --copper:     #C17F59;
+  --copper-light: #D4A07A;
   --signal:     #E85D3A;
   --off-white:  #F2F0EB;
   --concrete:   #8A8A8A;
 }
+
 * { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
 body {
-  background:var(--obsidian);
-  color:var(--off-white);
-  font-family:'DM Sans',sans-serif;
-  font-weight:300;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
+  background: var(--obsidian);
+  color: var(--off-white);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 /* ── NAV ── */
@@ -40,9 +49,8 @@ body {
 .site-nav-name  { font-family:'Thunder',sans-serif; font-weight:700; font-size:16px; letter-spacing:1px; color:#F2F0EB; }
 .site-nav-links { display:flex; align-items:center; gap:32px; }
 .site-nav-links a { font-family:'Space Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; text-decoration:none; color:#8A8A8A; transition:color .3s; }
-.site-nav-links a:hover  { color:#F2F0EB; }
-.site-nav-links a.active { color:#C17F59; }
-.site-nav-btn { display:none; background:none; border:none; cursor:pointer; padding:11px; min-height:44px; min-width:44px; }
+.site-nav-links a:hover, .site-nav-links a.active { color:#C17F59; }
+.site-nav-btn { display:none; background:none; border:none; cursor:pointer; padding:8px; }
 .site-nav-btn span { display:block; width:22px; height:2px; background:#F2F0EB; margin:5px 0; }
 @media(max-width:768px){
   .site-nav { padding:0 24px; }
@@ -51,180 +59,347 @@ body {
   .site-nav-btn { display:block; }
 }
 
-/* ── PAGE SHELL ── */
-.page { max-width:1200px; margin:0 auto; padding:0 48px; }
-
 /* ── HERO ── */
 .hero {
-  padding-top:132px; padding-bottom:60px;
-  display:flex; align-items:flex-end; justify-content:space-between; gap:40px;
-  border-bottom:1px solid rgba(193,127,89,0.12);
+  padding: 140px 60px 72px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 80px;
+  align-items: end;
+  border-bottom: 1px solid rgba(193,127,89,0.12);
+  position: relative;
+}
+.hero::before {
+  content: 'A&B';
+  position: absolute;
+  right: 60px; top: 80px;
+  font-family: 'Thunder', sans-serif;
+  font-weight: 700;
+  font-size: 240px;
+  color: rgba(193,127,89,0.04);
+  letter-spacing: -4px;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
 }
 .hero-eyebrow {
-  font-family:'Space Mono',monospace; font-size:10px; letter-spacing:4px;
-  text-transform:uppercase; color:var(--copper); margin-bottom:18px;
-  display:flex; align-items:center; gap:12px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+  color: var(--copper); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
 }
 .hero-eyebrow::before { content:''; width:28px; height:1px; background:var(--copper); }
 .hero-title {
+  font-family: 'Thunder', sans-serif; font-weight: 700;
+  font-size: clamp(64px, 9vw, 120px);
+  line-height: 0.88; letter-spacing: 1px;
+  color: var(--off-white); margin-bottom: 28px;
+}
+.hero-title em { color: var(--copper); font-style: normal; }
+.hero-meta {
+  display: flex; gap: 24px; align-items: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--concrete);
+}
+.hero-meta span { display:flex; align-items:center; gap:6px; }
+.hero-meta-dot { width:4px; height:4px; border-radius:50%; background:var(--copper); }
+
+/* ── SUBSCRIBE PANEL ── */
+.hero-subscribe {
+  background: rgba(193,127,89,0.05);
+  border: 1px solid rgba(193,127,89,0.15);
+  padding: 32px 28px;
+  position: relative;
+  z-index: 1;
+}
+.subscribe-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--copper); margin-bottom: 12px;
+}
+.subscribe-title {
+  font-family: 'Thunder', sans-serif; font-weight: 700;
+  font-size: 28px; letter-spacing: 2px;
+  color: var(--off-white); line-height: 1; margin-bottom: 10px;
+}
+.subscribe-desc {
+  font-size: 13px; color: var(--concrete); line-height: 1.65; margin-bottom: 20px;
+}
+.subscribe-form { display:flex; flex-direction:column; gap:10px; }
+.subscribe-input {
+  background: rgba(242,240,235,0.05);
+  border: 1px solid rgba(242,240,235,0.1);
+  padding: 13px 16px;
+  font-family: 'DM Sans', sans-serif; font-size: 14px;
+  color: var(--off-white); outline: none;
+  transition: border-color 0.3s;
+}
+.subscribe-input::placeholder { color: var(--concrete); }
+.subscribe-input:focus { border-color: var(--copper); }
+.subscribe-btn {
+  background: var(--copper); color: var(--obsidian);
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+  padding: 14px 20px; border: none; cursor: pointer;
+  transition: background 0.3s; text-align: center;
+}
+.subscribe-btn:hover { background: var(--copper-light); }
+.subscribe-btn:disabled { opacity:0.6; cursor:not-allowed; }
+.subscribe-note {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 1px; color: rgba(138,138,138,0.5);
+  text-align: center; margin-top: 4px;
+}
+.subscribe-success {
+  display:none; text-align:center; padding: 20px 0;
+}
+.subscribe-success .ty-icon { font-size:22px; color:var(--copper); margin-bottom:10px; }
+.subscribe-success .ty-title {
   font-family:'Thunder',sans-serif; font-weight:700;
-  font-size:clamp(56px,8vw,104px); line-height:0.88; letter-spacing:1px; color:var(--off-white);
+  font-size:22px; letter-spacing:3px; color:var(--off-white); margin-bottom:6px;
 }
-.hero-title em { color:var(--copper); font-style:normal; }
-.hero-desc {
-  font-size:15px; color:rgba(242,240,235,0.5); line-height:1.75;
-  max-width:300px; text-align:right;
-}
-
-/* ── GRID SECTION ── */
-.grid-section { padding:52px 0 0; }
-.grid-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
-.grid-label  { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--concrete); }
-.grid-status { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:rgba(138,138,138,0.4); }
-
-.articles-grid {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1px;
-  background:rgba(242,240,235,0.05);
+.subscribe-success .ty-sub {
+  font-size:12px; color:var(--concrete); font-family:'Space Mono',monospace;
+  letter-spacing:1px; text-transform:uppercase;
 }
 
-/* ── CARD ── */
-.article-card {
-  background:var(--obsidian);
-  text-decoration:none;
+/* ── FILTERS ── */
+.filters-bar {
+  max-width: 1200px; margin: 0 auto;
+  padding: 36px 60px 0;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  flex-wrap: wrap;
+}
+.filter-pills { display:flex; gap:8px; flex-wrap:wrap; }
+.filter-pill {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 7px 16px; background: transparent;
+  border: 1px solid rgba(193,127,89,0.15); color: var(--concrete);
+  cursor: pointer; transition: all 0.25s;
+}
+.filter-pill:hover, .filter-pill.active {
+  border-color: var(--copper); color: var(--copper);
+  background: rgba(193,127,89,0.08);
+}
+.issue-count {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 2px; color: rgba(138,138,138,0.4);
+  text-transform: uppercase;
+}
+
+/* ── ISSUE GRID ── */
+.issues-wrap {
+  max-width: 1200px; margin: 0 auto;
+  padding: 40px 60px 100px;
+}
+
+/* ── FEATURED ISSUE (first one) ── */
+.issue-featured {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid rgba(193,127,89,0.12);
+  margin-bottom: 2px;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition: border-color 0.3s;
+  position: relative;
+}
+.issue-featured:hover { border-color: rgba(193,127,89,0.4); }
+.issue-featured-img {
+  aspect-ratio: 16/10;
+  background: var(--warm-black);
+  position: relative; overflow: hidden;
+}
+.issue-featured-img img {
+  width:100%; height:100%; object-fit:cover;
+  filter: brightness(0.7);
+  transition: transform 0.6s ease, filter 0.4s ease;
+}
+.issue-featured:hover .issue-featured-img img {
+  transform: scale(1.04); filter: brightness(0.85);
+}
+.issue-featured-img-placeholder {
+  width:100%; height:100%; min-height:280px;
+  display:flex; align-items:center; justify-content:center;
+  background: linear-gradient(135deg, var(--warm-black), rgba(193,127,89,0.08));
+}
+.issue-featured-img-placeholder .big-num {
+  font-family:'Thunder',sans-serif; font-weight:700;
+  font-size:120px; color:rgba(193,127,89,0.12); letter-spacing:-2px; line-height:1;
+}
+.issue-featured-body {
+  padding: 48px 44px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  background: var(--warm-black);
+}
+.issue-featured-top {}
+.issue-badge-row { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+.issue-badge {
+  font-family:'Space Mono',monospace; font-size:8px;
+  letter-spacing:3px; text-transform:uppercase;
+  padding:4px 10px; background:var(--copper); color:var(--obsidian); font-weight:700;
+}
+.issue-number {
+  font-family:'Space Mono',monospace; font-size:9px;
+  letter-spacing:2px; text-transform:uppercase; color:var(--concrete);
+}
+.issue-featured-title {
+  font-family:'Thunder',sans-serif; font-weight:700;
+  font-size:clamp(32px,3.5vw,52px); letter-spacing:2px;
+  color:var(--off-white); line-height:0.95; margin-bottom:16px;
+}
+.issue-featured-excerpt {
+  font-size:14px; font-weight:300; color:var(--concrete);
+  line-height:1.75; margin-bottom:28px;
+}
+.issue-featured-footer {
+  display:flex; align-items:center; justify-content:space-between;
+  border-top:1px solid rgba(242,240,235,0.06); padding-top:20px;
+}
+.issue-date {
+  font-family:'Space Mono',monospace; font-size:9px;
+  letter-spacing:2px; text-transform:uppercase; color:var(--concrete);
+}
+.issue-read {
+  font-family:'Space Mono',monospace; font-size:9px;
+  letter-spacing:2px; color:var(--copper); text-transform:uppercase;
+  display:flex; align-items:center; gap:8px;
+}
+.issue-read::after { content:'→'; transition:transform 0.2s; }
+.issue-featured:hover .issue-read::after { transform:translateX(4px); }
+.issue-tags { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:20px; }
+.issue-tag {
+  font-family:'Space Mono',monospace; font-size:8px;
+  letter-spacing:2px; text-transform:uppercase; color:rgba(138,138,138,0.5);
+  padding:3px 8px; border:1px solid rgba(242,240,235,0.06);
+}
+
+/* ── ISSUE GRID (remaining) ── */
+.issues-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+.issue-card {
+  background:var(--warm-black);
+  text-decoration:none; color:inherit;
+  padding:32px 28px;
   display:flex; flex-direction:column;
+  border:1px solid rgba(193,127,89,0.0);
+  transition:background 0.25s, border-color 0.25s;
   position:relative; overflow:hidden;
-  transition:background .2s;
 }
-.article-card::after {
+.issue-card::before {
   content:''; position:absolute; top:0; left:0; right:0; height:2px;
   background:var(--copper); transform:scaleX(0); transform-origin:left;
-  transition:transform .35s cubic-bezier(.22,1,.36,1);
+  transition:transform 0.3s ease;
 }
-.article-card:hover { background:var(--warm-black); }
-.article-card:hover::after { transform:scaleX(1); }
-.article-card:hover .card-img { transform:scale(1.04); }
-.article-card:hover .card-arrow { transform:translate(3px,-3px); opacity:1; }
-
-/* Image zone */
-.card-img-wrap {
-  width:100%; height:180px; overflow:hidden;
-  position:relative; background:rgba(26,23,20,0.8);
-  flex-shrink:0;
-}
-.card-img {
-  width:100%; height:100%; object-fit:cover;
-  transition:transform .5s cubic-bezier(.22,1,.36,1);
-  filter:brightness(0.75) saturate(0.8);
-  display:block;
-}
-/* Copper tint overlay on image */
-.card-img-wrap::after {
-  content:'';
-  position:absolute; inset:0;
-  background:linear-gradient(
-    to bottom,
-    rgba(13,13,13,0) 30%,
-    rgba(13,13,13,0.7) 100%
-  );
-  pointer-events:none;
-}
-/* Category badge over the image */
-.card-badge {
-  position:absolute; bottom:12px; left:16px; z-index:2;
-  font-family:'Space Mono',monospace; font-size:8px; letter-spacing:3px;
-  text-transform:uppercase; color:var(--copper);
-  background:rgba(13,13,13,0.75);
-  backdrop-filter:blur(4px);
-  padding:4px 8px;
-  border:1px solid rgba(193,127,89,0.3);
-}
-
-/* Text zone */
-.card-body {
-  padding:24px 24px 20px;
-  display:flex; flex-direction:column; flex-grow:1;
-}
-.card-num     { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:rgba(193,127,89,.25); margin-bottom:10px; }
-.card-title   { font-family:'DM Sans',sans-serif; font-weight:700; font-size:16px; line-height:1.35; color:var(--off-white); margin-bottom:10px; flex-grow:1; }
-.card-excerpt { font-size:13px; font-weight:300; color:rgba(242,240,235,.45); line-height:1.65; margin-bottom:16px; }
-.card-footer  {
-  margin-top:auto; padding-top:14px;
-  border-top:1px solid rgba(242,240,235,.05);
-  display:flex; align-items:center; justify-content:space-between;
-}
-.card-date  { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:rgba(138,138,138,.45); text-transform:uppercase; }
-.card-arrow { font-size:13px; color:var(--copper); opacity:.35; transition:transform .25s,opacity .25s; }
-
-/* ── SKELETON ── */
-.skeleton-card { background:var(--obsidian); display:flex; flex-direction:column; overflow:hidden; }
-.skel-img-wrap { width:100%; height:180px; overflow:hidden; }
-.skel          { background:rgba(242,240,235,0.05); border-radius:2px; animation:pulse 1.8s ease-in-out infinite; }
-.skel-img      { width:100%; height:100%; border-radius:0; }
-.skel-body     { padding:24px 24px 20px; display:flex; flex-direction:column; gap:9px; }
-.s-num  { height:9px;  width:32px; }
-.s-t1   { height:14px; width:88%; }
-.s-t2   { height:14px; width:62%; }
-.s-d1   { height:9px;  width:100%; margin-top:3px; }
-.s-d2   { height:9px;  width:88%; }
-.s-d3   { height:9px;  width:70%; }
-.s-foot { height:1px;  width:100%; margin-top:auto; background:rgba(242,240,235,.04); }
-@keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:.75} }
-
-/* ── EMPTY STATE ── */
-.empty-state {
-  grid-column:1/-1; padding:80px 32px; text-align:center;
-  display:flex; flex-direction:column; align-items:center; gap:14px;
-}
-.empty-label { font-family:'Space Mono',monospace; font-size:10px; letter-spacing:4px; text-transform:uppercase; color:rgba(193,127,89,.35); }
-.empty-head  { font-family:'Thunder',sans-serif; font-weight:700; font-size:36px; letter-spacing:2px; color:rgba(242,240,235,.18); }
-.empty-body  { font-size:14px; color:rgba(242,240,235,.3); max-width:380px; line-height:1.7; }
-
-/* ── SUBSCRIBE BAND ── */
-.sub-band {
-  margin-top:1px; padding:52px 48px;
-  background:var(--warm-black);
-  border:1px solid rgba(193,127,89,.15);
-  border-top:2px solid var(--copper);
-  display:flex; align-items:center; justify-content:space-between; gap:48px;
-}
-.sub-eyebrow { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--copper); margin-bottom:12px; }
-.sub-title   { font-family:'Thunder',sans-serif; font-weight:700; font-size:clamp(36px,4vw,56px); line-height:.92; color:var(--off-white); margin-bottom:14px; }
-.sub-desc    { font-size:15px; font-weight:300; color:rgba(242,240,235,.5); line-height:1.7; max-width:440px; }
-.sub-btn {
-  display:inline-flex; align-items:center; gap:12px;
-  background:var(--copper); color:var(--obsidian);
+.issue-card:hover { background:#1F1C18; border-color:rgba(193,127,89,0.15); }
+.issue-card:hover::before { transform:scaleX(1); }
+.card-num {
   font-family:'Thunder',sans-serif; font-weight:700;
-  font-size:18px; letter-spacing:3px; text-transform:uppercase;
-  text-decoration:none; padding:18px 36px; white-space:nowrap;
-  transition:opacity .2s; flex-shrink:0;
+  font-size:56px; color:rgba(193,127,89,0.08);
+  line-height:1; margin-bottom:16px;
 }
-.sub-btn:hover { opacity:.85; }
-.sub-note { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:rgba(138,138,138,.4); text-transform:uppercase; margin-top:10px; text-align:right; }
+.card-title {
+  font-family:'Thunder',sans-serif; font-weight:700;
+  font-size:clamp(20px,2vw,28px); letter-spacing:2px;
+  color:var(--off-white); line-height:1.05; margin-bottom:12px;
+  flex:1;
+}
+.card-excerpt {
+  font-size:13px; font-weight:300; color:var(--concrete);
+  line-height:1.65; margin-bottom:20px;
+  display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+}
+.card-footer {
+  display:flex; align-items:center; justify-content:space-between;
+  border-top:1px solid rgba(242,240,235,0.05); padding-top:16px;
+  margin-top:auto;
+}
+.card-arrow {
+  font-family:'Space Mono',monospace; font-size:10px;
+  color:var(--copper); transition:transform 0.2s;
+}
+.issue-card:hover .card-arrow { transform:translateX(4px); }
 
-  /* ── FOOTER ── */
-    footer { background: var(--warm-black); border-top: 1px solid rgba(242,240,235,0.04); padding: 64px 60px 40px; }
-    .footer-top { display: flex; justify-content: space-between; gap: 48px; margin-bottom: 48px; }
-    .footer-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-bottom: 16px; }
-    .footer-brand-name { font-family: 'Thunder', sans-serif;
-        font-weight: 700; font-size: 14px; letter-spacing: 1px; color: var(--off-white); }
-    .footer-tagline { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); }
-    .footer-col-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--copper); margin-bottom: 20px; }
-    .footer-col { display: flex; flex-direction: column; gap: 12px; }
-    .footer-link { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; color: var(--concrete); transition: color 0.3s ease; }
-    .footer-link:hover { color: var(--off-white); }
-    .footer-bottom { border-top: 1px solid rgba(242,240,235,0.04); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
-    .footer-legal { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(242,240,235,0.2); }
-    /* "The" header row */
+/* ── LOADING / EMPTY STATES ── */
+.state-wrap {
+  display:flex; flex-direction:column; align-items:center;
+  justify-content:center; padding:80px 20px; text-align:center;
+}
+.state-label {
+  font-family:'Space Mono',monospace; font-size:9px;
+  letter-spacing:3px; text-transform:uppercase; color:var(--concrete);
+  margin-bottom:16px;
+}
+.state-title {
+  font-family:'Thunder',sans-serif; font-weight:700;
+  font-size:42px; letter-spacing:3px; color:rgba(242,240,235,0.15);
+}
+.skeleton {
+  background:linear-gradient(90deg,rgba(255,255,255,0.03) 25%,rgba(255,255,255,0.07) 50%,rgba(255,255,255,0.03) 75%);
+  background-size:200% 100%;
+  animation:shimmer 1.5s infinite;
+  border-radius:2px;
+}
+@keyframes shimmer {
+  0%{background-position:200% 0}
+  100%{background-position:-200% 0}
+}
 
-    
+/* ── FOOTER ── */
+footer {
+  background:var(--warm-black);
+  border-top:1px solid rgba(242,240,235,0.04);
+  padding:48px 60px;
+}
+.footer-inner {
+  max-width:1200px; margin:0 auto;
+  display:flex; justify-content:space-between; align-items:center; gap:40px; flex-wrap:wrap;
+}
+.footer-brand {
+  font-family:'Thunder',sans-serif; font-weight:700;
+  font-size:14px; letter-spacing:1px; color:rgba(242,240,235,0.15);
+}
+.footer-links { display:flex; gap:24px; flex-wrap:wrap; }
+.footer-link {
+  font-family:'Space Mono',monospace; font-size:9px;
+  letter-spacing:2px; text-transform:uppercase;
+  color:var(--concrete); text-decoration:none; transition:color 0.3s;
+}
+.footer-link:hover { color:var(--off-white); }
+.footer-legal {
+  font-family:'Space Mono',monospace; font-size:9px;
+  letter-spacing:1px; color:rgba(242,240,235,0.12);
+}
 
-  </style>
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero { grid-template-columns:1fr; gap:40px; }
+  .hero-subscribe { max-width:500px; }
+  .issues-grid { grid-template-columns:repeat(2,1fr); }
+  .issue-featured { grid-template-columns:1fr; }
+}
+@media(max-width:768px){
+  .hero { padding:120px 24px 60px; }
+  .filters-bar { padding:28px 24px 0; }
+  .issues-wrap { padding:28px 24px 80px; }
+  .issues-grid { grid-template-columns:1fr; }
+  .issue-featured-body { padding:32px 24px; }
+  footer { padding:40px 24px; }
+  .footer-inner { flex-direction:column; gap:24px; text-align:center; }
+}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ── NAV ── -->
 <nav class="site-nav">
   <a href="/" class="site-nav-brand">
     <svg width="28" height="28" viewBox="0 0 240 240" fill="none">
@@ -234,7 +409,7 @@ body {
     </svg>
     <span class="site-nav-name">LONNELL WILLIAMS</span>
   </a>
-  <div class="site-nav-links">
+  <div class="site-nav-links" id="navLinks">
     <a href="/#about">About</a>
     <a href="/speaking.html">Speaking</a>
     <a href="/books.html">Books</a>
@@ -243,184 +418,241 @@ body {
     <a href="/articles.html" class="active">Articles</a>
     <a href="/vantage.html">Vantage</a>
   </div>
-  <button class="site-nav-btn" onclick="document.querySelector('.site-nav-links').classList.toggle('open')">
+  <button class="site-nav-btn" onclick="document.getElementById('navLinks').classList.toggle('open')">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<!-- HERO -->
-<div class="page">
-  <header class="hero">
-    <div>
-      <div class="hero-eyebrow">Arise &amp; Build</div>
-      <h1 class="hero-title">FIELD NOTES<br>FROM THE<br><em>BUILD.</em></h1>
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Arise & Build</div>
+    <h1 class="hero-title">THE<br>ARCHIVE<em>.</em></h1>
+    <div class="hero-meta">
+      <span><span class="hero-meta-dot"></span> Weekly</span>
+      <span><span class="hero-meta-dot"></span> No filler</span>
+      <span><span class="hero-meta-dot"></span> <span id="issue-count-meta">—</span> issues</span>
     </div>
-    <p class="hero-desc">Essays, frameworks, and operating principles. Published every two weeks on Substack. No filler.</p>
-  </header>
-
-  <!-- ARTICLES GRID -->
-  <section class="grid-section">
-    <div class="grid-header">
-      <span class="grid-label">Latest Issues</span>
-      <span class="grid-status" id="grid-status">Loading…</span>
+  </div>
+  <div class="hero-subscribe">
+    <div class="subscribe-label">Join the builders</div>
+    <div class="subscribe-title">GET IT IN YOUR INBOX<span style="color:var(--copper)">.</span></div>
+    <p class="subscribe-desc">Leadership systems. Operational frameworks. The stuff no one teaches in seminary or B-school. Every week.</p>
+    <div id="subscribe-form-area">
+      <div class="subscribe-form">
+        <input type="email" class="subscribe-input" id="articles-email" placeholder="Your email address">
+        <button class="subscribe-btn" id="articles-subscribe-btn">Subscribe Free</button>
+      </div>
+      <div class="subscribe-note">No spam. No fluff. Unsubscribe anytime.</div>
     </div>
-
-    <div class="articles-grid" id="articles-grid">
-      <!-- 6 skeleton cards -->
-      <div class="skeleton-card"><div class="skel-img-wrap"><div class="skel skel-img"></div></div><div class="skel-body"><div class="skel s-num"></div><div class="skel s-t1"></div><div class="skel s-t2"></div><div class="skel s-d1"></div><div class="skel s-d2"></div><div class="skel s-d3"></div><div class="skel s-foot"></div></div></div>
-      <div class="skeleton-card"><div class="skel-img-wrap"><div class="skel skel-img"></div></div><div class="skel-body"><div class="skel s-num"></div><div class="skel s-t1" style="width:72%"></div><div class="skel s-t2" style="width:90%"></div><div class="skel s-d1"></div><div class="skel s-d2" style="width:80%"></div><div class="skel s-d3" style="width:60%"></div><div class="skel s-foot"></div></div></div>
-      <div class="skeleton-card"><div class="skel-img-wrap"><div class="skel skel-img"></div></div><div class="skel-body"><div class="skel s-num"></div><div class="skel s-t1" style="width:90%"></div><div class="skel s-t2" style="width:55%"></div><div class="skel s-d1"></div><div class="skel s-d2" style="width:92%"></div><div class="skel s-d3" style="width:72%"></div><div class="skel s-foot"></div></div></div>
-      <div class="skeleton-card"><div class="skel-img-wrap"><div class="skel skel-img"></div></div><div class="skel-body"><div class="skel s-num"></div><div class="skel s-t1" style="width:80%"></div><div class="skel s-t2"></div><div class="skel s-d1"></div><div class="skel s-d2" style="width:70%"></div><div class="skel s-d3" style="width:85%"></div><div class="skel s-foot"></div></div></div>
-      <div class="skeleton-card"><div class="skel-img-wrap"><div class="skel skel-img"></div></div><div class="skel-body"><div class="skel s-num"></div><div class="skel s-t1"></div><div class="skel s-t2" style="width:68%"></div><div class="skel s-d1"></div><div class="skel s-d2"></div><div class="skel s-d3" style="width:58%"></div><div class="skel s-foot"></div></div></div>
-      <div class="skeleton-card"><div class="skel-img-wrap"><div class="skel skel-img"></div></div><div class="skel-body"><div class="skel s-num"></div><div class="skel s-t1" style="width:76%"></div><div class="skel s-t2" style="width:88%"></div><div class="skel s-d1"></div><div class="skel s-d2" style="width:78%"></div><div class="skel s-d3" style="width:50%"></div><div class="skel s-foot"></div></div></div>
-    </div>
-  </section>
-</div>
-
-<!-- SUBSCRIBE BAND -->
-<div class="page" style="padding-top:1px; margin-top:1px;">
-  <div class="sub-band">
-    <div>
-      <div class="sub-eyebrow">Arise &amp; Build — Newsletter</div>
-      <div class="sub-title">EVERY TWO<br>WEEKS.</div>
-      <p class="sub-desc">One idea, done fully. Every issue either clarifies something that was foggy or names something you already knew but couldn't say. Never both at once.</p>
-    </div>
-    <div>
-      <a href="https://buildwithldw.substack.com" target="_blank" rel="noopener" class="sub-btn">
-        Subscribe on Substack &nbsp;↗
-      </a>
-      <p class="sub-note">Free. One-click unsubscribe.</p>
+    <div class="subscribe-success" id="subscribe-success">
+      <div class="ty-icon">✦</div>
+      <div class="ty-title">YOU'RE IN</div>
+      <div class="ty-sub">Welcome to the builders.</div>
     </div>
   </div>
 </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-top">
-        <div>
-          <div class="footer-col-label">Foundation</div>
-          <p class="footer-scripture">"The God of heaven will make us prosper, and we his servants will arise and build."</p>
-          <div class="footer-ref">Nehemiah 2:20 — ESV</div>
-        </div>
-        <div>
-          <div class="footer-col-label">Navigate</div>
-          <a href="/#about" class="footer-link">About</a>
-          <a href="/#speaking" class="footer-link">Speaking</a>
-          <a href="/books.html" class="footer-link">Books</a>
-          <a href="/#consulting" class="footer-link">Work With Me</a>
-          <a href="/#newsletter" class="footer-link">Newsletter</a>
-          <a href="/media.html" class="footer-link">Media</a>
-          <a href="/vantage.html" class="footer-link">Vantage</a>
-          <a href="/admin.html" class="footer-link" style="color:var(--copper);margin-top:4px;">Portal</a>
-        </div>
-        <div>
-          <div class="footer-col-label">Books</div>
-          <a href="/books.html" class="footer-link">Anything, Everything, or Nothing at All</a>
-          <a href="/books.html" class="footer-link">Zag: Leading Ministry Jesus's Way</a>
-          <a href="/books.html" class="footer-link">The Staff (In Development)</a>
-        </div>
-        <div>
-                    <div class="footer-col-label">Connect</div>
-          <div class="footer-social-row">
-            <a href="https://instagram.com/lonnelldwilliams" target="_blank" class="footer-social" aria-label="Instagram" style="color:var(--concrete);">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-            </a>
-            <a href="https://youtube.com/@lonnelldwilliams" target="_blank" class="footer-social" aria-label="YouTube" style="color:var(--concrete);">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
-            </a>
-            <a href="https://threads.net/@lonnelldwilliams" target="_blank" class="footer-social" aria-label="Threads" style="color:var(--concrete);">
-              <svg width="17" height="17" viewBox="0 0 192 192" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.347-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.141-23.82 1.374-39.134 15.369-38.105 34.809.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.35-22.809-.169-40.06-7.484-51.275-21.741C35.236 139.966 29.808 120.682 29.605 96c.203-24.682 5.63-43.966 16.133-57.317C56.954 24.435 74.206 17.12 97.015 16.951c22.975.17 40.526 7.52 52.171 21.847 5.71 7.026 9.986 15.976 12.838 26.52l16.2-4.325c-3.486-12.961-9-24.386-16.525-33.813C147.377 9.012 125.133-.281 97.105 0h-.195C68.988.28 47.019 9.616 32.162 27.773 18.956 44.001 12.026 67.04 11.768 95.952v.096c.258 28.912 7.188 51.951 20.394 68.179 14.857 18.157 36.826 27.493 65.633 27.772h.195c25.925-.242 44.188-6.977 59.208-22 18.263-18.243 17.717-40.706 11.718-54.614-4.297-10.016-12.653-18.101-26.379-23.397z"/><path d="M98.44 133.332c-10.654.618-21.804-4.185-22.372-14.463-.412-7.75 5.52-16.397 23.493-17.426 2.057-.119 4.075-.178 6.057-.178 5.88 0 11.396.545 16.435 1.6-1.87 23.384-13.039 29.853-23.613 30.467z"/></svg>
-            </a>
-            <a href="https://linkedin.com/in/lonnelldwilliams" target="_blank" class="footer-social" aria-label="LinkedIn" style="color:var(--concrete);">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            </a>
-          </div>
-        </div>
+<!-- ── FILTERS ── -->
+<div class="filters-bar">
+  <div class="filter-pills" id="filter-pills">
+    <button class="filter-pill active" data-tag="all">All Issues</button>
+  </div>
+  <div class="issue-count" id="issue-count-bar">Loading...</div>
+</div>
+
+<!-- ── ISSUES ── -->
+<div class="issues-wrap">
+  <div id="issues-container">
+    <!-- Skeleton loading state -->
+    <div id="loading-state">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:2px;">
+        <div class="skeleton" style="height:320px;"></div>
+        <div class="skeleton" style="height:320px;"></div>
       </div>
-      <div class="footer-bottom">
-        <div class="footer-brand-text">LONNELL DAWSON WILLIAMS</div>
-        <div class="footer-legal">&copy; 2026 LONNELL WILLIAMS. ALL RIGHTS RESERVED.</div>
-        </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;">
+        <div class="skeleton" style="height:240px;"></div>
+        <div class="skeleton" style="height:240px;"></div>
+        <div class="skeleton" style="height:240px;"></div>
+      </div>
     </div>
-  </footer>
+    <div id="issues-content" style="display:none;"></div>
+  </div>
+</div>
 
-<script src="/nav-patch.js" defer></script>
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">LONNELL DAWSON WILLIAMS</div>
+    <div class="footer-links">
+      <a href="/" class="footer-link">Home</a>
+      <a href="/speaking.html" class="footer-link">Speaking</a>
+      <a href="/books.html" class="footer-link">Books</a>
+      <a href="/media.html" class="footer-link">Media</a>
+      <a href="/vantage.html" class="footer-link">Vantage</a>
+    </div>
+    <div class="footer-legal">&copy; 2026 LONNELL WILLIAMS</div>
+  </div>
+</footer>
 
+<script src="/supabase.min.js"></script>
 <script>
-// ── ARTICLES FEED LOADER ─────────────────────────────────────────────────────
-// Priority 1: Uses cover image you set on Substack (RSS enclosure / media:content / first img)
-// Priority 2: Falls back to category-mapped image based on article keywords
-// New issue published → auto-appears. 7th issue → oldest rolls off. Zero maintenance.
+const SUPABASE_URL  = 'https://riqdcirsmckubkdfbtoj.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM';
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
-const RSS_PROXY = 'https://riqdcirsmckubkdfbtoj.supabase.co/functions/v1/rss-proxy';
+let allIssues = [];
+let activeTag = 'all';
 
-async function loadArticles() {
-  const grid   = document.getElementById('articles-grid');
-  const status = document.getElementById('grid-status');
+// ── FORMAT DATE ──
+function formatDate(iso) {
+  const d = new Date(iso);
+  return d.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
+}
 
+// ── LOAD ISSUES ──
+async function loadIssues() {
   try {
-    const res   = await fetch(RSS_PROXY);
-    const data  = await res.json();
-    const items = Array.isArray(data.items) ? data.items : [];
+    const { data, error } = await db
+      .from('newsletter_issues')
+      .select('id,slug,title,excerpt,cover_image_url,tags,published_at,issue_number,read_time_minutes')
+      .eq('published', true)
+      .order('published_at', { ascending: false });
 
-    if (items.length === 0) {
-      status.textContent = '— No issues yet';
-      grid.innerHTML = `
-        <div class="empty-state">
-          <div class="empty-label">Coming Soon</div>
-          <div class="empty-head">FIRST ISSUE INCOMING.</div>
-          <p class="empty-body">Subscribe below — you'll be first when it lands.</p>
-        </div>`;
-      return;
-    }
-
-    status.textContent = `— ${items.length} issue${items.length !== 1 ? 's' : ''}`;
-
-    grid.innerHTML = items.map((item, i) => `
-      <a class="article-card" href="${x(item.link)}" target="_blank" rel="noopener">
-        <div class="card-img-wrap">
-          <img
-            class="card-img"
-            src="${x(item.image)}"
-            alt="${x(item.title)}"
-            loading="lazy"
-            onerror="this.parentElement.style.background='#1A1714'; this.style.display='none';"
-          >
-          <span class="card-badge">${x(item.category && item.category !== 'DEFAULT' ? item.category : 'Arise &amp; Build')}</span>
-        </div>
-        <div class="card-body">
-          <div class="card-num">0${i + 1}</div>
-          <div class="card-title">${x(item.title)}</div>
-          <div class="card-excerpt">${x(item.excerpt)}</div>
-          <div class="card-footer">
-            <span class="card-date">${x(item.pubDate)}</span>
-            <span class="card-arrow">↗</span>
-          </div>
-        </div>
-      </a>`).join('');
-
-  } catch {
-    status.textContent = '— Visit Substack';
-    grid.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-label">Arise &amp; Build</div>
-        <div class="empty-head">READ ON SUBSTACK.</div>
-        <p class="empty-body">All issues are live on Substack. Subscribe to read the full archive.</p>
+    if (error) throw error;
+    allIssues = data || [];
+    buildTagFilters();
+    renderIssues(allIssues);
+    updateCounts(allIssues.length);
+  } catch(err) {
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('issues-content').style.display = 'block';
+    document.getElementById('issues-content').innerHTML = `
+      <div class="state-wrap">
+        <div class="state-label">No issues found</div>
+        <div class="state-title">COMING SOON.</div>
       </div>`;
   }
 }
 
-function x(s) {
-  return String(s || '')
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;');
+// ── BUILD TAG FILTERS ──
+function buildTagFilters() {
+  const tagSet = new Set();
+  allIssues.forEach(i => (i.tags || []).forEach(t => tagSet.add(t)));
+  const pills = document.getElementById('filter-pills');
+  tagSet.forEach(tag => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-pill';
+    btn.dataset.tag = tag;
+    btn.textContent = tag;
+    btn.addEventListener('click', () => filterByTag(tag, btn));
+    pills.appendChild(btn);
+  });
 }
 
-loadArticles();
+// ── FILTER ──
+function filterByTag(tag, btn) {
+  activeTag = tag;
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const filtered = tag === 'all' ? allIssues : allIssues.filter(i => (i.tags||[]).includes(tag));
+  renderIssues(filtered);
+  updateCounts(filtered.length);
+}
+
+function updateCounts(n) {
+  const s = n === 1 ? 'issue' : 'issues';
+  document.getElementById('issue-count-bar').textContent = `${n} ${s}`;
+  document.getElementById('issue-count-meta').textContent = n;
+}
+
+// ── RENDER ──
+function renderIssues(issues) {
+  document.getElementById('loading-state').style.display = 'none';
+  const content = document.getElementById('issues-content');
+  content.style.display = 'block';
+
+  if (!issues || issues.length === 0) {
+    content.innerHTML = `<div class="state-wrap"><div class="state-label">No issues</div><div class="state-title">NOTHING YET.</div></div>`;
+    return;
+  }
+
+  let html = '';
+
+  // ── FEATURED (latest) ──
+  const featured = issues[0];
+  const featNum  = featured.issue_number ? `Issue #${featured.issue_number}` : '';
+  const imgBlock = featured.cover_image_url
+    ? `<img src="${featured.cover_image_url}" alt="${featured.title}" loading="lazy">`
+    : `<div class="issue-featured-img-placeholder"><span class="big-num">${featured.issue_number || '01'}</span></div>`;
+
+  const tagsHtml = (featured.tags||[]).map(t=>`<span class="issue-tag">${t}</span>`).join('');
+
+  html += `
+    <a href="/article.html?slug=${encodeURIComponent(featured.slug)}" class="issue-featured">
+      <div class="issue-featured-img">${imgBlock}</div>
+      <div class="issue-featured-body">
+        <div class="issue-featured-top">
+          <div class="issue-badge-row">
+            <span class="issue-badge">Latest</span>
+            ${featNum ? `<span class="issue-number">${featNum}</span>` : ''}
+          </div>
+          <div class="issue-featured-title">${featured.title}</div>
+          ${tagsHtml ? `<div class="issue-tags">${tagsHtml}</div>` : ''}
+          <div class="issue-featured-excerpt">${featured.excerpt || ''}</div>
+        </div>
+        <div class="issue-featured-footer">
+          <span class="issue-date">${formatDate(featured.published_at)}</span>
+          <span class="issue-read">${featured.read_time_minutes || 5} min read</span>
+        </div>
+      </div>
+    </a>`;
+
+  // ── GRID (rest) ──
+  if (issues.length > 1) {
+    html += `<div class="issues-grid" style="margin-top:2px;">`;
+    issues.slice(1).forEach(issue => {
+      const num = issue.issue_number ? `#${String(issue.issue_number).padStart(2,'0')}` : '';
+      html += `
+        <a href="/article.html?slug=${encodeURIComponent(issue.slug)}" class="issue-card">
+          <div class="card-num">${num || '◆'}</div>
+          <div class="card-title">${issue.title}</div>
+          <div class="card-excerpt">${issue.excerpt || ''}</div>
+          <div class="card-footer">
+            <span class="issue-date">${formatDate(issue.published_at)}</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>`;
+    });
+    html += `</div>`;
+  }
+
+  content.innerHTML = html;
+}
+
+// ── SUBSCRIBE ──
+const subBtn   = document.getElementById('articles-subscribe-btn');
+const subInput = document.getElementById('articles-email');
+
+subBtn.addEventListener('click', async () => {
+  const email = subInput.value.trim();
+  if (!email || !email.includes('@')) { subInput.style.borderColor='var(--signal)'; subInput.focus(); return; }
+  subInput.style.borderColor = '';
+  subBtn.disabled = true;
+  subBtn.textContent = 'SUBSCRIBING...';
+
+  try {
+    await db.from('newsletter_subscribers').insert([{ email: email.toLowerCase(), source: 'newsletter_section' }]);
+  } catch(e) { /* silent — duplicate ok */ }
+
+  document.getElementById('subscribe-form-area').style.display = 'none';
+  document.getElementById('subscribe-success').style.display = 'block';
+});
+
+subInput.addEventListener('keydown', e => { if(e.key==='Enter') subBtn.click(); });
+
+// ── INIT ──
+loadIssues();
 </script>
 </body>
 </html>
-
