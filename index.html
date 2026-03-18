@@ -2613,14 +2613,17 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
       if (!isValidEmail(email)) { showMsg(msgEl, 'Please enter a valid email.', true); return; }
       if (isRateLimited('subscribe_' + source, 10000)) { showMsg(msgEl, 'Please wait before trying again.', true); return; }
 
-      setLoading(btnEl, true);
-      try {
-        // Save to Supabase as backup record
-        await db
-          .from('newsletter_subscribers')
-          .insert([{ email: email.toLowerCase(), source: source }])
-          .catch(function() {}); // non-blocking — don't fail on duplicate
+setLoading(btnEl, true);
+    try {
+        // Save to Supabase — wrapped in own try/catch so insert errors never
+        // surface to the user (duplicate emails, etc. are all silently ignored)
+        try {
+          await db
+            .from('newsletter_subscribers')
+            .insert([{ email: email.toLowerCase(), source: source }]);
+        } catch(insertErr) { /* silent — duplicate or constraint errors ignored */ }
 
+        // Show thank-you state
         // Show thank-you state
         inputEl.style.display = 'none';
         btnEl.style.display = 'none';
@@ -3355,9 +3358,9 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
 
       try {
         if (typeof db !== 'undefined') {
-          await db.from('newsletter_subscribers').insert([{
+    await db.from('newsletter_subscribers').insert([{
             email: email.toLowerCase(),
-            source: 'popup_cta'
+            source: 'popup'
           }]);
         }
       } catch(err) {}
