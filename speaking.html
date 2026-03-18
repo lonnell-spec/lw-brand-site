@@ -1617,6 +1617,7 @@
 
 
 <!-- ===== BOOKING FORM SCRIPT ===== -->
+<script src="/supabase.min.js"></script>
 <script>
   // === VIDEO PLAYER ===
   (function() {
@@ -1704,6 +1705,19 @@
           var errBody = await resp.text();
           throw new Error('HTTP ' + resp.status + ': ' + errBody);
         }
+
+        // Sync to ActiveCampaign — fire and forget
+        fetch(SUPA_URL + '/functions/v1/sync-activecampaign', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SUPA_KEY },
+          body: JSON.stringify({
+            email:      email.toLowerCase(),
+            first_name: name.split(' ')[0],
+            last_name:  name.split(' ').slice(1).join(' ') || '',
+            tags:       ['speaking-inquiry'],
+            list_id:    1
+          })
+        }).catch(function(e) { console.error('AC sync error (speaking):', e); });
 
         // Success — clear form, show confirmation
         document.getElementById('bookingForm')

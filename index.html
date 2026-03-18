@@ -2763,7 +2763,7 @@ setLoading(btnEl, true);
               tags: ['consulting-inquiry', 'source-' + serviceType],
               list_id: 1
             })
-          }).catch(function(e) {});
+          }).catch(function(e) { console.error('AC sync error (consulting):', e); });
 
           // Hide all form fields and show thank you
           document.getElementById('inquiry-name').value = '';
