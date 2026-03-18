@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Newsletter — Admin | LDW</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://api.fontshare.com/v2/css?f[]=thunder@800,700,600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;700&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --obsidian:     #0D0D0D;
+  --warm-black:   #1A1714;
+  --off-white:    #F2F0EB;
+  --concrete:     #8A8A8A;
+  --copper:       #C17F59;
+  --copper-light: #D4956A;
+  --signal:       #00E676;
+  --danger:       #E85D3A;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--obsidian);
+  color: var(--off-white);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+.site-nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 48px; height:64px;
+  background:rgba(13,13,13,0.92); backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(242,240,235,0.06);
+}
+.site-nav-brand { display:flex; align-items:center; gap:12px; text-decoration:none; }
+.site-nav-name  { font-family:'Thunder',sans-serif; font-weight:700; font-size:18px; letter-spacing:1px; color:var(--off-white); }
+.nav-back {
+  font-family:'Space Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase;
+  color:var(--concrete); text-decoration:none; transition:color 0.3s; display:flex; align-items:center; gap:8px;
+}
+.nav-back:hover { color:var(--copper); }
+.nav-status {
+  font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase;
+  color:var(--signal); display:flex; align-items:center; gap:6px;
+}
+.status-dot { width:6px; height:6px; border-radius:50%; background:var(--signal); animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+/* ── MAIN DASHBOARD ── */
+.dashboard { padding-top:64px; }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  padding:48px 48px 32px;
+  border-bottom:1px solid rgba(242,240,235,0.06);
+  display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap;
+}
+.page-eyebrow {
+  font-family:'Space Mono',monospace; font-size:9px; letter-spacing:4px;
+  text-transform:uppercase; color:var(--copper); margin-bottom:10px;
+}
+.page-title {
+  font-family:'Thunder',sans-serif; font-weight:700;
+  font-size:clamp(36px,5vw,60px); letter-spacing:3px; line-height:1;
+  color:var(--off-white);
+}
+.page-title .accent { color:var(--copper); }
+.page-stats { display:flex; gap:32px; }
+.stat-item { text-align:right; }
+.stat-num {
+  font-family:'Thunder',sans-serif; font-weight:700;
+  font-size:32px; letter-spacing:2px; color:var(--copper); line-height:1;
+}
+.stat-label {
+  font-family:'Space Mono',monospace; font-size:8px;
+  letter-spacing:2px; text-transform:uppercase; color:var(--concrete);
+}
+
+/* ── TWO-PANEL LAYOUT ── */
+.panel-wrap {
+  display:grid; grid-template-columns:1fr 380px;
+  gap:0; min-height:calc(100vh - 200px);
+}
+
+/* ── COMPOSE PANEL ── */
+.compose-panel { border-right:1px solid rgba(242,240,235,0.06); padding:36px 48px; }
+.compose-section-label {
+  font-family:'Space Mono',monospace; font-size:9px; letter-spacing:4px;
+  text-transform:uppercase; color:var(--concrete); margin-bottom:20px;
+  padding-bottom:12px; border-bottom:1px solid rgba(242,240,235,0.06);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.compose-section-label span { color:var(--copper); }
+
+.field { margin-bottom:20px; }
+.field-label {
+  font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px;
+  text-transform:uppercase; color:var(--copper); margin-bottom:8px; display:block;
+}
+.field-input {
+  width:100%; background:rgba(242,240,235,0.04);
+  border:1px solid rgba(242,240,235,0.08); padding:12px 16px;
+  font-family:'DM Sans',sans-serif; font-size:14px;
+  color:var(--off-white); outline:none; transition:border-color 0.3s;
+}
+.field-input:focus { border-color:var(--copper); }
+.field-input::placeholder { color:var(--concrete); }
+.field-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.field-row-3 { display:grid; grid-template-columns:1fr 1fr 80px; gap:16px; }
+.field-hint {
+  font-family:'Space Mono',monospace; font-size:8px; letter-spacing:1px;
+  color:rgba(138,138,138,0.5); margin-top:6px;
+}
+.char-count {
+  font-family:'Space Mono',monospace; font-size:8px; letter-spacing:1px;
+  color:rgba(138,138,138,0.3); text-align:right; margin-top:4px;
+}
+
+.editor-toolbar {
+  display:flex; gap:4px; flex-wrap:wrap;
+  background:rgba(242,240,235,0.03);
+  border:1px solid rgba(242,240,235,0.08); border-bottom:none; padding:8px 10px;
+}
+.toolbar-btn {
+  background:transparent; border:1px solid rgba(242,240,235,0.08);
+  color:var(--concrete); font-family:'Space Mono',monospace;
+  font-size:9px; letter-spacing:1px; padding:5px 10px;
+  cursor:pointer; transition:all 0.2s;
+}
+.toolbar-btn:hover { border-color:var(--copper); color:var(--copper); }
+.toolbar-sep { width:1px; background:rgba(242,240,235,0.08); margin:0 4px; }
+.field-textarea {
+  width:100%; background:rgba(242,240,235,0.04);
+  border:1px solid rgba(242,240,235,0.08); padding:16px;
+  font-family:'DM Sans',sans-serif; font-size:14px;
+  color:var(--off-white); outline:none; transition:border-color 0.3s;
+  resize:vertical; min-height:360px; line-height:1.7;
+}
+.field-textarea:focus { border-color:var(--copper); }
+.field-textarea::placeholder { color:var(--concrete); }
+
+.action-bar {
+  display:flex; gap:12px; margin-top:28px; padding-top:24px;
+  border-top:1px solid rgba(242,240,235,0.06); flex-wrap:wrap;
+}
+.btn-publish {
+  background:var(--copper); color:var(--obsidian);
+  font-family:'Space Mono',monospace; font-size:10px; font-weight:700;
+  letter-spacing:3px; text-transform:uppercase; padding:14px 28px;
+  border:none; cursor:pointer; transition:background 0.3s; flex:1;
+}
+.btn-publish:hover { background:var(--copper-light); }
+.btn-publish:disabled { opacity:0.5; cursor:not-allowed; }
+.btn-draft {
+  background:transparent; color:var(--concrete);
+  font-family:'Space Mono',monospace; font-size:10px;
+  letter-spacing:3px; text-transform:uppercase; padding:14px 24px;
+  border:1px solid rgba(242,240,235,0.1); cursor:pointer; transition:all 0.3s;
+}
+.btn-draft:hover { border-color:var(--concrete); color:var(--off-white); }
+.btn-clear {
+  background:transparent; color:rgba(232,93,58,0.5);
+  font-family:'Space Mono',monospace; font-size:10px;
+  letter-spacing:2px; text-transform:uppercase; padding:14px 18px;
+  border:1px solid rgba(232,93,58,0.15); cursor:pointer; transition:all 0.3s;
+}
+.btn-clear:hover { border-color:var(--danger); color:var(--danger); }
+
+/* ── TOAST ── */
+.toast {
+  position:fixed; bottom:32px; right:32px; z-index:9999;
+  background:var(--warm-black); border:1px solid rgba(193,127,89,0.3);
+  padding:16px 20px; display:none; align-items:center; gap:12px;
+  min-width:280px; animation:slideIn 0.3s ease;
+}
+.toast.show { display:flex; }
+.toast.error { border-color:rgba(232,93,58,0.3); }
+.toast-icon { font-size:16px; }
+.toast-msg { font-family:'Space Mono',monospace; font-size:10px; letter-spacing:1px; flex:1; }
+@keyframes slideIn { from{transform:translateY(16px);opacity:0} to{transform:translateY(0);opacity:1} }
+
+/* ── ISSUES PANEL ── */
+.issues-panel { padding:36px 28px; overflow-y:auto; }
+.issues-panel-label {
+  font-family:'Space Mono',monospace; font-size:9px; letter-spacing:4px;
+  text-transform:uppercase; color:var(--concrete); margin-bottom:20px;
+  padding-bottom:12px; border-bottom:1px solid rgba(242,240,235,0.06);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.issues-list { display:flex; flex-direction:column; gap:2px; }
+.issue-row {
+  padding:16px; background:rgba(242,240,235,0.02);
+  border:1px solid rgba(242,240,235,0.04);
+  cursor:pointer; transition:all 0.2s; position:relative; overflow:hidden;
+}
+.issue-row::before {
+  content:''; position:absolute; top:0; left:0; bottom:0; width:2px;
+  background:var(--copper); transform:scaleY(0); transform-origin:bottom; transition:transform 0.25s;
+}
+.issue-row:hover { background:rgba(242,240,235,0.04); border-color:rgba(193,127,89,0.15); }
+.issue-row:hover::before { transform:scaleY(1); }
+.issue-row.editing { background:rgba(193,127,89,0.06); border-color:rgba(193,127,89,0.25); }
+.issue-row.editing::before { transform:scaleY(1); }
+.issue-row-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+.issue-row-num { font-family:'Space Mono',monospace; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--concrete); }
+.issue-row-status { font-family:'Space Mono',monospace; font-size:8px; letter-spacing:1px; text-transform:uppercase; padding:2px 8px; }
+.status-live { color:var(--signal); border:1px solid rgba(0,230,118,0.2); }
+.status-draft { color:var(--concrete); border:1px solid rgba(138,138,138,0.15); }
+.issue-row-title { font-family:'Thunder',sans-serif; font-weight:700; font-size:18px; letter-spacing:1px; color:var(--off-white); line-height:1.1; margin-bottom:6px; }
+.issue-row-actions { display:flex; gap:8px; margin-top:10px; opacity:0; transition:opacity 0.2s; }
+.issue-row:hover .issue-row-actions, .issue-row.editing .issue-row-actions { opacity:1; }
+.row-btn {
+  font-family:'Space Mono',monospace; font-size:8px; letter-spacing:1px;
+  text-transform:uppercase; padding:4px 10px; background:transparent;
+  border:1px solid rgba(242,240,235,0.1); color:var(--concrete);
+  cursor:pointer; transition:all 0.2s;
+}
+.row-btn:hover { border-color:var(--copper); color:var(--copper); }
+.row-btn.danger:hover { border-color:var(--danger); color:var(--danger); }
+.row-btn.publish-btn { color:var(--signal); border-color:rgba(0,230,118,0.2); }
+.row-btn.unpublish-btn { color:var(--danger); border-color:rgba(232,93,58,0.2); }
+.empty-issues { text-align:center; padding:48px 20px; font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(138,138,138,0.3); }
+.skel { background:linear-gradient(90deg,rgba(255,255,255,0.03) 25%,rgba(255,255,255,0.06) 50%,rgba(255,255,255,0.03) 75%); background-size:200% 100%; animation:shimmer 1.5s infinite; border-radius:1px; }
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+@media(max-width:1024px){ .panel-wrap { grid-template-columns:1fr; } .issues-panel { border-top:1px solid rgba(242,240,235,0.06); } }
+@media(max-width:768px){ .site-nav { padding:0 24px; } .page-header { padding:40px 24px 28px; flex-direction:column; align-items:flex-start; } .compose-panel { padding:28px 24px; } .issues-panel { padding:28px 24px; } .field-row, .field-row-3 { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="site-nav">
+  <a href="/admin.html" class="site-nav-brand">
+    <svg width="24" height="24" viewBox="0 0 240 240" fill="none">
+      <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+      <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
+      <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/>
+    </svg>
+    <span class="site-nav-name">ADMIN</span>
+  </a>
+  <a href="/admin.html" class="nav-back">← Portal</a>
+  <div class="nav-status">
+    <span class="status-dot"></span> Connected
+  </div>
+</nav>
+
+<!-- ── DASHBOARD ── -->
+<div class="dashboard">
+  <div class="page-header">
+    <div>
+      <div class="page-eyebrow">◆ Arise & Build</div>
+      <div class="page-title">NEWSLETTER<span class="accent">.</span></div>
+    </div>
+    <div class="page-stats">
+      <div class="stat-item"><div class="stat-num" id="stat-total">—</div><div class="stat-label">Total Issues</div></div>
+      <div class="stat-item"><div class="stat-num" id="stat-live">—</div><div class="stat-label">Live</div></div>
+      <div class="stat-item"><div class="stat-num" id="stat-draft">—</div><div class="stat-label">Drafts</div></div>
+    </div>
+  </div>
+
+  <div class="panel-wrap">
+    <!-- ── COMPOSE ── -->
+    <div class="compose-panel">
+      <div class="compose-section-label">
+        <span id="compose-mode-label">NEW ISSUE</span>
+        <span id="editing-slug" style="color:var(--concrete);font-size:8px;"></span>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label class="field-label">Title *</label>
+          <input type="text" class="field-input" id="f-title" placeholder="Infrastructure Before Vision">
+        </div>
+        <div class="field">
+          <label class="field-label">Slug * <span style="color:var(--concrete);font-weight:300;">(URL)</span></label>
+          <input type="text" class="field-input" id="f-slug" placeholder="infrastructure-before-vision">
+          <div class="field-hint">ldw.build/article.html?slug=<span id="slug-preview">…</span></div>
+        </div>
+      </div>
+
+      <div class="field-row-3">
+        <div class="field">
+          <label class="field-label">Issue #</label>
+          <input type="number" class="field-input" id="f-issue-num" placeholder="2" min="1">
+        </div>
+        <div class="field">
+          <label class="field-label">Read Time (min)</label>
+          <input type="number" class="field-input" id="f-read-time" placeholder="5" min="1" value="5">
+        </div>
+        <div class="field">
+          <label class="field-label">Pub Date</label>
+          <input type="date" class="field-input" id="f-pub-date">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Excerpt * <span style="color:var(--concrete);font-weight:300;">(shown on archive)</span></label>
+        <input type="text" class="field-input" id="f-excerpt" placeholder="One sentence that earns the open.">
+        <div class="char-count"><span id="excerpt-count">0</span> / 200</div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Tags <span style="color:var(--concrete);font-weight:300;">(comma-separated)</span></label>
+        <input type="text" class="field-input" id="f-tags" placeholder="systems, leadership, infrastructure">
+      </div>
+
+      <div class="field">
+        <label class="field-label">Cover Image URL <span style="color:var(--concrete);font-weight:300;">(optional)</span></label>
+        <input type="url" class="field-input" id="f-cover" placeholder="https://...">
+      </div>
+
+      <div class="field">
+        <label class="field-label">Body HTML * <span style="color:var(--concrete);font-weight:300;">(paste from AC or write direct)</span></label>
+        <div class="editor-toolbar">
+          <button class="toolbar-btn" onclick="wrap('<h2>','</h2>')">H2</button>
+          <button class="toolbar-btn" onclick="wrap('<h3>','</h3>')">H3</button>
+          <div class="toolbar-sep"></div>
+          <button class="toolbar-btn" onclick="wrap('<p>','</p>')">P</button>
+          <button class="toolbar-btn" onclick="wrap('<strong>','</strong>')"><b>B</b></button>
+          <button class="toolbar-btn" onclick="wrap('<em>','</em>')"><i>I</i></button>
+          <div class="toolbar-sep"></div>
+          <button class="toolbar-btn" onclick="insertList('ul')">UL</button>
+          <button class="toolbar-btn" onclick="insertList('ol')">OL</button>
+          <button class="toolbar-btn" onclick="wrap('<blockquote>','</blockquote>')">"</button>
+          <div class="toolbar-sep"></div>
+          <button class="toolbar-btn" onclick="insertHR()">HR</button>
+          <button class="toolbar-btn" onclick="previewBody()" style="color:var(--copper);border-color:rgba(193,127,89,0.3);">Preview</button>
+        </div>
+        <textarea class="field-textarea" id="f-body" placeholder="Paste your HTML from ActiveCampaign here...&#10;&#10;<p>Your content.</p>"></textarea>
+        <div class="char-count"><span id="body-count">0</span> chars</div>
+      </div>
+
+      <div class="action-bar">
+        <button class="btn-publish" id="btn-publish" onclick="saveIssue(true)">Publish Live</button>
+        <button class="btn-draft" onclick="saveIssue(false)">Save Draft</button>
+        <button class="btn-clear" onclick="clearForm()">Clear</button>
+      </div>
+    </div>
+
+    <!-- ── ISSUES LIST ── -->
+    <div class="issues-panel">
+      <div class="issues-panel-label">
+        <span>All Issues</span>
+        <span onclick="loadIssues()" style="cursor:pointer;color:var(--copper);font-size:8px;">↻ Refresh</span>
+      </div>
+      <div id="issues-list">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="skel" style="height:88px;"></div>
+          <div class="skel" style="height:88px;"></div>
+          <div class="skel" style="height:88px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── PREVIEW MODAL ── -->
+<div id="preview-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);overflow-y:auto;padding:80px 24px 40px;">
+  <div style="max-width:720px;margin:0 auto;background:var(--warm-black);border:1px solid rgba(193,127,89,0.2);padding:48px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;">
+      <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--copper);">Preview</div>
+      <button onclick="document.getElementById('preview-modal').style.display='none'" style="background:none;border:1px solid rgba(242,240,235,0.1);color:var(--concrete);font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;cursor:pointer;">Close ×</button>
+    </div>
+    <div id="preview-content" style="font-size:16px;font-weight:300;line-height:1.85;color:rgba(242,240,235,0.85);"></div>
+  </div>
+</div>
+
+<!-- ── TOAST ── -->
+<div class="toast" id="toast">
+  <span class="toast-icon" id="toast-icon">✦</span>
+  <span class="toast-msg" id="toast-msg">Saved.</span>
+</div>
+
+<script src="/supabase.min.js"></script>
+<script>
+// ── AUTH GUARD — uses existing admin portal session, no separate login ──
+if (sessionStorage.getItem('ldw_admin') !== 'true') {
+  window.location.href = '/admin.html';
+}
+
+const SUPABASE_URL  = 'https://riqdcirsmckubkdfbtoj.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM';
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+let editingId = null;
+let allIssues = [];
+
+// ── INIT ──
+setDefaultDate();
+loadIssues();
+
+function setDefaultDate() {
+  const d = new Date();
+  document.getElementById('f-pub-date').value = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+// ── SLUG AUTO-GEN ──
+document.getElementById('f-title').addEventListener('input', function() {
+  if (!editingId) {
+    const slug = this.value.toLowerCase().replace(/[^a-z0-9\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').trim();
+    document.getElementById('f-slug').value = slug;
+    document.getElementById('slug-preview').textContent = slug || '…';
+  }
+});
+document.getElementById('f-slug').addEventListener('input', function() {
+  document.getElementById('slug-preview').textContent = this.value || '…';
+});
+document.getElementById('f-excerpt').addEventListener('input', function() {
+  document.getElementById('excerpt-count').textContent = this.value.length;
+});
+document.getElementById('f-body').addEventListener('input', function() {
+  document.getElementById('body-count').textContent = this.value.length.toLocaleString();
+});
+
+// ── TOOLBAR ──
+function wrap(open, close) {
+  const ta = document.getElementById('f-body');
+  const s = ta.selectionStart, e = ta.selectionEnd;
+  const sel = ta.value.substring(s,e);
+  ta.value = ta.value.substring(0,s) + open + (sel||'Text here') + close + ta.value.substring(e);
+  ta.focus();
+  document.getElementById('body-count').textContent = ta.value.length.toLocaleString();
+}
+function insertList(type) {
+  const ta = document.getElementById('f-body');
+  const snip = `<${type}>\n  <li>Item one</li>\n  <li>Item two</li>\n  <li>Item three</li>\n</${type}>`;
+  const p = ta.selectionStart;
+  ta.value = ta.value.substring(0,p) + snip + ta.value.substring(p);
+  ta.focus();
+}
+function insertHR() {
+  const ta = document.getElementById('f-body');
+  const p = ta.selectionStart;
+  ta.value = ta.value.substring(0,p) + '\n<hr>\n' + ta.value.substring(p);
+  ta.focus();
+}
+function previewBody() {
+  document.getElementById('preview-content').innerHTML = `
+    <style>
+      #preview-content p{margin-bottom:20px}
+      #preview-content h2{font-family:'Thunder',sans-serif;font-size:32px;letter-spacing:2px;color:#F2F0EB;margin:40px 0 16px;padding-top:8px;border-top:1px solid rgba(193,127,89,0.15)}
+      #preview-content h3{font-weight:700;font-size:18px;color:#F2F0EB;margin:28px 0 12px}
+      #preview-content ul,#preview-content ol{padding-left:0;margin-bottom:20px;list-style:none}
+      #preview-content ul li,#preview-content ol li{padding:8px 0 8px 24px;position:relative;border-bottom:1px solid rgba(242,240,235,0.04);color:rgba(242,240,235,0.75)}
+      #preview-content ul li::before{content:'→';position:absolute;left:0;color:#C17F59}
+      #preview-content blockquote{border-left:3px solid #C17F59;padding:16px 24px;margin:28px 0;background:rgba(193,127,89,0.05);font-style:italic;color:rgba(242,240,235,0.7)}
+      #preview-content strong{color:#F2F0EB;font-weight:700}
+      #preview-content hr{border:none;border-top:1px solid rgba(193,127,89,0.15);margin:36px 0}
+      #preview-content a{color:#C17F59}
+    </style>
+    ${document.getElementById('f-body').value}`;
+  document.getElementById('preview-modal').style.display = 'block';
+}
+
+// ── TOAST ──
+let toastTimer;
+function showToast(msg, isError=false) {
+  clearTimeout(toastTimer);
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  document.getElementById('toast-icon').textContent = isError ? '✕' : '✦';
+  t.className = 'toast show' + (isError ? ' error' : '');
+  toastTimer = setTimeout(() => { t.className = 'toast'; }, 3500);
+}
+
+// ── LOAD ISSUES ──
+async function loadIssues() {
+  document.getElementById('issues-list').innerHTML = `<div style="display:flex;flex-direction:column;gap:8px;"><div class="skel" style="height:88px;"></div><div class="skel" style="height:88px;"></div><div class="skel" style="height:88px;"></div></div>`;
+  try {
+    const { data, error } = await db.from('newsletter_issues')
+      .select('id,slug,title,excerpt,published,issue_number,published_at,read_time_minutes')
+      .order('published_at', { ascending:false });
+    if (error) throw error;
+    allIssues = data || [];
+    renderList();
+    updateStats();
+  } catch(err) {
+    document.getElementById('issues-list').innerHTML = `<div class="empty-issues">Failed to load</div>`;
+  }
+}
+
+function updateStats() {
+  const live = allIssues.filter(i=>i.published).length;
+  document.getElementById('stat-total').textContent = allIssues.length;
+  document.getElementById('stat-live').textContent  = live;
+  document.getElementById('stat-draft').textContent = allIssues.length - live;
+}
+
+function renderList() {
+  if (!allIssues.length) {
+    document.getElementById('issues-list').innerHTML = `<div class="empty-issues">No issues yet. Write the first one.</div>`;
+    return;
+  }
+  document.getElementById('issues-list').innerHTML = `<div class="issues-list">${allIssues.map(issue => {
+    const date = new Date(issue.published_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    const num  = issue.issue_number ? `#${String(issue.issue_number).padStart(2,'0')}` : '—';
+    const toggleBtn = issue.published
+      ? `<button class="row-btn unpublish-btn" onclick="togglePublish('${issue.id}',false,event)">Unpublish</button>`
+      : `<button class="row-btn publish-btn" onclick="togglePublish('${issue.id}',true,event)">Publish</button>`;
+    return `
+      <div class="issue-row${editingId===issue.id?' editing':''}" onclick="loadForEdit('${issue.id}')">
+        <div class="issue-row-top">
+          <div class="issue-row-num">Issue ${num} · ${date}</div>
+          <div class="issue-row-status ${issue.published?'status-live':'status-draft'}">${issue.published?'Live':'Draft'}</div>
+        </div>
+        <div class="issue-row-title">${issue.title}</div>
+        <div class="issue-row-actions">
+          <button class="row-btn" onclick="loadForEdit('${issue.id}');event.stopPropagation();">Edit</button>
+          ${toggleBtn}
+          <button class="row-btn danger" onclick="deleteIssue('${issue.id}',event)">Delete</button>
+        </div>
+      </div>`;
+  }).join('')}</div>`;
+}
+
+// ── LOAD FOR EDIT ──
+async function loadForEdit(id) {
+  const { data } = await db.from('newsletter_issues').select('*').eq('id',id).single();
+  if (!data) return;
+  editingId = id;
+  document.getElementById('compose-mode-label').textContent = 'EDITING ISSUE';
+  document.getElementById('editing-slug').textContent = data.slug;
+  document.getElementById('f-title').value     = data.title || '';
+  document.getElementById('f-slug').value      = data.slug || '';
+  document.getElementById('f-issue-num').value = data.issue_number || '';
+  document.getElementById('f-read-time').value = data.read_time_minutes || 5;
+  document.getElementById('f-excerpt').value   = data.excerpt || '';
+  document.getElementById('f-tags').value      = (data.tags||[]).join(', ');
+  document.getElementById('f-cover').value     = data.cover_image_url || '';
+  document.getElementById('f-body').value      = data.body_html || '';
+  if (data.published_at) {
+    const d = new Date(data.published_at);
+    document.getElementById('f-pub-date').value = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
+  document.getElementById('slug-preview').textContent    = data.slug;
+  document.getElementById('excerpt-count').textContent   = (data.excerpt||'').length;
+  document.getElementById('body-count').textContent      = (data.body_html||'').length.toLocaleString();
+  document.getElementById('btn-publish').textContent     = data.published ? 'Update Live' : 'Publish Live';
+  renderList();
+  window.scrollTo({ top:0, behavior:'smooth' });
+  showToast(`Loaded: ${data.title}`);
+}
+
+// ── SAVE ──
+async function saveIssue(publish) {
+  const title    = document.getElementById('f-title').value.trim();
+  const slug     = document.getElementById('f-slug').value.trim().toLowerCase().replace(/\s+/g,'-');
+  const excerpt  = document.getElementById('f-excerpt').value.trim();
+  const body     = document.getElementById('f-body').value.trim();
+  const tagsRaw  = document.getElementById('f-tags').value.trim();
+  const cover    = document.getElementById('f-cover').value.trim();
+  const issueNum = parseInt(document.getElementById('f-issue-num').value)||null;
+  const readTime = parseInt(document.getElementById('f-read-time').value)||5;
+  const pubDate  = document.getElementById('f-pub-date').value;
+
+  if (!title)   { showToast('Title required.', true); return; }
+  if (!slug)    { showToast('Slug required.', true); return; }
+  if (!excerpt) { showToast('Excerpt required.', true); return; }
+  if (!body)    { showToast('Body HTML required.', true); return; }
+
+  const tags  = tagsRaw ? tagsRaw.split(',').map(t=>t.trim()).filter(Boolean) : [];
+  const pubAt = pubDate ? new Date(pubDate).toISOString() : new Date().toISOString();
+  const payload = {
+    title, slug, excerpt, body_html:body, tags,
+    cover_image_url: cover||null, issue_number:issueNum,
+    read_time_minutes:readTime, published:publish, published_at:pubAt,
+    updated_at: new Date().toISOString()
+  };
+
+  const btn = document.getElementById('btn-publish');
+  btn.disabled = true; btn.textContent = 'Saving...';
+
+  try {
+    let error;
+    if (editingId) {
+      const res = await db.from('newsletter_issues').update(payload).eq('id', editingId);
+      error = res.error;
+    } else {
+      payload.created_at = new Date().toISOString();
+      const res = await db.from('newsletter_issues').insert([payload]);
+      error = res.error;
+    }
+    if (error) throw error;
+    showToast(`${publish ? 'Published' : 'Draft saved'}: "${title}"`);
+    clearForm();
+    loadIssues();
+  } catch(err) {
+    const msg = err.message?.includes('duplicate') ? 'Slug already exists.' : 'Save failed.';
+    showToast(msg, true);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Publish Live';
+  }
+}
+
+// ── TOGGLE PUBLISH ──
+async function togglePublish(id, publish, e) {
+  e.stopPropagation();
+  const { error } = await db.from('newsletter_issues').update({ published:publish, updated_at:new Date().toISOString() }).eq('id',id);
+  if (error) { showToast('Update failed.', true); return; }
+  showToast(publish ? 'Issue is now live.' : 'Issue unpublished.');
+  loadIssues();
+}
+
+// ── DELETE ──
+async function deleteIssue(id, e) {
+  e.stopPropagation();
+  const issue = allIssues.find(i=>i.id===id);
+  if (!confirm(`Delete "${issue?.title}"? This cannot be undone.`)) return;
+  const { error } = await db.from('newsletter_issues').delete().eq('id',id);
+  if (error) { showToast('Delete failed.', true); return; }
+  if (editingId === id) clearForm();
+  showToast('Issue deleted.');
+  loadIssues();
+}
+
+// ── CLEAR ──
+function clearForm() {
+  editingId = null;
+  ['f-title','f-slug','f-issue-num','f-excerpt','f-tags','f-cover','f-body'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('f-read-time').value = '5';
+  document.getElementById('slug-preview').textContent = '…';
+  document.getElementById('excerpt-count').textContent = '0';
+  document.getElementById('body-count').textContent = '0';
+  document.getElementById('compose-mode-label').textContent = 'NEW ISSUE';
+  document.getElementById('editing-slug').textContent = '';
+  document.getElementById('btn-publish').textContent = 'Publish Live';
+  setDefaultDate();
+  renderList();
+}
+</script>
+</body>
+</html>
