@@ -502,12 +502,11 @@
   </footer>
 
 <!-- Supabase client + form handler -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/supabase.min.js"></script>
 <script>
-  const _sb = window.supabase.createClient(
-    'https://riqdcirsmckubkdfbtoj.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM'
-  );
+  const SUPA_URL = 'https://riqdcirsmckubkdfbtoj.supabase.co';
+  const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM';
+  const _sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
 
   document.getElementById('consultForm').addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -531,6 +530,19 @@
       }]);
 
       if (error) throw error;
+
+      // Sync to ActiveCampaign — fire and forget
+      fetch(SUPA_URL + '/functions/v1/sync-activecampaign', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SUPA_KEY },
+        body: JSON.stringify({
+          email:      data.email.toLowerCase(),
+          first_name: data.name.split(' ')[0],
+          last_name:  data.name.split(' ').slice(1).join(' ') || '',
+          tags:       ['consulting-inquiry', 'source-' + (data.service || 'general')],
+          list_id:    1
+        })
+      }).catch(function(e) { console.error('AC sync error (consulting):', e); });
 
       this.innerHTML = `
         <div style="text-align:center; padding: 40px 0;">
