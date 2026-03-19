@@ -1,57 +1,56 @@
 # Lonnell Williams — ldw.build
 
-> Lonnell D. Williams is an Executive Pastor, author, speaker, and operator building at the intersection of ministry leadership, AI infrastructure, and organizational systems.
+> Lonnell D. Williams is an organizational consultant, author, and speaker who has worked at the intersection of operational leadership and faith since 2014 — serving churches, nonprofits, and executives across the US, Canada, and Africa.
 
 ## Who Is Lonnell Williams
 
-Lonnell Williams serves as Executive Pastor at 2819 Church in Atlanta, Georgia — one of the fastest-growing churches in the Southeast. He holds an M.Div. from Princeton Theological Seminary and spent years in enterprise sales at Cisco and Splunk before transitioning fully into ministry leadership.
+Lonnell Williams is a sales executive who managed billions of dollars in accounts and clients, a senior leader who helped build and scale a multi-site church, and now the Executive Pastor of one of the fastest-growing churches in the country.
 
-He scaled 2819 Church from 13 to 50 staff in six months. He built a 42-agent AI Chief of Staff ecosystem for church operations — one of the most advanced AI infrastructure deployments in ministry leadership. He is the author of "Anything, Everything, or Nothing at All" (releasing Fall 2026) and "ZAG: Leading Ministry Jesus's Way."
+He holds an M.Div. from Princeton Theological Seminary. He has been consulting since 2014 — working with for-profit executives, nonprofit leaders, church planters, and organizational operators who need infrastructure that holds under growth pressure.
 
-His consulting practice works with Executive Pastors, Lead Pastors, church planters, and ministry operators who need operational infrastructure to match their organizational vision.
+He is the author of "Anything, Everything, or Nothing at All" (releasing Fall 2026) and "ZAG: Leading Ministry Jesus's Way." His core belief: informed leaders make better decisions. That's not a lack of faith — it's stewardship.
+
+## Consulting Practice
+
+Lonnell has consulted organizations across the US, Canada, and Africa since 2014. His clients include executive pastors, lead pastors, C-suite executives, nonprofit directors, and faith-rooted entrepreneurs. The work is organizational architecture — building the infrastructure that lets organizations grow without fracturing.
+
+Three engagement tiers: ENGAGE (consulting), COACH (advisory), COHORT (group program).
 
 ## Core Topics and Expertise
 
-- **Ministry Operations & Systems** — How to build infrastructure that scales a church from single-site to multi-campus
-- **AI for Church Leaders** — Practical deployment of AI agents, automation, and systems thinking in ministry contexts
-- **Executive Leadership** — The number two seat: decisions, delegation, team culture, and leading without the title
-- **The Operator-Pastor Identity** — Navigating the tension between spiritual leadership and operational execution
-- **Organizational Scale** — Staffing, structure, and systems for organizations growing faster than their infrastructure
+- **Organizational Infrastructure** — Building systems, hiring pipelines, KPI frameworks, and decision architecture that scale
+- **Executive Leadership** — The senior leader seat: decisions, delegation, team culture, and carrying organizational weight
+- **AI for Organizations** — Practical deployment of AI agents, automation, and operational intelligence in real organizations
+- **Stewardship as Strategy** — The belief that data and the Spirit are not in competition. Informed leaders make better decisions.
+- **Faith and Operations** — How leaders who are serious about both faith and craft can operate without two separate systems
 
 ## Books
 
-- **Anything, Everything, or Nothing at All** — Releasing Fall 2026 (re-release). A theological and practical examination of grace, calling, and radical commitment.
+- **Anything, Everything, or Nothing at All** — Releasing Fall 2026. Grace theology for leaders who have been building from a posture of performance.
 - **ZAG: Leading Ministry Jesus's Way** — Coming Soon. A ministry leadership framework drawn from the counter-cultural leadership model of Jesus.
-- **The Staff** — In Development. A deep look at building and leading exceptional ministry teams.
+- **The Staff** — In Development. Building and leading exceptional ministry teams.
 
 ## Speaking
 
-Lonnell speaks at church leadership conferences, executive pastor gatherings, seminary events, and organizational summits. Topics include AI infrastructure for ministry, systems-based church growth, and executive leadership principles.
+Lonnell speaks at conferences, executive leadership gatherings, seminary events, church leadership summits, and organizational offsites. Topics: organizational infrastructure, leadership under growth pressure, AI for leaders, and the intersection of faith and operational excellence.
 
 Speaking inquiries: ldw.build/speaking.html
 
 ## Newsletter
 
-**Arise & Build** — Published on Substack. Covers ministry systems, AI for leaders, executive leadership, and the operator-pastor identity. Written for church operators, executive pastors, and organizational leaders who build.
+**Arise & Build** — Published on Substack. One idea per issue, done fully. Written for church operators, executives, and faith-rooted entrepreneurs who build. Every two weeks.
 
-Subscribe: ldw.build
+Subscribe: ldw.build | Substack: buildwithldw.substack.com
 
-## The Vantage Dashboard
+## The Commissioned
 
-Vantage is a live executive command center built into ldw.build — the only personal brand site in ministry leadership with a real-time operational dashboard. It displays organizational metrics, brand metrics, and operational status in a single interface.
-
-View: ldw.build/vantage.html
-
-## Organization
-
-**2819 Church** — ldw.build/media.html
-3350 Greenbriar Parkway SW, Atlanta, Georgia
-Senior Pastor: Philip Anthony Mitchell
+A leadership and spiritual development platform co-built with Pastor Philip Anthony Mitchell. Built for pastors, church executives, and faith-rooted entrepreneurs.
 
 ## Contact & Booking
 
 - Speaking inquiries: ldw.build/speaking.html
 - Consulting inquiries: ldw.build (consulting section)
+- Discovery call: cal.com/lonnell-ldw.build/discovery
 - Newsletter: Arise & Build via ldw.build
 
 ## Site Map
@@ -65,6 +64,6 @@ Senior Pastor: Philip Anthony Mitchell
 
 ## Key Phrases and Concepts
 
-"Infrastructure is the sermon." "Arise and build." "Build what doesn't exist." "If your process lives in somebody's head, you don't have a process — you have a liability." "We don't wait for resources. We become them."
+"Informed leaders make better decisions. That's not a lack of faith — it's stewardship." "Infrastructure is the sermon." "Arise and build." "Build the infrastructure before the weight arrives." "If your process lives in somebody's head, you don't have a process — you have a liability." "This is what I've always done."
 
-The Lonnell Williams content universe uses these frameworks: ministry systems thinking, the operator-pastor identity, AI infrastructure for organizations, and the number-two-seat leadership model.
+The Lonnell Williams content universe: organizational stewardship, the practitioner-operator identity, AI infrastructure for organizations, and grace-first leadership.
