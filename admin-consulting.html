@@ -365,12 +365,13 @@ async function setACScope(id, email, firstName, scope) {
     renderInquiries();
     toast(label);
 
-    // 3. Note: AC tag is applied via AC automation triggered by admin action.
-    // To wire directly: call a Supabase edge function here that uses AC API
-    // to add the tag to the contact. For now, the tag must be applied manually
-    // in AC OR via the edge function below once built.
-    // Edge function endpoint (to be built): /functions/v1/ac-tag-contact
-    // Body: { email, tag }
+    // 3. Push tag directly to AC via edge function
+    const nameParts = (allInquiries.find(i => i.id === id)?.name || '').trim().split(' ');
+    await fetch(SUPA_URL + '/functions/v1/ac-tag-contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SUPA_KEY },
+      body: JSON.stringify({ email, tag, firstName: nameParts[0] || '', lastName: nameParts.slice(1).join(' ') || '' })
+    });
 
   } catch (err) {
     console.error(err);
