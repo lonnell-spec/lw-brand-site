@@ -67,6 +67,11 @@ body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sa
 .btn-danger { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; background: transparent; color: var(--concrete); border: 1px solid rgba(138,138,138,0.25); padding: 10px 18px; cursor: pointer; transition: all 0.2s; }
 .btn-danger:hover { color: var(--signal); border-color: rgba(232,93,58,0.4); }
 .btn-disabled { opacity: 0.35; pointer-events: none; }
+.btn-inscope { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; background: rgba(0,230,118,0.12); color: #00E676; border: 1px solid rgba(0,230,118,0.35); padding: 10px 18px; cursor: pointer; transition: opacity 0.2s; }
+.btn-inscope:hover { opacity: 0.8; }
+.btn-outscope { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; background: transparent; color: var(--signal); border: 1px solid rgba(232,93,58,0.35); padding: 10px 18px; cursor: pointer; transition: opacity 0.2s; }
+.btn-outscope:hover { opacity: 0.8; }
+.scope-divider { width: 1px; background: rgba(242,240,235,0.08); align-self: stretch; margin: 0 4px; }
 
 /* ── STATUS BADGES ── */
 .status-badge { display: inline-block; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; padding: 6px 12px; }
@@ -255,9 +260,15 @@ function renderInquiries() {
           ${status === 'new' ? `
             <button class="btn-primary" onclick="updateStatus('${inq.id}', 'contacted')">&#10003; Mark Contacted</button>
             <button class="btn-secondary" onclick="updateStatus('${inq.id}', 'active')">&#8594; Move to Active</button>
+            <div class="scope-divider"></div>
+            <button class="btn-inscope" onclick="setACScope('${inq.id}', '${inq.email}', '${(inq.name||'').split(' ')[0]}', 'in')">&#9650; In Scope</button>
+            <button class="btn-outscope" onclick="setACScope('${inq.id}', '${inq.email}', '${(inq.name||'').split(' ')[0]}', 'out')">&#9660; Out of Scope</button>
             <button class="btn-danger" onclick="updateStatus('${inq.id}', 'closed')">&#10005; Close</button>
           ` : status === 'contacted' ? `
             <button class="btn-primary" onclick="updateStatus('${inq.id}', 'active')">&#8594; Move to Active</button>
+            <div class="scope-divider"></div>
+            <button class="btn-inscope" onclick="setACScope('${inq.id}', '${inq.email}', '${(inq.name||'').split(' ')[0]}', 'in')">&#9650; In Scope</button>
+            <button class="btn-outscope" onclick="setACScope('${inq.id}', '${inq.email}', '${(inq.name||'').split(' ')[0]}', 'out')">&#9660; Out of Scope</button>
             <button class="btn-ghost" onclick="updateStatus('${inq.id}', 'new')">&#8617; Reset to New</button>
             <button class="btn-danger" onclick="updateStatus('${inq.id}', 'closed')">&#10005; Close</button>
           ` : status === 'active' ? `
@@ -325,6 +336,45 @@ async function saveNotes(id) {
   } catch (err) {
     console.error(err);
     toast('ERROR SAVING NOTES');
+  }
+}
+
+async function setACScope(id, email, firstName, scope) {
+  const tag = scope === 'in' ? 'consulting-in-scope' : 'consulting-out-of-scope';
+  const label = scope === 'in' ? 'IN SCOPE — DISCOVERY CALL EMAIL QUEUED' : 'OUT OF SCOPE — CLOSE EMAIL QUEUED';
+
+  try {
+    // 1. Update Supabase notes to log the decision
+    const idx = allInquiries.findIndex(i => i.id === id);
+    const existing = (allInquiries[idx] || {}).notes || '';
+    const timestamp = new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+    const newNote = existing + (existing ? '\n' : '') + `[${timestamp}] Marked ${scope === 'in' ? 'IN SCOPE' : 'OUT OF SCOPE'} — AC tag: ${tag}`;
+
+    await fetch(SUPA_URL + '/rest/v1/consulting_inquiries?id=eq.' + id, {
+      method: 'PATCH',
+      headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ notes: newNote, status: scope === 'in' ? 'active' : 'closed', updated_at: new Date().toISOString() })
+    });
+
+    // 2. Update local state
+    if (idx > -1) {
+      allInquiries[idx].notes = newNote;
+      allInquiries[idx].status = scope === 'in' ? 'active' : 'closed';
+    }
+
+    renderInquiries();
+    toast(label);
+
+    // 3. Note: AC tag is applied via AC automation triggered by admin action.
+    // To wire directly: call a Supabase edge function here that uses AC API
+    // to add the tag to the contact. For now, the tag must be applied manually
+    // in AC OR via the edge function below once built.
+    // Edge function endpoint (to be built): /functions/v1/ac-tag-contact
+    // Body: { email, tag }
+
+  } catch (err) {
+    console.error(err);
+    toast('ERROR — TRY AGAIN');
   }
 }
 
