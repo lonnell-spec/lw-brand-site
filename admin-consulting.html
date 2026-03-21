@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consulting — Admin | LDW</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://api.fontshare.com/v2/css?f[]=thunder@800,700,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --obsidian: #0D0D0D; --warm-black: #1A1714; --off-white: #F2F0EB;
+  --concrete: #8A8A8A; --copper: #C17F59; --copper-light: #D4956A;
+  --signal: #E85D3A;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+
+/* ── NAV ── */
+.site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; background: rgba(13,13,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(242,240,235,0.06); }
+.site-nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--off-white); }
+.site-nav-name { font-family: 'Thunder', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 1px; }
+.site-nav-links { display: flex; gap: 32px; align-items: center; }
+.site-nav-links a { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.3s; }
+.site-nav-links a:hover { color: var(--off-white); }
+
+/* ── LAYOUT ── */
+.admin-sub { padding: 64px 0 0; min-height: 100vh; }
+.admin-sub-header { padding: 48px 48px 32px; border-bottom: 1px solid rgba(242,240,235,0.06); }
+.admin-sub-back { display: inline-flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); text-decoration: none; margin-bottom: 24px; transition: color 0.3s; }
+.admin-sub-back:hover { color: var(--copper-light); }
+.admin-sub-eyebrow { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--copper); margin-bottom: 12px; }
+.admin-sub-title { font-family: 'Thunder', sans-serif; font-weight: 700; font-size: 42px; letter-spacing: 1px; line-height: 1; }
+.admin-sub-title .accent { color: var(--copper); }
+.admin-content { padding: 40px 48px 80px; max-width: 1200px; }
+.section-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--copper); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid rgba(193,127,89,0.2); }
+.inq-count { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--concrete); letter-spacing: 2px; margin-bottom: 16px; }
+
+/* ── INQUIRY CARDS ── */
+.inq-card { background: var(--warm-black); border: 1px solid rgba(242,240,235,0.06); margin-bottom: 16px; transition: border-color 0.2s; }
+.inq-card:hover { border-color: rgba(193,127,89,0.2); }
+.inq-card-header { display: grid; grid-template-columns: 1fr auto; align-items: start; padding: 24px 28px 20px; gap: 20px; }
+.inq-card-meta { display: flex; flex-wrap: wrap; gap: 6px 24px; align-items: center; margin-bottom: 10px; }
+.inq-name { font-family: 'Thunder', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 1px; color: var(--off-white); }
+.inq-org { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--copper); }
+.inq-detail { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--concrete); }
+.inq-detail a { color: var(--concrete); text-decoration: none; transition: color 0.2s; }
+.inq-detail a:hover { color: var(--copper); }
+.inq-service-tag { display: inline-block; font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; background: rgba(193,127,89,0.1); border: 1px solid rgba(193,127,89,0.25); color: var(--copper); }
+.inq-date { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--concrete); letter-spacing: 1px; text-align: right; }
+.inq-message-wrap { padding: 0 28px 0; }
+.inq-message { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; color: rgba(242,240,235,0.8); line-height: 1.75; white-space: pre-wrap; overflow: hidden; position: relative; }
+.inq-message.collapsed { max-height: 72px; }
+.inq-message.collapsed::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40px; background: linear-gradient(transparent, var(--warm-black)); pointer-events: none; }
+.inq-expand-btn { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--copper); background: none; border: none; cursor: pointer; padding: 10px 0 0; display: block; transition: opacity 0.2s; }
+.inq-expand-btn:hover { opacity: 0.7; }
+
+/* ── ACTIONS ── */
+.inq-actions { padding: 20px 28px 24px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(242,240,235,0.04); margin-top: 20px; }
+.inq-action-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn-primary { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; background: var(--copper); color: var(--obsidian); border: none; padding: 10px 18px; cursor: pointer; transition: opacity 0.2s; }
+.btn-primary:hover { opacity: 0.85; }
+.btn-secondary { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; background: transparent; color: var(--copper); border: 1px solid rgba(193,127,89,0.4); padding: 10px 18px; cursor: pointer; transition: opacity 0.2s; }
+.btn-secondary:hover { opacity: 0.7; }
+.btn-ghost { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; background: transparent; color: var(--concrete); border: 1px solid rgba(138,138,138,0.25); padding: 10px 18px; cursor: pointer; transition: opacity 0.2s; }
+.btn-ghost:hover { color: var(--off-white); border-color: rgba(242,240,235,0.3); }
+.btn-danger { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; background: transparent; color: var(--concrete); border: 1px solid rgba(138,138,138,0.25); padding: 10px 18px; cursor: pointer; transition: all 0.2s; }
+.btn-danger:hover { color: var(--signal); border-color: rgba(232,93,58,0.4); }
+.btn-disabled { opacity: 0.35; pointer-events: none; }
+
+/* ── STATUS BADGES ── */
+.status-badge { display: inline-block; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; padding: 6px 12px; }
+.status-new       { background: rgba(242,240,235,0.04); color: var(--off-white); border: 1px solid rgba(242,240,235,0.15); }
+.status-contacted { background: rgba(193,127,89,0.1); color: var(--copper); border: 1px solid rgba(193,127,89,0.3); }
+.status-active    { background: rgba(0,230,118,0.08); color: #00E676; border: 1px solid rgba(0,230,118,0.3); }
+.status-closed    { background: rgba(138,138,138,0.06); color: var(--concrete); border: 1px solid rgba(138,138,138,0.2); }
+
+/* ── NOTES INPUT ── */
+.inq-notes-wrap { padding: 0 28px 20px; }
+.inq-notes-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); margin-bottom: 8px; display: block; }
+.inq-notes-input { width: 100%; background: rgba(13,13,13,0.6); border: 1px solid rgba(242,240,235,0.08); color: var(--off-white); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300; padding: 12px 14px; resize: vertical; min-height: 72px; outline: none; transition: border-color 0.2s; box-sizing: border-box; }
+.inq-notes-input:focus { border-color: rgba(193,127,89,0.4); }
+.inq-notes-input::placeholder { color: var(--concrete); }
+.inq-notes-save { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; background: transparent; color: var(--concrete); border: 1px solid rgba(138,138,138,0.2); padding: 7px 14px; cursor: pointer; margin-top: 8px; transition: all 0.2s; }
+.inq-notes-save:hover { color: var(--copper); border-color: rgba(193,127,89,0.3); }
+
+/* ── EMPTY STATE ── */
+.inq-empty-state { text-align: center; padding: 80px 40px; }
+.inq-empty-state p { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--concrete); letter-spacing: 2px; text-transform: uppercase; }
+
+/* ── TOAST ── */
+#toast { position: fixed; bottom: 32px; right: 32px; background: var(--copper); color: var(--obsidian); font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 14px 20px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 9999; }
+
+/* ── FILTER BAR ── */
+.filter-bar { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+.filter-btn { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; background: transparent; color: var(--concrete); border: 1px solid rgba(138,138,138,0.2); padding: 7px 14px; cursor: pointer; transition: all 0.2s; }
+.filter-btn:hover, .filter-btn.active { color: var(--copper); border-color: rgba(193,127,89,0.4); }
+
+/* ── FOOTER ── */
+.admin-sub-footer { padding: 24px 48px; border-top: 1px solid rgba(242,240,235,0.06); display: flex; justify-content: space-between; align-items: center; }
+.admin-sub-footer a { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--concrete); text-decoration: none; transition: color 0.3s; }
+.admin-sub-footer a:hover { color: var(--off-white); }
+.admin-sub-footer span { font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(138,138,138,0.5); }
+
+@media (max-width: 768px) {
+  .site-nav { padding: 0 24px; }
+  .admin-sub-header { padding: 32px 24px 24px; }
+  .admin-sub-title { font-size: 32px; }
+  .admin-content { padding: 24px 24px 60px; }
+  .inq-card-header { grid-template-columns: 1fr; }
+  .inq-date { text-align: left; }
+  .admin-sub-footer { padding: 16px 24px; flex-direction: column; gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/" class="site-nav-brand">
+    <svg width="28" height="28" viewBox="0 0 240 240" fill="none"><polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/><polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/><polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/></svg>
+    <span class="site-nav-name">LONNELL WILLIAMS</span>
+  </a>
+  <div class="site-nav-links"><a href="/admin.html">Portal</a></div>
+</nav>
+
+<div class="admin-sub">
+  <div class="admin-sub-header">
+    <a href="/admin.html" class="admin-sub-back">&larr; Back to Portal</a>
+    <div class="admin-sub-eyebrow">&#9670; Admin / Consulting</div>
+    <div class="admin-sub-title">CONSULTING<span class="accent">.</span></div>
+  </div>
+
+  <div class="admin-content">
+    <div class="section-label">CONSULTING INQUIRIES</div>
+    <div class="inq-count" id="inq-count">Loading...</div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+      <button class="filter-btn" onclick="setFilter('new', this)">New</button>
+      <button class="filter-btn" onclick="setFilter('contacted', this)">Contacted</button>
+      <button class="filter-btn" onclick="setFilter('active', this)">Active</button>
+      <button class="filter-btn" onclick="setFilter('closed', this)">Closed</button>
+    </div>
+
+    <div id="inq-list">
+      <div class="inq-empty-state"><p>Loading inquiries...</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="admin-sub-footer">
+  <a href="/admin.html">&larr; Back to Portal</a>
+  <span>ldw.build — Admin Portal — v2.0</span>
+  <a href="#" onclick="sessionStorage.removeItem('ldw_admin'); window.location.href='/admin.html'; return false;">Log Out</a>
+</div>
+
+<div id="toast"></div>
+
+<script>
+if (sessionStorage.getItem('ldw_admin') !== 'true') { window.location.href = '/admin.html'; }
+
+const SUPA_URL = 'https://riqdcirsmckubkdfbtoj.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM';
+
+let allInquiries = [];
+let currentFilter = 'all';
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.opacity = '1';
+  setTimeout(() => { t.style.opacity = '0'; }, 2800);
+}
+
+function formatDate(iso) {
+  const d = new Date(iso);
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) +
+    ' — ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+}
+
+function statusBadge(status) {
+  const map = {
+    new:       ['NEW INQUIRY',  'status-new'],
+    contacted: ['CONTACTED',    'status-contacted'],
+    active:    ['ACTIVE CLIENT','status-active'],
+    closed:    ['CLOSED',       'status-closed'],
+  };
+  const [label, cls] = map[status] || ['NEW INQUIRY', 'status-new'];
+  return `<span class="status-badge ${cls}">${label}</span>`;
+}
+
+function setFilter(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderInquiries();
+}
+
+function renderInquiries() {
+  const filtered = currentFilter === 'all'
+    ? allInquiries
+    : allInquiries.filter(i => (i.status || 'new') === currentFilter);
+
+  const total = allInquiries.filter(i => (i.status || 'new') !== 'closed').length;
+  document.getElementById('inq-count').textContent =
+    `${total} active inquir${total === 1 ? 'y' : 'ies'} — ${allInquiries.length} total`;
+
+  const list = document.getElementById('inq-list');
+
+  if (filtered.length === 0) {
+    list.innerHTML = `<div class="inq-empty-state"><p>${currentFilter === 'all' ? 'No inquiries yet.' : 'No ' + currentFilter + ' inquiries.'}</p></div>`;
+    return;
+  }
+
+  list.innerHTML = filtered.map(inq => {
+    const status = inq.status || 'new';
+    const msgPreview = (inq.message || '').length > 200;
+    const safeMsg = (inq.message || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const safeNotes = (inq.notes || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+    return `
+    <div class="inq-card" id="card-${inq.id}">
+      <div class="inq-card-header">
+        <div>
+          <div class="inq-card-meta">
+            <span class="inq-name">${inq.name || '—'}</span>
+            ${inq.organization ? `<span class="inq-org">${inq.organization}</span>` : ''}
+            ${inq.service_type ? `<span class="inq-service-tag">${inq.service_type}</span>` : ''}
+          </div>
+          <div style="display:flex; gap:20px; flex-wrap:wrap;">
+            ${inq.email ? `<span class="inq-detail"><a href="mailto:${inq.email}">${inq.email}</a></span>` : ''}
+            <span class="inq-detail">${formatDate(inq.created_at)}</span>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
+          <div id="badge-${inq.id}">${statusBadge(status)}</div>
+        </div>
+      </div>
+
+      ${inq.message ? `
+      <div class="inq-message-wrap">
+        <div class="inq-message ${msgPreview ? 'collapsed' : ''}" id="msg-${inq.id}">${safeMsg}</div>
+        ${msgPreview ? `<button class="inq-expand-btn" onclick="expandMsg('${inq.id}', this)">&#9660; Read Full Message</button>` : ''}
+      </div>
+      ` : ''}
+
+      <div class="inq-notes-wrap" style="margin-top:20px;">
+        <label class="inq-notes-label" for="notes-${inq.id}">&#9670; Internal Notes</label>
+        <textarea class="inq-notes-input" id="notes-${inq.id}" placeholder="Add context, next steps, or reminders...">${safeNotes}</textarea>
+        <button class="inq-notes-save" onclick="saveNotes('${inq.id}')">Save Notes</button>
+      </div>
+
+      <div class="inq-actions" id="actions-${inq.id}">
+        <div class="inq-action-btns">
+          ${status === 'new' ? `
+            <button class="btn-primary" onclick="updateStatus('${inq.id}', 'contacted')">&#10003; Mark Contacted</button>
+            <button class="btn-secondary" onclick="updateStatus('${inq.id}', 'active')">&#8594; Move to Active</button>
+            <button class="btn-danger" onclick="updateStatus('${inq.id}', 'closed')">&#10005; Close</button>
+          ` : status === 'contacted' ? `
+            <button class="btn-primary" onclick="updateStatus('${inq.id}', 'active')">&#8594; Move to Active</button>
+            <button class="btn-ghost" onclick="updateStatus('${inq.id}', 'new')">&#8617; Reset to New</button>
+            <button class="btn-danger" onclick="updateStatus('${inq.id}', 'closed')">&#10005; Close</button>
+          ` : status === 'active' ? `
+            <button class="btn-ghost" onclick="updateStatus('${inq.id}', 'contacted')">&#8617; Back to Contacted</button>
+            <button class="btn-danger" onclick="updateStatus('${inq.id}', 'closed')">&#10005; Close Engagement</button>
+          ` : `
+            <button class="btn-ghost" onclick="updateStatus('${inq.id}', 'new')">&#8617; Reopen</button>
+          `}
+          <a href="mailto:${inq.email}?subject=Re: Your Consulting Inquiry" class="btn-ghost" style="text-decoration:none; display:inline-block;">&#9993; Reply</a>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function expandMsg(id, btn) {
+  const msg = document.getElementById('msg-' + id);
+  msg.classList.remove('collapsed');
+  btn.remove();
+}
+
+async function updateStatus(id, newStatus) {
+  try {
+    const res = await fetch(SUPA_URL + '/rest/v1/consulting_inquiries?id=eq.' + id, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify({ status: newStatus, updated_at: new Date().toISOString() })
+    });
+
+    if (!res.ok) throw new Error('Update failed');
+
+    // Update local data
+    const idx = allInquiries.findIndex(i => i.id === id);
+    if (idx > -1) allInquiries[idx].status = newStatus;
+
+    renderInquiries();
+    toast('STATUS UPDATED');
+  } catch (err) {
+    console.error(err);
+    toast('ERROR — TRY AGAIN');
+  }
+}
+
+async function saveNotes(id) {
+  const notes = document.getElementById('notes-' + id).value;
+  try {
+    const res = await fetch(SUPA_URL + '/rest/v1/consulting_inquiries?id=eq.' + id, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ notes, updated_at: new Date().toISOString() })
+    });
+    if (!res.ok) throw new Error('Save failed');
+    const idx = allInquiries.findIndex(i => i.id === id);
+    if (idx > -1) allInquiries[idx].notes = notes;
+    toast('NOTES SAVED');
+  } catch (err) {
+    console.error(err);
+    toast('ERROR SAVING NOTES');
+  }
+}
+
+async function loadInquiries() {
+  try {
+    const res = await fetch(
+      SUPA_URL + '/rest/v1/consulting_inquiries?order=created_at.desc&select=*',
+      {
+        headers: {
+          'apikey': SUPA_KEY,
+          'Authorization': 'Bearer ' + SUPA_KEY
+        }
+      }
+    );
+    if (!res.ok) throw new Error('Fetch failed');
+    allInquiries = await res.json();
+    renderInquiries();
+  } catch (err) {
+    console.error(err);
+    document.getElementById('inq-list').innerHTML =
+      `<div class="inq-empty-state"><p>Error loading inquiries. Check console.</p></div>`;
+    document.getElementById('inq-count').textContent = 'Error loading data';
+  }
+}
+
+loadInquiries();
+</script>
+</body>
+</html>
