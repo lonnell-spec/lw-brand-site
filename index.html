@@ -2774,16 +2774,19 @@ setLoading(btnEl, true);
 
           if (error) throw error;
 
-          // Sync to ActiveCampaign
-          fetch(SUPABASE_URL + '/functions/v1/sync-activecampaign', {
+          // Sync to ActiveCampaign via sync-email
+          fetch(SUPABASE_URL + '/functions/v1/sync-email', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
             body: JSON.stringify({
-              email: email.toLowerCase(),
-              first_name: name.split(' ')[0],
-              last_name: name.split(' ').slice(1).join(' ') || '',
-              tags: ['consulting-inquiry', 'source-' + serviceType],
-              list_id: 1
+              type: 'consulting_inquiry',
+              record: {
+                name: name,
+                email: email.toLowerCase(),
+                organization: organization || null,
+                service_type: serviceType,
+                status: 'new'
+              }
             })
           }).catch(function(e) { console.error('AC sync error (consulting):', e); });
 
