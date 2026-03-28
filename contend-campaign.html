@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CONTEND — Campaign Strategy 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --obsidian: #0D0D0D;
+    --crimson: #8B1A1A;
+    --crimson-mid: #C0392B;
+    --crimson-glow: #E84040;
+    --gold: #C9A84C;
+    --gold-light: #F0D08A;
+    --off-white: #F2F0EB;
+    --muted: #8A8880;
+    --card-bg: #161412;
+    --card-border: #2A2725;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--obsidian); color: var(--off-white); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; }
+  .campaign-header { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 80px 60px 60px; background: #0A0808; }
+  .header-eyebrow { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.2em; color: var(--crimson-glow); text-transform: uppercase; margin-bottom: 28px; }
+  .header-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(120px, 22vw, 220px); letter-spacing: -2px; line-height: 0.85; color: var(--off-white); }
+  .header-title span.accent { color: var(--crimson-glow); }
+  .header-subtitle-row { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--card-border); gap: 40px; flex-wrap: wrap; }
+  .header-author { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--muted); }
+  .header-author strong { color: var(--off-white); font-weight: 700; display: block; font-size: 16px; margin-bottom: 4px; }
+  .badge { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; padding: 5px 12px; border: 1px solid var(--card-border); color: var(--muted); display: inline-block; margin: 2px; }
+  .badge.hot { border-color: var(--crimson-mid); color: var(--crimson-glow); }
+  .badge.gold-badge { border-color: var(--gold); color: var(--gold); }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+  section { padding: 80px 0; }
+  .section-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--crimson-mid); margin-bottom: 12px; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 2px; line-height: 1; color: var(--off-white); margin-bottom: 40px; }
+  .divider { height: 1px; background: var(--card-border); margin: 0 60px; }
+  .assessment-strip { background: #100C0B; border-top: 1px solid var(--crimson-mid); border-bottom: 1px solid var(--card-border); padding: 40px 60px; }
+  .assessment-strip .strip-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; }
+  .assessment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--card-border); }
+  .assessment-cell { background: #100C0B; padding: 28px 24px; }
+  .assessment-cell .cell-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 10px; }
+  .assessment-cell.green .cell-label { color: #4CAF50; }
+  .assessment-cell.yellow .cell-label { color: var(--gold); }
+  .assessment-cell p { font-size: 13px; line-height: 1.6; color: var(--muted); }
+  .assessment-cell p strong { color: var(--off-white); font-weight: 500; }
+  .card { background: var(--card-bg); border: 1px solid var(--card-border); padding: 32px; }
+  .card-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .card-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+  .card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 1px; color: var(--off-white); margin-bottom: 12px; }
+  .card p { font-size: 14px; line-height: 1.7; color: var(--muted); }
+  .card p strong { color: var(--off-white); font-weight: 500; }
+  .stat-number { font-family: 'Bebas Neue', sans-serif; font-size: 64px; letter-spacing: 1px; line-height: 1; color: var(--off-white); }
+  .stat-unit { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.15em; color: var(--crimson-mid); margin-top: 4px; text-transform: uppercase; }
+  .platform-row { display: flex; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--card-border); gap: 20px; }
+  .platform-row:last-child { border-bottom: none; }
+  .platform-name { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); width: 160px; flex-shrink: 0; }
+  .platform-bar-wrap { flex: 1; height: 6px; background: #2A2725; }
+  .platform-bar-fill { height: 100%; background: var(--crimson-mid); }
+  .platform-bar-fill.gold { background: var(--gold); }
+  .platform-count { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--off-white); font-weight: 700; width: 80px; text-align: right; }
+  .billboard-section
