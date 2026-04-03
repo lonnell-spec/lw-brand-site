@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — LDW.Build</title>
+<link rel="preload" href="https://api.fontshare.com/v2/css?f[]=thunder@800,700,600&display=swap" as="style">
+<link href="https://api.fontshare.com/v2/css?f[]=thunder@800,700,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --obsidian: #0D0D0D;
+    --warm-black: #1A1714;
+    --copper: #C17F59;
+    --copper-light: #D4A07A;
+    --signal: #E85D3A;
+    --off-white: #F2F0EB;
+    --concrete: #A0A0A0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--obsidian);
+    color: var(--off-white);
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--copper);
+    outline-offset: 3px;
+  }
+
+  /* ===== NAV ===== */
+  .site-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+    padding: 0 48px; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(13,13,13,0.92);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(242,240,235,0.04);
+  }
+  .site-nav-brand {
+    display: flex; align-items: center; gap: 14px; text-decoration: none;
+  }
+  .site-nav-name {
+    font-family: 'Thunder', sans-serif;
+    font-weight: 700;
+    font-size: 16px; letter-spacing: 1px; color: #F2F0EB;
+  }
+  .site-nav-links {
+    display: flex; align-items: center; gap: 32px;
+  }
+  .site-nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    text-decoration: none; color: var(--concrete); transition: color 0.3s ease;
+  }
+  .site-nav-links a:hover { color: #F2F0EB; }
+  .site-nav-btn {
+    display: none; background: none; border: none; cursor: pointer; padding: 8px;
+  }
+  .site-nav-btn span {
+    display: block; width: 22px; height: 2px; background: #F2F0EB; margin: 5px 0;
+  }
+  @media (max-width: 768px) {
+    .site-nav { padding: 0 24px; }
+    .site-nav-links {
+      display: none; position: fixed; top: 64px; left: 0; right: 0;
+      background: rgba(13,13,13,0.96); flex-direction: column; padding: 24px; gap: 20px;
+    }
+    .site-nav-links.open { display: flex; }
+    .site-nav-btn { display: block; }
+  }
+
+  /* ===== 404 CONTENT ===== */
+  .error-page {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .error-page::before {
+    content: '';
+    position: absolute;
+    top: -20%; right: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(193,127,89,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .error-page::after {
+    content: '';
+    position: absolute;
+    bottom: -30%; left: -15%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(232,93,58,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .error-content {
+    text-align: center;
+    max-width: 600px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .error-code {
+    font-family: 'Thunder', sans-serif;
+    font-weight: 700;
+    font-size: clamp(120px, 20vw, 200px);
+    color: rgba(193,127,89,0.08);
+    line-height: 0.9;
+    letter-spacing: 8px;
+    margin-bottom: -20px;
+    user-select: none;
+  }
+
+  .error-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 20px;
+  }
+
+  .error-title {
+    font-family: 'Thunder', sans-serif;
+    font-weight: 700;
+    font-size: clamp(36px, 6vw, 60px);
+    letter-spacing: 3px;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .error-title .accent {
+    color: var(--signal);
+  }
+
+  .error-desc {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--concrete);
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+
+  .error-cta-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--copper);
+    color: var(--obsidian);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 16px 32px;
+    transition: all 0.3s ease;
+  }
+  .btn-primary:hover {
+    background: var(--copper-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(193,127,89,0.25);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--off-white);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 16px 32px;
+    border: 1px solid rgba(242,240,235,0.12);
+    transition: all 0.3s ease;
+  }
+  .btn-secondary:hover {
+    border-color: var(--copper);
+    color: var(--copper);
+  }
+
+  .error-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+  }
+
+  .error-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--concrete);
+    transition: color 0.3s ease;
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+  }
+  .error-links a:hover {
+    color: var(--copper);
+    border-bottom-color: var(--copper);
+  }
+
+  /* ===== FOOTER ===== */
+  .footer-404 {
+    padding: 24px 48px;
+    border-top: 1px solid rgba(242,240,235,0.04);
+    text-align: center;
+  }
+  .footer-404 span {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: rgba(242,240,235,0.2);
+  }
+
+  @media (max-width: 480px) {
+    .error-page { padding: 100px 20px 60px; }
+    .error-cta-row { flex-direction: column; }
+    .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav" aria-label="Main navigation">
+  <a href="/" class="site-nav-brand">
+    <svg width="28" height="28" viewBox="0 0 240 240" fill="none" aria-hidden="true">
+      <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
+      <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
+      <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/>
+    </svg>
+    <span class="site-nav-name">LONNELL WILLIAMS</span>
+  </a>
+  <div class="site-nav-links" id="site-nav-menu" role="menu">
+    <a href="/" role="menuitem">Home</a>
+    <a href="/speaking" role="menuitem">Speaking</a>
+    <a href="/books" role="menuitem">Books</a>
+    <a href="/media" role="menuitem">Media</a>
+    <a href="/vantage" role="menuitem">Vantage</a>
+  </div>
+  <button class="site-nav-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-nav-menu" onclick="var l=document.getElementById('site-nav-menu');var isOpen=l.classList.toggle('open');this.setAttribute('aria-expanded',isOpen);">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- 404 CONTENT -->
+<main class="error-page">
+  <div class="error-content">
+    <div class="error-code">404</div>
+    <div class="error-eyebrow">Page Not Found</div>
+    <h1 class="error-title">THIS PATH<br>DOESN'T EXIST<span class="accent">.</span></h1>
+    <p class="error-desc">The page you're looking for isn't here — but there's plenty to build on. Head back to the foundation.</p>
+
+    <div class="error-cta-row">
+      <a href="/" class="btn-primary">Back to Home</a>
+      <a href="/speaking" class="btn-secondary">Book to Speak</a>
+    </div>
+
+    <div class="error-links">
+      <a href="/books">Books</a>
+      <a href="/media">Media</a>
+      <a href="/vantage">Vantage</a>
+      <a href="https://buildwithldw.substack.com" target="_blank" rel="noopener">Newsletter</a>
+    </div>
+  </div>
+</main>
+
+<footer class="footer-404">
+  <span>&copy; 2026 LONNELL WILLIAMS. ALL RIGHTS RESERVED.</span>
+</footer>
+
+</body>
+</html>

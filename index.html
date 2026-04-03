@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://ldw.build/">
 <title>Lonnell Williams — Builder. Executive Pastor. Author. Speaker.</title>
+<link rel="preload" href="https://api.fontshare.com/v2/css?f[]=thunder@800,700,600&display=swap" as="style">
 <link href="https://api.fontshare.com/v2/css?f[]=thunder@800,700,600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="https://riqdcirsmckubkdfbtoj.supabase.co/storage/v1/object/public/site-images/photos/IMG_3385.jpeg">
 <style>
   :root {
     --obsidian: #0D0D0D;
@@ -13,8 +15,13 @@
     --copper: #C17F59;
     --copper-light: #D4A07A;
     --signal: #E85D3A;
+    --signal-success: #00E676;
     --off-white: #F2F0EB;
-    --concrete: #8A8A8A;
+    --concrete: #A0A0A0;
+    --text-muted: #888888;
+    --text-faint: rgba(242,240,235,0.35);
+    --section-pad-y: 120px;
+    --section-pad-y-sm: 80px;
     --aena-cyan: #1FAABD;
     --aena-red: #E23636;
     --aena-yellow: #F5C518;
@@ -31,6 +38,61 @@
     font-family: 'DM Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+  }
+
+  /* ===== SKIP TO CONTENT (A11y) ===== */
+  .skip-to-content {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    background: var(--copper);
+    color: var(--obsidian);
+    padding: 12px 24px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    z-index: 99999;
+    transition: top 0.3s ease;
+    border-radius: 0 0 2px 2px;
+  }
+  .skip-to-content:focus {
+    top: 0;
+    outline: none;
+  }
+
+  /* ===== FOCUS-VISIBLE (A11y) ===== */
+  :focus-visible {
+    outline: 2px solid var(--copper);
+    outline-offset: 3px;
+  }
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* ===== SCROLL REVEAL ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== SHIMMER SKELETON ===== */
+  .skeleton {
+    background: linear-gradient(90deg, rgba(193,127,89,0.04) 25%, rgba(193,127,89,0.08) 50%, rgba(193,127,89,0.04) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+    border-radius: 2px;
+  }
+  @keyframes skeleton-shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
   }
 
   /* ===== NAV ===== */
@@ -223,7 +285,7 @@
     transition: all 0.3s ease;
   }
 
-  .btn-primary:hover { background: var(--copper-light); transform: translateY(-2px); }
+  .btn-primary:hover { background: var(--copper-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(193,127,89,0.25); filter: brightness(1.08); }
 
   .btn-secondary {
     display: inline-flex;
@@ -241,7 +303,7 @@
     transition: all 0.3s ease;
   }
 
-  .btn-secondary:hover { border-color: var(--copper); color: var(--copper); }
+  .btn-secondary:hover { border-color: var(--copper); color: var(--copper); box-shadow: 0 4px 16px rgba(193,127,89,0.12); }
 
   .hero-email {
     display: flex;
@@ -419,7 +481,7 @@
     line-height: 1.8;
     max-width: 580px;
     margin-bottom: 50px;
-    color: #666;
+    color: var(--text-muted);
   }
 
   .section-dark .section-desc,
@@ -488,7 +550,7 @@
     font-size: 15px;
     font-weight: 300;
     line-height: 1.8;
-    color: #555;
+    color: var(--text-muted);
     margin-bottom: 24px;
   }
 
@@ -606,7 +668,7 @@
   .topic-desc {
     font-size: 13px;
     font-weight: 300;
-    color: #777;
+    color: var(--text-muted);
     line-height: 1.6;
   }
 
@@ -695,7 +757,7 @@
     .notify-btn { background: var(--aena-cyan); color: #0D0D0D; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; padding: 11px 18px; border: none; cursor: pointer; font-weight: 700; white-space: nowrap; transition: background 0.3s; }
     .notify-btn:hover { background: #25BDD1; }
     .notify-btn:disabled { background: var(--concrete); cursor: not-allowed; }
-    .notify-success { display: none; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: #00E676; margin-top: 12px; }
+    .notify-success { display: none; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--signal-success); margin-top: 12px; }
 
     /* ── VANTAGE CTA BAND ── */
     .vantage-band { border-top: 1px solid rgba(242,240,235,0.06); border-bottom: 1px solid rgba(242,240,235,0.06); padding: 80px 60px; background: var(--warm-black); }
@@ -740,6 +802,9 @@
 
 
     /* ── STAFF COVER — ANTON FULL COLOR ── */
+  .book-cover {
+    cursor: pointer;
+  }
   .book-cover:hover {
     transform: perspective(800px) rotateY(-5deg) rotateX(2deg);
     box-shadow: 20px 20px 60px rgba(0,0,0,0.3);
@@ -1693,7 +1758,7 @@
 .site-nav-links a {
   font-family: 'Space Mono', monospace;
   font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
-  text-decoration: none; color: #8A8A8A; transition: color 0.3s ease;
+  text-decoration: none; color: var(--concrete); transition: color 0.3s ease;
 }
 .site-nav-links a:hover { color: #F2F0EB; }
 .site-nav-btn {
@@ -1973,26 +2038,27 @@
 <link rel="stylesheet" href="/shared.css">
 </head>
 <body>
+<a href="#main-content" class="skip-to-content">Skip to content</a>
 <!-- ===== SITE NAV ===== -->
-<nav class="site-nav">
+<nav class="site-nav" aria-label="Main navigation">
   <a href="/" class="site-nav-brand">
-    <svg width="28" height="28" viewBox="0 0 240 240" fill="none">
+    <svg width="28" height="28" viewBox="0 0 240 240" fill="none" aria-hidden="true">
       <polygon points="40,180 120,130 120,55 40,105" fill="#F2F0EB"/>
       <polygon points="120,55 200,105 200,180 120,130" fill="#C17F59"/>
       <polygon points="40,180 120,230 200,180 120,130" fill="rgba(242,240,235,0.06)"/>
     </svg>
     <span class="site-nav-name">LONNELL WILLIAMS</span>
   </a>
-  <div class="site-nav-links" id="navLinks">
-    <a href="#about">About</a>
-    <a href="/speaking.html">Speaking</a>
-    <a href="/books.html">Books</a>
-    <a href="#consulting">Work With Me</a>
-    <a href="/media.html">Media</a>
-    <a href="/articles.html">Articles</a>
-    <a href="/vantage.html">Vantage</a>
+  <div class="site-nav-links" id="navLinks" role="menu">
+    <a href="#about" role="menuitem">About</a>
+    <a href="/speaking.html" role="menuitem">Speaking</a>
+    <a href="/books.html" role="menuitem">Books</a>
+    <a href="#consulting" role="menuitem">Consulting</a>
+    <a href="/media.html" role="menuitem">Media</a>
+    <a href="/articles.html" role="menuitem">Articles</a>
+    <a href="/vantage.html" role="menuitem">Vantage</a>
   </div>
-  <button class="site-nav-btn" onclick="var l=document.querySelector('.site-nav-links');l.classList.toggle('open');">
+  <button class="site-nav-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks" onclick="var l=document.getElementById('navLinks');var isOpen=l.classList.toggle('open');this.setAttribute('aria-expanded',isOpen);">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -2002,29 +2068,18 @@
 
 
   <!-- ===== HERO ===== -->
-  <section class="hero">
+  <section class="hero" id="main-content">
     <div class="hero-inner">
       <div class="hero-content">
         <div class="hero-scripture">Nehemiah 2:20</div>
-        <h1 class="hero-title">ARISE<br>AND BUILD<span class="accent">.</span></h1>
+        <h1 class="hero-title">ARISE<br>AND BUILD<span class="accent" aria-hidden="true">.</span></h1>
         <p class="hero-tagline">For the church leader whose organization is growing but breaking. The Christian executive who keeps faith and work in separate compartments. The builder motivated by calling, not just opportunity.<br><br>Most organizations don't fail from too little vision. They fail from too little infrastructure.<br><br>The data and the Spirit aren't in competition. That's stewardship — and it's what this is built on.</p>
         <div class="hero-cta-row">
           <a href="#speaking" class="btn-primary">Book to Speak</a>
           <a href="/books.html" class="btn-secondary">The Books</a>
         </div>
-        <div class="hero-subscribe-divider" id="hero-subscribe-form">
-          <span class="hero-subscribe-label">or stay in the loop</span>
-          <div class="hero-email">
-          <input type="email" id="hero-email-input" placeholder="Enter your email" required>
-          <button type="button" id="hero-subscribe-btn">Subscribe</button>
-          <div id="hero-subscribe-msg" style="display:none; margin-top:8px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:1px;"></div>
-          <div class="thank-you-box" id="hero-thank-you">
-            <div class="ty-icon">✦</div>
-            <div class="ty-title">YOU'RE IN</div>
-            <div class="ty-subtitle">Welcome to the builders.</div>
-          </div>
-          </div><!-- end hero-email -->
-        </div><!-- end hero-subscribe-divider -->
+
+
       </div>
       <div class="hero-right">
         <div class="hero-photo-frame">
@@ -2062,6 +2117,8 @@
     </div>
   </section>
 
+  <!-- ===== COPPER DIVIDER ===== -->
+  <div style="max-width:120px; margin:0 auto; height:2px; background:var(--copper); opacity:0.35;"></div>
 
   <!-- ===== WHAT I CARRY ===== -->
   <div class="section-dark section-full">
@@ -2265,15 +2322,12 @@
     </div><!-- /section-inner -->
   </div><!-- /section -->
 
-    HTMLEOF
-echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
-
     <!-- ===== CONSULTING ===== -->
   <div class="section-dark section-full" id="consulting">
     <div class="section-inner">
       <div class="consult-intro-row">
         <div class="consult-intro-left">
-          <div class="section-label">Work With Me</div>
+          <div class="section-label">Consulting</div>
           <div class="section-title" style="color:var(--off-white);">CONSULTING &<br>COACHING<span class="accent">.</span></div>
           <div class="section-desc">For leaders, organizations, and churches that need an operator — not another consultant with a slide deck.</div>
           <div style="margin-top:16px;">
@@ -2406,6 +2460,18 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
           </div>
         </div>
       </div>
+
+      <!-- ===== CAL.COM BOOKING ===== -->
+      <div style="margin-top:60px; padding-top:48px; border-top:1px solid rgba(193,127,89,0.15);">
+        <div style="text-align:center; margin-bottom:32px;">
+          <div class="section-label" style="color:var(--copper);">Book a Call</div>
+          <div style="font-family:'Thunder',sans-serif; font-weight:700; font-size:32px; letter-spacing:3px; text-transform:uppercase; color:var(--off-white); margin-top:8px;">SCHEDULE A CONSULTATION<span class="accent">.</span></div>
+          <p style="font-family:'DM Sans',sans-serif; font-size:15px; color:var(--concrete); max-width:520px; margin:12px auto 0; line-height:1.75;">Skip the form. Book a 30-minute consultation directly. Come with your challenge — leave with a framework.</p>
+        </div>
+        <div id="cal-embed" style="width:100%; min-height:400px; overflow:hidden; border-radius:2px;"></div>
+      </div>
+      <!-- ===== END CAL.COM ===== -->
+
     </div>
   </div>
 
@@ -2629,7 +2695,7 @@ echo "Written: $(wc -c < /tmp/new_books_section.html) chars"
           <a href="#about" class="footer-link">About</a>
           <a href="#speaking" class="footer-link">Speaking</a>
           <a href="/books.html" class="footer-link">Books</a>
-          <a href="#consulting" class="footer-link">Work With Me</a>
+          <a href="#consulting" class="footer-link">Consulting</a>
           <a href="#newsletter" class="footer-link">Newsletter</a>
           <a href="/media.html" class="footer-link">Media</a>
           <a href="/vantage.html" class="footer-link">Vantage</a>
@@ -3452,8 +3518,24 @@ setLoading(btnEl, true);
       try { localStorage.setItem('ldw_popup_seen', '1'); } catch(e) {}
     }
 
-    // Fire immediately on page load
-    setTimeout(showPopup, 3000);
+    // Show popup after 40% scroll or 12 seconds — whichever comes first
+    var popupFired = false;
+    function triggerPopup() {
+      if (popupFired) return;
+      popupFired = true;
+      showPopup();
+      window.removeEventListener('scroll', checkScroll);
+      clearTimeout(popupTimer);
+    }
+    function checkScroll() {
+      var scrollPos = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight > 0 && (scrollPos / docHeight) >= 0.4) {
+        triggerPopup();
+      }
+    }
+    window.addEventListener('scroll', checkScroll, { passive: true });
+    var popupTimer = setTimeout(triggerPopup, 12000);
 
     // Close handlers
     closeBtn.addEventListener('click', hidePopup);
@@ -3683,6 +3765,7 @@ setLoading(btnEl, true);
       alert('Something went wrong. Please try again.');
     }
   }
+
   
   // ===== VANTAGE SCROLL ANIMATIONS =====
   (function() {
@@ -3775,6 +3858,118 @@ setLoading(btnEl, true);
     }
   })();
 </script>
+
+  <!-- ===== SCROLL REVEAL + MOBILE SECTION TRANSITION ===== -->
+  <style>
+    /* F7: Mobile section transition — smooth the About→What I Carry gap */
+    @media (max-width: 768px) {
+      .section-offwhite + .section-dark,
+      .section-light + .section-dark,
+      .section + .section-dark {
+        margin-top: -1px;
+      }
+      #about {
+        padding-bottom: 60px !important;
+      }
+      /* Add a subtle gradient fade at bottom of light sections before dark */
+      #about::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: linear-gradient(to bottom, transparent, var(--obsidian));
+        pointer-events: none;
+      }
+    }
+    
+    /* Stagger delay classes for reveal animations */
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+    .reveal-delay-6 { transition-delay: 0.6s; }
+  </style>
+
+  <script>
+  // ── Scroll Reveal: Intersection Observer ──────────────────────────
+  (function() {
+    // Add .reveal class to target elements
+    var selectors = [
+      '.section-label',
+      '.section-title',
+      '.topic-card',
+      '.strength-row',
+      '.book-row',
+      '.offer-item',
+      '.consult-stat',
+      '.vantage-feat',
+      '.ig-cell',
+      '.yt-featured',
+      '.audit-gate',
+      '.newsletter-box'
+    ];
+
+    selectors.forEach(function(sel) {
+      var els = document.querySelectorAll(sel);
+      els.forEach(function(el, i) {
+        if (!el.classList.contains('reveal')) {
+          el.classList.add('reveal');
+          // Add stagger delay for card groups
+          if (sel === '.topic-card' || sel === '.strength-row' || sel === '.offer-item' || sel === '.consult-stat' || sel === '.ig-cell' || sel === '.vantage-feat') {
+            var delayClass = 'reveal-delay-' + Math.min(i + 1, 6);
+            el.classList.add(delayClass);
+          }
+        }
+      });
+    });
+
+    // Observe
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      observer.observe(el);
+    });
+  })();
+  </script>
+  <!-- Cal.com Embed -->
+  <script>
+    (function() {
+      var calScript = document.createElement('script');
+      calScript.src = 'https://app.cal.com/embed/embed.js';
+      calScript.async = true;
+      calScript.onload = function() {
+        if (window.Cal) {
+          Cal("init", {origin: "https://cal.com"});
+          Cal("inline", {
+            elementOrSelector: "#cal-embed",
+            calLink: "lonnell-ldw.build/discovery",
+            layout: "month_view",
+            config: {
+              theme: "dark"
+            }
+          });
+          Cal("ui", {
+            theme: "dark",
+            styles: { branding: { brandColor: "#C17F59" } },
+            hideEventTypeDetails: false,
+            layout: "month_view"
+          });
+        }
+      };
+      document.head.appendChild(calScript);
+    })();
+  </script>
+
 </body>
 </html>
 

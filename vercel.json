@@ -1,4 +1,16 @@
 {
+  "rewrites": [
+    { "source": "/speaking", "destination": "/speaking.html" },
+    { "source": "/books", "destination": "/books.html" },
+    { "source": "/media", "destination": "/media.html" },
+    { "source": "/articles", "destination": "/articles.html" },
+    { "source": "/vantage", "destination": "/vantage.html" },
+    { "source": "/consulting", "destination": "/consulting.html" },
+    { "source": "/content", "destination": "/content.html" },
+    { "source": "/admin", "destination": "/admin.html" },
+    { "source": "/scorecard", "destination": "/scorecard.html" },
+    { "source": "/brand-board", "destination": "/brand-board.html" }
+  ],
   "redirects": [
     {
       "source": "/LDW_Speaking_Rider_v4.pdf",
@@ -19,6 +31,38 @@
       "source": "/content.html",
       "destination": "/content-hub.html",
       "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)\\.html",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=60, s-maxage=300, stale-while-revalidate=3600" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.css",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(?:png|jpg|jpeg|gif|svg|webp|avif|ico)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(?:woff|woff2|ttf|eot|otf)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
     }
   ]
 }
