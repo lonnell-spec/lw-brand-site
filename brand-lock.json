@@ -1,0 +1,173 @@
+{
+  "$schema": "https://ldw.build/schemas/brand-lock.schema.json",
+  "version": "1.0",
+  "checksum": "ldw-brand-lock-v1.0-2026-04-11",
+  "status": "ACTIVE",
+  "owner": "Lonnell Williams",
+  "lastUpdated": "2026-04-11",
+  "governs": [
+    "ldw.build",
+    "Arise & Build newsletter",
+    "All Lonnell Williams personal content"
+  ],
+  "notionSource": "https://www.notion.so/33fe09b9c1578144be52d5c4d0306a73",
+
+  "identity": {
+    "name": "LDW.build",
+    "person": "Lonnell Williams",
+    "category": "Operator-Leader",
+    "tagline": "Builder. Operator. Author.",
+    "coreEthos": "Build what doesn't exist.",
+    "personalDeclaration": "Anything, Everything, or Nothing at All.",
+    "scripturalFoundation": "Nehemiah 2:20",
+    "isNot": [
+      "2819 Church",
+      "The Worship Label",
+      "A church-leadership podcast",
+      "A pastor brand",
+      "A motivational speaker brand"
+    ],
+    "audiences": [
+      "Church/ministry leaders",
+      "Corporate executives & organizational leaders",
+      "Entrepreneurs building from scratch"
+    ]
+  },
+
+  "voice": {
+    "tone": [
+      "Confrontational with compassion",
+      "Power-statement energy",
+      "Intellectual authority + spiritual conviction",
+      "First-person-authority",
+      "Dry humor used sparingly"
+    ],
+    "requiredVocabulary": [
+      "build", "execute", "architect", "infrastructure", "arise",
+      "weight", "deliver", "operator", "standard", "discipline",
+      "capacity", "build what doesn't exist", "arise and build",
+      "the gap is the assignment"
+    ],
+    "bannedVocabulary": [
+      "season", "journey", "blessed", "alignment", "circle back",
+      "pivot", "authentic", "transparent", "just so grateful",
+      "prayerfully considering", "God showed me in a dream"
+    ],
+    "signatureLines": [
+      "To be early is to be on time. To be on time is to be late. To be late is unacceptable.",
+      "I'd rather be an excellent #2 than an average #1.",
+      "Three things I don't play with: my wife, my kids, my money, and God's house.",
+      "We don't leave our brain at home, but we don't leave our business degree in the car either.",
+      "Infrastructure is the sermon.",
+      "Arise and build.",
+      "Build what doesn't exist.",
+      "Anything, everything, or nothing at all."
+    ]
+  },
+
+  "visual": {
+    "colorPalette": {
+      "obsidian": {
+        "hex": "#0D0D0D",
+        "role": "Primary foundation, dominant tone"
+      },
+      "warmBlack": {
+        "hex": "#1A1714",
+        "role": "Backgrounds, depth without coldness"
+      },
+      "copper": {
+        "hex": "#C17F59",
+        "role": "Accent — dividers, labels, metadata, logo working face",
+        "notes": "Earned, oxidized, handmade. NOT gold."
+      },
+      "signal": {
+        "hex": "#E85D3A",
+        "role": "Period — breaks the pattern",
+        "notes": "Used sparingly — once per layout max."
+      },
+      "offWhite": {
+        "hex": "#F2F0EB",
+        "role": "Breathing — light backgrounds, text on dark",
+        "notes": "NEVER pure white (#FFFFFF)."
+      }
+    },
+    "defaultMode": "dark",
+    "typography": {
+      "currentStack": {
+        "display": "Bebas Neue",
+        "body": "DM Sans",
+        "mono": "Space Mono"
+      },
+      "upgradeStack": {
+        "display": "PP Monument Extended",
+        "body": "PP Neue Montreal",
+        "mono": "Sligoil",
+        "accent": "PP Neue Machina Inktrap"
+      },
+      "rules": [
+        "Display font is ALWAYS ALL CAPS. Never mixed case.",
+        "Maximum two typefaces in a layout (mono as metadata is a third, separate role).",
+        "Punctuation used architecturally.",
+        "Monospace carries outsized weight — dates, project codes, metadata, labels."
+      ]
+    },
+    "logoMarks": [
+      {
+        "name": "The Cornerstone",
+        "description": "Isometric cornerstone, two planes meeting at a central ridge"
+      },
+      {
+        "name": "The Shift",
+        "description": "Two horizontal bars, stacked but offset"
+      }
+    ],
+    "nameLockup": "LONNELL WILLIAMS"
+  },
+
+  "contentPillars": [
+    { "name": "BUILD", "percentage": 40, "focus": "Infrastructure, systems, processes, speed, execution" },
+    { "name": "LEAD", "percentage": 25, "focus": "Leadership philosophy, #2 seat, carrying weight" },
+    { "name": "ZAG", "percentage": 20, "focus": "Counter-cultural takes, provoking thought" },
+    { "name": "WORD", "percentage": 15, "focus": "Biblical wisdom applied to building and leadership" }
+  ],
+
+  "platformArchitecture": [
+    { "platform": "YouTube", "role": "Authority — long-form teaching 10-15 min", "cadence": "1x/week" },
+    { "platform": "Instagram", "role": "Presence — Reels + carousels", "cadence": "3-5x/week" },
+    { "platform": "Substack — Arise & Build", "role": "Depth — owned list", "cadence": "1x/week Thursday" },
+    { "platform": "Threads", "role": "Conversation — power statements", "cadence": "2-3x/day" },
+    { "platform": "TikTok", "role": "Repurpose only — cross-post IG Reels", "cadence": "As published" },
+    { "platform": "LinkedIn", "role": "Bridge to corporate audience", "cadence": "2-3x/week" },
+    { "platform": "ldw.build", "role": "The home base / destination", "cadence": "Continuous" }
+  ],
+
+  "forbiddenCrossovers": [
+    "Never speak as 2819.",
+    "Never use 2819 brand assets (logos, colors, fonts, visual patterns).",
+    "Never convert LDW.build into a church platform.",
+    "Never promote church services or events as LDW.build content.",
+    "Never dilute the Builder. Operator. Author. positioning.",
+    "Never use ministry-insider language for a general audience.",
+    "Never let the brand soften."
+  ],
+
+  "validationCheck": [
+    "Does this speak as Lonnell Williams, not as the church?",
+    "Does it reinforce the Builder / Operator / Author positioning?",
+    "Does it use LDW.build color palette and typography?",
+    "Does it end with a challenge or a CTA?",
+    "Does it avoid every item in FORBIDDEN CROSSOVERS?",
+    "Does it avoid every banned vocabulary word?",
+    "Would at least 2 of the 3 audiences see themselves in it?"
+  ],
+
+  "deployment": {
+    "endpoint": "/brand-lock.json",
+    "access": "public-read",
+    "linkedFrom": [
+      "admin.html",
+      "admin-brand-report.html"
+    ],
+    "status": "DEPLOYED"
+  }
+}
