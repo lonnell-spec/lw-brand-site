@@ -497,6 +497,7 @@ footer {
 
 <script src="/supabase.min.js"></script>
 <script>
+const RSS_PROXY = 'https://riqdcirsmckubkdfbtoj.supabase.co/functions/v1/rss-proxy';
 const SUPABASE_URL  = 'https://riqdcirsmckubkdfbtoj.supabase.co';
 const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM';
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
@@ -504,23 +505,21 @@ const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 let allIssues = [];
 let activeTag = 'all';
 
-// ── FORMAT DATE ──
-function formatDate(iso) {
-  const d = new Date(iso);
-  return d.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
-}
-
-// ── LOAD ISSUES ──
+// ── LOAD ISSUES from rss-proxy edge function ──
 async function loadIssues() {
   try {
-    const { data, error } = await db
-      .from('newsletter_issues')
-      .select('id,slug,title,excerpt,cover_image_url,tags,published_at,issue_number,read_time_minutes')
-      .eq('published', true)
-      .order('published_at', { ascending: false });
-
-    if (error) throw error;
-    allIssues = data || [];
+    const res = await fetch(RSS_PROXY);
+    if (!res.ok) throw new Error('proxy fetch failed');
+    const data = await res.json();
+    allIssues = (data.items || []).map((item, i) => ({
+      title:        item.title,
+      link:         item.link,
+      excerpt:      item.excerpt,
+      cover_image:  item.image,
+      category:     item.category,
+      pubDate:      item.pubDate,
+      index:        i + 1
+    }));
     buildTagFilters();
     renderIssues(allIssues);
     updateCounts(allIssues.length);
@@ -529,8 +528,8 @@ async function loadIssues() {
     document.getElementById('issues-content').style.display = 'block';
     document.getElementById('issues-content').innerHTML = `
       <div class="state-wrap">
-        <div class="state-label">No issues found</div>
-        <div class="state-title">COMING SOON.</div>
+        <div class="state-label">Could not load articles</div>
+        <div class="state-title">TRY AGAIN SOON.</div>
       </div>`;
   }
 }
@@ -538,7 +537,7 @@ async function loadIssues() {
 // ── BUILD TAG FILTERS ──
 function buildTagFilters() {
   const tagSet = new Set();
-  allIssues.forEach(i => (i.tags || []).forEach(t => tagSet.add(t)));
+  allIssues.forEach(i => { if (i.category) tagSet.add(i.category); });
   const pills = document.getElementById('filter-pills');
   tagSet.forEach(tag => {
     const btn = document.createElement('button');
@@ -555,7 +554,7 @@ function filterByTag(tag, btn) {
   activeTag = tag;
   document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
-  const filtered = tag === 'all' ? allIssues : allIssues.filter(i => (i.tags||[]).includes(tag));
+  const filtered = tag === 'all' ? allIssues : allIssues.filter(i => i.category === tag);
   renderIssues(filtered);
   updateCounts(filtered.length);
 }
@@ -581,29 +580,25 @@ function renderIssues(issues) {
 
   // ── FEATURED (latest) ──
   const featured = issues[0];
-  const featNum  = featured.issue_number ? `Issue #${featured.issue_number}` : '';
-  const imgBlock = featured.cover_image_url
-    ? `<img src="${featured.cover_image_url}" alt="${featured.title}" loading="lazy">`
-    : `<div class="issue-featured-img-placeholder"><span class="big-num">${featured.issue_number || '01'}</span></div>`;
-
-  const tagsHtml = (featured.tags||[]).map(t=>`<span class="issue-tag">${t}</span>`).join('');
+  const imgBlock = featured.cover_image
+    ? `<img src="${featured.cover_image}" alt="${featured.title}" loading="lazy">`
+    : `<div class="issue-featured-img-placeholder"><span class="big-num">01</span></div>`;
 
   html += `
-    <a href="/article.html?slug=${encodeURIComponent(featured.slug)}" class="issue-featured">
+    <a href="${featured.link}" target="_blank" rel="noopener" class="issue-featured">
       <div class="issue-featured-img">${imgBlock}</div>
       <div class="issue-featured-body">
         <div class="issue-featured-top">
           <div class="issue-badge-row">
             <span class="issue-badge">Latest</span>
-            ${featNum ? `<span class="issue-number">${featNum}</span>` : ''}
+            ${featured.category ? `<span class="issue-number">${featured.category}</span>` : ''}
           </div>
           <div class="issue-featured-title">${featured.title}</div>
-          ${tagsHtml ? `<div class="issue-tags">${tagsHtml}</div>` : ''}
           <div class="issue-featured-excerpt">${featured.excerpt || ''}</div>
         </div>
         <div class="issue-featured-footer">
-          <span class="issue-date">${formatDate(featured.published_at)}</span>
-          <span class="issue-read">${featured.read_time_minutes || 5} min read</span>
+          <span class="issue-date">${featured.pubDate}</span>
+          <span class="issue-read">Read on Substack</span>
         </div>
       </div>
     </a>`;
@@ -611,15 +606,15 @@ function renderIssues(issues) {
   // ── GRID (rest) ──
   if (issues.length > 1) {
     html += `<div class="issues-grid" style="margin-top:2px;">`;
-    issues.slice(1).forEach(issue => {
-      const num = issue.issue_number ? `#${String(issue.issue_number).padStart(2,'0')}` : '';
+    issues.slice(1).forEach((issue, idx) => {
+      const num = `#${String(idx + 2).padStart(2,'0')}`;
       html += `
-        <a href="/article.html?slug=${encodeURIComponent(issue.slug)}" class="issue-card">
-          <div class="card-num">${num || '◆'}</div>
+        <a href="${issue.link}" target="_blank" rel="noopener" class="issue-card">
+          <div class="card-num">${num}</div>
           <div class="card-title">${issue.title}</div>
           <div class="card-excerpt">${issue.excerpt || ''}</div>
           <div class="card-footer">
-            <span class="issue-date">${formatDate(issue.published_at)}</span>
+            <span class="issue-date">${issue.pubDate}</span>
             <span class="card-arrow">→</span>
           </div>
         </a>`;
