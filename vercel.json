@@ -9,7 +9,8 @@
     { "source": "/content", "destination": "/content.html" },
     { "source": "/admin", "destination": "/admin.html" },
     { "source": "/scorecard", "destination": "/scorecard.html" },
-    { "source": "/brand-board", "destination": "/brand-board.html" }
+    { "source": "/brand-board", "destination": "/brand-board.html" },
+    { "source": "/tpc", "destination": "/tpc/index.html" }
   ],
   "redirects": [
     {

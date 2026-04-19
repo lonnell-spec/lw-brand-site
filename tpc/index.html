@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+<title>Worship First. Build Second. | Turning Point Talking Sessions</title>
+<meta name="description" content="Live companion for Lonnell Williams' talk to the Turning Point creative team. Power statements, practices, and the 30-day install." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --obsidian: #0D0D0D;
+    --warm-black: #1A1714;
+    --copper: #C17F59;
+    --copper-dim: #8a5a3f;
+    --signal: #E85D3A;
+    --off-white: #F2F0EB;
+    --concrete: #8A8A8A;
+    --border: rgba(193, 127, 89, 0.25);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--obsidian);
+    color: var(--off-white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  .bebas { font-family: 'Bebas Neue', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; }
+  .mono { font-family: 'Space Mono', monospace; text-transform: uppercase; letter-spacing: 0.15em; font-size: 11px; }
+
+  /* Sticky nav */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13,13,13,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.12em; color: var(--off-white); }
+  .nav-progress {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--copper);
+    letter-spacing: 0.2em;
+  }
+
+  /* Section scroll dots (fixed right) */
+  .scroll-dots {
+    position: fixed; right: 14px; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 8px; z-index: 50;
+  }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(193, 127, 89, 0.3);
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+  }
+  .dot.active { background: var(--copper); transform: scale(1.5); }
+
+  /* Hero */
+  .hero {
+    min-height: 92vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 40px 24px 60px;
+    background: radial-gradient(ellipse at top, #1a1714 0%, #0D0D0D 60%);
+    position: relative;
+  }
+  .hero-label { color: var(--copper); font-size: 11px; margin-bottom: 28px; }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 13vw, 96px);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    margin-bottom: 24px;
+  }
+  .hero-title .accent { color: var(--copper); }
+  .hero-sub {
+    color: var(--concrete);
+    font-size: 15px;
+    max-width: 500px;
+    margin-bottom: 40px;
+  }
+  .hero-meta {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+    display: flex; flex-wrap: wrap; gap: 16px 32px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--concrete);
+  }
+  .hero-meta span { color: var(--off-white); }
+
+  /* Section base */
+  section {
+    padding: 80px 24px;
+    border-top: 1px solid var(--border);
+    scroll-margin-top: 60px;
+  }
+  section.light {
+    background: var(--off-white);
+    color: var(--obsidian);
+  }
+  section.warm { background: var(--warm-black); }
+  .section-label {
+    color: var(--copper);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    margin-bottom: 16px;
+  }
+  section.light .section-label { color: var(--copper); }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 8vw, 64px);
+    line-height: 0.95;
+    margin-bottom: 32px;
+    letter-spacing: 0.02em;
+  }
+  .section-body {
+    font-size: 16px;
+    line-height: 1.7;
+    max-width: 620px;
+  }
+  .section-body p { margin-bottom: 18px; }
+
+  /* Power statement */
+  .power {
+    border-left: 3px solid var(--copper);
+    padding: 20px 0 20px 24px;
+    margin: 36px 0;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(22px, 5vw, 32px);
+    line-height: 1.15;
+    letter-spacing: 0.02em;
+    color: var(--off-white);
+  }
+  section.light .power { color: var(--obsidian); }
+  .power .num {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--copper);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  /* Scripture block */
+  .scripture {
+    background: rgba(193, 127, 89, 0.06);
+    border: 1px solid var(--border);
+    padding: 24px;
+    margin: 28px 0;
+    border-radius: 2px;
+  }
+  .scripture-ref {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--copper);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .scripture-text { font-style: italic; color: var(--off-white); font-size: 15px; }
+  section.light .scripture-text { color: var(--obsidian); }
+
+  /* Ice breaker */
+  .icebreaker-frame {
+    border: 1px solid var(--border);
+    padding: 24px;
+    margin-bottom: 16px;
+    border-radius: 2px;
+    background: rgba(193, 127, 89, 0.03);
+  }
+  .frame-num {
+    font-family: 'Space Mono', monospace;
+    color: var(--copper);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    margin-bottom: 8px;
+  }
+  .frame-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+  }
+  .frame-body { font-size: 15px; color: var(--concrete); }
+  .frame-body ul { margin-top: 10px; padding-left: 18px; }
+  .frame-body li { margin-bottom: 8px; color: var(--off-white); }
+
+  /* Interactive commitment box */
+  .commit-box {
+    border: 1px solid var(--copper);
+    padding: 28px;
+    margin: 32px 0;
+    border-radius: 2px;
+    background: rgba(193, 127, 89, 0.04);
+  }
+  .commit-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--copper);
+    margin-bottom: 10px;
+  }
+  .commit-question {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 0.03em;
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+  .commit-help { font-size: 13px; color: var(--concrete); margin-bottom: 18px; }
+  .commit-box textarea, .commit-box input {
+    width: 100%;
+    background: var(--obsidian);
+    border: 1px solid var(--border);
+    color: var(--off-white);
+    padding: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    border-radius: 2px;
+    margin-bottom: 12px;
+    resize: vertical;
+    min-height: 80px;
+  }
+  section.light .commit-box textarea,
+  section.light .commit-box input {
+    background: #fff;
+    color: var(--obsidian);
+  }
+  .commit-box textarea:focus, .commit-box input:focus {
+    outline: none;
+    border-color: var(--copper);
+  }
+  .commit-btn {
+    background: var(--copper);
+    color: var(--obsidian);
+    border: none;
+    padding: 14px 28px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    border-radius: 2px;
+    width: 100%;
+    transition: background 0.2s;
+  }
+  .commit-btn:hover { background: var(--signal); }
+  .commit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .commit-success {
+    color: var(--copper);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    margin-top: 10px;
+    display: none;
+  }
+  .commit-success.show { display: block; }
+
+  /* Practice cards */
+  .practice {
+    border-top: 1px solid var(--border);
+    padding: 28px 0;
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 20px;
+  }
+  .practice-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--copper);
+    line-height: 1;
+  }
+  .practice-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+    line-height: 1.1;
+  }
+  .practice-body { font-size: 15px; color: var(--concrete); margin-bottom: 14px; }
+  section.light .practice-body { color: #555; }
+  .practice-install {
+    border-left: 2px solid var(--copper);
+    padding-left: 14px;
+    font-size: 14px;
+    color: var(--off-white);
+  }
+  section.light .practice-install { color: var(--obsidian); }
+  .practice-install-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--copper);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* Weekly rhythm grid */
+  .week-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin: 28px 0;
+  }
+  .day {
+    border: 1px solid var(--border);
+    padding: 18px;
+    border-radius: 2px;
+    background: rgba(193, 127, 89, 0.03);
+  }
+  .day-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    color: var(--copper);
+    margin-bottom: 4px;
+  }
+  .day-theme {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .day-body { font-size: 14px; color: var(--concrete); }
+
+  /* Assessment questions */
+  .assessment-q {
+    border-top: 1px solid var(--border);
+    padding: 22px 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .assessment-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    color: var(--copper);
+    line-height: 1;
+    min-width: 36px;
+  }
+  .assessment-text {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* 30-day plan */
+  .week-card {
+    border: 1px solid var(--border);
+    padding: 24px;
+    margin-bottom: 14px;
+    border-radius: 2px;
+    background: rgba(193, 127, 89, 0.04);
+  }
+  .week-card-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--copper);
+    margin-bottom: 6px;
+  }
+  .week-card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+    line-height: 1.1;
+  }
+  .week-card-body { font-size: 15px; color: var(--concrete); }
+
+  /* Mentee flow */
+  .mentee-block {
+    border-left: 3px solid var(--copper);
+    padding: 0 0 0 20px;
+    margin-bottom: 28px;
+  }
+  .mentee-time {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--copper);
+    margin-bottom: 6px;
+  }
+  .mentee-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+  .mentee-list { list-style: none; }
+  .mentee-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
+    color: var(--off-white);
+  }
+  section.light .mentee-list li { color: var(--obsidian); }
+  .mentee-list li:last-child { border-bottom: none; }
+
+  /* Download button */
+  .download-btn {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid var(--copper);
+    color: var(--copper);
+    padding: 16px 28px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    text-decoration: none;
+    margin-top: 24px;
+    border-radius: 2px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .download-btn:hover {
+    background: var(--copper);
+    color: var(--obsidian);
+  }
+
+  /* Final call */
+  .final-call {
+    text-align: center;
+    padding: 100px 24px;
+    background: linear-gradient(180deg, var(--obsidian) 0%, #1a1714 100%);
+  }
+  .final-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 10vw, 72px);
+    line-height: 0.95;
+    margin-bottom: 20px;
+    letter-spacing: 0.02em;
+  }
+  .final-title .accent { color: var(--copper); }
+  .final-sub {
+    color: var(--concrete);
+    font-size: 15px;
+    max-width: 460px;
+    margin: 0 auto 40px;
+  }
+  .arise {
+    display: inline-block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 0.3em;
+    color: var(--copper);
+    border-top: 1px solid var(--copper);
+    border-bottom: 1px solid var(--copper);
+    padding: 14px 0;
+    margin-top: 30px;
+  }
+
+  /* Footer */
+  footer {
+    padding: 40px 24px;
+    border-top: 1px solid var(--border);
+    background: #0A0A0A;
+    text-align: center;
+    color: var(--concrete);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+  }
+  footer a { color: var(--copper); text-decoration: none; }
+
+  /* Hide Power statement numbers (now removed) */
+  .power .num { display: none; }
+
+  /* Desktop tweaks */
+  @media (min-width: 768px) {
+    section { padding: 120px 60px; }
+    .hero { padding: 60px 60px 80px; }
+    .week-grid { grid-template-columns: repeat(2, 1fr); }
+    .nav { padding: 18px 60px; }
+  }
+  @media (min-width: 1024px) {
+    .week-grid { grid-template-columns: repeat(3, 1fr); }
+    .section-body, .section-title { max-width: 760px; }
+  }
+  @media (max-width: 420px) {
+    .scroll-dots { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-title">Worship First · Build Second</div>
+  <div class="nav-progress" id="progress">00%</div>
+</nav>
+
+<div class="scroll-dots" id="scrollDots"></div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-label mono">Turning Point Talking Sessions</div>
+  <h1 class="hero-title">Worship <span class="accent">First.</span><br/>Build <span class="accent">Second.</span></h1>
+  <p class="hero-sub">A companion for the creative team. Power statements. Practices. A 30-day install. Follow along on your phone as we go.</p>
+  <div class="hero-meta">
+    <div>Speaker<br/><span>Lonnell Williams</span></div>
+    <div>Venue<br/><span>Turning Point Church · McDonough, GA</span></div>
+  </div>
+</section>
+
+<!-- ICE BREAKER -->
+<section id="icebreaker">
+  <div class="section-label mono">Before We Start</div>
+  <h2 class="section-title">Before we start.</h2>
+  <div class="section-body">
+    <p>Before we talk about worship, I need to know who's in the room. Not your job title. Not your tenure. Put your phone down for the first two. This is a voice exercise.</p>
+
+    <div class="icebreaker-frame">
+      <div class="frame-title">Name Yourself in the Room</div>
+      <div class="frame-body">
+        <ul>
+          <li>Stand up if you've been on this creative team more than two years.</li>
+          <li>Stand up if you've worked a Sunday while fighting something personal nobody knew about.</li>
+          <li>Stand up if you've ever critiqued a worship moment mid-service instead of entering into it.</li>
+          <li>Stand up if you've ever hidden spiritual dryness from your team because you were afraid of what it would cost you.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="icebreaker-frame">
+      <div class="frame-title">Turn to Your Neighbor</div>
+      <div class="frame-body">Give the person next to you two words — only two — that describe your current spiritual state. Not your ministry. Not your family. <strong style="color:var(--off-white)">You.</strong> Then listen to theirs. No advice. No fixing. Just receive it.</div>
+    </div>
+
+    <div class="icebreaker-frame">
+      <div class="frame-title">Type It. Own It.</div>
+      <div class="frame-body">Before we start — type one thing below that you're willing to be honest about during our time together. Nobody will see it but you. But you'll see it again at the end of this session.</div>
+    </div>
+
+    <div class="commit-box" id="iceCommit">
+      <div class="commit-label mono">Your Private Commitment</div>
+      <div class="commit-question">What will you be honest about today?</div>
+      <div class="commit-help">One sentence. Nobody sees it but you. We'll come back to it at the end.</div>
+      <textarea id="iceText" placeholder="I'm willing to be honest about..."></textarea>
+      <button class="commit-btn" onclick="submitCommitment('ice_breaker', 'iceText', 'iceSuccess')">Lock It In</button>
+      <div class="commit-success mono" id="iceSuccess">✓ Locked · We'll come back to it</div>
+    </div>
+
+    <div class="power">
+      A team that can't get honest in the room will never get excellent in the field.
+    </div>
+  </div>
+</section>
+
+<!-- BIG IDEA -->
+<section class="warm" id="bigidea">
+  <div class="section-label mono">The Big Idea</div>
+  <h2 class="section-title">The Best Work Your Team Will Ever Produce.</h2>
+  <div class="section-body">
+    <p>Won't come from a better camera. A faster computer. A bigger budget.</p>
+    <p>It will come from people who are still in love with the God they're building for.</p>
+    <p>You can train technique. You can't train hunger. And a church that settles for skilled hands attached to cold hearts is building with the wrong materials.</p>
+
+    <div class="power">
+      You can manage what people do. You cannot manufacture why they do it.
+    </div>
+    <div class="power">
+      Skill builds the frame. Spirit fills it. One without the other is scaffolding nobody wants to stand under.
+    </div>
+  </div>
+</section>
+
+<!-- PART 1 -->
+<section id="part1">
+  <div class="section-label mono">The Foundation</div>
+  <h2 class="section-title">The Spiritual Foundation of Creative Ministry.</h2>
+  <div class="section-body">
+
+    <h3 class="bebas" style="font-size:26px;margin-bottom:16px;color:var(--copper)">Worship Is Not a Genre</h3>
+    <p>The church world did worship a disservice when it made worship synonymous with music. Worship is not a genre. Worship is not a tempo. Worship is not the forty minutes before the sermon.</p>
+
+    <div class="scripture">
+      <div class="scripture-ref">John 4:23-24</div>
+      <div class="scripture-text">"A time is coming and has now come when the true worshipers will worship the Father in the Spirit and in truth, for they are the kind of worshipers the Father seeks. God is spirit, and his worshipers must worship in the Spirit and in truth."</div>
+    </div>
+
+    <p>Jesus didn't say in a particular building. He didn't say through a particular genre. He said in Spirit and in truth.</p>
+    <p>The photographer with their eye in the viewfinder during altar call can be worshiping. The designer at 11pm on a Wednesday can be worshiping. The camera operator locked on a wide shot can be worshiping.</p>
+
+    <div class="power">
+      But none of that is available to a team that disconnected from God Monday through Saturday and expects to reconnect by Sunday call time.
+    </div>
+    <div class="power">
+      Worship is not a slot on the run of show. Worship is the posture you walk in the door with.
+    </div>
+
+    <h3 class="bebas" style="font-size:26px;margin:32px 0 16px;color:var(--copper)">Hands Without a Heart</h3>
+
+    <div class="scripture">
+      <div class="scripture-ref">Mark 7:6</div>
+      <div class="scripture-text">"These people honor me with their lips, but their hearts are far from me."</div>
+    </div>
+
+    <p>Jesus was describing people who did all the right things in all the right places and were completely hollow on the inside. That is a creative team problem too.</p>
+    <p>Excellence without intimacy is performance. God doesn't need a performance. He has angels for that.</p>
+
+    <div class="power">
+      If your team's best output is technical but not spiritual, you don't have a creative ministry. You have a production company that happens to meet on Sundays.
+    </div>
+    <div class="power">
+      Precision without presence is just polish. And polish won't preach.
+    </div>
+
+    <h3 class="bebas" style="font-size:26px;margin:32px 0 16px;color:var(--copper)">What Transfers in the Frame</h3>
+    <p>When someone who genuinely loves God points a camera at a moment of genuine transformation — something transfers in the frame. People feel it. They can't always name it. But they feel it.</p>
+
+    <div class="power">
+      You cannot manufacture anointing. But you can position your people to carry it.
+    </div>
+    <div class="power">
+      Your equipment captures what your spirit confirms. A dry team will deliver dry content — regardless of the resolution.
+    </div>
+
+    <div class="commit-box">
+      <div class="commit-label mono">First Diagnostic · Answer For You</div>
+      <div class="commit-question">If my phone died for a week, would my walk with God survive?</div>
+      <div class="commit-help">No judgment. Just honesty. Type the real answer.</div>
+      <textarea id="diag1Text" placeholder="Honest answer..."></textarea>
+      <button class="commit-btn" onclick="submitCommitment('diagnostic_1', 'diag1Text', 'diag1Success')">Save My Answer</button>
+      <div class="commit-success mono" id="diag1Success">✓ Saved · Come back to this in 30 days</div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 2 -->
+<section class="warm" id="part2">
+  <div class="section-label mono">The Cost</div>
+  <h2 class="section-title">How Serving Kills Worship.</h2>
+  <div class="section-body">
+    <h3 class="bebas" style="font-size:26px;margin-bottom:16px;color:var(--copper)">The Invisible Cost of Always Producing</h3>
+    <p>The person in the congregation gets to receive. They get to close their eyes. They get to cry without worrying about whether their hands are steady.</p>
+    <p>Your team member is watching the clock. Checking the shot. Troubleshooting the cable.</p>
+    <p>That is not a complaint about serving. Serving is holy. But the way most creative ministries are structured, the people doing the most work are getting the least nourishment.</p>
+
+    <div class="power">
+      You cannot pour from a cup you never fill. Some of your people are running on fumes and calling it faithfulness.
+    </div>
+    <div class="power">
+      Serving is not a substitute for being served by God.
+    </div>
+
+    <h3 class="bebas" style="font-size:26px;margin:32px 0 16px;color:var(--copper)">The Worship Deficit</h3>
+    <p>Every Sunday your team makes a spiritual withdrawal. They pour out. They give. They serve. But if they never stop to make a deposit in their own account — the reserves run out. And for a while, they can fake it. Then one day the account hits zero. And you can see it.</p>
+    <p>You see it in the <strong style="color:var(--copper)">attitude</strong> — the person first in the door shows up at the last possible minute.</p>
+    <p>You see it in the <strong style="color:var(--copper)">work</strong> — creativity that felt alive starts to feel mechanical.</p>
+    <p>You see it in the <strong style="color:var(--copper)">exits</strong> — your best people quietly pulling back until one day they're gone.</p>
+
+    <div class="power">
+      Burnout in creative ministry is almost never about the workload. It is almost always about the worship deficit.
+    </div>
+    <div class="power">
+      A cold team doesn't leave loudly. They leave quietly. And by the time you notice, you're already behind.
+    </div>
+
+    <h3 class="bebas" style="font-size:26px;margin:32px 0 16px;color:var(--copper)">Four Traps</h3>
+
+    <div class="practice">
+      <div class="practice-num">01</div>
+      <div>
+        <div class="practice-title">The Production Mindset</div>
+        <div class="practice-body">When value gets measured by output. Output is necessary. But when output becomes identity, you've lost the plot.</div>
+        <div class="power" style="margin-top:8px">
+          When output becomes identity, rest becomes threat.
+        </div>
+      </div>
+    </div>
+
+    <div class="practice">
+      <div class="practice-num">02</div>
+      <div>
+        <div class="practice-title">The Critic's Chair</div>
+        <div class="practice-body">It's nearly impossible to be moved by what you're analyzing. Critical watching becomes the default — and bleeds from the edit bay into the sanctuary.</div>
+        <div class="power" style="margin-top:8px">
+          You cannot enter the presence of God with a red pen in your hand.
+        </div>
+      </div>
+    </div>
+
+    <div class="practice">
+      <div class="practice-num">03</div>
+      <div>
+        <div class="practice-title">Proximity Without Participation</div>
+        <div class="practice-body">Being close to church is not being in church. Being in the building is not being in the presence. There is a difference between standing near a fire and being warm.</div>
+        <div class="power" style="margin-top:8px">
+          Proximity without participation is the most dangerous place a church person can live.
+        </div>
+      </div>
+    </div>
+
+    <div class="practice">
+      <div class="practice-num">04</div>
+      <div>
+        <div class="practice-title">The Insider's Blindness</div>
+        <div class="practice-body">After enough Sundays, the miraculous starts to look mechanical. Not because it is. Because you stopped seeing it.</div>
+        <div class="power" style="margin-top:8px">
+          Familiarity is not the opposite of faith. But it is its most quiet enemy.
+        </div>
+        <div class="power" style="margin-top:8px">
+          The moment God's house feels like another venue, you have a spiritual problem — not a scheduling one.
+        </div>
+      </div>
+    </div>
+
+    <h3 class="bebas" style="font-size:26px;margin:32px 0 16px;color:var(--copper)">Nehemiah Built Second</h3>
+
+    <div class="scripture">
+      <div class="scripture-ref">Nehemiah 1:4</div>
+      <div class="scripture-text">"When I heard these things, I sat down and wept. For some days I mourned and fasted and prayed before the God of heaven."</div>
+    </div>
+
+    <p>Before Nehemiah drafted a plan. Before he made a personnel decision. Before he requested a single resource from the king. He wept. He fasted. He prayed. The builder positioned himself before God before he positioned a single brick.</p>
+
+    <div class="power">
+      Nehemiah built a wall in 52 days because he spent four months on his knees. A creative team that never worships together will never build together. They'll just work.
+    </div>
+    <div class="power">
+      The time you spend on your face is not time away from the build. It is the build.
+    </div>
+  </div>
+</section>
+
+<!-- PART 3 - PRACTICES -->
+<section class="light" id="part3">
+  <div class="section-label mono">The Practices</div>
+  <h2 class="section-title">Eight Practices.<br/>Install This Week.</h2>
+  <div class="section-body">
+    <p>You don't need a program. You need a practice. Here's what to install — in order — starting Monday.</p>
+
+    <div class="power">
+      What you open with is what you're actually building. Everything else is decoration.
+    </div>
+
+    <div class="practice">
+      <div class="practice-num">01</div>
+      <div>
+        <div class="practice-title">Open With Honest</div>
+        <div class="practice-body">Not a devotional off YouVersion. Something real. What is God actually doing in you right now? What are you wrestling with?</div>
+        <div class="practice-install">
+          <span class="practice-install-label mono">Install</span>
+          One question per week. Go first. Keep it to 10 minutes. Don't fix what people share — receive it.
+        </div>
+      </div>
+    </div>
+
+    <div class="practice">
+      <div class="practice-num">02</div>
+      <div>
+        <div class="practice-title">Receive Sundays</div>
+        <div class="practice-body">Your people need to be on the receiving end of what they spend their week building.</div>
+        <div class="practice-install">
+          <span class="practice-install-label mono">Install</span>
+          One Sunday per quarter per team member. No phone. No camera. Blocked like a production call.
+        </div>
+      </div>
+    </div>
+
+    <div class="practice">
+      <div class="practice-num">03</div>
+      <div>
+        <div class="practice-title">Spiritual Debrief First</div>
+        <div class="practice-body">After a major service — before you open the footage — ask: What did God do today? Where did you feel Him?</div>
+        <div class="practice-install">
+          <span class="practice-install-label mono">Install</span>
+          Two questions. Five minutes. Before any technical debrief. Every week.
+        </div>
+      </div>
+    </div>
+
+    <div class="practice">
+      <div class="practice-num">04</div>
+      <div>
+        <div class="practice-title">Permission to Be Empty</div>
+        <div class="practice-body">Build a culture where a camera operator can say "I'm running dry" and it gets received as responsibility, not weakness.</div>
+        <div class="practice-install">
+          <span class="practice-install-label mono">Install</span>
+          Name it publicly. Honor the first person who uses it — visibly — so the team knows it's real.
+        </div>
+      </div>
+    </div>
+
+    <div class="practice">
+      <div class="practice-num">05</div>
+      <div>
+        <div class="practice-title">Model From the Top</div>
+        <div class="practice-body">Your team will not out-worship their leader. They will meet you at the level you set.</div>
+        <div class="practice-install">
+          <span class="practice-install-label mono">Install</span>
+          You are in a receiving posture once a week. Non-negotiable. Visible to your team.
+        </div>
+      </div>
+    </div>
+
+    <div class="power">
+      If the leader doesn't model it, the team won't maintain it. Culture is not what you preach. Culture is what you tolerate.
+    </div>
+
+    <div class="practice">
+      <div class="practice-num">06</div>
+      <div>
+        <div class="practice-title">The 3-Deep Rule</div>
+        <div class="practice-body">Every role, three trained people. Not so you can replace anyone — so nobody feels unreplaceable. Unreplaceable people cannot rest.</div>
+        <div class="practice-install">
+          <span class="practice-install-label mono">Install</span>
+          Audit every role this week. Mark the 1-deep roles in red. Start training depth this month.
+        </div>
+        <div class="power" style="margin-top:12px">
+          A ministry where one person is indispensable is not a ministry. It is a hostage situation.
+        </div>
+      </div>
+    </div>
+
+    <div class="practice">
+      <div class="practice-num">07</div>
+      <div>
+        <div class="practice-title">Silent Seasons</div>
+        <div class="practice-body">Every team member gets one month a year off the rotation. Not vacation. A silent season — on purpose — to receive.</div>
+        <div class="practice-install">
+          <span class="practice-install-label mono">Install</span>
+          Schedule them on the annual calendar by January 15. Protect them like you protect budgets.
+        </div>
+        <div class="power" style="margin-top:12px">
+          If rest isn't on the calendar, it isn't real. It's just a wish in the wind.
+        </div>
+      </div>
+    </div>
+
+    <div class="practice">
+      <div class="practice-num">08</div>
+      <div>
+        <div class="practice-title">The Pre-Roll Prayer</div>
+        <div class="practice-body">Before the red light goes on — the creative team gathers. Not for the run of show. For prayer. Two minutes. Every Sunday. Non-negotiable.</div>
+        <div class="practice-install">
+          <span class="practice-install-label mono">Install</span>
+          This Sunday. 10 minutes before service. Room you normally gather in. Two minutes only.
+        </div>
+        <div class="power" style="margin-top:12px">
+          Before you press record, let God press reset.
+        </div>
+      </div>
+    </div>
+
+    <h3 class="bebas" style="font-size:26px;margin:48px 0 16px;color:var(--copper)">The Leader's Weekly Rhythm</h3>
+    <p>If you're leading a creative team — install this on your own calendar first. Not theirs. Yours.</p>
+
+    <div class="week-grid">
+      <div class="day">
+        <div class="day-name">Monday</div>
+        <div class="day-theme">Receive</div>
+        <div class="day-body">You don't lead anyone. You get filled. Long devotion. No team texts unless it's fire.</div>
+      </div>
+      <div class="day">
+        <div class="day-name">Tuesday</div>
+        <div class="day-theme">Plan</div>
+        <div class="day-body">Systems, schedules, vision. This is the build day.</div>
+      </div>
+      <div class="day">
+        <div class="day-name">Wednesday</div>
+        <div class="day-theme">People</div>
+        <div class="day-body">One-on-ones. Honest check-ins. Not project reviews. People.</div>
+      </div>
+      <div class="day">
+        <div class="day-name">Thursday</div>
+        <div class="day-theme">Make</div>
+        <div class="day-body">You still create. You don't just manage creators. Keep your hands in it.</div>
+      </div>
+      <div class="day">
+        <div class="day-name">Friday</div>
+        <div class="day-theme">Prepare</div>
+        <div class="day-body">Sunday starts Friday. Not Sunday morning. Friday.</div>
+      </div>
+      <div class="day">
+        <div class="day-name">Saturday</div>
+        <div class="day-theme">Rest</div>
+        <div class="day-body">Boundaried. Protected. Modeled for your team to see.</div>
+      </div>
+      <div class="day" style="grid-column: 1 / -1">
+        <div class="day-name">Sunday</div>
+        <div class="day-theme">Deliver</div>
+        <div class="day-body">You show up full — because you spent six days getting full.</div>
+      </div>
+    </div>
+
+    <div class="power">
+      A leader who sprints to Sunday will always arrive empty. A leader who walks toward Sunday arrives ready.
+    </div>
+  </div>
+</section>
+
+<!-- MENTEE MEETING -->
+<section class="warm" id="mentee">
+  <div class="section-label mono">The Install · Run This Within 7 Days</div>
+  <h2 class="section-title">The Honest Conversation.<br/>A Mentee Meeting Flow.</h2>
+  <div class="section-body">
+    <p>A structured 1-on-1 a creative leader runs with a team member within 7 days of this session. Four segments. Twelve questions. One commitment. You don't fix what they share. You listen. You protect. You schedule the next one.</p>
+
+    <div class="mentee-block">
+      <div class="mentee-time mono">Temperature Check</div>
+      <div class="mentee-title">Not a Project Check. A Person Check.</div>
+      <ul class="mentee-list">
+        <li>How are you actually doing — not the work, you?</li>
+        <li>When did you last feel full spiritually? What were you doing?</li>
+        <li>What's one thing you've been carrying that I haven't asked about?</li>
+      </ul>
+    </div>
+
+    <div class="mentee-block">
+      <div class="mentee-time mono">The Deficit Audit</div>
+      <div class="mentee-title">Find the Leak.</div>
+      <ul class="mentee-list">
+        <li>On a scale of 1–10, where is your worship deficit right now?</li>
+        <li>When did you last attend a service as a receiver, not a producer?</li>
+        <li>What part of your role is feeding you? What part is draining you?</li>
+        <li>If I removed one thing from your plate for 30 days, what would give you the most oxygen?</li>
+      </ul>
+    </div>
+
+    <div class="mentee-block">
+      <div class="mentee-time mono">The Build</div>
+      <div class="mentee-title">Design the Response.</div>
+      <ul class="mentee-list">
+        <li>What would a Silent Season look like for you this quarter?</li>
+        <li>Who on the team could be trained to cover your role so you can receive?</li>
+        <li>What's one rhythm you want to install — and what do you need from me to protect it?</li>
+      </ul>
+    </div>
+
+    <div class="mentee-block">
+      <div class="mentee-time mono">The Close</div>
+      <div class="mentee-title">Make It Real. Make It Next.</div>
+      <ul class="mentee-list">
+        <li>One thing you'll do this week to make a spiritual deposit.</li>
+        <li>One thing I'll do this week to protect your ability to make that deposit.</li>
+        <li>Next check-in date. On the calendar. Non-negotiable.</li>
+      </ul>
+    </div>
+
+    <a href="./honest-30.pdf" class="download-btn" download>↓ Download The Mentee Meeting Flow (PDF)</a>
+
+    <div class="power" style="margin-top:40px">
+      You don't fix what they share. You protect the space where they can share it.
+    </div>
+  </div>
+</section>
+
+<!-- PART 4 -->
+<section id="part4">
+  <div class="section-label mono">The Call</div>
+  <h2 class="section-title">The Standard and the Call.</h2>
+  <div class="section-body">
+    <h3 class="bebas" style="font-size:26px;margin-bottom:16px;color:var(--copper)">What You Are Actually Building</h3>
+    <p>Every Sunday your team builds an environment. An atmosphere. A room someone will walk into for the first time — carrying the weight of a marriage that's ending. A diagnosis they just received. A child they just buried.</p>
+    <p>That person did not drive to church to admire your graphic package. They came because something in them is reaching for something bigger than their situation. And your work is the infrastructure for that encounter.</p>
+
+    <div class="power">
+      Your creative work is not a support function. It is a ministry. And ministry requires ministers. Not technicians.
+    </div>
+    <div class="power">
+      The stranger in row 12 is not judging your lower third. They are reaching for a lifeline. Build like you know the difference.
+    </div>
+
+    <h3 class="bebas" style="font-size:26px;margin:32px 0 16px;color:var(--copper)">The Honest Assessment</h3>
+    <p>Don't answer these out loud. Answer them on the drive home.</p>
+
+    <div class="assessment-q">
+      <div class="assessment-num">01</div>
+      <div class="assessment-text">When did a team member last tell you they were spiritually dry? If <em>never</em> — that's not health. That's a team that doesn't feel safe being honest.</div>
+    </div>
+    <div class="assessment-q">
+      <div class="assessment-num">02</div>
+      <div class="assessment-text">When did you last build space for your team to receive rather than produce?</div>
+    </div>
+    <div class="assessment-q">
+      <div class="assessment-num">03</div>
+      <div class="assessment-text">When did you last lead your team in something purely about God — with no production attached?</div>
+    </div>
+    <div class="assessment-q">
+      <div class="assessment-num">04</div>
+      <div class="assessment-text">When did you last ask someone how they were doing spiritually — and actually wait for the real answer?</div>
+    </div>
+    <div class="assessment-q">
+      <div class="assessment-num">05</div>
+      <div class="assessment-text">When were <em>you</em> — the leader — last led by someone else in worship with no responsibility attached?</div>
+    </div>
+    <div class="assessment-q">
+      <div class="assessment-num">06</div>
+      <div class="assessment-text">When did you last say no to an opportunity because your team wasn't spiritually ready to carry it?</div>
+    </div>
+
+    <div class="power">
+      Every question you refuse to ask is a problem you've agreed to keep.
+    </div>
+  </div>
+</section>
+
+<!-- 30 DAY PLAN -->
+<section class="warm" id="plan">
+  <div class="section-label mono">The 30-Day Starter Plan</div>
+  <h2 class="section-title">Don't Build a Program.<br/>Build a Practice.</h2>
+  <div class="section-body">
+    <p>Overhauls fail. Rhythms stick. Four weeks. One move at a time.</p>
+
+    <div class="week-card">
+      <div class="week-card-num mono">Week 01</div>
+      <div class="week-card-title">Listen.</div>
+      <div class="week-card-body">One honest conversation with one person on your team. Not a project review. A check-in. Ask how they're really doing. Wait for the real answer.</div>
+    </div>
+    <div class="week-card">
+      <div class="week-card-num mono">Week 02</div>
+      <div class="week-card-title">Lead.</div>
+      <div class="week-card-body">Install the spiritual debrief. Two questions. Five minutes. Before any technical debrief. Every week until it's the default.</div>
+    </div>
+    <div class="week-card">
+      <div class="week-card-num mono">Week 03</div>
+      <div class="week-card-title">Protect.</div>
+      <div class="week-card-body">Put one team member on a Receive Sunday. Take them off the rotation. Ask what they heard — not what they fixed.</div>
+    </div>
+    <div class="week-card">
+      <div class="week-card-num mono">Week 04</div>
+      <div class="week-card-title">Multiply.</div>
+      <div class="week-card-body">Identify one person who could be trained into a 3-deep role you're thin on. Start the training. Begin the depth.</div>
+    </div>
+
+    <div class="commit-box" id="planCommit">
+      <div class="commit-label mono">Your 30-Day Commitment</div>
+      <div class="commit-question">Who are you calling this week?</div>
+      <div class="commit-help">One name. First week. Who gets the honest conversation? Type it here. I'll send you a reminder in 7 days.</div>
+      <input id="planName" placeholder="Their name..." />
+      <input id="planEmail" placeholder="Your email (so we can check in)" type="email" />
+      <button class="commit-btn" onclick="submitCommitment('thirty_day_plan', 'planName', 'planSuccess', 'planEmail')">I'm Having the Conversation</button>
+      <div class="commit-success mono" id="planSuccess">✓ Committed · We'll check in at Day 7</div>
+    </div>
+
+    <div class="power">
+      Programs expire. Practices compound.
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CALL -->
+<section class="final-call" id="close">
+  <div class="section-label mono" style="text-align:center">The Close</div>
+  <h2 class="final-title">Worship <span class="accent">First.</span><br/>Build <span class="accent">Second.</span></h2>
+  <p class="final-sub">In that order. Always. You cannot serve what you won't worship. You cannot build what you won't receive.</p>
+
+  <div class="scripture" style="max-width:500px;margin:0 auto 30px">
+    <div class="scripture-ref">Psalm 100:2</div>
+    <div class="scripture-text">"Worship the Lord with gladness; come before him with joyful songs."</div>
+  </div>
+
+  <div class="arise">Arise and Build</div>
+</section>
+
+<footer>
+  Lonnell Williams · <a href="https://ldw.build">ldw.build</a> · Turning Point Church
+</footer>
+
+<script>
+  const SUPABASE_URL = 'https://riqdcirsmckubkdfbtoj.supabase.co';
+  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM';
+
+  // Session ID — stable per page load
+  const sessionId = 'tp_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+
+  async function submitCommitment(type, textId, successId, emailId) {
+    const text = document.getElementById(textId).value.trim();
+    if (!text) return;
+    const email = emailId ? document.getElementById(emailId).value.trim() : null;
+
+    const btn = event.target;
+    btn.disabled = true;
+    btn.textContent = 'Saving...';
+
+    try {
+      const res = await fetch(SUPABASE_URL + '/rest/v1/turning_point_commitments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON,
+          'Authorization': 'Bearer ' + SUPABASE_ANON,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          commitment_type: type,
+          content: text,
+          email: email || null,
+          session_id: sessionId,
+          anonymous: !email
+        })
+      });
+      if (res.ok || res.status === 201) {
+        document.getElementById(successId).classList.add('show');
+        btn.textContent = '✓ Locked';
+      } else {
+        btn.textContent = 'Try Again';
+        btn.disabled = false;
+      }
+    } catch (e) {
+      btn.textContent = 'Try Again';
+      btn.disabled = false;
+    }
+  }
+
+  // Scroll dots + progress
+  const sections = document.querySelectorAll('section');
+  const dotsContainer = document.getElementById('scrollDots');
+  const progressEl = document.getElementById('progress');
+
+  sections.forEach((s, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'dot';
+    btn.setAttribute('aria-label', 'Section ' + (i+1));
+    btn.onclick = () => s.scrollIntoView({ behavior: 'smooth' });
+    dotsContainer.appendChild(btn);
+  });
+  const dots = dotsContainer.querySelectorAll('.dot');
+
+  function onScroll() {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = Math.round((window.scrollY / total) * 100);
+    progressEl.textContent = String(pct).padStart(2,'0') + '%';
+
+    let activeIdx = 0;
+    sections.forEach((s, i) => {
+      const r = s.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.4) activeIdx = i;
+    });
+    dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>
+</body>
+</html>
