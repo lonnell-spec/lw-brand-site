@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="index, follow" />
+<title>Managing The Tension — ARC 2026 · Lonnell Williams</title>
+<meta name="description" content="High-level takeaways from the ARC Conference 2026 breakout on Managing Tension Between Mission and Management. Acts 6. The B.U.I.L.D. Protocol." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Motion libs -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js"></script>
+<style>
+  :root {
+    --obsidian: #0D0D0D;
+    --warm-black: #1A1714;
+    --copper: #C17F59;
+    --signal: #E85D3A;
+    --off-white: #F2F0EB;
+    --concrete: #8A8A8A;
+    --hairline: rgba(242, 240, 235, 0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    background: var(--obsidian);
+    color: var(--off-white);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* ── Loader ─────────────────────────── */
+  .loader {
+    position: fixed;
+    inset: 0;
+    background: var(--obsidian);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .loader-mark {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    letter-spacing: 6px;
+    color: var(--off-white);
+    opacity: 0;
+  }
+  .loader-mark .dot { color: var(--copper); }
+  .loader-bar {
+    width: 220px;
+    height: 1px;
+    background: var(--hairline);
+    position: relative;
+    overflow: hidden;
+  }
+  .loader-bar::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 0;
+    background: var(--copper);
+  }
+  .loader-caption {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--concrete);
+    text-transform: uppercase;
+    opacity: 0;
+  }
+
+  /* ── Three.js canvas ─────────────────── */
+  #bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  /* ── Layout ─────────────────────────── */
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 2; }
+  .wrap-wide { max-width: 920px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 2; }
+
+  /* ── Topbar ─────────────────────────── */
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(13, 13, 13, 0.72);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border-bottom: 1px solid var(--hairline);
+    z-index: 50;
+    padding: 14px 0;
+    transform: translateY(-100%);
+  }
+  .topbar-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 3px;
+    color: var(--off-white);
+    text-decoration: none;
+  }
+  .brand-dot { color: var(--copper); }
+  .topnav {
+    display: flex;
+    gap: 22px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .topnav a {
+    color: var(--concrete);
+    text-decoration: none;
+    transition: color 0.25s ease;
+    position: relative;
+  }
+  .topnav a:hover { color: var(--copper); }
+  .topnav a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -4px;
+    width: 0; height: 1px;
+    background: var(--copper);
+    transition: width 0.25s ease;
+  }
+  .topnav a:hover::after { width: 100%; }
+  @media (max-width: 640px) { .topnav { display: none; } }
+
+  /* ── Hero ───────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 40%, rgba(193, 127, 89, 0.08), transparent 60%),
+      radial-gradient(ellipse at 70% 70%, rgba(232, 93, 58, 0.05), transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 14px 8px 0;
+    background: var(--obsidian);
+    position: relative;
+    z-index: 3;
+  }
+  section.block.off .eyebrow { background: var(--off-white); }
+  section.block.warm .eyebrow { background: var(--warm-black); }
+  .eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--copper);
+  }
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: clamp(48px, 9vw, 100px);
+    line-height: 0.92;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  h1 .accent { color: var(--copper); }
+  h1 .word {
+    display: inline-block;
+    overflow: hidden;
+  }
+  .kicker {
+    font-size: 18px;
+    color: var(--concrete);
+    max-width: 580px;
+    margin-bottom: 48px;
+  }
+  .meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 22px 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--hairline);
+    max-width: 780px;
+  }
+  .meta-item .label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--concrete);
+    margin-bottom: 6px;
+  }
+  .meta-item .value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* ── Section ────────────────────────── */
+  section.block {
+    padding: 120px 0;
+    border-bottom: 1px solid var(--hairline);
+    position: relative;
+    z-index: 1;
+  }
+  section.block.warm {
+    background: var(--warm-black);
+  }
+  section.block.off {
+    background: var(--off-white);
+    color: var(--obsidian);
+  }
+  section.block.off .eyebrow { color: var(--signal); }
+  section.block.off .eyebrow::before { background: var(--signal); }
+  section.block.off .section-num { color: var(--signal); }
+
+  .section-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    color: var(--copper);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-num::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: currentColor;
+  }
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: clamp(36px, 6vw, 64px);
+    line-height: 0.98;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+  h2 .accent { color: var(--copper); }
+  section.block.off h2 .accent { color: var(--signal); }
+
+  p { margin-bottom: 18px; font-size: 17px; }
+  p.lead {
+    font-size: 21px;
+    color: var(--off-white);
+    line-height: 1.5;
+    max-width: 640px;
+  }
+  section.block.off p { color: #2a2a2a; }
+  section.block.off p.lead { color: var(--obsidian); }
+
+  /* ── Takeaway cards ─────────────────── */
+  .takeaways {
+    display: grid;
+    gap: 24px;
+    margin-top: 56px;
+  }
+  .takeaway {
+    background: rgba(242, 240, 235, 0.02);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--hairline);
+    padding: 36px 36px 32px;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 24px;
+    align-items: start;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+    will-change: transform;
+  }
+  .takeaway:hover {
+    border-color: var(--copper);
+  }
+  .takeaway-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    line-height: 1;
+    color: var(--copper);
+    letter-spacing: 1px;
+  }
+  .takeaway-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    line-height: 1.05;
+  }
+  .takeaway-body {
+    font-size: 16px;
+    color: var(--concrete);
+    line-height: 1.55;
+  }
+  section.block.off .takeaway {
+    background: rgba(13, 13, 13, 0.02);
+    border-color: rgba(13,13,13,0.12);
+  }
+  section.block.off .takeaway-num { color: var(--signal); }
+  section.block.off .takeaway-body { color: #3a3a3a; }
+  @media (max-width: 600px) {
+    .takeaway { grid-template-columns: 1fr; gap: 10px; padding: 28px 24px; }
+    .takeaway-num { font-size: 40px; }
+  }
+
+  /* ── Thesis card ────────────────────── */
+  .thesis {
+    text-align: center;
+    padding: 80px 24px;
+    margin: 60px 0 20px;
+    position: relative;
+  }
+  .thesis::before, .thesis::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 1px;
+    background: var(--copper);
+  }
+  .thesis::before { top: 0; }
+  .thesis::after { bottom: 0; }
+  .thesis .line {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 7vw, 72px);
+    line-height: 0.98;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .thesis .line + .line { margin-top: 6px; }
+  .thesis .copper { color: var(--copper); }
+
+  /* ── B.U.I.L.D. grid ────────────────── */
+  .protocol {
+    display: grid;
+    gap: 1px;
+    background: var(--hairline);
+    margin: 48px 0 0;
+    border: 1px solid var(--hairline);
+  }
+  .step {
+    background: var(--warm-black);
+    padding: 40px 36px;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 28px;
+    align-items: start;
+    transition: background 0.3s ease;
+  }
+  .step:hover { background: #221D18; }
+  .step-letter {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    line-height: 0.9;
+    color: var(--copper);
+    letter-spacing: 1px;
+  }
+  .step-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .step-body {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--concrete);
+  }
+  .step-body strong { color: var(--off-white); font-weight: 400; }
+  @media (max-width: 640px) {
+    .step { grid-template-columns: 1fr; gap: 8px; padding: 32px 24px; }
+    .step-letter { font-size: 60px; }
+  }
+
+  /* ── Text card ──────────────────────── */
+  .text-card {
+    background: var(--obsidian);
+    border: 1px solid var(--copper);
+    padding: 48px 36px;
+    margin: 48px 0;
+    text-align: center;
+    position: relative;
+  }
+  .text-card .text-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    color: var(--copper);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .text-card .text-body {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 4.2vw, 42px);
+    line-height: 1.08;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--off-white);
+  }
+
+  /* ── Audit list ──────────────────────── */
+  .audit {
+    counter-reset: step-counter;
+    margin: 40px 0 0;
+  }
+  .audit-step {
+    counter-increment: step-counter;
+    padding: 24px 0 24px 72px;
+    border-bottom: 1px solid rgba(13,13,13,0.1);
+    position: relative;
+  }
+  .audit-step:last-child { border-bottom: none; }
+  .audit-step::before {
+    content: counter(step-counter, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 22px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--signal);
+    width: 52px;
+    letter-spacing: 1px;
+  }
+  .audit-step strong {
+    display: block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+  .audit-step p { margin-bottom: 0; font-size: 15px; color: #4a4a4a; }
+
+  /* ── Power statements ───────────────── */
+  .statements {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--hairline);
+    border: 1px solid var(--hairline);
+    margin-top: 48px;
+  }
+  .statement {
+    background: var(--obsidian);
+    padding: 36px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 180px;
+    transition: background 0.3s ease;
+  }
+  .statement:hover { background: #131313; }
+  .statement-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--copper);
+  }
+  .statement-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(20px, 2.6vw, 26px);
+    line-height: 1.1;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* ── Footer ─────────────────────────── */
+  footer {
+    background: #0A0A0A;
+    padding: 80px 0 50px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  footer .tag {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 14px;
+  }
+  footer .site {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--concrete);
+  }
+  footer a {
+    color: var(--off-white);
+    text-decoration: none;
+    border-bottom: 1px solid var(--copper);
+    padding-bottom: 2px;
+    transition: color 0.2s ease;
+  }
+  footer a:hover { color: var(--copper); }
+
+  /* ── Reveal states ──────────────────── */
+  .reveal { opacity: 0; transform: translateY(30px); }
+  .reveal-fast { opacity: 0; }
+
+  /* ── Anchor list ────────────────────── */
+  .anchor-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 44px;
+  }
+  .anchor-list a {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--copper);
+    text-decoration: none;
+    padding: 11px 16px;
+    border: 1px solid var(--copper);
+    transition: all 0.25s ease;
+    background: var(--obsidian);
+    position: relative;
+    z-index: 3;
+  }
+  .anchor-list a:hover {
+    background: var(--copper);
+    color: var(--obsidian);
+  }
+
+  /* ── Scroll indicator ───────────────── */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    color: var(--concrete);
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    opacity: 0;
+  }
+  .scroll-indicator::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--copper), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { transform: scaleY(0.5); transform-origin: top; opacity: 0.4; }
+    50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  }
+
+  /* ── Progress bar ───────────────────── */
+  .progress {
+    position: fixed;
+    top: 0; left: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--copper);
+    z-index: 100;
+    transition: width 0.1s linear;
+  }
+
+  /* ── Respect reduced motion ─────────── */
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    .reveal, .reveal-fast { opacity: 1; transform: none; }
+    #bg-canvas { opacity: 0 !important; }
+    .topbar { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-mark" id="loader-mark">LDW<span class="dot">.</span>BUILD</div>
+  <div class="loader-bar"><span id="loader-fill" style="position:absolute;left:0;top:0;bottom:0;width:0;background:var(--copper);"></span></div>
+  <div class="loader-caption" id="loader-caption">Preparing the Table</div>
+</div>
+
+<!-- PROGRESS BAR -->
+<div class="progress" id="progress"></div>
+
+<!-- THREE.JS BG removed by request -->
+
+<!-- TOPBAR -->
+<div class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <a href="/" class="brand">LDW<span class="brand-dot">.</span>BUILD</a>
+    <nav class="topnav">
+      <a href="#problem">Problem</a>
+      <a href="#acts6">Acts 6</a>
+      <a href="#build">Protocol</a>
+      <a href="#monday">Monday</a>
+      <a href="#lines">Lines</a>
+    </nav>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="wrap-wide">
+    <div class="eyebrow reveal">ARC Conference 2026 · Warehouse Breakout</div>
+    <h1 class="hero-title">
+      <div class="word">Managing The</div>
+      <div class="word">Tension Between</div>
+      <div class="word"><span class="accent">Mission</span> &amp;</div>
+      <div class="word"><span class="accent">Management</span></div>
+    </h1>
+    <p class="kicker reveal">High-level takeaways from the session. Keep your phone in your pocket. Follow along here. Leave with the handful of ideas that actually change Monday.</p>
+
+    <div class="meta reveal">
+      <div class="meta-item">
+        <div class="label">Speaker</div>
+        <div class="value">Lonnell Williams</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Room</div>
+        <div class="value">The Warehouse</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Track</div>
+        <div class="value">Exec &amp; Admin</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Thesis</div>
+        <div class="value">Infrastructure Is The Sermon</div>
+      </div>
+    </div>
+
+    <div class="anchor-list reveal">
+      <a href="#problem">01 · Problem</a>
+      <a href="#acts6">02 · Acts 6</a>
+      <a href="#build">03 · B.U.I.L.D.</a>
+      <a href="#cross">04 · The Cross</a>
+      <a href="#monday">05 · Monday</a>
+      <a href="#lines">06 · Lines</a>
+    </div>
+  </div>
+  <div class="scroll-indicator" id="scroll-indicator">Scroll</div>
+</section>
+
+<!-- 01 · THE PROBLEM -->
+<section class="block" id="problem">
+  <div class="wrap">
+    <div class="section-num reveal">01 · The Problem</div>
+    <h2 class="reveal">You Cannot Pray<br>Your Way Out Of<br>A <span class="accent">Broken System.</span></h2>
+
+    <p class="lead reveal">Built for the Stretched XP. Every ministry line item on your laptop. Slack during worship. Midnight emails. And you can't remember the last time you sat with Jesus.</p>
+
+    <div class="thesis reveal">
+      <div class="line">Infrastructure</div>
+      <div class="line copper">Is the Sermon.</div>
+      <div class="line" style="margin-top: 18px;">Acts 6</div>
+      <div class="line copper">Is the Proof.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 · ACTS 6 -->
+<section class="block warm" id="acts6">
+  <div class="wrap">
+    <div class="section-num reveal">02 · Acts 6 — The Core Insight</div>
+    <h2 class="reveal">The Table And The<br>Pulpit Are <span class="accent">The Same<br>Ministry.</span></h2>
+
+    <p class="lead reveal">"Serve tables" — <em>diakonein trapezais</em>. "Ministry of the word" — <em>tē diakonia tou logou</em>. Same root. Same word. Luke is making a claim we've been ignoring for centuries.</p>
+  </div>
+</section>
+
+<!-- 03 · B.U.I.L.D. -->
+<section class="block" id="build">
+  <div class="wrap">
+    <div class="section-num reveal">03 · The Framework</div>
+    <h2 class="reveal">The B.U.I.L.D.<br><span class="accent">Protocol.</span></h2>
+    <p class="lead reveal">Acts 6 is not just a story — it's a protocol. Five moves, in order. Miss one, the whole thing breaks. Run all five, Acts 6:7 is your outcome.</p>
+
+    <div class="protocol">
+      <div class="step reveal">
+        <div class="step-letter">B</div>
+        <div>
+          <div class="step-title">Break The Silence</div>
+          <div class="step-body">Name the gap publicly. <strong>The gap is not evidence of failure. The gap is the assignment.</strong></div>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-letter">U</div>
+        <div>
+          <div class="step-title">Uncompromise The Engine</div>
+          <div class="step-body">Know the three things only you can do. <strong>Prayer. The Word. Vision.</strong> Refuse to get pulled off them.</div>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-letter">I</div>
+        <div>
+          <div class="step-title">Identify Your Seven</div>
+          <div class="step-body">Not the most available. The most qualified. <strong>Good repute. Full of Spirit. Full of wisdom.</strong></div>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-letter">L</div>
+        <div>
+          <div class="step-title">Launch Publicly</div>
+          <div class="step-body">Hands on. In front of the church. Private delegation creates silent confusion. Public commissioning creates covenant clarity.</div>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-letter">D</div>
+        <div>
+          <div class="step-title">Deploy The Domain</div>
+          <div class="step-body">Acts 6:7 — "the word of God continued to increase." <strong>Fix the plumbing, the house expands.</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 · CROSS -->
+<section class="block warm" id="cross">
+  <div class="wrap">
+    <div class="section-num reveal">04 · The Anchor</div>
+    <h2 class="reveal">Because He<br>Did It Completely,<br><span class="accent">You Don't Have To<br>Do It All.</span></h2>
+
+    <p class="lead reveal">Philippians 2. Jesus emptied Himself to the form of a <em>doulos</em>. The ultimate <em>diakonos</em>. The Table has already been served.</p>
+  </div>
+</section>
+
+<!-- 05 · MONDAY MORNING -->
+<section class="block off" id="monday">
+  <div class="wrap">
+    <div class="section-num reveal">05 · The Mechanic</div>
+    <h2 class="reveal">The Monday<br>Morning <span class="accent">Move.</span></h2>
+    <p class="lead reveal">Sunday is forty-eight hours behind you, five days ahead of you. One window. Don't leave this conference with notes. Leave with a meeting on the calendar.</p>
+
+    <div class="text-card reveal">
+      <div class="text-label">The Ask</div>
+      <div class="text-body">Book ninety minutes<br>with your Senior Pastor.</div>
+    </div>
+
+    <p class="reveal"><strong>The 90-Minute Core vs. Tables Audit.</strong> Eight moves. One sheet of paper. One vertical line.</p>
+
+    <div class="audit">
+      <div class="audit-step reveal"><strong>Pull Both Calendars</strong><p>Last four weeks. Every recurring meeting, every decision, every standing block.</p></div>
+      <div class="audit-step reveal"><strong>One Sheet. One Vertical Line.</strong><p>Left column: ENGINE — prayer, Word, vision, preaching, shepherding, culture. Right column: TABLES — everything else.</p></div>
+      <div class="audit-step reveal"><strong>Mark Every Item E Or T</strong><p>No third category. No "a little bit of both." Make the call.</p></div>
+      <div class="audit-step reveal"><strong>Protect The Engine</strong><p>Every E on SP's calendar stays. Every T is a transfer target. Every T on XP's calendar transfers down to a qualified Seven.</p></div>
+      <div class="audit-step reveal"><strong>Find The Longest-Stuck T</strong><p>The top three items stuck longest on SP's plate. Not most-annoying. Longest-stuck.</p></div>
+      <div class="audit-step reveal"><strong>Pick One. Just One.</strong><p>That's your ninety-day transfer.</p></div>
+      <div class="audit-step reveal"><strong>Commission Publicly</strong><p>At the next staff meeting. Hands on. Prayer. Authority. Not a forwarded email.</p></div>
+      <div class="audit-step reveal"><strong>Run It Again In Ninety Days</strong><p>Same sheet. Different items. Every quarter until SP's calendar is 80% engine and yours is 80% system.</p></div>
+    </div>
+
+    <div class="text-card reveal" style="margin-top: 56px;">
+      <div class="text-label">Text Your Senior Pastor Now</div>
+      <div class="text-body">
+        "I can protect what you cannot delegate.<br>
+        But only if you will name it.<br>
+        Acts 6. Ninety minutes. Monday."
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 · POWER STATEMENTS -->
+<section class="block" id="lines">
+  <div class="wrap-wide">
+    <div class="section-num reveal">06 · The Lines</div>
+    <h2 class="reveal">Take One<br><span class="accent">Home.</span></h2>
+    <p class="lead reveal">Screenshot one. Text it to your team. Put it on the whiteboard. Walk out of The Warehouse with a sentence that won't leave you alone.</p>
+
+    <div class="statements">
+      <div class="statement reveal">
+        <div class="statement-num">— 01</div>
+        <div class="statement-text">You cannot pray your way out of a broken system.</div>
+      </div>
+      <div class="statement reveal">
+        <div class="statement-num">— 02</div>
+        <div class="statement-text">The table and the pulpit are the same ministry.</div>
+      </div>
+      <div class="statement reveal">
+        <div class="statement-num">— 03</div>
+        <div class="statement-text">Availability without qualification is how you get Judas with a clipboard.</div>
+      </div>
+      <div class="statement reveal">
+        <div class="statement-num">— 04</div>
+        <div class="statement-text">The gap is not evidence of failure. The gap is the assignment.</div>
+      </div>
+      <div class="statement reveal">
+        <div class="statement-num">— 05</div>
+        <div class="statement-text">Protect the engine. Release the rest. That's the whole game.</div>
+      </div>
+      <div class="statement reveal">
+        <div class="statement-num">— 06</div>
+        <div class="statement-text">If you don't manage the growth, the growth will manage you.</div>
+      </div>
+      <div class="statement reveal">
+        <div class="statement-num">— 07</div>
+        <div class="statement-text">Systems are the scaffolding for the Spirit.</div>
+      </div>
+      <div class="statement reveal">
+        <div class="statement-num">— 08</div>
+        <div class="statement-text">The table is not a demotion. The table is a launchpad.</div>
+      </div>
+      <div class="statement reveal">
+        <div class="statement-num">— 09</div>
+        <div class="statement-text">If you're grasping everything, you don't yet know what Jesus finished.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="tag">Arise and Build.</div>
+    <div class="site"><a href="https://ldw.build">ldw.build</a></div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   GSAP — cinematic loader + scroll-triggered reveals
+   ============================================================ */
+(function initMotion() {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) {
+    document.getElementById('loader').style.display = 'none';
+    document.getElementById('topbar').style.transform = 'translateY(0)';
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ── Loader sequence ─────────────────────────── */
+  const loader = document.getElementById('loader');
+  const loaderMark = document.getElementById('loader-mark');
+  const loaderFill = document.getElementById('loader-fill');
+  const loaderCaption = document.getElementById('loader-caption');
+
+  const tl = gsap.timeline();
+  tl.to(loaderMark, { opacity: 1, duration: 0.5, ease: 'power2.out' })
+    .to(loaderCaption, { opacity: 1, duration: 0.4 }, '-=0.3')
+    .to(loaderFill, { width: '100%', duration: 1.2, ease: 'power2.inOut' }, '-=0.1')
+    .to([loaderMark, loaderCaption], { opacity: 0, duration: 0.4, ease: 'power2.in' }, '+=0.15')
+    .to(loader, { opacity: 0, duration: 0.5, ease: 'power2.out', onComplete: () => loader.style.display = 'none' }, '-=0.2');
+
+  /* ── Topbar reveal ───────────────────────────── */
+  tl.to('#topbar', { y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.3');
+  tl.to('#scroll-indicator', { opacity: 1, duration: 0.5 }, '-=0.2');
+
+  /* ── Hero title word-by-word ────────────────── */
+  const words = document.querySelectorAll('.hero-title .word');
+  gsap.set(words, { y: 120 });
+  tl.to(words, {
+    y: 0,
+    duration: 1,
+    stagger: 0.08,
+    ease: 'power4.out',
+  }, '-=1.0');
+
+  /* ── Hero reveal chain ──────────────────────── */
+  tl.to('.hero .reveal', {
+    opacity: 1,
+    y: 0,
+    duration: 0.7,
+    stagger: 0.08,
+    ease: 'power2.out',
+  }, '-=0.6');
+
+  /* ── Scroll-triggered reveals for the rest ──── */
+  const revealEls = document.querySelectorAll('section.block .reveal');
+  revealEls.forEach((el) => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse',
+        }
+      }
+    );
+  });
+
+  /* ── Parallax drift on section headings ─────── */
+  gsap.utils.toArray('section.block h2').forEach((h2) => {
+    gsap.to(h2, {
+      y: -30,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: h2,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true,
+      }
+    });
+  });
+
+  /* ── Progress bar ───────────────────────────── */
+  const progress = document.getElementById('progress');
+  ScrollTrigger.create({
+    start: 0,
+    end: 'max',
+    onUpdate: (self) => {
+      progress.style.width = (self.progress * 100) + '%';
+    }
+  });
+
+  /* ── Fade scroll indicator out early ────────── */
+  gsap.to('#scroll-indicator', {
+    opacity: 0,
+    scrollTrigger: {
+      trigger: '#hero',
+      start: '20% top',
+      end: '40% top',
+      scrub: true,
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
