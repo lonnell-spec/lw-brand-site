@@ -489,6 +489,36 @@
   @media (max-width: 420px) {
     .scroll-dots { display: none; }
   }
+  /* Cross-page nav */
+  .page-switcher {
+    display: flex;
+    gap: 2px;
+    margin: 40px auto 0;
+    max-width: 720px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+  }
+  .page-switcher a {
+    flex: 1;
+    padding: 14px 16px;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--concrete);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .page-switcher a:hover { color: var(--off-white); background: rgba(193,127,89,0.05); }
+  .page-switcher a.current {
+    background: var(--copper);
+    color: var(--obsidian);
+    font-weight: 700;
+  }
+  .page-switcher a.current:hover { background: var(--copper); }
+  .page-switcher .label { display:block; font-size: 9px; opacity: 0.6; margin-bottom: 2px; }
+  .page-switcher .name { display:block; font-size: 12px; }
 </style>
 </head>
 <body>
@@ -508,6 +538,10 @@
   <div class="hero-meta">
     <div>Speaker<br/><span>Lonnell Williams</span></div>
     <div>Venue<br/><span>Turning Point Church · McDonough, GA</span></div>
+  </div>
+  <div class="page-switcher">
+    <a href="./" class="current"><span class="label">Part One</span><span class="name">Worship First</span></a>
+    <a href="./shot-list/"><span class="label">Part Two</span><span class="name">The Shot List</span></a>
   </div>
 </section>
 

@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+<title>The Shot List. | Turning Point Talking Sessions</title>
+<meta name="description" content="Live companion for Lonnell Williams' talk to the Turning Point creative team. Power statements, practices, and the 30-day install." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --obsidian: #0D0D0D;
+    --warm-black: #1A1714;
+    --copper: #C17F59;
+    --copper-dim: #8a5a3f;
+    --signal: #E85D3A;
+    --off-white: #F2F0EB;
+    --concrete: #8A8A8A;
+    --border: rgba(193, 127, 89, 0.25);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--obsidian);
+    color: var(--off-white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  .bebas { font-family: 'Bebas Neue', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; }
+  .mono { font-family: 'Space Mono', monospace; text-transform: uppercase; letter-spacing: 0.15em; font-size: 11px; }
+
+  /* Sticky nav */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13,13,13,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.12em; color: var(--off-white); }
+  .nav-progress {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--copper);
+    letter-spacing: 0.2em;
+  }
+
+  /* Section scroll dots (fixed right) */
+  .scroll-dots {
+    position: fixed; right: 14px; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 8px; z-index: 50;
+  }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(193, 127, 89, 0.3);
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+  }
+  .dot.active { background: var(--copper); transform: scale(1.5); }
+
+  /* Hero */
+  .hero {
+    min-height: 92vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 40px 24px 60px;
+    background: radial-gradient(ellipse at top, #1a1714 0%, #0D0D0D 60%);
+    position: relative;
+  }
+  .hero-label { color: var(--copper); font-size: 11px; margin-bottom: 28px; }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 13vw, 96px);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    margin-bottom: 24px;
+  }
+  .hero-title .accent { color: var(--copper); }
+  .hero-sub {
+    color: var(--concrete);
+    font-size: 15px;
+    max-width: 500px;
+    margin-bottom: 40px;
+  }
+  .hero-meta {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+    display: flex; flex-wrap: wrap; gap: 16px 32px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--concrete);
+  }
+  .hero-meta span { color: var(--off-white); }
+
+  /* Section base */
+  section {
+    padding: 80px 24px;
+    border-top: 1px solid var(--border);
+    scroll-margin-top: 60px;
+  }
+  section > * { max-width: 720px; margin-left: auto; margin-right: auto; }
+  .hero > * { max-width: 720px; margin-left: auto; margin-right: auto; width: 100%; }
+  section.light {
+    background: var(--off-white);
+    color: var(--obsidian);
+  }
+  section.warm { background: var(--warm-black); }
+  .section-label {
+    color: var(--copper);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    margin-bottom: 16px;
+  }
+  section.light .section-label { color: var(--copper); }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 8vw, 64px);
+    line-height: 0.95;
+    margin-bottom: 32px;
+    letter-spacing: 0.02em;
+  }
+  .section-body {
+    font-size: 16px;
+    line-height: 1.7;
+    max-width: 620px;
+  }
+  .section-body p { margin-bottom: 18px; }
+
+  /* Power statement */
+  .power {
+    border-left: 3px solid var(--copper);
+    padding: 20px 0 20px 24px;
+    margin: 36px 0;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(22px, 5vw, 32px);
+    line-height: 1.15;
+    letter-spacing: 0.02em;
+    color: var(--off-white);
+  }
+  section.light .power { color: var(--obsidian); }
+  .power .num {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--copper);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  /* Scripture block */
+  .scripture {
+    background: rgba(193, 127, 89, 0.06);
+    border: 1px solid var(--border);
+    padding: 24px;
+    margin: 28px 0;
+    border-radius: 2px;
+  }
+  .scripture-ref {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--copper);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .scripture-text { font-style: italic; color: var(--off-white); font-size: 15px; }
+  section.light .scripture-text { color: var(--obsidian); }
+
+  /* Ice breaker */
+  .icebreaker-frame {
+    border: 1px solid var(--border);
+    padding: 24px;
+    margin-bottom: 16px;
+    border-radius: 2px;
+    background: rgba(193, 127, 89, 0.03);
+  }
+  .frame-num {
+    font-family: 'Space Mono', monospace;
+    color: var(--copper);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    margin-bottom: 8px;
+  }
+  .frame-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+  }
+  .frame-body { font-size: 15px; color: var(--concrete); }
+  .frame-body ul { margin-top: 10px; padding-left: 18px; }
+  .frame-body li { margin-bottom: 8px; color: var(--off-white); }
+
+  /* Interactive commitment box */
+  .commit-box {
+    border: 1px solid var(--copper);
+    padding: 28px;
+    margin: 32px 0;
+    border-radius: 2px;
+    background: rgba(193, 127, 89, 0.04);
+  }
+  .commit-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--copper);
+    margin-bottom: 10px;
+  }
+  .commit-question {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 0.03em;
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+  .commit-help { font-size: 13px; color: var(--concrete); margin-bottom: 18px; }
+  .commit-box textarea, .commit-box input {
+    width: 100%;
+    background: var(--obsidian);
+    border: 1px solid var(--border);
+    color: var(--off-white);
+    padding: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    border-radius: 2px;
+    margin-bottom: 12px;
+    resize: vertical;
+    min-height: 80px;
+  }
+  section.light .commit-box textarea,
+  section.light .commit-box input {
+    background: #fff;
+    color: var(--obsidian);
+  }
+  .commit-box textarea:focus, .commit-box input:focus {
+    outline: none;
+    border-color: var(--copper);
+  }
+  .commit-btn {
+    background: var(--copper);
+    color: var(--obsidian);
+    border: none;
+    padding: 14px 28px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    border-radius: 2px;
+    width: 100%;
+    transition: background 0.2s;
+  }
+  .commit-btn:hover { background: var(--signal); }
+  .commit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .commit-success {
+    color: var(--copper);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    margin-top: 10px;
+    display: none;
+  }
+  .commit-success.show { display: block; }
+
+  /* Practice cards */
+  .practice {
+    border-top: 1px solid var(--border);
+    padding: 28px 0;
+  }
+  .practice-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--copper);
+    line-height: 1;
+  }
+  .practice-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+    line-height: 1.1;
+  }
+  .practice-body { font-size: 15px; color: var(--concrete); margin-bottom: 14px; }
+  section.light .practice-body { color: #555; }
+  .practice-install {
+    border-left: 2px solid var(--copper);
+    padding-left: 14px;
+    font-size: 14px;
+    color: var(--off-white);
+  }
+  section.light .practice-install { color: var(--obsidian); }
+  .practice-install-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--copper);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* Weekly rhythm grid */
+  .week-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin: 28px 0;
+  }
+  .day {
+    border: 1px solid var(--border);
+    padding: 18px;
+    border-radius: 2px;
+    background: rgba(193, 127, 89, 0.03);
+  }
+  .day-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    color: var(--copper);
+    margin-bottom: 4px;
+  }
+  .day-theme {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .day-body { font-size: 14px; color: var(--concrete); }
+
+  /* Assessment questions */
+  .assessment-q {
+    border-top: 1px solid var(--border);
+    padding: 22px 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .assessment-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    color: var(--copper);
+    line-height: 1;
+    min-width: 36px;
+  }
+  .assessment-text {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* 30-day plan */
+  .week-card {
+    border: 1px solid var(--border);
+    padding: 24px;
+    margin-bottom: 14px;
+    border-radius: 2px;
+    background: rgba(193, 127, 89, 0.04);
+  }
+  .week-card-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--copper);
+    margin-bottom: 6px;
+  }
+  .week-card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+    line-height: 1.1;
+  }
+  .week-card-body { font-size: 15px; color: var(--concrete); }
+
+  /* Mentee flow */
+  .mentee-block {
+    border-left: 3px solid var(--copper);
+    padding: 0 0 0 20px;
+    margin-bottom: 28px;
+  }
+  .mentee-time {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--copper);
+    margin-bottom: 6px;
+  }
+  .mentee-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+  .mentee-list { list-style: none; }
+  .mentee-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
+    color: var(--off-white);
+  }
+  section.light .mentee-list li { color: var(--obsidian); }
+  .mentee-list li:last-child { border-bottom: none; }
+
+  /* Download button */
+  .download-btn {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid var(--copper);
+    color: var(--copper);
+    padding: 16px 28px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    text-decoration: none;
+    margin-top: 24px;
+    border-radius: 2px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .download-btn:hover {
+    background: var(--copper);
+    color: var(--obsidian);
+  }
+
+  /* Final call */
+  .final-call {
+    text-align: center;
+    padding: 100px 24px;
+    background: linear-gradient(180deg, var(--obsidian) 0%, #1a1714 100%);
+  }
+  .final-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 10vw, 72px);
+    line-height: 0.95;
+    margin-bottom: 20px;
+    letter-spacing: 0.02em;
+  }
+  .final-title .accent { color: var(--copper); }
+  .final-sub {
+    color: var(--concrete);
+    font-size: 15px;
+    max-width: 460px;
+    margin: 0 auto 40px;
+  }
+  .arise {
+    display: inline-block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 0.3em;
+    color: var(--copper);
+    border-top: 1px solid var(--copper);
+    border-bottom: 1px solid var(--copper);
+    padding: 14px 0;
+    margin-top: 30px;
+  }
+
+  /* Footer */
+  footer {
+    padding: 40px 24px;
+    border-top: 1px solid var(--border);
+    background: #0A0A0A;
+    text-align: center;
+    color: var(--concrete);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+  }
+  footer a { color: var(--copper); text-decoration: none; }
+
+  /* Hide Power statement numbers (now removed) */
+  .power .num { display: none; }
+
+  /* Desktop tweaks */
+  @media (min-width: 768px) {
+    section { padding: 120px 60px; }
+    .hero { padding: 60px 60px 80px; }
+    .week-grid { grid-template-columns: repeat(2, 1fr); }
+    .nav { padding: 18px 60px; }
+  }
+  @media (min-width: 1024px) {
+    .week-grid { grid-template-columns: repeat(3, 1fr); }
+    .section-body, .section-title { max-width: 760px; }
+  }
+  @media (max-width: 420px) {
+    .scroll-dots { display: none; }
+  }
+  /* Cross-page nav */
+  .page-switcher {
+    display: flex;
+    gap: 2px;
+    margin: 40px auto 0;
+    max-width: 720px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+  }
+  .page-switcher a {
+    flex: 1;
+    padding: 14px 16px;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--concrete);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .page-switcher a:hover { color: var(--off-white); background: rgba(193,127,89,0.05); }
+  .page-switcher a.current {
+    background: var(--copper);
+    color: var(--obsidian);
+    font-weight: 700;
+  }
+  .page-switcher a.current:hover { background: var(--copper); }
+  .page-switcher .label { display:block; font-size: 9px; opacity: 0.6; margin-bottom: 2px; }
+  .page-switcher .name { display:block; font-size: 12px; }
+
+  /* Shot list card */
+  .shot-card {
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--copper);
+    padding: 24px 24px 20px;
+    margin: 18px 0;
+    background: rgba(193,127,89,0.03);
+  }
+  .shot-card-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--copper);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .shot-card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 0.03em;
+    line-height: 1.1;
+    color: var(--off-white);
+    margin-bottom: 12px;
+  }
+  .shot-card-body {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--concrete);
+  }
+  .shot-card-body strong { color: var(--off-white); font-weight: 500; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-title">The Shot List</div>
+  <div class="nav-progress" id="progress">00%</div>
+</nav>
+
+<div class="scroll-dots" id="scrollDots"></div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-label mono">Turning Point Talking Sessions · Part Two</div>
+  <h1 class="hero-title">The <span class="accent">Shot</span><br/><span class="accent">List.</span></h1>
+  <p class="hero-sub">For the servant leaders carrying volunteer teams. If you're positioning the camera, running the deck, directing the switch — this is for you. Plans that move the Spirit. Rhythms that hold the room.</p>
+  <div class="hero-meta">
+    <div>Speaker<br/><span>Lonnell Williams</span></div>
+    <div>Venue<br/><span>Turning Point Church · McDonough, GA</span></div>
+  </div>
+  <div class="page-switcher">
+    <a href="../"><span class="label">Part One</span><span class="name">Worship First</span></a>
+    <a href="./" class="current"><span class="label">Part Two</span><span class="name">The Shot List</span></a>
+  </div>
+</section>
+
+<!-- BIG IDEA -->
+<section id="bigidea">
+  <div class="section-label mono">The Big Idea</div>
+  <h2 class="section-title">Spontaneity Is Not a Strategy.</h2>
+  <div class="section-body">
+    <p>Hoping you get the shot is not a workflow. Showing up and figuring it out is not a plan — it's a prayer. And while prayer is good, God also honors preparation.</p>
+    <p>The stories that move people — new families through the door, the city seeing what God is doing in this room — don't happen by accident. They are planned. Assigned. Shot with intention. Edited with purpose.</p>
+
+    <div class="power">
+      The gap between what your team produces and what the church deserves is a planning problem. Not a talent problem.
+    </div>
+    <div class="power">
+      You don't need more volunteers. You need a plan your volunteers can follow.
+    </div>
+  </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section class="warm" id="problem">
+  <div class="section-label mono">The Problem</div>
+  <h2 class="section-title">We've Romanticized Spontaneity.</h2>
+  <div class="section-body">
+    <p>The story we tell ourselves: <em>"We let the Spirit lead. We stay flexible. We don't want a plan so locked we miss the moment."</em></p>
+    <p>That sounds humble. It's lazy.</p>
+    <p>The Spirit can move through a plan. Preparation creates margin for the Spirit to move — because you're not standing in the hallway figuring out who's in kids right now.</p>
+
+    <div class="power">
+      Preparation is not the opposite of Spirit-led. Preparation is what Spirit-led people do before the moment arrives.
+    </div>
+
+    <div class="scripture" style="margin-top:30px">
+      <div class="scripture-ref">Luke 14:28</div>
+      <div class="scripture-text">"Suppose one of you wants to build a tower. Won't you first sit down and estimate the cost?"</div>
+    </div>
+    <p>Jesus said count the cost before you build. That's pre-production. That's a shot list.</p>
+
+    <div class="power">
+      You don't get to build what you haven't surveyed. You don't get to tell what you haven't planned.
+    </div>
+  </div>
+</section>
+
+<!-- FOUR QUESTIONS -->
+<section id="questions">
+  <div class="section-label mono">What a Shot List Is</div>
+  <h2 class="section-title">Four Questions.<br/>Answered Before Sunday.</h2>
+  <div class="section-body">
+    <p>A shot list is a pre-production document that answers four questions before any Sunday or event begins.</p>
+
+    <div class="assessment-q">
+      <div class="assessment-num">01</div>
+      <div class="assessment-text">What moments do we need to capture?</div>
+    </div>
+    <div class="assessment-q">
+      <div class="assessment-num">02</div>
+      <div class="assessment-text">What story are we trying to tell?</div>
+    </div>
+    <div class="assessment-q">
+      <div class="assessment-num">03</div>
+      <div class="assessment-text">Who is responsible for each piece of coverage?</div>
+    </div>
+    <div class="assessment-q">
+      <div class="assessment-num">04</div>
+      <div class="assessment-text">What will we do with it after we have it?</div>
+    </div>
+
+    <p>If the team you lead can't answer all four before Sunday — they are guessing.</p>
+
+    <div class="power">
+      Guessing is expensive. It costs you shots you can never get back. Moments that happened once and will never happen again.
+    </div>
+    <div class="power">
+      One person trying to capture everything captures nothing. Intentional coverage by a focused team captures everything that matters.
+    </div>
+  </div>
+</section>
+
+<!-- FIVE COVERAGE CATEGORIES -->
+<section class="warm" id="categories">
+  <div class="section-label mono">Five Coverage Categories</div>
+  <h2 class="section-title">Every Sunday Needs These.</h2>
+  <div class="section-body">
+    <p>Not whoever has time. A specific volunteer. A specific assignment. A specific time window.</p>
+
+    <div class="practice">
+      <div class="practice-title">01 · The Atmosphere</div>
+      <div class="practice-body">The room before people arrive. The lighting at its peak. The stage design. The details that tell the story of how much you care before a single word is spoken. Fifteen-minute window. Own it or lose it.</div>
+      <div class="power" style="margin:16px 0 0">The room tells the first story. Most churches never photograph it.</div>
+    </div>
+
+    <div class="practice">
+      <div class="practice-title">02 · The People</div>
+      <div class="practice-body">The greeting at the door. The parent handing off a child in kids. The first-time guest receiving their welcome gift. Unstaged. Predictable. Happening every Sunday — because this church has rhythms.</div>
+      <div class="power" style="margin:16px 0 0">The moments that feel spontaneous to the congregation are predictable to the team. Position for them.</div>
+    </div>
+
+    <div class="practice">
+      <div class="practice-title">03 · The Worship Experience</div>
+      <div class="practice-body">Not background footage. Content. Wide establishing shots. Congregation sections. Close-ups of individual worshipers — faces, hands, posture. Band. Singers. Worship leader. If you only have one shooter, they need to know which shot matters more. Not a guess. A plan.</div>
+      <div class="power" style="margin:16px 0 0">Without a plan, you'll get the same shot twenty-five times and call it coverage. It's not. It's one shot, twenty-five times.</div>
+    </div>
+
+    <div class="practice">
+      <div class="practice-title">04 · The Teaching Moment</div>
+      <div class="practice-body">Not just the pastor on camera. The congregation's response. The moment the message lands. The person three rows back whose hand goes to their chest when a sentence hits them.</div>
+      <div class="power" style="margin:16px 0 0">The preacher is the message. The congregation is the evidence. Both need to be on your shot list.</div>
+    </div>
+
+    <div class="practice">
+      <div class="practice-title">05 · The Response</div>
+      <div class="practice-body">The altar call. The baptism. The prayer moment. The entire point of the Sunday. The category most teams miss — because they're not ready. Know where to stand before it happens.</div>
+      <div class="power" style="margin:16px 0 0">The response is the proof of what God did. If you don't capture it, you can't testify to it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- THE DOCUMENT -->
+<section id="document">
+  <div class="section-label mono">Building the Document</div>
+  <h2 class="section-title">Four Parts.<br/>Write It Down.</h2>
+  <div class="section-body">
+    <p>The shot list covers four things. Miss one — you're still guessing.</p>
+
+    <div class="shot-card">
+      <div class="shot-card-label">01 · The Date & The Event</div>
+      <div class="shot-card-title">Name the Sunday.</div>
+      <div class="shot-card-body">What Sunday is this? What series? Any special moments — baptisms, guest speakers — requiring specific attention?</div>
+    </div>
+
+    <div class="shot-card">
+      <div class="shot-card-label">02 · The Assignments</div>
+      <div class="shot-card-title">Every volunteer knows their lane.</div>
+      <div class="shot-card-body">Every volunteer should read the list and know <strong>exactly where they are and what they're responsible for.</strong> If the names aren't on paper, the responsibility isn't real.</div>
+    </div>
+
+    <div class="shot-card">
+      <div class="shot-card-label">03 · The Timeline</div>
+      <div class="shot-card-title">When each shot gets made.</div>
+      <div class="shot-card-body">Atmosphere shots happen <strong>before doors open.</strong> Response coverage doesn't start at the altar call — it starts when they position themselves before it happens.</div>
+    </div>
+
+    <div class="shot-card">
+      <div class="shot-card-label">04 · The Deliverables</div>
+      <div class="shot-card-title">Know where it's going before you shoot it.</div>
+      <div class="shot-card-body">Reels need vertical. Print needs wide. Website needs variety. <strong>Say it before Sunday.</strong> The destination changes what you prioritize.</div>
+    </div>
+
+    <div class="power">
+      If the team doesn't know what the content is for, they can't shoot it right. Give them the destination before the journey.
+    </div>
+  </div>
+</section>
+
+<!-- THE BRIEFING -->
+<section class="warm" id="briefing">
+  <div class="section-label mono">The Briefing</div>
+  <h2 class="section-title">Ten Minutes.<br/>Non-Negotiable.</h2>
+  <div class="section-body">
+    <p>Before every significant Sunday, the team needs a briefing. Not a text. Not a group message. A meeting — even if it's ten minutes.</p>
+    <p>Everyone reviews the shot list. Everyone asks questions. Everyone knows who owns what. Everyone leaves with a clear assignment and a clear picture of success.</p>
+    <p>A team that's briefed makes field decisions that align with the plan. A team that isn't briefed makes decisions that serve themselves.</p>
+    <p>As a volunteer lead, this is the single most important ten minutes you run all week. It's also what proves — to the staff above you and the volunteers beside you — that you take this seriously.</p>
+
+    <div class="power">
+      You brief before you deploy. Every time. Without exception.
+    </div>
+    <div class="power">
+      The volunteer who briefs their team is already operating at staff level. Budget catches up to standard. It always does.
+    </div>
+    <div class="power">
+      Planning creates margin. Margin creates flexibility. Flexibility is what lets you catch the moment nobody planned for.
+    </div>
+  </div>
+</section>
+
+<!-- THE CALL -->
+<section id="call">
+  <div class="section-label mono">The Call</div>
+  <h2 class="section-title">Build Your Shot List.<br/>Before You Leave.</h2>
+  <div class="section-body">
+    <p>Pull out your phone. Answer these four questions for next Sunday before you walk out of this room.</p>
+
+    <div class="assessment-q">
+      <div class="assessment-num">01</div>
+      <div class="assessment-text"><strong style="color:var(--off-white)">What five moments absolutely cannot be missed next Sunday</strong> — the ones that, if we don't capture them, we failed? Write them down.</div>
+    </div>
+    <div class="assessment-q">
+      <div class="assessment-num">02</div>
+      <div class="assessment-text"><strong style="color:var(--off-white)">Who on the team owns each one?</strong> Agree with them now. Not this week. Now. Volunteers don't get assigned — they commit. Get the commitment.</div>
+    </div>
+    <div class="assessment-q">
+      <div class="assessment-num">03</div>
+      <div class="assessment-text"><strong style="color:var(--off-white)">What are we doing with the content after?</strong> Name a specific platform and a specific timeline.</div>
+    </div>
+    <div class="assessment-q">
+      <div class="assessment-num">04</div>
+      <div class="assessment-text"><strong style="color:var(--off-white)">When are we briefing the team?</strong> Put it on the calendar right now. Protect it like a call time.</div>
+    </div>
+
+    <p>Do those four before you walk out — you'll have more direction than most creative teams walk into Sunday with. Paid or volunteer.</p>
+
+    <div class="commit-box" id="shotCommit">
+      <div class="commit-label mono">Lock It In</div>
+      <div class="commit-question">What is your single most important shot next Sunday?</div>
+      <div class="commit-help">One moment. One line. We'll check in before Sunday.</div>
+      <input id="shotText" placeholder="The shot I'm not allowed to miss..." />
+      <input id="shotEmail" placeholder="Your email (so we can check in)" type="email" />
+      <button class="commit-btn" onclick="submitCommitment('shot_list', 'shotText', 'shotSuccess', 'shotEmail')">I'm Getting the Shot</button>
+      <div class="commit-success mono" id="shotSuccess">✓ Committed · Go build the list</div>
+    </div>
+  </div>
+</section>
+
+<!-- THE CLOSE -->
+<section class="warm" id="close">
+  <div class="section-label mono">The Close</div>
+  <h2 class="section-title">Testimony. Not Content.</h2>
+  <div class="section-body">
+    <p>Every moment this church experiences — the baptism, the first-time guest, the kid who raised their hand, the marriage saved in altar prayer — every one deserves to be told.</p>
+    <p>Not because they're content. Because they're testimony.</p>
+    <p>The team you lead is the keeper of those testimonies. You carry it better when you're prepared.</p>
+
+    <div class="scripture" style="margin:30px 0">
+      <div class="scripture-ref">Habakkuk 2:2</div>
+      <div class="scripture-text">"Write down the revelation and make it plain on tablets so that a herald may run with it."</div>
+    </div>
+
+    <div class="power">
+      Your camera is not a tool for social media. It is an instrument for testimony. Use it with that weight.
+    </div>
+    <div class="power">
+      If you don't have a shot list, you're guessing. And what God is doing in this church is too important to guess at.
+    </div>
+    <div class="power">
+      Write it down. Make it plain. Then go get the shot.
+    </div>
+
+    <div class="page-switcher" style="margin-top:50px">
+      <a href="../"><span class="label">← Back To Part One</span><span class="name">Worship First</span></a>
+      <a href="./" class="current"><span class="label">You Are Here</span><span class="name">The Shot List</span></a>
+    </div>
+
+    <div class="arise" style="margin-top:30px">Arise and Build</div>
+  </div>
+</section>
+
+<footer>
+  Lonnell Williams · <a href="https://ldw.build">ldw.build</a> · Turning Point Church
+</footer>
+
+<script>
+  const SUPABASE_URL = 'https://riqdcirsmckubkdfbtoj.supabase.co';
+  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM';
+  const sessionId = 'tp_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+
+  async function submitCommitment(type, textId, successId, emailId) {
+    const text = document.getElementById(textId).value.trim();
+    if (!text) return;
+    const email = emailId ? document.getElementById(emailId).value.trim() : null;
+    const btn = event.target;
+    btn.disabled = true;
+    btn.textContent = 'Saving...';
+    try {
+      const res = await fetch(SUPABASE_URL + '/rest/v1/turning_point_commitments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON,
+          'Authorization': 'Bearer ' + SUPABASE_ANON,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          commitment_type: type, content: text, email: email || null,
+          session_id: sessionId, anonymous: !email
+        })
+      });
+      if (res.ok || res.status === 201) {
+        document.getElementById(successId).classList.add('show');
+        btn.textContent = '✓ Locked';
+      } else { btn.textContent = 'Try Again'; btn.disabled = false; }
+    } catch (e) { btn.textContent = 'Try Again'; btn.disabled = false; }
+  }
+
+  const sections = document.querySelectorAll('section');
+  const dotsContainer = document.getElementById('scrollDots');
+  const progressEl = document.getElementById('progress');
+  sections.forEach((s, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'dot';
+    btn.setAttribute('aria-label', 'Section ' + (i+1));
+    btn.onclick = () => s.scrollIntoView({ behavior: 'smooth' });
+    dotsContainer.appendChild(btn);
+  });
+  const dots = dotsContainer.querySelectorAll('.dot');
+  function onScroll() {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = Math.round((window.scrollY / total) * 100);
+    progressEl.textContent = String(pct).padStart(2,'0') + '%';
+    let activeIdx = 0;
+    sections.forEach((s, i) => {
+      const r = s.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.4) activeIdx = i;
+    });
+    dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>
+</body>
+</html>
