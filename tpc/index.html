@@ -540,8 +540,8 @@
     <div>Venue<br/><span>Turning Point Church · McDonough, GA</span></div>
   </div>
   <div class="page-switcher">
-    <a href="./" class="current"><span class="label">Part One</span><span class="name">Worship First</span></a>
-    <a href="./shot-list/"><span class="label">Part Two</span><span class="name">The Shot List</span></a>
+    <a href="./shot-list/"><span class="name">The Shot List</span></a>
+    <a href="./" class="current"><span class="name">Worship First</span></a>
   </div>
 </section>
 
@@ -1064,6 +1064,26 @@
   <p style="text-align:center; margin-top: 30px"><a href="./shot-list/" class="cta-primary" style="display:inline-block; padding: 16px 32px; background: var(--copper); color: var(--obsidian); text-decoration:none; font-family: 'Bebas Neue', sans-serif; letter-spacing: 3px; font-size: 16px;">Go to Part Two →</a></p>
 </section>
 
+<!-- NEWSLETTER -->
+<section id="newsletter" class="warm">
+  <div class="section-label mono" style="text-align:center">Newsletter</div>
+  <h2 class="section-title" style="text-align:center">Arise <span class="accent">&amp;</span> Build.</h2>
+  <p class="lead" style="text-align:center; max-width: 560px; margin-left:auto; margin-right:auto">Weekly notes on leadership, systems, and the operational side of doing extraordinary things. No fluff. No "seasons." Just the instruction: arise and build.</p>
+
+  <div id="nl-form" style="max-width:480px; margin:30px auto 0; display:flex; gap:10px; flex-wrap:wrap;">
+    <input id="nl-email" type="email" placeholder="Your email address" required
+      style="flex:1; min-width:220px; padding:14px 16px; background:rgba(255,255,255,0.03); border:1px solid var(--border); color:var(--off-white); font-family:'DM Sans',sans-serif; font-size:15px; outline:none;">
+    <button id="nl-btn" type="button"
+      style="padding:14px 22px; background:var(--copper); color:var(--obsidian); border:none; font-family:'Bebas Neue',sans-serif; letter-spacing:3px; font-size:14px; cursor:pointer;">Subscribe</button>
+  </div>
+  <div id="nl-msg" style="text-align:center; margin-top:12px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:1px; color:var(--concrete); display:none;"></div>
+  <div id="nl-ty" style="text-align:center; margin-top:18px; display:none;">
+    <div style="font-family:'Bebas Neue',sans-serif; letter-spacing:4px; font-size:20px; color:var(--copper);">✦ You're in.</div>
+    <div style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:1px; color:var(--concrete); margin-top:6px;">Welcome to the builders.</div>
+  </div>
+  <p style="text-align:center; margin-top:24px; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--concrete); text-transform:uppercase;">Join the builders. Unsubscribe anytime.</p>
+</section>
+
 <!-- FINAL CALL -->
 <section class="final-call" id="close">
   <div class="section-label mono" style="text-align:center">The Close</div>
@@ -1156,6 +1176,31 @@
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  // Newsletter subscribe
+  const nlBtn = document.getElementById('nl-btn');
+  const nlEmail = document.getElementById('nl-email');
+  const nlMsg = document.getElementById('nl-msg');
+  const nlForm = document.getElementById('nl-form');
+  const nlTy = document.getElementById('nl-ty');
+  function nlShow(text, isErr) { nlMsg.textContent = text; nlMsg.style.display='block'; nlMsg.style.color = isErr ? '#E85D3A' : 'var(--concrete)'; }
+  async function nlSubmit() {
+    const email = (nlEmail.value || '').trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { nlShow('Enter a valid email.', true); return; }
+    nlBtn.disabled = true; nlBtn.textContent = 'Saving...';
+    try {
+      await fetch(SUPABASE_URL + '/rest/v1/newsletter_subscribers', {
+        method:'POST', headers:{ 'Content-Type':'application/json','apikey':SUPABASE_ANON,'Authorization':'Bearer '+SUPABASE_ANON,'Prefer':'return=minimal' },
+        body: JSON.stringify({ email: email, source: 'tpc_worship_first' })
+      }).catch(function(){});
+    } catch(e) {}
+    nlForm.style.display = 'none'; nlMsg.style.display = 'none'; nlTy.style.display = 'block';
+    setTimeout(function(){ window.open('https://substack.com/@buildwithldw', '_blank'); }, 700);
+  }
+  if (nlBtn) {
+    nlBtn.addEventListener('click', nlSubmit);
+    nlEmail.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); nlSubmit(); } });
+  }
 </script>
 </body>
 </html>
