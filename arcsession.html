@@ -512,7 +512,136 @@
     text-transform: uppercase;
   }
 
-  /* ── Footer ─────────────────────────── */
+  /* ── CTA Section ───────────────────── */
+  .cta-section {
+    background: var(--warm-black);
+    padding: 100px 0 110px;
+    border-bottom: 1px solid var(--hairline);
+    position: relative;
+    z-index: 2;
+  }
+  .cta-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .cta-lead {
+    text-align: center;
+    color: var(--concrete);
+    max-width: 520px;
+    margin: 0 auto 56px;
+    font-size: 17px;
+  }
+  .cta-section .section-num {
+    justify-content: center;
+  }
+  .cta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--hairline);
+    border: 1px solid var(--hairline);
+    max-width: 920px;
+    margin: 0 auto;
+  }
+  .cta-card {
+    background: var(--warm-black);
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-height: 340px;
+    transition: background 0.3s ease;
+  }
+  .cta-card:hover { background: #221D18; }
+  .cta-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    color: var(--copper);
+    text-transform: uppercase;
+  }
+  .cta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.05;
+  }
+  .cta-body {
+    font-size: 14px;
+    color: var(--concrete);
+    line-height: 1.55;
+    flex-grow: 1;
+  }
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--obsidian);
+    background: var(--copper);
+    padding: 14px 20px;
+    text-decoration: none;
+    border: 1px solid var(--copper);
+    transition: all 0.25s ease;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 400;
+  }
+  .cta-btn:hover {
+    background: transparent;
+    color: var(--copper);
+  }
+  .cta-btn.ghost {
+    background: transparent;
+    color: var(--copper);
+  }
+  .cta-btn.ghost:hover {
+    background: var(--copper);
+    color: var(--obsidian);
+  }
+  .email-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .email-form input[type="email"] {
+    background: var(--obsidian);
+    border: 1px solid var(--hairline);
+    color: var(--off-white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    padding: 14px 16px;
+    outline: none;
+    transition: border-color 0.25s ease;
+    width: 100%;
+  }
+  .email-form input[type="email"]:focus {
+    border-color: var(--copper);
+  }
+  .email-form input[type="email"]::placeholder {
+    color: var(--concrete);
+  }
+  .form-status {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--concrete);
+    text-transform: uppercase;
+    min-height: 14px;
+  }
+  .form-status.success { color: var(--copper); }
+  .form-status.error { color: var(--signal); }
+  @media (max-width: 720px) {
+    .cta-grid { grid-template-columns: 1fr; }
+    .cta-card { min-height: auto; padding: 36px 28px; }
+  }
+
+  /* ── Footer ───────────────────────────── */
   footer {
     background: #0A0A0A;
     padding: 80px 0 50px;
@@ -861,6 +990,44 @@
   </div>
 </section>
 
+<!-- CTA SECTION -->
+<section class="cta-section" id="stay">
+  <div class="wrap-wide">
+    <div class="section-num reveal">Before You Leave The Room</div>
+    <h2 class="reveal">Don't Do It<br><span class="accent">Alone.</span></h2>
+    <p class="cta-lead reveal">Three ways to keep building after Wednesday. Take the one that fits.</p>
+
+    <div class="cta-grid">
+
+      <div class="cta-card reveal">
+        <div class="cta-label">— 01 · Newsletter</div>
+        <div class="cta-title">Build With LDW</div>
+        <div class="cta-body">Weekly field notes on infrastructure, leadership, and the tension between mission and management. No fluff.</div>
+        <a class="cta-btn" href="https://buildwithldw.substack.com" target="_blank" rel="noopener">Subscribe on Substack</a>
+      </div>
+
+      <div class="cta-card reveal">
+        <div class="cta-label">— 02 · The List</div>
+        <div class="cta-title">Arise and Build</div>
+        <div class="cta-body">Drop your email. Get the Acts 6 framework, the audit worksheet, and notes for XPs carrying too much.</div>
+        <form class="email-form" id="arc-form">
+          <input type="email" name="email" placeholder="you@yourchurch.org" required autocomplete="email" />
+          <button type="submit" class="cta-btn" id="arc-submit">Join The List</button>
+          <div class="form-status" id="arc-status"></div>
+        </form>
+      </div>
+
+      <div class="cta-card reveal">
+        <div class="cta-label">— 03 · Everything Else</div>
+        <div class="cta-title">ldw.build</div>
+        <div class="cta-body">The full site. Speaking, books, consulting, and the rest of the work — all in one place.</div>
+        <a class="cta-btn ghost" href="https://ldw.build" target="_blank" rel="noopener">Visit ldw.build</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="wrap">
@@ -870,6 +1037,63 @@
 </footer>
 
 <script>
+/* ============================================================
+   Email capture — Supabase insert with arc_2026 tag
+   ============================================================ */
+(function initForm() {
+  const form = document.getElementById('arc-form');
+  const statusEl = document.getElementById('arc-status');
+  const submit = document.getElementById('arc-submit');
+  if (!form) return;
+
+  const SUPABASE_URL = 'https://riqdcirsmckubkdfbtoj.supabase.co';
+  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM';
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = form.email.value.trim();
+    if (!email) return;
+
+    submit.disabled = true;
+    statusEl.className = 'form-status';
+    statusEl.textContent = 'Sending...';
+
+    try {
+      const resp = await fetch(SUPABASE_URL + '/rest/v1/arc_2026_subscribers', {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON,
+          'Authorization': 'Bearer ' + SUPABASE_ANON,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          email: email,
+          source: 'arc_2026_companion',
+          tag: 'arc_2026'
+        })
+      });
+
+      if (resp.ok) {
+        statusEl.className = 'form-status success';
+        statusEl.textContent = 'You are in. Watch your inbox.';
+        form.reset();
+      } else if (resp.status === 409 || resp.status === 400) {
+        statusEl.className = 'form-status success';
+        statusEl.textContent = 'Already on the list. Good.';
+        form.reset();
+      } else {
+        throw new Error('HTTP ' + resp.status);
+      }
+    } catch (err) {
+      statusEl.className = 'form-status error';
+      statusEl.textContent = 'Something broke. Try again.';
+    } finally {
+      submit.disabled = false;
+    }
+  });
+})();
+
 /* ============================================================
    GSAP — cinematic loader + scroll-triggered reveals
    ============================================================ */
