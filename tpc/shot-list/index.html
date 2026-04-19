@@ -66,9 +66,9 @@
 
   /* Hero */
   .hero {
-    min-height: 92vh;
+    min-height: auto;
     display: flex; flex-direction: column; justify-content: center;
-    padding: 40px 24px 60px;
+    padding: 80px 24px 40px;
     background: radial-gradient(ellipse at top, #1a1714 0%, #0D0D0D 60%);
     position: relative;
   }
@@ -101,9 +101,10 @@
   /* Section base */
   section {
     padding: 80px 24px;
-    border-top: 1px solid var(--border);
     scroll-margin-top: 60px;
   }
+  section + section { border-top: 1px solid var(--border); }
+  .hero + section { border-top: none; }
   section > * { max-width: 720px; margin-left: auto; margin-right: auto; }
   .hero > * { max-width: 720px; margin-left: auto; margin-right: auto; width: 100%; }
   section.light {
