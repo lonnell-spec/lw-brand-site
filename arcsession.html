@@ -1144,7 +1144,7 @@
   }, '-=0.6');
 
   /* ── Scroll-triggered reveals for the rest ──── */
-  const revealEls = document.querySelectorAll('section.block .reveal');
+  const revealEls = document.querySelectorAll('section.block .reveal, .cta-section .reveal');
   revealEls.forEach((el) => {
     gsap.fromTo(el,
       { opacity: 0, y: 40 },
