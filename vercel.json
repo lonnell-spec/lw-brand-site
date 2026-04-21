@@ -11,7 +11,8 @@
     { "source": "/scorecard", "destination": "/scorecard.html" },
     { "source": "/brand-board", "destination": "/brand-board.html" },
     { "source": "/tpc", "destination": "/tpc/index.html" },
-    { "source": "/arcsession", "destination": "/arcsession.html" }
+    { "source": "/arcsession", "destination": "/arcsession.html" },
+    { "source": "/arc", "destination": "/arcsession.html" }
   ],
   "redirects": [
     {
