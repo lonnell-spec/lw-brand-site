@@ -901,7 +901,7 @@
           <button type="submit" class="cta-btn" id="arc-submit">Subscribe &amp; Unlock</button>
           <div class="form-status" id="arc-status"></div>
         </form>
-        <div class="gate-fineprint">Already subscribed? <a href="#" id="already-subbed">Unlock the handout</a></div>
+        <div class="gate-fineprint">One email. One handout. We add you to the list either way.</div>
       </div>
 
       <div id="gate-unlocked" hidden>
@@ -933,7 +933,6 @@
   const submit = document.getElementById('arc-submit');
   const locked = document.getElementById('gate-locked');
   const unlocked = document.getElementById('gate-unlocked');
-  const alreadyLink = document.getElementById('already-subbed');
   const downloadBtn = document.getElementById('download-btn');
   if (!form || !locked || !unlocked) return;
 
@@ -952,13 +951,8 @@
     }
   }
 
-  // Auto-unlock on return visits
+  // Auto-unlock on return visits (only if they previously submitted on this device)
   try { if (localStorage.getItem(KEY) === '1') unlock(); } catch (_) {}
-
-  // Allow "already subscribed" path
-  if (alreadyLink) {
-    alreadyLink.addEventListener('click', (e) => { e.preventDefault(); unlock(); });
-  }
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
