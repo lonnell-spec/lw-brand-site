@@ -753,6 +753,31 @@
     height: 1px; background: var(--hairline);
     max-width: 80px; margin: 28px auto; opacity: 0.5;
   }
+  .gate-step {
+    font-family: 'Space Mono', monospace; font-size: 10px;
+    letter-spacing: 3px; color: var(--copper);
+    text-transform: uppercase; text-align: center; margin-bottom: 14px;
+  }
+  .gate-step-num {
+    display: inline-block; width: 22px; height: 22px; line-height: 20px;
+    border: 1px solid var(--copper); border-radius: 50%;
+    margin-right: 8px; font-size: 11px; color: var(--copper);
+  }
+  .embed-wrap {
+    background: var(--warm-black); border: 1px solid var(--hairline);
+    padding: 8px; margin: 0 auto 32px; max-width: 460px;
+    position: relative;
+  }
+  .embed-wrap iframe {
+    width: 100%; height: 320px; border: 0; display: block;
+    background: var(--warm-black);
+  }
+  .embed-note {
+    font-family: 'Space Mono', monospace; font-size: 10px;
+    letter-spacing: 1.5px; color: var(--concrete);
+    text-transform: uppercase; text-align: center;
+    margin: 14px auto 28px; max-width: 440px; line-height: 1.7;
+  }
   [hidden] { display: none !important; }
   @media (max-width: 720px) {
     .gate-card { padding: 44px 28px 36px; }
@@ -1206,19 +1231,26 @@
   <div class="wrap-wide">
     <div class="section-num reveal">The Takeaway</div>
     <h2 class="reveal">Take The Sheet<br><span class="accent">Home.</span></h2>
-    <p class="cta-lead reveal">The full deep-dive handout. The ten systems behind the three you heard today. The 6A process. The Monday move. Subscribe to the newsletter and the download unlocks.</p>
+    <p class="cta-lead reveal">The full deep-dive handout. The ten systems behind the three you heard today. The 6A process. The Monday move. Subscribe to Arise &amp; Build below, then unlock the download.</p>
 
     <div class="gate-card reveal">
       <div id="gate-locked">
         <div class="gate-label">— Locked · Subscribe To Unlock</div>
         <div class="gate-title">Build With <span class="accent">LDW</span></div>
-        <div class="gate-body">Weekly field notes on infrastructure, leadership, and the tension between mission and management. Drop your email — we'll add you, open Substack, and unlock the handout.</div>
+        <div class="gate-body">Weekly field notes on infrastructure, leadership, and the tension between mission and management. Subscribe to the newsletter, then enter your email below to unlock the handout.</div>
+
+        <div class="gate-step"><span class="gate-step-num">1</span>Subscribe to the newsletter</div>
+        <div class="embed-wrap">
+          <iframe src="https://buildwithldw.substack.com/embed" title="Subscribe to Arise &amp; Build with LDW" loading="lazy"></iframe>
+        </div>
+
+        <div class="gate-step"><span class="gate-step-num">2</span>Enter the same email to unlock</div>
         <form class="email-form" id="arc-form">
           <input type="email" name="email" placeholder="you@yourchurch.org" required autocomplete="email" />
-          <button type="submit" class="cta-btn" id="arc-submit">Subscribe &amp; Unlock</button>
+          <button type="submit" class="cta-btn" id="arc-submit">Unlock Handout</button>
           <div class="form-status" id="arc-status"></div>
         </form>
-        <div class="gate-fineprint">One email. One handout. We add you to the list either way.</div>
+        <div class="gate-fineprint">Use the same email both places. We verify and unlock the download.</div>
       </div>
 
       <div id="gate-unlocked" hidden>
@@ -1254,7 +1286,6 @@
   if (!form || !locked || !unlocked || !downloadBtn) return;
 
   const UNLOCK_URL = 'https://riqdcirsmckubkdfbtoj.supabase.co/functions/v1/unlock-arc-handout';
-  const SUBSTACK_URL = 'https://buildwithldw.substack.com/subscribe';
 
   function reveal(url) {
     downloadBtn.setAttribute('href', url);
@@ -1293,10 +1324,8 @@
       }
 
       statusEl.className = 'form-status success';
-      statusEl.textContent = 'You\'re in. Opening Substack\u2026';
-      const subUrl = SUBSTACK_URL + '?email=' + encodeURIComponent(email);
-      try { window.open(subUrl, '_blank', 'noopener'); } catch (_) {}
-      setTimeout(() => reveal(data.url), 600);
+      statusEl.textContent = 'Verified. Unlocking\u2026';
+      setTimeout(() => reveal(data.url), 500);
     } catch (err) {
       statusEl.className = 'form-status error';
       statusEl.textContent = 'Network error. Try again.';
