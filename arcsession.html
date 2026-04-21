@@ -320,6 +320,275 @@
     border: 1px solid var(--hairline);
     padding: 6px 10px; white-space: nowrap;
   }
+  /* System deep-dive pattern */
+  .deepdive { margin-top: 56px; display: grid; gap: 40px; }
+  .dd-block {
+    border: 1px solid var(--hairline);
+    background: var(--obsidian);
+    padding: 40px 44px;
+    position: relative;
+  }
+  .dd-block.warm { background: var(--warm-black); }
+  .dd-block::before {
+    content: ''; position: absolute; top: -1px; left: -1px;
+    width: 48px; height: 3px; background: var(--copper);
+  }
+  .dd-label {
+    font-family: 'Space Mono', monospace; font-size: 10px;
+    letter-spacing: 2.5px; color: var(--copper);
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .dd-block h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(22px, 2.8vw, 30px);
+    letter-spacing: 2px; line-height: 1.1;
+    text-transform: uppercase; margin-bottom: 18px;
+    color: var(--off-white);
+  }
+  .dd-block h4 .accent { color: var(--copper); }
+  .dd-block p {
+    color: var(--concrete); font-size: 15px; line-height: 1.65;
+    margin-bottom: 14px;
+  }
+  .dd-block p:last-child { margin-bottom: 0; }
+  .dd-block p.scripture {
+    color: var(--off-white); font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-style: italic;
+    border-left: 2px solid var(--copper);
+    padding: 6px 0 6px 18px; margin: 12px 0;
+  }
+  .dd-block .cite {
+    font-family: 'Space Mono', monospace; font-size: 10px;
+    letter-spacing: 1.5px; color: var(--copper);
+    text-transform: uppercase; display: block; margin-top: 8px;
+    font-style: normal;
+  }
+
+  /* Pullquote inside a system */
+  .pullquote {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(22px, 3vw, 32px);
+    letter-spacing: 1.5px; line-height: 1.15;
+    text-transform: uppercase; color: var(--off-white);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+    padding: 22px 0; margin: 22px 0;
+  }
+  .pullquote .accent { color: var(--copper); }
+
+  /* Tier table (Decision Matrix) */
+  .tier-table {
+    margin-top: 20px;
+    border: 1px solid var(--hairline);
+    display: grid;
+  }
+  .tier-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 2fr;
+    gap: 20px;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--hairline);
+    align-items: start;
+  }
+  .tier-row:last-child { border-bottom: none; }
+  .tier-row.head {
+    background: var(--warm-black);
+    font-family: 'Space Mono', monospace; font-size: 10px;
+    letter-spacing: 2px; color: var(--copper);
+    text-transform: uppercase;
+  }
+  .tier-tag {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px; letter-spacing: 1.5px;
+    color: var(--copper);
+  }
+  .tier-owner {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px; letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--off-white);
+  }
+  .tier-ex { font-size: 13px; color: var(--concrete); line-height: 1.55; }
+  @media (max-width: 720px) {
+    .tier-row { grid-template-columns: 70px 1fr; }
+    .tier-row.head .tier-ex, .tier-row .tier-ex { grid-column: 1 / -1; padding-top: 4px; }
+  }
+
+  /* PPP Lanes */
+  .lanes {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--hairline);
+    border: 1px solid var(--hairline); margin-top: 20px;
+  }
+  .lane {
+    background: var(--obsidian); padding: 28px 24px;
+    display: flex; flex-direction: column; gap: 10px;
+    min-height: 220px;
+  }
+  .lane-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px; letter-spacing: 2px;
+    color: var(--copper);
+  }
+  .lane-q {
+    font-size: 14px; color: var(--off-white);
+    line-height: 1.55;
+  }
+  .lane-fail {
+    font-family: 'Space Mono', monospace; font-size: 10px;
+    letter-spacing: 1.5px; color: var(--concrete);
+    text-transform: uppercase; line-height: 1.7;
+    border-top: 1px solid var(--hairline); padding-top: 14px;
+    margin-top: auto;
+  }
+  @media (max-width: 720px) { .lanes { grid-template-columns: 1fr; } }
+
+  /* Install steps */
+  .install-steps {
+    margin-top: 22px;
+    display: grid; gap: 1px;
+    background: var(--hairline);
+    border: 1px solid var(--hairline);
+  }
+  .step-row {
+    background: var(--obsidian);
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 22px;
+    padding: 18px 22px;
+    align-items: start;
+  }
+  .step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px; letter-spacing: 1.5px;
+    color: var(--copper); line-height: 1;
+    padding-top: 2px;
+  }
+  .step-text {
+    font-size: 14px; color: var(--off-white);
+    line-height: 1.6;
+  }
+  .step-text .emph {
+    font-family: 'Space Mono', monospace; font-size: 10px;
+    letter-spacing: 1.5px; color: var(--copper);
+    text-transform: uppercase; display: block;
+    margin-bottom: 4px;
+  }
+
+  /* The three-move loop */
+  .loop {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--hairline);
+    border: 1px solid var(--hairline); margin-top: 40px;
+  }
+  .loop-step {
+    background: var(--obsidian); padding: 32px 28px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .loop-idx {
+    font-family: 'Space Mono', monospace; font-size: 10px;
+    letter-spacing: 2.5px; color: var(--copper);
+    text-transform: uppercase;
+  }
+  .loop-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px; letter-spacing: 1.5px;
+    line-height: 1.1; color: var(--off-white);
+  }
+  .loop-desc { font-size: 14px; color: var(--concrete); line-height: 1.55; }
+  @media (max-width: 720px) { .loop { grid-template-columns: 1fr; } }
+
+  /* Try-it-now writing box */
+  .tryit {
+    margin-top: 28px;
+    border: 2px dashed var(--copper);
+    padding: 32px 36px;
+    background: rgba(193, 127, 89, 0.04);
+  }
+  .tryit .tryit-label {
+    font-family: 'Space Mono', monospace; font-size: 10px;
+    letter-spacing: 2.5px; color: var(--copper);
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .tryit .tryit-prompt {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(26px, 3.4vw, 36px);
+    letter-spacing: 1.5px; line-height: 1.1;
+    color: var(--off-white); text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .tryit .tryit-prompt .fill {
+    color: var(--copper);
+    border-bottom: 3px solid var(--copper);
+    padding: 0 20px;
+  }
+  .tryit .tryit-body {
+    font-size: 14px; color: var(--concrete);
+    line-height: 1.65; margin-bottom: 10px;
+  }
+  .tryit .tryit-examples {
+    list-style: none; padding: 0; margin: 10px 0 0 0;
+    display: grid; gap: 8px;
+  }
+  .tryit .tryit-examples li {
+    font-size: 13px; color: var(--off-white);
+    line-height: 1.55; padding-left: 18px; position: relative;
+    font-style: italic;
+  }
+  .tryit .tryit-examples li::before {
+    content: '—'; position: absolute; left: 0; color: var(--copper);
+  }
+
+  /* Text-your-SP card */
+  .text-sp {
+    margin-top: 48px;
+    border: 1px solid var(--copper);
+    padding: 36px 40px;
+    background: var(--warm-black);
+  }
+  .text-sp .text-sp-label {
+    font-family: 'Space Mono', monospace; font-size: 10px;
+    letter-spacing: 2.5px; color: var(--copper);
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .text-sp .text-sp-quote {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(26px, 3.4vw, 36px);
+    letter-spacing: 1.5px; line-height: 1.15;
+    color: var(--off-white); text-transform: uppercase;
+  }
+  .text-sp .text-sp-quote .accent { color: var(--copper); }
+
+  /* Close truths */
+  .truths {
+    margin-top: 40px;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--hairline);
+    border: 1px solid var(--hairline);
+  }
+  .truth {
+    background: var(--obsidian); padding: 32px 28px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .truth .truth-num {
+    font-family: 'Space Mono', monospace; font-size: 10px;
+    letter-spacing: 2.5px; color: var(--copper);
+    text-transform: uppercase;
+  }
+  .truth .truth-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px; line-height: 1.55;
+    color: var(--off-white);
+  }
+  @media (max-width: 720px) { .truths { grid-template-columns: 1fr; } }
+
+  @media (max-width: 720px) {
+    .dd-block { padding: 32px 24px; }
+    .tryit { padding: 24px 22px; }
+    .text-sp { padding: 26px 24px; }
+    .loop-step { padding: 26px 22px; }
+    .lane { min-height: auto; }
+  }
+
   @media (max-width: 720px) {
     .sys-row { grid-template-columns: 50px 1fr; }
     .sys-pill { display: none; }
@@ -570,13 +839,13 @@
   <div class="topbar-inner">
     <a href="/" class="brand">LDW<span class="brand-dot">.</span>BUILD</a>
     <nav class="topnav">
-      <a href="#promise">Promise</a>
-      <a href="#tensions">Tensions</a>
-      <a href="#process">6A</a>
-      <a href="#external">External</a>
-      <a href="#internal">Internal</a>
+      <a href="#frame">Frame</a>
+      <a href="#acts6">Acts 6</a>
+      <a href="#matrix">System 1</a>
+      <a href="#ppp">System 2</a>
+      <a href="#engine">System 3</a>
       <a href="#monday">Monday</a>
-      <a href="#lines">Lines</a>
+      <a href="#handout">Handout</a>
     </nav>
   </div>
 </div>
@@ -591,7 +860,7 @@
       <div class="word"><span class="accent">Mission</span> &amp;</div>
       <div class="word"><span class="accent">Management</span></div>
     </h1>
-    <p class="kicker reveal">Keep your phone down. Follow along here. The playbook, not the preaching — one process, ten systems, one Monday move.</p>
+    <p class="kicker reveal">Follow along here. Three systems. One that saves your Senior Pastor's bandwidth. One that saves your week. One that saves your soul.</p>
 
     <div class="meta reveal">
       <div class="meta-item">
@@ -613,273 +882,321 @@
     </div>
 
     <div class="anchor-list reveal">
-      <a href="#promise">The Promise</a>
-      <a href="#tensions">Two Tensions</a>
-      <a href="#process">6A Process</a>
-      <a href="#external">5 External</a>
-      <a href="#internal">5 Internal</a>
-      <a href="#monday">Monday</a>
-      <a href="#lines">Lines</a>
+      <a href="#frame">01 · Frame</a>
+      <a href="#acts6">02 · Acts 6</a>
+      <a href="#matrix">03 · Decision Matrix</a>
+      <a href="#ppp">04 · PPP Grid</a>
+      <a href="#engine">05 · Engine Statement</a>
+      <a href="#monday">06 · Monday Move</a>
+      <a href="#handout">Handout</a>
     </div>
   </div>
   <div class="scroll-indicator" id="scroll-indicator">Scroll</div>
 </section>
 
-<!-- 01 · THE PROMISE -->
-<section class="block" id="promise">
+<!-- 01 · FRAME THE ROOM -->
+<section class="block" id="frame">
   <div class="wrap-wide">
-    <div class="section-num reveal">01 · The Promise</div>
-    <h2 class="reveal">The Whole Talk,<br><span class="accent">In Four Numbers.</span></h2>
-    <p class="lead reveal">Ten things to put in place. Not tomorrow. This month.</p>
-
-    <div class="promise">
-      <div class="promise-cell reveal">
-        <div class="promise-num">— 01</div>
-        <div class="promise-big">1</div>
-        <div class="promise-label">Process</div>
-      </div>
-      <div class="promise-cell reveal">
-        <div class="promise-num">— 02</div>
-        <div class="promise-big">5</div>
-        <div class="promise-label">External Systems</div>
-      </div>
-      <div class="promise-cell reveal">
-        <div class="promise-num">— 03</div>
-        <div class="promise-big">5</div>
-        <div class="promise-label">Internal Systems</div>
-      </div>
-      <div class="promise-cell reveal">
-        <div class="promise-num">— 04</div>
-        <div class="promise-big">1</div>
-        <div class="promise-label">Monday Move</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 02 · TWO TENSIONS -->
-<section class="block warm" id="tensions">
-  <div class="wrap-wide">
-    <div class="section-num reveal">02 · The Two Tensions</div>
-    <h2 class="reveal">Most Training<br>Only Addresses <span class="accent">One.</span></h2>
-    <p class="lead reveal">Every XP in a growing church manages two tensions. Train for both, or burn out at forty-two with a healthy church and an empty tank.</p>
+    <div class="section-num reveal">01 · Frame The Room</div>
+    <h2 class="reveal">Three Systems.<br><span class="accent">All Three. Or None.</span></h2>
+    <p class="lead reveal">Every executive leader in this room is managing two tensions at the same time. Most of our training only talks about one. Today — tools for both. One system saves your SP's bandwidth. One saves your week. One saves your soul.</p>
 
     <div class="tensions">
       <div class="tension-card reveal">
-        <div class="tension-tag">— External</div>
-        <div class="tension-title">Mission <span class="vs">vs.</span> Management</div>
-        <div class="tension-q">How do we grow without breaking the systems and the people?</div>
-        <div class="tension-where">Staff meetings<br>Budget<br>Org chart<br>Sunday production</div>
+        <div class="tension-label">— External</div>
+        <h3>Mission <span class="accent">vs.</span> Management</h3>
+        <p class="tension-q">How do we grow without breaking the systems and the people?</p>
+        <div class="tension-where">
+          Staff Meetings<br>Budget<br>Org Chart<br>Sunday Production
+        </div>
       </div>
       <div class="tension-card reveal">
-        <div class="tension-tag">— Internal</div>
-        <div class="tension-title">Calling <span class="vs">vs.</span> Craft</div>
-        <div class="tension-q">How do I stay a minister while I manage a growing ministry?</div>
-        <div class="tension-where">Your car at 9 PM<br>The shower<br>Alone in your office</div>
+        <div class="tension-label">— Internal</div>
+        <h3>Calling <span class="accent">vs.</span> Craft</h3>
+        <p class="tension-q">How do I stay a minister while I manage a ministry?</p>
+        <div class="tension-where">
+          Your Car At 9 PM<br>The Shower<br>Alone In Your Office
+        </div>
       </div>
+    </div>
+
+    <div class="pullquote reveal">
+      You can't <span class="accent">out-pray</span> a broken system. You can't <span class="accent">system</span> your way back to a soul. You need tools for both.
     </div>
   </div>
 </section>
 
-<!-- 03 · THE 6A -->
-<section class="block" id="process">
+<!-- 02 · ACTS 6 ANCHOR -->
+<section class="block warm" id="acts6">
   <div class="wrap-wide">
-    <div class="section-num reveal">03 · The Process</div>
-    <h2 class="reveal">The 6A.<br><span class="accent">Every System Runs Through It.</span></h2>
-    <p class="lead reveal">Six verbs. Pulled from Acts 6. Every system — external or internal — installs through these six steps. Miss one, it breaks. Run all six, it ships.</p>
+    <div class="section-num reveal">02 · The Anchor</div>
+    <h2 class="reveal">Growth Revealed<br><span class="accent">A Fracture.</span></h2>
+    <p class="lead reveal">Acts 6. The church is exploding. Three thousand saved. Five thousand more. The system built for 120 can't hold 5,000 — and the widows fall through the cracks. Every XP in this room has a widow problem right now. You know what yours is.</p>
 
-    <div class="six-a">
-      <div class="a-cell reveal">
-        <div class="a-num">— 01 · Acts 6:1</div>
-        <div class="a-verb">Analyze</div>
-        <div class="a-desc">What is actually breaking — what is the root cause?</div>
+    <div class="deepdive">
+      <div class="dd-block reveal">
+        <div class="dd-label">— The Text</div>
+        <p class="scripture">"Now in these days when the disciples were increasing in number, a complaint by the Hellenists arose against the Hebrews because their widows were being neglected in the daily distribution."<span class="cite">— Acts 6:1</span></p>
+        <p class="scripture">"It is not right that we should give up preaching the word of God to serve tables… we will devote ourselves to prayer and to the ministry of the word."<span class="cite">— Acts 6:2, 4</span></p>
+        <p>The Greek word for <em>serve tables</em> is <strong>diakonein</strong>. The Greek word for <em>ministry of the word</em> is <strong>diakonia</strong>. Same root. Luke isn't making a distinction of value. He's making a distinction of assignment.</p>
       </div>
-      <div class="a-cell reveal">
-        <div class="a-num">— 02 · Acts 6:2</div>
-        <div class="a-verb">Assess</div>
-        <div class="a-desc">What can only I do? What is the engine? What is non-negotiable?</div>
+
+      <div class="pullquote reveal">
+        The spreadsheet <span class="accent">is ministry.</span> Luke said so first.
       </div>
-      <div class="a-cell reveal">
-        <div class="a-num">— 03 · Acts 6:3</div>
-        <div class="a-verb">Assign</div>
-        <div class="a-desc">Who has the character, Spirit, and wisdom to own this?</div>
+
+      <div class="dd-block warm reveal">
+        <div class="dd-label">— The Deeper Word</div>
+        <p>The apostles weren't protecting their schedule. They weren't protecting their preference. They were <strong>protecting their oxygen</strong>. They built external structure so they could protect internal oxygen.</p>
+        <p>Acts 6:7 — "the word of God continued to increase, and the disciples multiplied greatly, and a great many of the priests became obedient to the faith."</p>
       </div>
-      <div class="a-cell reveal">
-        <div class="a-num">— 04 · Acts 6:2,6</div>
-        <div class="a-verb">Attest</div>
-        <div class="a-desc">Does the whole team know, publicly, that this is happening?</div>
-      </div>
-      <div class="a-cell reveal">
-        <div class="a-num">— 05 · Acts 6:5</div>
-        <div class="a-verb">Affirm</div>
-        <div class="a-desc">Do the people affected actually trust the person carrying it?</div>
-      </div>
-      <div class="a-cell reveal">
-        <div class="a-num">— 06 · Acts 6:7</div>
-        <div class="a-verb">Acknowledge</div>
-        <div class="a-desc">At 90 days — what worked? What needs adjusting?</div>
+
+      <div class="pullquote reveal">
+        When you fix the plumbing, the house doesn't shrink. <span class="accent">It expands.</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 04 · FIVE EXTERNAL -->
-<section class="block warm" id="external">
+<!-- 03 · SYSTEM ONE — DECISION MATRIX -->
+<section class="block" id="matrix">
   <div class="wrap-wide">
-    <div class="section-num reveal">04 · Five External Systems</div>
-    <h2 class="reveal">For The <span class="accent">Org.</span></h2>
-    <p class="lead reveal">Five systems for managing the external tension. Each transfers to your church this month. Each installs through the 6A.</p>
+    <div class="section-num reveal">03 · System One · External</div>
+    <h2 class="reveal">The Decision <span class="accent">Matrix.</span></h2>
+    <p class="lead reveal">Saves your Senior Pastor's bandwidth. Stops every decision from landing on their desk. Four tiers. Written. Shared. Audited.</p>
 
-    <div class="systems">
-      <div class="sys-row reveal">
-        <div class="sys-num">01</div>
-        <div>
-          <div class="sys-name">The Growth Fracture Map</div>
-          <div class="sys-tagline">Predicts where your next breakdown will happen.</div>
-        </div>
-        <div class="sys-pill">Diagnostic</div>
+    <div class="deepdive">
+      <div class="dd-block reveal">
+        <div class="dd-label">— The Story</div>
+        <p>Two years in, I was managing every decision at 2819. Every hire. Every budget line. Every Sunday adjustment. I told myself I was being helpful. I was the bottleneck.</p>
+        <p>The night I realized it, I couldn't sleep. 3 AM. I wrote every decision I'd made that week on one sheet of paper. <strong>Forty-seven decisions in one week.</strong> How many actually required me? <strong>Six.</strong></p>
       </div>
-      <div class="sys-row reveal">
-        <div class="sys-num">02</div>
-        <div>
-          <div class="sys-name">The 160% Build Rule</div>
-          <div class="sys-tagline">Forces you to build ahead of your size.</div>
-        </div>
-        <div class="sys-pill">Planning</div>
+
+      <div class="dd-block warm reveal">
+        <div class="dd-label">— The Theology · Exodus 18</div>
+        <p class="scripture">"What you are doing is not good. You will surely wear yourself out, both you and these people with you. For the thing is too heavy for you. You are not able to do it alone."<span class="cite">— Exodus 18:17–18</span></p>
+        <p>God gave Moses the first org chart in scripture through a Midianite operations consultant. Not a prophet. A father-in-law who watched Moses bottleneck and said — <strong>build tiers</strong>.</p>
       </div>
-      <div class="sys-row reveal">
-        <div class="sys-num">03</div>
-        <div>
-          <div class="sys-name">The Decision Matrix</div>
-          <div class="sys-tagline">Stops every decision from landing on the Senior Pastor.</div>
+
+      <div class="dd-block reveal">
+        <div class="dd-label">— The System · Four Tiers</div>
+        <div class="tier-table">
+          <div class="tier-row head">
+            <div>Tier</div><div>Owner</div><div>Examples</div>
+          </div>
+          <div class="tier-row">
+            <div class="tier-tag">Tier 1</div>
+            <div class="tier-owner">Senior Pastor</div>
+            <div class="tier-ex">Vision. Theology. Elders. Campus launches. Director+ hires.</div>
+          </div>
+          <div class="tier-row">
+            <div class="tier-tag">Tier 2</div>
+            <div class="tier-owner">XP + SP Input</div>
+            <div class="tier-ex">Org structure. Budget above threshold. Coordinator+ hires.</div>
+          </div>
+          <div class="tier-row">
+            <div class="tier-tag">Tier 3</div>
+            <div class="tier-owner">Directors</div>
+            <div class="tier-ex">Tactical execution. Hires below coordinator. Spending in allocation.</div>
+          </div>
+          <div class="tier-row">
+            <div class="tier-tag">Tier 4</div>
+            <div class="tier-owner">Coordinators</div>
+            <div class="tier-ex">Day-to-day. Volunteer management. Execution details.</div>
+          </div>
         </div>
-        <div class="sys-pill">Authority</div>
       </div>
-      <div class="sys-row reveal">
-        <div class="sys-num">04</div>
-        <div>
-          <div class="sys-name">The Multiplier Hiring Test</div>
-          <div class="sys-tagline">Filters executors out of director roles.</div>
+
+      <div class="dd-block warm reveal">
+        <div class="dd-label">— The Install · Walk It With Me</div>
+        <div class="install-steps">
+          <div class="step-row"><div class="step-num">01</div><div class="step-text"><span class="emph">This week</span>Write your four tiers. Not in your head. On paper. Share with your SP.</div></div>
+          <div class="step-row"><div class="step-num">02</div><div class="step-text"><span class="emph">Sit &amp; disagree</span>Fight it out in the document. Not on Sunday morning.</div></div>
+          <div class="step-row"><div class="step-num">03</div><div class="step-text"><span class="emph">Share out</span>Present to every director in a meeting. Not a memo. "This is how decisions get made now."</div></div>
+          <div class="step-row"><div class="step-num">04</div><div class="step-text"><span class="emph">30 days</span>Audit. Every decision that drifted up from Tier 3 or 4 — push it back down with a conversation.</div></div>
+          <div class="step-row"><div class="step-num">05</div><div class="step-text"><span class="emph">90 days</span>Measure. How many decisions reach the SP per week? That number should drop.</div></div>
         </div>
-        <div class="sys-pill">Hiring</div>
       </div>
-      <div class="sys-row reveal">
-        <div class="sys-num">05</div>
-        <div>
-          <div class="sys-name">The Protect-Produce-Prepare Grid</div>
-          <div class="sys-tagline">Weekly rhythm that keeps leaders sustainable.</div>
-        </div>
-        <div class="sys-pill">Rhythm</div>
+
+      <div class="pullquote reveal">
+        If every decision comes to you, you have not scaled. <span class="accent">You have gotten famous.</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 05 · FIVE INTERNAL -->
-<section class="block" id="internal">
+<!-- 04 · SYSTEM TWO — PPP GRID -->
+<section class="block warm" id="ppp">
   <div class="wrap-wide">
-    <div class="section-num reveal">05 · Five Internal Systems</div>
-    <h2 class="reveal">For <span class="accent">You.</span></h2>
-    <p class="lead reveal">Five external systems keep the church healthy. Five internal systems keep you healthy. Same approach — specific, written, installable.</p>
+    <div class="section-num reveal">04 · System Two · External</div>
+    <h2 class="reveal">Protect. Produce. <span class="accent">Prepare.</span></h2>
+    <p class="lead reveal">Saves your week. Three lanes. Ten minutes every Sunday. Paper, not phone. Shared with your spouse and every direct report.</p>
 
-    <div class="systems">
-      <div class="sys-row reveal">
-        <div class="sys-num">01</div>
-        <div>
-          <div class="sys-name">The Engine Statement</div>
-          <div class="sys-tagline">Names what only you can do. Pin it where you see it daily.</div>
-        </div>
-        <div class="sys-pill">15 Min</div>
+    <div class="deepdive">
+      <div class="dd-block reveal">
+        <div class="dd-label">— The Story</div>
+        <p>Fourteen months in. A week where I produced everything and protected nothing. Three sermons. A budget revision. A staffing proposal. A run-of-show. A donor comm.</p>
+        <p>Saturday night, my wife asked when we'd last had a real conversation. I couldn't remember. I had produced at a high level — and protected <strong>nothing</strong>. Not my marriage. Not time with God. Not my children. Not my health.</p>
+        <p>The church is never going to be easier. That's when I built this.</p>
       </div>
-      <div class="sys-row reveal">
-        <div class="sys-num">02</div>
-        <div>
-          <div class="sys-name">The Personal Cadence</div>
-          <div class="sys-tagline">Input and rest at four time scales — daily, weekly, monthly, quarterly.</div>
-        </div>
-        <div class="sys-pill">30 Min</div>
+
+      <div class="dd-block reveal">
+        <div class="dd-label">— The Theology · Nehemiah</div>
+        <p class="scripture">"Those who carried burdens were loaded in such a way that each labored on the work with one hand and held his weapon with the other."<span class="cite">— Nehemiah 4:17</span></p>
+        <p>One hand builds. One hand guards. And throughout the book, Nehemiah is praying. The work doesn't replace the rhythm. The work is <strong>inside</strong> the rhythm.</p>
       </div>
-      <div class="sys-row reveal">
-        <div class="sys-num">03</div>
-        <div>
-          <div class="sys-name">The Soul Board</div>
-          <div class="sys-tagline">Three named people who know the real you — not the XP you.</div>
+
+      <div class="dd-block reveal">
+        <div class="dd-label">— The System · Three Lanes</div>
+        <div class="lanes">
+          <div class="lane">
+            <div class="lane-name">Protect</div>
+            <div class="lane-q">What am I protecting this week? Marriage. Key staff. My engine. Time with God. Culture.</div>
+            <div class="lane-fail">Only Protect<br>= You Become HR.<br>You Stop Leading.</div>
+          </div>
+          <div class="lane">
+            <div class="lane-name">Produce</div>
+            <div class="lane-q">What am I producing this week? Sunday. The things only I can execute.</div>
+            <div class="lane-fail">Only Produce<br>= Burnout In 18 Months.<br>The Default Killer.</div>
+          </div>
+          <div class="lane">
+            <div class="lane-name">Prepare</div>
+            <div class="lane-q">What am I preparing for 90 days out? Next hire. Next campus. Next season.</div>
+            <div class="lane-fail">Only Prepare<br>= Nothing Ships.<br>Team Loses Confidence.</div>
+          </div>
         </div>
-        <div class="sys-pill">Named</div>
       </div>
-      <div class="sys-row reveal">
-        <div class="sys-num">04</div>
-        <div>
-          <div class="sys-name">The Mission Commitment</div>
-          <div class="sys-tagline">One person you personally disciple outside your XP role.</div>
+
+      <div class="dd-block warm reveal">
+        <div class="dd-label">— The Install · Walk It With Me</div>
+        <div class="install-steps">
+          <div class="step-row"><div class="step-num">01</div><div class="step-text"><span class="emph">Sunday · 10 min</span>Before dinner. Paper. Not phone. Three columns.</div></div>
+          <div class="step-row"><div class="step-num">02</div><div class="step-text"><span class="emph">Specific</span>3–5 items per column. Not "protect my marriage" — but "Thursday date night, phone in the kitchen."</div></div>
+          <div class="step-row"><div class="step-num">03</div><div class="step-text"><span class="emph">Share it</span>Give the grid to your spouse. They see what you're protecting. Non-optional.</div></div>
+          <div class="step-row"><div class="step-num">04</div><div class="step-text"><span class="emph">1:1s</span>Add a 10-minute PPP check to every weekly 1:1 with every direct report.</div></div>
+          <div class="step-row"><div class="step-num">05</div><div class="step-text"><span class="emph">End of week</span>Two consecutive weeks of "no" on any lane = intervention signal, not a performance failure.</div></div>
         </div>
-        <div class="sys-pill">1 Person</div>
       </div>
-      <div class="sys-row reveal">
-        <div class="sys-num">05</div>
-        <div>
-          <div class="sys-name">The 90-Day Self Review</div>
-          <div class="sys-tagline">Five questions. Every quarter. Drift check, not performance review.</div>
-        </div>
-        <div class="sys-pill">Quarterly</div>
+
+      <div class="pullquote reveal">
+        If your spouse cannot name what you are protecting this week, <span class="accent">you are not protecting it.</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 06 · MONDAY MOVE -->
+<!-- 05 · SYSTEM THREE — ENGINE STATEMENT -->
+<section class="block" id="engine">
+  <div class="wrap-wide">
+    <div class="section-num reveal">05 · System Three · Internal</div>
+    <h2 class="reveal">The Engine <span class="accent">Statement.</span></h2>
+    <p class="lead reveal">Saves your soul. Three sentences. Pinned where you see them every day. Names what only you can do — before you delegate it without noticing.</p>
+
+    <div class="deepdive">
+      <div class="dd-block reveal">
+        <div class="dd-label">— The Story</div>
+        <p>I built the first two a year before I built this one. The Matrix freed my time. The Grid structured my week. I had more bandwidth than I'd had in eighteen months — and I used it to pick up new things. Every gap. Every underperforming area.</p>
+        <p>I had built systems to stop being the bottleneck. I used the freed capacity to become a <strong>different kind</strong> of bottleneck — one that looked like leadership and was actually drift. I knew my job description. I didn't know my engine.</p>
+      </div>
+
+      <div class="dd-block warm reveal">
+        <div class="dd-label">— The Theology · Mark 1:35</div>
+        <p class="scripture">"And rising very early in the morning, while it was still dark, he departed and went out to a desolate place, and there he prayed."<span class="cite">— Mark 1:35</span></p>
+        <p>The crowds were back looking for him. The disciples said "Everyone is looking for you." Jesus said "Let us go on to the next towns, that I may preach there also, for that is why I came out." Jesus named his engine in one sentence.</p>
+      </div>
+
+      <div class="dd-block reveal">
+        <div class="dd-label">— The System · Three Sentences</div>
+        <p>Write three sentences. Not tasks. <strong>Postures, relationships, inputs.</strong> Your prayer and word. Your elder shepherding. Your marriage. Your time with your children. The parts that — if you stopped — would fail slow, invisibly, over months. By the time you noticed, you'd be three years into a drift you can't reverse in three weeks.</p>
+      </div>
+
+      <div class="tryit reveal">
+        <div class="tryit-label">— Do This Now · In The Room</div>
+        <div class="tryit-prompt">Only I Can <span class="fill">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>.</div>
+        <div class="tryit-body">Phone out. Or paper. Write <strong>one</strong> sentence. Not three. One. Rule: put something in that blank that is NOT a task. Sixty seconds.</div>
+        <ul class="tryit-examples">
+          <li>Only I can carry the theological weight of what this church preaches.</li>
+          <li>Only I can protect the marriage of my senior pastor by making sure our staff culture doesn't drain him.</li>
+          <li>Only I can be the one who asks my daughter how her heart is when I pick her up from school.</li>
+        </ul>
+      </div>
+
+      <div class="pullquote reveal">
+        If you don't name your engine, <span class="accent">you will delegate it without noticing.</span>
+      </div>
+
+      <div class="dd-block warm reveal">
+        <div class="dd-label">— The Loop · All Three Together</div>
+        <p>The three systems work as a loop. Pull one out and the other two start drifting. Install all three and you have something that will hold the church you're building <strong>and</strong> the minister you're becoming — for the long haul.</p>
+        <div class="loop">
+          <div class="loop-step">
+            <div class="loop-idx">— Names</div>
+            <div class="loop-name">Engine Statement</div>
+            <div class="loop-desc">Names what matters most. What only you can do.</div>
+          </div>
+          <div class="loop-step">
+            <div class="loop-idx">— Protects</div>
+            <div class="loop-name">Decision Matrix</div>
+            <div class="loop-desc">Routes everything else away from you.</div>
+          </div>
+          <div class="loop-step">
+            <div class="loop-idx">— Audits</div>
+            <div class="loop-name">PPP Grid</div>
+            <div class="loop-desc">Weekly: did you actually do what only you can do?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 · MONDAY MOVE + CLOSE -->
 <section class="block off" id="monday">
   <div class="wrap-wide">
     <div class="section-num reveal">06 · The Monday Move</div>
-    <h2 class="reveal">Don't Install<br>All Ten <span class="accent">Monday.</span></h2>
-    <p class="lead reveal">Don't try to install all ten Monday — you will stall. Install three, get wins, come back. In twelve months, all ten are running.</p>
+    <h2 class="reveal">Three Moves.<br><span class="accent">Monday Morning.</span></h2>
+    <p class="lead reveal">One move for each system. That's it. Don't install eighty-seven things. Install three.</p>
 
-    <div class="monday-card">
-      <div class="monday-eyebrow">— The Ratio</div>
-      <div class="monday-ratio"><span class="copper">2</span> <span class="slash">/</span> <span class="copper">1</span></div>
-      <div class="monday-sub">Two external. One internal. Three systems running by end of week. Come back in 90 days and install three more.</div>
-    </div>
-
-    <div class="travel">
-      <div class="travel-label">— Text Your Senior Pastor Now</div>
-      <div class="travel-text">
-        I got a system.<br>
-        Ninety minutes. Monday.<br>
-        It's going to save us.
+    <div class="loop reveal">
+      <div class="loop-step">
+        <div class="loop-idx">— Move 01 · Decision Matrix</div>
+        <div class="loop-name">Book 90 Minutes With Your SP</div>
+        <div class="loop-desc">Write the four tiers together. Fight it out in the document.</div>
+      </div>
+      <div class="loop-step">
+        <div class="loop-idx">— Move 02 · PPP Grid</div>
+        <div class="loop-name">Sunday · 10 Minutes · Paper</div>
+        <div class="loop-desc">Three columns. Share with your spouse before dinner.</div>
+      </div>
+      <div class="loop-step">
+        <div class="loop-idx">— Move 03 · Engine Statement</div>
+        <div class="loop-name">Write The Other Two Tonight</div>
+        <div class="loop-desc">Pin all three where you see them tomorrow morning.</div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- 07 · POWER STATEMENTS -->
-<section class="block" id="lines">
-  <div class="wrap-wide">
-    <div class="section-num reveal">07 · The Lines</div>
-    <h2 class="reveal">Take One<br><span class="accent">Home.</span></h2>
-    <p class="lead reveal">Twenty-one standalone assets. Screenshot one. Text it to your team. Walk out with a sentence that won't leave you alone.</p>
+    <div class="text-sp reveal">
+      <div class="text-sp-label">— Text Your Senior Pastor. Right Now.</div>
+      <div class="text-sp-quote">"I got three systems. <span class="accent">One each.</span> They're going to save us."</div>
+    </div>
 
-    <div class="statements">
-      <div class="statement reveal"><div class="statement-num">— 01</div><div class="statement-text">You cannot out-pray a broken system. You cannot system your way back to a soul. You need tools for both.</div></div>
-      <div class="statement reveal"><div class="statement-num">— 02</div><div class="statement-text">You don't need more anointing. You need an operating system.</div></div>
-      <div class="statement reveal"><div class="statement-num">— 03</div><div class="statement-text">Prayer and the word weren't the apostles' deliverable. They were their oxygen.</div></div>
-      <div class="statement reveal"><div class="statement-num">— 04</div><div class="statement-text">The spreadsheet is ministry. Luke said so first.</div></div>
-      <div class="statement reveal"><div class="statement-num">— 05</div><div class="statement-text">Delegation without authority is errands. And errands come back.</div></div>
-      <div class="statement reveal"><div class="statement-num">— 06</div><div class="statement-text">Private delegation creates silent confusion. Public commissioning creates covenant.</div></div>
-      <div class="statement reveal"><div class="statement-num">— 07</div><div class="statement-text">Growth will find the cracks in your culture before you do.</div></div>
-      <div class="statement reveal"><div class="statement-num">— 08</div><div class="statement-text">If it lives in your head, it's not a system. It's a liability.</div></div>
-      <div class="statement reveal"><div class="statement-num">— 09</div><div class="statement-text">Build for tomorrow's church or die in today's.</div></div>
-      <div class="statement reveal"><div class="statement-num">— 10</div><div class="statement-text">If every decision comes to you, you have not scaled. You have gotten famous.</div></div>
-      <div class="statement reveal"><div class="statement-num">— 11</div><div class="statement-text">Availability is not a qualification. Multiplication is.</div></div>
-      <div class="statement reveal"><div class="statement-num">— 12</div><div class="statement-text">Protect. Produce. Prepare. All three. Every week. Or you break.</div></div>
-      <div class="statement reveal"><div class="statement-num">— 13</div><div class="statement-text">If you don't name your engine, you will delegate it without noticing.</div></div>
-      <div class="statement reveal"><div class="statement-num">— 14</div><div class="statement-text">No cadence, no oxygen. No oxygen, no ministry.</div></div>
-      <div class="statement reveal"><div class="statement-num">— 15</div><div class="statement-text">Isolation is where XPs die. A soul board is the antidote.</div></div>
-      <div class="statement reveal"><div class="statement-num">— 16</div><div class="statement-text">You were not called to produce the ministry. You were called to be a minister producing.</div></div>
-      <div class="statement reveal"><div class="statement-num">— 17</div><div class="statement-text">Drift is invisible without a check-in.</div></div>
-      <div class="statement reveal"><div class="statement-num">— 18</div><div class="statement-text">I got a system. Ninety minutes. Monday. It's going to save us.</div></div>
-      <div class="statement reveal"><div class="statement-num">— 19</div><div class="statement-text">Mission without management kills the people carrying it. Management without mission builds a machine nobody wants to work for. You are the bridge.</div></div>
-      <div class="statement reveal"><div class="statement-num">— 20</div><div class="statement-text">When you fix the plumbing, the house doesn't shrink. It expands.</div></div>
-      <div class="statement reveal"><div class="statement-num">— 21</div><div class="statement-text">Manage the church so you can stay a minister.</div></div>
+    <div class="truths reveal">
+      <div class="truth">
+        <div class="truth-num">— Truth 01</div>
+        <div class="truth-text">Faith builds architecture. Moses built. Solomon built. Nehemiah built. The question isn't whether to build. The question is whether you'll build yourself while you build the church.</div>
+      </div>
+      <div class="truth">
+        <div class="truth-num">— Truth 02</div>
+        <div class="truth-text">The people who last are the ones who installed the internal systems before they needed them.</div>
+      </div>
+      <div class="truth">
+        <div class="truth-num">— Truth 03</div>
+        <div class="truth-text">You are not alone.</div>
+      </div>
+    </div>
+
+    <div class="pullquote reveal" style="margin-top: 48px; text-align: center;">
+      Manage the church <span class="accent">so you can stay a minister.</span>
     </div>
   </div>
 </section>
@@ -889,7 +1206,7 @@
   <div class="wrap-wide">
     <div class="section-num reveal">The Takeaway</div>
     <h2 class="reveal">Take The Sheet<br><span class="accent">Home.</span></h2>
-    <p class="cta-lead reveal">One page. Both tensions. Ten systems. The Monday move. Subscribe to the newsletter and the download unlocks.</p>
+    <p class="cta-lead reveal">The full deep-dive handout. The ten systems behind the three you heard today. The 6A process. The Monday move. Subscribe to the newsletter and the download unlocks.</p>
 
     <div class="gate-card reveal">
       <div id="gate-locked">
@@ -907,7 +1224,7 @@
       <div id="gate-unlocked" hidden>
         <div class="gate-label">— Unlocked · You're In</div>
         <div class="gate-title">The <span class="accent">Handout.</span></div>
-        <div class="gate-body">One page. Both tensions, the 6A, the ten systems, the Monday move. Print it. Mark it up. Install three by Friday.</div>
+        <div class="gate-body">The field handout. Ten systems. The 6A. The Monday move. Print it. Mark it up. Install three by Friday.</div>
         <div class="unlock-row">
           <a class="cta-btn" href="/ARC_2026_Handout.pdf" download="ARC_2026_Handout.pdf" id="download-btn">Download Handout</a>
           <a class="cta-btn ghost" href="https://ldw.build" target="_blank" rel="noopener">Visit ldw.build</a>
