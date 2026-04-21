@@ -1226,7 +1226,7 @@
         <div class="gate-title">The <span class="accent">Handout.</span></div>
         <div class="gate-body">The field handout. Ten systems. The 6A. The Monday move. Print it. Mark it up. Install three by Friday.</div>
         <div class="unlock-row">
-          <a class="cta-btn" href="/ARC_2026_Handout.pdf" download="ARC_2026_Handout.pdf" id="download-btn">Download Handout</a>
+          <a class="cta-btn" href="#" id="download-btn">Download Handout</a>
           <a class="cta-btn ghost" href="https://ldw.build" target="_blank" rel="noopener">Visit ldw.build</a>
         </div>
         <div class="gate-fineprint">Thanks for subscribing. Check your inbox for the welcome note.</div>
@@ -1243,7 +1243,7 @@
 </footer>
 
 <script>
-/* Handout gate — subscribe unlocks download */
+/* Handout gate — server-issued signed URL, no bypass */
 (function initGate() {
   const form = document.getElementById('arc-form');
   const statusEl = document.getElementById('arc-status');
@@ -1251,66 +1251,57 @@
   const locked = document.getElementById('gate-locked');
   const unlocked = document.getElementById('gate-unlocked');
   const downloadBtn = document.getElementById('download-btn');
-  if (!form || !locked || !unlocked) return;
+  if (!form || !locked || !unlocked || !downloadBtn) return;
 
-  const SUPABASE_URL = 'https://riqdcirsmckubkdfbtoj.supabase.co';
-  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM';
+  const UNLOCK_URL = 'https://riqdcirsmckubkdfbtoj.supabase.co/functions/v1/unlock-arc-handout';
   const SUBSTACK_URL = 'https://buildwithldw.substack.com/subscribe';
-  const KEY = 'ldw_arc_handout_unlocked';
 
-  function unlock() {
+  function reveal(url) {
+    downloadBtn.setAttribute('href', url);
+    downloadBtn.setAttribute('download', 'ARC_2026_Handout.pdf');
+    downloadBtn.setAttribute('target', '_blank');
+    downloadBtn.setAttribute('rel', 'noopener');
     locked.setAttribute('hidden', '');
     unlocked.removeAttribute('hidden');
-    try { localStorage.setItem(KEY, '1'); } catch (_) {}
-    // trigger the reveal animation on the unlocked block
     if (window.gsap) {
       gsap.fromTo(unlocked, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
     }
   }
 
-  // Auto-unlock on return visits (only if they previously submitted on this device)
-  try { if (localStorage.getItem(KEY) === '1') unlock(); } catch (_) {}
-
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const email = form.email.value.trim();
+    const email = (form.email.value || '').trim();
     if (!email) return;
 
     submit.disabled = true;
     statusEl.className = 'form-status';
     statusEl.textContent = 'Subscribing...';
 
-    let saved = false;
     try {
-      const resp = await fetch(SUPABASE_URL + '/rest/v1/arc_2026_subscribers', {
+      const resp = await fetch(UNLOCK_URL, {
         method: 'POST',
-        headers: {
-          'apikey': SUPABASE_ANON,
-          'Authorization': 'Bearer ' + SUPABASE_ANON,
-          'Content-Type': 'application/json',
-          'Prefer': 'return=minimal'
-        },
-        body: JSON.stringify({ email: email, source: 'arc_2026_handout', tag: 'arc_2026' })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email })
       });
-      // 409/400 = already on list; treat as success
-      if (resp.ok || resp.status === 409 || resp.status === 400) saved = true;
-      else throw new Error('HTTP ' + resp.status);
-    } catch (err) {
-      statusEl.className = 'form-status error';
-      statusEl.textContent = 'Something broke. Try again.';
-      submit.disabled = false;
-      return;
-    }
+      const data = await resp.json().catch(() => ({}));
 
-    if (saved) {
+      if (!resp.ok || !data.url) {
+        statusEl.className = 'form-status error';
+        statusEl.textContent = data.error || 'Something broke. Try again.';
+        submit.disabled = false;
+        return;
+      }
+
       statusEl.className = 'form-status success';
       statusEl.textContent = 'You\'re in. Opening Substack\u2026';
-      // Open Substack subscribe page with email prefilled (new tab, user-initiated)
-      const url = SUBSTACK_URL + '?email=' + encodeURIComponent(email);
-      try { window.open(url, '_blank', 'noopener'); } catch (_) {}
-      setTimeout(unlock, 600);
+      const subUrl = SUBSTACK_URL + '?email=' + encodeURIComponent(email);
+      try { window.open(subUrl, '_blank', 'noopener'); } catch (_) {}
+      setTimeout(() => reveal(data.url), 600);
+    } catch (err) {
+      statusEl.className = 'form-status error';
+      statusEl.textContent = 'Network error. Try again.';
+      submit.disabled = false;
     }
-    submit.disabled = false;
   });
 })();
 
