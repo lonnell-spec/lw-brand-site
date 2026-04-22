@@ -1327,51 +1327,38 @@
     }
   }
 
-  // Detection strategy:
-  // 1. User interacts with iframe (first blur with activeElement === iframe) = typing email
-  // 2. After a dwell of 4+ seconds of iframe focus, we count the next interaction as Subscribe click
-  // 3. Once we see the second qualifying interaction, reveal
+  // Detection strategy (browser security: cross-origin iframe blocks all event visibility):
+  // - When the user clicks into the Substack iframe, the page loses focus (window blur fires
+  //   with document.activeElement === iframe)
+  // - We require the iframe to have been interacted with AND the user to wait
+  //   at least 6 seconds total (realistic time to type an email and click Subscribe)
+  // - After that dwell, reveal the download
   //
-  // This requires the user to actually spend time in the widget and click twice (field + button)
-  // — matching the real subscribe flow. Refreshing the page reloads the iframe and resets state.
-  let firstInteraction = 0;
-  let interactions = 0;
+  // This trusts the user: they must interact with the Substack widget and spend real time in it.
+  // It's the tightest gate possible given Substack's cross-origin lockdown.
+  const REQUIRED_DWELL_MS = 6000;
+  let firstInteractionAt = 0;
+  let dwellTimer = null;
 
-  function onIframeInteraction() {
-    if (revealed || unlocking) return;
-    const now = Date.now();
-    if (!firstInteraction) {
-      firstInteraction = now;
-      interactions = 1;
-      setStatus('\u2014 Typing\u2026', '');
-      return;
-    }
-    // Require at least 4 seconds between first interaction and second (enough time to type email)
-    if (now - firstInteraction < 4000) {
-      interactions++;
-      setStatus('\u2014 Keep going\u2026', '');
-      return;
-    }
-    // Qualified second interaction — treat as Subscribe click
-    interactions++;
+  function startDwell() {
+    if (firstInteractionAt || revealed || unlocking) return;
+    firstInteractionAt = Date.now();
     setStatus('\u2014 Subscribing\u2026', '');
-    setTimeout(() => {
+    dwellTimer = setTimeout(() => {
       if (revealed || unlocking) return;
       fetchUrlAndReveal();
-    }, 2500);
+    }, REQUIRED_DWELL_MS);
   }
 
+  // The iframe taking focus = user clicked into it
   window.addEventListener('blur', () => {
-    // A small delay so we can check activeElement after the blur settles
     setTimeout(() => {
-      if (document.activeElement === iframe) {
-        onIframeInteraction();
-      }
-    }, 0);
+      if (document.activeElement === iframe) startDwell();
+    }, 10);
   });
 
   iframe.addEventListener('load', () => {
-    setStatus('\u2014 Waiting for subscribe', '');
+    if (!firstInteractionAt) setStatus('\u2014 Subscribe to unlock', '');
   });
 })();
 
