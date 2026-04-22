@@ -740,9 +740,9 @@
   .form-status.error { color: var(--signal); }
   .unlock-row {
     display: flex; gap: 14px; justify-content: center;
-    flex-wrap: wrap; margin-top: 4px;
+    flex-wrap: wrap; margin-top: 4px; margin-bottom: 14px;
   }
-  .unlock-row .cta-btn { padding: 16px 28px; min-width: 200px; }
+  .unlock-row .cta-btn { padding: 18px 32px; min-width: 240px; font-size: 12px; }
   .gate-fineprint {
     font-family: 'Space Mono', monospace; font-size: 10px;
     letter-spacing: 1.5px; color: var(--concrete);
@@ -751,7 +751,7 @@
   .gate-fineprint a { color: var(--copper); text-decoration: none; border-bottom: 1px solid var(--copper); padding-bottom: 1px; }
   .gate-divider {
     height: 1px; background: var(--hairline);
-    max-width: 80px; margin: 28px auto; opacity: 0.5;
+    max-width: 80px; margin: 40px auto 32px; opacity: 0.6;
   }
   .gate-step {
     font-family: 'Space Mono', monospace; font-size: 10px;
@@ -1232,32 +1232,27 @@
   <div class="wrap-wide">
     <div class="section-num reveal">The Takeaway</div>
     <h2 class="reveal">Take The Sheet<br><span class="accent">Home.</span></h2>
-    <p class="cta-lead reveal">The full deep-dive handout. The ten systems behind the three you heard today. The 6A process. The Monday move. Subscribe to Arise &amp; Build below, then unlock the download.</p>
+    <p class="cta-lead reveal">The full deep-dive handout. The ten systems behind the three you heard today. The 6A process. The Monday move. Take it home. Install three by Friday.</p>
 
     <div class="gate-card reveal">
-      <div id="gate-locked">
-        <div class="gate-label">— Locked · Subscribe To Unlock</div>
-        <div class="gate-title">Build With <span class="accent">LDW</span></div>
-        <div class="gate-body">Weekly field notes on infrastructure, leadership, and the tension between mission and management. Subscribe below — the handout unlocks the moment you do.</div>
+      <div class="gate-title">The <span class="accent">Handout.</span></div>
+      <div class="gate-body">Five pages. Ten systems. The 6A process. The Monday move. Print it. Mark it up. Build.</div>
 
-        <div class="embed-wrap" id="substack-embed">
-          <iframe id="substack-iframe" src="https://buildwithldw.substack.com/embed" title="Subscribe to Arise &amp; Build with LDW" loading="lazy"></iframe>
-        </div>
-
-        <div class="form-status" id="arc-status">— Waiting for subscribe</div>
-        <div class="gate-fineprint">The handout unlocks the moment you subscribe.</div>
+      <div class="unlock-row">
+        <button type="button" class="cta-btn" id="download-btn">Download Handout</button>
       </div>
+      <div class="form-status" id="arc-status"></div>
 
-      <div id="gate-unlocked" hidden>
-        <div class="gate-label">— Unlocked · You're In</div>
-        <div class="gate-title">The <span class="accent">Handout.</span></div>
-        <div class="gate-body">The field handout. Ten systems. The 6A. The Monday move. Print it. Mark it up. Install three by Friday.</div>
-        <div class="unlock-row">
-          <a class="cta-btn" href="#" id="download-btn">Download Handout</a>
-          <a class="cta-btn ghost" href="https://ldw.build" target="_blank" rel="noopener">Visit ldw.build</a>
-        </div>
-        <div class="gate-fineprint">Thanks for subscribing. Check your inbox for the welcome note.</div>
+      <div class="gate-divider"></div>
+
+      <div class="gate-label">— Want More?</div>
+      <div class="gate-title" style="font-size: clamp(22px, 2.8vw, 30px); letter-spacing: 2px;">Subscribe To <span class="accent">Arise &amp; Build.</span></div>
+      <div class="gate-body">Weekly field notes on infrastructure, leadership, and the tension between mission and management.</div>
+
+      <div class="embed-wrap">
+        <iframe src="https://buildwithldw.substack.com/embed" title="Subscribe to Arise &amp; Build with LDW" loading="lazy"></iframe>
       </div>
+      <div class="gate-fineprint">No spam. Unsubscribe anytime.</div>
     </div>
   </div>
 </section>
@@ -1270,44 +1265,28 @@
 </footer>
 
 <script>
-/* Handout gate — Substack embed interaction reveals download */
-(function initGate() {
+/* Download handout — fetches a short-lived signed URL, then downloads */
+(function initDownload() {
+  const btn = document.getElementById('download-btn');
   const statusEl = document.getElementById('arc-status');
-  const locked = document.getElementById('gate-locked');
-  const unlocked = document.getElementById('gate-unlocked');
-  const downloadBtn = document.getElementById('download-btn');
-  const iframe = document.getElementById('substack-iframe');
-  if (!locked || !unlocked || !downloadBtn || !iframe) return;
+  if (!btn) return;
 
   const UNLOCK_URL = 'https://riqdcirsmckubkdfbtoj.supabase.co/functions/v1/unlock-arc-handout';
-  let unlocking = false;
-  let revealed = false;
-  let subscribeClickTime = 0;
+  let busy = false;
 
   function setStatus(text, kind) {
+    if (!statusEl) return;
     statusEl.className = 'form-status' + (kind ? ' ' + kind : '');
-    statusEl.textContent = text;
+    statusEl.textContent = text || '';
   }
 
-  function reveal(url) {
-    if (revealed) return;
-    revealed = true;
-    downloadBtn.setAttribute('href', url);
-    downloadBtn.setAttribute('download', 'ARC_2026_Handout.pdf');
-    downloadBtn.setAttribute('target', '_blank');
-    downloadBtn.setAttribute('rel', 'noopener');
-    locked.setAttribute('hidden', '');
-    unlocked.removeAttribute('hidden');
-    unlocked.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    if (window.gsap) {
-      gsap.fromTo(unlocked, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-    }
-  }
+  btn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    if (busy) return;
+    busy = true;
+    btn.setAttribute('disabled', '');
+    setStatus('Preparing download\u2026', '');
 
-  async function fetchUrlAndReveal() {
-    if (unlocking || revealed) return;
-    unlocking = true;
-    setStatus('Unlocking\u2026', 'success');
     try {
       const resp = await fetch(UNLOCK_URL, {
         method: 'POST',
@@ -1316,49 +1295,30 @@
       });
       const data = await resp.json().catch(() => ({}));
       if (!resp.ok || !data.url) {
-        setStatus(data.error || 'Unlock failed. Refresh and try again.', 'error');
-        unlocking = false;
+        setStatus(data.error || 'Download failed. Try again.', 'error');
+        btn.removeAttribute('disabled');
+        busy = false;
         return;
       }
-      reveal(data.url);
+      // Trigger download in a new tab so the page stays put
+      const a = document.createElement('a');
+      a.href = data.url;
+      a.download = 'ARC_2026_Handout.pdf';
+      a.rel = 'noopener';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setStatus('Download started.', 'success');
+      setTimeout(() => {
+        btn.removeAttribute('disabled');
+        busy = false;
+        setStatus('', '');
+      }, 3000);
     } catch (err) {
-      setStatus('Network error. Refresh and try again.', 'error');
-      unlocking = false;
+      setStatus('Network error. Try again.', 'error');
+      btn.removeAttribute('disabled');
+      busy = false;
     }
-  }
-
-  // Detection strategy (browser security: cross-origin iframe blocks all event visibility):
-  // - When the user clicks into the Substack iframe, the page loses focus (window blur fires
-  //   with document.activeElement === iframe)
-  // - We require the iframe to have been interacted with AND the user to wait
-  //   at least 6 seconds total (realistic time to type an email and click Subscribe)
-  // - After that dwell, reveal the download
-  //
-  // This trusts the user: they must interact with the Substack widget and spend real time in it.
-  // It's the tightest gate possible given Substack's cross-origin lockdown.
-  const REQUIRED_DWELL_MS = 6000;
-  let firstInteractionAt = 0;
-  let dwellTimer = null;
-
-  function startDwell() {
-    if (firstInteractionAt || revealed || unlocking) return;
-    firstInteractionAt = Date.now();
-    setStatus('\u2014 Subscribing\u2026', '');
-    dwellTimer = setTimeout(() => {
-      if (revealed || unlocking) return;
-      fetchUrlAndReveal();
-    }, REQUIRED_DWELL_MS);
-  }
-
-  // The iframe taking focus = user clicked into it
-  window.addEventListener('blur', () => {
-    setTimeout(() => {
-      if (document.activeElement === iframe) startDwell();
-    }, 10);
-  });
-
-  iframe.addEventListener('load', () => {
-    if (!firstInteractionAt) setStatus('\u2014 Subscribe to unlock', '');
   });
 })();
 
