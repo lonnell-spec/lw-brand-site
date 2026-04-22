@@ -1238,20 +1238,14 @@
       <div id="gate-locked">
         <div class="gate-label">— Locked · Subscribe To Unlock</div>
         <div class="gate-title">Build With <span class="accent">LDW</span></div>
-        <div class="gate-body">Weekly field notes on infrastructure, leadership, and the tension between mission and management. Subscribe to the newsletter, then enter your email below to unlock the handout.</div>
+        <div class="gate-body">Weekly field notes on infrastructure, leadership, and the tension between mission and management. Subscribe below — the handout unlocks the moment you do.</div>
 
-        <div class="gate-step"><span class="gate-step-num">1</span>Subscribe to the newsletter</div>
-        <div class="embed-wrap">
-          <iframe src="https://buildwithldw.substack.com/embed" title="Subscribe to Arise &amp; Build with LDW" loading="lazy"></iframe>
+        <div class="embed-wrap" id="substack-embed">
+          <iframe id="substack-iframe" src="https://buildwithldw.substack.com/embed" title="Subscribe to Arise &amp; Build with LDW" loading="lazy"></iframe>
         </div>
 
-        <div class="gate-step"><span class="gate-step-num">2</span>Enter the same email to unlock</div>
-        <form class="email-form" id="arc-form">
-          <input type="email" name="email" placeholder="you@yourchurch.org" required autocomplete="email" />
-          <button type="submit" class="cta-btn" id="arc-submit">Unlock Handout</button>
-          <div class="form-status" id="arc-status"></div>
-        </form>
-        <div class="gate-fineprint">Use the same email both places. We verify and unlock the download.</div>
+        <div class="form-status" id="arc-status">— Waiting for subscribe</div>
+        <div class="gate-fineprint">The handout unlocks the moment you subscribe.</div>
       </div>
 
       <div id="gate-unlocked" hidden>
@@ -1276,62 +1270,108 @@
 </footer>
 
 <script>
-/* Handout gate — server-issued signed URL, no bypass */
+/* Handout gate — Substack embed interaction reveals download */
 (function initGate() {
-  const form = document.getElementById('arc-form');
   const statusEl = document.getElementById('arc-status');
-  const submit = document.getElementById('arc-submit');
   const locked = document.getElementById('gate-locked');
   const unlocked = document.getElementById('gate-unlocked');
   const downloadBtn = document.getElementById('download-btn');
-  if (!form || !locked || !unlocked || !downloadBtn) return;
+  const iframe = document.getElementById('substack-iframe');
+  if (!locked || !unlocked || !downloadBtn || !iframe) return;
 
   const UNLOCK_URL = 'https://riqdcirsmckubkdfbtoj.supabase.co/functions/v1/unlock-arc-handout';
+  let unlocking = false;
+  let revealed = false;
+  let subscribeClickTime = 0;
+
+  function setStatus(text, kind) {
+    statusEl.className = 'form-status' + (kind ? ' ' + kind : '');
+    statusEl.textContent = text;
+  }
 
   function reveal(url) {
+    if (revealed) return;
+    revealed = true;
     downloadBtn.setAttribute('href', url);
     downloadBtn.setAttribute('download', 'ARC_2026_Handout.pdf');
     downloadBtn.setAttribute('target', '_blank');
     downloadBtn.setAttribute('rel', 'noopener');
     locked.setAttribute('hidden', '');
     unlocked.removeAttribute('hidden');
+    unlocked.scrollIntoView({ behavior: 'smooth', block: 'center' });
     if (window.gsap) {
       gsap.fromTo(unlocked, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
     }
   }
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = (form.email.value || '').trim();
-    if (!email) return;
-
-    submit.disabled = true;
-    statusEl.className = 'form-status';
-    statusEl.textContent = 'Subscribing...';
-
+  async function fetchUrlAndReveal() {
+    if (unlocking || revealed) return;
+    unlocking = true;
+    setStatus('Unlocking\u2026', 'success');
     try {
       const resp = await fetch(UNLOCK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email })
+        body: JSON.stringify({})
       });
       const data = await resp.json().catch(() => ({}));
-
       if (!resp.ok || !data.url) {
-        statusEl.className = 'form-status error';
-        statusEl.textContent = data.error || 'Something broke. Try again.';
-        submit.disabled = false;
+        setStatus(data.error || 'Unlock failed. Refresh and try again.', 'error');
+        unlocking = false;
         return;
       }
-
-      statusEl.className = 'form-status success';
-      statusEl.textContent = 'Verified. Unlocking\u2026';
-      setTimeout(() => reveal(data.url), 500);
+      reveal(data.url);
     } catch (err) {
-      statusEl.className = 'form-status error';
-      statusEl.textContent = 'Network error. Try again.';
-      submit.disabled = false;
+      setStatus('Network error. Refresh and try again.', 'error');
+      unlocking = false;
     }
+  }
+
+  // Detection strategy:
+  // 1. User interacts with iframe (first blur with activeElement === iframe) = typing email
+  // 2. After a dwell of 4+ seconds of iframe focus, we count the next interaction as Subscribe click
+  // 3. Once we see the second qualifying interaction, reveal
+  //
+  // This requires the user to actually spend time in the widget and click twice (field + button)
+  // — matching the real subscribe flow. Refreshing the page reloads the iframe and resets state.
+  let firstInteraction = 0;
+  let interactions = 0;
+
+  function onIframeInteraction() {
+    if (revealed || unlocking) return;
+    const now = Date.now();
+    if (!firstInteraction) {
+      firstInteraction = now;
+      interactions = 1;
+      setStatus('\u2014 Typing\u2026', '');
+      return;
+    }
+    // Require at least 4 seconds between first interaction and second (enough time to type email)
+    if (now - firstInteraction < 4000) {
+      interactions++;
+      setStatus('\u2014 Keep going\u2026', '');
+      return;
+    }
+    // Qualified second interaction — treat as Subscribe click
+    interactions++;
+    setStatus('\u2014 Subscribing\u2026', '');
+    setTimeout(() => {
+      if (revealed || unlocking) return;
+      fetchUrlAndReveal();
+    }, 2500);
+  }
+
+  window.addEventListener('blur', () => {
+    // A small delay so we can check activeElement after the blur settles
+    setTimeout(() => {
+      if (document.activeElement === iframe) {
+        onIframeInteraction();
+      }
+    }, 0);
+  });
+
+  iframe.addEventListener('load', () => {
+    setStatus('\u2014 Waiting for subscribe', '');
   });
 })();
 
