@@ -3672,7 +3672,7 @@ setLoading(btnEl, true);
       if (error && error.code !== '23505') throw error;
       document.getElementById('audit-form-wrap').style.display = 'none';
       document.getElementById('audit-success').style.display   = 'block';
-      const PDF_URL = 'https://drive.google.com/file/d/1Sk779nipV6RAAG8zbpbllgPTkPPn_crO/view?usp=sharing';
+      const PDF_URL = 'https://ldw.build/infrastructure-audit.pdf';
       setTimeout(() => { window.open(PDF_URL, '_blank'); }, 800);
     } catch (err) {
       console.error('Audit gate error:', err);
