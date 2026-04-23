@@ -91,7 +91,51 @@
     transition: color 0.25s ease; position: relative;
   }
   .topnav a:hover { color: var(--copper); }
-  @media (max-width: 760px) { .topnav { display: none; } }
+  /* Mobile nav toggle — hidden on desktop */
+  .nav-toggle {
+    display: none;
+    background: transparent; border: 1px solid var(--hairline);
+    color: var(--off-white); padding: 8px 12px; cursor: pointer;
+    font-family: 'Space Mono', monospace; font-size: 10px;
+    letter-spacing: 2px; text-transform: uppercase;
+    transition: border-color 0.2s ease;
+  }
+  .nav-toggle:hover { border-color: var(--copper); color: var(--copper); }
+  .nav-toggle .bars {
+    display: inline-flex; flex-direction: column; gap: 3px;
+    margin-right: 8px; vertical-align: middle;
+  }
+  .nav-toggle .bars span {
+    display: block; width: 16px; height: 1.5px; background: currentColor;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+  .nav-toggle[aria-expanded="true"] .bars span:nth-child(1) { transform: translateY(4.5px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] .bars span:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded="true"] .bars span:nth-child(3) { transform: translateY(-4.5px) rotate(-45deg); }
+
+  /* Mobile drawer */
+  .mobile-drawer {
+    display: none;
+    position: fixed; top: 68px; left: 0; right: 0;
+    background: var(--obsidian); border-bottom: 1px solid var(--hairline);
+    z-index: 99; padding: 8px 0 20px;
+    max-height: calc(100vh - 68px); overflow-y: auto;
+  }
+  .mobile-drawer[data-open="true"] { display: block; }
+  .mobile-drawer a {
+    display: block; padding: 14px 24px;
+    font-family: 'Space Mono', monospace; font-size: 12px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--off-white); text-decoration: none;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .mobile-drawer a:last-child { border-bottom: none; }
+  .mobile-drawer a:hover, .mobile-drawer a:active { color: var(--copper); }
+
+  @media (max-width: 760px) {
+    .topnav { display: none; }
+    .nav-toggle { display: inline-flex; align-items: center; }
+  }
 
   /* Progress bar */
   .progress {
@@ -844,6 +888,95 @@
     50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
   }
 
+  /* =========================================
+     COMPREHENSIVE MOBILE (≤ 760px)
+     Hero tightening, body scaling, hero meta + anchor wrap, section padding.
+     ========================================= */
+  @media (max-width: 760px) {
+    .wrap-wide { padding: 0 20px; }
+
+    /* Hero title — was clamp(48px, 9vw, 100px); too big at 9vw on mobile */
+    h1 { font-size: clamp(40px, 11.5vw, 56px); letter-spacing: 1px; line-height: 0.95; }
+    h2 { font-size: clamp(32px, 8.5vw, 44px); letter-spacing: 1px; margin-bottom: 28px; }
+
+    /* Body copy — cap so vw-scaled lead text stops running huge */
+    p { font-size: 16px; line-height: 1.6; }
+    p.lead { font-size: 17px; line-height: 1.55; }
+
+    /* Hero spacing */
+    .hero { padding: 100px 0 64px; min-height: auto; }
+    .kicker { font-size: 15px; line-height: 1.55; margin-bottom: 36px; }
+    .eyebrow { font-size: 10px; letter-spacing: 2px; flex-wrap: wrap; row-gap: 6px; }
+
+    /* Meta row stacks 2×2 */
+    .meta { grid-template-columns: repeat(2, 1fr); gap: 18px 20px; padding-top: 24px; }
+    .meta-item .value { font-size: 17px; letter-spacing: 1px; }
+
+    /* Hero anchor pills — ensure wrapping */
+    .anchor-list { flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+    .anchor-list a { font-size: 10px; padding: 9px 12px; letter-spacing: 1px; }
+
+    /* Section padding */
+    section.block { padding: 72px 0; }
+    .section-num { font-size: 10px; letter-spacing: 2px; margin-bottom: 14px; }
+
+    /* dd-block scripture + card text */
+    .dd-block { padding: 28px 22px; }
+    .dd-block h4 { font-size: 22px; line-height: 1.15; }
+    .dd-block p.scripture { font-size: 16px; }
+    .dd-label, .dd-block .dd-label { font-size: 10px; letter-spacing: 1.8px; }
+
+    /* Tension cards — padding tighten */
+    .tension-card { padding: 32px 24px; }
+    .tension-title, .tension-card h3 { font-size: 26px; line-height: 1.1; }
+    .tension-where { font-size: 10px; letter-spacing: 1.2px; line-height: 1.7; }
+
+    /* Pullquote */
+    .pullquote { font-size: clamp(22px, 6vw, 30px); line-height: 1.2; padding: 32px 22px; }
+
+    /* Loop cards (Monday Move) */
+    .loop-step { padding: 26px 22px; }
+    .loop-name { font-size: 20px; line-height: 1.15; }
+    .loop-idx { font-size: 10px; letter-spacing: 1.8px; }
+
+    /* Text-your-SP */
+    .text-sp { padding: 26px 22px; }
+    .text-sp .text-sp-quote { font-size: clamp(22px, 6.5vw, 30px); line-height: 1.2; }
+    .text-sp .text-sp-label { font-size: 10px; letter-spacing: 1.8px; }
+
+    /* Truths cards */
+    .truth-num { font-size: 10px; letter-spacing: 1.5px; }
+    .truth-text { font-size: 15px; line-height: 1.55; }
+
+    /* Try-it / Ask Yourself block */
+    .tryit { padding: 26px 22px; }
+    .tryit-prompt { font-size: 22px; line-height: 1.2; }
+    .tryit-body { font-size: 15px; }
+
+    /* CTA / Handout gate */
+    .cta-section { padding: 80px 0; }
+    .cta-section h2 { font-size: clamp(34px, 9vw, 48px); }
+
+    /* Progress bar slightly thinner */
+    .progress { height: 2px; }
+
+    /* Topbar shrink */
+    .topbar-inner { padding: 14px 20px; }
+    .brand { font-size: 13px; }
+  }
+
+  /* Extra-small phones (≤ 380px) — aggressive clamp */
+  @media (max-width: 380px) {
+    .wrap-wide { padding: 0 16px; }
+    h1 { font-size: 38px; letter-spacing: 0.5px; }
+    h2 { font-size: 30px; }
+    .tension-title, .tension-card h3 { font-size: 23px; }
+    .dd-block h4 { font-size: 20px; }
+    .loop-name { font-size: 18px; }
+    .anchor-list a { font-size: 9px; padding: 8px 10px; }
+    .meta-item .value { font-size: 16px; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; }
     .reveal { opacity: 1; transform: none; }
@@ -874,7 +1007,20 @@
       <a href="#monday">Monday</a>
       <a href="#handout">Handout</a>
     </nav>
+    <button type="button" class="nav-toggle" id="navToggle" aria-controls="mobileDrawer" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="nav-toggle-label">Menu</span>
+    </button>
   </div>
+</div>
+<div class="mobile-drawer" id="mobileDrawer" data-open="false">
+  <a href="#widow">01 · Widow</a>
+  <a href="#acts6">02 · Acts 6</a>
+  <a href="#grid1">03 · Six A's · 1–3</a>
+  <a href="#grid2">04 · Six A's · 4–6</a>
+  <a href="#truths">05 · Truths</a>
+  <a href="#monday">06 · Monday</a>
+  <a href="#handout">Handout</a>
 </div>
 
 <!-- HERO -->
@@ -1308,6 +1454,36 @@
   gsap.to('#scroll-indicator', {
     opacity: 0,
     scrollTrigger: { trigger: '#hero', start: '20% top', end: '40% top', scrub: true }
+  });
+})();
+
+/* Mobile nav drawer */
+(function initMobileNav() {
+  const toggle = document.getElementById('navToggle');
+  const drawer = document.getElementById('mobileDrawer');
+  if (!toggle || !drawer) return;
+
+  const setOpen = (open) => {
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    drawer.setAttribute('data-open', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+
+  toggle.addEventListener('click', () => {
+    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  drawer.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', () => setOpen(false));
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setOpen(false);
+  });
+
+  // Close drawer if viewport expands past mobile breakpoint
+  window.matchMedia('(min-width: 761px)').addEventListener('change', (e) => {
+    if (e.matches) setOpen(false);
   });
 })();
 </script>
