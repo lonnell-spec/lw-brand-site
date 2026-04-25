@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Status Pill · Admin · ldw.build</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --obsidian:    #0D0D0D;
+      --warm-black:  #1A1714;
+      --copper:      #C17F59;
+      --signal:      #E85D3A;
+      --off-white:   #F2F0EB;
+      --concrete:    #8A8A8A;
+      --rule:        rgba(242, 240, 235, 0.12);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      background: var(--obsidian);
+      color: var(--off-white);
+      min-height: 100vh;
+      padding: 40px 24px 80px;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 640px; margin: 0 auto; }
+
+    .crumb {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--concrete);
+      margin: 0 0 24px;
+    }
+    .crumb a {
+      color: var(--copper);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 200ms ease;
+    }
+    .crumb a:hover { border-bottom-color: var(--copper); }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-weight: 400;
+      font-size: clamp(40px, 8vw, 64px);
+      letter-spacing: 0.04em;
+      line-height: 1;
+      margin: 0 0 12px;
+    }
+    .sub {
+      color: var(--concrete);
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 0 0 40px;
+      max-width: 52ch;
+    }
+
+    form { display: grid; gap: 24px; }
+
+    label { display: block; }
+    label > span:first-child {
+      display: block;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 8px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      background: var(--warm-black);
+      border: 1px solid var(--rule);
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      padding: 14px 16px;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 200ms ease;
+    }
+    input[type="text"]:focus { border-color: var(--copper); }
+
+    .toggle { display: flex; align-items: center; gap: 12px; }
+    .toggle input { width: 18px; height: 18px; accent-color: var(--copper); cursor: pointer; }
+    .toggle span:not(:first-child) { font-size: 14px; color: var(--off-white); }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    button[type="submit"] {
+      background: var(--copper);
+      color: var(--obsidian);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 0.08em;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+    button[type="submit"]:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(193, 127, 89, 0.25); }
+    button[type="submit"]:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    .msg {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      margin: 0;
+      min-height: 1.2em;
+    }
+    .msg[data-state="ok"]  { color: var(--copper); }
+    .msg[data-state="err"] { color: var(--signal); }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <p class="crumb"><a href="/admin.html">← Admin</a> · STATUS PILL</p>
+    <h1>STATUS PILL</h1>
+    <p class="sub">The four fields shown in the floating pill on every public page. Saves go live within one second via Supabase Realtime.</p>
+
+    <form id="status-form" autocomplete="off">
+      <label>
+        <span>Location</span>
+        <input type="text" name="location" maxlength="32" required />
+      </label>
+      <label>
+        <span>Building</span>
+        <input type="text" name="current_focus" maxlength="64" required />
+      </label>
+      <label>
+        <span>Availability</span>
+        <input type="text" name="availability" maxlength="64" required />
+      </label>
+      <label class="toggle">
+        <input type="checkbox" name="pill_visible" />
+        <span>Show pill on site</span>
+      </label>
+      <div class="actions">
+        <button type="submit">Save</button>
+        <p id="status-form-msg" class="msg" aria-live="polite"></p>
+      </div>
+    </form>
+  </main>
+
+  <script>
+  (function () {
+    // Auth gate — match the existing admin pattern
+    if (!sessionStorage.getItem('ldw_admin_auth')) {
+      window.location.href = '/admin.html';
+      return;
+    }
+
+    const SUPABASE_URL = 'https://riqdcirsmckubkdfbtoj.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM'; // ⚠️ Replace with real anon key
+    const FUNCTION_URL = SUPABASE_URL + '/functions/v1/update-site-status';
+
+    const form = document.getElementById('status-form');
+    const msg  = document.getElementById('status-form-msg');
+    const btn  = form.querySelector('button[type="submit"]');
+
+    function setMsg(text, state) {
+      msg.textContent = text;
+      msg.dataset.state = state || '';
+    }
+
+    // Load current values via anon read
+    fetch(SUPABASE_URL + '/rest/v1/site_status?id=eq.1&select=*', {
+      headers: {
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: 'Bearer ' + SUPABASE_ANON_KEY,
+      },
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (rows) {
+        const data = rows && rows[0];
+        if (!data) return setMsg('No row found — run schema first.', 'err');
+        form.location.value      = data.location || '';
+        form.current_focus.value = data.current_focus || '';
+        form.availability.value  = data.availability || '';
+        form.pill_visible.checked = !!data.pill_visible;
+      })
+      .catch(function (e) { setMsg('Could not load: ' + e.message, 'err'); });
+
+    // Save handler
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      btn.disabled = true;
+      setMsg('Saving…', '');
+
+      const adminToken = sessionStorage.getItem('ldw_admin_auth');
+      const payload = {
+        location:      form.location.value.trim(),
+        current_focus: form.current_focus.value.trim(),
+        availability:  form.availability.value.trim(),
+        pill_visible:  form.pill_visible.checked,
+      };
+
+      try {
+        const r = await fetch(FUNCTION_URL, {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Bearer ' + adminToken,
+            'Content-Type':  'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+        const data = await r.json().catch(function () { return {}; });
+        if (!r.ok) throw new Error(data.error || ('HTTP ' + r.status));
+        setMsg('Saved · live now', 'ok');
+        setTimeout(function () { setMsg(''); }, 3000);
+      } catch (err) {
+        setMsg('Error: ' + err.message, 'err');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  })();
+  </script>
+</body>
+</html>
