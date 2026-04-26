@@ -2958,7 +2958,7 @@ setLoading(btnEl, true);
         .from('site_instagram')
         .select('*')
         .eq('visible', true)
-        .order('display_order', { ascending: true })
+        .order('post_date', { ascending: false, nullsFirst: false })
         .limit(4);
 
       if (!igErr && igData && igData.length > 0) {
