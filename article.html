@@ -25,7 +25,243 @@
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
-body {
+cat > /tmp/pill.sh <<'PILL_EOF'
+#!/bin/bash
+set -e
+cd ~/Documents/GitHub/lw-brand-site
+
+# Build the pill snippet as a heredoc'd file once
+cat > /tmp/pill-snippet.html <<'SNIPPET_EOF'
+<!-- ──────────────────────────────────────────────────────────────────────
+     STATUS PILL · ldw.build · auto-loads from Supabase site_status table
+     ────────────────────────────────────────────────────────────────────── -->
+<aside id="status-pill" class="status-pill" aria-label="Current status" hidden>
+  <button class="status-pill__trigger" aria-expanded="false" aria-controls="status-pill-card">
+    <span class="status-pill__dot" aria-hidden="true"></span>
+    <span class="status-pill__time" data-status="time">--:-- ET</span>
+    <span class="status-pill__sep" aria-hidden="true">·</span>
+    <span class="status-pill__focus" data-status="focus">—</span>
+  </button>
+  <div id="status-pill-card" class="status-pill__card" role="region">
+    <dl class="status-pill__grid">
+      <dt>LOCATION</dt><dd data-status="location">—</dd>
+      <dt>LOCAL TIME</dt><dd data-status="time-full">—</dd>
+      <dt>BUILDING</dt><dd data-status="focus-full">—</dd>
+      <dt>AVAILABILITY</dt><dd data-status="availability">—</dd>
+    </dl>
+    <p class="status-pill__updated">Updated <span data-status="updated">—</span></p>
+  </div>
+</aside>
+<style>
+.status-pill {
+  --sp-copper: var(--copper, #C17F59);
+  --sp-copper-glow: rgba(193, 127, 89, 0.45);
+  --sp-obsidian-90: rgba(13, 13, 13, 0.85);
+  --sp-paper: var(--off-white, #F2F0EB);
+  --sp-paper-faint: rgba(242, 240, 235, 0.6);
+  --sp-rule: rgba(242, 240, 235, 0.18);
+  position: fixed; bottom: 16px; right: 16px; z-index: 90;
+  font-family: 'Space Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  color: var(--sp-paper);
+}
+.status-pill[hidden] { display: none; }
+.status-pill__trigger {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 16px; background: var(--sp-obsidian-90);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid var(--sp-rule); border-radius: 999px;
+  color: var(--sp-paper); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  cursor: pointer; transition: border-color 200ms ease, transform 200ms ease;
+  font-family: inherit;
+}
+.status-pill__trigger:hover { border-color: var(--sp-copper); }
+.status-pill__trigger:focus-visible { outline: 2px solid var(--sp-copper); outline-offset: 3px; }
+.status-pill__dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--sp-copper);
+  box-shadow: 0 0 0 0 var(--sp-copper-glow);
+  animation: status-pulse 2.4s ease-in-out infinite;
+}
+@keyframes status-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 var(--sp-copper-glow); }
+  50% { box-shadow: 0 0 0 6px rgba(193, 127, 89, 0); }
+}
+.status-pill__sep { opacity: 0.4; }
+.status-pill__focus { color: var(--sp-copper); }
+.status-pill__card {
+  position: absolute; bottom: calc(100% + 10px); right: 0;
+  min-width: 280px; padding: 18px 20px;
+  background: var(--sp-obsidian-90);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--sp-rule); border-radius: 14px;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity 200ms ease, transform 200ms ease;
+  pointer-events: none;
+}
+.status-pill[data-open="true"] .status-pill__card {
+  opacity: 1; transform: translateY(0); pointer-events: auto;
+}
+.status-pill__grid {
+  display: grid; grid-template-columns: max-content 1fr;
+  gap: 8px 18px; margin: 0;
+}
+.status-pill__grid dt { font-size: 10px; letter-spacing: 0.1em; color: var(--sp-paper-faint); }
+.status-pill__grid dd { margin: 0; font-size: 13px; color: var(--sp-paper); }
+.status-pill__grid dd[data-status="focus-full"] {
+  font-family: 'Bebas Neue', 'Arial Black', sans-serif;
+  font-weight: 400; font-size: 18px; text-transform: uppercase;
+  letter-spacing: 0.04em; color: var(--sp-copper);
+}
+.status-pill__updated {
+  margin: 14px 0 0; padding-top: 12px;
+  border-top: 1px solid var(--sp-rule);
+  font-size: 10px; letter-spacing: 0.08em; color: var(--sp-paper-faint);
+}
+@media (max-width: 540px) {
+  .status-pill__trigger { padding: 8px 12px; font-size: 10px; }
+  .status-pill__sep, .status-pill__focus { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .status-pill__dot { animation: none; }
+  .status-pill__card { transition: none; }
+}
+</style>
+<script>
+(function () {
+  const SUPABASE_URL = 'https://riqdcirsmckubkdfbtoj.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcWRjaXJzbWNrdWJrZGZidG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzMTE5MzQsImV4cCI6MjA4Nzg4NzkzNH0.m8mLPxFeOeKhMV3W4HMru9kSYIcxXfbfDRVslLCj_gM';
+  const ROOT = document.getElementById('status-pill');
+  if (!ROOT) return;
+  const els = {
+    time: ROOT.querySelector('[data-status="time"]'),
+    timeFull: ROOT.querySelector('[data-status="time-full"]'),
+    focus: ROOT.querySelector('[data-status="focus"]'),
+    focusFull: ROOT.querySelector('[data-status="focus-full"]'),
+    location: ROOT.querySelector('[data-status="location"]'),
+    availability: ROOT.querySelector('[data-status="availability"]'),
+    updated: ROOT.querySelector('[data-status="updated"]'),
+    trigger: ROOT.querySelector('.status-pill__trigger'),
+  };
+  function fmtTime(full) {
+    return new Intl.DateTimeFormat('en-US', {
+      hour: 'numeric', minute: '2-digit',
+      timeZone: 'America/New_York', hour12: true,
+      timeZoneName: full ? 'short' : undefined,
+    }).format(new Date());
+  }
+  function tickClock() {
+    if (els.time) els.time.textContent = fmtTime(false).toUpperCase();
+    if (els.timeFull) els.timeFull.textContent = fmtTime(true);
+  }
+  function ensureClient(cb) {
+    if (window.supabase && typeof window.supabase.from === 'function') return cb(window.supabase);
+    if (window.supabase && typeof window.supabase.createClient === 'function') return cb(window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY));
+    const s = document.createElement('script');
+    s.src = 'https://esm.sh/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+    s.onload = function () {
+      if (window.supabase && window.supabase.createClient) cb(window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY));
+    };
+    s.onerror = function () {};
+    document.head.appendChild(s);
+  }
+  function render(d) {
+    if (els.location) els.location.textContent = d.location;
+    if (els.focus) els.focus.textContent = d.current_focus;
+    if (els.focusFull) els.focusFull.textContent = d.current_focus;
+    if (els.availability) els.availability.textContent = d.availability;
+    if (els.updated && d.updated_at) {
+      const dt = new Date(d.updated_at);
+      els.updated.textContent = dt.toLocaleString('en-US', {
+        month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit',
+        timeZone: 'America/New_York',
+      });
+    }
+  }
+  function setOpen(open) {
+    ROOT.dataset.open = open ? 'true' : 'false';
+    els.trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  els.trigger.addEventListener('click', function (e) { e.stopPropagation(); setOpen(ROOT.dataset.open !== 'true'); });
+  document.addEventListener('click', function (e) { if (!ROOT.contains(e.target)) setOpen(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+  ensureClient(function (sb) {
+    async function loadStatus() {
+      try {
+        const { data, error } = await sb.from('site_status').select('location, current_focus, availability, pill_visible, updated_at').eq('id', 1).single();
+        if (error) throw error;
+        if (!data || data.pill_visible === false) { ROOT.hidden = true; return; }
+        render(data);
+        ROOT.hidden = false;
+      } catch (e) {
+        console.warn('[status-pill]', e);
+        ROOT.hidden = true;
+      }
+    }
+    tickClock();
+    setInterval(tickClock, 30 * 1000);
+    loadStatus();
+    if (sb.channel) {
+      sb.channel('site_status_live').on('postgres_changes',
+        { event: 'UPDATE', schema: 'public', table: 'site_status' },
+        function (payload) {
+          if (payload.new && payload.new.pill_visible === false) ROOT.hidden = true;
+          else { render(payload.new); ROOT.hidden = false; }
+        }
+      ).subscribe();
+    }
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'visible') loadStatus();
+    });
+  });
+})();
+</script>
+<!-- ─── end Status Pill ────────────────────────────────────────────────── -->
+SNIPPET_EOF
+
+# Insert pill snippet before </body> in each of 5 files
+for f in index.html speaking.html books.html media.html articles.html; do
+  # Use awk to inject the snippet content before </body>
+  awk -v snip_file=/tmp/pill-snippet.html '
+    /^<\/body>$/ {
+      while ((getline line < snip_file) > 0) print line
+      close(snip_file)
+    }
+    { print }
+  ' "$f" > "/tmp/$f.new"
+  mv "/tmp/$f.new" "$f"
+done
+
+echo "==> VERIFY ==="
+echo ""
+echo "[A] Pill snippet present in all 5 (looking for status-pill id):"
+for f in index.html speaking.html books.html media.html articles.html; do
+  if grep -q 'id="status-pill"' "$f"; then echo "  $f: OK"; else echo "  $f: MISSING"; fi
+done
+
+echo ""
+echo "[B] Pill is BEFORE </body> (not after):"
+for f in index.html speaking.html books.html media.html articles.html; do
+  pill_line=$(grep -n 'id="status-pill"' "$f" | head -1 | cut -d: -f1)
+  body_line=$(grep -n '^</body>$' "$f" | tail -1 | cut -d: -f1)
+  if [ -n "$pill_line" ] && [ -n "$body_line" ] && [ "$pill_line" -lt "$body_line" ]; then
+    echo "  $f: OK (pill at line $pill_line, </body> at $body_line)"
+  else
+    echo "  $f: BROKEN (pill at $pill_line, </body> at $body_line)"
+  fi
+done
+
+echo ""
+echo "[C] Diff stats:"
+git diff --stat
+PILL_EOF
+
+bash /tmp/pill.sh
+  
+  
+  
+  body {
   background: var(--obsidian);
   color: var(--off-white);
   font-family: 'DM Sans', sans-serif;
