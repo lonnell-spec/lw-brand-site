@@ -908,15 +908,56 @@ git push
   }
   .audit-input::placeholder { color: var(--concrete); }
   .audit-input:focus { border-color: var(--copper); }
-  .audit-btn {
-    width: 100%; background: var(--copper); color: var(--obsidian);
-    font-family: 'Thunder', sans-serif;
-        font-weight: 700; font-size: 16px;
-    letter-spacing: 2px; padding: 14px 20px; border: none;
-    cursor: pointer; transition: opacity 0.2s; margin-top: 4px;
+  /* LDW Signature Button — copper rise + top/bottom border lines */
+  .btn-ldw {
+    position: relative;
+    display: inline-block;
+    font-family: 'Thunder', 'Bebas Neue', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--off-white);
+    background: transparent;
+    border: none;
+    padding: 14px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    overflow: hidden;
+    transition: color 0.35s ease;
+    isolation: isolate;
   }
-  .audit-btn:hover { opacity: 0.85; }
-  .audit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-ldw::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--copper);
+    transform: scaleY(0);
+    opacity: 0;
+    transform-origin: top;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+    z-index: -1;
+  }
+  .btn-ldw::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-top: 2px solid var(--copper);
+    border-bottom: 2px solid var(--copper);
+    transform: scaleY(2);
+    opacity: 0;
+    transform-origin: center;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+    pointer-events: none;
+  }
+  .btn-ldw > span { position: relative; display: inline-block; }
+  .btn-ldw:hover { color: var(--obsidian); }
+  .btn-ldw:hover::before,
+  .btn-ldw:hover::after { transform: scaleY(1); opacity: 1; }
+  .btn-ldw:disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+  .btn-ldw--sm { font-size: 13px; padding: 10px 20px; letter-spacing: 1.5px; }
+  .btn-ldw--lg { font-size: 18px; padding: 18px 40px; letter-spacing: 3px; }
+  .btn-ldw--full { display: block; width: 100%; text-align: center; margin-top: 4px; }
   .audit-privacy {
     font-family: 'Space Mono', monospace; font-size: 9px;
     color: var(--concrete); letter-spacing: 1px;
@@ -2336,7 +2377,7 @@ git push
                 <p class="audit-form-label">GET THE FREE AUDIT</p>
                 <input type="text" id="audit-name" class="audit-input" placeholder="First name" autocomplete="given-name" />
                 <input type="email" id="audit-email" class="audit-input" placeholder="Email address" autocomplete="email" />
-                <button class="audit-btn" id="audit-submit" onclick="submitAuditGate()">SEND ME THE AUDIT</button>
+                <button class="btn-ldw btn-ldw--full" id="audit-submit" onclick="submitAuditGate()"><span>SEND ME THE AUDIT</span></button>
                 <p class="audit-privacy">No spam. One-click unsubscribe. Ever.</p>
               </div>
               <div class="audit-success" id="audit-success" style="display:none;">
@@ -3656,7 +3697,7 @@ setLoading(btnEl, true);
     if (!name)  { nameEl.focus(); return; }
     if (!email || !email.includes('@')) { emailEl.focus(); return; }
     btn.disabled = true;
-    btn.textContent = 'SENDING...';
+    btn.querySelector('span').textContent = 'SENDING...';
     try {
       // Create client inline — avoids cross-script scope issues
       const _db = supabase.createClient(
@@ -3679,7 +3720,7 @@ setLoading(btnEl, true);
     } catch (err) {
       console.error('Audit gate error:', err);
       btn.disabled = false;
-      btn.textContent = 'SEND ME THE AUDIT';
+      btn.querySelector('span').textContent = 'SEND ME THE AUDIT';
       alert('Something went wrong. Please try again.');
     }
   }
