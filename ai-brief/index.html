@@ -806,13 +806,13 @@ h2{line-height:1.0 !important;}
 
 
 /* ============ MOBILE LAYER (v8.5) ============ */
-@media (max-width: 820px){
+@media (max-width: 920px){
   .slide{display:block !important;overflow-y:auto !important;-webkit-overflow-scrolling:touch;padding:64px 6vw 120px !important;}
   .chip{top:20px;left:6vw;font-size:9px;letter-spacing:0.18em;right:6vw;}
   .container{max-width:100% !important;}
   .row{display:flex;flex-direction:column;gap:26px;}
   .row > .col{flex:1 1 auto !important;width:100%;}
-  .grid-2,.grid-3,.grid-4,.agents-grid,.os-grid{grid-template-columns:1fr !important;gap:14px !important;}
+  .grid-2,.grid-3,.grid-4,.agents-grid,.os-grid,.pillars{grid-template-columns:1fr !important;gap:14px !important;}
   [style*="grid-template-columns: repeat(4"],[style*="grid-template-columns: repeat(3"],[style*="grid-template-columns: 1fr 1fr"]{grid-template-columns:1fr 1fr !important;gap:12px !important;}
   h1{font-size:clamp(30px,9.5vw,44px) !important;margin-bottom:18px !important;}
   h2{font-size:clamp(24px,7vw,34px) !important;}
@@ -866,10 +866,16 @@ h2{line-height:1.0 !important;}
   <div class="chip">I · THE SHIFT</div>
   <div class="container">
     <div class="eyebrow">A new way to think about what we use technology for</div>
-    <h1 style="font-size: clamp(31px, 3.9vw, 56px); margin-bottom: 12px;">We use our brains for <em>creativity.</em></h1>
-    <h1 style="font-size: clamp(31px, 3.9vw, 56px); margin-bottom: 12px; color: var(--ink);">We use technology for <em>storage.</em></h1>
-    <h1 style="font-size: clamp(31px, 3.9vw, 56px); margin-bottom: 12px;">Now we also use it for <em>automation, efficiency, and speed.</em></h1>
-    
+    <h1 style="font-size: clamp(31px, 3.9vw, 56px); margin-bottom: 16px;">We use our brains for <em>creativity.</em></h1>
+    <h1 style="font-size: clamp(31px, 3.9vw, 56px); margin-bottom: 16px; color: var(--ink);">We use technology for <em>storage.</em></h1>
+    <h1 style="font-size: clamp(31px, 3.9vw, 56px); margin-bottom: 0;">Now we also use it for <em>automation, efficiency, and speed.</em></h1>
+  </div>
+</section>
+<section class="slide paper">
+  <div class="chip">I · THE SHIFT</div>
+  <div class="container">
+    <div class="eyebrow">Where each one lives</div>
+    <h1 style="font-size: clamp(30px, 3.6vw, 52px); margin-bottom: 28px;">Your brain keeps the <em>judgment.</em> The machine takes the <em>repetition.</em></h1>
     <div class="pillars">
       <div class="pillar">
         <div class="pillar-label">YESTERDAY · BRAIN</div>
@@ -1619,7 +1625,7 @@ Use this whenever drafting the weekly church email.
 
 <div class="controls">F · fullscreen · ← → arrows · click to advance</div>
 
-<div class="m-nav"><span class="m-count" id="mCount">1 / 29</span><button id="mPrev" aria-label="Previous">←</button><button id="mNext" aria-label="Next">→</button></div>
+<div class="m-nav"><span class="m-count" id="mCount">1 / 30</span><button id="mPrev" aria-label="Previous">←</button><button id="mNext" aria-label="Next">→</button></div>
 <script>
 const slides = document.querySelectorAll('.slide');
 let current = 0;
