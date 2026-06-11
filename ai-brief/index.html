@@ -812,7 +812,10 @@ h2{line-height:1.0 !important;}
   .container{max-width:100% !important;}
   .row{display:flex;flex-direction:column;gap:26px;}
   .row > .col{flex:1 1 auto !important;width:100%;}
-  .grid-2,.grid-3,.grid-4,.agents-grid,.os-grid,.pillars{grid-template-columns:1fr !important;gap:14px !important;}
+  .grid-2,.grid-3,.grid-4,.agents-grid,.os-grid,.pillars,.faces,.cost-cards,.tier-table,.stack-grid,.cards{grid-template-columns:1fr !important;display:grid !important;gap:14px !important;}
+  .slide,.container{overflow-x:hidden !important;}
+  .container > div[style*="display: flex"]{flex-direction:column !important;}
+  .ext-row{grid-template-columns:1fr 1fr !important;display:grid !important;gap:10px !important;}
   [style*="grid-template-columns: repeat(4"],[style*="grid-template-columns: repeat(3"],[style*="grid-template-columns: 1fr 1fr"]{grid-template-columns:1fr 1fr !important;gap:12px !important;}
   h1{font-size:clamp(30px,9.5vw,44px) !important;margin-bottom:18px !important;}
   h2{font-size:clamp(24px,7vw,34px) !important;}
