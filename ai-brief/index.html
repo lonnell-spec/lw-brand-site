@@ -804,6 +804,32 @@ h2{line-height:1.0 !important;}
 .slide.red .card p{color:var(--muted) !important;}
 .slide.red .card .label{color:var(--red) !important;}
 
+
+/* ============ MOBILE LAYER (v8.5) ============ */
+@media (max-width: 820px){
+  .slide{display:block !important;overflow-y:auto !important;-webkit-overflow-scrolling:touch;padding:64px 6vw 120px !important;}
+  .chip{top:20px;left:6vw;font-size:9px;letter-spacing:0.18em;right:6vw;}
+  .container{max-width:100% !important;}
+  .row{display:flex;flex-direction:column;gap:26px;}
+  .row > .col{flex:1 1 auto !important;width:100%;}
+  .grid-2,.grid-3,.grid-4,.agents-grid,.os-grid{grid-template-columns:1fr !important;gap:14px !important;}
+  [style*="grid-template-columns: repeat(4"],[style*="grid-template-columns: repeat(3"],[style*="grid-template-columns: 1fr 1fr"]{grid-template-columns:1fr 1fr !important;gap:12px !important;}
+  h1{font-size:clamp(30px,9.5vw,44px) !important;margin-bottom:18px !important;}
+  h2{font-size:clamp(24px,7vw,34px) !important;}
+  .lede{font-size:clamp(16px,4.6vw,20px) !important;max-width:100% !important;}
+  .role-p{font-size:15px !important;}
+  .eyebrow{font-size:10px;margin-bottom:14px;}
+  .phone-mock{max-width:270px;margin:0 auto;}
+  pre,code,.code-block,.terminal{font-size:10.5px !important;overflow-x:auto;}
+  .stack-item{gap:16px;padding:14px 0;}
+  .stack-num{font-size:clamp(26px,8vw,34px) !important;}
+  .controls{display:none !important;}
+  .m-nav{display:flex !important;}
+}
+.m-nav{display:none;position:fixed;bottom:18px;right:16px;z-index:50;gap:10px;align-items:center;}
+.m-nav .m-count{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.15em;color:rgba(242,240,235,0.85);background:rgba(13,13,13,0.72);padding:6px 10px;border-radius:14px;margin-right:8px;backdrop-filter:blur(4px);}
+.m-nav button{width:46px;height:46px;border-radius:50%;border:1px solid var(--red);background:rgba(13,13,13,0.78);color:var(--red);font-size:18px;line-height:1;cursor:pointer;backdrop-filter:blur(4px);}
+
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -1593,10 +1619,11 @@ Use this whenever drafting the weekly church email.
 
 <div class="controls">F · fullscreen · ← → arrows · click to advance</div>
 
+<div class="m-nav"><span class="m-count" id="mCount">1 / 29</span><button id="mPrev" aria-label="Previous">←</button><button id="mNext" aria-label="Next">→</button></div>
 <script>
 const slides = document.querySelectorAll('.slide');
 let current = 0;
-function show(n) { slides.forEach((s, i) => s.classList.toggle('active', i === n)); current = n; }
+function show(n) { slides.forEach((s, i) => s.classList.toggle('active', i === n)); current = n; const c=document.getElementById('mCount'); if(c) c.textContent=(n+1)+' / '+slides.length; const a=document.querySelector('.slide.active'); if(a) a.scrollTop=0; }
 function next() { if (current < slides.length - 1) show(current + 1); }
 function prev() { if (current > 0) show(current - 1); }
 document.addEventListener('keydown', (e) => {
@@ -1607,10 +1634,20 @@ document.addEventListener('keydown', (e) => {
     else document.exitFullscreen();
   }
 });
+const coarse = window.matchMedia('(pointer: coarse)').matches;
 document.addEventListener('click', (e) => {
+  if (coarse) return;
   if (e.target.closest('a, button, input')) return;
   next();
 });
+document.getElementById('mPrev').addEventListener('click', prev);
+document.getElementById('mNext').addEventListener('click', next);
+let tx=0, ty=0;
+document.addEventListener('touchstart', (e)=>{ tx=e.changedTouches[0].clientX; ty=e.changedTouches[0].clientY; }, {passive:true});
+document.addEventListener('touchend', (e)=>{
+  const dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
+  if (Math.abs(dx)>70 && Math.abs(dy)<50) { dx<0 ? next() : prev(); }
+}, {passive:true});
 </script>
 </body>
 </html>
