@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Cornerstone — concept lab</title>
+<link rel="stylesheet" href="/shared.css">
+<style>
+  :root{ --obsidian:#0D0D0D; --warm:#1A1714; --copper:#C17F59; --signal:#E85D3A; --off:#F2F0EB; --mute:#8A8A8A; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; background:var(--obsidian); color:var(--off); }
+  .lab{ height:300vh; position:relative; }
+  .stage{ position:sticky; top:0; height:100vh; display:flex; align-items:center; justify-content:center; overflow:hidden; background:var(--obsidian); }
+  .inner{ width:min(1120px,92vw); display:grid; grid-template-columns:1.05fr .95fr; gap:48px; align-items:center; }
+  .eyebrow{ font-family:'Space Mono',ui-monospace,monospace; font-size:12px; letter-spacing:3px; color:var(--copper); margin:0 0 22px; }
+  .headline{ font-family:'Thunder','Arial Narrow',sans-serif; font-weight:700; text-transform:uppercase; font-size:clamp(46px,7.5vw,108px); line-height:.9; letter-spacing:-1px; margin:0; color:var(--off); }
+  .headline .dot{ color:var(--signal); }
+  .sub{ max-width:44ch; color:var(--mute); font-size:17px; line-height:1.65; margin:28px 0 0; }
+  .scene{ perspective:1150px; display:flex; align-items:center; justify-content:center; height:440px; }
+  .stone{ position:relative; transform-style:preserve-3d; will-change:transform; transform:rotateX(14deg); }
+  .face{ position:absolute; width:152px; height:236px; top:-118px; backface-visibility:hidden; }
+  .face.l{ right:0; transform-origin:right center; background:var(--off); }
+  .face.r{ left:0; transform-origin:left center; background:var(--copper); }
+  .key{ position:absolute; width:26px; height:26px; left:-13px; top:-138px; background:var(--signal); opacity:0; }
+  .hint{ position:absolute; bottom:30px; left:50%; transform:translateX(-50%); font-family:'Space Mono',ui-monospace,monospace; font-size:11px; letter-spacing:3px; color:#55534e; }
+  .hint::after{ content:" \2193"; }
+  @media (max-width:760px){ .inner{ grid-template-columns:1fr; gap:20px; } .scene{ height:300px; order:-1; } .sub{ max-width:none; } }
+  @media (prefers-reduced-motion:reduce){
+    .stone{ transform:rotateX(14deg) rotateY(0deg)!important; }
+    .face.l{ transform:rotateY(52deg)!important; } .face.r{ transform:rotateY(-52deg)!important; }
+    .face{ opacity:1!important; } .key{ opacity:1!important; transform:none!important; } .hint{ display:none; }
+  }
+</style>
+</head>
+<body>
+<div class="lab">
+  <div class="stage">
+    <div class="inner">
+      <div class="copy">
+        <p class="eyebrow">NEHEMIAH 2:20 &mdash; CONCEPT</p>
+        <h1 class="headline">ARISE<br>AND BUILD<span class="dot">.</span></h1>
+        <p class="sub">Most organizations don't fail from too little vision. They fail from too little infrastructure. Scroll &mdash; the cornerstone builds itself.</p>
+      </div>
+      <div class="scene">
+        <div class="stone" id="stone">
+          <div class="face l" id="fl"></div>
+          <div class="face r" id="fr"></div>
+          <div class="key" id="key"></div>
+        </div>
+      </div>
+    </div>
+    <div class="hint">SCROLL</div>
+  </div>
+</div>
+<script>
+(function(){
+  var stone=document.getElementById('stone'),fl=document.getElementById('fl'),fr=document.getElementById('fr'),key=document.getElementById('key');
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var lab=document.querySelector('.lab'), ticking=false;
+  function clamp(x){ return x<0?0:x>1?1:x; }
+  function frame(){
+    ticking=false;
+    var range=lab.offsetHeight-window.innerHeight;
+    var p=clamp(window.scrollY/(range||1));
+    var fold=54*p, spin=-42+42*p;
+    stone.style.transform='rotateX(14deg) rotateY('+spin.toFixed(1)+'deg)';
+    fl.style.transform='rotateY('+fold.toFixed(1)+'deg)';
+    fr.style.transform='rotateY('+(-fold).toFixed(1)+'deg)';
+    fl.style.opacity=fr.style.opacity=(0.30+0.70*p).toFixed(2);
+    var kp=clamp((p-0.8)/0.2);
+    key.style.opacity=kp.toFixed(2);
+    key.style.transform='translateY('+(-26*(1-kp)).toFixed(0)+'px)';
+  }
+  window.addEventListener('scroll',function(){ if(!ticking){ ticking=true; requestAnimationFrame(frame); } },{passive:true});
+  window.addEventListener('resize',frame);
+  frame();
+})();
+</script>
+</body>
+</html>
