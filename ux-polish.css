@@ -46,3 +46,21 @@ html.lw-motion .hero-tagline.lw-in {
     transition: none !important;
   }
 }
+
+/* ── Brand token alignment ────────────────────────────────────────────
+   Brand-lock says Signal = #E85D3A (orange, "the period that breaks the
+   pattern"). Site CSS shipped --signal: #00E676 (green). Realign the brand
+   accent (hero square + headline periods, 15 var(--signal) uses) to the lock.
+   Functional state greens (e.g. .notify-success) are hardcoded, so unaffected. */
+:root { --signal: #E85D3A !important; }
+
+/* ── Scroll progress (Signal accent) ──────────────────────────────────
+   Thin precise progress line — on-brand for an operator/infrastructure voice. */
+.lw-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--signal);
+  transform: scaleX(0); transform-origin: 0 50%;
+  z-index: 9999; pointer-events: none;
+  transition: transform .08s linear;
+}
+@media (prefers-reduced-motion: reduce) { .lw-progress { transition: none; } }

@@ -80,4 +80,24 @@
     }
     requestAnimationFrame(frame);
   }
+
+  // ── Scroll progress bar (Signal accent) ────────────────────────────
+  (function () {
+    var bar = document.createElement('div');
+    bar.className = 'lw-progress';
+    bar.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(bar);
+    var ticking = false;
+    function update() {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var p = h > 0 ? Math.min(Math.max(window.scrollY / h, 0), 1) : 0;
+      bar.style.transform = 'scaleX(' + p + ')';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
 })();

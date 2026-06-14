@@ -3515,8 +3515,20 @@ setLoading(btnEl, true);
       try { localStorage.setItem('ldw_popup_seen', '1'); } catch(e) {}
     }
 
-    // Fire immediately on page load
-    setTimeout(showPopup, 3000);
+    // Show on engagement (45% scroll depth) or after a 25s dwell — not an instant
+    // interruption. Still once per browser (localStorage gate above).
+    var lwPopupShown = false;
+    function lwMaybePopup() {
+      if (lwPopupShown) return;
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      if (h > 0 && (window.scrollY / h) >= 0.45) {
+        lwPopupShown = true;
+        window.removeEventListener('scroll', lwMaybePopup);
+        showPopup();
+      }
+    }
+    window.addEventListener('scroll', lwMaybePopup, { passive: true });
+    setTimeout(function () { if (!lwPopupShown) { lwPopupShown = true; showPopup(); } }, 25000);
 
     // Close handlers
     closeBtn.addEventListener('click', hidePopup);
