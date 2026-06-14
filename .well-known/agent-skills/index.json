@@ -1,0 +1,19 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cloudflare/agent-skills-discovery-rfc/main/schema/v0.2.0.json",
+  "skills": [
+    {
+      "name": "ldw-infrastructure-scorecard",
+      "type": "prompt",
+      "description": "Self-serve organizational-infrastructure readiness assessment across systems, hiring, KPIs, delegation, documentation, and succession. Surfaces top gaps and next steps; ends with a discovery-call CTA.",
+      "url": "https://ldw.build/skills/ldw-infrastructure-scorecard.md",
+      "sha256": "6c65e3bb1b18587fadaa11484067bea5e09c407e2293f0df02816b59e7b7799c"
+    },
+    {
+      "name": "design-md-generator",
+      "type": "prompt",
+      "description": "Generate a DESIGN.md (machine-readable design identity) from a brand's colours, type, and voice so AI build tools produce on-brand output instead of generic defaults.",
+      "url": "https://ldw.build/skills/design-md-generator.md",
+      "sha256": "12d8eb5003f5af9296f2bf0350c9c8ca9622bed342264160f4fc7462cd904d07"
+    }
+  ]
+}

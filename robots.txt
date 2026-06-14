@@ -1,8 +1,14 @@
 User-agent: *
 Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 
 # Site map
 Sitemap: https://ldw.build/sitemap.xml
+
+# AI content usage preferences — see contentsignals.org
+#   search=yes    → allow AI search engines to index/recommend this site
+#   ai-input=yes  → allow AI tools to read pages to ground live answers (keeps you recommendable)
+#   ai-train=no   → do NOT use this content to train models (protects book/IP) — flip to yes if desired
 
 # LLM-friendly content
 # See /llms.txt for machine-readable site overview
