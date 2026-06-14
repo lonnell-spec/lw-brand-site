@@ -1,0 +1,48 @@
+/* ux-polish.css — additive UX/motion layer for ldw.build
+   Namespace: .lw-* — never touches the Vantage .v-reveal system.
+   Flash-free: elements hide only when <html class="lw-motion"> is set by the head
+   script BEFORE first paint. If motion.js never signals ready, the head script
+   removes lw-motion after 3s (failsafe) so content can never get stuck hidden.
+   Reduced-motion: html.lw-motion is only added when (prefers-reduced-motion: no-preference).
+   Animates opacity/transform only (no layout properties). Ease-out-expo, no bounce. */
+
+html.lw-motion .section-label,
+html.lw-motion .section-title,
+html.lw-motion .section-desc,
+html.lw-motion .offer-item,
+html.lw-motion .topic-card,
+html.lw-motion .book-row,
+html.lw-motion .consult-stat,
+html.lw-motion .hero-tagline {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .7s cubic-bezier(.16, 1, .3, 1),
+              transform .7s cubic-bezier(.16, 1, .3, 1);
+}
+
+html.lw-motion .section-label.lw-in,
+html.lw-motion .section-title.lw-in,
+html.lw-motion .section-desc.lw-in,
+html.lw-motion .offer-item.lw-in,
+html.lw-motion .topic-card.lw-in,
+html.lw-motion .book-row.lw-in,
+html.lw-motion .consult-stat.lw-in,
+html.lw-motion .hero-tagline.lw-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.lw-motion .section-label,
+  html.lw-motion .section-title,
+  html.lw-motion .section-desc,
+  html.lw-motion .offer-item,
+  html.lw-motion .topic-card,
+  html.lw-motion .book-row,
+  html.lw-motion .consult-stat,
+  html.lw-motion .hero-tagline {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
