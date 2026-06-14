@@ -11,10 +11,11 @@
 //   curl -H "Accept: text/markdown" https://<preview-url>/about   → expect Content-Type: text/markdown
 
 export const config = {
-  matcher: ['/about', '/books', '/consulting'],
+  matcher: ['/', '/about', '/books', '/consulting'],
 };
 
 const MD_TWIN = {
+  '/': '/index.md',
   '/about': '/about.md',
   '/books': '/books.md',
   '/consulting': '/consulting.md',
