@@ -1,0 +1,41 @@
+/* ============================================================
+   ScrollHero preset — LDW.build (Lonnell Williams personal brand)
+   [brand: LDW.build | checksum: ldw-brand-lock-v1.2-2026-06-14]
+   Locked palette: Obsidian #0D0D0D · Warm Black #1A1714 · Copper #C17F59
+                   · Signal #E85D3A (once per layout max) · Off-White #F2F0EB (NEVER pure white).
+   Locked type: Bebas Neue (display, ALWAYS caps) · DM Sans (body) · Space Mono (mono/meta).
+   Default mode: dark. HARD RULE: no 2819 red/black/white church palette, no CG Gothic.
+   ============================================================ */
+.sh-ldw {
+  --sh-bg: #0D0D0D;
+  --sh-loader: rgba(13, 13, 13, .55);
+  --sh-pad: clamp(28px, 6vw, 96px);
+  --obsidian: #0D0D0D; --warm: #1A1714; --copper: #C17F59; --signal: #E85D3A; --offwhite: #F2F0EB;
+  /* Thunder = the display face the live ldw.build uses (XP 2026-06-25). The brand-lock
+     still names Bebas Neue (kept as fallback) — reconcile the lock to Thunder. */
+  --font-display: "Thunder", "Bebas Neue", Impact, sans-serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+}
+.sh-ldw .sh-overlay { justify-content: flex-end; color: var(--offwhite); }
+.sh-ldw .sh-kicker {
+  font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .28em;
+  font-size: clamp(10px, 1vw, 12px); color: var(--copper); margin: 0 0 20px;
+}
+.sh-ldw .sh-title {
+  font-family: var(--font-display); font-weight: 700; text-transform: none;
+  letter-spacing: .01em; line-height: .92; font-size: clamp(52px, 9vw, 150px);
+  color: var(--offwhite); margin: 0; max-width: 16ch;
+}
+.sh-ldw .sh-title .sig { color: var(--signal); }   /* Signal = the one pattern-break / period */
+.sh-ldw .sh-sub {
+  font-family: var(--font-body); font-size: clamp(15px, 1.6vw, 20px); line-height: 1.5;
+  color: rgba(242, 240, 235, .78); max-width: 48ch; margin: 22px 0 0;
+}
+.sh-ldw .sh-cta {
+  display: inline-flex; align-items: center; gap: 12px; margin-top: 30px;
+  font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .18em;
+  font-size: 12px; color: var(--obsidian); background: var(--copper);
+  padding: 15px 28px; border: 0; border-radius: 0; text-decoration: none; transition: background .2s, color .2s;
+}
+.sh-ldw .sh-cta:hover { background: var(--offwhite); }

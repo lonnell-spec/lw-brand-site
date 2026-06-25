@@ -1,0 +1,55 @@
+/* ============================================================
+   ScrollHero — engine layout (brand-NEUTRAL)
+   No brand colors or fonts. Every visual token is a var() that
+   a preset (presets/*.css) supplies. Neutral fallbacks only.
+   ============================================================ */
+.sh-root { position: relative; width: 100%; }
+
+.sh-pin {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--sh-bg, #111);
+}
+
+.sh-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+.sh-poster {
+  position: absolute; inset: 0;
+  background: var(--sh-bg, #111) center/cover no-repeat;
+  transition: opacity .5s ease;
+}
+.sh-poster.sh-hide { opacity: 0; }
+
+/* content layer (headline / CTA) — pinned over the canvas */
+.sh-overlay {
+  position: absolute; inset: 0; z-index: 3;
+  display: flex; flex-direction: column;
+  padding: var(--sh-pad, clamp(28px, 6vw, 96px));
+  pointer-events: none;
+}
+.sh-overlay > * { pointer-events: auto; }
+
+/* loading shade — color comes from the preset */
+.sh-loader {
+  position: absolute; inset: 0; z-index: 2;
+  background: var(--sh-loader, rgba(0,0,0,.45));
+  backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+  transition: opacity .6s ease;
+  animation: sh-pulse 2.4s cubic-bezier(.45,0,.55,1) infinite;
+  pointer-events: none;
+}
+.sh-loader.sh-hide { opacity: 0; animation: none; }
+
+@keyframes sh-pulse { 0%,100% { opacity: .55; } 50% { opacity: .9; } }
+
+/* static fallback (reduced-motion / mobile / save-data / load failure):
+   no pin, the section is just one tall poster frame */
+.sh-static .sh-pin { height: var(--sh-static-h, 100vh); }
+.sh-static .sh-canvas, .sh-static .sh-loader { display: none; }
+.sh-static .sh-poster { opacity: 1 !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sh-loader { animation: none; }
+}
