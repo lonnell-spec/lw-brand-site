@@ -115,6 +115,28 @@ git push
     transition: all 0.3s ease;
   }
 
+  /* ===== VIDEO HERO (cornerstone) ===== */
+  .vhero { position: relative; width: 100%; height: 100svh; overflow: hidden; background: var(--obsidian); }
+  .vhero video, .vhero .vhero-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .vhero .vhero-poster { background: #0D0D0D center/cover no-repeat; opacity: 0; transition: opacity .5s ease; }
+  .vhero.is-static video { display: none; }
+  .vhero.is-static .vhero-poster { opacity: 1; }
+  .vhero .vhero-scrim { position: absolute; inset: 0; pointer-events: none; z-index: 1;
+    background: linear-gradient(to bottom, rgba(13,13,13,.55) 0%, rgba(13,13,13,0) 22%),
+                linear-gradient(to top, rgba(13,13,13,.6) 0%, rgba(13,13,13,0) 32%); }
+  .vhero .vhero-cta-wrap { position: absolute; left: 0; right: 0; bottom: clamp(48px,8vh,96px); display: flex; justify-content: center; z-index: 2;
+    opacity: 0; transform: translateY(10px); transition: opacity .8s ease, transform .8s ease; }
+  .vhero .vhero-cta-wrap.show { opacity: 1; transform: none; }
+  .vhero .vhero-cta { display: inline-flex; align-items: center; gap: 12px; font-family: 'Space Mono', monospace;
+    text-transform: uppercase; letter-spacing: .18em; font-size: 12px; color: var(--obsidian); background: var(--copper);
+    padding: 15px 28px; text-decoration: none; transition: background .2s; }
+  .vhero .vhero-cta:hover { background: var(--copper-light); }
+  .vhero .vhero-cue { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 2;
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .28em; text-transform: uppercase;
+    color: rgba(242,240,235,.5); animation: vhcue 2.4s ease-in-out infinite; }
+  @keyframes vhcue { 0%,100%{opacity:.35;transform:translate(-50%,0)} 50%{opacity:.8;transform:translate(-50%,4px)} }
+  @media (prefers-reduced-motion: reduce){ .vhero .vhero-cue{animation:none} }
+
   /* ===== HERO ===== */
   .hero {
     min-height: 100vh;
@@ -2046,6 +2068,17 @@ git push
   
 
 
+  <!-- ===== VIDEO HERO (cornerstone) ===== -->
+  <section class="vhero" id="vhero">
+    <video id="vhero-vid" muted playsinline preload="auto" poster="video/cornerstone-poster.jpg">
+      <source src="video/cornerstone-hero.mp4" type="video/mp4">
+    </video>
+    <div class="vhero-poster" style="background-image:url('video/cornerstone-poster.jpg')"></div>
+    <div class="vhero-scrim"></div>
+    <div class="vhero-cta-wrap" id="vhero-cta"><a class="vhero-cta" href="#consulting">Arise &amp; build →</a></div>
+    <div class="vhero-cue">Scroll</div>
+  </section>
+
   <!-- ===== HERO ===== -->
   <section class="hero">
     <div class="hero-inner">
@@ -3850,6 +3883,18 @@ setLoading(btnEl, true);
       });
     }
   })();
+</script>
+<!-- ===== VIDEO HERO autoplay ===== -->
+<script>
+(function(){
+  var hero=document.getElementById('vhero'); if(!hero) return;
+  var vid=document.getElementById('vhero-vid'), cta=document.getElementById('vhero-cta');
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce){ hero.classList.add('is-static'); cta.classList.add('show'); return; }
+  vid.addEventListener('timeupdate',function(){ if(vid.duration && vid.currentTime>vid.duration-2.2) cta.classList.add('show'); });
+  vid.addEventListener('ended',function(){ vid.pause(); cta.classList.add('show'); });
+  var p=vid.play(); if(p&&p.catch) p.catch(function(){ hero.classList.add('is-static'); cta.classList.add('show'); });
+})();
 </script>
 </body>
 </html>
