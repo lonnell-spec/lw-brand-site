@@ -1,10 +1,8 @@
 <!doctype html>
 <!-- [brand: LDW.build | checksum: ldw-brand-lock-v1.2-2026-06-14]
-     ScrollHero homepage-hero candidate for ldw.build.
-     This is a standalone preview — index.html is NOT modified.
-     To put it on the homepage, paste the block marked >>> HOMEPAGE SNIPPET <<< below
-     into index.html where the hero should go, and add the three <script>/<link> refs to <head>/before </body>.
-     Replace scroll-hero/frames/*.svg with a real footage frame sequence (see scroll-hero README / ffmpeg). -->
+     ScrollHero (video) — "The Cornerstone" continuous drone shot for ldw.build.
+     Groundbreaking -> cornerstone rises -> resolves into the LDW lockup.
+     Standalone /hero candidate. index.html untouched. -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -12,45 +10,91 @@
 <title>Lonnell Williams — Build what doesn't exist.</title>
 <meta name="robots" content="noindex">
 <link rel="canonical" href="https://ldw.build/hero">
-
-<!-- >>> HOMEPAGE SNIPPET — head refs <<< -->
-<link href="https://api.fontshare.com/v2/css?f[]=thunder@1&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500&family=Space+Mono&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="scroll-hero/scroll-hero.css">
-<link rel="stylesheet" href="scroll-hero/ldw.css">
-<!-- >>> end head refs <<< -->
-
 <style>
-  body{margin:0;background:#0D0D0D;color:#F2F0EB;font-family:"DM Sans",system-ui,sans-serif}
+  :root{
+    --obsidian:#0D0D0D; --warm:#1A1714; --copper:#C17F59; --signal:#E85D3A; --offwhite:#F2F0EB;
+    --font-display:"Bebas Neue",Impact,sans-serif; --font-body:"DM Sans",system-ui,sans-serif; --font-mono:"Space Mono",ui-monospace,monospace;
+    --pad:clamp(28px,6vw,96px);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--obsidian);color:var(--offwhite);font-family:var(--font-body)}
+
+  .hero{position:relative;width:100%;height:100svh;overflow:hidden;background:var(--obsidian)}
+  .hero video,.hero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero .poster{background:#0D0D0D center/cover no-repeat;opacity:0;transition:opacity .5s ease}
+  .hero.reduced video{display:none}
+  .hero.reduced .poster{opacity:1}
+
+  /* legibility scrim — light; the film is already dark */
+  .hero .scrim{position:absolute;inset:0;pointer-events:none;z-index:1;
+    background:linear-gradient(to bottom,rgba(13,13,13,.45) 0%,rgba(13,13,13,0) 22%),
+               linear-gradient(to top,rgba(13,13,13,.55) 0%,rgba(13,13,13,0) 30%)}
+
+  .hero .overlay{position:absolute;inset:0;z-index:2;pointer-events:none}
+  .hero .overlay > *{pointer-events:auto}
+  .kicker{position:absolute;top:var(--pad);left:var(--pad);margin:0;
+    font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.30em;
+    font-size:clamp(10px,1vw,12px);color:var(--copper)}
+  .cta-wrap{position:absolute;left:0;right:0;bottom:var(--pad);display:flex;justify-content:center;
+    opacity:0;transform:translateY(10px);transition:opacity .8s ease,transform .8s ease}
+  .cta-wrap.show{opacity:1;transform:none}
+  .cta{display:inline-flex;align-items:center;gap:12px;
+    font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.18em;font-size:12px;
+    color:var(--obsidian);background:var(--copper);padding:15px 28px;text-decoration:none;transition:background .2s}
+  .cta:hover{background:var(--offwhite)}
+  .replay{position:absolute;right:var(--pad);bottom:var(--pad);z-index:3;
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:rgba(242,240,235,.55);background:none;border:0;cursor:pointer;opacity:0;transition:opacity .5s}
+  .replay.show{opacity:1}
+  .replay:hover{color:var(--offwhite)}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
   .strip{min-height:100vh;display:grid;place-items:center;text-align:center;padding:48px}
-  .strip .k{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#C17F59}
-  .strip h2{font-family:"Bebas Neue",sans-serif;font-size:clamp(40px,7vw,96px);letter-spacing:.01em;margin:.2em 0;color:#F2F0EB}
+  .strip .k{font-family:var(--font-mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--copper)}
+  .strip h2{font-family:var(--font-display);font-size:clamp(40px,7vw,96px);letter-spacing:.01em;margin:.2em 0;color:var(--offwhite)}
 </style>
 </head>
 <body>
   <!-- >>> HOMEPAGE SNIPPET — markup <<< -->
-  <section id="ldw-hero" class="sh-ldw">
-    <div class="sh-kicker">Builder · Operator · Author</div>
-    <h1 class="sh-title">Build what doesn't exist<span class="sig">.</span></h1>
-    <p class="sh-sub">The gap is the assignment. Arise and build — from the seat you're in, with the weight it takes to deliver.</p>
-    <a class="sh-cta" href="/about.html">Arise &amp; build →</a>
+  <section class="hero" id="ldw-hero">
+    <h1 class="sr-only">Lonnell Williams — Builder, Operator, Author. Build what doesn't exist.</h1>
+    <video id="hero-vid" muted playsinline preload="auto" poster="video/cornerstone-poster.jpg">
+      <source src="video/cornerstone-hero.mp4" type="video/mp4">
+    </video>
+    <div class="poster" style="background-image:url('video/cornerstone-poster.jpg')"></div>
+    <div class="scrim"></div>
+    <div class="overlay">
+      <p class="kicker">Builder · Operator · Author</p>
+      <div class="cta-wrap" id="cta-wrap"><a class="cta" href="/about.html">Arise &amp; build →</a></div>
+    </div>
+    <button class="replay" id="replay" aria-label="Replay">↻ Replay</button>
   </section>
   <!-- >>> end markup <<< -->
 
   <section class="strip"><div><div class="k">Nehemiah 2:20</div><h2>Anything, everything, or nothing at all.</h2></div></section>
 
-  <!-- >>> HOMEPAGE SNIPPET — scripts (before </body>) <<< -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="scroll-hero/scroll-hero.js"></script>
+  <!-- >>> HOMEPAGE SNIPPET — scripts <<< -->
   <script>
-    ScrollHero.init({
-      el: '#ldw-hero',
-      frames: { dir: 'scroll-hero/frames', prefix: 'f', ext: 'webp', count: 48, pad: 4 },
-      fit: 'cover',
-      scrollLength: 3
-      // when you swap in real footage frames: ext:'webp', count:<your frame count>
-    });
+    (function(){
+      var hero=document.getElementById('ldw-hero');
+      var vid=document.getElementById('hero-vid');
+      var ctaWrap=document.getElementById('cta-wrap');
+      var replay=document.getElementById('replay');
+      var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if(reduce){ hero.classList.add('reduced'); ctaWrap.classList.add('show'); return; }
+
+      // CTA fades in as the logo resolves (near the end); video plays once and holds on the lockup.
+      vid.addEventListener('timeupdate',function(){
+        if(vid.duration && vid.currentTime > vid.duration - 2.2) ctaWrap.classList.add('show');
+      });
+      vid.addEventListener('ended',function(){ vid.pause(); replay.classList.add('show'); ctaWrap.classList.add('show'); });
+      replay.addEventListener('click',function(){ replay.classList.remove('show'); vid.currentTime=0; vid.play(); });
+
+      var p=vid.play();
+      if(p&&p.catch) p.catch(function(){ /* autoplay blocked -> poster (last frame) stays */ hero.classList.add('reduced'); ctaWrap.classList.add('show'); });
+    })();
   </script>
   <!-- >>> end scripts <<< -->
 </body>
