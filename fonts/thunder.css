@@ -1,0 +1,10 @@
+/* 'Thunder' display face — self-hosted (Bebas Neue, OFL), the LDW brand-lock display font.
+   Replaces the dead Fontshare `thunder` slug that returned an empty stylesheet sitewide.
+   font-weight range 100–900 maps every requested weight to the one file (no faux-bold). */
+@font-face {
+  font-family: 'Thunder';
+  src: url('/fonts/thunder.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
